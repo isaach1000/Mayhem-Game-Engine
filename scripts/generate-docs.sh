@@ -1,2 +1,2 @@
 BASEDIR=$(dirname $0)
-jsdoc js/util/boundingBox.js -d $BASEDIR/../docs/
+jsdoc $BASEDIR/../js/util -r -d $BASEDIR/../docs/

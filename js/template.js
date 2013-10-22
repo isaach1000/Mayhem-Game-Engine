@@ -1,24 +1,22 @@
 define([], function() {
     "use strict";
 
-    var module;
-
     // Private class methods/fields
 
-    module = {
-        // Public class methods/fields
-    
-        // Constructor
-        create: function() {
-            var object;
-
-            // Private instance methods/fields
-
-            object = {
-                // Public instance methods/fields
-            };
-
-            return object;
+    /**
+     * @exports modulePath // TODO: replace modulePath
+     */
+    var module = {
+        // Public class methods/fields 
+        
+        /**
+         * ClassName // TODO: replace ClassName here and below
+         *
+         * @constructor
+         */
+        ClassName: function() {
+            // Private instance methods/fields, `var privateFoo = 4; var bar = function() {...};` etc.
+            // Public instance methods/fields, `this.x = x; this.y = function() {...};` etc.
         }
     };
 

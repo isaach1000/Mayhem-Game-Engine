@@ -5,8 +5,9 @@ require.config({
     }
 });
 
-require(['jquery'], function($) {
+require(['jquery', 'util/factory'], function($, Factory) {
     $(document).ready(function() {
+        Factory.createCanvas('mainCanvas');
     });
 });
 
