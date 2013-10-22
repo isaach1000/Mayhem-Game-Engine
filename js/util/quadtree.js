@@ -1,6 +1,6 @@
 // Quadtree for hit-testing. Based on http://en.wikipedia.org/wiki/Quadtree. 
 
-require(['util/boundingBox'], function(BoundingBox) {
+define(['util/boundingBox'], function(BoundingBox) {
     "use strict";
 
     var module;

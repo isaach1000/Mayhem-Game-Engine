@@ -1,4 +1,4 @@
-require([], function() {
+define([], function() {
     "use strict";
 
     var module;
@@ -9,7 +9,7 @@ require([], function() {
         // Public class methods/fields
     
         // Constructor
-        create: function() {
+        createBoundingBox: function() {
             var bbox;
             
             // Private instance methods/fields
@@ -31,23 +31,41 @@ require([], function() {
                 break;
             }
 
-
             var center = {
                 x: x + w / 2,
                 y: y + h / 2
             };
 
             bbox = {
-                // Public instance methods/fields
+                // Public fields
                 
+                x: x,
+                y: y,
+                width: w,
+                height: h,
+                center: center,
+
+
+                // Public methods
+
                 containsPoint: function(point) {
-                    // TODO
+                    return (point.x >= x && point.x < x + w &&
+                            point.y >= y && point.y < y + h);
                 },
 
                 intersection: function(otherBbox) {
-                    // TODO
+                    x1 = Math.max(bbox.x, otherBbox.x);
+                    y1 = Math.max(bbox.y, otherBbox.y);
+                    x2 = Math.min(bbox.x + bbox.width,
+                            otherBbox.x + otherBbox.width);
+                    y2 = Math.min(bbox.y + bbox.height,
+                            otherBbox.y + otherBbox.height);
+                    return module.createBoundingBox(x1, y1, x2 - x1, y2 - y1);
                 }
             };
+
+            // This line makes bounding boxes immutable.
+            Object.freeze(bbox);
 
             return bbox;
         }
