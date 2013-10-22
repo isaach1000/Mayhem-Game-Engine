@@ -1,4 +1,6 @@
 require([], function() {
+    "use strict";
+
     var module;
 
     // Private class methods/fields
