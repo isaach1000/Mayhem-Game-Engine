@@ -1,16 +1,12 @@
 # Canvas Project
-==========
 
 ## Introduction
-----------
 This project demostrates the use of HTML5 Canvas in game development.
 
 ## Libraries
-----------
-RequireJS, jQuery, JSDoc
+RequireJS, jQuery
 
 ## Structure
-----------
 Folders:
 
 * js/ --- Contains all of the Javascript.:
