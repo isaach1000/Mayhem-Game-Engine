@@ -1,6 +1,6 @@
 define(['util/boundingBox'], function(BoundingBox) {
     "use strict";
-
+    
     /**
      * QuadTree for hit-testing. Based on http://en.wikipedia.org/wiki/Quadtree.
      * 

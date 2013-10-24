@@ -49,7 +49,7 @@
     
     
     <div class="description">
-        Create a bounding box.
+        Create a BoundingBox.
     </div>
     
 
@@ -205,7 +205,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="boundingBox.js.html">boundingBox.js</a>, <a href="boundingBox.js.html#line16">line 16</a>
+        <a href="boundingBox.js.html">util/boundingBox.js</a>, <a href="boundingBox.js.html#line16">line 16</a>
     </li></ul></dd>
     
     
@@ -256,7 +256,7 @@
 <dd>
     
     <div class="description">
-        Center of the bounding box.
+        Center of the BoundingBox.
     </div>
     
     
@@ -285,7 +285,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="boundingBox.js.html">boundingBox.js</a>, <a href="boundingBox.js.html#line59">line 59</a>
+        <a href="boundingBox.js.html">util/boundingBox.js</a>, <a href="boundingBox.js.html#line54">line 54</a>
     </li></ul></dd>
     
     
@@ -310,7 +310,7 @@
 <dd>
     
     <div class="description">
-        Height of the bounding box.
+        Height of the BoundingBox.
     </div>
     
     
@@ -339,7 +339,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="boundingBox.js.html">boundingBox.js</a>, <a href="boundingBox.js.html#line56">line 56</a>
+        <a href="boundingBox.js.html">util/boundingBox.js</a>, <a href="boundingBox.js.html#line51">line 51</a>
     </li></ul></dd>
     
     
@@ -364,7 +364,7 @@
 <dd>
     
     <div class="description">
-        Width of the bounding box.
+        Width of the BoundingBox.
     </div>
     
     
@@ -393,7 +393,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="boundingBox.js.html">boundingBox.js</a>, <a href="boundingBox.js.html#line53">line 53</a>
+        <a href="boundingBox.js.html">util/boundingBox.js</a>, <a href="boundingBox.js.html#line48">line 48</a>
     </li></ul></dd>
     
     
@@ -447,7 +447,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="boundingBox.js.html">boundingBox.js</a>, <a href="boundingBox.js.html#line47">line 47</a>
+        <a href="boundingBox.js.html">util/boundingBox.js</a>, <a href="boundingBox.js.html#line42">line 42</a>
     </li></ul></dd>
     
     
@@ -501,7 +501,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="boundingBox.js.html">boundingBox.js</a>, <a href="boundingBox.js.html#line50">line 50</a>
+        <a href="boundingBox.js.html">util/boundingBox.js</a>, <a href="boundingBox.js.html#line45">line 45</a>
     </li></ul></dd>
     
     
@@ -525,7 +525,7 @@
         <dl>
             
 <dt>
-    <h4 class="name" id="containsPoint"><span class="type-signature"></span>containsPoint<span class="signature">(point)</span><span class="type-signature"> &rarr; {boolean}</span></h4>
+    <h4 class="name" id="containsBoundingBox"><span class="type-signature"></span>containsBoundingBox<span class="signature">(bbox)</span><span class="type-signature"> &rarr; {boolean}</span></h4>
     
     
 </dt>
@@ -533,7 +533,7 @@
     
     
     <div class="description">
-        Check if the bounding box contains a point.
+        Check if this BoundingBox contains another BoundingBox.
     </div>
     
 
@@ -567,13 +567,13 @@
 	
         <tr>
             
-                <td class="name"><code>point</code></td>
+                <td class="name"><code>bbox</code></td>
             
             
             <td class="type">
             
                 
-<span class="param-type">Point</span>
+<span class="param-type">BoundingBox</span>
 
 
             
@@ -583,7 +583,7 @@
             
             
             
-            <td class="description last">- The point to check for.</td>
+            <td class="description last">The other BoundingBox</td>
         </tr>
 	
 	
@@ -614,7 +614,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="boundingBox.js.html">boundingBox.js</a>, <a href="boundingBox.js.html#line66">line 66</a>
+        <a href="boundingBox.js.html">util/boundingBox.js</a>, <a href="boundingBox.js.html#line65">line 65</a>
     </li></ul></dd>
     
     
@@ -638,6 +638,10 @@
     <h5>Returns:</h5>
     
             
+<div class="param-desc">
+    True if contains the other BoundingBox, false otherwise.
+</div>
+
 
 
 <dl>
@@ -668,8 +672,8 @@
     
     
     <div class="description">
-        Get the intersection of this bounding box
-and another bounding box.
+        Get the intersection of this BoundingBox
+and another BoundingBox.
     </div>
     
 
@@ -719,7 +723,7 @@ and another bounding box.
             
             
             
-            <td class="description last">- Another bounding box instance.</td>
+            <td class="description last">Another BoundingBox instance.</td>
         </tr>
 	
 	
@@ -750,7 +754,7 @@ and another bounding box.
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="boundingBox.js.html">boundingBox.js</a>, <a href="boundingBox.js.html#line77">line 77</a>
+        <a href="boundingBox.js.html">util/boundingBox.js</a>, <a href="boundingBox.js.html#line76">line 76</a>
     </li></ul></dd>
     
     
@@ -809,13 +813,13 @@ and another bounding box.
 </div>
 
 <nav>
-    <h2><a href="index.html">Index</a></h2><h3>Modules</h3><ul><li><a href="boundingBox.html">util/boundingBox</a></li><li><a href="factory.html">util/factory</a></li><li><a href="quadTree.html">util/quadTree</a></li></ul><h3>Classes</h3><ul><li><a href="boundingBox.BoundingBox.html">BoundingBox</a></li><li><a href="quadTree.QuadTree.html">QuadTree</a></li></ul>
+    <h2><a href="index.html">Index</a></h2><h3>Modules</h3><ul><li><a href="canvasDrawer.html">foundation/canvasDrawer</a></li><li><a href="boundingBox.html">util/boundingBox</a></li><li><a href="factory.html">util/factory</a></li><li><a href="polygon.html">util/polygon</a></li><li><a href="quadTree.html">util/quadTree</a></li></ul><h3>Classes</h3><ul><li><a href="canvasDrawer.CanvasDrawer.html">CanvasDrawer</a></li><li><a href="boundingBox.BoundingBox.html">BoundingBox</a></li><li><a href="polygon.Polygon.html">Polygon</a></li><li><a href="quadTree.QuadTree.html">QuadTree</a></li></ul>
 </nav>
 
 <br clear="both">
 
 <footer>
-    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.3.0-dev</a> on Wed Oct 23 2013 03:00:40 GMT-0400 (EDT)
+    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.3.0-dev</a> on Thu Oct 24 2013 14:37:54 GMT-0400 (EDT)
 </footer>
 
 <script> prettyPrint(); </script>

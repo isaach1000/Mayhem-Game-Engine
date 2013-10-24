@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>JSDoc: Source: util/factory.js</title>
+    <title>JSDoc: Source: util/polygon.js</title>
     
     <script src="scripts/prettify/prettify.js"> </script>
     <script src="scripts/prettify/lang-css.js"> </script>
@@ -17,7 +17,7 @@
 
 <div id="main">
     
-    <h1 class="page-title">Source: util/factory.js</h1>
+    <h1 class="page-title">Source: util/polygon.js</h1>
     
     
 
@@ -25,23 +25,26 @@
     
     <section>
         <article>
-            <pre class="prettyprint source"><code>define(['jquery'], function($) {
+            <pre class="prettyprint source"><code>define([], function() {
     "use strict";
 
+    // Private class methods/fields
+
     /**
-     * @exports util/factory
+     * @exports util/polygon
      */
     var module = {
-        /** Construct a canvas. Should be called during/after `$(document).ready`.
-         * 
-         * @param {string} id -- The id of the new HTML canvas.
-         * @return {JQueryObject} -- The canvas jQuery object.
+        /**
+         * Polygon
+         *
+         * @constructor
+         * @param {Array.&lt;Point>} arrayOfPoints - An array of points that describe the polygon.
          */
-        createCanvas: function(options) {
-            var canvas = $('&lt;canvas>&lt;/canvas>');
-            canvas.attr(options);
-            $('body').append(canvas);
-            return canvas;
+        Polygon: function(arrayOfPoints) {
+            // Private instance methods/fields, `var privateFoo = 4; var bar = function() {...};` etc.
+            
+            // Public instance methods/fields, `this.x = x; this.y = function() {...};` etc.
+            this.points = [];
         }
     };
 

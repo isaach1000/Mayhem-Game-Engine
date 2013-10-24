@@ -8,10 +8,11 @@ define(['jquery'], function($) {
         /** Construct a canvas. Should be called during/after `$(document).ready`.
          * 
          * @param {string} id -- The id of the new HTML canvas.
-         * @return {jQueryObject} -- The canvas jQuery object.
+         * @return {JQueryObject} -- The canvas jQuery object.
          */
-        createCanvas: function(id) {
-            var canvas = $('<canvas id="' + id + '"></canvas>');
+        createCanvas: function(options) {
+            var canvas = $('<canvas></canvas>');
+            canvas.attr(options);
             $('body').append(canvas);
             return canvas;
         }

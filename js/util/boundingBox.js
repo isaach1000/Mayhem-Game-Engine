@@ -6,7 +6,7 @@ define([], function() {
      */
     var module = { 
         /**
-         * Create a bounding box.
+         * Create a BoundingBox.
          * @constructor
          * @param {(float|Point)} arg0 - The x coordinate of left side, or upper-left point.
          * @param {(float|Point)} arg1 - The y coordinate of top side, or bottom-right point.
@@ -44,13 +44,13 @@ define([], function() {
             /** Minimum y coordinate. */
             this.y = y;
 
-            /** Width of the bounding box. */
+            /** Width of the BoundingBox. */
             this.width = w;
 
-            /** Height of the bounding box. */
+            /** Height of the BoundingBox. */
             this.height = h;
 
-            /** Center of the bounding box. */
+            /** Center of the BoundingBox. */
             this.center = {
                 x: x + w / 2,
                 y: y + h / 2
@@ -58,9 +58,9 @@ define([], function() {
 
 
             /**
-             * Check if the bounding box contains a point.
-             * @param {Point} point -- The point to check for.
-             * @return {boolean}
+             * Check if this BoundingBox contains another BoundingBox.
+             * @param {BoundingBox} bbox - The other BoundingBox
+             * @return {boolean} True if contains the other BoundingBox, false otherwise.
              */
             this.containsBoundingBox = function(bbox) {
                 return (bbox.x >= x && bbox.x + bbox.width <= x + w &&
@@ -68,9 +68,9 @@ define([], function() {
             };
 
             /**
-             * Get the intersection of this bounding box
-             * and another bounding box.
-             * @param {BoundingBox} otherBbox -- Another bounding box instance.
+             * Get the intersection of this BoundingBox
+             * and another BoundingBox.
+             * @param {BoundingBox} otherBbox - Another BoundingBox instance.
              * @return {BoundingBox}
              */
             this.intersection = function(otherBbox) {
@@ -83,7 +83,7 @@ define([], function() {
                 return new BoundingBox(x1, y1, x2 - x1, y2 - y1);
             };
 
-            // This line makes bounding boxes immutable.
+            // This line makes BoundingBox instances immutable.
             Object.freeze(this);
         }
     };
