@@ -15,76 +15,95 @@ define(['util/boundingBox'], function(BoundingBox) {
          */
         QuadTree: function(bbox) {
             // Private instance methods/fields
-            var quadtreeNW, quadtreeNE, quadtreeSW, quadtreeSE;
-            var subtrees = [quadtreeNW, quadtreeNE, quadtreeSW, quadtreeSE];
-            var points = [];
+            var quadTreeNW, quadTreeNE, quadTreeSW, quadTreeSE;
+            var subtrees = [quadTreeNW, quadTreeNE, quadTreeSW, quadTreeSE];
+            var shapes = [];
 
             /**
-             * Create four quadtrees which fully divide this quadtree into four
+             * Create four quadTrees which fully divide this quadTree into four
              * quads of equal area.
              *
              * @private
              * @return {void} 
              */
             var subdivide = function() {
-                // TODO
-                //var bboxNW = BoundingBox;
+                var bboxNW = new BoundingBox(bbox.x, bbox.y,
+                                    bbox.width / 2, bbox.height / 2);
+                quadTreeNW = new QuadTree(bboxNW);
+
+                var bboxNE = new BoundingBox(bbox.x + bbox.width / 2, bbox.y,
+                                            bbox.width / 2, bbox.height / 2);
+                quadTreeNE = new QuadTree(bboxNE);
+
+                var bboxSW = new BoundingBox(bbox.x, bbox.y + bbox.height / 2,
+                                             bbox.width / 2, bbox.height / 2);
+                quadTreeSW = new QuadTree(bboxSW);
+
+                var bboxSE = new BoundingBox(bbox.x + bbox.width / 2,
+                                             bbox.y + bbox.height / 2,
+                                             bbox.width / 2, bbox.height / 2);
+                quadTreeSE = new QuadTree(bboxSE); 
             };
               
             /** The bounding box of the QuadTree's coordinates. */
             this.boundingBox = bbox;
             
             /**
-             * Insert a point into the QuadTree.
+             * Insert a shape into the QuadTree.
              *
-             * @param {Point} point -- The point to insert.
-             * @return {boolean} -- Whether or not insertion was successful.
+             * @param {Object.<bbox>} shape -- The shape to insert.
+             * @return {boolean} Whether or not insertion was successful.
              */
-            this.insert = function(point) {
-                if (!bbox.containsPoint(point)) {
-                    // Point cannot be inserted.
+            this.insert = function(shape) {
+                if (!bbox.containsBoundingBox(shape.bbox)) {
+                    // BoundingBox cannot be inserted.
                     return false;
                 }
                 
-                // If there is space in this quadtree, add the point here.
-                if (points.length < QT_NODE_CAPACITY) {
-                    points.push(point);
+                // If there is space in this quadTree, add the shape here.
+                if (shapes.length < module.QT_NODE_CAPACITY) {
+                    shapes.push(shape);
                     return true;
                 }
-                // Otherwise, we need to subdivide then add the point to
+                // Otherwise, we need to subdivide then add the shape to
                 // whichever node will accept it.
-                if (quadtreeNW == null) {
+                if (quadTreeNW == null) {
                     this.subdivide();
                 }
                 var subtreesLen = subtrees.length;
                 for (var i = 0; i < subtreesLen; i++) {
-                    if (subtrees[i].insert(point)) {
+                    if (subtrees[i].insert(shape)) {
                         return true;
                     }
                 }
-                return false;
+
+                // If no child can insert the shape, insert it into the parent
+                // despite the capacity limit. The shape is probably lying
+                // on a border.
+                shapes.push(shape);
+                return true;
             };
 
             /**
-             * Query the tree for points within a range.
+             * Query the tree for boxes within a range.
              *
              * @param {BoundingBox} rangeBbox -- The query range bounding box.
-             * @return {Array.<Point>} -- An array of points within the range.
+             * @return {Array.<BoundingBox>} An array of boxes within the range.
              */
             this.queryRange = function(rangeBbox) {
                 // Prepare an array of results.
                 var results = [];
                 if (bbox.boundingBox.intersection(rangeBbox) == null) {
-                    var pointsLen = points.length;
-                    for (var i = 0; i < pointsLen; i++) {
-                        var point = points[i];
-                        if (rangeBbox.containsPoint(point)) {
-                            results.push(point);
+                    var boxesLen = boxes.length;
+                    for (var i = 0; i < boxesLen; i++) {
+                        var box = boxes[i];
+                        if (rangeBbox.containsBoundingBox(box)) {
+                            results.push(box);
                         }
                     }
                 }
                 // If there are no subtrees, return results.
-                if (quadtreeNW == null) {
+                if (quadTreeNW == null) {
                     return results;
                 }
                 // Get the results of the subtrees.

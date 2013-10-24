@@ -37,11 +37,6 @@ define([], function() {
                 // Return null because no valid intersection.
                 return null;
             }
-
-            this.center = {
-                x: x + w / 2,
-                y: y + h / 2
-            };
               
             /** Minimum x coordinate. */
             this.x = x;
@@ -56,16 +51,20 @@ define([], function() {
             this.height = h;
 
             /** Center of the bounding box. */
-            this.center = center;
-            
+            this.center = {
+                x: x + w / 2,
+                y: y + h / 2
+            };
+
+
             /**
              * Check if the bounding box contains a point.
              * @param {Point} point -- The point to check for.
              * @return {boolean}
              */
-            this.containsPoint = function(point) {
-                return (point.x >= x && point.x < x + w &&
-                        point.y >= y && point.y < y + h);
+            this.containsBoundingBox = function(bbox) {
+                return (bbox.x >= x && bbox.x + bbox.width <= x + w &&
+                        bbox.y >= y && bbox.y + bbox.height <= y + h);
             };
 
             /**
@@ -84,10 +83,10 @@ define([], function() {
                 return new BoundingBox(x1, y1, x2 - x1, y2 - y1);
             };
 
-        // This line makes bounding boxes immutable.
-        Object.freeze(this);
-    }
-};
+            // This line makes bounding boxes immutable.
+            Object.freeze(this);
+        }
+    };
 
     return module; 
 });
