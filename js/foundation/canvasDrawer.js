@@ -16,19 +16,47 @@ define([], function() {
          * @param {Context} context - The context from a canvas.
          */
         CanvasDrawer: function(context) {
-            // Private instance methods/fields, `var privateFoo = 4; var bar = function() {...};` etc.
+            // Private instance methods/fields
             
             var ctx = context;
             
             
-            // Public instance methods/fields, `this.x = x; this.y = function() {...};` etc.
+            // Public instance methods/fields
             
+            /**
+             * Get the context of the CanvasDrawer.
+             *
+             * @return {Context}
+             */
+            this.getContext = function() {
+                return ctx;
+            };
+
+            /**
+             * Change the context of the CanvasDrawer.
+             *
+             * @param {Context} newContext - The new context
+             * @return {void}
+             */
             this.setContext = function(newContext) {
                 ctx = newContext;
             };
 
-            this.getContext = function() {
-                return ctx;
+            /**
+             * Change properties of the context. Valid settings include:
+             * lineWidth, fillStyle, and strokeStyle.
+             *
+             * @param {Object} settings - A dictionary with settings
+             * @return {void}
+             */
+            this.setContextSettings = function(settings) {
+                var VALID_SETTINGS = ['lineWidth', 'fillStyle', 'strokeStyle'];
+                
+                for (var property in settings) {
+                    if (VALID_SETTINGS.indexOf(property) !== -1) {
+                        ctx[property] = settings[property];
+                    }
+                }
             };
 
             /**
@@ -67,7 +95,7 @@ define([], function() {
             };
 
             /**
-             * Wrapper for canvas stroke method.
+             * Wrapper for `context.stroke()`.
              *
              * @return {void}
              */
@@ -76,12 +104,30 @@ define([], function() {
             };
 
             /**
-             * Wrapper for canvas fill method.
+             * Wrapper for `context.fill()`.
              *
              * @return {void}
              */
             this.fill = function() {
                 ctx.fill();  
+            };
+
+            /**
+             * Wrapper for `context.beginPath()`.
+             *
+             * @return {void}
+             */
+            this.beginPath = function() {
+                ctx.beginPath();
+            };
+          
+            /**
+             * Wrapper for `context.rect()`.
+             *
+             * @return {void}
+             */
+            this.rect = function(x, y, w, h) {
+                ctx.rect(x, y, w, h);
             };
         }
     };
