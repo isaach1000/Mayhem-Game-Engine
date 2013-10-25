@@ -4,7 +4,9 @@ define([], function() {
     /**
      * @exports util/boundingBox
      */
-    var module = { 
+    var module = {
+        // Public class methods/fields
+
         /**
          * Create a BoundingBox.
          * @constructor
@@ -15,6 +17,7 @@ define([], function() {
          */
         BoundingBox: function(arg0, arg1, arg2, arg3) {
             // Private instance methods/fields
+            
             var x, y, w, h;
             switch (arguments.length) {
             case 2:

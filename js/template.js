@@ -3,6 +3,7 @@ define([], function() {
 
     // Private class methods/fields
     
+    
     /**
      * @exports modulePath // TODO: replace modulePath
      */
@@ -16,7 +17,10 @@ define([], function() {
          */
         ClassName: function() {
             // Private instance methods/fields
+
+            
             // Public instance methods/fields
+            
         }
     };
 

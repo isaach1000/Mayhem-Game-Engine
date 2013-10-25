@@ -9,6 +9,7 @@ define([], function() {
     var module = {
         // Public class methods/fields
         
+        
         /**
          * CanvasDrawer for drawing to a canvas.
          *
@@ -62,12 +63,9 @@ define([], function() {
             /**
              * Draw a line between two points.
              * 
-             * @param {Point} point1        -   The x coordinate of the first
-             *                                  point, or the first point.
-             * @param {Point} point2        -   The y coordinate of the first
-             *                                  point, or the second point.
-             * @param {boolean} (moveFirst) -   Whether or not the context
-             *                                  perform the moveTo method.
+             * @param {Point} point1        -   The x coordinate of the first point, or the first point.
+             * @param {Point} point2        -   The y coordinate of the first point, or the second point.
+             * @param {boolean} (moveFirst) -   Whether or not the context perform the moveTo method.
              * @return {void}
              */
             this.drawLine = function(point1, point2, moveFirst) {

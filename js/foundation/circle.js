@@ -1,4 +1,4 @@
-define([], function() {
+define(['util/boundingBox'], function(BoundingBox) {
     "use strict";
 
     // Private class methods/fields
@@ -8,8 +8,6 @@ define([], function() {
      */
     var module = {
         // Public class methods/fields
-        
-                // Public class methods/fields
         
         /**
          * Circle
@@ -24,8 +22,15 @@ define([], function() {
         Circle: function(x, y, radius, drawer, drawingSettings) {
             // Private instance methods/fields
 
+            var boundingBox = new BoundingBox.BoundingBox(x, y, radius * 2, radius * 2);
+
+
             // Public instance methods/fields
-                       
+
+            this.getBoundingBox = function() {
+                return boundingBox;
+            };
+
             /**
              * getCanvasDrawer
              *

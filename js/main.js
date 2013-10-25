@@ -9,12 +9,12 @@ require([
         'jquery',
         'util/factory',
         'foundation/canvasDrawer',
-        'foundation/circle'
+        'sprites/tileMap'
     ],
     function($,
         Factory,
         CanvasDrawer,
-        Circle) {
+        TileMap) {
         $(document).ready(function() {
 
             var canvas = Factory.createCanvas({
@@ -31,8 +31,11 @@ require([
                 fillStyle: 'green'
             });
            
-            var circ = new Circle.Circle(100, 200, 50, drawer, {});
-            circ.draw();
+            var tileMap = new TileMap.TileMap(200, 100, 100, 100, 4, 4, drawer, [
+                                                                    {fillStyle: 'green'},
+                                                                    {fillStyle: 'blue'}
+                                                                ]);
+            tileMap.draw();
 
         });
 });

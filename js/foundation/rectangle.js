@@ -1,4 +1,4 @@
-define([], function() {
+define(['util/boundingBox'], function(BoundingBox) {
     "use strict";
 
     // Private class methods/fields
@@ -22,8 +22,15 @@ define([], function() {
          */
         Rectangle: function(x, y, width, height, drawer, drawingSettings) {
             // Private instance methods/fields
+            
+            var boundingBox = new BoundingBox.BoundingBox
 
+            
             // Public instance methods/fields
+            
+            this.getBoundingBox = function() {
+                return boundingBox;
+            };
                        
             /**
              * getCanvasDrawer
