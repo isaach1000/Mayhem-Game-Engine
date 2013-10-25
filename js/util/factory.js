@@ -7,8 +7,8 @@ define(['jquery'], function($) {
     var module = {
         /** Construct a canvas. Should be called during/after `$(document).ready`.
          * 
-         * @param {string} id -- The id of the new HTML canvas.
-         * @return {JQueryObject} -- The canvas jQuery object.
+         * @param {string} options - The options for the new HTML canvas.
+         * @return {JQueryObject} The canvas jQuery object.
          */
         createCanvas: function(options) {
             var canvas = $('<canvas></canvas>');

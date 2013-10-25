@@ -176,7 +176,7 @@
         <dl>
             
 <dt>
-    <h4 class="name" id="beginPath"><span class="type-signature"></span>beginPath<span class="signature">()</span><span class="type-signature"> &rarr; {void}</span></h4>
+    <h4 class="name" id="arc"><span class="type-signature"></span>arc<span class="signature">(x, y, radius, startAngle, endAngle, ccw)</span><span class="type-signature"> &rarr; {void}</span></h4>
     
     
 </dt>
@@ -184,7 +184,7 @@
     
     
     <div class="description">
-        Wrapper for `context.beginPath()`.
+        Wrapper for `context.arc`
     </div>
     
 
@@ -192,6 +192,169 @@
     
     
     
+    
+        <h5>Parameters:</h5>
+        
+
+<table class="params">
+    <thead>
+	<tr>
+		
+		<th>Name</th>
+		
+		
+		<th>Type</th>
+		
+		
+		
+		
+		
+		<th class="last">Description</th>
+	</tr>
+	</thead>
+	
+	<tbody>
+	
+	
+        <tr>
+            
+                <td class="name"><code>x</code></td>
+            
+            
+            <td class="type">
+            
+                
+<span class="param-type">float</span>
+
+
+            
+            </td>
+            
+            
+            
+            
+            
+            <td class="description last">x coordinate</td>
+        </tr>
+	
+	
+	
+        <tr>
+            
+                <td class="name"><code>y</code></td>
+            
+            
+            <td class="type">
+            
+                
+<span class="param-type">float</span>
+
+
+            
+            </td>
+            
+            
+            
+            
+            
+            <td class="description last">y coordinate</td>
+        </tr>
+	
+	
+	
+        <tr>
+            
+                <td class="name"><code>radius</code></td>
+            
+            
+            <td class="type">
+            
+                
+<span class="param-type">float</span>
+
+
+            
+            </td>
+            
+            
+            
+            
+            
+            <td class="description last">Radius of arc</td>
+        </tr>
+	
+	
+	
+        <tr>
+            
+                <td class="name"><code>startAngle</code></td>
+            
+            
+            <td class="type">
+            
+                
+<span class="param-type">float</span>
+
+
+            
+            </td>
+            
+            
+            
+            
+            
+            <td class="description last">Start angle of arc</td>
+        </tr>
+	
+	
+	
+        <tr>
+            
+                <td class="name"><code>endAngle</code></td>
+            
+            
+            <td class="type">
+            
+                
+<span class="param-type">float</span>
+
+
+            
+            </td>
+            
+            
+            
+            
+            
+            <td class="description last">End angle of arc</td>
+        </tr>
+	
+	
+	
+        <tr>
+            
+                <td class="name"><code>ccw</code></td>
+            
+            
+            <td class="type">
+            
+                
+<span class="param-type">boolean</span>
+
+
+            
+            </td>
+            
+            
+            
+            
+            
+            <td class="description last">Move counterclockwise</td>
+        </tr>
+	
+	
+	</tbody>
+</table>
     
     
     
@@ -217,7 +380,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="canvasDrawer.js.html">foundation/canvasDrawer.js</a>, <a href="canvasDrawer.js.html#line120">line 120</a>
+        <a href="canvasDrawer.js.html">foundation/canvasDrawer.js</a>, <a href="canvasDrawer.js.html#line139">line 139</a>
     </li></ul></dd>
     
     
@@ -263,7 +426,181 @@
         
             
 <dt>
-    <h4 class="name" id="drawLine"><span class="type-signature"></span>drawLine<span class="signature">(arg0, arg1, (arg2), (arg3))</span><span class="type-signature"> &rarr; {void}</span></h4>
+    <h4 class="name" id="beginPath"><span class="type-signature"></span>beginPath<span class="signature">()</span><span class="type-signature"> &rarr; {void}</span></h4>
+    
+    
+</dt>
+<dd>
+    
+    
+    <div class="description">
+        Wrapper for `context.beginPath`.
+    </div>
+    
+
+    
+    
+    
+    
+    
+    
+    
+<dl class="details">
+    
+        
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="canvasDrawer.js.html">foundation/canvasDrawer.js</a>, <a href="canvasDrawer.js.html#line103">line 103</a>
+    </li></ul></dd>
+    
+    
+    
+    
+    
+    
+    
+</dl>
+
+    
+    
+
+    
+
+    
+    
+    
+    
+    
+    <h5>Returns:</h5>
+    
+            
+
+
+<dl>
+	<dt>
+		Type
+	</dt>
+	<dd>
+		
+<span class="param-type">void</span>
+
+
+	</dd>
+</dl>
+
+        
+    
+    
+</dd>
+
+        
+            
+<dt>
+    <h4 class="name" id="closePath"><span class="type-signature"></span>closePath<span class="signature">()</span><span class="type-signature"> &rarr; {void}</span></h4>
+    
+    
+</dt>
+<dd>
+    
+    
+    <div class="description">
+        Wrapper for `context.closePath`.
+    </div>
+    
+
+    
+    
+    
+    
+    
+    
+    
+<dl class="details">
+    
+        
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="canvasDrawer.js.html">foundation/canvasDrawer.js</a>, <a href="canvasDrawer.js.html#line111">line 111</a>
+    </li></ul></dd>
+    
+    
+    
+    
+    
+    
+    
+</dl>
+
+    
+    
+
+    
+
+    
+    
+    
+    
+    
+    <h5>Returns:</h5>
+    
+            
+
+
+<dl>
+	<dt>
+		Type
+	</dt>
+	<dd>
+		
+<span class="param-type">void</span>
+
+
+	</dd>
+</dl>
+
+        
+    
+    
+</dd>
+
+        
+            
+<dt>
+    <h4 class="name" id="drawLine"><span class="type-signature"></span>drawLine<span class="signature">(point1, point2, (moveFirst))</span><span class="type-signature"> &rarr; {void}</span></h4>
     
     
 </dt>
@@ -305,15 +642,12 @@
 	
         <tr>
             
-                <td class="name"><code>arg0</code></td>
+                <td class="name"><code>point1</code></td>
             
             
             <td class="type">
             
                 
-<span class="param-type">float</span>
-|
-
 <span class="param-type">Point</span>
 
 
@@ -332,15 +666,12 @@
 	
         <tr>
             
-                <td class="name"><code>arg1</code></td>
+                <td class="name"><code>point2</code></td>
             
             
             <td class="type">
             
                 
-<span class="param-type">float</span>
-|
-
 <span class="param-type">Point</span>
 
 
@@ -359,13 +690,13 @@
 	
         <tr>
             
-                <td class="name"><code>(arg2)</code></td>
+                <td class="name"><code>(moveFirst)</code></td>
             
             
             <td class="type">
             
                 
-<span class="param-type">float</span>
+<span class="param-type">boolean</span>
 
 
             
@@ -375,31 +706,8 @@
             
             
             
-            <td class="description last">The x coordinate of the second
-                                 point.</td>
-        </tr>
-	
-	
-	
-        <tr>
-            
-                <td class="name"><code>(arg3)</code></td>
-            
-            
-            <td class="type">
-            
-                
-<span class="param-type">float</span>
-
-
-            
-            </td>
-            
-            
-            
-            
-            
-            <td class="description last">The y coordinate of the second point.</td>
+            <td class="description last">Whether or not the context
+                                 perform the moveTo method.</td>
         </tr>
 	
 	
@@ -430,7 +738,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="canvasDrawer.js.html">foundation/canvasDrawer.js</a>, <a href="canvasDrawer.js.html#line74">line 74</a>
+        <a href="canvasDrawer.js.html">foundation/canvasDrawer.js</a>, <a href="canvasDrawer.js.html#line73">line 73</a>
     </li></ul></dd>
     
     
@@ -484,7 +792,7 @@
     
     
     <div class="description">
-        Wrapper for `context.fill()`.
+        Wrapper for `context.fill`.
     </div>
     
 
@@ -517,7 +825,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="canvasDrawer.js.html">foundation/canvasDrawer.js</a>, <a href="canvasDrawer.js.html#line111">line 111</a>
+        <a href="canvasDrawer.js.html">foundation/canvasDrawer.js</a>, <a href="canvasDrawer.js.html#line94">line 94</a>
     </li></ul></dd>
     
     
@@ -650,7 +958,7 @@
         
             
 <dt>
-    <h4 class="name" id="rect"><span class="type-signature"></span>rect<span class="signature">()</span><span class="type-signature"> &rarr; {void}</span></h4>
+    <h4 class="name" id="rect"><span class="type-signature"></span>rect<span class="signature">(x, y, w, h)</span><span class="type-signature"> &rarr; {void}</span></h4>
     
     
 </dt>
@@ -658,7 +966,7 @@
     
     
     <div class="description">
-        Wrapper for `context.rect()`.
+        Wrapper for `context.rect`.
     </div>
     
 
@@ -666,6 +974,123 @@
     
     
     
+    
+        <h5>Parameters:</h5>
+        
+
+<table class="params">
+    <thead>
+	<tr>
+		
+		<th>Name</th>
+		
+		
+		<th>Type</th>
+		
+		
+		
+		
+		
+		<th class="last">Description</th>
+	</tr>
+	</thead>
+	
+	<tbody>
+	
+	
+        <tr>
+            
+                <td class="name"><code>x</code></td>
+            
+            
+            <td class="type">
+            
+                
+<span class="param-type">float</span>
+
+
+            
+            </td>
+            
+            
+            
+            
+            
+            <td class="description last">x coordinate</td>
+        </tr>
+	
+	
+	
+        <tr>
+            
+                <td class="name"><code>y</code></td>
+            
+            
+            <td class="type">
+            
+                
+<span class="param-type">float</span>
+
+
+            
+            </td>
+            
+            
+            
+            
+            
+            <td class="description last">y coordinate</td>
+        </tr>
+	
+	
+	
+        <tr>
+            
+                <td class="name"><code>w</code></td>
+            
+            
+            <td class="type">
+            
+                
+<span class="param-type">float</span>
+
+
+            
+            </td>
+            
+            
+            
+            
+            
+            <td class="description last">Width of rectangle</td>
+        </tr>
+	
+	
+	
+        <tr>
+            
+                <td class="name"><code>h</code></td>
+            
+            
+            <td class="type">
+            
+                
+<span class="param-type">float</span>
+
+
+            
+            </td>
+            
+            
+            
+            
+            
+            <td class="description last">Height of rectangle</td>
+        </tr>
+	
+	
+	</tbody>
+</table>
     
     
     
@@ -691,7 +1116,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="canvasDrawer.js.html">foundation/canvasDrawer.js</a>, <a href="canvasDrawer.js.html#line129">line 129</a>
+        <a href="canvasDrawer.js.html">foundation/canvasDrawer.js</a>, <a href="canvasDrawer.js.html#line124">line 124</a>
     </li></ul></dd>
     
     
@@ -1016,7 +1441,7 @@ lineWidth, fillStyle, and strokeStyle.
     
     
     <div class="description">
-        Wrapper for `context.stroke()`.
+        Wrapper for `context.stroke`.
     </div>
     
 
@@ -1049,7 +1474,7 @@ lineWidth, fillStyle, and strokeStyle.
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="canvasDrawer.js.html">foundation/canvasDrawer.js</a>, <a href="canvasDrawer.js.html#line102">line 102</a>
+        <a href="canvasDrawer.js.html">foundation/canvasDrawer.js</a>, <a href="canvasDrawer.js.html#line85">line 85</a>
     </li></ul></dd>
     
     
@@ -1108,13 +1533,13 @@ lineWidth, fillStyle, and strokeStyle.
 </div>
 
 <nav>
-    <h2><a href="index.html">Index</a></h2><h3>Modules</h3><ul><li><a href="canvasDrawer.html">foundation/canvasDrawer</a></li><li><a href="rectangle.html">foundation/rectangle</a></li><li><a href="boundingBox.html">util/boundingBox</a></li><li><a href="factory.html">util/factory</a></li><li><a href="polygon.html">util/polygon</a></li><li><a href="quadTree.html">util/quadTree</a></li></ul><h3>Classes</h3><ul><li><a href="canvasDrawer.CanvasDrawer.html">CanvasDrawer</a></li><li><a href="rectangle.Rectangle.html">Rectangle</a></li><li><a href="boundingBox.BoundingBox.html">BoundingBox</a></li><li><a href="polygon.Polygon.html">Polygon</a></li><li><a href="quadTree.QuadTree.html">QuadTree</a></li></ul>
+    <h2><a href="index.html">Index</a></h2><h3>Modules</h3><ul><li><a href="canvasDrawer.html">foundation/canvasDrawer</a></li><li><a href="circle.html">foundation/circle</a></li><li><a href="rectangle.html">foundation/rectangle</a></li><li><a href="boundingBox.html">util/boundingBox</a></li><li><a href="factory.html">util/factory</a></li><li><a href="polygon.html">util/polygon</a></li><li><a href="quadTree.html">util/quadTree</a></li></ul><h3>Classes</h3><ul><li><a href="canvasDrawer.CanvasDrawer.html">CanvasDrawer</a></li><li><a href="circle.Circle.html">Circle</a></li><li><a href="rectangle.Rectangle.html">Rectangle</a></li><li><a href="boundingBox.BoundingBox.html">BoundingBox</a></li><li><a href="polygon.Polygon.html">Polygon</a></li><li><a href="quadTree.QuadTree.html">QuadTree</a></li></ul>
 </nav>
 
 <br clear="both">
 
 <footer>
-    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.3.0-dev</a> on Thu Oct 24 2013 17:39:52 GMT-0400 (EDT)
+    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.3.0-dev</a> on Fri Oct 25 2013 01:48:20 GMT-0400 (EDT)
 </footer>
 
 <script> prettyPrint(); </script>

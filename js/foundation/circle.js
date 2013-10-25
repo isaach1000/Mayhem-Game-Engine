@@ -2,23 +2,30 @@ define([], function() {
     "use strict";
 
     // Private class methods/fields
-
+    
     /**
-     * @exports util/polygon
+     * @exports foundation/circle
      */
     var module = {
-
+        // Public class methods/fields
+        
+                // Public class methods/fields
+        
         /**
-         * Polygon
+         * Circle
          *
          * @constructor
-         * @param {Array.<Point>} points    -   An array of points that describe the polygon.
-         * @param {CanvasDrawer} drawer     -   A CanvasDrawer to draw the polygon onto the canvas.
+         * @param {float} x                 -   The x coordinate of the circle on the canvas.
+         * @param {float} y                 -   The y coordinate of the circle on the canvas.
+         * @param {float} radius            -   The radius of the circle.
+         * @param {CanvasDrawer} drawer     -   A CanvasDrawer to draw the circle onto the canvas.
          * @param {Object} drawingSettings  -   A dictionary of drawing options.
          */
-        Polygon: function(points, drawer, drawingSettings) {
-            // Public instance methods/fields
+        Circle: function(x, y, radius, drawer, drawingSettings) {
+            // Private instance methods/fields
 
+            // Public instance methods/fields
+                       
             /**
              * getCanvasDrawer
              *
@@ -31,7 +38,7 @@ define([], function() {
             // TODO: should there be a setter for the drawer?
             
             /**
-             * Set the drawing settings for the rectangle. TODO: valid settings are...
+             * Set the drawing settings for the circle. TODO: valid settings are...
              *
              * @param {Object} settings - An object with drawing settings.
              * @return {void}
@@ -41,20 +48,14 @@ define([], function() {
             }
 
             /**
-             * Draw the rectangle onto the canvas using the CanvasDrawer.
+             * Draw the circle onto the canvas using the CanvasDrawer.
              *
              * @return {void}
              */
             this.draw = function() {
                 drawer.beginPath();
                 drawer.setContextSettings(drawingSettings);
-                var numPoints = points.length;
-                drawer.drawLine(points[0], points[1], true);
-                for (var i = 1; i < numPoints; i++) {
-                    var point = points[i];
-                    drawer.drawLine(points[i], points[(i + 1) % numPoints]);
-                }
-                drawer.closePath();
+                drawer.arc(x, y, radius, radius, 0, Math.PI * 2, true);
                 drawer.fill();
                 drawer.stroke();
             };

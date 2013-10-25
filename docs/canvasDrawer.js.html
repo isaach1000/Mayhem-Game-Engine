@@ -88,41 +88,24 @@
 
             /**
              * Draw a line between two points.
-             *
-             * @param {float|Point} arg0    -   The x coordinate of the first
+             * 
+             * @param {Point} point1        -   The x coordinate of the first
              *                                  point, or the first point.
-             * @param {float|Point} arg1    -   The y coordinate of the first
+             * @param {Point} point2        -   The y coordinate of the first
              *                                  point, or the second point.
-             * @param {float} (arg2)        -   The x coordinate of the second
-             *                                  point. 
-             * @param {float} (arg3)        -   The y coordinate of the second point.
+             * @param {boolean} (moveFirst) -   Whether or not the context
+             *                                  perform the moveTo method.
              * @return {void}
              */
-            this.drawLine = function() {
-                var x1, y1, x2, y2;
-                if (arguments.length == 4) {
-                    x1 = arguments[0];
-                    y1 = arguments[1];
-                    x2 = arguments[2];
-                    y2 = arguments[3];
+            this.drawLine = function(point1, point2, moveFirst) {
+                if (moveFirst) {
+                    ctx.moveTo(point1.x, point1.y);
                 }
-                else if (arguments.length == 2) {
-                    var p1 = arguments[0], p2 = arguments[1];
-                    x1 = p1.x;
-                    y1 = p1.y;
-                    x2 = p2.x;
-                    y2 = p2.y;
-                }
-                else {
-                    throw new Error();
-                }
-
-                ctx.moveTo(x1, y1);
-                ctx.lineTo(x2, y2);
+                ctx.lineTo(point2.x, point2.y);
             };
 
             /**
-             * Wrapper for `context.stroke()`.
+             * Wrapper for `context.stroke`.
              *
              * @return {void}
              */
@@ -131,7 +114,7 @@
             };
 
             /**
-             * Wrapper for `context.fill()`.
+             * Wrapper for `context.fill`.
              *
              * @return {void}
              */
@@ -140,21 +123,48 @@
             };
 
             /**
-             * Wrapper for `context.beginPath()`.
+             * Wrapper for `context.beginPath`.
              *
              * @return {void}
              */
             this.beginPath = function() {
                 ctx.beginPath();
             };
+
+            /**
+             * Wrapper for `context.closePath`.
+             * @return {void}
+             */
+            this.closePath = function() {
+                ctx.closePath();
+            };
           
             /**
-             * Wrapper for `context.rect()`.
-             *
+             * Wrapper for `context.rect`.
+             * 
+             * @param  {float}  x   x coordinate
+             * @param  {float}  y   y coordinate
+             * @param  {float}  w   Width of rectangle
+             * @param  {float}  h   Height of rectangle
              * @return {void}
              */
             this.rect = function(x, y, w, h) {
                 ctx.rect(x, y, w, h);
+            };
+
+
+            /**
+             * Wrapper for `context.arc` 
+             * @param  {float}      x          x coordinate
+             * @param  {float}      y          y coordinate
+             * @param  {float}      radius     Radius of arc
+             * @param  {float}      startAngle Start angle of arc
+             * @param  {float}      endAngle   End angle of arc
+             * @param  {boolean}    ccw        Move counterclockwise
+             * @return {void}
+             */
+            this.arc = function(x, y, radius, startAngle, endAngle, ccw) {
+                ctx.arc(x, y, radius, startAngle, endAngle, ccw);
             };
         }
     };
@@ -172,13 +182,13 @@
 </div>
 
 <nav>
-    <h2><a href="index.html">Index</a></h2><h3>Modules</h3><ul><li><a href="canvasDrawer.html">foundation/canvasDrawer</a></li><li><a href="rectangle.html">foundation/rectangle</a></li><li><a href="boundingBox.html">util/boundingBox</a></li><li><a href="factory.html">util/factory</a></li><li><a href="polygon.html">util/polygon</a></li><li><a href="quadTree.html">util/quadTree</a></li></ul><h3>Classes</h3><ul><li><a href="canvasDrawer.CanvasDrawer.html">CanvasDrawer</a></li><li><a href="rectangle.Rectangle.html">Rectangle</a></li><li><a href="boundingBox.BoundingBox.html">BoundingBox</a></li><li><a href="polygon.Polygon.html">Polygon</a></li><li><a href="quadTree.QuadTree.html">QuadTree</a></li></ul>
+    <h2><a href="index.html">Index</a></h2><h3>Modules</h3><ul><li><a href="canvasDrawer.html">foundation/canvasDrawer</a></li><li><a href="circle.html">foundation/circle</a></li><li><a href="rectangle.html">foundation/rectangle</a></li><li><a href="boundingBox.html">util/boundingBox</a></li><li><a href="factory.html">util/factory</a></li><li><a href="polygon.html">util/polygon</a></li><li><a href="quadTree.html">util/quadTree</a></li></ul><h3>Classes</h3><ul><li><a href="canvasDrawer.CanvasDrawer.html">CanvasDrawer</a></li><li><a href="circle.Circle.html">Circle</a></li><li><a href="rectangle.Rectangle.html">Rectangle</a></li><li><a href="boundingBox.BoundingBox.html">BoundingBox</a></li><li><a href="polygon.Polygon.html">Polygon</a></li><li><a href="quadTree.QuadTree.html">QuadTree</a></li></ul>
 </nav>
 
 <br clear="both">
 
 <footer>
-    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.3.0-dev</a> on Thu Oct 24 2013 17:39:52 GMT-0400 (EDT)
+    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.3.0-dev</a> on Fri Oct 25 2013 01:48:20 GMT-0400 (EDT)
 </footer>
 
 <script> prettyPrint(); </script>

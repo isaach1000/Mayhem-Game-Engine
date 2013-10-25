@@ -34,7 +34,7 @@ define([], function() {
             }
 
             if (w < 0 || h < 0) {
-                // Return null because no valid intersection.
+                // Return null, because it is not a valid box.
                 return null;
             }
               

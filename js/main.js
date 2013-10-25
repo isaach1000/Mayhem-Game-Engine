@@ -9,13 +9,14 @@ require([
         'jquery',
         'util/factory',
         'foundation/canvasDrawer',
-        'foundation/polygon'
+        'foundation/circle'
     ],
     function($,
         Factory,
         CanvasDrawer,
-        Polygon) {
+        Circle) {
         $(document).ready(function() {
+
             var canvas = Factory.createCanvas({
                 id: 'mainCanvas',
                 width: '1000px',
@@ -30,14 +31,8 @@ require([
                 fillStyle: 'green'
             });
            
-            var poly = new Polygon.Polygon([
-                {x: 100, y: 100},
-                {x: 100, y: 200},
-                {x: 200, y: 300},
-                {x: 150, y: 70}
-            ], drawer, {});
-            poly.draw();
+            var circ = new Circle.Circle(100, 200, 50, drawer, {});
+            circ.draw();
 
         });
 });
-

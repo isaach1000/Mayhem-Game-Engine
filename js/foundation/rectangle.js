@@ -17,12 +17,11 @@ define([], function() {
          * @param {float} y                 -   The y coordinate of the rectangle on the canvas.
          * @param {float} width             -   The width of the rectangle.
          * @param {float} height            -   The height of the rectangle.
-         * @param {CanvasDrawer} drawer     -   A CanvasDrawer to draw the rectangle of the canvas.
+         * @param {CanvasDrawer} drawer     -   A CanvasDrawer to draw the rectangle onto the canvas.
          * @param {Object} drawingSettings  -   A dictionary of drawing options.
          */
         Rectangle: function(x, y, width, height, drawer, drawingSettings) {
-            // Private instance methods/fields             
-
+            // Private instance methods/fields
 
             // Public instance methods/fields
                        
@@ -53,11 +52,11 @@ define([], function() {
              * @return {void}
              */
             this.draw = function() {
-                drawer.setContextSettings(drawingSettings);
                 drawer.beginPath();
+                drawer.setContextSettings(drawingSettings);
                 drawer.rect(x, y, width, height);
-                drawer.stroke();
                 drawer.fill();
+                drawer.stroke();
             };
         }
     };

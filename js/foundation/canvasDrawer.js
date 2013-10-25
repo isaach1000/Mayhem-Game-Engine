@@ -78,7 +78,7 @@ define([], function() {
             };
 
             /**
-             * Wrapper for `context.stroke()`.
+             * Wrapper for `context.stroke`.
              *
              * @return {void}
              */
@@ -87,7 +87,7 @@ define([], function() {
             };
 
             /**
-             * Wrapper for `context.fill()`.
+             * Wrapper for `context.fill`.
              *
              * @return {void}
              */
@@ -96,7 +96,7 @@ define([], function() {
             };
 
             /**
-             * Wrapper for `context.beginPath()`.
+             * Wrapper for `context.beginPath`.
              *
              * @return {void}
              */
@@ -105,7 +105,7 @@ define([], function() {
             };
 
             /**
-             * Wrapper for `context.closePath()`.
+             * Wrapper for `context.closePath`.
              * @return {void}
              */
             this.closePath = function() {
@@ -113,16 +113,31 @@ define([], function() {
             };
           
             /**
-             * Wrapper for `context.rect()`.
+             * Wrapper for `context.rect`.
              * 
-             * @param  {[type]} x [description]
-             * @param  {[type]} y [description]
-             * @param  {[type]} w [description]
-             * @param  {[type]} h [description]
+             * @param  {float}  x   x coordinate
+             * @param  {float}  y   y coordinate
+             * @param  {float}  w   Width of rectangle
+             * @param  {float}  h   Height of rectangle
              * @return {void}
              */
             this.rect = function(x, y, w, h) {
                 ctx.rect(x, y, w, h);
+            };
+
+
+            /**
+             * Wrapper for `context.arc` 
+             * @param  {float}      x          x coordinate
+             * @param  {float}      y          y coordinate
+             * @param  {float}      radius     Radius of arc
+             * @param  {float}      startAngle Start angle of arc
+             * @param  {float}      endAngle   End angle of arc
+             * @param  {boolean}    ccw        Move counterclockwise
+             * @return {void}
+             */
+            this.arc = function(x, y, radius, startAngle, endAngle, ccw) {
+                ctx.arc(x, y, radius, startAngle, endAngle, ccw);
             };
         }
     };
