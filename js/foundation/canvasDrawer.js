@@ -61,37 +61,20 @@ define([], function() {
 
             /**
              * Draw a line between two points.
-             *
-             * @param {float|Point} arg0    -   The x coordinate of the first
+             * 
+             * @param {Point} point1        -   The x coordinate of the first
              *                                  point, or the first point.
-             * @param {float|Point} arg1    -   The y coordinate of the first
+             * @param {Point} point2        -   The y coordinate of the first
              *                                  point, or the second point.
-             * @param {float} (arg2)        -   The x coordinate of the second
-             *                                  point. 
-             * @param {float} (arg3)        -   The y coordinate of the second point.
+             * @param {boolean} (moveFirst) -   Whether or not the context
+             *                                  perform the moveTo method.
              * @return {void}
              */
-            this.drawLine = function() {
-                var x1, y1, x2, y2;
-                if (arguments.length == 4) {
-                    x1 = arguments[0];
-                    y1 = arguments[1];
-                    x2 = arguments[2];
-                    y2 = arguments[3];
+            this.drawLine = function(point1, point2, moveFirst) {
+                if (moveFirst) {
+                    ctx.moveTo(point1.x, point1.y);
                 }
-                else if (arguments.length == 2) {
-                    var p1 = arguments[0], p2 = arguments[1];
-                    x1 = p1.x;
-                    y1 = p1.y;
-                    x2 = p2.x;
-                    y2 = p2.y;
-                }
-                else {
-                    throw new Error();
-                }
-
-                ctx.moveTo(x1, y1);
-                ctx.lineTo(x2, y2);
+                ctx.lineTo(point2.x, point2.y);
             };
 
             /**
@@ -120,10 +103,22 @@ define([], function() {
             this.beginPath = function() {
                 ctx.beginPath();
             };
+
+            /**
+             * Wrapper for `context.closePath()`.
+             * @return {void}
+             */
+            this.closePath = function() {
+                ctx.closePath();
+            };
           
             /**
              * Wrapper for `context.rect()`.
-             *
+             * 
+             * @param  {[type]} x [description]
+             * @param  {[type]} y [description]
+             * @param  {[type]} w [description]
+             * @param  {[type]} h [description]
              * @return {void}
              */
             this.rect = function(x, y, w, h) {

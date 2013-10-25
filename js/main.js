@@ -8,17 +8,13 @@ require.config({
 require([
         'jquery',
         'util/factory',
-        'util/boundingBox',
-        'util/quadTree',
         'foundation/canvasDrawer',
-        'foundation/rectangle'
+        'foundation/polygon'
     ],
     function($,
         Factory,
-        BoundingBox,
-        QuadTree,
         CanvasDrawer,
-        Rectangle) {
+        Polygon) {
         $(document).ready(function() {
             var canvas = Factory.createCanvas({
                 id: 'mainCanvas',
@@ -27,17 +23,21 @@ require([
             });
             var ctx = canvas[0].getContext('2d');
             var drawer = new CanvasDrawer.CanvasDrawer(ctx); 
-            
-            // TODO: var qt = new QuadTree.QuadTree(new BoundingBox.BoundingBox(100, 100, 200, 200));
 
             drawer.setContextSettings({
-                lineWidth: 9,
+                lineWidth: 4,
                 strokeStyle: 'black',
                 fillStyle: 'green'
             });
+           
+            var poly = new Polygon.Polygon([
+                {x: 100, y: 100},
+                {x: 100, y: 200},
+                {x: 200, y: 300},
+                {x: 150, y: 70}
+            ], drawer, {});
+            poly.draw();
 
-            var rect = new Rectangle.Rectangle(100, 100, 200, 200, drawer, {});
-            rect.draw();
         });
 });
 
