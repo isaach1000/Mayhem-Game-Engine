@@ -9,12 +9,14 @@ require([
         'jquery',
         'util/factory',
         'foundation/canvasDrawer',
-        'sprites/tileMap'
+        'foundation/circle',
+        'foundation/animation'
     ],
     function($,
         Factory,
         CanvasDrawer,
-        TileMap) {
+        Circle,
+        Animation) {
         $(document).ready(function() {
 
             var canvas = Factory.createCanvas({
@@ -24,18 +26,27 @@ require([
             });
             var ctx = canvas[0].getContext('2d');
             var drawer = new CanvasDrawer.CanvasDrawer(ctx); 
-
-            drawer.setContextSettings({
+           
+            var circ = new Circle.Circle(100, 100, 50, drawer, {
                 lineWidth: 4,
                 strokeStyle: 'black',
                 fillStyle: 'green'
             });
-           
-            var tileMap = new TileMap.TileMap(200, 100, 100, 100, 4, 4, drawer, [
-                                                                    {fillStyle: 'green'},
-                                                                    {fillStyle: 'blue'}
-                                                                ]);
-            tileMap.draw();
+            circ.draw();
 
+            var startY = circ.y,
+                vx = 1,
+                vy = 0,
+                g = 0.001,
+                maxDur = 4000;
+            var circAnim = new Animation.Animation(circ, function(durationElapsed) {
+                circ.x += vx;
+                
+                vy = g * durationElapsed;
+                circ.y += vy;
+
+                return durationElapsed < maxDur;
+            });
+            circAnim.start();
         });
 });

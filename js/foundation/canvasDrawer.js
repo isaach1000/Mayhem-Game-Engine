@@ -125,7 +125,8 @@ define([], function() {
 
 
             /**
-             * Wrapper for `context.arc` 
+             * Wrapper for `context.arc`
+             * 
              * @param  {float}      x          x coordinate
              * @param  {float}      y          y coordinate
              * @param  {float}      radius     Radius of arc
@@ -136,6 +137,19 @@ define([], function() {
              */
             this.arc = function(x, y, radius, startAngle, endAngle, ccw) {
                 ctx.arc(x, y, radius, startAngle, endAngle, ccw);
+            };
+
+            /**
+             * Wrapper for `context.clearRect`
+             * 
+             * @param  {float} x - Minimum x of area.
+             * @param  {float} y - Minimum y of area.
+             * @param  {float} width  - Width of area.
+             * @param  {float} height - Height of area.
+             * @return {void}
+             */
+            this.clearRect = function(x, y, width, height) {
+                ctx.clearRect(x, y, width, height);
             };
         }
     };

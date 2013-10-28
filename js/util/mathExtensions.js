@@ -18,7 +18,7 @@ define([], function() {
          */
         randomInt: function() {
             return Math.floor(randomFloat);
-        }
+        },
 
         /**
          * Generate a random float.

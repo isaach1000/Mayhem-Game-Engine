@@ -1,4 +1,4 @@
-define([], function() {
+define(['util/boundingBox'], function(BoundingBox) {
     "use strict";
 
     // Private class methods/fields
@@ -7,6 +7,35 @@ define([], function() {
      * @exports util/polygon
      */
     var module = {
+        /**
+         * Generate a BoundingBox for a polygon.
+         *
+         * @param {Array.<Point>} points - An array of points describing the polygon.
+         * @return {BoundingBox} - A BoundingBox that contains all of the points.
+         */
+        generateBbox: function(points) {
+            var minX = points[0].x,
+                maxX = points[0].x,
+                minY = points[0].y,
+                maxY = points[0].y;
+            var numPoints = points.length;
+            for (var i = 0; i < numPoints; i++) {
+                var point = points[i];
+                if (minX > point.x) {
+                    minX = point.x;
+                }
+                if (maxX < point.x) {
+                    maxX = point.x;
+                }
+                if (minY > point.y) {
+                    minY = point.y;
+                }
+                if (maxY < point.y) {
+                    maxY = point.y;
+                }
+            }
+            return new BoundingBox.BoundingBox(minX, minY, maxX, maxY);
+        },
 
         /**
          * Polygon
@@ -17,6 +46,11 @@ define([], function() {
          * @param {Object} drawingSettings  -   A dictionary of drawing options.
          */
         Polygon: function(points, drawer, drawingSettings) {
+            // Private instance methods/fields
+
+            var bbox = generateBbox(points);
+            
+
             // Public instance methods/fields
 
             /**
@@ -57,6 +91,15 @@ define([], function() {
                 drawer.closePath();
                 drawer.fill();
                 drawer.stroke();
+            };
+
+            /**
+             * Clear the shape.
+             * 
+             * @return {void}
+             */
+            this.clear = function() {
+                drawer.clearRect(bbox.getX(), bbox.getY(), bbox.getWidth(), bbox.getHeight());
             };
         }
     };

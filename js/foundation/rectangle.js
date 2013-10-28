@@ -65,6 +65,15 @@ define(['util/boundingBox'], function(BoundingBox) {
                 drawer.fill();
                 drawer.stroke();
             };
+
+            /**
+             * Clear the shape.
+             * 
+             * @return {void}
+             */
+            this.clear = function() {
+                drawer.clearRect(x, y, width, height);
+            }
         }
     };
 

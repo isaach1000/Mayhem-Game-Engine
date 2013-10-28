@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>JSDoc: Source: util/factory.js</title>
+    <title>JSDoc: Source: util/mathExtensions.js</title>
     
     <script src="scripts/prettify/prettify.js"> </script>
     <script src="scripts/prettify/lang-css.js"> </script>
@@ -17,7 +17,7 @@
 
 <div id="main">
     
-    <h1 class="page-title">Source: util/factory.js</h1>
+    <h1 class="page-title">Source: util/mathExtensions.js</h1>
     
     
 
@@ -25,29 +25,54 @@
     
     <section>
         <article>
-            <pre class="prettyprint source"><code>define(['jquery'], function($) {
+            <pre class="prettyprint source"><code>define([], function() {
     "use strict";
 
+    // Private class methods/fields
+    
+    
     /**
-     * @exports util/factory
+     * @exports util/mathExtensions // TODO: replace util/mathExtensions
      */
     var module = {
-        /** Construct a canvas. Should be called during/after `$(document).ready`.
-         * 
-         * @param {string} options - The options for the new HTML canvas.
-         * @return {JQueryObject} The canvas jQuery object.
+        // Public class methods/fields
+        
+        /**
+         * Generate a random integer.
+         * @param   {int} [min=0]   -   The minimum for the random integer (inclusive).
+         * @param   {int} max       -   The maximum for the random integer (not inclusive).
+         * @return  {int} A random integer within the specified range.
          */
-        createCanvas: function(options) {
-            var canvas = $('&lt;canvas>&lt;/canvas>');
-            canvas.attr(options);
-            $('body').append(canvas);
-            return canvas;
+        randomInt: function() {
+            return Math.floor(randomFloat);
+        },
+
+        /**
+         * Generate a random float.
+         * @param   {float} [min=0]   -   The minimum for the random float (inclusive).
+         * @param   {float} max       -   The maximum for the random float (not inclusive).
+         * @return  {float} A random float within the specified range.
+         */
+        randomFloat: function() {
+            var min, max;
+            switch (arguments.length) {
+            case 1:
+                min = 0;
+                max = arguments[0];
+                break;
+            case 2:
+                min = arguments[0];
+                max = arguments[1];
+                break;
+            }
+
+            var range = max - min;
+            return Math.random() * range + min;
         }
     };
 
     return module; 
 });
-
 </code></pre>
         </article>
     </section>

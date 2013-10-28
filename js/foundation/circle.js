@@ -26,6 +26,10 @@ define(['util/boundingBox'], function(BoundingBox) {
 
 
             // Public instance methods/fields
+            
+            this.x = x;
+            this.y = y;
+            this.radius = radius;
 
             this.getBoundingBox = function() {
                 return boundingBox;
@@ -39,8 +43,6 @@ define(['util/boundingBox'], function(BoundingBox) {
             this.getCanvasDrawer = function() {
                 return drawer;
             };
-
-            // TODO: should there be a setter for the drawer?
             
             /**
              * Set the drawing settings for the circle. TODO: valid settings are...
@@ -60,9 +62,19 @@ define(['util/boundingBox'], function(BoundingBox) {
             this.draw = function() {
                 drawer.beginPath();
                 drawer.setContextSettings(drawingSettings);
-                drawer.arc(x, y, radius, radius, 0, Math.PI * 2, true);
+                drawer.arc(this.x, this.y, this.radius, this.radius, 0, Math.PI * 2, true);
                 drawer.fill();
                 drawer.stroke();
+            };
+
+            /**
+             * Clear the shape.
+             * 
+             * @return {void}
+             */
+            this.clear = function() {
+                var bigRadius = this.radius + 3;
+                drawer.clearRect(this.x - bigRadius, this.y - bigRadius, 2 * bigRadius, 2 * bigRadius);
             };
         }
     };
