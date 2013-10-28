@@ -1,4 +1,8 @@
-define(['util/boundingBox'], function(BoundingBox) {
+define([
+    'foundation/polygon',
+    'util/boundingBox'
+    ], function(Polygon,
+        BoundingBox) {
     "use strict";
 
     // Private class methods/fields
@@ -13,24 +17,26 @@ define(['util/boundingBox'], function(BoundingBox) {
          * Rectangle
          *
          * @constructor
-         * @param {float} x                 -   The x coordinate of the rectangle on the canvas.
-         * @param {float} y                 -   The y coordinate of the rectangle on the canvas.
-         * @param {float} width             -   The width of the rectangle.
-         * @param {float} height            -   The height of the rectangle.
-         * @param {CanvasDrawer} drawer     -   A CanvasDrawer to draw the rectangle onto the canvas.
-         * @param {Object} drawingSettings  -   A dictionary of drawing options.
+         * @param {float}           x               - The x coordinate of the rectangle on the canvas.
+         * @param {float}           y               - The y coordinate of the rectangle on the canvas.
+         * @param {float}           width           - The width of the rectangle.
+         * @param {float}           height          - The height of the rectangle.
+         * @param {CanvasDrawer}    drawer          - A CanvasDrawer to draw the rectangle onto the canvas.
+         * @param {Object}          drawingSettings - A dictionary of drawing options.
          */
         Rectangle: function(x, y, width, height, drawer, drawingSettings) {
             // Private instance methods/fields
             
-            var boundingBox = new BoundingBox.BoundingBox
+            this.bbox = new BoundingBox.BoundingBox(x, y, width, height);
+            var polygon = new Polygon.Polygon([
+                {x: x, y: y},
+                {x: x + width, y: y},
+                {x: x + width, y: y + height},
+                {x: x, y: y + height}
+            ], drawer, drawingSettings);
 
             
             // Public instance methods/fields
-            
-            this.getBoundingBox = function() {
-                return boundingBox;
-            };
                        
             /**
              * getCanvasDrawer
@@ -59,11 +65,7 @@ define(['util/boundingBox'], function(BoundingBox) {
              * @return {void}
              */
             this.draw = function() {
-                drawer.beginPath();
-                drawer.setContextSettings(drawingSettings);
-                drawer.rect(x, y, width, height);
-                drawer.fill();
-                drawer.stroke();
+                polygon.draw();
             };
 
             /**
@@ -72,7 +74,7 @@ define(['util/boundingBox'], function(BoundingBox) {
              * @return {void}
              */
             this.clear = function() {
-                drawer.clearRect(x, y, width, height);
+                polygon.clear();
             }
         }
     };

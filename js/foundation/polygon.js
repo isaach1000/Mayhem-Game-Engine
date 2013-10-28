@@ -48,10 +48,17 @@ define(['util/boundingBox'], function(BoundingBox) {
         Polygon: function(points, drawer, drawingSettings) {
             // Private instance methods/fields
 
-            var bbox = generateBbox(points);
-            
+            var EXTRA_BOUNDS = 3;            
 
             // Public instance methods/fields
+            
+            this.bbox = module.generateBbox(points);
+            
+            /** The offset of the polygon in x. */
+            this.offsetX = 0;
+            /** The offset of the polygon in y. */
+            this.offsetY = 0; 
+            
 
             /**
              * getCanvasDrawer
@@ -82,6 +89,8 @@ define(['util/boundingBox'], function(BoundingBox) {
             this.draw = function() {
                 drawer.beginPath();
                 drawer.setContextSettings(drawingSettings);
+                drawer.save();
+                drawer.translate(this.offsetX, this.offsetY);
                 var numPoints = points.length;
                 drawer.drawLine(points[0], points[1], true);
                 for (var i = 1; i < numPoints; i++) {
@@ -91,6 +100,7 @@ define(['util/boundingBox'], function(BoundingBox) {
                 drawer.closePath();
                 drawer.fill();
                 drawer.stroke();
+                drawer.restore();
             };
 
             /**
@@ -99,7 +109,13 @@ define(['util/boundingBox'], function(BoundingBox) {
              * @return {void}
              */
             this.clear = function() {
-                drawer.clearRect(bbox.getX(), bbox.getY(), bbox.getWidth(), bbox.getHeight());
+                drawer.save();
+                drawer.translate(this.offsetX, this.offsetY)
+                drawer.clearRect(this.bbox.x - EXTRA_BOUNDS,
+                                    this.bbox.y - EXTRA_BOUNDS,
+                                    this.bbox.width + EXTRA_BOUNDS,
+                                    this.bbox.height + EXTRA_BOUNDS);
+                drawer.restore();
             };
         }
     };

@@ -151,6 +151,33 @@ define([], function() {
             this.clearRect = function(x, y, width, height) {
                 ctx.clearRect(x, y, width, height);
             };
+
+            /**
+             * Wrapper for `context.save`
+             * 
+             * @return {void}
+             */
+            this.save = function() {
+                ctx.save();
+            };
+
+            /**
+             * Wrapper for `context.restore`
+             * 
+             * @return {void}
+             */
+            this.restore = function() {
+                ctx.restore();
+            }
+
+            /**
+             * Wrapper for `context.translate`
+             * 
+             * @return {void}
+             */
+            this.translate = function(x, y) {
+                ctx.translate(x, y);
+            }
         }
     };
 

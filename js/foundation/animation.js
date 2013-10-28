@@ -21,7 +21,6 @@ define([], function() {
          * Animation
          *
          * @constructor
-         * @param   {Shape}     shape           - The shape to animate.
          * @param   {Function}  frameFunction   - A function that updates the animation. Must return a boolean, which is 
          *                                      supposed to signal whether or not to terminate the animation (return false to terminate).
          *                                      It may take the duration in milliseconds from the beginning of the animation as a parameter.
