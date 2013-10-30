@@ -48,16 +48,19 @@ define([], function() {
              * lineWidth, fillStyle, and strokeStyle.
              *
              * @param {Object} settings - A dictionary with settings
-             * @return {void}
+             * @return {boolean} True if the changes were successful, false otherwise.
              */
             this.setContextSettings = function(settings) {
                 var VALID_SETTINGS = ['lineWidth', 'fillStyle', 'strokeStyle'];
                 
+                var success = true;
                 for (var property in settings) {
-                    if (VALID_SETTINGS.indexOf(property) !== -1) {
+                    success = success && (VALID_SETTINGS.indexOf(property) !== -1);
+                    if (success) {
                         ctx[property] = settings[property];
                     }
                 }
+                return success;
             };
 
             /**

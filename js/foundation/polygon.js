@@ -48,11 +48,12 @@ define(['util/boundingBox'], function(BoundingBox) {
         Polygon: function(points, drawer, drawingSettings) {
             // Private instance methods/fields
 
-            var EXTRA_BOUNDS = 3;            
+            var EXTRA_BOUNDS = drawingSettings.lineWidth;            
 
             // Public instance methods/fields
             
-            this.bbox = module.generateBbox(points);
+            this.points = points;
+            this.bbox = module.generateBbox(this.points);
             
             /** The offset of the polygon in x. */
             this.offsetX = 0;

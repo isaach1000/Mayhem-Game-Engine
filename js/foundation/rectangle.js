@@ -1,8 +1,10 @@
 define([
     'foundation/polygon',
-    'util/boundingBox'
+    'util/boundingBox',
+    'util/matrix'
     ], function(Polygon,
-        BoundingBox) {
+        BoundingBox,
+        Matrix) {
     "use strict";
 
     // Private class methods/fields
@@ -57,7 +59,21 @@ define([
              */
             this.setDrawingSettings = function(settings) {
                 drawingSettings = settings;
-            }
+            };
+
+            /**
+             * Change coordinates to isometric.
+             * @return {void}
+             */
+            this.projectIsometric = function() {
+                for (var i = 0; i < 4; i++) {
+                    var point = polygon.points[i];
+                    var cartesian = new Matrix.Matrix([point.x, 0, point.y], 3, 1);
+                    var isometric = Matrix.ISOMETRIC_MATRIX.multiply(cartesian);
+                    point.x = isometric.get(0, 0);
+                    point.y = isometric.get(1, 0);
+                }
+            };
 
             /**
              * Draw the rectangle onto the canvas using the CanvasDrawer.
@@ -75,7 +91,7 @@ define([
              */
             this.clear = function() {
                 polygon.clear();
-            }
+            };
         }
     };
 

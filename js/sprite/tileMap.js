@@ -5,7 +5,7 @@ define(['foundation/rectangle'], function(Rectangle) {
     
     
     /**
-     * @exports sprites/tileMap
+     * @exports sprite/tileMap
      */
     var module = {
         // Public class methods/fields
@@ -64,11 +64,23 @@ define(['foundation/rectangle'], function(Rectangle) {
                 }
             }
 
+            _this.projectIsometric = function() {
+                forEachTile(function(tile) {
+                    tile.projectIsometric();
+                });
+            }
+
             _this.draw = function() {
                 forEachTile(function(tile) {
                     tile.draw();
                 });
             };
+
+            _this.clear = function() {
+                forEachTile(function(tile) {
+                    tile.clear();
+                });
+            }
         }
     };
 
