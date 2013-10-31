@@ -1,5 +1,5 @@
-define(['foundation/polygon', 'util/matrix'
-    ], function(Polygon, Matrix) {
+define(['foundation/polygon', 'util/mathExtensions'
+    ], function(Polygon, MathExt) {
     "use strict";
 
     // Private class methods/fields
@@ -54,10 +54,7 @@ define(['foundation/polygon', 'util/matrix'
                 points2d = [];
                 for (var ptIdx = 0; ptIdx < 8; ptIdx++) {
                     var point = _this.points[ptIdx];
-                    var dimensions = [point.x, point.y, point.z];
-                    var pointMatrix = new Matrix.Matrix(dimensions, 3, 1);
-                    var projectedMatrix = Matrix.ISOMETRIC_MATRIX.multiply(pointMatrix);
-                    points2d.push({x: projectedMatrix.get(0, 0), y: projectedMatrix.get(1, 0)});
+                    points2d.push(MathExt.projectIsometric(point));
                 }
             };
 
@@ -93,10 +90,10 @@ define(['foundation/polygon', 'util/matrix'
                 projectIsometric();
 
                 // Faces
-                var top = [6, 7, 0, 1],
-                    front = [0, 1, 2, 3],
-                    bottom = [2, 3, 4, 5],
-                    back = [4, 5, 6, 7],
+                var bottom = [6, 7, 0, 1],
+                    back = [0, 1, 2, 3],
+                    top = [2, 3, 4, 5],
+                    front = [4, 5, 6, 7],
                     left = [0, 3, 4, 7],
                     right = [1, 2, 5, 6],
                     indexFaces = [left, back, bottom, right, front, top];

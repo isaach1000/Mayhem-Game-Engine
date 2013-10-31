@@ -1,10 +1,10 @@
 define([
     'foundation/polygon',
     'util/boundingBox',
-    'util/matrix'
+    'util/mathExtensions'
     ], function(Polygon,
         BoundingBox,
-        Matrix) {
+        MathExt) {
     "use strict";
 
     // Private class methods/fields
@@ -31,10 +31,10 @@ define([
             
             this.bbox = new BoundingBox.BoundingBox(x, y, width, height);
             var polygon = new Polygon.Polygon([
-                {x: x, y: y},
-                {x: x + width, y: y},
-                {x: x + width, y: y + height},
-                {x: x, y: y + height}
+                {x: x, y: y, z: 0},
+                {x: x + width, y: y, z: 0},
+                {x: x + width, y: y + height, z: 0},
+                {x: x, y: y + height, z: 0}
             ], drawer, drawingSettings);
 
             
@@ -67,11 +67,10 @@ define([
              */
             this.projectIsometric = function() {
                 for (var i = 0; i < 4; i++) {
-                    var point = polygon.points[i];
-                    var cartesian = new Matrix.Matrix([point.x, 0, point.y], 3, 1);
-                    var isometric = Matrix.ISOMETRIC_MATRIX.multiply(cartesian);
-                    point.x = isometric.get(0, 0);
-                    point.y = isometric.get(1, 0);
+                    var point3d = polygon.points[i];
+                    var point2d = MathExt.projectIsometric(point3d);
+                    point3d.x = point2d.x;
+                    point3d.y = point2d.y;
                 }
             };
 

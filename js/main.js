@@ -11,6 +11,7 @@ require([
         'foundation/canvasDrawer',
         'foundation/cube',
         'foundation/circle',
+        'foundation/rectangle',
         'sprite/tileMap',
         'foundation/animation'
     ],
@@ -19,6 +20,7 @@ require([
         CanvasDrawer,
         Cube,
         Circle,
+        Rectangle,
         TileMap,
         Animation) {
         $(document).ready(function() {
@@ -83,6 +85,16 @@ require([
                 anim.start();
             };
 
+            var rectangleTest = function() {
+                var rect = new Rectangle.Rectangle(500, 100, 50, 40, bgDrawer, {
+                    lineWidth: 3,
+                    fillStyle: 'green',
+                    strokeStyle: 'black'
+                });
+                rect.projectIsometric();
+                rect.draw();
+            };
+
             var tilesTest = function() {
                 var tiles = new TileMap.TileMap(500, 100, 50, 50, 5, 5, bgDrawer, [{
                     lineWidth: 3,
@@ -94,7 +106,7 @@ require([
             };
 
             var cubeTest = function() {
-                var cube = new Cube.Cube(500, 100, 50, 125, 125, 125, drawer, {
+                var cube = new Cube.Cube(500, 100, 50, 25, 50, 10, drawer, {
                     lineWidth: 3,
                     fillStyle: 'red',
                     strokeStyle: 'black'
@@ -105,7 +117,7 @@ require([
                     var betweenFrames = durationElapsed - oldDuration;
                     for (var i = 0; i < 8; i++) {
                         var point = cube.points[i];
-                        point.y -= betweenFrames / 5;
+                        point.x -= betweenFrames / 5;
                     }
                     oldDuration = durationElapsed;
 
@@ -119,6 +131,7 @@ require([
 
             // Perform test
             
+            //rectangleTest();
             tilesTest();
             cubeTest(); 
         });

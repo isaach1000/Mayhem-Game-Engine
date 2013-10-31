@@ -1,10 +1,5 @@
 define(['util/mathExtensions'], function(MathExtensions) {
     "use strict";
-
-    // Private class methods/fields
-    
-    var ISO_MATRIX;
-
     
     /**
      * @exports util/matrix
@@ -113,21 +108,6 @@ define(['util/mathExtensions'], function(MathExtensions) {
             return new module.Matrix
         }
     };
-
-    Object.defineProperty(module, 'ISOMETRIC_MATRIX', {get: function() {
-        if (ISO_MATRIX == null) {
-            var root2 = Math.sqrt(2),
-                root3 = Math.sqrt(3),
-                root6 = Math.sqrt(6),
-                isoArray = [root3, 0, -root3, 1, 2, 1, root2, -root2, root2];
-            for (var i = 0; i < 9; i++) {
-                isoArray[i] /= root6;
-            }
-            ISO_MATRIX = new module.Matrix(isoArray, 3, 3);
-        }
-
-        return ISO_MATRIX;
-    }});
 
     return module; 
 });

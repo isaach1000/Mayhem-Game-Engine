@@ -62,6 +62,12 @@ define([], function() {
                 total += vector1[i] * vector2[i];
             }
             return total;
+        },
+
+        projectIsometric: function(point3d) {
+            var x = point3d.x - point3d.y,
+                y = point3d.z + (point3d.x + point3d.y) / 2;
+            return {x: x, y: y};
         }
     };
 
