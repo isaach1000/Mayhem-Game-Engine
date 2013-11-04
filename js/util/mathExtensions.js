@@ -1,4 +1,4 @@
-define(['util/typeChecker'], function(TypeChecker) {
+define(['util/objectUtility'], function(ObjUtil) {
     "use strict";
 
     // Private class methods/fields
@@ -66,7 +66,7 @@ define(['util/typeChecker'], function(TypeChecker) {
 
         projectIsometric: function(point3d) {
             // If parameter is an array, recursively project and return a new array of 2d points.
-            if (TypeChecker.isArray(point3d)) {
+            if (O.isArray(point3d)) {
                 var numPoints = point3d.length;
                 var points2d = [];
                 for (var i = 0; i < numPoints; i++) {

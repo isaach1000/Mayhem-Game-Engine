@@ -5,7 +5,9 @@ define(['util/mathExtensions'], function(MathExtensions) {
      * @exports util/matrix
      */
     var module = {
-        // Public class methods/fields
+        /////////////////////////////////
+        // Public class methods/fields //
+        /////////////////////////////////
 
         /**
          * Matrix
@@ -13,7 +15,9 @@ define(['util/mathExtensions'], function(MathExtensions) {
          * @constructor
          */
         Matrix: function(entriesArray, numRows, numColumns) {           
-            // Private instance methods/fields
+            /////////////////////////////////////
+            // Private instance methods/fields //
+            /////////////////////////////////////
             
             var forEach = function(f) {
                 for (var i = 0; i < numRows; i++) {
@@ -39,7 +43,9 @@ define(['util/mathExtensions'], function(MathExtensions) {
             };
 
             
-            // Public instance methods/fields
+            ////////////////////////////////////
+            // Public instance methods/fields //
+            ////////////////////////////////////
             
             this.numRows = numRows;
             this.numColumns = numColumns;

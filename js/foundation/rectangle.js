@@ -1,44 +1,42 @@
-define([
-    'foundation/polyhedron',
-    'util/boundingCube',
-    'util/mathExtensions'
-    ], function(Polyhedron,
-        BoundingCube,
-        MathExt) {
+define(['util/boundingBox'], function(BoundingBox) {
     "use strict";
 
-    // Private class methods/fields
+    //////////////////////////////////
+    // Private class methods/fields //
+    //////////////////////////////////
     
     /**
      * @exports foundation/rectangle 
      */
     var module = {
-        // Public class methods/fields
+        /////////////////////////////////
+        // Public class methods/fields //
+        /////////////////////////////////
         
         /**
          * Rectangle
          *
          * @constructor
-         * @param {float}           x               - The x coordinate of the rectangle on the canvas.
-         * @param {float}           y               - The y coordinate of the rectangle on the canvas.
-         * @param {float}           width           - The width of the rectangle.
-         * @param {float}           height          - The height of the rectangle.
-         * @param {CanvasDrawer}    drawer          - A CanvasDrawer to draw the rectangle onto the canvas.
-         * @param {Object}          drawingSettings - A dictionary of drawing options.
+         * @param {float} x                 -   The x coordinate of the rectangle on the canvas.
+         * @param {float} y                 -   The y coordinate of the rectangle on the canvas.
+         * @param {float} width             -   The width of the rectangle.
+         * @param {float} height            -   The height of the rectangle.
+         * @param {CanvasDrawer} drawer     -   A CanvasDrawer to draw the rectangle onto the canvas.
+         * @param {Object} drawingSettings  -   A dictionary of drawing options.
          */
         Rectangle: function(x, y, width, length, drawer, drawingSettings) {
-            // Private instance methods/fields
+            /////////////////////////////////////
+            // Private instance methods/fields //
+            /////////////////////////////////////
             
-            this.bcube = new BoundingCube.BoundingCube(x, y, 0, width, length, 0);
-            var polyhedron = new Polyhedron.Polyhedron([
-                {x: x, y: y, z: 0},
-                {x: x + width, y: y, z: 0},
-                {x: x + width, y: y + length, z: 0},
-                {x: x, y: y + length, z: 0}
-            ], drawer, drawingSettings);
-
+            var boundingBox = new BoundingBox.BoundingBox
+            ////////////////////////////////////
+            // Public instance methods/fields //
+            ////////////////////////////////////
             
-            // Public instance methods/fields
+            this.getBoundingBox = function() {
+                return boundingBox;
+            };
                        
             /**
              * getCanvasDrawer
@@ -65,7 +63,11 @@ define([
              * @return {void}
              */
             this.draw = function() {
-                polyhedron.draw();
+                drawer.beginPath();
+                drawer.setContextSettings(drawingSettings);
+                drawer.rect(x, y, width, height);
+                drawer.fill();
+                drawer.stroke();
             };
 
             /**
@@ -74,7 +76,7 @@ define([
              * @return {void}
              */
             this.clear = function() {
-                polyhedron.clear();
+                drawer.clearRect(x, y, width, height);
             };
         }
     };

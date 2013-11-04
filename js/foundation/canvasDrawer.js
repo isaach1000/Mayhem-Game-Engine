@@ -1,14 +1,17 @@
 define([], function() {
     "use strict";
 
-    // Private class methods/fields
+    //////////////////////////////////
+    // Private class methods/fields //
+    //////////////////////////////////
     
     /**
      * @exports foundation/canvasDrawer
      */
     var module = {
-        // Public class methods/fields
-        
+        /////////////////////////////////
+        // Public class methods/fields //
+        /////////////////////////////////
         
         /**
          * CanvasDrawer for drawing to a canvas.
@@ -17,13 +20,17 @@ define([], function() {
          * @param {Context} context - The context from a canvas.
          */
         CanvasDrawer: function(context, width, height) {
-            // Private instance methods/fields
+            /////////////////////////////////////
+            // Private instance methods/fields //
+            /////////////////////////////////////
             
             var _this = this;
             var ctx = context;
             
             
-            // Public instance methods/fields
+            ////////////////////////////////////
+            // Public instance methods/fields //
+            ////////////////////////////////////
             
             this.width = width;
             this.height = height;

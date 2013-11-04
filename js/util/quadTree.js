@@ -1,4 +1,4 @@
-define(['util/boundingCube'], function(BoundingCube) {
+define(['util/boundingBox'], function(BoundingBox) {
     "use strict";
     
     /**
@@ -11,9 +11,9 @@ define(['util/boundingCube'], function(BoundingCube) {
 
         /**
          * @constructor
-         * @param {BoundingCube} bcube
+         * @param {BoundingBox} bbox
          */
-        QuadTree: function(bcube) {
+        QuadTree: function(bbox) {
             // Private instance methods/fields
             var quadTreeNW, quadTreeNE, quadTreeSW, quadTreeSE;
             var subtrees = [quadTreeNW, quadTreeNE, quadTreeSW, quadTreeSE];
@@ -27,36 +27,36 @@ define(['util/boundingCube'], function(BoundingCube) {
              * @return {void} 
              */
             var subdivide = function() {
-                var bcubeNW = new BoundingCube(bcube.x, bcube.y,
-                                    bcube.width / 2, bcube.height / 2);
-                quadTreeNW = new QuadTree(bcubeNW);
+                var bboxNW = new BoundingBox(bbox.x, bbox.y,
+                                    bbox.width / 2, bbox.height / 2);
+                quadTreeNW = new QuadTree(bboxNW);
 
-                var bcubeNE = new BoundingCube(bcube.x + bcube.width / 2, bcube.y,
-                                            bcube.width / 2, bcube.height / 2);
-                quadTreeNE = new QuadTree(bcubeNE);
+                var bboxNE = new BoundingBox(bbox.x + bbox.width / 2, bbox.y,
+                                            bbox.width / 2, bbox.height / 2);
+                quadTreeNE = new QuadTree(bboxNE);
 
-                var bcubeSW = new BoundingCube(bcube.x, bcube.y + bcube.height / 2,
-                                             bcube.width / 2, bcube.height / 2);
-                quadTreeSW = new QuadTree(bcubeSW);
+                var bboxSW = new BoundingBox(bbox.x, bbox.y + bbox.height / 2,
+                                             bbox.width / 2, bbox.height / 2);
+                quadTreeSW = new QuadTree(bboxSW);
 
-                var bcubeSE = new BoundingCube(bcube.x + bcube.width / 2,
-                                             bcube.y + bcube.height / 2,
-                                             bcube.width / 2, bcube.height / 2);
-                quadTreeSE = new QuadTree(bcubeSE); 
+                var bboxSE = new BoundingBox(bbox.x + bbox.width / 2,
+                                             bbox.y + bbox.height / 2,
+                                             bbox.width / 2, bbox.height / 2);
+                quadTreeSE = new QuadTree(bboxSE); 
             };
               
-            /** The bounding cube of the QuadTree's coordinates. */
-            this.boundingCube = bcube;
+            /** The bounding box of the QuadTree's coordinates. */
+            this.boundingBox = bbox;
             
             /**
              * Insert a shape into the QuadTree.
              *
-             * @param {Object.<bcube>} shape -- The shape to insert.
+             * @param {Object.<bbox>} shape -- The shape to insert.
              * @return {boolean} Whether or not insertion was successful.
              */
             this.insert = function(shape) {
-                if (!bcube.containsBoundingCube(shape.bcube)) {
-                    // BoundingCube cannot be inserted.
+                if (!bbox.containsBoundingBox(shape.bbox)) {
+                    // BoundingBox cannot be inserted.
                     return false;
                 }
                 
@@ -85,20 +85,20 @@ define(['util/boundingCube'], function(BoundingCube) {
             };
 
             /**
-             * Query the tree for cubees within a range.
+             * Query the tree for boxes within a range.
              *
-             * @param {BoundingCube} rangeBcube -- The query range bounding cube.
-             * @return {Array.<BoundingCube>} An array of cubees within the range.
+             * @param {BoundingBox} rangeBbox -- The query range bounding box.
+             * @return {Array.<BoundingBox>} An array of boxes within the range.
              */
-            this.queryRange = function(rangeBcube) {
+            this.queryRange = function(rangeBbox) {
                 // Prepare an array of results.
                 var results = [];
-                if (bcube.boundingCube.intersection(rangeBcube) == null) {
-                    var cubeesLen = cubees.length;
-                    for (var i = 0; i < cubeesLen; i++) {
-                        var cube = cubees[i];
-                        if (rangeBcube.containsBoundingCube(cube)) {
-                            results.push(cube);
+                if (bbox.boundingBox.intersection(rangeBbox) == null) {
+                    var boxesLen = boxes.length;
+                    for (var i = 0; i < boxesLen; i++) {
+                        var box = boxes[i];
+                        if (rangeBbox.containsBoundingBox(box)) {
+                            results.push(box);
                         }
                     }
                 }
@@ -110,7 +110,7 @@ define(['util/boundingCube'], function(BoundingCube) {
                 var subtreesLen = subtrees.length;
                 for (var i = 0; i < subtreesLen; i++) {
                     var subtree = subtrees[i];
-                    results = results.concat(subtree.queryRange(rangeBcube));
+                    results = results.concat(subtree.queryRange(rangeBbox));
                 }
                 return result;
             };

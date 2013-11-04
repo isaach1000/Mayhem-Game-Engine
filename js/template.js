@@ -1,14 +1,18 @@
 define([], function() {
     "use strict";
 
-    // Private class methods/fields
+    //////////////////////////////////
+    // Private class methods/fields //
+    //////////////////////////////////
     
     
     /**
      * @exports modulePath // TODO: replace modulePath
      */
     var module = {
-        // Public class methods/fields
+        /////////////////////////////////
+        // Public class methods/fields //
+        /////////////////////////////////
         
         /**
          * ClassName // TODO: replace ClassName here and below
@@ -16,11 +20,14 @@ define([], function() {
          * @constructor
          */
         ClassName: function() {
-            // Private instance methods/fields
+            /////////////////////////////////////
+            // Private instance methods/fields //
+            /////////////////////////////////////
 
             
-            // Public instance methods/fields
-            
+            ////////////////////////////////////
+            // Public instance methods/fields //
+            ////////////////////////////////////            
         }
     };
 
