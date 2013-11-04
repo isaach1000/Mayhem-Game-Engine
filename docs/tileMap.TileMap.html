@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>JSDoc: Class: QuadTree</title>
+    <title>JSDoc: Class: TileMap</title>
     
     <script src="scripts/prettify/prettify.js"> </script>
     <script src="scripts/prettify/lang-css.js"> </script>
@@ -17,7 +17,7 @@
 
 <div id="main">
     
-    <h1 class="page-title">Class: QuadTree</h1>
+    <h1 class="page-title">Class: TileMap</h1>
     
     
 
@@ -27,9 +27,9 @@
     
 <header>
     <h2>
-        <span class="ancestors"><a href="quadTree.html">util/quadTree</a>.</span>
+        <span class="ancestors"><a href="tileMap.html">sprite/tileMap</a>.</span>
     
-    QuadTree
+    TileMap
     </h2>
     
 </header>  
@@ -41,12 +41,16 @@
     
         
 <dt>
-    <h4 class="name" id="QuadTree"><span class="type-signature"></span>new QuadTree<span class="signature">(bbox)</span><span class="type-signature"></span></h4>
+    <h4 class="name" id="TileMap"><span class="type-signature"></span>new TileMap<span class="signature">(x, y, width, height, numWidth, numHeight, drawer, drawingSettingsArray)</span><span class="type-signature"></span></h4>
     
     
 </dt>
 <dd>
     
+    
+    <div class="description">
+        TileMap
+    </div>
     
 
     
@@ -79,13 +83,13 @@
 	
         <tr>
             
-                <td class="name"><code>bbox</code></td>
+                <td class="name"><code>x</code></td>
             
             
             <td class="type">
             
                 
-<span class="param-type">BoundingBox</span>
+<span class="param-type">int</span>
 
 
             
@@ -95,7 +99,169 @@
             
             
             
-            <td class="description last"></td>
+            <td class="description last">The x coordinate of the TileMap.</td>
+        </tr>
+	
+	
+	
+        <tr>
+            
+                <td class="name"><code>y</code></td>
+            
+            
+            <td class="type">
+            
+                
+<span class="param-type">int</span>
+
+
+            
+            </td>
+            
+            
+            
+            
+            
+            <td class="description last">The y coordinate of the TileMap.</td>
+        </tr>
+	
+	
+	
+        <tr>
+            
+                <td class="name"><code>width</code></td>
+            
+            
+            <td class="type">
+            
+                
+<span class="param-type">int</span>
+
+
+            
+            </td>
+            
+            
+            
+            
+            
+            <td class="description last">The width of a standard tile.</td>
+        </tr>
+	
+	
+	
+        <tr>
+            
+                <td class="name"><code>height</code></td>
+            
+            
+            <td class="type">
+            
+                
+<span class="param-type">int</span>
+
+
+            
+            </td>
+            
+            
+            
+            
+            
+            <td class="description last">The height of a standard tile.</td>
+        </tr>
+	
+	
+	
+        <tr>
+            
+                <td class="name"><code>numWidth</code></td>
+            
+            
+            <td class="type">
+            
+                
+<span class="param-type">int</span>
+
+
+            
+            </td>
+            
+            
+            
+            
+            
+            <td class="description last">The number of tiles in the width of the TileMap</td>
+        </tr>
+	
+	
+	
+        <tr>
+            
+                <td class="name"><code>numHeight</code></td>
+            
+            
+            <td class="type">
+            
+                
+<span class="param-type">int</span>
+
+
+            
+            </td>
+            
+            
+            
+            
+            
+            <td class="description last">The number of tiles in the height of the TileMap</td>
+        </tr>
+	
+	
+	
+        <tr>
+            
+                <td class="name"><code>drawer</code></td>
+            
+            
+            <td class="type">
+            
+                
+<span class="param-type">CanvasDrawer</span>
+
+
+            
+            </td>
+            
+            
+            
+            
+            
+            <td class="description last">A CanvasDrawer to draw the TileMap.</td>
+        </tr>
+	
+	
+	
+        <tr>
+            
+                <td class="name"><code>drawingSettingsArray</code></td>
+            
+            
+            <td class="type">
+            
+                
+<span class="param-type">Array.&lt;Object></span>
+
+
+            
+            </td>
+            
+            
+            
+            
+            
+            <td class="description last">An array of to apply to the tiles repeatedly using modulo.
+                                                 Iterates through each row.</td>
         </tr>
 	
 	
@@ -126,7 +292,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="quadTree.js.html">util/quadTree.js</a>, <a href="quadTree.js.html#line16">line 16</a>
+        <a href="tileMap.js.html">sprite/tileMap.js</a>, <a href="tileMap.js.html#line27">line 27</a>
     </li></ul></dd>
     
     
@@ -164,64 +330,6 @@
     
     
     
-    
-        <h3 class="subsection-title">Members</h3>
-        
-        <dl>
-            
-<dt>
-    <h4 class="name" id="boundingBox"><span class="type-signature"></span>boundingBox<span class="type-signature"></span></h4>
-    
-    
-</dt>
-<dd>
-    
-    <div class="description">
-        The bounding box of the QuadTree's coordinates.
-    </div>
-    
-    
-    
-
-    
-<dl class="details">
-    
-        
-    
-    
-    
-
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    <dt class="tag-source">Source:</dt>
-    <dd class="tag-source"><ul class="dummy"><li>
-        <a href="quadTree.js.html">util/quadTree.js</a>, <a href="quadTree.js.html#line49">line 49</a>
-    </li></ul></dd>
-    
-    
-    
-    
-    
-    
-    
-</dl>
-
-    
-    
-</dd>
-
-        </dl>
     
     
     
@@ -230,7 +338,7 @@
         <dl>
             
 <dt>
-    <h4 class="name" id="insert"><span class="type-signature"></span>insert<span class="signature">(shape)</span><span class="type-signature"> &rarr; {boolean}</span></h4>
+    <h4 class="name" id="forEachTile"><span class="type-signature">&lt;inner> </span>forEachTile<span class="signature">(f)</span><span class="type-signature"> &rarr; {void}</span></h4>
     
     
 </dt>
@@ -238,7 +346,7 @@
     
     
     <div class="description">
-        Insert a shape into the QuadTree.
+        Iterate through each of the tiles. Iterates through rows.
     </div>
     
 
@@ -272,13 +380,13 @@
 	
         <tr>
             
-                <td class="name"><code>shape</code></td>
+                <td class="name"><code>f</code></td>
             
             
             <td class="type">
             
                 
-<span class="param-type">Object.&lt;bbox></span>
+<span class="param-type">function</span>
 
 
             
@@ -288,7 +396,7 @@
             
             
             
-            <td class="description last">- The shape to insert.</td>
+            <td class="description last">A function to apply to each tile. The function is given each tile as a parameter.</td>
         </tr>
 	
 	
@@ -319,7 +427,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="quadTree.js.html">util/quadTree.js</a>, <a href="quadTree.js.html#line57">line 57</a>
+        <a href="tileMap.js.html">sprite/tileMap.js</a>, <a href="tileMap.js.html#line38">line 38</a>
     </li></ul></dd>
     
     
@@ -343,10 +451,6 @@
     <h5>Returns:</h5>
     
             
-<div class="param-desc">
-    Whether or not insertion was successful.
-</div>
-
 
 
 <dl>
@@ -355,146 +459,7 @@
 	</dt>
 	<dd>
 		
-<span class="param-type">boolean</span>
-
-
-	</dd>
-</dl>
-
-        
-    
-    
-</dd>
-
-        
-            
-<dt>
-    <h4 class="name" id="queryRange"><span class="type-signature"></span>queryRange<span class="signature">(rangeBbox)</span><span class="type-signature"> &rarr; {Array.&lt;BoundingBox>}</span></h4>
-    
-    
-</dt>
-<dd>
-    
-    
-    <div class="description">
-        Query the tree for boxes within a range.
-    </div>
-    
-
-    
-    
-    
-    
-    
-        <h5>Parameters:</h5>
-        
-
-<table class="params">
-    <thead>
-	<tr>
-		
-		<th>Name</th>
-		
-		
-		<th>Type</th>
-		
-		
-		
-		
-		
-		<th class="last">Description</th>
-	</tr>
-	</thead>
-	
-	<tbody>
-	
-	
-        <tr>
-            
-                <td class="name"><code>rangeBbox</code></td>
-            
-            
-            <td class="type">
-            
-                
-<span class="param-type">BoundingBox</span>
-
-
-            
-            </td>
-            
-            
-            
-            
-            
-            <td class="description last">- The query range bounding box.</td>
-        </tr>
-	
-	
-	</tbody>
-</table>
-    
-    
-    
-<dl class="details">
-    
-        
-    
-    
-    
-
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    <dt class="tag-source">Source:</dt>
-    <dd class="tag-source"><ul class="dummy"><li>
-        <a href="quadTree.js.html">util/quadTree.js</a>, <a href="quadTree.js.html#line93">line 93</a>
-    </li></ul></dd>
-    
-    
-    
-    
-    
-    
-    
-</dl>
-
-    
-    
-
-    
-
-    
-    
-    
-    
-    
-    <h5>Returns:</h5>
-    
-            
-<div class="param-desc">
-    An array of boxes within the range.
-</div>
-
-
-
-<dl>
-	<dt>
-		Type
-	</dt>
-	<dd>
-		
-<span class="param-type">Array.&lt;BoundingBox></span>
+<span class="param-type">void</span>
 
 
 	</dd>

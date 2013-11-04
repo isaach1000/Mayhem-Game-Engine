@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>JSDoc: Source: util/boundingBox.js</title>
+    <title>JSDoc: Source: foundation/shape.js</title>
     
     <script src="scripts/prettify/prettify.js"> </script>
     <script src="scripts/prettify/lang-css.js"> </script>
@@ -17,7 +17,7 @@
 
 <div id="main">
     
-    <h1 class="page-title">Source: util/boundingBox.js</h1>
+    <h1 class="page-title">Source: foundation/shape.js</h1>
     
     
 
@@ -25,53 +25,36 @@
     
     <section>
         <article>
-            <pre class="prettyprint source"><code>define([], function() {
+            <pre class="prettyprint source"><code>define(['util/boundingBox', 'util/objectUtility'
+    ], function(BoundingBox, ObjUtil) {
     "use strict";
 
+    //////////////////////////////////
+    // Private class methods/fields //
+    //////////////////////////////////
+    
+    
     /**
-     * @exports util/boundingBox
+     * @exports foundation/shape
      */
     var module = {
         /////////////////////////////////
         // Public class methods/fields //
         /////////////////////////////////
-
+        
         /**
-         * Create a BoundingBox.
+         * Shape
+         *
          * @constructor
-         * @param {(float|Point)} arg0  - The x coordinate of left side, or left-top point.
-         * @param {(float|Point)} arg1  - The y coordinate of front side, or right-bottom point.
-         * @param {float} arg2          - Width of the box.
-         * @param {float} arg3          - Height of the box.
          */
-        BoundingBox: function(arg0, arg1, arg2, arg3) {
+        Shape: function(x, y, width, height, drawer, drawingSettings) {
             /////////////////////////////////////
             // Private instance methods/fields //
             /////////////////////////////////////
             
-            var x, y, w, h;
-            switch (arguments.length) {
-            case 2:
-                var point1 = arg0;
-                var point2 = arg1;
-                x = point1.x;
-                y = point1.y;
-                w = point2.x - point1.x;
-                h = point2.y - point1.y;
-                break;
-            case 4:
-                x = arg0;
-                y = arg1;
-                w = arg2;
-                h = arg3;
-                break;
-            }
-
-            if (w &lt; 0 || h &lt; 0) {
-                // Return null, because it is not a valid box.
-                return null;
-            }
-
+            /** BoundingBox of shape */
+            var bbox = new BoundingBox.BoundingBox(x, y, width, height);
+            
 
             ////////////////////////////////////
             // Public instance methods/fields //
@@ -79,9 +62,9 @@
 
             Object.defineProperties(this, {
                 /**
-                 * x coordinate of top-left of BoundingBox instance
+                 * x coordinate of top-left of Shape instance
                  * @type {float}
-                 * @memberof module:util/boundingBox.BoundingBox
+                 * @memberof module:foundation/shape.Shape
                  */
                 x: {
                     get: function() {
@@ -89,13 +72,14 @@
                     },
                     set: function(newX) {
                         x = newX;
+                        bbox.x = x;
                     }
-                }
-                ,
+                },
+
                 /**
-                 * y coordinate of top-left of BoundingBox instance
+                 * y coordinate of top-left of Shape instance
                  * @type {float}
-                 * @memberof module:util/boundingBox.BoundingBox
+                 * @memberof module:foundation/shape.Shape
                  */
                 y: {
                     get: function() {
@@ -103,58 +87,51 @@
                     },
                     set: function(newY) {
                         y = newY;
+                        bbox.y = y;
                     }
                 },
 
-                width: {
-                    value: w
-                },
-
-                height: {
-                    value: h
-                },
-
-                center: {
+                /**
+                 * Bounding box of shape.
+                 * @memberof module:foundation/shape.Shape
+                 * @instance
+                 */
+                boundingBox: {
                     get: function() {
-                        return {
-                            x: this.x + this.width / 2,
-                            y: this.y + this.height / 2
-                        };
+                        return ObjUtil.deepClone(bbox);
+                    }
+                },
+
+                /** 
+                 * Drawing settings of shape.
+                 * @memberof module:foundation/shape.Shape
+                 * @instance
+                 */
+                drawingSettings: {
+                    get: function() {
+                        return ObjUtil.deepClone(drawingSettings);
+                    },
+                    set: function(newSettings) {
+                        drawingSettings = ObjUtil.deepClone(newSettings);
                     }
                 }
             });
 
             /**
-             * Check if this BoundingBox contains another BoundingBox.
-             * @param {BoundingBox} bbox - The other BoundingBox
-             * @return {boolean} True if contains the other BoundingBox, false otherwise.
+             * Clear the shape.
+             * 
+             * @return {void}
              */
-            this.containsBoundingBox = function(bbox) {
-                return (bbox.x >= x && bbox.x + bbox.width &lt;= x + w &&
-                        bbox.y >= y && bbox.y + bbox.height &lt;= y + h);
-            };
-
-            /**
-             * Get the intersection of this BoundingBox
-             * and another BoundingBox.
-             * @param {BoundingBox} otherBbox - Another BoundingBox instance.
-             * @return {BoundingBox}
-             */
-            this.intersection = function(otherBbox) {
-                var x1 = Math.max(this.x, otherBbox.x),
-                    y1 = Math.max(this.y, otherBbox.y),
-                    x2 = Math.min(this.x + this.width,
-                        otherBbox.x + otherBbox.width),
-                    y2 = Math.min(this.y + this.height,
-                        otherBbox.y + otherBbox.height);
-                return new BoundingBox(x1, y1, x2 - x1, y2 - y1);
+            this.clear = function() {
+                var lineWidth = this.drawingSettings.lineWidth || 0;
+                drawer.clearRect(bbox.x - lineWidth, bbox.y - lineWidth,
+                    bbox.width + lineWidth * 2, bbox.height + lineWidth * 2);
             };
         }
     };
 
     return module; 
 });
-
 </code></pre>
         </article>
     </section>

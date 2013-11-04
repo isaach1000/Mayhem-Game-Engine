@@ -21,7 +21,7 @@ define([], function() {
             /////////////////////////////////////
             // Private instance methods/fields //
             /////////////////////////////////////
-
+            
             var x, y, w, h;
             switch (arguments.length) {
             case 2:
@@ -44,39 +44,58 @@ define([], function() {
                 // Return null, because it is not a valid box.
                 return null;
             }
-              
 
-            /////////////////////////////////////
-            // Private instance methods/fields //
-            /////////////////////////////////////
-        
-            /** Minimum x coordinate. */
-            this.x = x;
 
-            /** Minimum y coordinate. */
-            this.y = y;
+            ////////////////////////////////////
+            // Public instance methods/fields //
+            ////////////////////////////////////
 
-            /** Width of the BoundingBox. */
-            this.width = w;
-
-            /** Height of the BoundingBox. */
-            this.height = h;
-
-            /** Center of the BoundingBox. */
-            this.center = {
-                x: x + w / 2,
-                y: y + h / 2
-            };
-
-            this.points = [];
-            for (var i = 0; i < 2; i++) {
-                for (var j = 0; j < 2; j++) {
-                    this.points.push({
-                        x: this.x + this.width * i,
-                        y: this.y + this.height * j
-                    });
+            Object.defineProperties(this, {
+                /**
+                 * x coordinate of top-left of BoundingBox instance
+                 * @type {float}
+                 * @memberof module:util/boundingBox.BoundingBox
+                 */
+                x: {
+                    get: function() {
+                        return x;
+                    },
+                    set: function(newX) {
+                        x = newX;
+                    }
                 }
-            }
+                ,
+                /**
+                 * y coordinate of top-left of BoundingBox instance
+                 * @type {float}
+                 * @memberof module:util/boundingBox.BoundingBox
+                 */
+                y: {
+                    get: function() {
+                        return y;
+                    },
+                    set: function(newY) {
+                        y = newY;
+                    }
+                },
+
+                width: {
+                    value: w
+                },
+
+                height: {
+                    value: h
+                },
+
+                center: {
+                    get: function() {
+                        return {
+                            x: this.x + this.width / 2,
+                            y: this.y + this.height / 2
+                        };
+                    }
+                }
+            });
 
             /**
              * Check if this BoundingBox contains another BoundingBox.
@@ -95,17 +114,14 @@ define([], function() {
              * @return {BoundingBox}
              */
             this.intersection = function(otherBbox) {
-                x1 = Math.max(bbox.x, otherBbox.x);
-                y1 = Math.max(bbox.y, otherBbox.y);
-                x2 = Math.min(bbox.x + bbox.width,
-                        otherBbox.x + otherBbox.width);
-                y2 = Math.min(bbox.y + bbox.length,
-                        otherBbox.y + otherBbox.length);
-                return new BoundingBox(x1, y1, z1, x2 - x1, y2 - y1);
+                var x1 = Math.max(this.x, otherBbox.x),
+                    y1 = Math.max(this.y, otherBbox.y),
+                    x2 = Math.min(this.x + this.width,
+                        otherBbox.x + otherBbox.width),
+                    y2 = Math.min(this.y + this.height,
+                        otherBbox.y + otherBbox.height);
+                return new BoundingBox(x1, y1, x2 - x1, y2 - y1);
             };
-
-            // This line makes BoundingBox instances immutable.
-            Object.freeze(this);
         }
     };
 

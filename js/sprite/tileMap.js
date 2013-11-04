@@ -46,15 +46,15 @@ define(['foundation/rectangle'], function(Rectangle) {
             // Public instance methods/fields
 
             // The 2d-array containing all of the tiles.            
-            _this.tiles = [];
+            this.tiles = [];
 
             // Generate the tiles.
             var index = 0, settingsLen = drawingSettingsArray.length;
             for (var i = 0; i < numHeight; i++) {
-                _this.tiles.push([]);   // Add a row to the tiles matrix.
+                this.tiles.push([]);   // Add a row to the tiles matrix.
                 for (var j = 0; j < numWidth; j++) {
                     var settingsIndex = index % settingsLen;
-                    _this.tiles[i].push(new Rectangle.Rectangle(
+                    this.tiles[i].push(new Rectangle.Rectangle(
                                         x + j * width,
                                         y + i * height,
                                         width, height,
@@ -64,13 +64,13 @@ define(['foundation/rectangle'], function(Rectangle) {
                 }
             }
 
-            _this.draw = function() {
+            this.draw = function() {
                 forEachTile(function(tile) {
                     tile.draw();
                 });
             };
 
-            _this.clear = function() {
+            this.clear = function() {
                 forEachTile(function(tile) {
                     tile.clear();
                 });

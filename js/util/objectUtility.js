@@ -68,12 +68,12 @@ define([], function() {
         },
         
         /**
-         * Check if an object is an array.
-         * @param  {Object} object      - An object to check
-         * @return {Boolean}            Whether or not the object is an array
+         * Check if a value is an object.
+         * @param  {Object} value       - A value to check
+         * @return {Boolean}            Whether or not the value is an object
          */
-        isObject: function(object) {
-            return object instanceof Object;
+        isObject: function(value) {
+            return value instanceof Object;
         },
 
         /**

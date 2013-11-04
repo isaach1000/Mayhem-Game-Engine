@@ -1,4 +1,8 @@
-define(['util/boundingBox'], function(BoundingBox) {
+define([
+        'foundation/shape',
+        'util/boundingBox'
+    ], function(Shape,
+        BoundingBox) {
     "use strict";
 
     //////////////////////////////////
@@ -47,6 +51,7 @@ define(['util/boundingBox'], function(BoundingBox) {
          * Polygon
          *
          * @constructor
+         * @extends {Shape}
          * @param {Array.<Point>} points    -   An array of points that describe the polygon.
          * @param {CanvasDrawer} drawer     -   A CanvasDrawer to draw the polygon onto the canvas.
          * @param {Object} drawingSettings  -   A dictionary of drawing options.
@@ -55,34 +60,20 @@ define(['util/boundingBox'], function(BoundingBox) {
             /////////////////////////////////////
             // Private instance methods/fields //
             /////////////////////////////////////
-
-            var EXTRA_BOUNDS = 3;            
+            
+            var bbox = module.generateBbox(points);
+            var x = bbox.x,
+                y = bbox.y,
+                w = bbox.w,
+                h = bbox.h;
 
 
             ////////////////////////////////////
             // Public instance methods/fields //
             ////////////////////////////////////
-            
-            /**
-             * getCanvasDrawer
-             *
-             * @return {CanvasDrawer} - The current canvas drawer.
-             */
-            this.getCanvasDrawer = function() {
-                return drawer;
-            };
 
-            // TODO: should there be a setter for the drawer?
-            
-            /**
-             * Set the drawing settings for the rectangle. TODO: valid settings are...
-             *
-             * @param {Object} settings - An object with drawing settings.
-             * @return {void}
-             */
-            this.setDrawingSettings = function(settings) {
-                drawingSettings = settings;
-            }
+            // Extend Shape constructor
+            Shape.Shape.call(this, x, y, w, h, drawer, drawingSettings);
 
             /**
              * Draw the rectangle onto the canvas using the CanvasDrawer.
@@ -91,8 +82,7 @@ define(['util/boundingBox'], function(BoundingBox) {
              */
             this.draw = function() {
                 drawer.beginPath();
-                drawer.setContextSettings(drawingSettings);
-                drawer.save();
+                drawer.contextSettings = drawingSettings;
                 var numPoints = points.length;
                 drawer.drawLine(points[0], points[1], true);
                 for (var i = 1; i < numPoints; i++) {
@@ -102,21 +92,6 @@ define(['util/boundingBox'], function(BoundingBox) {
                 drawer.closePath();
                 drawer.fill();
                 drawer.stroke();
-                drawer.restore();
-            };
-
-            /**
-             * Clear the shape.
-             * 
-             * @return {void}
-             */
-            this.clear = function() {
-                drawer.save();
-                drawer.clearRect(this.bbox.x - EXTRA_BOUNDS,
-                                    this.bbox.y - EXTRA_BOUNDS,
-                                    this.bbox.width + EXTRA_BOUNDS,
-                                    this.bbox.height + EXTRA_BOUNDS);
-                drawer.restore();
             };
         }
     };

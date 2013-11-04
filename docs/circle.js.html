@@ -25,7 +25,13 @@
     
     <section>
         <article>
-            <pre class="prettyprint source"><code>define(['util/objectUtility', 'util/boundingBox'], function(ObjUtil, BoundingBox) {
+            <pre class="prettyprint source"><code>define([
+        'foundation/shape',
+        'util/objectUtility',
+        'util/boundingBox'
+    ], function(Shape,
+        ObjUtil,
+        BoundingBox) {
     "use strict";
 
     //////////////////////////////////
@@ -44,6 +50,7 @@
          * Circle
          *
          * @constructor
+         * @extends {Shape}
          * @param {float} x                 -   x coordinate of circle
          * @param {float} y                 -   y coordinate of circle
          * @param {float} radius            -   Radius of the circle
@@ -51,73 +58,36 @@
          * @param {Object} drawingSettings  -   Dictionary of drawing options
          */
         Circle: function(x, y, radius, drawer, drawingSettings) {
-            /////////////////////////////////////
-            // Private instance methods/fields //
-            /////////////////////////////////////
-
-            var bbox = new BoundingBox.BoundingBox(x, y, radius * 2, radius * 2);
-
+            // Extend Shape constructor
+            Shape.Shape.call(this, x, y, radius * 2, radius * 2,
+                                drawer, drawingSettings);
 
             ////////////////////////////////////
             // Public instance methods/fields //
             ////////////////////////////////////
-            
-            this.x = x;
-            this.y = y;
+
+            /** Radius of circle. */
             this.radius = radius;
 
-            Object.defineProperties(this, {
-                /**
-                 * Bounding box of circle.
-                 * @memberOf Circle
-                 * @name Circle#boundingBox
-                 */
-                boundingBox: {
-                    get: function() {
-                        // No clone necessary because BoundingBox instances are immutable.
-                        return bbox;
-                    }
-                },
-
-                /** 
-                 * Drawing settings for the circle.
-                 * @memberOf Circle
-                 * @name Circle#drawingSettings
-                 */
-                drawingSettings: {
-                    get: function() {
-                        return ObjUtil.deepClone(drawingSettings);
-                    },
-                    set: function(newSettings) {
-                        drawingSettings = ObjUtil.deepClone(newSettings);
-                    }
-                }
-            });
-
             /**
-             * Draw the circle onto the canvas using the CanvasDrawer.
+             * Draw circle onto canvas.
              *
              * @return {void}
              */
             this.draw = function() {
                 drawer.beginPath();
                 drawer.contextSettings = drawingSettings;
-                drawer.arc(this.x, this.y, this.radius, this.radius, 0, Math.PI * 2, true);
+                drawer.arc(this.x + this.radius, this.y + this.radius,
+                        this.radius, this.radius, 0,
+                    2 * Math.PI, true);
                 drawer.fill();
                 drawer.stroke();
             };
-
-            /**
-             * Clear the shape.
-             * 
-             * @return {void}
-             */
-            this.clear = function() {
-                var bigRadius = this.radius + 3;
-                drawer.clearRect(this.x - bigRadius, this.y - bigRadius, 2 * bigRadius, 2 * bigRadius);
-            };
         }
     };
+
+    // Clone Shape prototype
+    module.Circle.prototype = new Shape.Shape;
 
     return module; 
 });
@@ -131,13 +101,13 @@
 </div>
 
 <nav>
-    <h2><a href="index.html">Index</a></h2><h3>Modules</h3><ul><li><a href="animation.html">foundation/animation</a></li><li><a href="canvasDrawer.html">foundation/canvasDrawer</a></li><li><a href="circle_.html">foundation/circle</a></li><li><a href="rectangle.html">foundation/rectangle</a></li><li><a href="boundingBox.html">util/boundingBox</a></li><li><a href="factory.html">util/factory</a></li><li><a href="mathExtensions.html">util/mathExtensions</a></li><li><a href="matrix.html">util/matrix</a></li><li><a href="objectUtility.html">util/objectUtility</a></li><li><a href="polygon.html">util/polygon</a></li><li><a href="quadTree.html">util/quadTree</a></li></ul><h3>Classes</h3><ul><li><a href="animation.Animation.html">Animation</a></li><li><a href="canvasDrawer.CanvasDrawer.html">CanvasDrawer</a></li><li><a href="circle.Circle.html">Circle</a></li><li><a href="rectangle.Rectangle.html">Rectangle</a></li><li><a href="boundingBox.BoundingBox.html">BoundingBox</a></li><li><a href="matrix.Matrix.html">Matrix</a></li><li><a href="polygon.Polygon.html">Polygon</a></li><li><a href="quadTree.QuadTree.html">QuadTree</a></li></ul>
+    <h2><a href="index.html">Index</a></h2><h3>Modules</h3><ul><li><a href="animation.html">foundation/animation</a></li><li><a href="canvasDrawer.html">foundation/canvasDrawer</a></li><li><a href="circle.html">foundation/circle</a></li><li><a href="rectangle.html">foundation/rectangle</a></li><li><a href="shape.html">foundation/shape</a></li><li><a href="module-modulePath.html">modulePath</a></li><li><a href="tileMap.html">sprite/tileMap</a></li><li><a href="boundingBox.html">util/boundingBox</a></li><li><a href="factory.html">util/factory</a></li><li><a href="mathExtensions.html">util/mathExtensions</a></li><li><a href="matrix.html">util/matrix</a></li><li><a href="objectUtility.html">util/objectUtility</a></li><li><a href="polygon.html">util/polygon</a></li><li><a href="quadTree.html">util/quadTree</a></li></ul><h3>Classes</h3><ul><li><a href="animation.Animation.html">Animation</a></li><li><a href="canvasDrawer.CanvasDrawer.html">CanvasDrawer</a></li><li><a href="circle.Circle.html">Circle</a></li><li><a href="rectangle.Rectangle.html">Rectangle</a></li><li><a href="shape.Shape.html">Shape</a></li><li><a href="module-modulePath.ClassName.html">ClassName</a></li><li><a href="tileMap.TileMap.html">TileMap</a></li><li><a href="boundingBox.BoundingBox.html">BoundingBox</a></li><li><a href="matrix.Matrix.html">Matrix</a></li><li><a href="polygon.Polygon.html">Polygon</a></li><li><a href="quadTree.QuadTree.html">QuadTree</a></li></ul>
 </nav>
 
 <br clear="both">
 
 <footer>
-    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.3.0-dev</a> on Sun Nov 03 2013 21:01:09 GMT-0500 (EST)
+    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.3.0-dev</a> on Mon Nov 04 2013 01:10:43 GMT-0500 (EST)
 </footer>
 
 <script> prettyPrint(); </script>

@@ -13,6 +13,11 @@ define(['jquery'], function($) {
         createCanvas: function(options) {
             var canvas = $('<canvas></canvas>');
             canvas.attr(options);
+            canvas.css({
+                position: 'absolute',
+                top: '0',
+                left: '0'
+            });
             $('body').append(canvas);
             return canvas;
         }

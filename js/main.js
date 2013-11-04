@@ -9,23 +9,24 @@ require([
         'jquery',
         'util/factory',
         'foundation/canvasDrawer',
+        'foundation/animation',
         'foundation/circle',
-        'foundation/animation'
+        'foundation/polygon',
+        'foundation/rectangle'
     ],
     function($,
         Factory,
         CanvasDrawer,
+        Animation,
         Circle,
-        Animation) {
-        $(document).ready(function() {
-            var canvas = Factory.createCanvas({
-                id: 'mainCanvas',
-                width: '1000px',
-                height: '600px'
-            });
-            var ctx = canvas[0].getContext('2d');
-            var drawer = new CanvasDrawer.CanvasDrawer(ctx); 
-           
+        Polygon,
+        Rectangle) {
+
+        ////////////////////
+        // Test functions //
+        ////////////////////
+        
+        var circleTest = function(drawer) {
             var circ = new Circle.Circle(100, 100, 50, drawer, {
                 lineWidth: 4,
                 strokeStyle: 'black',
@@ -56,5 +57,53 @@ require([
             });
 
             circAnim.start();
+        };
+
+        var polyTest = function(drawer) {
+            var poly = new Polygon.Polygon([
+                    {x: 100, y: 200},
+                    {x: 300, y: 200},
+                    {x: 100, y: 300}
+                ], drawer, {
+                    lineWidth: 4,
+                    strokeStyle: 'black',
+                    fillStyle: 'blue'
+            });
+            poly.draw();
+        };
+
+        var rectTest = function(drawer) {
+            var rect = new Rectangle.Rectangle(300, 200, 100, 200, drawer, {
+                lineWidth: 4,
+                strokeStyle: 'black',
+                fillStyle: 'red'
+            });
+            rect.draw()
+        };
+
+        ///////////////////
+        // Main function //
+        ///////////////////
+        
+        $(document).ready(function() {
+            var bgCanvas = Factory.createCanvas({
+                id: 'bgCanvas',
+                width: '1000px',
+                height: '600px'
+            }),
+                mainCanvas = Factory.createCanvas({
+                id: 'mainCanvas',
+                width: '1000px',
+                height: '600px'
+            });
+
+            var mainCtx = mainCanvas[0].getContext('2d');
+            var mainDrawer = new CanvasDrawer.CanvasDrawer(mainCtx); 
+            circleTest(mainDrawer);
+
+            var bgCtx = bgCanvas[0].getContext('2d');
+            var bgDrawer = new CanvasDrawer.CanvasDrawer(bgCtx);
+            polyTest(bgDrawer);
+            rectTest(bgDrawer);
         });
 });
