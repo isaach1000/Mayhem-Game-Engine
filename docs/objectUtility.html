@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>JSDoc: Class: Polygon</title>
+    <title>JSDoc: Module: util/objectUtility</title>
     
     <script src="scripts/prettify/prettify.js"> </script>
     <script src="scripts/prettify/lang-css.js"> </script>
@@ -17,7 +17,7 @@
 
 <div id="main">
     
-    <h1 class="page-title">Class: Polygon</h1>
+    <h1 class="page-title">Module: util/objectUtility</h1>
     
     
 
@@ -27,9 +27,7 @@
     
 <header>
     <h2>
-        <span class="ancestors"><a href="polygon.html">util/polygon</a>.</span>
-    
-    Polygon
+    util/objectUtility
     </h2>
     
 </header>  
@@ -40,8 +38,65 @@
     
     
         
+        
+        
+<dl class="details">
+    
+        
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="objectUtility.js.html">util/objectUtility.js</a>, <a href="objectUtility.js.html#line47">line 47</a>
+    </li></ul></dd>
+    
+    
+    
+    
+    
+    
+    
+</dl>
+
+        
+        
+    
+    </div>
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+        <h3 class="subsection-title">Methods</h3>
+        
+        <dl>
+            
 <dt>
-    <h4 class="name" id="Polygon"><span class="type-signature"></span>new Polygon<span class="signature">(points, drawer, drawingSettings)</span><span class="type-signature"></span></h4>
+    <h4 class="name" id="deepClone"><span class="type-signature">&lt;static> </span>deepClone<span class="signature">(originalObject)</span><span class="type-signature"> &rarr; {Object|Array}</span></h4>
     
     
 </dt>
@@ -49,7 +104,7 @@
     
     
     <div class="description">
-        Polygon
+        Create a deep copy of an object.
     </div>
     
 
@@ -83,59 +138,16 @@
 	
         <tr>
             
-                <td class="name"><code>points</code></td>
-            
-            
-            <td class="type">
-            
-                
-<span class="param-type">Array.&lt;Point></span>
-
-
-            
-            </td>
-            
-            
-            
-            
-            
-            <td class="description last">An array of points that describe the polygon.</td>
-        </tr>
-	
-	
-	
-        <tr>
-            
-                <td class="name"><code>drawer</code></td>
-            
-            
-            <td class="type">
-            
-                
-<span class="param-type">CanvasDrawer</span>
-
-
-            
-            </td>
-            
-            
-            
-            
-            
-            <td class="description last">A CanvasDrawer to draw the polygon onto the canvas.</td>
-        </tr>
-	
-	
-	
-        <tr>
-            
-                <td class="name"><code>drawingSettings</code></td>
+                <td class="name"><code>originalObject</code></td>
             
             
             <td class="type">
             
                 
 <span class="param-type">Object</span>
+|
+
+<span class="param-type">Array</span>
 
 
             
@@ -145,7 +157,7 @@
             
             
             
-            <td class="description last">A dictionary of drawing options.</td>
+            <td class="description last">An object to copy</td>
         </tr>
 	
 	
@@ -176,268 +188,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="polygon.js.html">foundation/polygon.js</a>, <a href="polygon.js.html#line54">line 54</a>
-    </li></ul></dd>
-    
-    
-    
-    
-    
-    
-    
-</dl>
-
-    
-    
-
-    
-
-    
-    
-    
-    
-    
-    
-    
-</dd>
-
-    
-    </div>
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-        <h3 class="subsection-title">Methods</h3>
-        
-        <dl>
-            
-<dt>
-    <h4 class="name" id="clear"><span class="type-signature"></span>clear<span class="signature">()</span><span class="type-signature"> &rarr; {void}</span></h4>
-    
-    
-</dt>
-<dd>
-    
-    
-    <div class="description">
-        Clear the shape.
-    </div>
-    
-
-    
-    
-    
-    
-    
-    
-    
-<dl class="details">
-    
-        
-    
-    
-    
-
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    <dt class="tag-source">Source:</dt>
-    <dd class="tag-source"><ul class="dummy"><li>
-        <a href="polygon.js.html">foundation/polygon.js</a>, <a href="polygon.js.html#line113">line 113</a>
-    </li></ul></dd>
-    
-    
-    
-    
-    
-    
-    
-</dl>
-
-    
-    
-
-    
-
-    
-    
-    
-    
-    
-    <h5>Returns:</h5>
-    
-            
-
-
-<dl>
-	<dt>
-		Type
-	</dt>
-	<dd>
-		
-<span class="param-type">void</span>
-
-
-	</dd>
-</dl>
-
-        
-    
-    
-</dd>
-
-        
-            
-<dt>
-    <h4 class="name" id="draw"><span class="type-signature"></span>draw<span class="signature">()</span><span class="type-signature"> &rarr; {void}</span></h4>
-    
-    
-</dt>
-<dd>
-    
-    
-    <div class="description">
-        Draw the rectangle onto the canvas using the CanvasDrawer.
-    </div>
-    
-
-    
-    
-    
-    
-    
-    
-    
-<dl class="details">
-    
-        
-    
-    
-    
-
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    <dt class="tag-source">Source:</dt>
-    <dd class="tag-source"><ul class="dummy"><li>
-        <a href="polygon.js.html">foundation/polygon.js</a>, <a href="polygon.js.html#line92">line 92</a>
-    </li></ul></dd>
-    
-    
-    
-    
-    
-    
-    
-</dl>
-
-    
-    
-
-    
-
-    
-    
-    
-    
-    
-    <h5>Returns:</h5>
-    
-            
-
-
-<dl>
-	<dt>
-		Type
-	</dt>
-	<dd>
-		
-<span class="param-type">void</span>
-
-
-	</dd>
-</dl>
-
-        
-    
-    
-</dd>
-
-        
-            
-<dt>
-    <h4 class="name" id="getCanvasDrawer"><span class="type-signature"></span>getCanvasDrawer<span class="signature">()</span><span class="type-signature"> &rarr; {CanvasDrawer}</span></h4>
-    
-    
-</dt>
-<dd>
-    
-    
-    <div class="description">
-        getCanvasDrawer
-    </div>
-    
-
-    
-    
-    
-    
-    
-    
-    
-<dl class="details">
-    
-        
-    
-    
-    
-
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    <dt class="tag-source">Source:</dt>
-    <dd class="tag-source"><ul class="dummy"><li>
-        <a href="polygon.js.html">foundation/polygon.js</a>, <a href="polygon.js.html#line71">line 71</a>
+        <a href="objectUtility.js.html">util/objectUtility.js</a>, <a href="objectUtility.js.html#line66">line 66</a>
     </li></ul></dd>
     
     
@@ -462,7 +213,7 @@
     
             
 <div class="param-desc">
-    - The current canvas drawer.
+    A deep clone of originalObject
 </div>
 
 
@@ -473,7 +224,10 @@
 	</dt>
 	<dd>
 		
-<span class="param-type">CanvasDrawer</span>
+<span class="param-type">Object</span>
+|
+
+<span class="param-type">Array</span>
 
 
 	</dd>
@@ -487,7 +241,7 @@
         
             
 <dt>
-    <h4 class="name" id="setDrawingSettings"><span class="type-signature"></span>setDrawingSettings<span class="signature">(settings)</span><span class="type-signature"> &rarr; {void}</span></h4>
+    <h4 class="name" id="isArray"><span class="type-signature">&lt;static> </span>isArray<span class="signature">(object)</span><span class="type-signature"> &rarr; {Boolean}</span></h4>
     
     
 </dt>
@@ -495,7 +249,7 @@
     
     
     <div class="description">
-        Set the drawing settings for the rectangle. TODO: valid settings are...
+        Check if an object is an array.
     </div>
     
 
@@ -529,7 +283,7 @@
 	
         <tr>
             
-                <td class="name"><code>settings</code></td>
+                <td class="name"><code>object</code></td>
             
             
             <td class="type">
@@ -545,7 +299,7 @@
             
             
             
-            <td class="description last">An object with drawing settings.</td>
+            <td class="description last">An object to check</td>
         </tr>
 	
 	
@@ -576,7 +330,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="polygon.js.html">foundation/polygon.js</a>, <a href="polygon.js.html#line83">line 83</a>
+        <a href="objectUtility.js.html">util/objectUtility.js</a>, <a href="objectUtility.js.html#line84">line 84</a>
     </li></ul></dd>
     
     
@@ -600,6 +354,10 @@
     <h5>Returns:</h5>
     
             
+<div class="param-desc">
+    Whether or not the object is an array
+</div>
+
 
 
 <dl>
@@ -608,7 +366,291 @@
 	</dt>
 	<dd>
 		
-<span class="param-type">void</span>
+<span class="param-type">Boolean</span>
+
+
+	</dd>
+</dl>
+
+        
+    
+    
+</dd>
+
+        
+            
+<dt>
+    <h4 class="name" id="isObject"><span class="type-signature">&lt;static> </span>isObject<span class="signature">(object)</span><span class="type-signature"> &rarr; {Boolean}</span></h4>
+    
+    
+</dt>
+<dd>
+    
+    
+    <div class="description">
+        Check if an object is an array.
+    </div>
+    
+
+    
+    
+    
+    
+    
+        <h5>Parameters:</h5>
+        
+
+<table class="params">
+    <thead>
+	<tr>
+		
+		<th>Name</th>
+		
+		
+		<th>Type</th>
+		
+		
+		
+		
+		
+		<th class="last">Description</th>
+	</tr>
+	</thead>
+	
+	<tbody>
+	
+	
+        <tr>
+            
+                <td class="name"><code>object</code></td>
+            
+            
+            <td class="type">
+            
+                
+<span class="param-type">Object</span>
+
+
+            
+            </td>
+            
+            
+            
+            
+            
+            <td class="description last">An object to check</td>
+        </tr>
+	
+	
+	</tbody>
+</table>
+    
+    
+    
+<dl class="details">
+    
+        
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="objectUtility.js.html">util/objectUtility.js</a>, <a href="objectUtility.js.html#line75">line 75</a>
+    </li></ul></dd>
+    
+    
+    
+    
+    
+    
+    
+</dl>
+
+    
+    
+
+    
+
+    
+    
+    
+    
+    
+    <h5>Returns:</h5>
+    
+            
+<div class="param-desc">
+    Whether or not the object is an array
+</div>
+
+
+
+<dl>
+	<dt>
+		Type
+	</dt>
+	<dd>
+		
+<span class="param-type">Boolean</span>
+
+
+	</dd>
+</dl>
+
+        
+    
+    
+</dd>
+
+        
+            
+<dt>
+    <h4 class="name" id="shallowClone"><span class="type-signature">&lt;static> </span>shallowClone<span class="signature">(originalObject)</span><span class="type-signature"> &rarr; {Object|Array}</span></h4>
+    
+    
+</dt>
+<dd>
+    
+    
+    <div class="description">
+        Create a shallow copy of an object.
+    </div>
+    
+
+    
+    
+    
+    
+    
+        <h5>Parameters:</h5>
+        
+
+<table class="params">
+    <thead>
+	<tr>
+		
+		<th>Name</th>
+		
+		
+		<th>Type</th>
+		
+		
+		
+		
+		
+		<th class="last">Description</th>
+	</tr>
+	</thead>
+	
+	<tbody>
+	
+	
+        <tr>
+            
+                <td class="name"><code>originalObject</code></td>
+            
+            
+            <td class="type">
+            
+                
+<span class="param-type">Object</span>
+|
+
+<span class="param-type">Array</span>
+
+
+            
+            </td>
+            
+            
+            
+            
+            
+            <td class="description last">An object to copy</td>
+        </tr>
+	
+	
+	</tbody>
+</table>
+    
+    
+    
+<dl class="details">
+    
+        
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="objectUtility.js.html">util/objectUtility.js</a>, <a href="objectUtility.js.html#line57">line 57</a>
+    </li></ul></dd>
+    
+    
+    
+    
+    
+    
+    
+</dl>
+
+    
+    
+
+    
+
+    
+    
+    
+    
+    
+    <h5>Returns:</h5>
+    
+            
+<div class="param-desc">
+    A shallow copy of originalObject
+</div>
+
+
+
+<dl>
+	<dt>
+		Type
+	</dt>
+	<dd>
+		
+<span class="param-type">Object</span>
+|
+
+<span class="param-type">Array</span>
 
 
 	</dd>

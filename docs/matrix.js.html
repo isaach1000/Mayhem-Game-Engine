@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>JSDoc: Source: util/matrix.js</title>
+    
+    <script src="scripts/prettify/prettify.js"> </script>
+    <script src="scripts/prettify/lang-css.js"> </script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="styles/prettify-tomorrow.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc-default.css">
+</head>
+
+<body>
+
+<div id="main">
+    
+    <h1 class="page-title">Source: util/matrix.js</h1>
+    
+    
+
+
+    
+    <section>
+        <article>
+            <pre class="prettyprint source"><code>define(['util/mathExtensions'], function(MathExtensions) {
+    "use strict";
+    
+    /**
+     * @exports util/matrix
+     */
+    var module = {
+        /////////////////////////////////
+        // Public class methods/fields //
+        /////////////////////////////////
+
+        /**
+         * Matrix
+         *
+         * @constructor
+         */
+        Matrix: function(entriesArray, numRows, numColumns) {           
+            /////////////////////////////////////
+            // Private instance methods/fields //
+            /////////////////////////////////////
+            
+            var forEach = function(f) {
+                for (var i = 0; i &lt; numRows; i++) {
+                    for (var j = 0; j &lt; numColumns; j++) {
+                        f(entriesArray[i][j], i, j);
+                    }
+                }
+            };
+
+            var addAll = function(matrix, coefficient) {
+                if (this.numRows !== matrix.numRows ||
+                    this.numColumns !== matrix.numColumns) {
+                    return null;
+                }
+
+                var newEntries = [];
+                forEach(function(entry, row, column) {
+                    var sum = entry + coefficient * matrix.get(row, column);
+                    newEntries.push(sum);
+                });
+
+                return new module.Matrix(newEntries, this.numRows, this.numColumns);
+            };
+
+            
+            ////////////////////////////////////
+            // Public instance methods/fields //
+            ////////////////////////////////////
+            
+            this.numRows = numRows;
+            this.numColumns = numColumns;
+
+            // Store the matrix in a 2d array.
+            var rows = [];
+            for (var i = 0; i &lt; this.numRows; i++) {
+                var row = [];
+                for (var j = 0; j &lt; this.numColumns; j++) {
+                    row.push(entriesArray[i * this.numColumns + j]);
+                }
+                rows.push(row);
+            }
+
+            this.get = function(row, column) {
+                return rows[row][column];
+            };
+
+            this.set = function(row, column, value) {
+                rows[row][column] = value;
+            }
+
+            this.getRow = function(rowIndex) {
+                // Return a clone of the row.
+                return rows[rowIndex].slice(0);
+            };
+
+            this.getColumn = function(columnIndex) {
+                var column = [];
+                for (var i = 0; i &lt; this.numRows; i++) {
+                    column.push(rows[i][columnIndex]);
+                }
+                return column;
+            };
+
+            this.add = function(matrix) {
+                return addAll(matrix, 1);
+            };
+
+            this.subtract = function(matrix) {
+                return addAll(matrix, -1);
+            };
+
+            this.multiply = function(matrix) {
+                if (this.numColumns !== this.numRows) {
+                    return null;
+                }
+
+                var newEntries = [];
+                for (var i = 0; i &lt; this.numRows; i++) {
+                    var vector1 = this.getRow(i);
+                    for (var j = 0; j &lt; matrix.numColumns; j++) {
+                        var vector2 = matrix.getColumn(j),
+                            dotProduct = MathExtensions.dotProduct(vector1, vector2);
+                        newEntries.push(dotProduct);
+                    }
+                }
+                return new module.Matrix(newEntries, this.numRows, matrix.numColumns);
+            }
+
+            // Make the instance immutable.
+            Object.freeze(this);
+        },
+
+        identity: function() {
+            return new module.Matrix
+        }
+    };
+
+    return module; 
+});
+</code></pre>
+        </article>
+    </section>
+
+
+
+
+</div>
+
+<nav>
+    <h2><a href="index.html">Index</a></h2><h3>Modules</h3><ul><li><a href="animation.html">foundation/animation</a></li><li><a href="canvasDrawer.html">foundation/canvasDrawer</a></li><li><a href="circle_.html">foundation/circle</a></li><li><a href="rectangle.html">foundation/rectangle</a></li><li><a href="boundingBox.html">util/boundingBox</a></li><li><a href="factory.html">util/factory</a></li><li><a href="mathExtensions.html">util/mathExtensions</a></li><li><a href="matrix.html">util/matrix</a></li><li><a href="objectUtility.html">util/objectUtility</a></li><li><a href="polygon.html">util/polygon</a></li><li><a href="quadTree.html">util/quadTree</a></li></ul><h3>Classes</h3><ul><li><a href="animation.Animation.html">Animation</a></li><li><a href="canvasDrawer.CanvasDrawer.html">CanvasDrawer</a></li><li><a href="circle.Circle.html">Circle</a></li><li><a href="rectangle.Rectangle.html">Rectangle</a></li><li><a href="boundingBox.BoundingBox.html">BoundingBox</a></li><li><a href="matrix.Matrix.html">Matrix</a></li><li><a href="polygon.Polygon.html">Polygon</a></li><li><a href="quadTree.QuadTree.html">QuadTree</a></li></ul>
+</nav>
+
+<br clear="both">
+
+<footer>
+    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.3.0-dev</a> on Sun Nov 03 2013 21:01:09 GMT-0500 (EST)
+</footer>
+
+<script> prettyPrint(); </script>
+<script src="scripts/linenumber.js"> </script>
+</body>
+</html>

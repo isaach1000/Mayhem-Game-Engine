@@ -25,17 +25,20 @@
     
     <section>
         <article>
-            <pre class="prettyprint source"><code>define([], function() {
+            <pre class="prettyprint source"><code>define(['util/objectUtility'], function(ObjUtil) {
     "use strict";
 
-    // Private class methods/fields
+    //////////////////////////////////
+    // Private class methods/fields //
+    //////////////////////////////////
     
     /**
      * @exports foundation/canvasDrawer
      */
     var module = {
-        // Public class methods/fields
-        
+        /////////////////////////////////
+        // Public class methods/fields //
+        /////////////////////////////////
         
         /**
          * CanvasDrawer for drawing to a canvas.
@@ -43,14 +46,23 @@
          * @constructor
          * @param {Context} context - The context from a canvas.
          */
-        CanvasDrawer: function(context) {
-            // Private instance methods/fields
+        CanvasDrawer: function(context, width, height) {
+            /////////////////////////////////////
+            // Private instance methods/fields //
+            /////////////////////////////////////
             
+            var _this = this;
             var ctx = context;
+            var ctxSettings;
             
             
-            // Public instance methods/fields
+            ////////////////////////////////////
+            // Public instance methods/fields //
+            ////////////////////////////////////
             
+            this.width = width;
+            this.height = height;
+
             /**
              * Get the context of the CanvasDrawer.
              *
@@ -73,19 +85,25 @@
             /**
              * Change properties of the context. Valid settings include:
              * lineWidth, fillStyle, and strokeStyle.
-             *
-             * @param {Object} settings - A dictionary with settings
-             * @return {void}
              */
-            this.setContextSettings = function(settings) {
-                var VALID_SETTINGS = ['lineWidth', 'fillStyle', 'strokeStyle'];
-                
-                for (var property in settings) {
-                    if (VALID_SETTINGS.indexOf(property) !== -1) {
-                        ctx[property] = settings[property];
+            Object.defineProperty(this, 'contextSettings', {
+                get: function() {
+                    return ObjUtil.deepClone(ctxSettings);
+                },
+                set: function(settings) {
+                    var VALID_SETTINGS = ['lineWidth', 'fillStyle', 'strokeStyle'];
+                    var success = true;
+                    for (var property in settings) {
+                        success = (success && VALID_SETTINGS.indexOf(property) !== -1);
+                        if (success) {
+                            ctx[property] = settings[property];
+                        }
+                    }
+                    if (success) {
+                        ctxSettings = ObjUtil.deepClone(settings);
                     }
                 }
-            };
+            });
 
             /**
              * Draw a line between two points.
@@ -178,6 +196,41 @@
             this.clearRect = function(x, y, width, height) {
                 ctx.clearRect(x, y, width, height);
             };
+
+            this.clearCanvas = function() {
+                _this.clearRect(0, 0, _this.width, _this.height);
+            }
+
+            /**
+             * Wrapper for `context.save`
+             * 
+             * @return {void}
+             */
+            this.save = function() {
+                ctx.save();
+            };
+
+            /**
+             * Wrapper for `context.restore`
+             * 
+             * @return {void}
+             */
+            this.restore = function() {
+                ctx.restore();
+            };
+
+            /**
+             * Wrapper for `context.translate`
+             * 
+             * @return {void}
+             */
+            this.translate = function(x, y) {
+                ctx.translate(x, y);
+            };
+
+            this.fillRect = function(x, y, w, h) {
+                ctx.fillRect(x, y, w, h);
+            };
         }
     };
 
@@ -194,13 +247,13 @@
 </div>
 
 <nav>
-    <h2><a href="index.html">Index</a></h2><h3>Modules</h3><ul><li><a href="animation.html">foundation/animation</a></li><li><a href="canvasDrawer.html">foundation/canvasDrawer</a></li><li><a href="circle.html">foundation/circle</a></li><li><a href="rectangle.html">foundation/rectangle</a></li><li><a href="boundingBox.html">util/boundingBox</a></li><li><a href="factory.html">util/factory</a></li><li><a href="mathExtensions.html">util/mathExtensions</a></li><li><a href="polygon.html">util/polygon</a></li><li><a href="quadTree.html">util/quadTree</a></li></ul><h3>Classes</h3><ul><li><a href="animation.Animation.html">Animation</a></li><li><a href="canvasDrawer.CanvasDrawer.html">CanvasDrawer</a></li><li><a href="circle.Circle.html">Circle</a></li><li><a href="rectangle.Rectangle.html">Rectangle</a></li><li><a href="boundingBox.BoundingBox.html">BoundingBox</a></li><li><a href="polygon.Polygon.html">Polygon</a></li><li><a href="quadTree.QuadTree.html">QuadTree</a></li></ul>
+    <h2><a href="index.html">Index</a></h2><h3>Modules</h3><ul><li><a href="animation.html">foundation/animation</a></li><li><a href="canvasDrawer.html">foundation/canvasDrawer</a></li><li><a href="circle_.html">foundation/circle</a></li><li><a href="rectangle.html">foundation/rectangle</a></li><li><a href="boundingBox.html">util/boundingBox</a></li><li><a href="factory.html">util/factory</a></li><li><a href="mathExtensions.html">util/mathExtensions</a></li><li><a href="matrix.html">util/matrix</a></li><li><a href="objectUtility.html">util/objectUtility</a></li><li><a href="polygon.html">util/polygon</a></li><li><a href="quadTree.html">util/quadTree</a></li></ul><h3>Classes</h3><ul><li><a href="animation.Animation.html">Animation</a></li><li><a href="canvasDrawer.CanvasDrawer.html">CanvasDrawer</a></li><li><a href="circle.Circle.html">Circle</a></li><li><a href="rectangle.Rectangle.html">Rectangle</a></li><li><a href="boundingBox.BoundingBox.html">BoundingBox</a></li><li><a href="matrix.Matrix.html">Matrix</a></li><li><a href="polygon.Polygon.html">Polygon</a></li><li><a href="quadTree.QuadTree.html">QuadTree</a></li></ul>
 </nav>
 
 <br clear="both">
 
 <footer>
-    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.3.0-dev</a> on Mon Oct 28 2013 09:01:13 GMT-0400 (EDT)
+    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.3.0-dev</a> on Sun Nov 03 2013 21:01:09 GMT-0500 (EST)
 </footer>
 
 <script> prettyPrint(); </script>

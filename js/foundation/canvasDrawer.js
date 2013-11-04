@@ -1,4 +1,4 @@
-define([], function() {
+define(['util/objectUtility'], function(ObjUtil) {
     "use strict";
 
     //////////////////////////////////
@@ -26,6 +26,7 @@ define([], function() {
             
             var _this = this;
             var ctx = context;
+            var ctxSettings;
             
             
             ////////////////////////////////////
@@ -57,22 +58,25 @@ define([], function() {
             /**
              * Change properties of the context. Valid settings include:
              * lineWidth, fillStyle, and strokeStyle.
-             *
-             * @param {Object} settings - A dictionary with settings
-             * @return {boolean} True if the changes were successful, false otherwise.
              */
-            this.setContextSettings = function(settings) {
-                var VALID_SETTINGS = ['lineWidth', 'fillStyle', 'strokeStyle'];
-                
-                var success = true;
-                for (var property in settings) {
-                    success = success && (VALID_SETTINGS.indexOf(property) !== -1);
+            Object.defineProperty(this, 'contextSettings', {
+                get: function() {
+                    return ObjUtil.deepClone(ctxSettings);
+                },
+                set: function(settings) {
+                    var VALID_SETTINGS = ['lineWidth', 'fillStyle', 'strokeStyle'];
+                    var success = true;
+                    for (var property in settings) {
+                        success = (success && VALID_SETTINGS.indexOf(property) !== -1);
+                        if (success) {
+                            ctx[property] = settings[property];
+                        }
+                    }
                     if (success) {
-                        ctx[property] = settings[property];
+                        ctxSettings = ObjUtil.deepClone(settings);
                     }
                 }
-                return success;
-            };
+            });
 
             /**
              * Draw a line between two points.
