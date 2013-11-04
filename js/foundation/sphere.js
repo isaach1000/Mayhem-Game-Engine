@@ -1,38 +1,38 @@
-define(['util/boundingBox'], function(BoundingBox) {
+define(['util/boundingCube'], function(BoundingCube) {
     "use strict";
 
     // Private class methods/fields
     
     /**
-     * @exports foundation/circle
+     * @exports foundation/sphere
      */
     var module = {
         // Public class methods/fields
         
         /**
-         * Circle
+         * Sphere
          *
          * @constructor
-         * @param {float} x                 -   The x coordinate of the circle on the canvas.
-         * @param {float} y                 -   The y coordinate of the circle on the canvas.
-         * @param {float} radius            -   The radius of the circle.
-         * @param {CanvasDrawer} drawer     -   A CanvasDrawer to draw the circle onto the canvas.
+         * @param {float} x                 -   The x coordinate of the sphere on the canvas.
+         * @param {float} y                 -   The y coordinate of the sphere on the canvas.
+         * @param {float} radius            -   The radius of the sphere.
+         * @param {CanvasDrawer} drawer     -   A CanvasDrawer to draw the sphere onto the canvas.
          * @param {Object} drawingSettings  -   A dictionary of drawing options.
          */
-        Circle: function(x, y, radius, drawer, drawingSettings) {
+        Sphere: function(x, y, z, radius, drawer, drawingSettings) {
             // Private instance methods/fields
 
-            var boundingBox = new BoundingBox.BoundingBox(x, y, radius * 2, radius * 2);
-
+            var boundingCube = new BoundingCube.BoundingCube(x, y, radius * 2, radius * 2);
 
             // Public instance methods/fields
             
             this.x = x;
             this.y = y;
+            this.z = z;
             this.radius = radius;
 
-            this.getBoundingBox = function() {
-                return boundingBox;
+            this.getBoundingCube = function() {
+                return boundingCube;
             };
 
             /**
@@ -45,7 +45,7 @@ define(['util/boundingBox'], function(BoundingBox) {
             };
             
             /**
-             * Set the drawing settings for the circle. TODO: valid settings are...
+             * Set the drawing settings for the sphere. TODO: valid settings are...
              *
              * @param {Object} settings - An object with drawing settings.
              * @return {void}
@@ -55,7 +55,7 @@ define(['util/boundingBox'], function(BoundingBox) {
             }
 
             /**
-             * Draw the circle onto the canvas using the CanvasDrawer.
+             * Draw the sphere onto the canvas using the CanvasDrawer.
              *
              * @return {void}
              */

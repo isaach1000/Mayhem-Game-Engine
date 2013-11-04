@@ -10,7 +10,7 @@ require([
         'util/factory',
         'foundation/canvasDrawer',
         'foundation/cube',
-        'foundation/circle',
+        'foundation/sphere',
         'foundation/rectangle',
         'sprite/tileMap',
         'foundation/animation'
@@ -19,14 +19,14 @@ require([
         Factory,
         CanvasDrawer,
         Cube,
-        Circle,
+        Sphere,
         Rectangle,
         TileMap,
         Animation) {
         $(document).ready(function() {
 
-            var WIDTH = '1000px',
-                HEIGHT = '1000px',
+            var WIDTH = 1000,
+                HEIGHT = 1000,
                 CSS_CANVAS = {
                     position: 'absolute',
                     top: 0,
@@ -35,8 +35,8 @@ require([
 
             var backgroundCanvas = Factory.createCanvas({
                 id:     'backgroundCanvas',
-                width:  WIDTH,
-                height: HEIGHT
+                width:  WIDTH + 'px',
+                height: HEIGHT + 'px'
             });
             var bgCSS = $.extend({'z-index': 0}, CSS_CANVAS);
             backgroundCanvas.css(bgCSS);
@@ -56,14 +56,14 @@ require([
             var ctxBg = backgroundCanvas[0].getContext('2d');
             var ctx = mainCanvas[0].getContext('2d');
 
-            var bgDrawer = new CanvasDrawer.CanvasDrawer(ctxBg);
-            var drawer = new CanvasDrawer.CanvasDrawer(ctx); 
+            var bgDrawer = new CanvasDrawer.CanvasDrawer(ctxBg, WIDTH, HEIGHT);
+            var drawer = new CanvasDrawer.CanvasDrawer(ctx, WIDTH, HEIGHT); 
 
 
             // Test functions
             
-            var circleTest = function() {
-                var circ = new Circle.Circle(200, 100, 50, drawer, {
+            var sphereTest = function() {
+                var circ = new Sphere.Sphere(200, 100, 50, drawer, {
                     lineWidth: 3,
                     fillStyle: 'green',
                     strokeStyle: 'black'
@@ -91,7 +91,6 @@ require([
                     fillStyle: 'green',
                     strokeStyle: 'black'
                 });
-                rect.projectIsometric();
                 rect.draw();
             };
 
@@ -101,7 +100,6 @@ require([
                     fillStyle: 'green',
                     strokeStyle: 'black'
                 }]);
-                tiles.projectIsometric();
                 tiles.draw();
             };
 
@@ -112,17 +110,18 @@ require([
                     strokeStyle: 'black'
                 });
                 
-                var oldDuration = 0;
+                /*var oldDuration = 0;
                 var anim = new Animation.Animation(cube, function(durationElapsed) {
                     var betweenFrames = durationElapsed - oldDuration;
                     for (var i = 0; i < 8; i++) {
                         var point = cube.points[i];
-                        point.x -= betweenFrames / 5;
+                        point.z -= betweenFrames / 5;
                     }
                     oldDuration = durationElapsed;
 
                     return durationElapsed < 1000;
-                });
+                });*/
+                var anim = Animation.easing(cube, cube.x - 400, cube.y, cube.z, 1000);
 
                 cube.draw();
                 anim.start();
@@ -131,8 +130,8 @@ require([
 
             // Perform test
             
-            //rectangleTest();
             tilesTest();
             cubeTest(); 
+            sphereTest();
         });
 });

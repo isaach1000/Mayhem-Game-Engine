@@ -1,5 +1,5 @@
-define(['foundation/polygon', 'util/mathExtensions'
-    ], function(Polygon, MathExt) {
+define(['foundation/polyhedron', 'util/mathExtensions'
+    ], function(Polyhedron, MathExt) {
     "use strict";
 
     // Private class methods/fields
@@ -47,24 +47,15 @@ define(['foundation/polygon', 'util/mathExtensions'
         Cube: function(x, y, z, width, height, length, drawer, drawingSettings) {
             // Private instance methods/fields
             
-            var points2d;
             var _this = this;
-
-            var projectIsometric = function() {
-                points2d = [];
-                for (var ptIdx = 0; ptIdx < 8; ptIdx++) {
-                    var point = _this.points[ptIdx];
-                    points2d.push(MathExt.projectIsometric(point));
-                }
-            };
 
             var drawFace = function(faceArray) {
                 var facePoints = [];
                 for (var i = 0; i < 4; i++) {
                     var index = faceArray[i];
-                    facePoints.push(points2d[index]);
+                    facePoints.push(_this.points[index]);
                 }
-                var faceRect = new Polygon.Polygon(facePoints, drawer, drawingSettings);
+                var faceRect = new Polyhedron.Polyhedron(facePoints, drawer, drawingSettings);
                 faceRect.draw();
                 return faceRect;
             };
@@ -87,8 +78,6 @@ define(['foundation/polygon', 'util/mathExtensions'
     		}
 
             this.draw = function() {
-                projectIsometric();
-
                 // Faces
                 var bottom = [6, 7, 0, 1],
                     back = [0, 1, 2, 3],

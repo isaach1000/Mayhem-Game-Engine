@@ -72,19 +72,23 @@ define([], function() {
          * @param  {Function}                   callback    - A function to perform at the completion of the animation.
          * @return {Animation} An animation that represents the easing.
          */
-        easing: function(shape, endX, endY, duration, callback) {
+        easing: function(shape, endX, endY, endZ, duration, callback) {
             var startX = shape.x,
                 startY = shape.y,
+                startZ = shape.z,
                 distX = endX - startX,
                 distY = endY - startY,
+                distZ = endZ - startZ,
                 durationX = distX / duration,
-                durationY = distY / duration;
+                durationY = distY / duration,
+                durationZ = distZ / duration;
 
             var frameFunction = function(durationElapsed) {
                 shape.x = startX + durationX * durationElapsed;
                 shape.y = startY + durationY * durationElapsed;
+                shape.z = startZ + durationZ * durationElapsed;
 
-                return shape.x < endX && shape.y < endY && durationElapsed < duration;
+                return shape.x < endX && shape.y < endY && shape.z < endZ && durationElapsed < duration;
             }
 
             return new module.Animation(shape, frameFunction, callback);

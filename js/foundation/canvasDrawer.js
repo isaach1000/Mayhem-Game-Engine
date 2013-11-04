@@ -16,14 +16,18 @@ define([], function() {
          * @constructor
          * @param {Context} context - The context from a canvas.
          */
-        CanvasDrawer: function(context) {
+        CanvasDrawer: function(context, width, height) {
             // Private instance methods/fields
             
+            var _this = this;
             var ctx = context;
             
             
             // Public instance methods/fields
             
+            this.width = width;
+            this.height = height;
+
             /**
              * Get the context of the CanvasDrawer.
              *
@@ -155,6 +159,10 @@ define([], function() {
                 ctx.clearRect(x, y, width, height);
             };
 
+            this.clearCanvas = function() {
+                _this.clearRect(0, 0, _this.width, _this.height);
+            }
+
             /**
              * Wrapper for `context.save`
              * 
@@ -171,7 +179,7 @@ define([], function() {
              */
             this.restore = function() {
                 ctx.restore();
-            }
+            };
 
             /**
              * Wrapper for `context.translate`
@@ -180,7 +188,11 @@ define([], function() {
              */
             this.translate = function(x, y) {
                 ctx.translate(x, y);
-            }
+            };
+
+            this.fillRect = function(x, y, w, h) {
+                ctx.fillRect(x, y, w, h);
+            };
         }
     };
 

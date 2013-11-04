@@ -64,12 +64,6 @@ define(['foundation/rectangle'], function(Rectangle) {
                 }
             }
 
-            _this.projectIsometric = function() {
-                forEachTile(function(tile) {
-                    tile.projectIsometric();
-                });
-            }
-
             _this.draw = function() {
                 forEachTile(function(tile) {
                     tile.draw();

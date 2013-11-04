@@ -1,23 +1,29 @@
-define(['util/boundingBox'], function(BoundingBox) {
+define(['util/boundingCube',
+        'util/mathExtensions'
+        ], function(BoundingCube,
+            MathExt) {
     "use strict";
 
     // Private class methods/fields
 
     /**
-     * @exports util/polygon
+     * @exports util/polyhedron
      */
     var module = {
         /**
-         * Generate a BoundingBox for a polygon.
+         * Generate a BoundingCube for a polyhedron.
          *
-         * @param {Array.<Point>} points - An array of points describing the polygon.
-         * @return {BoundingBox} - A BoundingBox that contains all of the points.
+         * @param {Array.<Point>} points - An array of points defining the polyhedron.
+         * @return {BoundingCube} - A BoundingCube that contains all of the points.
          */
-        generateBbox: function(points) {
+        generateBcube: function(points) {
             var minX = points[0].x,
                 maxX = points[0].x,
                 minY = points[0].y,
-                maxY = points[0].y;
+                maxY = points[0].y,
+                minZ = points[0].z,
+                maxZ = points[0].z;
+
             var numPoints = points.length;
             for (var i = 0; i < numPoints; i++) {
                 var point = points[i];
@@ -33,40 +39,50 @@ define(['util/boundingBox'], function(BoundingBox) {
                 if (maxY < point.y) {
                     maxY = point.y;
                 }
+                if (minZ > point.z) {
+                    minZ = point.z;
+                }
+                if (maxZ < point.z) {
+                    maxZ = point.z;
+                }
             }
-            return new BoundingBox.BoundingBox(minX, minY, maxX, maxY);
+
+            return new BoundingCube.BoundingCube(minX, minY, minZ, maxX - minX, maxY - minY, maxZ - minZ);
         },
 
         /**
-         * Polygon
+         * Polyhedron
          *
          * @constructor
-         * @param {Array.<Point>} points    -   An array of points that describe the polygon.
-         * @param {CanvasDrawer} drawer     -   A CanvasDrawer to draw the polygon onto the canvas.
+         * @param {Array.<Point>} points    -   An array of points that describe the polyhedron.
+         * @param {CanvasDrawer} drawer     -   A CanvasDrawer to draw the polyhedron onto the canvas.
          * @param {Object} drawingSettings  -   A dictionary of drawing options.
          */
-        Polygon: function(points, drawer, drawingSettings) {
+        Polyhedron: function(points, drawer, drawingSettings) {
             // Private instance methods/fields
 
             var EXTRA_BOUNDS = drawingSettings.lineWidth;            
+            var _this = this;
+
+            /**
+             * Generate a 2d box to clear the canvas with.
+             * 
+             * @return {Box}    A box with properties x, y, width, height.
+             */
+            var clearingBox = {x: 0, y: 0, w: 0, h: 0};
 
             // Public instance methods/fields
             
-            this.points = points;
-            this.bbox = module.generateBbox(this.points);
-            
-            /** The offset of the polygon in x. */
-            this.offsetX = 0;
-            /** The offset of the polygon in y. */
-            this.offsetY = 0; 
+            _this.points = points;
+            _this.bcube = module.generateBcube(_this.points);
             
 
             /**
-             * getCanvasDrawer
+             * Get the CanvasDrawer.
              *
              * @return {CanvasDrawer} - The current canvas drawer.
              */
-            this.getCanvasDrawer = function() {
+            _this.getCanvasDrawer = function() {
                 return drawer;
             };
 
@@ -78,30 +94,35 @@ define(['util/boundingBox'], function(BoundingBox) {
              * @param {Object} settings - An object with drawing settings.
              * @return {void}
              */
-            this.setDrawingSettings = function(settings) {
+            _this.setDrawingSettings = function(settings) {
                 drawingSettings = settings;
-            }
+            };
 
             /**
              * Draw the rectangle onto the canvas using the CanvasDrawer.
              *
              * @return {void}
              */
-            this.draw = function() {
+            _this.draw = function() {
                 drawer.beginPath();
                 drawer.setContextSettings(drawingSettings);
-                drawer.save();
-                drawer.translate(this.offsetX, this.offsetY);
+                var points2d = MathExt.projectIsometric(_this.points);
+                drawer.drawLine(points2d[0], points2d[1], true);
+
+                var minX = points2d[0].x,
+                    maxX = points2d[0].x,
+                    minY = points2d[0].y,
+                    maxY = points2d[0].y;
+
                 var numPoints = points.length;
-                drawer.drawLine(points[0], points[1], true);
                 for (var i = 1; i < numPoints; i++) {
-                    var point = points[i];
-                    drawer.drawLine(points[i], points[(i + 1) % numPoints]);
+                    var point = points2d[i];
+                    drawer.drawLine(points2d[i], points2d[(i + 1) % numPoints]);
                 }
+
                 drawer.closePath();
                 drawer.fill();
                 drawer.stroke();
-                drawer.restore();
             };
 
             /**
@@ -109,14 +130,8 @@ define(['util/boundingBox'], function(BoundingBox) {
              * 
              * @return {void}
              */
-            this.clear = function() {
-                drawer.save();
-                drawer.translate(this.offsetX, this.offsetY)
-                drawer.clearRect(this.bbox.x - EXTRA_BOUNDS,
-                                    this.bbox.y - EXTRA_BOUNDS,
-                                    this.bbox.width + EXTRA_BOUNDS,
-                                    this.bbox.height + EXTRA_BOUNDS);
-                drawer.restore();
+            _this.clear = function() {
+                drawer.clearCanvas();
             };
         }
     };

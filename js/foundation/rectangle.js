@@ -1,9 +1,9 @@
 define([
-    'foundation/polygon',
-    'util/boundingBox',
+    'foundation/polyhedron',
+    'util/boundingCube',
     'util/mathExtensions'
-    ], function(Polygon,
-        BoundingBox,
+    ], function(Polyhedron,
+        BoundingCube,
         MathExt) {
     "use strict";
 
@@ -26,15 +26,15 @@ define([
          * @param {CanvasDrawer}    drawer          - A CanvasDrawer to draw the rectangle onto the canvas.
          * @param {Object}          drawingSettings - A dictionary of drawing options.
          */
-        Rectangle: function(x, y, width, height, drawer, drawingSettings) {
+        Rectangle: function(x, y, width, length, drawer, drawingSettings) {
             // Private instance methods/fields
             
-            this.bbox = new BoundingBox.BoundingBox(x, y, width, height);
-            var polygon = new Polygon.Polygon([
+            this.bcube = new BoundingCube.BoundingCube(x, y, 0, width, length, 0);
+            var polyhedron = new Polyhedron.Polyhedron([
                 {x: x, y: y, z: 0},
                 {x: x + width, y: y, z: 0},
-                {x: x + width, y: y + height, z: 0},
-                {x: x, y: y + height, z: 0}
+                {x: x + width, y: y + length, z: 0},
+                {x: x, y: y + length, z: 0}
             ], drawer, drawingSettings);
 
             
@@ -49,8 +49,6 @@ define([
                 return drawer;
             };
 
-            // TODO: should there be a setter for the drawer?
-            
             /**
              * Set the drawing settings for the rectangle. TODO: valid settings are...
              *
@@ -62,25 +60,12 @@ define([
             };
 
             /**
-             * Change coordinates to isometric.
-             * @return {void}
-             */
-            this.projectIsometric = function() {
-                for (var i = 0; i < 4; i++) {
-                    var point3d = polygon.points[i];
-                    var point2d = MathExt.projectIsometric(point3d);
-                    point3d.x = point2d.x;
-                    point3d.y = point2d.y;
-                }
-            };
-
-            /**
              * Draw the rectangle onto the canvas using the CanvasDrawer.
              *
              * @return {void}
              */
             this.draw = function() {
-                polygon.draw();
+                polyhedron.draw();
             };
 
             /**
@@ -89,7 +74,7 @@ define([
              * @return {void}
              */
             this.clear = function() {
-                polygon.clear();
+                polyhedron.clear();
             };
         }
     };
