@@ -16,7 +16,7 @@ define([
         /////////////////////////////////
         // Public class methods/fields //
         /////////////////////////////////
-        
+
         /**
          * Generate a BoundingBox for a polygon.
          *
@@ -44,7 +44,7 @@ define([
                     maxY = point.y;
                 }
             }
-            return new BoundingBox.BoundingBox(minX, minY, maxX, maxY);
+            return new BoundingBox.BoundingBox(minX, minY, maxX - minX, maxY - minY);
         },
 
         /**
@@ -53,7 +53,7 @@ define([
          * @constructor
          * @extends {Shape}
          * @param {Array.<Point>} points    -   An array of points that describe the polygon.
-         * @param {CanvasDrawer} drawer     -   A CanvasDrawer to draw the polygon onto the canvas.
+         * @param {CanvasbbDrawer} drawer   -   A CanvasDrawer to draw the polygon onto the canvas.
          * @param {Object} drawingSettings  -   A dictionary of drawing options.
          */
         Polygon: function(points, drawer, drawingSettings) {
@@ -61,12 +61,28 @@ define([
             // Private instance methods/fields //
             /////////////////////////////////////
             
-            var bbox = module.generateBbox(points);
-            var x = bbox.x,
-                y = bbox.y,
-                w = bbox.w,
-                h = bbox.h;
+            var _this = this;
 
+            var bbox = module.generateBbox(points),
+                x = bbox.x,
+                y = bbox.y,
+                w = bbox.width,
+                h = bbox.height;
+
+            // TODO: fix lineWidth more completely
+            var adjustPoints = function() {
+                var numPoints = _this.points.length,
+                    lineWidth = drawingSettings.lineWidth || 0,
+                    ret = [];
+                for (var i = 0; i < numPoints; i++) {
+                    var adjPt = {
+                        x: _this.points[i].x - _this.boundingBox.x + lineWidth,
+                        y: _this.points[i].y - _this.boundingBox.y + lineWidth
+                    };
+                    ret.push(adjPt);
+                }
+                return ret;
+            }
 
             ////////////////////////////////////
             // Public instance methods/fields //
@@ -75,23 +91,44 @@ define([
             // Extend Shape constructor
             Shape.Shape.call(this, x, y, w, h, drawer, drawingSettings);
 
+            Object.defineProperties(this, {
+                /**
+                 * Points of Polygon instance
+                 * @type {Array.<Point>}
+                 * @memberof module:foundation/polygon.Polygon
+                 * @instance
+                 */
+                points: {
+                    get: function() {
+                        return points;
+                    },
+                    set: function(newPoints) {
+                        points = newPoints;
+                        this.boundingBox = generateBbox(this.points);
+                    }
+                }
+            });
+
             /**
-             * Draw the rectangle onto the canvas using the CanvasDrawer.
+             * Draw the rectangle onto the canvas using the CanvasbbDrawer.
              *
              * @return {void}
              */
-            this.draw = function() {
-                drawer.beginPath();
-                drawer.contextSettings = drawingSettings;
-                var numPoints = points.length;
-                drawer.drawLine(points[0], points[1], true);
+            this.drawShape = function(bbDrawer) {
+                bbDrawer.beginPath();
+                bbDrawer.contextSettings = this.drawingSettings;
+
+                var adjPoints = adjustPoints(),
+                    numPoints = adjPoints.length;
+                bbDrawer.drawLine(adjPoints[0], adjPoints[1], true);
                 for (var i = 1; i < numPoints; i++) {
-                    var point = points[i];
-                    drawer.drawLine(points[i], points[(i + 1) % numPoints]);
+                    var point = adjPoints[i];
+                    bbDrawer.drawLine(adjPoints[i], adjPoints[(i + 1) % numPoints]);
                 }
-                drawer.closePath();
-                drawer.fill();
-                drawer.stroke();
+
+                bbDrawer.closePath();
+                bbDrawer.fill();
+                bbDrawer.stroke();
             };
         }
     };

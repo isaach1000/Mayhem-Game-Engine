@@ -46,4 +46,3 @@ define([
 
     return module;
 });
-

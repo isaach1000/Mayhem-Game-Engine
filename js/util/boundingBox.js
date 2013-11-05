@@ -80,11 +80,15 @@ define([], function() {
                 },
 
                 width: {
-                    value: w
+                    get: function() {
+                        return w;
+                    }
                 },
 
                 height: {
-                    value: h
+                    get: function() {
+                        return h;
+                    }
                 },
 
                 center: {

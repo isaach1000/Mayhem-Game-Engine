@@ -40,14 +40,14 @@ require([
                 g = 0.008,
                 maxDur = 10000,
                 oldDuration = 0;
-                MAX_Y = 500;
+                MAX_Y = 300;
             var circAnim = new Animation.Animation(circ, function(durationElapsed) {
                 circ.x += vx;
                 
                 var betweenFrames = durationElapsed - oldDuration;
                 vy += g * betweenFrames;
                 if (circ.y > MAX_Y && vy > 0) {
-                    vy = -vy;
+                    vy = -0.8 * vy;
                 }
                 circ.y += vy;
 
@@ -97,13 +97,13 @@ require([
                 height: '600px'
             });
 
-            var mainCtx = mainCanvas[0].getContext('2d');
-            var mainDrawer = new CanvasDrawer.CanvasDrawer(mainCtx); 
-            circleTest(mainDrawer);
-
             var bgCtx = bgCanvas[0].getContext('2d');
             var bgDrawer = new CanvasDrawer.CanvasDrawer(bgCtx);
             polyTest(bgDrawer);
             rectTest(bgDrawer);
+
+            var mainCtx = mainCanvas[0].getContext('2d');
+            var mainDrawer = new CanvasDrawer.CanvasDrawer(mainCtx); 
+            circleTest(mainDrawer);
         });
 });

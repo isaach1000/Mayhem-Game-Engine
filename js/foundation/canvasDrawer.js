@@ -17,15 +17,16 @@ define(['util/objectUtility'], function(ObjUtil) {
          * CanvasDrawer for drawing to a canvas.
          *
          * @constructor
-         * @param {Context} context - The context from a canvas.
+         * @param {Context} ctx         - Context of the canvas
+         * @param {float} width         - Width of the canvas
+         * @param {float} height         - Height of the canvas
          */
-        CanvasDrawer: function(context, width, height) {
+        CanvasDrawer: function(ctx, width, height) {
             /////////////////////////////////////
             // Private instance methods/fields //
             /////////////////////////////////////
             
             var _this = this;
-            var ctx = context;
             var ctxSettings;
             
             
@@ -33,54 +34,60 @@ define(['util/objectUtility'], function(ObjUtil) {
             // Public instance methods/fields //
             ////////////////////////////////////
             
-            this.width = width;
-            this.height = height;
-
-            /**
-             * Get the context of the CanvasDrawer.
-             *
-             * @return {Context}
-             */
-            this.getContext = function() {
-                return ctx;
-            };
-
-            /**
-             * Change the context of the CanvasDrawer.
-             *
-             * @param {Context} newContext - The new context
-             * @return {void}
-             */
-            this.setContext = function(newContext) {
-                ctx = newContext;
-            };
-
-            /**
-             * Change properties of the context. Valid settings include:
-             * lineWidth, fillStyle, and strokeStyle.
-             */
-            Object.defineProperty(this, 'contextSettings', {
-                get: function() {
-                    return ObjUtil.deepClone(ctxSettings);
-                },
-                set: function(settings) {
-                    var VALID_SETTINGS = ['lineWidth', 'fillStyle', 'strokeStyle'];
-                    var success = true;
-                    for (var property in settings) {
-                        success = (success && VALID_SETTINGS.indexOf(property) !== -1);
-                        if (success) {
-                            ctx[property] = settings[property];
-                        }
+            Object.defineProperties(this, {
+                /**
+                 * Width of the canvas
+                 * @type {float}
+                 * @memberof module:foundation/canvasDrawer.CanvasDrawer
+                 * @instance
+                 */
+                width: {
+                    get: function() {
+                        return width;
                     }
-                    if (success) {
-                        ctxSettings = ObjUtil.deepClone(settings);
+                },
+
+                /**
+                 * Height of the canvas
+                 * @type {float}
+                 * @memberof module:foundation/canvasDrawer.CanvasDrawer
+                 * @instance
+                 */
+                height: {
+                    get: function() {
+                        return height;
+                    }
+                },
+
+                /**
+                 * Properties of the context. Valid settings include:
+                 * lineWidth, fillStyle, and strokeStyle.
+                 * @type {Object}
+                 * @memberof module:foundation/canvasDrawer.CanvasDrawer
+                 * @instance
+                 */
+                contextSettings: {
+                    get: function() {
+                        return ObjUtil.deepClone(ctxSettings);
+                    },
+                    set: function(settings) {
+                        var VALID_SETTINGS = ['lineWidth', 'fillStyle', 'strokeStyle'];
+                        var success = true;
+                        for (var property in settings) {
+                            success = (success && VALID_SETTINGS.indexOf(property) !== -1);
+                            if (success) {
+                                ctx[property] = settings[property];
+                            }
+                        }
+                        if (success) {
+                            ctxSettings = ObjUtil.deepClone(settings);
+                        }
                     }
                 }
             });
 
             /**
              * Draw a line between two points.
-             * 
              * @param {Point} point1        -   The x coordinate of the first point, or the first point.
              * @param {Point} point2        -   The y coordinate of the first point, or the second point.
              * @param {boolean} (moveFirst) -   Whether or not the context perform the moveTo method.
@@ -94,8 +101,7 @@ define(['util/objectUtility'], function(ObjUtil) {
             };
 
             /**
-             * Wrapper for `context.stroke`.
-             *
+             * Wrapper for <code>context.stroke</code>.
              * @return {void}
              */
             this.stroke = function() {
@@ -103,8 +109,7 @@ define(['util/objectUtility'], function(ObjUtil) {
             };
 
             /**
-             * Wrapper for `context.fill`.
-             *
+             * Wrapper for <code>context.fill</code>.
              * @return {void}
              */
             this.fill = function() {
@@ -112,8 +117,7 @@ define(['util/objectUtility'], function(ObjUtil) {
             };
 
             /**
-             * Wrapper for `context.beginPath`.
-             *
+             * Wrapper for <code>context.beginPath</code>.
              * @return {void}
              */
             this.beginPath = function() {
@@ -121,7 +125,7 @@ define(['util/objectUtility'], function(ObjUtil) {
             };
 
             /**
-             * Wrapper for `context.closePath`.
+             * Wrapper for <code>context.closePath</code>.
              * @return {void}
              */
             this.closePath = function() {
@@ -129,8 +133,7 @@ define(['util/objectUtility'], function(ObjUtil) {
             };
           
             /**
-             * Wrapper for `context.rect`.
-             * 
+             * Wrapper for <code>context.rect</code>.
              * @param  {float}  x   x coordinate
              * @param  {float}  y   y coordinate
              * @param  {float}  w   Width of rectangle
@@ -141,10 +144,8 @@ define(['util/objectUtility'], function(ObjUtil) {
                 ctx.rect(x, y, w, h);
             };
 
-
             /**
-             * Wrapper for `context.arc`
-             * 
+             * Wrapper for <code>context.arc</code>
              * @param  {float}      x          x coordinate
              * @param  {float}      y          y coordinate
              * @param  {float}      radius     Radius of arc
@@ -158,8 +159,7 @@ define(['util/objectUtility'], function(ObjUtil) {
             };
 
             /**
-             * Wrapper for `context.clearRect`
-             * 
+             * Wrapper for <code>context.clearRect</code>
              * @param  {float} x - Minimum x of area.
              * @param  {float} y - Minimum y of area.
              * @param  {float} width  - Width of area.
@@ -175,8 +175,7 @@ define(['util/objectUtility'], function(ObjUtil) {
             }
 
             /**
-             * Wrapper for `context.save`
-             * 
+             * Wrapper for <code>context.save</code>
              * @return {void}
              */
             this.save = function() {
@@ -184,8 +183,7 @@ define(['util/objectUtility'], function(ObjUtil) {
             };
 
             /**
-             * Wrapper for `context.restore`
-             * 
+             * Wrapper for <code>context.restore</code>
              * @return {void}
              */
             this.restore = function() {
@@ -193,20 +191,51 @@ define(['util/objectUtility'], function(ObjUtil) {
             };
 
             /**
-             * Wrapper for `context.translate`
-             * 
+             * Wrapper for <code>context.translate</code>
+             * @param  {float} x    - x coordinate of destination
+             * @param  {float} y    - y coordinate of destination
              * @return {void}
              */
             this.translate = function(x, y) {
                 ctx.translate(x, y);
             };
 
+            /**
+             * Wrapper for <code>context.fillRect</code>
+             * @param  {float} x    - x coordinate of top-left of rectangle
+             * @param  {float} y    - y coordinate of top-left of rectangle
+             * @param  {float} w    - Width of rectangle
+             * @param  {float} h    - Height of rectangle
+             * @return {void}
+             */
             this.fillRect = function(x, y, w, h) {
                 ctx.fillRect(x, y, w, h);
+            };
+
+            /**
+             * Wrapper for <code>context.getImageData</code>
+             * @param  {float} x        - x coordinate of top-left of image
+             * @param  {float} y        - y coordinate of top-left of image
+             * @param  {float} width    - Width of image
+             * @param  {float} height   - Height of image
+             * @return {Array}          Image data
+             */
+            this.getImageData = function(x, y, w, h) {
+                return ctx.getImageData(x, y, w, h);
+            };
+
+            /**
+             * Wrapper for <code>context.putImageData</code>
+             * @param  {Array} imageData    - Image data
+             * @param  {float} x            - x coordinate of top-left of image
+             * @param  {float} y            - y coordinate of top-left of image
+             * @return {void}
+             */
+            this.putImageData = function(imageData, x, y) {
+                ctx.putImageData(imageData, x, y);
             };
         }
     };
 
     return module; 
 });
-

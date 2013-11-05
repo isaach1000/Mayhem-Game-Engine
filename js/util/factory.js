@@ -7,17 +7,21 @@ define(['jquery'], function($) {
     var module = {
         /** Construct a canvas. Should be called during/after `$(document).ready`.
          * 
-         * @param {string} options - The options for the new HTML canvas.
-         * @return {JQueryObject} The canvas jQuery object.
+         * @param {(Object)} [options]      - A dictionary of attributes for a new HTML canvas.
+         * * @param {(Object)} [cssRules]   - A dictionary of CSS rules for a new HTML canvas.
+         * @return {JQueryObject}           The canvas jQuery object.
          */
-        createCanvas: function(options) {
+        createCanvas: function(options, cssRules) {
             var canvas = $('<canvas></canvas>');
-            canvas.attr(options);
-            canvas.css({
+            if (options != null) {
+                canvas.attr(options);
+            }
+            var requiredCss = {
                 position: 'absolute',
                 top: '0',
                 left: '0'
-            });
+            };
+            canvas.css($.extend(requiredCss, cssRules));
             $('body').append(canvas);
             return canvas;
         }

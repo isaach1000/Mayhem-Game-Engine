@@ -31,36 +31,59 @@ define([
          * @param {Object} drawingSettings  -   Dictionary of drawing options
          */
         Circle: function(x, y, radius, drawer, drawingSettings) {
+            /////////////////////////////////////
+            // Private instance methods/fields //
+            /////////////////////////////////////
+            
+            var lineWidth = drawingSettings.lineWidth || 0;
+            radius = Math.round(radius);
+
             // Extend Shape constructor
-            Shape.Shape.call(this, x, y, radius * 2, radius * 2,
+            Shape.Shape.call(this, x - radius,
+                                y - radius,
+                                radius * 2, radius * 2,
                                 drawer, drawingSettings);
+
 
             ////////////////////////////////////
             // Public instance methods/fields //
             ////////////////////////////////////
-
-            /** Radius of circle. */
-            this.radius = radius;
+            
+            Object.defineProperties(this, {
+                /**
+                 * Radius of circle
+                 * @type {float)
+                 * @memberof module:foundation/circle.Circle
+                 * @instance
+                 */
+                radius: {
+                    get: function() {
+                        return radius;
+                    },
+                    set: function(newRadius) {
+                        radius = Math.floor(newRadius);
+                        this.width = radius * 2;
+                        this.height = radius * 2;
+                    }
+                }
+            });
 
             /**
              * Draw circle onto canvas.
              *
              * @return {void}
              */
-            this.draw = function() {
-                drawer.beginPath();
-                drawer.contextSettings = drawingSettings;
-                drawer.arc(this.x + this.radius, this.y + this.radius,
-                        this.radius, this.radius, 0,
-                    2 * Math.PI, true);
-                drawer.fill();
-                drawer.stroke();
+            this.drawShape = function(bbDrawer) {
+                bbDrawer.beginPath();
+                bbDrawer.contextSettings = this.drawingSettings;
+
+                bbDrawer.arc(this.radius, this.radius, this.radius, 0, 2 * Math.PI, true);
+
+                bbDrawer.stroke();
+                bbDrawer.fill();
             };
         }
     };
-
-    // Clone Shape prototype
-    module.Circle.prototype = new Shape.Shape;
 
     return module; 
 });

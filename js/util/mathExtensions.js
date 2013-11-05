@@ -1,14 +1,18 @@
-define(['util/objectUtility'], function(ObjUtil) {
+define([], function() {
     "use strict";
 
-    // Private class methods/fields
+    //////////////////////////////////
+    // Private class methods/fields //
+    //////////////////////////////////
     
     
     /**
      * @exports util/mathExtensions // TODO: replace util/mathExtensions
      */
     var module = {
-        // Public class methods/fields
+        /////////////////////////////////
+        // Public class methods/fields //
+        /////////////////////////////////
         
         /**
          * Generate a random integer.
@@ -62,22 +66,6 @@ define(['util/objectUtility'], function(ObjUtil) {
                 total += vector1[i] * vector2[i];
             }
             return total;
-        },
-
-        projectIsometric: function(point3d) {
-            // If parameter is an array, recursively project and return a new array of 2d points.
-            if (O.isArray(point3d)) {
-                var numPoints = point3d.length;
-                var points2d = [];
-                for (var i = 0; i < numPoints; i++) {
-                    points2d.push(module.projectIsometric(point3d[i]));
-                }
-                return points2d;
-            }
-
-            var x = point3d.x - point3d.y,
-                y = point3d.z + (point3d.x + point3d.y) / 2;
-            return {x: x, y: y};
         }
     };
 
