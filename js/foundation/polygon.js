@@ -53,7 +53,7 @@ define([
          * @constructor
          * @extends {Shape}
          * @param {Array.<Point>} points    -   An array of points that describe the polygon.
-         * @param {CanvasbbDrawer} drawer   -   A CanvasDrawer to draw the polygon onto the canvas.
+         * @param {CanvascanvasDrawer} drawer   -   A CanvasDrawer to draw the polygon onto the canvas.
          * @param {Object} drawingSettings  -   A dictionary of drawing options.
          */
         Polygon: function(points, drawer, drawingSettings) {
@@ -68,34 +68,6 @@ define([
                	y = bbox.y,
                 w = bbox.width,
                 h = bbox.height;
-
-            // TODO: fix lineWidth more completely
-            var adjustPoints = function() {
-                var numPoints = _this.points.length,
-                    lineWidth = drawingSettings.lineWidth || 0,
-                    center = _this.boundingBox.center,
-                    ret = [];
-                for (var i = 0; i < numPoints; i++) {
-                    var adjPt = {
-                        x: _this.points[i].x - _this.boundingBox.x,
-                        y: _this.points[i].y - _this.boundingBox.y
-                    };
-                    if (adjPt.x < center.x) {
-                    	adjPt.x += lineWidth;
-                    }
-                    else {
-                    	adjPt.x -= lineWidth;
-                    }
-                    if (adjPt.y < center.y) {
-                    	adjPt.y += lineWidth;
-                    }
-                    else {
-                    	adjPt.y -= lineWidth;
-                    }
-                    ret.push(adjPt);
-                }
-                return ret;
-            };
 
             ////////////////////////////////////
             // Public instance methods/fields //
@@ -123,25 +95,25 @@ define([
             });
 
             /**
-             * Draw the rectangle onto the canvas using the CanvasbbDrawer.
+             * Draw the rectangle onto the canvas using the CanvascanvasDrawer.
              *
              * @return {void}
              */
-            this.drawShape = function(bbDrawer) {
-                bbDrawer.beginPath();
-                bbDrawer.contextSettings = this.drawingSettings;
+            this.drawShape = function(canvasDrawer) {
+                canvasDrawer.beginPath();
+                canvasDrawer.contextSettings = this.drawingSettings;
 
-                var adjPoints = adjustPoints(),
-                    numPoints = adjPoints.length;
-                bbDrawer.drawLine(adjPoints[0], adjPoints[1], true);
+                var pts = this.points,
+                    numPoints = pts.length;
+                canvasDrawer.drawLine(pts[0], pts[1], true);
                 for (var i = 1; i < numPoints; i++) {
-                    var point = adjPoints[i];
-                    bbDrawer.drawLine(adjPoints[i], adjPoints[(i + 1) % numPoints]);
+                    var point = pts[i];
+                    canvasDrawer.drawLine(pts[i], pts[(i + 1) % numPoints]);
                 }
 
-                bbDrawer.closePath();
-                bbDrawer.fill();
-                bbDrawer.stroke();
+                canvasDrawer.closePath();
+                canvasDrawer.fill();
+                canvasDrawer.stroke();
             };
         }
     };

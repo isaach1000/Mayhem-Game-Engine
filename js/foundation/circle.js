@@ -73,15 +73,16 @@ define([
              *
              * @return {void}
              */
-            this.drawShape = function(bbDrawer) {
-                bbDrawer.beginPath();
-                bbDrawer.contextSettings = this.drawingSettings;
+            this.drawShape = function(canvasDrawer) {
+                canvasDrawer.beginPath();
+                canvasDrawer.contextSettings = this.drawingSettings;
 
 				var lineWidth = this.drawingSettings.lineWidth || 0;
-                bbDrawer.arc(this.radius, this.radius, this.radius - lineWidth, 0, 2 * Math.PI, true);
+                canvasDrawer.arc(this.x + this.radius, this.y + this.radius,
+                	this.radius - lineWidth, 0, 2 * Math.PI, true);
 
-                bbDrawer.stroke();
-                bbDrawer.fill();
+                canvasDrawer.stroke();
+                canvasDrawer.fill();
             };
         }
     };

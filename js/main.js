@@ -53,7 +53,7 @@ require([
 
                 oldDuration = durationElapsed;
 
-                return durationElapsed < maxDur;
+                return circ.x < 1000;
             });
 
             circAnim.start();

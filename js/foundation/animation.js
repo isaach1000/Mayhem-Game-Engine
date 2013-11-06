@@ -5,10 +5,14 @@ define([], function() {
     
     // Based on http://www.html5canvastutorials.com/
     window.requestAnimFrame = (function(callback) {
-        return window.requestAnimationFrame || window.webkitRequestAnimationFrame || window.mozRequestAnimationFrame || window.oRequestAnimationFrame || window.msRequestAnimationFrame ||
-        function(callback) {
-          window.setTimeout(callback, 1000 / 60);
-        };
+        return window.requestAnimationFrame ||
+        	window.webkitRequestAnimationFrame ||
+        	window.mozRequestAnimationFrame ||
+        	window.oRequestAnimationFrame ||
+        	window.msRequestAnimationFrame ||
+        	function(callback) {
+          		window.setTimeout(callback, 1000 / 60);
+        	};
     })();
     
     /**
@@ -22,24 +26,20 @@ define([], function() {
          *
          * @constructor
          * @param   {Shape}     shape           - The shape to animate.
-         * @param   {Function}  frameFunction   - A function that updates the animation. Must return a boolean, which is 
-         *                                      supposed to signal whether or not to terminate the animation (return false to terminate).
+         * @param   {Function}  frameFunction	- A function that updates the animation. Must return a boolean, which is 
+         *                                     	supposed to signal whether or not to terminate the animation (return false to terminate).
          *                                      It may take the duration in milliseconds from the beginning of the animation as a parameter.
          * @param   {Function}  callback        - A function to perform at the completion of the animation.
          */
         Animation: function(shape, frameFunction, callback) {
             // Private instance methods/fields
             
-            var frameCounter = 0;
-            var startDate;
+            var startTime;
             
             var animate = function() {
                 shape.clear();
-                
-                var shouldContinue = frameFunction(new Date() - startDate);
-
+                var shouldContinue = frameFunction(new Date() - startTime);
                 shape.draw();
-
                 if (shouldContinue) {
                     window.requestAnimFrame(function() {
                         animate();
@@ -58,7 +58,7 @@ define([], function() {
              * @return {void}
              */
             this.start = function() {
-                startDate = new Date();
+                startTime = new Date();
                 animate();
             };
         },
@@ -76,19 +76,16 @@ define([], function() {
         easing: function(shape, endX, endY, endZ, duration, callback) {
             var startX = shape.x,
                 startY = shape.y,
-                startZ = shape.z,
                 distX = endX - startX,
                 distY = endY - startY,
-                distZ = endZ - startZ,
                 durationX = distX / duration,
-                durationY = distY / duration,
-                durationZ = distZ / duration;
+                durationY = distY / duration;
 
             var frameFunction = function(durationElapsed) {
                 shape.x = startX + durationX * durationElapsed;
                 shape.y = startY + durationY * durationElapsed;
-                shape.z = startZ + durationZ * durationElapsed;
-                return shape.x < endX && shape.y < endY && shape.z < endZ && durationElapsed < duration;
+                return shape.x < endX && shape.y < endY &&
+                		durationElapsed < duration;
             };
 
             return new module.Animation(shape, frameFunction, callback);

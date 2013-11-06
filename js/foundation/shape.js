@@ -44,32 +44,12 @@ define([
             width = Math.round(width);
             height = Math.round(height);
 
-            var bbox = new BoundingBox.BoundingBox(x, y, width, height),
-                backBuffer = Factory.createCanvas({
-                	width: drawer.width + 'px',
-                	height: drawer.height + 'px'
-                }, {
-                	display: 'none'
-                }),
-                backBufferDrawer = new CanvasDrawer.CanvasDrawer(backBuffer[0]
-                                        .getContext('2d'), backBuffer.width, backBuffer.height);
+            var bbox = new BoundingBox.BoundingBox(x, y, width, height);
 
-            /**
-             * Private function to transfer image from backbuffer to canvas.
-             */ 
-            var blit = function() {
-                var lineWidth = _this.drawingSettings.lineWidth || 0;
-                var drawingData = backBufferDrawer.getImageData(0, 0,
-                	_this.width + 2 * lineWidth, _this.height + 2 * lineWidth);
-                drawer.putImageData(drawingData, _this.x, _this.y);
-            };
-
+            
             ////////////////////////////////////
             // Public instance methods/fields //
             ////////////////////////////////////
-
-            /** Flag to signify whether or not redraw to backbuffer is necessary. */
-            this.needsRedraw = true;
 
             Object.defineProperties(this, {
                 /**
@@ -115,8 +95,11 @@ define([
                         return width;
                     },
                     set: function(newWidth) {
-                        width = Math.round(newWidth);
-                        bbox = new BoundingBox.BoundingBox(x, y, width, height);
+                        newWidth = Math.round(newWidth);
+                    	if (newWidth !== width) {
+                    		width = newWidth;
+	                        bbox = new BoundingBox.BoundingBox(x, y, width, height);
+                    	}
                     }
                 },
 
@@ -131,8 +114,11 @@ define([
                         return height;
                     },
                     set: function(newHeight) {
-                        height = Math.round(newHeight);
-                        bbox = new BoundingBox.BoundingBox(x, y, width, height);
+                        newHeight = Math.round(newHeight);
+                    	if (newHeight !== height) {
+                    		height = newHeight;
+	                        bbox = new BoundingBox.BoundingBox(x, y, width, height);
+                    	}
                     }
                 },
 
@@ -161,26 +147,13 @@ define([
                         drawingSettings = newSettings;
                         Object.freeze(drawingSettings);
                     }
-                },
-
-                backBuffer: {
-                    get: function() {
-                        return backBuffer;
-                    }
                 }
             });
 
             this.draw = function() {
-                if (this.needsRedraw) {
-                    // Call the subclass drawing method if it exists.
-                    if (this.drawShape != null) {
-                        this.drawShape(backBufferDrawer);
-                    }
-
-                    this.needsRedraw = false;
+                if (this.drawShape != null) {
+                    this.drawShape(drawer);
                 }
-
-                blit();
             };
 
             /**
