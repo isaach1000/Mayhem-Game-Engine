@@ -45,16 +45,22 @@ define([
             height = Math.round(height);
 
             var bbox = new BoundingBox.BoundingBox(x, y, width, height),
-                backBuffer = Factory.createCanvas({}, {
-                    display: 'none'
+                backBuffer = Factory.createCanvas({
+                	width: drawer.width + 'px',
+                	height: drawer.height + 'px'
+                }, {
+                	display: 'none'
                 }),
                 backBufferDrawer = new CanvasDrawer.CanvasDrawer(backBuffer[0]
-                                        .getContext('2d'), width, height);
+                                        .getContext('2d'), backBuffer.width, backBuffer.height);
 
-            // Private function to transfer image from backbuffer to canvas.
+            /**
+             * Private function to transfer image from backbuffer to canvas.
+             */ 
             var blit = function() {
                 var lineWidth = _this.drawingSettings.lineWidth || 0;
-                var drawingData = backBufferDrawer.getImageData(0, 0, _this.width + 2 * lineWidth, _this.height + 2 * lineWidth);
+                var drawingData = backBufferDrawer.getImageData(0, 0,
+                	_this.width + 2 * lineWidth, _this.height + 2 * lineWidth);
                 drawer.putImageData(drawingData, _this.x, _this.y);
             };
 
@@ -78,7 +84,7 @@ define([
                     },
                     set: function(newX) {
                         x = Math.round(newX);
-                        bbox.x = x;
+                        this.boundingBox.x = x;
                     }
                 },
 
@@ -94,7 +100,7 @@ define([
                     },
                     set: function(newY) {
                         y = Math.round(newY);
-                        bbox.y = y;
+                        this.boundingBox.y = y;
                     }
                 },
 

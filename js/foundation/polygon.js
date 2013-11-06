@@ -65,7 +65,7 @@ define([
 
             var bbox = module.generateBbox(points),
                 x = bbox.x,
-                y = bbox.y,
+               	y = bbox.y,
                 w = bbox.width,
                 h = bbox.height;
 
@@ -73,12 +73,25 @@ define([
             var adjustPoints = function() {
                 var numPoints = _this.points.length,
                     lineWidth = drawingSettings.lineWidth || 0,
+                    center = _this.boundingBox.center,
                     ret = [];
                 for (var i = 0; i < numPoints; i++) {
                     var adjPt = {
-                        x: _this.points[i].x - _this.boundingBox.x + lineWidth,
-                        y: _this.points[i].y - _this.boundingBox.y + lineWidth
+                        x: _this.points[i].x - _this.boundingBox.x,
+                        y: _this.points[i].y - _this.boundingBox.y
                     };
+                    if (adjPt.x < center.x) {
+                    	adjPt.x += lineWidth;
+                    }
+                    else {
+                    	adjPt.x -= lineWidth;
+                    }
+                    if (adjPt.y < center.y) {
+                    	adjPt.y += lineWidth;
+                    }
+                    else {
+                    	adjPt.y -= lineWidth;
+                    }
                     ret.push(adjPt);
                 }
                 return ret;

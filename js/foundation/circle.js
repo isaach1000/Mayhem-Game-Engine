@@ -77,7 +77,8 @@ define([
                 bbDrawer.beginPath();
                 bbDrawer.contextSettings = this.drawingSettings;
 
-                bbDrawer.arc(this.radius, this.radius, this.radius, 0, 2 * Math.PI, true);
+				var lineWidth = this.drawingSettings.lineWidth || 0;
+                bbDrawer.arc(this.radius, this.radius, this.radius - lineWidth, 0, 2 * Math.PI, true);
 
                 bbDrawer.stroke();
                 bbDrawer.fill();

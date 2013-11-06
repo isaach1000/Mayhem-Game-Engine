@@ -78,7 +78,7 @@ require([
                 strokeStyle: 'black',
                 fillStyle: 'red'
             });
-            rect.draw()
+            rect.draw();
         };
 
         ///////////////////
@@ -86,24 +86,26 @@ require([
         ///////////////////
         
         $(document).ready(function() {
+        	var WIDTH = 1000, HEIGHT = 600;
+        	
             var bgCanvas = Factory.createCanvas({
                 id: 'bgCanvas',
-                width: '1000px',
-                height: '600px'
-            }),
-                mainCanvas = Factory.createCanvas({
+                width: WIDTH + 'px',
+                height: HEIGHT + 'px'
+            }), 
+            mainCanvas = Factory.createCanvas({
                 id: 'mainCanvas',
-                width: '1000px',
-                height: '600px'
+                width: WIDTH + 'px',
+                height: HEIGHT + 'px'
             });
 
             var bgCtx = bgCanvas[0].getContext('2d');
-            var bgDrawer = new CanvasDrawer.CanvasDrawer(bgCtx);
+            var bgDrawer = new CanvasDrawer.CanvasDrawer(bgCtx, bgCanvas.width(), bgCanvas.height());
             polyTest(bgDrawer);
             rectTest(bgDrawer);
 
             var mainCtx = mainCanvas[0].getContext('2d');
-            var mainDrawer = new CanvasDrawer.CanvasDrawer(mainCtx); 
+            var mainDrawer = new CanvasDrawer.CanvasDrawer(mainCtx, mainCanvas.width(), mainCanvas.height());
             circleTest(mainDrawer);
         });
 });
