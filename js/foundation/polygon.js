@@ -82,7 +82,7 @@ define([
                     ret.push(adjPt);
                 }
                 return ret;
-            }
+            };
 
             ////////////////////////////////////
             // Public instance methods/fields //

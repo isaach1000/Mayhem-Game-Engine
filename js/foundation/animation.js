@@ -88,9 +88,8 @@ define([], function() {
                 shape.x = startX + durationX * durationElapsed;
                 shape.y = startY + durationY * durationElapsed;
                 shape.z = startZ + durationZ * durationElapsed;
-
                 return shape.x < endX && shape.y < endY && shape.z < endZ && durationElapsed < duration;
-            }
+            };
 
             return new module.Animation(shape, frameFunction, callback);
         }

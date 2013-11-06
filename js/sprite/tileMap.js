@@ -74,7 +74,7 @@ define(['foundation/rectangle'], function(Rectangle) {
                 forEachTile(function(tile) {
                     tile.clear();
                 });
-            }
+            };
         }
     };
 

@@ -172,7 +172,7 @@ define(['util/objectUtility'], function(ObjUtil) {
 
             this.clearCanvas = function() {
                 _this.clearRect(0, 0, _this.width, _this.height);
-            }
+            };
 
             /**
              * Wrapper for <code>context.save</code>

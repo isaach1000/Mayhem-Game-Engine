@@ -66,7 +66,7 @@ define(['util/mathExtensions'], function(MathExtensions) {
 
             this.set = function(row, column, value) {
                 rows[row][column] = value;
-            }
+            };
 
             this.getRow = function(rowIndex) {
                 // Return a clone of the row.
@@ -104,14 +104,14 @@ define(['util/mathExtensions'], function(MathExtensions) {
                     }
                 }
                 return new module.Matrix(newEntries, this.numRows, matrix.numColumns);
-            }
+            };
 
             // Make the instance immutable.
             Object.freeze(this);
         },
 
         identity: function() {
-            return new module.Matrix
+            return new module.Matrix;
         }
     };
 
