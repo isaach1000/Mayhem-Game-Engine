@@ -41,8 +41,7 @@ define([], function() {
             }
 
             if (w < 0 || h < 0) {
-                // Return null, because it is not a valid box.
-                return null;
+            	throw new Error('Invalid dimensions for BoundingBox.');
             }
 
 
@@ -123,8 +122,15 @@ define([], function() {
                     x2 = Math.min(this.x + this.width,
                         otherBbox.x + otherBbox.width),
                     y2 = Math.min(this.y + this.height,
-                        otherBbox.y + otherBbox.height);
-                return new BoundingBox(x1, y1, x2 - x1, y2 - y1);
+                        otherBbox.y + otherBbox.height),
+                    intWidth = x2 - x1,
+                    intHeight = y2 - y1;
+                    
+                if (intWidth < 0 || intHeight < 0) {
+                	return null;	
+                }
+                
+                return new module.BoundingBox(x1, y1, intWidth, intWidth);
             };
         }
     };

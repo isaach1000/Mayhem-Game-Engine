@@ -55,7 +55,7 @@ define(['util/boundingBox'], function(BoundingBox) {
              * @return {boolean} Whether or not insertion was successful.
              */
             this.insert = function(shape) {
-                if (!bbox.containsBoundingBox(shape.bbox)) {
+                if (!bbox.containsBoundingBox(shape.boundingBox)) {
                     // BoundingBox cannot be inserted.
                     return false;
                 }
@@ -87,18 +87,19 @@ define(['util/boundingBox'], function(BoundingBox) {
             /**
              * Query the tree for boxes within a range.
              *
-             * @param {BoundingBox} rangeBbox -- The query range bounding box.
-             * @return {Array.<BoundingBox>} An array of boxes within the range.
+             * @param {BoundingBox} rangeBbox	- The query range bounding box.
+             * @return {Array.<BoundingBox>}	An array of boxes within the range.
              */
             this.queryRange = function(rangeBbox) {
                 // Prepare an array of results.
                 var results = [];
-                if (bbox.boundingBox.intersection(rangeBbox) == null) {
-                    var boxesLen = boxes.length;
-                    for (var i = 0; i < boxesLen; i++) {
-                        var box = boxes[i];
-                        if (rangeBbox.containsBoundingBox(box)) {
-                            results.push(box);
+                if (bbox.intersection(rangeBbox) != null) {
+                    var numShapes = shapes.length;
+                    for (var i = 0; i < numShapes; i++) {
+                        var shape = shapes[i],
+                        	box = shape.boundingBox;
+                        if (rangeBbox.intersection(box) != null) {
+                            results.push(shape);
                         }
                     }
                 }

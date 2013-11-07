@@ -39,10 +39,8 @@ define([
             radius = Math.round(radius);
 
             // Extend Shape constructor
-            Shape.Shape.call(this, x - radius,
-                                y - radius,
-                                radius * 2, radius * 2,
-                                drawer, drawingSettings);
+            Shape.Shape.call(this, x, y, radius * 2, radius * 2,
+                                	drawer, drawingSettings);
 
 
             ////////////////////////////////////

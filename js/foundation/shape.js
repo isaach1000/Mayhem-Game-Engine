@@ -43,6 +43,9 @@ define([
             y = Math.round(y);
             width = Math.round(width);
             height = Math.round(height);
+            
+            // Make drawingSettings immutable
+    		Object.freeze(drawingSettings);
 
             var bbox = new BoundingBox.BoundingBox(x, y, width, height);
 
@@ -145,6 +148,9 @@ define([
                     },
                     set: function(newSettings) {
                         drawingSettings = newSettings;
+                    	Object.freeze(drawingSettings); 
+                        this.clear();
+                        this.draw();
                         Object.freeze(drawingSettings);
                     }
                 }
