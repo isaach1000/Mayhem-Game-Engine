@@ -32,10 +32,14 @@
     
     // Based on http://www.html5canvastutorials.com/
     window.requestAnimFrame = (function(callback) {
-        return window.requestAnimationFrame || window.webkitRequestAnimationFrame || window.mozRequestAnimationFrame || window.oRequestAnimationFrame || window.msRequestAnimationFrame ||
-        function(callback) {
-          window.setTimeout(callback, 1000 / 60);
-        };
+        return window.requestAnimationFrame ||
+        	window.webkitRequestAnimationFrame ||
+        	window.mozRequestAnimationFrame ||
+        	window.oRequestAnimationFrame ||
+        	window.msRequestAnimationFrame ||
+        	function(callback) {
+          		window.setTimeout(callback, 1000 / 60);
+        	};
     })();
     
     /**
@@ -49,24 +53,20 @@
          *
          * @constructor
          * @param   {Shape}     shape           - The shape to animate.
-         * @param   {Function}  frameFunction   - A function that updates the animation. Must return a boolean, which is 
-         *                                      supposed to signal whether or not to terminate the animation (return false to terminate).
+         * @param   {Function}  frameFunction	- A function that updates the animation. Must return a boolean, which is 
+         *                                     	supposed to signal whether or not to terminate the animation (return false to terminate).
          *                                      It may take the duration in milliseconds from the beginning of the animation as a parameter.
          * @param   {Function}  callback        - A function to perform at the completion of the animation.
          */
         Animation: function(shape, frameFunction, callback) {
             // Private instance methods/fields
             
-            var frameCounter = 0;
-            var startDate;
+            var startTime;
             
             var animate = function() {
                 shape.clear();
-                
-                var shouldContinue = frameFunction(new Date() - startDate);
-
+                var shouldContinue = frameFunction(new Date() - startTime);
                 shape.draw();
-
                 if (shouldContinue) {
                     window.requestAnimFrame(function() {
                         animate();
@@ -85,7 +85,7 @@
              * @return {void}
              */
             this.start = function() {
-                startDate = new Date();
+                startTime = new Date();
                 animate();
             };
         },
@@ -103,21 +103,17 @@
         easing: function(shape, endX, endY, endZ, duration, callback) {
             var startX = shape.x,
                 startY = shape.y,
-                startZ = shape.z,
                 distX = endX - startX,
                 distY = endY - startY,
-                distZ = endZ - startZ,
                 durationX = distX / duration,
-                durationY = distY / duration,
-                durationZ = distZ / duration;
+                durationY = distY / duration;
 
             var frameFunction = function(durationElapsed) {
                 shape.x = startX + durationX * durationElapsed;
                 shape.y = startY + durationY * durationElapsed;
-                shape.z = startZ + durationZ * durationElapsed;
-
-                return shape.x &lt; endX && shape.y &lt; endY && shape.z &lt; endZ && durationElapsed &lt; duration;
-            }
+                return shape.x &lt; endX && shape.y &lt; endY &&
+                		durationElapsed &lt; duration;
+            };
 
             return new module.Animation(shape, frameFunction, callback);
         }
@@ -135,13 +131,13 @@
 </div>
 
 <nav>
-    <h2><a href="index.html">Index</a></h2><h3>Modules</h3><ul><li><a href="animation.html">foundation/animation</a></li><li><a href="canvasDrawer.html">foundation/canvasDrawer</a></li><li><a href="circle.html">foundation/circle</a></li><li><a href="rectangle.html">foundation/rectangle</a></li><li><a href="shape.html">foundation/shape</a></li><li><a href="tileMap.html">sprite/tileMap</a></li><li><a href="boundingBox.html">util/boundingBox</a></li><li><a href="factory.html">util/factory</a></li><li><a href="mathExtensions.html">util/mathExtensions</a></li><li><a href="matrix.html">util/matrix</a></li><li><a href="objectUtility.html">util/objectUtility</a></li><li><a href="polygon.html">util/polygon</a></li><li><a href="quadTree.html">util/quadTree</a></li></ul><h3>Classes</h3><ul><li><a href="animation.Animation.html">Animation</a></li><li><a href="canvasDrawer.CanvasDrawer.html">CanvasDrawer</a></li><li><a href="circle.Circle.html">Circle</a></li><li><a href="rectangle.Rectangle.html">Rectangle</a></li><li><a href="shape.Shape.html">Shape</a></li><li><a href="tileMap.TileMap.html">TileMap</a></li><li><a href="boundingBox.BoundingBox.html">BoundingBox</a></li><li><a href="matrix.Matrix.html">Matrix</a></li><li><a href="polygon.Polygon.html">Polygon</a></li><li><a href="quadTree.QuadTree.html">QuadTree</a></li></ul>
+    <h2><a href="index.html">Index</a></h2><h3>Modules</h3><ul><li><a href="animation.html">foundation/animation</a></li><li><a href="canvasDrawer.html">foundation/canvasDrawer</a></li><li><a href="circle.html">foundation/circle</a></li><li><a href="rectangle.html">foundation/rectangle</a></li><li><a href="shape.html">foundation/shape</a></li><li><a href="sprite.html">sprite/sprite</a></li><li><a href="tileMap.html">sprite/tileMap</a></li><li><a href="boundingBox.html">util/boundingBox</a></li><li><a href="factory.html">util/factory</a></li><li><a href="mathExtensions.html">util/mathExtensions</a></li><li><a href="matrix.html">util/matrix</a></li><li><a href="objectUtility.html">util/objectUtility</a></li><li><a href="physics.html">util/physics</a></li><li><a href="polygon.html">util/polygon</a></li><li><a href="quadTree.html">util/quadTree</a></li></ul><h3>Classes</h3><ul><li><a href="animation.Animation.html">Animation</a></li><li><a href="canvasDrawer.CanvasDrawer.html">CanvasDrawer</a></li><li><a href="circle.Circle.html">Circle</a></li><li><a href="rectangle.Rectangle.html">Rectangle</a></li><li><a href="shape.Shape.html">Shape</a></li><li><a href="sprite.Sprite.html">Sprite</a></li><li><a href="tileMap.TileMap.html">TileMap</a></li><li><a href="boundingBox.BoundingBox.html">BoundingBox</a></li><li><a href="matrix.Matrix.html">Matrix</a></li><li><a href="polygon.Polygon_.html">Polygon</a></li><li><a href="quadTree.QuadTree.html">QuadTree</a></li></ul>
 </nav>
 
 <br clear="both">
 
 <footer>
-    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.3.0-dev</a> on Mon Nov 04 2013 01:27:53 GMT-0500 (EST)
+    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.3.0-dev</a> on Sat Nov 09 2013 20:27:14 GMT-0500 (EST)
 </footer>
 
 <script> prettyPrint(); </script>

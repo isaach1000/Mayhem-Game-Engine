@@ -44,15 +44,16 @@
          * CanvasDrawer for drawing to a canvas.
          *
          * @constructor
-         * @param {Context} context - The context from a canvas.
+         * @param {Context} ctx         - Context of the canvas
+         * @param {float} width         - Width of the canvas
+         * @param {float} height         - Height of the canvas
          */
-        CanvasDrawer: function(context, width, height) {
+        CanvasDrawer: function(ctx, width, height) {
             /////////////////////////////////////
             // Private instance methods/fields //
             /////////////////////////////////////
             
             var _this = this;
-            var ctx = context;
             var ctxSettings;
             
             
@@ -60,54 +61,60 @@
             // Public instance methods/fields //
             ////////////////////////////////////
             
-            this.width = width;
-            this.height = height;
-
-            /**
-             * Get the context of the CanvasDrawer.
-             *
-             * @return {Context}
-             */
-            this.getContext = function() {
-                return ctx;
-            };
-
-            /**
-             * Change the context of the CanvasDrawer.
-             *
-             * @param {Context} newContext - The new context
-             * @return {void}
-             */
-            this.setContext = function(newContext) {
-                ctx = newContext;
-            };
-
-            /**
-             * Change properties of the context. Valid settings include:
-             * lineWidth, fillStyle, and strokeStyle.
-             */
-            Object.defineProperty(this, 'contextSettings', {
-                get: function() {
-                    return ObjUtil.deepClone(ctxSettings);
-                },
-                set: function(settings) {
-                    var VALID_SETTINGS = ['lineWidth', 'fillStyle', 'strokeStyle'];
-                    var success = true;
-                    for (var property in settings) {
-                        success = (success && VALID_SETTINGS.indexOf(property) !== -1);
-                        if (success) {
-                            ctx[property] = settings[property];
-                        }
+            Object.defineProperties(this, {
+                /**
+                 * Width of the canvas
+                 * @type {float}
+                 * @memberof module:foundation/canvasDrawer.CanvasDrawer
+                 * @instance
+                 */
+                width: {
+                    get: function() {
+                        return width;
                     }
-                    if (success) {
-                        ctxSettings = ObjUtil.deepClone(settings);
+                },
+
+                /**
+                 * Height of the canvas
+                 * @type {float}
+                 * @memberof module:foundation/canvasDrawer.CanvasDrawer
+                 * @instance
+                 */
+                height: {
+                    get: function() {
+                        return height;
+                    }
+                },
+
+                /**
+                 * Properties of the context. Valid settings include:
+                 * lineWidth, fillStyle, and strokeStyle.
+                 * @type {Object}
+                 * @memberof module:foundation/canvasDrawer.CanvasDrawer
+                 * @instance
+                 */
+                contextSettings: {
+                    get: function() {
+                        return ObjUtil.deepClone(ctxSettings);
+                    },
+                    set: function(settings) {
+                        var VALID_SETTINGS = ['lineWidth', 'fillStyle', 'strokeStyle'];
+                        var success = true;
+                        for (var property in settings) {
+                            success = (success && VALID_SETTINGS.indexOf(property) !== -1);
+                            if (success) {
+                                ctx[property] = settings[property];
+                            }
+                        }
+                        if (success) {
+                            ctxSettings = ObjUtil.deepClone(settings);
+                        }
                     }
                 }
             });
 
             /**
              * Draw a line between two points.
-             * 
              * @param {Point} point1        -   The x coordinate of the first point, or the first point.
              * @param {Point} point2        -   The y coordinate of the first point, or the second point.
              * @param {boolean} (moveFirst) -   Whether or not the context perform the moveTo method.
@@ -121,8 +128,7 @@
             };
 
             /**
-             * Wrapper for `context.stroke`.
-             *
+             * Wrapper for &lt;code>context.stroke&lt;/code>.
              * @return {void}
              */
             this.stroke = function() {
@@ -130,8 +136,7 @@
             };
 
             /**
-             * Wrapper for `context.fill`.
-             *
+             * Wrapper for &lt;code>context.fill&lt;/code>.
              * @return {void}
              */
             this.fill = function() {
@@ -139,8 +144,7 @@
             };
 
             /**
-             * Wrapper for `context.beginPath`.
-             *
+             * Wrapper for &lt;code>context.beginPath&lt;/code>.
              * @return {void}
              */
             this.beginPath = function() {
@@ -148,7 +152,7 @@
             };
 
             /**
-             * Wrapper for `context.closePath`.
+             * Wrapper for &lt;code>context.closePath&lt;/code>.
              * @return {void}
              */
             this.closePath = function() {
@@ -156,8 +160,7 @@
             };
           
             /**
-             * Wrapper for `context.rect`.
-             * 
+             * Wrapper for &lt;code>context.rect&lt;/code>.
              * @param  {float}  x   x coordinate
              * @param  {float}  y   y coordinate
              * @param  {float}  w   Width of rectangle
@@ -168,10 +171,8 @@
                 ctx.rect(x, y, w, h);
             };
 
-
             /**
-             * Wrapper for `context.arc`
-             * 
+             * Wrapper for &lt;code>context.arc&lt;/code>
              * @param  {float}      x          x coordinate
              * @param  {float}      y          y coordinate
              * @param  {float}      radius     Radius of arc
@@ -185,8 +186,7 @@
             };
 
             /**
-             * Wrapper for `context.clearRect`
-             * 
+             * Wrapper for &lt;code>context.clearRect&lt;/code>
              * @param  {float} x - Minimum x of area.
              * @param  {float} y - Minimum y of area.
              * @param  {float} width  - Width of area.
@@ -199,11 +199,10 @@
 
             this.clearCanvas = function() {
                 _this.clearRect(0, 0, _this.width, _this.height);
-            }
+            };
 
             /**
-             * Wrapper for `context.save`
-             * 
+             * Wrapper for &lt;code>context.save&lt;/code>
              * @return {void}
              */
             this.save = function() {
@@ -211,8 +210,7 @@
             };
 
             /**
-             * Wrapper for `context.restore`
-             * 
+             * Wrapper for &lt;code>context.restore&lt;/code>
              * @return {void}
              */
             this.restore = function() {
@@ -220,23 +218,66 @@
             };
 
             /**
-             * Wrapper for `context.translate`
-             * 
+             * Wrapper for &lt;code>context.translate&lt;/code>
+             * @param  {float} x    - x coordinate of destination
+             * @param  {float} y    - y coordinate of destination
              * @return {void}
              */
             this.translate = function(x, y) {
                 ctx.translate(x, y);
             };
 
+            /**
+             * Wrapper for &lt;code>context.fillRect&lt;/code>
+             * @param  {float} x    - x coordinate of top-left of rectangle
+             * @param  {float} y    - y coordinate of top-left of rectangle
+             * @param  {float} w    - Width of rectangle
+             * @param  {float} h    - Height of rectangle
+             * @return {void}
+             */
             this.fillRect = function(x, y, w, h) {
                 ctx.fillRect(x, y, w, h);
+            };
+            
+            /**
+             * Wrapper for &lt;code>context.strokeRect&lt;/code>
+             * @param  {float} x    - x coordinate of top-left of rectangle
+             * @param  {float} y    - y coordinate of top-left of rectangle
+             * @param  {float} w    - Width of rectangle
+             * @param  {float} h    - Height of rectangle
+             * @return {void}
+             */
+            this.strokeRect = function(x, y, w, h) {
+                ctx.strokeRect(x, y, w, h);
+            };
+
+            /**
+             * Wrapper for &lt;code>context.getImageData&lt;/code>
+             * @param  {float} x        - x coordinate of top-left of image
+             * @param  {float} y        - y coordinate of top-left of image
+             * @param  {float} width    - Width of image
+             * @param  {float} height   - Height of image
+             * @return {Array}          Image data
+             */
+            this.getImageData = function(x, y, w, h) {
+                return ctx.getImageData(x, y, w, h);
+            };
+
+            /**
+             * Wrapper for &lt;code>context.putImageData&lt;/code>
+             * @param  {Array} imageData    - Image data
+             * @param  {float} x            - x coordinate of top-left of image
+             * @param  {float} y            - y coordinate of top-left of image
+             * @return {void}
+             */
+            this.putImageData = function(imageData, x, y) {
+                ctx.putImageData(imageData, x, y);
             };
         }
     };
 
     return module; 
 });
-
 </code></pre>
         </article>
     </section>
@@ -247,13 +288,13 @@
 </div>
 
 <nav>
-    <h2><a href="index.html">Index</a></h2><h3>Modules</h3><ul><li><a href="animation.html">foundation/animation</a></li><li><a href="canvasDrawer.html">foundation/canvasDrawer</a></li><li><a href="circle.html">foundation/circle</a></li><li><a href="rectangle.html">foundation/rectangle</a></li><li><a href="shape.html">foundation/shape</a></li><li><a href="tileMap.html">sprite/tileMap</a></li><li><a href="boundingBox.html">util/boundingBox</a></li><li><a href="factory.html">util/factory</a></li><li><a href="mathExtensions.html">util/mathExtensions</a></li><li><a href="matrix.html">util/matrix</a></li><li><a href="objectUtility.html">util/objectUtility</a></li><li><a href="polygon.html">util/polygon</a></li><li><a href="quadTree.html">util/quadTree</a></li></ul><h3>Classes</h3><ul><li><a href="animation.Animation.html">Animation</a></li><li><a href="canvasDrawer.CanvasDrawer.html">CanvasDrawer</a></li><li><a href="circle.Circle.html">Circle</a></li><li><a href="rectangle.Rectangle.html">Rectangle</a></li><li><a href="shape.Shape.html">Shape</a></li><li><a href="tileMap.TileMap.html">TileMap</a></li><li><a href="boundingBox.BoundingBox.html">BoundingBox</a></li><li><a href="matrix.Matrix.html">Matrix</a></li><li><a href="polygon.Polygon.html">Polygon</a></li><li><a href="quadTree.QuadTree.html">QuadTree</a></li></ul>
+    <h2><a href="index.html">Index</a></h2><h3>Modules</h3><ul><li><a href="animation.html">foundation/animation</a></li><li><a href="canvasDrawer.html">foundation/canvasDrawer</a></li><li><a href="circle.html">foundation/circle</a></li><li><a href="rectangle.html">foundation/rectangle</a></li><li><a href="shape.html">foundation/shape</a></li><li><a href="sprite.html">sprite/sprite</a></li><li><a href="tileMap.html">sprite/tileMap</a></li><li><a href="boundingBox.html">util/boundingBox</a></li><li><a href="factory.html">util/factory</a></li><li><a href="mathExtensions.html">util/mathExtensions</a></li><li><a href="matrix.html">util/matrix</a></li><li><a href="objectUtility.html">util/objectUtility</a></li><li><a href="physics.html">util/physics</a></li><li><a href="polygon.html">util/polygon</a></li><li><a href="quadTree.html">util/quadTree</a></li></ul><h3>Classes</h3><ul><li><a href="animation.Animation.html">Animation</a></li><li><a href="canvasDrawer.CanvasDrawer.html">CanvasDrawer</a></li><li><a href="circle.Circle.html">Circle</a></li><li><a href="rectangle.Rectangle.html">Rectangle</a></li><li><a href="shape.Shape.html">Shape</a></li><li><a href="sprite.Sprite.html">Sprite</a></li><li><a href="tileMap.TileMap.html">TileMap</a></li><li><a href="boundingBox.BoundingBox.html">BoundingBox</a></li><li><a href="matrix.Matrix.html">Matrix</a></li><li><a href="polygon.Polygon_.html">Polygon</a></li><li><a href="quadTree.QuadTree.html">QuadTree</a></li></ul>
 </nav>
 
 <br clear="both">
 
 <footer>
-    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.3.0-dev</a> on Mon Nov 04 2013 01:27:53 GMT-0500 (EST)
+    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.3.0-dev</a> on Sat Nov 09 2013 20:27:14 GMT-0500 (EST)
 </footer>
 
 <script> prettyPrint(); </script>

@@ -138,9 +138,10 @@ define([
                 },
 
                 /** 
-                 * Drawing settings of shape.
+                 * Drawing settings of Shape instance
                  * @memberof module:foundation/shape.Shape
                  * @instance
+                 * @return {void}
                  */
                 drawingSettings: {
                     get: function() {
@@ -156,19 +157,42 @@ define([
                 }
             });
 
+			/**
+			 * Draw the shape onto the canvas.
+             * @memberof module:foundation/shape.Shape
+			 * @return {void}
+			 */
             this.draw = function() {
+            	// Call subclass method if exists.
                 if (this.drawShape != null) {
                     this.drawShape(drawer);
                 }
+                // TODO: remove debug drawing bbox
+                this.drawBoundingBox();
             };
 
             /**
              * Clear the shape.
-             * 
+             * @memberof module:foundation/shape.Shape
              * @return {void}
              */
             this.clear = function() {
                 drawer.clearRect(this.x, this.y, this.width, this.height);
+            };
+            
+            this.drawBoundingBox = function() {
+            	var x = this.boundingBox.x,
+            		y = this.boundingBox.y,
+            		w = this.boundingBox.width,
+            		h = this.boundingBox.height,
+            		lineWidth = this.drawingSettings.lineWidth || 0;
+            	drawer.strokeRect(x + lineWidth, y + lineWidth,
+            			w - 2 * lineWidth, h - 2 * lineWidth);
+            };
+            
+            this.collisionTest = function(point) {
+            	// Return result of subclass's test.
+           		return this.hitTest(point);
             };
         }
     };

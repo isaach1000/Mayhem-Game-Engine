@@ -82,6 +82,12 @@ define([
                 canvasDrawer.stroke();
                 canvasDrawer.fill();
             };
+            
+            this.hitTest = function(point) {
+            	var dx = this.x + this.radius - point.x,
+            		dy = this.y + this.radius - point.y;
+            	return dx * dx + dy * dy <= this.radius * this.radius;
+            };
         }
     };
 

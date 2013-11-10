@@ -16,7 +16,6 @@ define([], function() {
         
         /**
          * ClassName // TODO: replace ClassName here and below
-         *
          * @constructor
          */
         ClassName: function() {

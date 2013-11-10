@@ -211,6 +211,18 @@ define(['util/objectUtility'], function(ObjUtil) {
             this.fillRect = function(x, y, w, h) {
                 ctx.fillRect(x, y, w, h);
             };
+            
+            /**
+             * Wrapper for <code>context.strokeRect</code>
+             * @param  {float} x    - x coordinate of top-left of rectangle
+             * @param  {float} y    - y coordinate of top-left of rectangle
+             * @param  {float} w    - Width of rectangle
+             * @param  {float} h    - Height of rectangle
+             * @return {void}
+             */
+            this.strokeRect = function(x, y, w, h) {
+                ctx.strokeRect(x, y, w, h);
+            };
 
             /**
              * Wrapper for <code>context.getImageData</code>

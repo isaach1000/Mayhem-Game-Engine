@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>JSDoc: Source: foundation/circle.js</title>
+    <title>JSDoc: Source: sprite/sprite.js</title>
     
     <script src="scripts/prettify/prettify.js"> </script>
     <script src="scripts/prettify/lang-css.js"> </script>
@@ -17,7 +17,7 @@
 
 <div id="main">
     
-    <h1 class="page-title">Source: foundation/circle.js</h1>
+    <h1 class="page-title">Source: sprite/sprite.js</h1>
     
     
 
@@ -25,21 +25,16 @@
     
     <section>
         <article>
-            <pre class="prettyprint source"><code>define([
-        'foundation/shape',
-        'util/objectUtility',
-        'util/boundingBox'
-    ], function(Shape,
-        ObjUtil,
-        BoundingBox) {
+            <pre class="prettyprint source"><code>define([], function() {
     "use strict";
 
     //////////////////////////////////
     // Private class methods/fields //
     //////////////////////////////////
     
+    
     /**
-     * @exports foundation/circle
+     * @exports sprite/sprite
      */
     var module = {
         /////////////////////////////////
@@ -47,79 +42,76 @@
         /////////////////////////////////
         
         /**
-         * Circle
-         *
+         * Sprite
          * @constructor
-         * @extends {Shape}
-         * @param {float} x                 -   x coordinate of circle
-         * @param {float} y                 -   y coordinate of circle
-         * @param {float} radius            -   Radius of the circle
-         * @param {CanvasDrawer} drawer     -   CanvasDrawer to draw circle
-         * @param {Object} drawingSettings  -   Dictionary of drawing options
          */
-        Circle: function(x, y, radius, drawer, drawingSettings) {
+        Sprite: function() {
             /////////////////////////////////////
             // Private instance methods/fields //
             /////////////////////////////////////
+			
+			var shapes = [];
+			
             
-            var lineWidth = drawingSettings.lineWidth || 0;
-            radius = Math.round(radius);
-
-            // Extend Shape constructor
-            Shape.Shape.call(this, x, y, radius * 2, radius * 2,
-                                	drawer, drawingSettings);
-
-
             ////////////////////////////////////
             // Public instance methods/fields //
             ////////////////////////////////////
             
             Object.defineProperties(this, {
-                /**
-                 * Radius of circle
-                 * @type {float)
-                 * @memberof module:foundation/circle.Circle
-                 * @instance
-                 */
-                radius: {
-                    get: function() {
-                        return radius;
-                    },
-                    set: function(newRadius) {
-                        radius = Math.floor(newRadius);
-                        this.width = radius * 2;
-                        this.height = radius * 2;
-                    }
-                }
+            	/**
+            	 * Shapes of sprite instance
+            	 * @memberof module:sprite/sprite
+            	 * @instance
+            	 */
+            	shapes: {
+            		get: function() {
+            			return shapes;
+            		},
+            		set: function(newShapes) {
+            			shapes = newShapes;
+            		}
+            	},
+            	
+            	/**
+            	 * BoundingBox of sprite instance
+            	 * @memberof module:sprite/sprite
+            	 * @instance
+            	 */
+            	boundingBox: {
+            		get: function() {
+            			return bbox;
+            		},
+            		set: function(newBbox) {
+            			bbox = newBbox;
+            		}
+            	}
             });
-
-            /**
-             * Draw circle onto canvas.
-             *
-             * @return {void}
-             */
-            this.drawShape = function(canvasDrawer) {
-                canvasDrawer.beginPath();
-                canvasDrawer.contextSettings = this.drawingSettings;
-
-				var lineWidth = this.drawingSettings.lineWidth || 0;
-                canvasDrawer.arc(this.x + this.radius, this.y + this.radius,
-                	this.radius - lineWidth, 0, 2 * Math.PI, true);
-
-                canvasDrawer.stroke();
-                canvasDrawer.fill();
-            };
             
-            this.hitTest = function(point) {
-            	var dx = this.x + this.radius - point.x,
-            		dy = this.y + this.radius - point.y;
-            	return dx * dx + dy * dy &lt;= this.radius * this.radius;
+            this.updateBoundingBox = function() {
+            	var numShapes = shapes.length;
+            	var minX, minY, maxX, maxY;
+            	for (var i = 0; i &lt; numShapes; i++) {
+            		var shapeBox = this.shapes[i].boundingBox;
+            		if (minX == null || minX > shapeBox.x) {
+						minX = shapeBox.x;
+            		}
+            		if (minY == null || minY > shapeBox.y) {
+						minY = shapeBox.y;
+            		}
+            		if (maxX == null || maxX &lt; shapeBox.x) {
+						maxX = shapeBox.x;
+            		}
+            		if (maxY == null || maxY &lt; shapeBox.y) {
+						maxY = shapeBox.y;
+            		}
+            	}
             };
         }
     };
 
     return module; 
 });
+
 </code></pre>
         </article>
     </section>

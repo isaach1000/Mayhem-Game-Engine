@@ -25,21 +25,26 @@
     
     <section>
         <article>
-            <pre class="prettyprint source"><code>define(['foundation/rectangle'], function(Rectangle) {
+            <pre class="prettyprint source"><code>define(['sprite/sprite',
+		'foundation/rectangle'
+		], function(Sprite, 
+			Rectangle) {
     "use strict";
 
-    // Private class methods/fields
-    
+	//////////////////////////////////
+    // Private class methods/fields //
+    //////////////////////////////////
     
     /**
      * @exports sprite/tileMap
      */
     var module = {
-        // Public class methods/fields
+    	/////////////////////////////////
+        // Public class methods/fields //
+        /////////////////////////////////
         
         /**
          * TileMap
-         *
          * @param {int} x                               -   The x coordinate of the TileMap.
          * @param {int} y                               -   The y coordinate of the TileMap.
          * @param {int} width                           -   The width of a standard tile.
@@ -55,11 +60,13 @@
             // Protect the `this` keyword to refer to the TileMap instance by storing it in a variable.
             var _this = this;
 
-            // Private instance methods/fields
+			/////////////////////////////////////
+            // Private instance methods/fields //
+            /////////////////////////////////////
             
             /**
              * Iterate through each of the tiles. Iterates through rows.
-             * @param  {function} f - A function to apply to each tile. The function is given each tile as a parameter.
+             * @param {function} f 		- A function to apply to each tile. The function is given each tile as a parameter.
              * @return {void}
              */
             var forEachTile = function(f) {
@@ -70,26 +77,32 @@
                 }
             };
             
-            // Public instance methods/fields
+            Sprite.Sprite.call(this);
 
-            // The 2d-array containing all of the tiles.            
-            this.tiles = [];
+            ////////////////////////////////////
+            // Public instance methods/fields //
+            ////////////////////////////////////
+			
+			this.tiles = [];
 
-            // Generate the tiles.
+            // Generate the tiles
             var index = 0, settingsLen = drawingSettingsArray.length;
             for (var i = 0; i &lt; numHeight; i++) {
                 this.tiles.push([]);   // Add a row to the tiles matrix.
                 for (var j = 0; j &lt; numWidth; j++) {
-                    var settingsIndex = index % settingsLen;
-                    this.tiles[i].push(new Rectangle.Rectangle(
+                    var settingsIndex = index % settingsLen,
+                    	rect = new Rectangle.Rectangle(
                                         x + j * width,
                                         y + i * height,
                                         width, height,
                                         drawer,
-                                        drawingSettingsArray[settingsIndex]));
+                                        drawingSettingsArray[settingsIndex]);
+                    this.tiles[i].push(rect);
+					this.shapes.push(rect);                    
                     index++;
                 }
             }
+            this.updateBoundingBox();
 
             this.draw = function() {
                 forEachTile(function(tile) {
@@ -101,7 +114,7 @@
                 forEachTile(function(tile) {
                     tile.clear();
                 });
-            }
+            };
         }
     };
 
@@ -117,13 +130,13 @@
 </div>
 
 <nav>
-    <h2><a href="index.html">Index</a></h2><h3>Modules</h3><ul><li><a href="animation.html">foundation/animation</a></li><li><a href="canvasDrawer.html">foundation/canvasDrawer</a></li><li><a href="circle.html">foundation/circle</a></li><li><a href="rectangle.html">foundation/rectangle</a></li><li><a href="shape.html">foundation/shape</a></li><li><a href="tileMap.html">sprite/tileMap</a></li><li><a href="boundingBox.html">util/boundingBox</a></li><li><a href="factory.html">util/factory</a></li><li><a href="mathExtensions.html">util/mathExtensions</a></li><li><a href="matrix.html">util/matrix</a></li><li><a href="objectUtility.html">util/objectUtility</a></li><li><a href="polygon.html">util/polygon</a></li><li><a href="quadTree.html">util/quadTree</a></li></ul><h3>Classes</h3><ul><li><a href="animation.Animation.html">Animation</a></li><li><a href="canvasDrawer.CanvasDrawer.html">CanvasDrawer</a></li><li><a href="circle.Circle.html">Circle</a></li><li><a href="rectangle.Rectangle.html">Rectangle</a></li><li><a href="shape.Shape.html">Shape</a></li><li><a href="tileMap.TileMap.html">TileMap</a></li><li><a href="boundingBox.BoundingBox.html">BoundingBox</a></li><li><a href="matrix.Matrix.html">Matrix</a></li><li><a href="polygon.Polygon.html">Polygon</a></li><li><a href="quadTree.QuadTree.html">QuadTree</a></li></ul>
+    <h2><a href="index.html">Index</a></h2><h3>Modules</h3><ul><li><a href="animation.html">foundation/animation</a></li><li><a href="canvasDrawer.html">foundation/canvasDrawer</a></li><li><a href="circle.html">foundation/circle</a></li><li><a href="rectangle.html">foundation/rectangle</a></li><li><a href="shape.html">foundation/shape</a></li><li><a href="sprite.html">sprite/sprite</a></li><li><a href="tileMap.html">sprite/tileMap</a></li><li><a href="boundingBox.html">util/boundingBox</a></li><li><a href="factory.html">util/factory</a></li><li><a href="mathExtensions.html">util/mathExtensions</a></li><li><a href="matrix.html">util/matrix</a></li><li><a href="objectUtility.html">util/objectUtility</a></li><li><a href="physics.html">util/physics</a></li><li><a href="polygon.html">util/polygon</a></li><li><a href="quadTree.html">util/quadTree</a></li></ul><h3>Classes</h3><ul><li><a href="animation.Animation.html">Animation</a></li><li><a href="canvasDrawer.CanvasDrawer.html">CanvasDrawer</a></li><li><a href="circle.Circle.html">Circle</a></li><li><a href="rectangle.Rectangle.html">Rectangle</a></li><li><a href="shape.Shape.html">Shape</a></li><li><a href="sprite.Sprite.html">Sprite</a></li><li><a href="tileMap.TileMap.html">TileMap</a></li><li><a href="boundingBox.BoundingBox.html">BoundingBox</a></li><li><a href="matrix.Matrix.html">Matrix</a></li><li><a href="polygon.Polygon_.html">Polygon</a></li><li><a href="quadTree.QuadTree.html">QuadTree</a></li></ul>
 </nav>
 
 <br clear="both">
 
 <footer>
-    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.3.0-dev</a> on Mon Nov 04 2013 01:27:53 GMT-0500 (EST)
+    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.3.0-dev</a> on Sat Nov 09 2013 20:27:14 GMT-0500 (EST)
 </footer>
 
 <script> prettyPrint(); </script>

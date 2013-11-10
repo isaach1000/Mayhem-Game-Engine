@@ -16,7 +16,8 @@ require([
         'foundation/animation',
         'foundation/circle',
         'foundation/polygon',
-        'foundation/rectangle'
+        'foundation/rectangle',
+        'sprite/tileMap'
     ],
     function($,
     	ObjUtil,
@@ -28,7 +29,8 @@ require([
         Animation,
         Circle,
         Polygon,
-        Rectangle) {
+        Rectangle,
+        TileMap) {
         "use strict";
 
         ////////////////////
@@ -88,26 +90,49 @@ require([
             rect.draw();
         };
         
+        var tileTest = function(drawer, quadTree) {
+        	var tiles = new TileMap.TileMap(100, 100, 50, 75, 3, 4, drawer, [{
+        		lineWidth: 3,
+        		fillStyle: 'purple'
+        	}]);
+        	tiles.draw();
+        };
+        
         var mouseTime = new Date(),
-        	MOUSE_WAIT = 100;
+        	MOUSE_WAIT = 50;
         var mouseTest = function(quadTree) {
+        	var mouseX, mouseY;
+        	
         	$('body').mousemove(function(e) {
-        		var currentTime = new Date();
-        		if (currentTime - mouseTime >= MOUSE_WAIT) { 
-        			var box = new BoundingBox.BoundingBox(e.pageX, e.pageY, 1, 1),
-        				hitShapes = quadTree.queryRange(box),
-        				numShapes = hitShapes.length;
-        			
-        			for (var i = 0; i < numShapes; i++) {
-        				var shape = hitShapes[i],
-        					newSettings = ObjUtil.shallowClone(shape.drawingSettings);
-        				newSettings.strokeStyle = 'yellow';
-        				shape.drawingSettings = newSettings;
-        			}
-        				        				
-        			mouseTime = currentTime;
-        		}
+        		mouseX = e.pageX;
+        		mouseY = e.pageY;
         	});
+        			
+    		var mouseCollision = function() {
+    			// Set the current time.
+	    		var currentTime = new Date();
+	    		// If the time is greater than MOUSE_WAIT and coordinates are set, perform hit testing.
+	    		if (currentTime - mouseTime >= MOUSE_WAIT && mouseX != null && mouseY != null) { 
+	    			var box = new BoundingBox.BoundingBox(mouseX, mouseY, 1, 1),
+	    				hitShapes = quadTree.queryRange(box),
+	    				numShapes = hitShapes.length;
+	    			
+	    			for (var i = 0; i < numShapes; i++) {
+	    				var shape = hitShapes[i];
+	    				if (shape.collisionTest({x: mouseX, y: mouseY})) {
+	        				var newSettings = ObjUtil.shallowClone(shape.drawingSettings);
+	        				newSettings.strokeStyle = 'yellow';
+	        				shape.drawingSettings = newSettings;
+	    				}
+	    			}
+	    				        				
+	    			mouseTime = currentTime;
+	    		}
+	    		
+    			setTimeout(mouseCollision, MOUSE_WAIT);
+   			};
+   			
+   			mouseCollision();
         };
         
 
@@ -140,6 +165,8 @@ require([
             var mainCtx = mainCanvas[0].getContext('2d');
             var mainDrawer = new CanvasDrawer.CanvasDrawer(mainCtx, mainCanvas.width(), mainCanvas.height());
             circleTest(mainDrawer, qTree);
+            
+            tileTest(bgDrawer, qTree);
             
             mouseTest(qTree);
         });

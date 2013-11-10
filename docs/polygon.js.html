@@ -43,7 +43,7 @@
         /////////////////////////////////
         // Public class methods/fields //
         /////////////////////////////////
-        
+
         /**
          * Generate a BoundingBox for a polygon.
          *
@@ -71,7 +71,7 @@
                     maxY = point.y;
                 }
             }
-            return new BoundingBox.BoundingBox(minX, minY, maxX, maxY);
+            return new BoundingBox.BoundingBox(minX, minY, maxX - minX, maxY - minY);
         },
 
         /**
@@ -80,7 +80,7 @@
          * @constructor
          * @extends {Shape}
          * @param {Array.&lt;Point>} points    -   An array of points that describe the polygon.
-         * @param {CanvasDrawer} drawer     -   A CanvasDrawer to draw the polygon onto the canvas.
+         * @param {CanvascanvasDrawer} drawer   -   A CanvasDrawer to draw the polygon onto the canvas.
          * @param {Object} drawingSettings  -   A dictionary of drawing options.
          */
         Polygon: function(points, drawer, drawingSettings) {
@@ -88,11 +88,13 @@
             // Private instance methods/fields //
             /////////////////////////////////////
             
-            var bbox = module.generateBbox(points);
-            var x = bbox.x,
-                y = bbox.y,
-                w = bbox.w,
-                h = bbox.h;
+            var _this = this;
+
+            var bbox = module.generateBbox(points),
+                x = bbox.x,
+               	y = bbox.y,
+                w = bbox.width,
+                h = bbox.height;
 
 
             ////////////////////////////////////
@@ -102,24 +104,62 @@
             // Extend Shape constructor
             Shape.Shape.call(this, x, y, w, h, drawer, drawingSettings);
 
+            Object.defineProperties(this, {
+                /**
+                 * Points of Polygon instance
+                 * @type {Array.&lt;Point>}
+                 * @memberof module:foundation/polygon.Polygon
+                 * @instance
+                 */
+                points: {
+                    get: function() {
+                        return points;
+                    },
+                    set: function(newPoints) {
+                        points = newPoints;
+                        this.boundingBox = generateBbox(this.points);
+                    }
+                }
+            });
+
             /**
-             * Draw the rectangle onto the canvas using the CanvasDrawer.
+             * Draw the rectangle onto the canvas using the CanvascanvasDrawer.
              *
              * @return {void}
              */
-            this.draw = function() {
-                drawer.beginPath();
-                drawer.contextSettings = drawingSettings;
-                var numPoints = points.length;
-                drawer.drawLine(points[0], points[1], true);
+            this.drawShape = function(canvasDrawer) {
+                canvasDrawer.beginPath();
+                canvasDrawer.contextSettings = this.drawingSettings;
+
+                var pts = this.points,
+                    numPoints = pts.length;
+                canvasDrawer.drawLine(pts[0], pts[1], true);
                 for (var i = 1; i &lt; numPoints; i++) {
-                    var point = points[i];
-                    drawer.drawLine(points[i], points[(i + 1) % numPoints]);
+                    var point = pts[i];
+                    canvasDrawer.drawLine(pts[i], pts[(i + 1) % numPoints]);
                 }
-                drawer.closePath();
-                drawer.fill();
-                drawer.stroke();
+
+				canvasDrawer.closePath();
+                canvasDrawer.fill();
+                canvasDrawer.stroke();
             };
+            
+            /**
+             * Hit testing based on &lt;a href="http://stackoverflow.com/a/2922778/1930331">this answer&lt;/a>.
+             * @param {Point}		- A point
+             * @return {boolean}	If the point is in the polygon
+             */
+            this.hitTest = function(point) {
+				var nvert = this.points.length;
+				var i, j, c = false;
+  				for (i = 0, j = nvert-1; i &lt; nvert; j = i++) {
+    				if ( ((this.points[i].y > point.y) != (this.points[j].y > point.y)) &&
+     					(point.x &lt; (this.points[j].x - this.points[i].x) * (point.y-this.points[i].y) / (this.points[j].y - this.points[i].y) + this.points[i].x) ) {
+       					c = !c;
+       				}
+  				}
+  				return c;
+			};
         }
     };
 
@@ -135,13 +175,13 @@
 </div>
 
 <nav>
-    <h2><a href="index.html">Index</a></h2><h3>Modules</h3><ul><li><a href="animation.html">foundation/animation</a></li><li><a href="canvasDrawer.html">foundation/canvasDrawer</a></li><li><a href="circle.html">foundation/circle</a></li><li><a href="rectangle.html">foundation/rectangle</a></li><li><a href="shape.html">foundation/shape</a></li><li><a href="tileMap.html">sprite/tileMap</a></li><li><a href="boundingBox.html">util/boundingBox</a></li><li><a href="factory.html">util/factory</a></li><li><a href="mathExtensions.html">util/mathExtensions</a></li><li><a href="matrix.html">util/matrix</a></li><li><a href="objectUtility.html">util/objectUtility</a></li><li><a href="polygon.html">util/polygon</a></li><li><a href="quadTree.html">util/quadTree</a></li></ul><h3>Classes</h3><ul><li><a href="animation.Animation.html">Animation</a></li><li><a href="canvasDrawer.CanvasDrawer.html">CanvasDrawer</a></li><li><a href="circle.Circle.html">Circle</a></li><li><a href="rectangle.Rectangle.html">Rectangle</a></li><li><a href="shape.Shape.html">Shape</a></li><li><a href="tileMap.TileMap.html">TileMap</a></li><li><a href="boundingBox.BoundingBox.html">BoundingBox</a></li><li><a href="matrix.Matrix.html">Matrix</a></li><li><a href="polygon.Polygon.html">Polygon</a></li><li><a href="quadTree.QuadTree.html">QuadTree</a></li></ul>
+    <h2><a href="index.html">Index</a></h2><h3>Modules</h3><ul><li><a href="animation.html">foundation/animation</a></li><li><a href="canvasDrawer.html">foundation/canvasDrawer</a></li><li><a href="circle.html">foundation/circle</a></li><li><a href="rectangle.html">foundation/rectangle</a></li><li><a href="shape.html">foundation/shape</a></li><li><a href="sprite.html">sprite/sprite</a></li><li><a href="tileMap.html">sprite/tileMap</a></li><li><a href="boundingBox.html">util/boundingBox</a></li><li><a href="factory.html">util/factory</a></li><li><a href="mathExtensions.html">util/mathExtensions</a></li><li><a href="matrix.html">util/matrix</a></li><li><a href="objectUtility.html">util/objectUtility</a></li><li><a href="physics.html">util/physics</a></li><li><a href="polygon.html">util/polygon</a></li><li><a href="quadTree.html">util/quadTree</a></li></ul><h3>Classes</h3><ul><li><a href="animation.Animation.html">Animation</a></li><li><a href="canvasDrawer.CanvasDrawer.html">CanvasDrawer</a></li><li><a href="circle.Circle.html">Circle</a></li><li><a href="rectangle.Rectangle.html">Rectangle</a></li><li><a href="shape.Shape.html">Shape</a></li><li><a href="sprite.Sprite.html">Sprite</a></li><li><a href="tileMap.TileMap.html">TileMap</a></li><li><a href="boundingBox.BoundingBox.html">BoundingBox</a></li><li><a href="matrix.Matrix.html">Matrix</a></li><li><a href="polygon.Polygon_.html">Polygon</a></li><li><a href="quadTree.QuadTree.html">QuadTree</a></li></ul>
 </nav>
 
 <br clear="both">
 
 <footer>
-    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.3.0-dev</a> on Mon Nov 04 2013 01:27:53 GMT-0500 (EST)
+    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.3.0-dev</a> on Sat Nov 09 2013 20:27:14 GMT-0500 (EST)
 </footer>
 
 <script> prettyPrint(); </script>

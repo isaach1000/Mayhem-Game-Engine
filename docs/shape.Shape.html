@@ -41,7 +41,7 @@
     
         
 <dt>
-    <h4 class="name" id="Shape"><span class="type-signature"></span>new Shape<span class="signature">()</span><span class="type-signature"></span></h4>
+    <h4 class="name" id="Shape"><span class="type-signature"></span>new Shape<span class="signature">(x, y, width, height, drawer, drawingSettings)</span><span class="type-signature"></span></h4>
     
     
 </dt>
@@ -49,7 +49,7 @@
     
     
     <div class="description">
-        Shape
+        Shape abstract class
     </div>
     
 
@@ -57,6 +57,169 @@
     
     
     
+    
+        <h5>Parameters:</h5>
+        
+
+<table class="params">
+    <thead>
+	<tr>
+		
+		<th>Name</th>
+		
+		
+		<th>Type</th>
+		
+		
+		
+		
+		
+		<th class="last">Description</th>
+	</tr>
+	</thead>
+	
+	<tbody>
+	
+	
+        <tr>
+            
+                <td class="name"><code>x</code></td>
+            
+            
+            <td class="type">
+            
+                
+<span class="param-type">float</span>
+
+
+            
+            </td>
+            
+            
+            
+            
+            
+            <td class="description last">x coordinate of top-left</td>
+        </tr>
+	
+	
+	
+        <tr>
+            
+                <td class="name"><code>y</code></td>
+            
+            
+            <td class="type">
+            
+                
+<span class="param-type">float</span>
+
+
+            
+            </td>
+            
+            
+            
+            
+            
+            <td class="description last">y coordinate of top-left</td>
+        </tr>
+	
+	
+	
+        <tr>
+            
+                <td class="name"><code>width</code></td>
+            
+            
+            <td class="type">
+            
+                
+<span class="param-type">float</span>
+
+
+            
+            </td>
+            
+            
+            
+            
+            
+            <td class="description last">Width of shape</td>
+        </tr>
+	
+	
+	
+        <tr>
+            
+                <td class="name"><code>height</code></td>
+            
+            
+            <td class="type">
+            
+                
+<span class="param-type">float</span>
+
+
+            
+            </td>
+            
+            
+            
+            
+            
+            <td class="description last">Height of shape</td>
+        </tr>
+	
+	
+	
+        <tr>
+            
+                <td class="name"><code>drawer</code></td>
+            
+            
+            <td class="type">
+            
+                
+<span class="param-type">CanvasDrawer</span>
+
+
+            
+            </td>
+            
+            
+            
+            
+            
+            <td class="description last">CanvasDrawer to draw image to canvas</td>
+        </tr>
+	
+	
+	
+        <tr>
+            
+                <td class="name"><code>drawingSettings</code></td>
+            
+            
+            <td class="type">
+            
+                
+<span class="param-type">Object</span>
+
+
+            
+            </td>
+            
+            
+            
+            
+            
+            <td class="description last">Settings for the CanvasDrawer</td>
+        </tr>
+	
+	
+	</tbody>
+</table>
     
     
     
@@ -82,7 +245,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="shape.js.html">foundation/shape.js</a>, <a href="shape.js.html#line23">line 23</a>
+        <a href="shape.js.html">foundation/shape.js</a>, <a href="shape.js.html#line33">line 33</a>
     </li></ul></dd>
     
     
@@ -126,14 +289,14 @@
         <dl>
             
 <dt>
-    <h4 class="name" id="x"><span class="type-signature">&lt;static> </span>x<span class="type-signature"> :float</span></h4>
+    <h4 class="name" id="boundingBox"><span class="type-signature"></span>boundingBox<span class="type-signature"> :BoundingBox</span></h4>
     
     
 </dt>
 <dd>
     
     <div class="description">
-        x coordinate of top-left of Shape instance
+        BoundingBox of Shape instance
     </div>
     
     
@@ -142,7 +305,7 @@
         <ul>
             <li>
                 
-<span class="param-type">float</span>
+<span class="param-type">BoundingBox</span>
 
 
             </li>
@@ -172,125 +335,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="shape.js.html">foundation/shape.js</a>, <a href="shape.js.html#line42">line 42</a>
-    </li></ul></dd>
-    
-    
-    
-    
-    
-    
-    
-</dl>
-
-    
-    
-</dd>
-
-        
-            
-<dt>
-    <h4 class="name" id="y"><span class="type-signature">&lt;static> </span>y<span class="type-signature"> :float</span></h4>
-    
-    
-</dt>
-<dd>
-    
-    <div class="description">
-        y coordinate of top-left of Shape instance
-    </div>
-    
-    
-    
-        <h5>Type:</h5>
-        <ul>
-            <li>
-                
-<span class="param-type">float</span>
-
-
-            </li>
-        </ul>
-    
-
-    
-<dl class="details">
-    
-        
-    
-    
-    
-
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    <dt class="tag-source">Source:</dt>
-    <dd class="tag-source"><ul class="dummy"><li>
-        <a href="shape.js.html">foundation/shape.js</a>, <a href="shape.js.html#line57">line 57</a>
-    </li></ul></dd>
-    
-    
-    
-    
-    
-    
-    
-</dl>
-
-    
-    
-</dd>
-
-        
-            
-<dt>
-    <h4 class="name" id="boundingBox"><span class="type-signature"></span>boundingBox<span class="type-signature"></span></h4>
-    
-    
-</dt>
-<dd>
-    
-    <div class="description">
-        Bounding box of shape.
-    </div>
-    
-    
-    
-
-    
-<dl class="details">
-    
-        
-    
-    
-    
-
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    <dt class="tag-source">Source:</dt>
-    <dd class="tag-source"><ul class="dummy"><li>
-        <a href="shape.js.html">foundation/shape.js</a>, <a href="shape.js.html#line72">line 72</a>
+        <a href="shape.js.html">foundation/shape.js</a>, <a href="shape.js.html#line134">line 134</a>
     </li></ul></dd>
     
     
@@ -315,7 +360,7 @@
 <dd>
     
     <div class="description">
-        Drawing settings of shape.
+        Drawing settings of Shape instance
     </div>
     
     
@@ -344,7 +389,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="shape.js.html">foundation/shape.js</a>, <a href="shape.js.html#line83">line 83</a>
+        <a href="shape.js.html">foundation/shape.js</a>, <a href="shape.js.html#line146">line 146</a>
     </li></ul></dd>
     
     
@@ -362,17 +407,27 @@
         
             
 <dt>
-    <h4 class="name" id="bbox"><span class="type-signature">&lt;inner> </span>bbox<span class="type-signature"></span></h4>
+    <h4 class="name" id="height"><span class="type-signature"></span>height<span class="type-signature"> :integer</span></h4>
     
     
 </dt>
 <dd>
     
     <div class="description">
-        BoundingBox of shape
+        Height of Shape instance
     </div>
     
     
+    
+        <h5>Type:</h5>
+        <ul>
+            <li>
+                
+<span class="param-type">integer</span>
+
+
+            </li>
+        </ul>
     
 
     
@@ -398,7 +453,199 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="shape.js.html">foundation/shape.js</a>, <a href="shape.js.html#line29">line 29</a>
+        <a href="shape.js.html">foundation/shape.js</a>, <a href="shape.js.html#line115">line 115</a>
+    </li></ul></dd>
+    
+    
+    
+    
+    
+    
+    
+</dl>
+
+    
+    
+</dd>
+
+        
+            
+<dt>
+    <h4 class="name" id="width"><span class="type-signature"></span>width<span class="type-signature"> :integer</span></h4>
+    
+    
+</dt>
+<dd>
+    
+    <div class="description">
+        Width of Shape instance
+    </div>
+    
+    
+    
+        <h5>Type:</h5>
+        <ul>
+            <li>
+                
+<span class="param-type">integer</span>
+
+
+            </li>
+        </ul>
+    
+
+    
+<dl class="details">
+    
+        
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="shape.js.html">foundation/shape.js</a>, <a href="shape.js.html#line96">line 96</a>
+    </li></ul></dd>
+    
+    
+    
+    
+    
+    
+    
+</dl>
+
+    
+    
+</dd>
+
+        
+            
+<dt>
+    <h4 class="name" id="x"><span class="type-signature"></span>x<span class="type-signature"> :integer</span></h4>
+    
+    
+</dt>
+<dd>
+    
+    <div class="description">
+        x coordinate of top-left of Shape instance
+    </div>
+    
+    
+    
+        <h5>Type:</h5>
+        <ul>
+            <li>
+                
+<span class="param-type">integer</span>
+
+
+            </li>
+        </ul>
+    
+
+    
+<dl class="details">
+    
+        
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="shape.js.html">foundation/shape.js</a>, <a href="shape.js.html#line64">line 64</a>
+    </li></ul></dd>
+    
+    
+    
+    
+    
+    
+    
+</dl>
+
+    
+    
+</dd>
+
+        
+            
+<dt>
+    <h4 class="name" id="y"><span class="type-signature"></span>y<span class="type-signature"> :integer</span></h4>
+    
+    
+</dt>
+<dd>
+    
+    <div class="description">
+        y coordinate of top-left of Shape instance
+    </div>
+    
+    
+    
+        <h5>Type:</h5>
+        <ul>
+            <li>
+                
+<span class="param-type">integer</span>
+
+
+            </li>
+        </ul>
+    
+
+    
+<dl class="details">
+    
+        
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="shape.js.html">foundation/shape.js</a>, <a href="shape.js.html#line80">line 80</a>
     </li></ul></dd>
     
     
@@ -422,7 +669,7 @@
         <dl>
             
 <dt>
-    <h4 class="name" id="clear"><span class="type-signature"></span>clear<span class="signature">()</span><span class="type-signature"> &rarr; {void}</span></h4>
+    <h4 class="name" id="this.clear"><span class="type-signature">&lt;static> </span>this.clear<span class="signature">()</span><span class="type-signature"> &rarr; {void}</span></h4>
     
     
 </dt>
@@ -463,7 +710,94 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="shape.js.html">foundation/shape.js</a>, <a href="shape.js.html#line98">line 98</a>
+        <a href="shape.js.html">foundation/shape.js</a>, <a href="shape.js.html#line179">line 179</a>
+    </li></ul></dd>
+    
+    
+    
+    
+    
+    
+    
+</dl>
+
+    
+    
+
+    
+
+    
+    
+    
+    
+    
+    <h5>Returns:</h5>
+    
+            
+
+
+<dl>
+	<dt>
+		Type
+	</dt>
+	<dd>
+		
+<span class="param-type">void</span>
+
+
+	</dd>
+</dl>
+
+        
+    
+    
+</dd>
+
+        
+            
+<dt>
+    <h4 class="name" id="this.draw"><span class="type-signature">&lt;static> </span>this.draw<span class="signature">()</span><span class="type-signature"> &rarr; {void}</span></h4>
+    
+    
+</dt>
+<dd>
+    
+    
+    <div class="description">
+        Draw the shape onto the canvas.
+    </div>
+    
+
+    
+    
+    
+    
+    
+    
+    
+<dl class="details">
+    
+        
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="shape.js.html">foundation/shape.js</a>, <a href="shape.js.html#line165">line 165</a>
     </li></ul></dd>
     
     
@@ -522,13 +856,13 @@
 </div>
 
 <nav>
-    <h2><a href="index.html">Index</a></h2><h3>Modules</h3><ul><li><a href="animation.html">foundation/animation</a></li><li><a href="canvasDrawer.html">foundation/canvasDrawer</a></li><li><a href="circle.html">foundation/circle</a></li><li><a href="rectangle.html">foundation/rectangle</a></li><li><a href="shape.html">foundation/shape</a></li><li><a href="tileMap.html">sprite/tileMap</a></li><li><a href="boundingBox.html">util/boundingBox</a></li><li><a href="factory.html">util/factory</a></li><li><a href="mathExtensions.html">util/mathExtensions</a></li><li><a href="matrix.html">util/matrix</a></li><li><a href="objectUtility.html">util/objectUtility</a></li><li><a href="polygon.html">util/polygon</a></li><li><a href="quadTree.html">util/quadTree</a></li></ul><h3>Classes</h3><ul><li><a href="animation.Animation.html">Animation</a></li><li><a href="canvasDrawer.CanvasDrawer.html">CanvasDrawer</a></li><li><a href="circle.Circle.html">Circle</a></li><li><a href="rectangle.Rectangle.html">Rectangle</a></li><li><a href="shape.Shape.html">Shape</a></li><li><a href="tileMap.TileMap.html">TileMap</a></li><li><a href="boundingBox.BoundingBox.html">BoundingBox</a></li><li><a href="matrix.Matrix.html">Matrix</a></li><li><a href="polygon.Polygon.html">Polygon</a></li><li><a href="quadTree.QuadTree.html">QuadTree</a></li></ul>
+    <h2><a href="index.html">Index</a></h2><h3>Modules</h3><ul><li><a href="animation.html">foundation/animation</a></li><li><a href="canvasDrawer.html">foundation/canvasDrawer</a></li><li><a href="circle.html">foundation/circle</a></li><li><a href="rectangle.html">foundation/rectangle</a></li><li><a href="shape.html">foundation/shape</a></li><li><a href="sprite.html">sprite/sprite</a></li><li><a href="tileMap.html">sprite/tileMap</a></li><li><a href="boundingBox.html">util/boundingBox</a></li><li><a href="factory.html">util/factory</a></li><li><a href="mathExtensions.html">util/mathExtensions</a></li><li><a href="matrix.html">util/matrix</a></li><li><a href="objectUtility.html">util/objectUtility</a></li><li><a href="physics.html">util/physics</a></li><li><a href="polygon.html">util/polygon</a></li><li><a href="quadTree.html">util/quadTree</a></li></ul><h3>Classes</h3><ul><li><a href="animation.Animation.html">Animation</a></li><li><a href="canvasDrawer.CanvasDrawer.html">CanvasDrawer</a></li><li><a href="circle.Circle.html">Circle</a></li><li><a href="rectangle.Rectangle.html">Rectangle</a></li><li><a href="shape.Shape.html">Shape</a></li><li><a href="sprite.Sprite.html">Sprite</a></li><li><a href="tileMap.TileMap.html">TileMap</a></li><li><a href="boundingBox.BoundingBox.html">BoundingBox</a></li><li><a href="matrix.Matrix.html">Matrix</a></li><li><a href="polygon.Polygon_.html">Polygon</a></li><li><a href="quadTree.QuadTree.html">QuadTree</a></li></ul>
 </nav>
 
 <br clear="both">
 
 <footer>
-    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.3.0-dev</a> on Mon Nov 04 2013 01:27:54 GMT-0500 (EST)
+    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.3.0-dev</a> on Sat Nov 09 2013 20:27:15 GMT-0500 (EST)
 </footer>
 
 <script> prettyPrint(); </script>

@@ -1,18 +1,23 @@
-define(['foundation/rectangle'], function(Rectangle) {
+define(['sprite/sprite',
+		'foundation/rectangle'
+		], function(Sprite, 
+			Rectangle) {
     "use strict";
 
-    // Private class methods/fields
-    
+	//////////////////////////////////
+    // Private class methods/fields //
+    //////////////////////////////////
     
     /**
      * @exports sprite/tileMap
      */
     var module = {
-        // Public class methods/fields
+    	/////////////////////////////////
+        // Public class methods/fields //
+        /////////////////////////////////
         
         /**
          * TileMap
-         *
          * @param {int} x                               -   The x coordinate of the TileMap.
          * @param {int} y                               -   The y coordinate of the TileMap.
          * @param {int} width                           -   The width of a standard tile.
@@ -28,11 +33,13 @@ define(['foundation/rectangle'], function(Rectangle) {
             // Protect the `this` keyword to refer to the TileMap instance by storing it in a variable.
             var _this = this;
 
-            // Private instance methods/fields
+			/////////////////////////////////////
+            // Private instance methods/fields //
+            /////////////////////////////////////
             
             /**
              * Iterate through each of the tiles. Iterates through rows.
-             * @param  {function} f - A function to apply to each tile. The function is given each tile as a parameter.
+             * @param {function} f 		- A function to apply to each tile. The function is given each tile as a parameter.
              * @return {void}
              */
             var forEachTile = function(f) {
@@ -43,26 +50,32 @@ define(['foundation/rectangle'], function(Rectangle) {
                 }
             };
             
-            // Public instance methods/fields
+            Sprite.Sprite.call(this);
 
-            // The 2d-array containing all of the tiles.            
-            this.tiles = [];
+            ////////////////////////////////////
+            // Public instance methods/fields //
+            ////////////////////////////////////
+			
+			this.tiles = [];
 
-            // Generate the tiles.
+            // Generate the tiles
             var index = 0, settingsLen = drawingSettingsArray.length;
             for (var i = 0; i < numHeight; i++) {
                 this.tiles.push([]);   // Add a row to the tiles matrix.
                 for (var j = 0; j < numWidth; j++) {
-                    var settingsIndex = index % settingsLen;
-                    this.tiles[i].push(new Rectangle.Rectangle(
+                    var settingsIndex = index % settingsLen,
+                    	rect = new Rectangle.Rectangle(
                                         x + j * width,
                                         y + i * height,
                                         width, height,
                                         drawer,
-                                        drawingSettingsArray[settingsIndex]));
+                                        drawingSettingsArray[settingsIndex]);
+                    this.tiles[i].push(rect);
+					this.shapes.push(rect);                    
                     index++;
                 }
             }
+            this.updateBoundingBox();
 
             this.draw = function() {
                 forEachTile(function(tile) {

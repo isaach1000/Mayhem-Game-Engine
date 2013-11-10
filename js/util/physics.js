@@ -10,7 +10,7 @@ define([], function() {
      * @exports util/physics
      */
     var module = {
-    };
+ 	};
     
     Object.defineProperties(module, {
     	GRAVITY: {

@@ -15,9 +15,9 @@ define(['util/boundingBox'], function(BoundingBox) {
          */
         QuadTree: function(bbox) {
             // Private instance methods/fields
-            var quadTreeNW, quadTreeNE, quadTreeSW, quadTreeSE;
-            var subtrees = [quadTreeNW, quadTreeNE, quadTreeSW, quadTreeSE];
-            var shapes = [];
+            var quadTreeNW, quadTreeNE, quadTreeSW, quadTreeSE,
+            	subtrees = [quadTreeNW, quadTreeNE, quadTreeSW, quadTreeSE],
+            	shapes = [];
 
             /**
              * Create four quadTrees which fully divide this quadTree into four
