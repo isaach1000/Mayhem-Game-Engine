@@ -25,9 +25,11 @@
     
     <section>
         <article>
-            <pre class="prettyprint source"><code>define(['sprite/sprite',
-		'foundation/rectangle'
-		], function(Sprite, 
+            <pre class="prettyprint source"><code>/*jslint nomen: true*/
+define([
+    'sprite/sprite',
+    'foundation/rectangle'
+	], function(Sprite, 
 			Rectangle) {
     "use strict";
 
@@ -35,11 +37,80 @@
     // Private class methods/fields //
     //////////////////////////////////
     
+    function TileMap(x, y, width, height, numWidth, numHeight, drawer, drawingSettingsArr) {
+            /////////////////////////////////////
+            // Private instance methods/fields //
+            /////////////////////////////////////
+
+            // Preserve the "this" keyword to refer to the TileMap instance by storing it in a variable.
+            var that = this,
+                initialShapes = [];
+            
+            /**
+             * Iterate through each of the tiles. Iterates through rows.
+             * @param {function} f      - A function to apply to each tile. The function is given each tile as a parameter.
+             * @return {void}
+             */
+            function forEachTile(f) {
+                var i, j;
+                for (i = 0; i &lt; numHeight; i += 1) {
+                    for (j = 0; j &lt; numWidth; j += 1) {
+                        f(that.tiles[i][j]);
+                    }
+                }
+            }
+
+            function generateTiles() {
+                // Generate the tiles
+                var index = 0, settingsLen = drawingSettingsArr.length, i, j, settingsIndex, rect;
+                for (i = 0; i &lt; numHeight; i += 1) {
+                    that.tiles.push([]);   // Add a row to the tiles matrix.
+                    for (j = 0; j &lt; numWidth; j += 1) {
+                        settingsIndex = index % settingsLen;
+                        rect = new Rectangle.Rectangle(
+                                            x + j * width,
+                                            y + i * height,
+                                            width, height,
+                                            drawer,
+                                            drawingSettingsArr[settingsIndex]);
+                        that.tiles[i].push(rect);
+                        initialShapes.push(rect);
+                        index += 1;
+                    }
+                }
+            }
+            
+            
+            ////////////////////////////////////
+            // Public instance methods/fields //
+            ////////////////////////////////////
+            
+            that.tiles = [];
+            generateTiles();
+
+            // Extend Sprite constructor
+            Sprite.Sprite.call(that, initialShapes, drawer, drawingSettingsArr);
+            that.updateBoundingBox();
+
+            that.draw = function() {
+                that.forEachShape(function(tile) {
+                    tile.draw();
+                });
+            };
+
+            that.clear = function() {
+                forEachTile(function(tile) {
+                    tile.clear();
+                });
+            };
+        }
+    
+    
     /**
      * @exports sprite/tileMap
      */
     var module = {
-    	/////////////////////////////////
+        /////////////////////////////////
         // Public class methods/fields //
         /////////////////////////////////
         
@@ -52,70 +123,11 @@
          * @param {int} numWidth                        -   The number of tiles in the width of the TileMap
          * @param {int} numHeight                       -   The number of tiles in the height of the TileMap
          * @param {CanvasDrawer} drawer                 -   A CanvasDrawer to draw the TileMap.
-         * @param {Array.&lt;Object>} drawingSettingsArray -   An array of to apply to the tiles repeatedly using modulo.
+         * @param {Array.&lt;Object>} drawingSettingsArr	-   An array of to apply to the tiles repeatedly using modulo.
          *                                                  Iterates through each row.
          * @constructor
          */
-        TileMap: function(x, y, width, height, numWidth, numHeight, drawer, drawingSettingsArray) {
-            // Protect the `this` keyword to refer to the TileMap instance by storing it in a variable.
-            var _this = this;
-
-			/////////////////////////////////////
-            // Private instance methods/fields //
-            /////////////////////////////////////
-            
-            /**
-             * Iterate through each of the tiles. Iterates through rows.
-             * @param {function} f 		- A function to apply to each tile. The function is given each tile as a parameter.
-             * @return {void}
-             */
-            var forEachTile = function(f) {
-                for (var i = 0; i &lt; numHeight; i++) {
-                    for (var j = 0; j &lt; numWidth; j++) {
-                        f(_this.tiles[i][j]);
-                    }
-                }
-            };
-            
-            Sprite.Sprite.call(this);
-
-            ////////////////////////////////////
-            // Public instance methods/fields //
-            ////////////////////////////////////
-			
-			this.tiles = [];
-
-            // Generate the tiles
-            var index = 0, settingsLen = drawingSettingsArray.length;
-            for (var i = 0; i &lt; numHeight; i++) {
-                this.tiles.push([]);   // Add a row to the tiles matrix.
-                for (var j = 0; j &lt; numWidth; j++) {
-                    var settingsIndex = index % settingsLen,
-                    	rect = new Rectangle.Rectangle(
-                                        x + j * width,
-                                        y + i * height,
-                                        width, height,
-                                        drawer,
-                                        drawingSettingsArray[settingsIndex]);
-                    this.tiles[i].push(rect);
-					this.shapes.push(rect);                    
-                    index++;
-                }
-            }
-            this.updateBoundingBox();
-
-            this.draw = function() {
-                forEachTile(function(tile) {
-                    tile.draw();
-                });
-            };
-
-            this.clear = function() {
-                forEachTile(function(tile) {
-                    tile.clear();
-                });
-            };
-        }
+        TileMap: TileMap
     };
 
     return module; 
@@ -130,13 +142,13 @@
 </div>
 
 <nav>
-    <h2><a href="index.html">Index</a></h2><h3>Modules</h3><ul><li><a href="animation.html">foundation/animation</a></li><li><a href="canvasDrawer.html">foundation/canvasDrawer</a></li><li><a href="circle.html">foundation/circle</a></li><li><a href="rectangle.html">foundation/rectangle</a></li><li><a href="shape.html">foundation/shape</a></li><li><a href="sprite.html">sprite/sprite</a></li><li><a href="tileMap.html">sprite/tileMap</a></li><li><a href="boundingBox.html">util/boundingBox</a></li><li><a href="factory.html">util/factory</a></li><li><a href="mathExtensions.html">util/mathExtensions</a></li><li><a href="matrix.html">util/matrix</a></li><li><a href="objectUtility.html">util/objectUtility</a></li><li><a href="physics.html">util/physics</a></li><li><a href="polygon.html">util/polygon</a></li><li><a href="quadTree.html">util/quadTree</a></li></ul><h3>Classes</h3><ul><li><a href="animation.Animation.html">Animation</a></li><li><a href="canvasDrawer.CanvasDrawer.html">CanvasDrawer</a></li><li><a href="circle.Circle.html">Circle</a></li><li><a href="rectangle.Rectangle.html">Rectangle</a></li><li><a href="shape.Shape.html">Shape</a></li><li><a href="sprite.Sprite.html">Sprite</a></li><li><a href="tileMap.TileMap.html">TileMap</a></li><li><a href="boundingBox.BoundingBox.html">BoundingBox</a></li><li><a href="matrix.Matrix.html">Matrix</a></li><li><a href="polygon.Polygon_.html">Polygon</a></li><li><a href="quadTree.QuadTree.html">QuadTree</a></li></ul>
+    <h2><a href="index.html">Index</a></h2><h3>Modules</h3><ul><li><a href="animation.html">foundation/animation</a></li><li><a href="canvasDrawer.html">foundation/canvasDrawer</a></li><li><a href="circle.html">foundation/circle</a></li><li><a href="rectangle.html">foundation/rectangle</a></li><li><a href="shape.html">foundation/shape</a></li><li><a href="sprite.html">sprite/sprite</a></li><li><a href="tileMap.html">sprite/tileMap</a></li><li><a href="boundingBox.html">util/boundingBox</a></li><li><a href="factory.html">util/factory</a></li><li><a href="mathExtensions.html">util/mathExtensions</a></li><li><a href="matrix.html">util/matrix</a></li><li><a href="physics.html">util/physics</a></li><li><a href="polygon.html">util/polygon</a></li><li><a href="quadTree.html">util/quadTree</a></li></ul><h3>Classes</h3><ul><li><a href="animation.Animation.html">Animation</a></li><li><a href="canvasDrawer.CanvasDrawer.html">CanvasDrawer</a></li><li><a href="circle.Circle.html">Circle</a></li><li><a href="rectangle.Rectangle.html">Rectangle</a></li><li><a href="shape.Shape.html">Shape</a></li><li><a href="sprite.Sprite.html">Sprite</a></li><li><a href="tileMap.TileMap.html">TileMap</a></li><li><a href="boundingBox.BoundingBox.html">BoundingBox</a></li><li><a href="matrix.Matrix.html">Matrix</a></li><li><a href="polygon.Polygon_.html">Polygon</a></li><li><a href="quadTree.QuadTree.html">QuadTree</a></li></ul>
 </nav>
 
 <br clear="both">
 
 <footer>
-    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.3.0-dev</a> on Sat Nov 09 2013 20:27:14 GMT-0500 (EST)
+    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.3.0-dev</a> on Mon Nov 11 2013 18:30:44 GMT-0500 (EST)
 </footer>
 
 <script> prettyPrint(); </script>

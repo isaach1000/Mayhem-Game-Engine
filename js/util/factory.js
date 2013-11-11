@@ -22,12 +22,12 @@ define(['jquery'], function($) {
                 left: '0'
             };
             
-           	if (cssRules == null) {
+           	if (cssRules === undefined) {
            		cssRules = {};
            	}
            
             for (var key in defaultCss) {
-            	if (cssRules[key] == null) {
+            	if (cssRules[key] === undefined) {
             		cssRules[key] = defaultCss[key];
             	}
             }

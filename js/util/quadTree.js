@@ -16,8 +16,8 @@ define(['util/boundingBox'], function(BoundingBox) {
         QuadTree: function(bbox) {
             // Private instance methods/fields
             var quadTreeNW, quadTreeNE, quadTreeSW, quadTreeSE,
-            	subtrees = [quadTreeNW, quadTreeNE, quadTreeSW, quadTreeSE],
-            	shapes = [];
+                subtrees = [quadTreeNW, quadTreeNE, quadTreeSW, quadTreeSE],
+                shapes = [],
 
             /**
              * Create four quadTrees which fully divide this quadTree into four
@@ -26,23 +26,21 @@ define(['util/boundingBox'], function(BoundingBox) {
              * @private
              * @return {void} 
              */
-            var subdivide = function() {
+            subdivide = function() {
                 var bboxNW = new BoundingBox(bbox.x, bbox.y,
-                                    bbox.width / 2, bbox.height / 2);
-                quadTreeNW = new QuadTree(bboxNW);
-
-                var bboxNE = new BoundingBox(bbox.x + bbox.width / 2, bbox.y,
-                                            bbox.width / 2, bbox.height / 2);
-                quadTreeNE = new QuadTree(bboxNE);
-
-                var bboxSW = new BoundingBox(bbox.x, bbox.y + bbox.height / 2,
-                                             bbox.width / 2, bbox.height / 2);
-                quadTreeSW = new QuadTree(bboxSW);
-
-                var bboxSE = new BoundingBox(bbox.x + bbox.width / 2,
-                                             bbox.y + bbox.height / 2,
-                                             bbox.width / 2, bbox.height / 2);
-                quadTreeSE = new QuadTree(bboxSE); 
+                                    bbox.width / 2, bbox.height / 2),
+                    bboxNE = new BoundingBox(bbox.x + bbox.width / 2, bbox.y,
+                                                bbox.width / 2, bbox.height / 2),
+                    bboxSW = new BoundingBox(bbox.x, bbox.y + bbox.height / 2,
+                                                 bbox.width / 2, bbox.height / 2),
+                    bboxSE = new BoundingBox(bbox.x + bbox.width / 2,
+                                                 bbox.y + bbox.height / 2,
+                                                 bbox.width / 2, bbox.height / 2);
+                
+                quadTreeNW = new module.QuadTree(bboxNW);
+                quadTreeNE = new module.QuadTree(bboxNE);
+                quadTreeSW = new module.QuadTree(bboxSW);
+                quadTreeSE = new module.QuadTree(bboxSE); 
             };
               
             /** The bounding box of the QuadTree's coordinates. */
@@ -55,6 +53,8 @@ define(['util/boundingBox'], function(BoundingBox) {
              * @return {boolean} Whether or not insertion was successful.
              */
             this.insert = function(shape) {
+                var i, subtreesLen = subtrees.length;
+                
                 if (!bbox.containsBoundingBox(shape.boundingBox)) {
                     // BoundingBox cannot be inserted.
                     return false;
@@ -67,11 +67,11 @@ define(['util/boundingBox'], function(BoundingBox) {
                 }
                 // Otherwise, we need to subdivide then add the shape to
                 // whichever node will accept it.
-                if (quadTreeNW == null) {
+                if (quadTreeNW === undefined) {
                     this.subdivide();
                 }
-                var subtreesLen = subtrees.length;
-                for (var i = 0; i < subtreesLen; i++) {
+                
+                for (i = 0; i < subtreesLen; i += 1) {
                     if (subtrees[i].insert(shape)) {
                         return true;
                     }
@@ -87,33 +87,33 @@ define(['util/boundingBox'], function(BoundingBox) {
             /**
              * Query the tree for boxes within a range.
              *
-             * @param {BoundingBox} rangeBbox	- The query range bounding box.
-             * @return {Array.<BoundingBox>}	An array of boxes within the range.
+             * @param {BoundingBox} rangeBbox   - The query range bounding box.
+             * @return {Array.<BoundingBox>}    An array of boxes within the range.
              */
             this.queryRange = function(rangeBbox) {
                 // Prepare an array of results.
-                var results = [];
-                if (bbox.intersection(rangeBbox) != null) {
-                    var numShapes = shapes.length;
-                    for (var i = 0; i < numShapes; i++) {
-                        var shape = shapes[i],
-                        	box = shape.boundingBox;
-                        if (rangeBbox.intersection(box) != null) {
+                var results = [], i, shape, box, numShapes = shapes.length, 
+                    subtreesLen = subtrees.length, subtree;
+                    
+                if (bbox.intersection(rangeBbox) !== null) {
+                    for (i = 0; i < numShapes; i += 1) {
+                        shape = shapes[i];
+                        box = shape.boundingBox;
+                        if (rangeBbox.intersection(box) !== null) {
                             results.push(shape);
                         }
                     }
                 }
                 // If there are no subtrees, return results.
-                if (quadTreeNW == null) {
+                if (quadTreeNW === undefined) {
                     return results;
                 }
                 // Get the results of the subtrees.
-                var subtreesLen = subtrees.length;
-                for (var i = 0; i < subtreesLen; i++) {
-                    var subtree = subtrees[i];
+                for (i = 0; i < subtreesLen; i += 1) {
+                    subtree = subtrees[i];
                     results = results.concat(subtree.queryRange(rangeBbox));
                 }
-                return result;
+                return results;
             };
         }
     };

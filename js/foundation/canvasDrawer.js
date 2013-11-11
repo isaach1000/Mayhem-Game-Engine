@@ -1,4 +1,5 @@
-define(['util/objectUtility'], function(ObjUtil) {
+/*jslint nomen: true*/
+define(['underscore'], function(_) {
     "use strict";
 
     //////////////////////////////////
@@ -26,8 +27,8 @@ define(['util/objectUtility'], function(ObjUtil) {
             // Private instance methods/fields //
             /////////////////////////////////////
             
-            var _this = this;
-            var ctxSettings;
+            var that = this,
+                ctxSettings;
             
             
             ////////////////////////////////////
@@ -68,19 +69,20 @@ define(['util/objectUtility'], function(ObjUtil) {
                  */
                 contextSettings: {
                     get: function() {
-                        return ObjUtil.deepClone(ctxSettings);
+                        return ctxSettings;
                     },
                     set: function(settings) {
-                        var VALID_SETTINGS = ['lineWidth', 'fillStyle', 'strokeStyle'];
-                        var success = true;
-                        for (var property in settings) {
-                            success = (success && VALID_SETTINGS.indexOf(property) !== -1);
-                            if (success) {
-                                ctx[property] = settings[property];
+                        var VALID_SETTINGS = ['lineWidth', 'fillStyle', 'strokeStyle'], success = true, property;
+                        for (property in settings) {
+                            if (settings.hasOwnProperty(property)) {
+                                success = (success && _.contains(VALID_SETTINGS, property));
+                                if (success) {
+                                    ctx[property] = settings[property];
+                                }
                             }
                         }
                         if (success) {
-                            ctxSettings = ObjUtil.deepClone(settings);
+                            ctxSettings = settings;
                         }
                     }
                 }
@@ -171,7 +173,7 @@ define(['util/objectUtility'], function(ObjUtil) {
             };
 
             this.clearCanvas = function() {
-                _this.clearRect(0, 0, _this.width, _this.height);
+                that.clearRect(0, 0, that.width, that.height);
             };
 
             /**

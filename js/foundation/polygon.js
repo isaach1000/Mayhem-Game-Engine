@@ -60,8 +60,6 @@ define([
             /////////////////////////////////////
             // Private instance methods/fields //
             /////////////////////////////////////
-            
-            var _this = this;
 
             var bbox = module.generateBbox(points),
                 x = bbox.x,

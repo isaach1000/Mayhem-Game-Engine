@@ -1,3 +1,4 @@
+/*jslint nomen: true*/
 define([], function() {
     "use strict";
 

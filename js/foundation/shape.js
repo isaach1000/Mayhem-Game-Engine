@@ -1,3 +1,4 @@
+/*jslint nomen: true*/
 define([
         'foundation/canvasDrawer',
         'util/boundingBox',
@@ -35,26 +36,23 @@ define([
             // Private instance methods/fields //
             /////////////////////////////////////
             
-            // Preserve 'this' keyword
-            var _this = this;
+            var that = this,
+                bbox;
 
             // Make floats into integers
             x = Math.round(x);
             y = Math.round(y);
             width = Math.round(width);
             height = Math.round(height);
-            
-            // Make drawingSettings immutable
-    		Object.freeze(drawingSettings);
 
-            var bbox = new BoundingBox.BoundingBox(x, y, width, height);
+            bbox = new BoundingBox.BoundingBox(x, y, width, height);
 
             
             ////////////////////////////////////
             // Public instance methods/fields //
             ////////////////////////////////////
 
-            Object.defineProperties(this, {
+            Object.defineProperties(that, {
                 /**
                  * x coordinate of top-left of Shape instance
                  * @type {integer}
@@ -67,7 +65,7 @@ define([
                     },
                     set: function(newX) {
                         x = Math.round(newX);
-                        this.boundingBox.x = x;
+                        that.boundingBox.x = x;
                     }
                 },
 
@@ -83,7 +81,7 @@ define([
                     },
                     set: function(newY) {
                         y = Math.round(newY);
-                        this.boundingBox.y = y;
+                        that.boundingBox.y = y;
                     }
                 },
 
@@ -99,10 +97,10 @@ define([
                     },
                     set: function(newWidth) {
                         newWidth = Math.round(newWidth);
-                    	if (newWidth !== width) {
-                    		width = newWidth;
-	                        bbox = new BoundingBox.BoundingBox(x, y, width, height);
-                    	}
+                        if (newWidth !== width) {
+                            width = newWidth;
+                            bbox = new BoundingBox.BoundingBox(x, y, width, height);
+                        }
                     }
                 },
 
@@ -118,10 +116,10 @@ define([
                     },
                     set: function(newHeight) {
                         newHeight = Math.round(newHeight);
-                    	if (newHeight !== height) {
-                    		height = newHeight;
-	                        bbox = new BoundingBox.BoundingBox(x, y, width, height);
-                    	}
+                        if (newHeight !== height) {
+                            height = newHeight;
+                            bbox = new BoundingBox.BoundingBox(x, y, width, height);
+                        }
                     }
                 },
 
@@ -149,26 +147,28 @@ define([
                     },
                     set: function(newSettings) {
                         drawingSettings = newSettings;
-                    	Object.freeze(drawingSettings); 
-                        this.clear();
-                        this.draw();
-                        Object.freeze(drawingSettings);
+                        // TODO: approve settings (update?)
                     }
                 }
             });
+            
+            that.update = function() {
+                that.clear();
+                that.draw();
+            };
 
-			/**
-			 * Draw the shape onto the canvas.
+            /**
+             * Draw the shape onto the canvas.
              * @memberof module:foundation/shape.Shape
-			 * @return {void}
-			 */
-            this.draw = function() {
-            	// Call subclass method if exists.
-                if (this.drawShape != null) {
-                    this.drawShape(drawer);
+             * @return {void}
+             */
+            that.draw = function() {
+                // Call subclass method if exists.
+                if (that.drawShape !== undefined) {
+                    that.drawShape(drawer);
                 }
                 // TODO: remove debug drawing bbox
-                this.drawBoundingBox();
+                that.drawBoundingBox();
             };
 
             /**
@@ -176,23 +176,23 @@ define([
              * @memberof module:foundation/shape.Shape
              * @return {void}
              */
-            this.clear = function() {
-                drawer.clearRect(this.x, this.y, this.width, this.height);
+            that.clear = function() {
+                drawer.clearRect(that.x, that.y, that.width, that.height);
             };
             
-            this.drawBoundingBox = function() {
-            	var x = this.boundingBox.x,
-            		y = this.boundingBox.y,
-            		w = this.boundingBox.width,
-            		h = this.boundingBox.height,
-            		lineWidth = this.drawingSettings.lineWidth || 0;
-            	drawer.strokeRect(x + lineWidth, y + lineWidth,
-            			w - 2 * lineWidth, h - 2 * lineWidth);
+            that.drawBoundingBox = function() {
+                var x = that.boundingBox.x,
+                    y = that.boundingBox.y,
+                    w = that.boundingBox.width,
+                    h = that.boundingBox.height,
+                    lineWidth = that.drawingSettings.lineWidth || 0;
+                drawer.strokeRect(x + lineWidth, y + lineWidth,
+                        w - 2 * lineWidth, h - 2 * lineWidth);
             };
             
-            this.collisionTest = function(point) {
-            	// Return result of subclass's test.
-           		return this.hitTest(point);
+            that.collisionTest = function(point) {
+                // Return result of subclass's test.
+                return that.hitTest(point);
             };
         }
     };
