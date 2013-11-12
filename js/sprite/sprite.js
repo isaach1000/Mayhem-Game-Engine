@@ -96,7 +96,7 @@ define([
 
             /**
              * Iterator function
-             * @param {Function} f      - A function that takes a Shape instance as a parameter.
+             * @param {Function} f      -   A function that takes a Shape instance as a parameter.
              * @return {void}
              */
             that.forEachShape = function(f) {
@@ -112,12 +112,22 @@ define([
                 that.draw();  
             };
             
+            /**
+             * Draw Sprite instance
+             * @return {void}
+             */
             that.draw = function() {
                 that.forEachShape(function(shape) {
                     shape.draw();
                 });
+                // TODO: remove drawBoudingBox
+                that.drawBoundingBox();
             };
             
+            /**
+             * Draw BoundingBox of Sprite instance
+             * @return {void}
+             */
             that.drawBoundingBox = function() {
                 var x = that.boundingBox.x,
                 y = that.boundingBox.y,

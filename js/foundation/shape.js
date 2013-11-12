@@ -137,6 +137,7 @@ define([
 
                 /** 
                  * Drawing settings of Shape instance
+                 * @type {Object}
                  * @memberof module:foundation/shape.Shape
                  * @instance
                  * @return {void}
@@ -152,14 +153,17 @@ define([
                 }
             });
             
+            /**
+             * Clear and draw Shape onto canvas
+             * @return {void}
+             */
             that.update = function() {
                 that.clear();
                 that.draw();
             };
 
             /**
-             * Draw the shape onto the canvas.
-             * @memberof module:foundation/shape.Shape
+             * Draw Shape instance onto the canvas
              * @return {void}
              */
             that.draw = function() {
@@ -172,14 +176,17 @@ define([
             };
 
             /**
-             * Clear the shape.
-             * @memberof module:foundation/shape.Shape
+             * Clear the Shape instance
              * @return {void}
              */
             that.clear = function() {
                 drawer.clearRect(that.x, that.y, that.width, that.height);
             };
             
+            /**
+             * Draw BoundingBox of Shape instance
+             * @return {void}
+             */
             that.drawBoundingBox = function() {
                 var x = that.boundingBox.x,
                     y = that.boundingBox.y,

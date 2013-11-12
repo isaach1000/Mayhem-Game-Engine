@@ -89,10 +89,10 @@ define(['underscore'], function(_) {
             });
 
             /**
-             * Draw a line between two points.
-             * @param {Point} point1        -   The x coordinate of the first point, or the first point.
-             * @param {Point} point2        -   The y coordinate of the first point, or the second point.
-             * @param {boolean} (moveFirst) -   Whether or not the context perform the moveTo method.
+             * Draw a line between two points
+             * @param {(float|Point)} point1        -   x coordinate of the first point, or the first point
+             * @param {(float|Point)} point2        -   y coordinate of the first point, or the second point
+             * @param {boolean} [moveFirst=false]   -   If true, uses moveTo metho.
              * @return {void}
              */
             this.drawLine = function(point1, point2, moveFirst) {
@@ -103,7 +103,7 @@ define(['underscore'], function(_) {
             };
 
             /**
-             * Wrapper for <code>context.stroke</code>.
+             * Wrapper for <code>context.stroke</code>
              * @return {void}
              */
             this.stroke = function() {
@@ -111,7 +111,7 @@ define(['underscore'], function(_) {
             };
 
             /**
-             * Wrapper for <code>context.fill</code>.
+             * Wrapper for <code>context.fill</code>
              * @return {void}
              */
             this.fill = function() {
@@ -119,7 +119,7 @@ define(['underscore'], function(_) {
             };
 
             /**
-             * Wrapper for <code>context.beginPath</code>.
+             * Wrapper for <code>context.beginPath</code>
              * @return {void}
              */
             this.beginPath = function() {
@@ -127,7 +127,7 @@ define(['underscore'], function(_) {
             };
 
             /**
-             * Wrapper for <code>context.closePath</code>.
+             * Wrapper for <code>context.closePath</code>
              * @return {void}
              */
             this.closePath = function() {
@@ -135,7 +135,7 @@ define(['underscore'], function(_) {
             };
           
             /**
-             * Wrapper for <code>context.rect</code>.
+             * Wrapper for <code>context.rect</code>
              * @param  {float}  x   x coordinate
              * @param  {float}  y   y coordinate
              * @param  {float}  w   Width of rectangle
@@ -204,10 +204,10 @@ define(['underscore'], function(_) {
 
             /**
              * Wrapper for <code>context.fillRect</code>
-             * @param  {float} x    - x coordinate of top-left of rectangle
-             * @param  {float} y    - y coordinate of top-left of rectangle
-             * @param  {float} w    - Width of rectangle
-             * @param  {float} h    - Height of rectangle
+             * @param  {float} x    -   x coordinate of top-left of rectangle
+             * @param  {float} y    -   y coordinate of top-left of rectangle
+             * @param  {float} w    -   Width of rectangle
+             * @param  {float} h    -   Height of rectangle
              * @return {void}
              */
             this.fillRect = function(x, y, w, h) {
