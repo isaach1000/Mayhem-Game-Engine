@@ -1,4 +1,4 @@
-/*jslint nomen: true*/
+
 define([
     'sprite/sprite',
     'foundation/rectangle'

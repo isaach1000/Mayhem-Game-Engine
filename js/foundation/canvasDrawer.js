@@ -1,4 +1,4 @@
-/*jslint nomen: true*/
+
 define(['underscore'], function(_) {
     "use strict";
 
