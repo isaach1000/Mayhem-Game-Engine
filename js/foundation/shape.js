@@ -1,4 +1,4 @@
-/*jslint nomen: true*/
+
 define([
         'foundation/canvasDrawer',
         'util/boundingBox',
@@ -171,8 +171,6 @@ define([
                 if (that.drawShape !== undefined) {
                     that.drawShape(drawer);
                 }
-                // TODO: remove debug drawing bbox
-                that.drawBoundingBox();
             };
 
             /**

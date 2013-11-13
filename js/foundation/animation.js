@@ -1,4 +1,4 @@
-define([], function() {
+define(['underscore'], function(_) {
     "use strict";
 
     // Private class methods/fields
@@ -6,13 +6,13 @@ define([], function() {
     // Based on http://www.html5canvastutorials.com/
     window.requestAnimFrame = (function(callback) {
         return window.requestAnimationFrame ||
-        	window.webkitRequestAnimationFrame ||
-        	window.mozRequestAnimationFrame ||
-        	window.oRequestAnimationFrame ||
-        	window.msRequestAnimationFrame ||
-        	function(callback) {
-          		window.setTimeout(callback, 1000 / 60);
-        	};
+            window.webkitRequestAnimationFrame ||
+            window.mozRequestAnimationFrame ||
+            window.oRequestAnimationFrame ||
+            window.msRequestAnimationFrame ||
+            function(callback) {
+                window.setTimeout(callback, 1000 / 60);
+            };
     })();
     
     /**
@@ -26,8 +26,8 @@ define([], function() {
          *
          * @constructor
          * @param   {Shape}     shape           - The shape to animate.
-         * @param   {Function}  frameFunction	- A function that updates the animation. Must return a boolean, which is 
-         *                                     	supposed to signal whether or not to terminate the animation (return false to terminate).
+         * @param   {Function}  frameFunction   - A function that updates the animation. Must return a boolean, which is 
+         *                                      supposed to signal whether or not to terminate the animation (return false to terminate).
          *                                      It may take the duration in milliseconds from the beginning of the animation as a parameter.
          * @param   {Function}  callback        - A function to perform at the completion of the animation.
          */
@@ -45,7 +45,7 @@ define([], function() {
                         animate();
                     });
                 }
-                else if (typeof callback === 'Object') {
+                else if (_.isFunction(callback)) {
                     callback();
                 }
             };
@@ -85,7 +85,7 @@ define([], function() {
                 shape.x = startX + durationX * durationElapsed;
                 shape.y = startY + durationY * durationElapsed;
                 return shape.x < endX && shape.y < endY &&
-                		durationElapsed < duration;
+                        durationElapsed < duration;
             };
 
             return new module.Animation(shape, frameFunction, callback);

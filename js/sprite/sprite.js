@@ -1,4 +1,3 @@
-/*jslint nomen: true*/
 define([
         'underscore',
         'util/boundingBox'
