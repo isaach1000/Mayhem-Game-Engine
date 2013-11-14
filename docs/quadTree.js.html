@@ -43,8 +43,8 @@
         QuadTree: function(bbox) {
             // Private instance methods/fields
             var quadTreeNW, quadTreeNE, quadTreeSW, quadTreeSE,
-            	subtrees = [quadTreeNW, quadTreeNE, quadTreeSW, quadTreeSE],
-            	shapes = [];
+                subtrees = [quadTreeNW, quadTreeNE, quadTreeSW, quadTreeSE],
+                shapes = [],
 
             /**
              * Create four quadTrees which fully divide this quadTree into four
@@ -53,23 +53,21 @@
              * @private
              * @return {void} 
              */
-            var subdivide = function() {
+            subdivide = function() {
                 var bboxNW = new BoundingBox(bbox.x, bbox.y,
-                                    bbox.width / 2, bbox.height / 2);
-                quadTreeNW = new QuadTree(bboxNW);
-
-                var bboxNE = new BoundingBox(bbox.x + bbox.width / 2, bbox.y,
-                                            bbox.width / 2, bbox.height / 2);
-                quadTreeNE = new QuadTree(bboxNE);
-
-                var bboxSW = new BoundingBox(bbox.x, bbox.y + bbox.height / 2,
-                                             bbox.width / 2, bbox.height / 2);
-                quadTreeSW = new QuadTree(bboxSW);
-
-                var bboxSE = new BoundingBox(bbox.x + bbox.width / 2,
-                                             bbox.y + bbox.height / 2,
-                                             bbox.width / 2, bbox.height / 2);
-                quadTreeSE = new QuadTree(bboxSE); 
+                                    bbox.width / 2, bbox.height / 2),
+                    bboxNE = new BoundingBox(bbox.x + bbox.width / 2, bbox.y,
+                                                bbox.width / 2, bbox.height / 2),
+                    bboxSW = new BoundingBox(bbox.x, bbox.y + bbox.height / 2,
+                                                 bbox.width / 2, bbox.height / 2),
+                    bboxSE = new BoundingBox(bbox.x + bbox.width / 2,
+                                                 bbox.y + bbox.height / 2,
+                                                 bbox.width / 2, bbox.height / 2);
+                
+                quadTreeNW = new module.QuadTree(bboxNW);
+                quadTreeNE = new module.QuadTree(bboxNE);
+                quadTreeSW = new module.QuadTree(bboxSW);
+                quadTreeSE = new module.QuadTree(bboxSE); 
             };
               
             /** The bounding box of the QuadTree's coordinates. */
@@ -82,6 +80,8 @@
              * @return {boolean} Whether or not insertion was successful.
              */
             this.insert = function(shape) {
+                var i, subtreesLen = subtrees.length;
+                
                 if (!bbox.containsBoundingBox(shape.boundingBox)) {
                     // BoundingBox cannot be inserted.
                     return false;
@@ -94,11 +94,11 @@
                 }
                 // Otherwise, we need to subdivide then add the shape to
                 // whichever node will accept it.
-                if (quadTreeNW == null) {
+                if (quadTreeNW === undefined) {
                     this.subdivide();
                 }
-                var subtreesLen = subtrees.length;
-                for (var i = 0; i &lt; subtreesLen; i++) {
+                
+                for (i = 0; i &lt; subtreesLen; i += 1) {
                     if (subtrees[i].insert(shape)) {
                         return true;
                     }
@@ -114,33 +114,33 @@
             /**
              * Query the tree for boxes within a range.
              *
-             * @param {BoundingBox} rangeBbox	- The query range bounding box.
-             * @return {Array.&lt;BoundingBox>}	An array of boxes within the range.
+             * @param {BoundingBox} rangeBbox   - The query range bounding box.
+             * @return {Array.&lt;BoundingBox>}    An array of boxes within the range.
              */
             this.queryRange = function(rangeBbox) {
                 // Prepare an array of results.
-                var results = [];
-                if (bbox.intersection(rangeBbox) != null) {
-                    var numShapes = shapes.length;
-                    for (var i = 0; i &lt; numShapes; i++) {
-                        var shape = shapes[i],
-                        	box = shape.boundingBox;
-                        if (rangeBbox.intersection(box) != null) {
+                var results = [], i, shape, box, numShapes = shapes.length, 
+                    subtreesLen = subtrees.length, subtree;
+                    
+                if (bbox.intersection(rangeBbox) !== null) {
+                    for (i = 0; i &lt; numShapes; i += 1) {
+                        shape = shapes[i];
+                        box = shape.boundingBox;
+                        if (rangeBbox.intersection(box) !== null) {
                             results.push(shape);
                         }
                     }
                 }
                 // If there are no subtrees, return results.
-                if (quadTreeNW == null) {
+                if (quadTreeNW === undefined) {
                     return results;
                 }
                 // Get the results of the subtrees.
-                var subtreesLen = subtrees.length;
-                for (var i = 0; i &lt; subtreesLen; i++) {
-                    var subtree = subtrees[i];
+                for (i = 0; i &lt; subtreesLen; i += 1) {
+                    subtree = subtrees[i];
                     results = results.concat(subtree.queryRange(rangeBbox));
                 }
-                return result;
+                return results;
             };
         }
     };
@@ -158,13 +158,13 @@
 </div>
 
 <nav>
-    <h2><a href="index.html">Index</a></h2><h3>Modules</h3><ul><li><a href="animation.html">foundation/animation</a></li><li><a href="canvasDrawer.html">foundation/canvasDrawer</a></li><li><a href="circle.html">foundation/circle</a></li><li><a href="rectangle.html">foundation/rectangle</a></li><li><a href="shape.html">foundation/shape</a></li><li><a href="sprite.html">sprite/sprite</a></li><li><a href="tileMap.html">sprite/tileMap</a></li><li><a href="boundingBox.html">util/boundingBox</a></li><li><a href="factory.html">util/factory</a></li><li><a href="mathExtensions.html">util/mathExtensions</a></li><li><a href="matrix.html">util/matrix</a></li><li><a href="objectUtility.html">util/objectUtility</a></li><li><a href="physics.html">util/physics</a></li><li><a href="polygon.html">util/polygon</a></li><li><a href="quadTree.html">util/quadTree</a></li></ul><h3>Classes</h3><ul><li><a href="animation.Animation.html">Animation</a></li><li><a href="canvasDrawer.CanvasDrawer.html">CanvasDrawer</a></li><li><a href="circle.Circle.html">Circle</a></li><li><a href="rectangle.Rectangle.html">Rectangle</a></li><li><a href="shape.Shape.html">Shape</a></li><li><a href="sprite.Sprite.html">Sprite</a></li><li><a href="tileMap.TileMap.html">TileMap</a></li><li><a href="boundingBox.BoundingBox.html">BoundingBox</a></li><li><a href="matrix.Matrix.html">Matrix</a></li><li><a href="polygon.Polygon_.html">Polygon</a></li><li><a href="quadTree.QuadTree.html">QuadTree</a></li></ul>
+    <h2><a href="index.html">Index</a></h2><h3>Modules</h3><ul><li><a href="animation.html">foundation/animation</a></li><li><a href="canvasDrawer.html">foundation/canvasDrawer</a></li><li><a href="circle.html">foundation/circle</a></li><li><a href="rectangle.html">foundation/rectangle</a></li><li><a href="shape.html">foundation/shape</a></li><li><a href="levelBase.html">level/levelBase</a></li><li><a href="mainLevel.html">level/mainLevel</a></li><li><a href="sprite.html">sprite/sprite</a></li><li><a href="tileMap.html">sprite/tileMap</a></li><li><a href="boundingBox.html">util/boundingBox</a></li><li><a href="factory.html">util/factory</a></li><li><a href="mathExtensions.html">util/mathExtensions</a></li><li><a href="matrix.html">util/matrix</a></li><li><a href="physics.html">util/physics</a></li><li><a href="polygon.html">util/polygon</a></li><li><a href="quadTree.html">util/quadTree</a></li></ul><h3>Classes</h3><ul><li><a href="animation.Animation.html">Animation</a></li><li><a href="canvasDrawer.CanvasDrawer.html">CanvasDrawer</a></li><li><a href="circle.Circle.html">Circle</a></li><li><a href="rectangle.Rectangle.html">Rectangle</a></li><li><a href="shape.Shape.html">Shape</a></li><li><a href="levelBase.LevelBase.html">LevelBase</a></li><li><a href="mainLevel.MainLevel.html">MainLevel</a></li><li><a href="sprite.Sprite.html">Sprite</a></li><li><a href="tileMap.TileMap.html">TileMap</a></li><li><a href="boundingBox.BoundingBox.html">BoundingBox</a></li><li><a href="matrix.Matrix.html">Matrix</a></li><li><a href="polygon.Polygon_.html">Polygon</a></li><li><a href="quadTree.QuadTree.html">QuadTree</a></li></ul>
 </nav>
 
 <br clear="both">
 
 <footer>
-    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.3.0-dev</a> on Sat Nov 09 2013 20:27:14 GMT-0500 (EST)
+    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.3.0-dev</a> on Wed Nov 13 2013 18:37:40 GMT-0500 (EST)
 </footer>
 
 <script> prettyPrint(); </script>

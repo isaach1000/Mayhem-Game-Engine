@@ -40,56 +40,55 @@
         /////////////////////////////////
         // Public class methods/fields //
         /////////////////////////////////
-        
+
         /**
          * Generate a random integer.
          * 
-         * @param   {int} [min=0]   -   The minimum for the random integer (inclusive).
-         * @param   {int} max       -   The maximum for the random integer (not inclusive).
-         * @return  {int} A random integer within the specified range.
+         * @param   {int} [minimum=0]       -   The minimum for the random integer (inclusive).
+         * @param   {int} maximum           -   The maximum for the random integer (not inclusive).
+         * @return  {int}                   A random integer within the specified range.
          */
-        randomInt: function() {
-            return Math.floor(randomFloat);
+        randomInt: function(minimum, maximum) {
+            return Math.floor(module.randomFloat(minimum, maximum));
         },
 
         /**
          * Generate a random float.
          * 
-         * @param   {float} [min=0]   -   The minimum for the random float (inclusive).
-         * @param   {float} max       -   The maximum for the random float (not inclusive).
-         * @return  {float} A random float within the specified range.
+         * @param   {float} [minimum=0]     -   The minimum for the random float (inclusive).
+         * @param   {float} maximum         -   The maximum for the random float (not inclusive).
+         * @return  {float}                 A random float within the specified range.
          */
-        randomFloat: function() {
-            var min, max;
+        randomFloat: function(minimum, maximum) {
+            var min, max, range;
             switch (arguments.length) {
             case 1:
                 min = 0;
-                max = arguments[0];
+                max = minimum;
                 break;
             case 2:
-                min = arguments[0];
-                max = arguments[1];
+                min = minimum;
+                max = maximum;
                 break;
             }
-
-            var range = max - min;
+            range = max - min;
             return Math.random() * range + min;
         },
 
         /**
          * Get the dot product of two vectors.
-         * 
-         * @param  {Array.&lt;float>}  vector1     A vector of floats.
-         * @param  {Array.&lt;float>}  vector2     A vector of floats with the same length as vector1.
-         * @return {float}          The dot product of the two vectors.
+         * @param  {Array.&lt;number>}  vector1    -   A vector of numbers
+         * @param  {Array.&lt;number>}  vector2    -   A vector of numbers (same length as vector1)
+         * @return {float}                      The dot product of the two vectors.
          */
         dotProduct: function(vector1, vector2) {
+            var total = 0, i;
+
             if (vector1.length !== vector2.length) {
                 return null;
             }
 
-            var total = 0;
-            for (var i = 0; i &lt; vector1.length; i++) {
+            for (i = 0; i &lt; vector1.length; i += 1) {
                 total += vector1[i] * vector2[i];
             }
             return total;
@@ -108,13 +107,13 @@
 </div>
 
 <nav>
-    <h2><a href="index.html">Index</a></h2><h3>Modules</h3><ul><li><a href="animation.html">foundation/animation</a></li><li><a href="canvasDrawer.html">foundation/canvasDrawer</a></li><li><a href="circle.html">foundation/circle</a></li><li><a href="rectangle.html">foundation/rectangle</a></li><li><a href="shape.html">foundation/shape</a></li><li><a href="sprite.html">sprite/sprite</a></li><li><a href="tileMap.html">sprite/tileMap</a></li><li><a href="boundingBox.html">util/boundingBox</a></li><li><a href="factory.html">util/factory</a></li><li><a href="mathExtensions.html">util/mathExtensions</a></li><li><a href="matrix.html">util/matrix</a></li><li><a href="objectUtility.html">util/objectUtility</a></li><li><a href="physics.html">util/physics</a></li><li><a href="polygon.html">util/polygon</a></li><li><a href="quadTree.html">util/quadTree</a></li></ul><h3>Classes</h3><ul><li><a href="animation.Animation.html">Animation</a></li><li><a href="canvasDrawer.CanvasDrawer.html">CanvasDrawer</a></li><li><a href="circle.Circle.html">Circle</a></li><li><a href="rectangle.Rectangle.html">Rectangle</a></li><li><a href="shape.Shape.html">Shape</a></li><li><a href="sprite.Sprite.html">Sprite</a></li><li><a href="tileMap.TileMap.html">TileMap</a></li><li><a href="boundingBox.BoundingBox.html">BoundingBox</a></li><li><a href="matrix.Matrix.html">Matrix</a></li><li><a href="polygon.Polygon_.html">Polygon</a></li><li><a href="quadTree.QuadTree.html">QuadTree</a></li></ul>
+    <h2><a href="index.html">Index</a></h2><h3>Modules</h3><ul><li><a href="animation.html">foundation/animation</a></li><li><a href="canvasDrawer.html">foundation/canvasDrawer</a></li><li><a href="circle.html">foundation/circle</a></li><li><a href="rectangle.html">foundation/rectangle</a></li><li><a href="shape.html">foundation/shape</a></li><li><a href="levelBase.html">level/levelBase</a></li><li><a href="mainLevel.html">level/mainLevel</a></li><li><a href="sprite.html">sprite/sprite</a></li><li><a href="tileMap.html">sprite/tileMap</a></li><li><a href="boundingBox.html">util/boundingBox</a></li><li><a href="factory.html">util/factory</a></li><li><a href="mathExtensions.html">util/mathExtensions</a></li><li><a href="matrix.html">util/matrix</a></li><li><a href="physics.html">util/physics</a></li><li><a href="polygon.html">util/polygon</a></li><li><a href="quadTree.html">util/quadTree</a></li></ul><h3>Classes</h3><ul><li><a href="animation.Animation.html">Animation</a></li><li><a href="canvasDrawer.CanvasDrawer.html">CanvasDrawer</a></li><li><a href="circle.Circle.html">Circle</a></li><li><a href="rectangle.Rectangle.html">Rectangle</a></li><li><a href="shape.Shape.html">Shape</a></li><li><a href="levelBase.LevelBase.html">LevelBase</a></li><li><a href="mainLevel.MainLevel.html">MainLevel</a></li><li><a href="sprite.Sprite.html">Sprite</a></li><li><a href="tileMap.TileMap.html">TileMap</a></li><li><a href="boundingBox.BoundingBox.html">BoundingBox</a></li><li><a href="matrix.Matrix.html">Matrix</a></li><li><a href="polygon.Polygon_.html">Polygon</a></li><li><a href="quadTree.QuadTree.html">QuadTree</a></li></ul>
 </nav>
 
 <br clear="both">
 
 <footer>
-    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.3.0-dev</a> on Sat Nov 09 2013 20:27:14 GMT-0500 (EST)
+    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.3.0-dev</a> on Wed Nov 13 2013 18:37:40 GMT-0500 (EST)
 </footer>
 
 <script> prettyPrint(); </script>

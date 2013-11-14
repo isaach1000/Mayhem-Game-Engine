@@ -1,6 +1,8 @@
-define(['sprite/sprite',
-		'foundation/rectangle'
-		], function(Sprite, 
+
+define([
+    'sprite/sprite',
+    'foundation/rectangle'
+	], function(Sprite, 
 			Rectangle) {
     "use strict";
 
@@ -8,11 +10,80 @@ define(['sprite/sprite',
     // Private class methods/fields //
     //////////////////////////////////
     
+    function TileMap(x, y, width, height, numWidth, numHeight, drawer, drawingSettingsArr) {
+            /////////////////////////////////////
+            // Private instance methods/fields //
+            /////////////////////////////////////
+
+            // Preserve the "this" keyword to refer to the TileMap instance by storing it in a variable.
+            var that = this,
+                initialShapes = [];
+            
+            /**
+             * Iterate through each of the tiles. Iterates through rows.
+             * @param {function} f      - A function to apply to each tile. The function is given each tile as a parameter.
+             * @return {void}
+             */
+            function forEachTile(f) {
+                var i, j;
+                for (i = 0; i < numHeight; i += 1) {
+                    for (j = 0; j < numWidth; j += 1) {
+                        f(that.tiles[i][j]);
+                    }
+                }
+            }
+
+            function generateTiles() {
+                // Generate the tiles
+                var index = 0, settingsLen = drawingSettingsArr.length, i, j, settingsIndex, rect;
+                for (i = 0; i < numHeight; i += 1) {
+                    that.tiles.push([]);   // Add a row to the tiles matrix.
+                    for (j = 0; j < numWidth; j += 1) {
+                        settingsIndex = index % settingsLen;
+                        rect = new Rectangle.Rectangle(
+                                            x + j * width,
+                                            y + i * height,
+                                            width, height,
+                                            drawer,
+                                            drawingSettingsArr[settingsIndex]);
+                        that.tiles[i].push(rect);
+                        initialShapes.push(rect);
+                        index += 1;
+                    }
+                }
+            }
+            
+            
+            ////////////////////////////////////
+            // Public instance methods/fields //
+            ////////////////////////////////////
+            
+            that.tiles = [];
+            generateTiles();
+
+            // Extend Sprite constructor
+            Sprite.Sprite.call(that, initialShapes, drawer, drawingSettingsArr);
+            that.updateBoundingBox();
+
+            that.draw = function() {
+                that.forEachShape(function(tile) {
+                    tile.draw();
+                });
+            };
+
+            that.clear = function() {
+                forEachTile(function(tile) {
+                    tile.clear();
+                });
+            };
+        }
+    
+    
     /**
      * @exports sprite/tileMap
      */
     var module = {
-    	/////////////////////////////////
+        /////////////////////////////////
         // Public class methods/fields //
         /////////////////////////////////
         
@@ -25,70 +96,11 @@ define(['sprite/sprite',
          * @param {int} numWidth                        -   The number of tiles in the width of the TileMap
          * @param {int} numHeight                       -   The number of tiles in the height of the TileMap
          * @param {CanvasDrawer} drawer                 -   A CanvasDrawer to draw the TileMap.
-         * @param {Array.<Object>} drawingSettingsArray -   An array of to apply to the tiles repeatedly using modulo.
+         * @param {Array.<Object>} drawingSettingsArr	-   An array of to apply to the tiles repeatedly using modulo.
          *                                                  Iterates through each row.
          * @constructor
          */
-        TileMap: function(x, y, width, height, numWidth, numHeight, drawer, drawingSettingsArray) {
-            // Protect the `this` keyword to refer to the TileMap instance by storing it in a variable.
-            var _this = this;
-
-			/////////////////////////////////////
-            // Private instance methods/fields //
-            /////////////////////////////////////
-            
-            /**
-             * Iterate through each of the tiles. Iterates through rows.
-             * @param {function} f 		- A function to apply to each tile. The function is given each tile as a parameter.
-             * @return {void}
-             */
-            var forEachTile = function(f) {
-                for (var i = 0; i < numHeight; i++) {
-                    for (var j = 0; j < numWidth; j++) {
-                        f(_this.tiles[i][j]);
-                    }
-                }
-            };
-            
-            Sprite.Sprite.call(this);
-
-            ////////////////////////////////////
-            // Public instance methods/fields //
-            ////////////////////////////////////
-			
-			this.tiles = [];
-
-            // Generate the tiles
-            var index = 0, settingsLen = drawingSettingsArray.length;
-            for (var i = 0; i < numHeight; i++) {
-                this.tiles.push([]);   // Add a row to the tiles matrix.
-                for (var j = 0; j < numWidth; j++) {
-                    var settingsIndex = index % settingsLen,
-                    	rect = new Rectangle.Rectangle(
-                                        x + j * width,
-                                        y + i * height,
-                                        width, height,
-                                        drawer,
-                                        drawingSettingsArray[settingsIndex]);
-                    this.tiles[i].push(rect);
-					this.shapes.push(rect);                    
-                    index++;
-                }
-            }
-            this.updateBoundingBox();
-
-            this.draw = function() {
-                forEachTile(function(tile) {
-                    tile.draw();
-                });
-            };
-
-            this.clear = function() {
-                forEachTile(function(tile) {
-                    tile.clear();
-                });
-            };
-        }
+        TileMap: TileMap
     };
 
     return module; 

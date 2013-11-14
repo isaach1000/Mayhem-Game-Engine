@@ -25,7 +25,10 @@
     
     <section>
         <article>
-            <pre class="prettyprint source"><code>define([], function() {
+            <pre class="prettyprint source"><code>define([
+        'underscore',
+        'util/boundingBox'
+    ], function(_, BoundingBox) {
     "use strict";
 
     //////////////////////////////////
@@ -45,66 +48,163 @@
          * Sprite
          * @constructor
          */
-        Sprite: function() {
+        Sprite: function(shapes, drawer, drawingSettingsArr) {
             /////////////////////////////////////
             // Private instance methods/fields //
             /////////////////////////////////////
-			
-			var shapes = [];
-			
+            
+            var that = this,
+                boundingBox;
+            
+            shapes = shapes || [];
+            
             
             ////////////////////////////////////
             // Public instance methods/fields //
             ////////////////////////////////////
             
-            Object.defineProperties(this, {
-            	/**
-            	 * Shapes of sprite instance
-            	 * @memberof module:sprite/sprite
-            	 * @instance
-            	 */
-            	shapes: {
-            		get: function() {
-            			return shapes;
-            		},
-            		set: function(newShapes) {
-            			shapes = newShapes;
-            		}
-            	},
-            	
-            	/**
-            	 * BoundingBox of sprite instance
-            	 * @memberof module:sprite/sprite
-            	 * @instance
-            	 */
-            	boundingBox: {
-            		get: function() {
-            			return bbox;
-            		},
-            		set: function(newBbox) {
-            			bbox = newBbox;
-            		}
-            	}
+            Object.defineProperties(that, {
+                /**
+                 * Shapes of Sprite instance
+                 * @memberof module:sprite/sprite.Sprite
+                 * @instance
+                 */
+                shapes: {
+                    get: function() {
+                        return shapes;
+                    },
+                    set: function(newShapes) {
+                        shapes = newShapes;
+                    }
+                },
+                
+                /**
+                 * BoundingBox of Sprite instance
+                 * @memberof module:sprite/sprite.Sprite
+                 * @instance
+                 */
+                boundingBox: {
+                    get: function() {
+                        if (boundingBox === undefined) {
+                            that.updateBoundingBox();
+                        }
+                        return boundingBox;
+                    },
+                    set: function(newBbox) {
+                        boundingBox = newBbox;
+                    }
+                },
+                
+                /**
+                 * Drawing settings of Sprite instance
+                 * @memberof module:sprite/sprite.Sprite
+                 * @instance
+                 */
+                drawingSettings: {
+                    get: function() {
+                        return drawingSettingsArr;
+                    },
+                    set: function(newDrawingSettingsArr) {
+                        if (!_.isEqual(drawingSettingsArr,
+                                newDrawingSettingsArr) ||
+                            (!_.isArray(newDrawingSettingsArr) &&
+                            !_.isObject(newDrawingSettingsArr))) {
+                            return;
+                        }
+                        
+                        if (!_.isArray(newDrawingSettingsArr)) {
+                            newDrawingSettingsArr = [newDrawingSettingsArr];
+                        }
+                        drawingSettingsArr = newDrawingSettingsArr;
+                    }
+                }
             });
+
+            /**
+             * Iterator function
+             * @param {Function} f      -   A function that takes a Shape instance as a parameter.
+             * @return {void}
+             */
+            that.forEachShape = function(f) {
+                var numShapes = that.shapes.length, i, shape;
+                for (i = 0; i &lt; numShapes; i += 1) {
+                    shape = that.shapes[i];
+                    f(shape);
+                }
+            };
             
-            this.updateBoundingBox = function() {
-            	var numShapes = shapes.length;
-            	var minX, minY, maxX, maxY;
-            	for (var i = 0; i &lt; numShapes; i++) {
-            		var shapeBox = this.shapes[i].boundingBox;
-            		if (minX == null || minX > shapeBox.x) {
-						minX = shapeBox.x;
-            		}
-            		if (minY == null || minY > shapeBox.y) {
-						minY = shapeBox.y;
-            		}
-            		if (maxX == null || maxX &lt; shapeBox.x) {
-						maxX = shapeBox.x;
-            		}
-            		if (maxY == null || maxY &lt; shapeBox.y) {
-						maxY = shapeBox.y;
-            		}
-            	}
+            that.update = function() {
+                that.clear();
+                that.draw();  
+            };
+            
+            /**
+             * Draw Sprite instance
+             * @return {void}
+             */
+            that.draw = function() {
+                that.forEachShape(function(shape) {
+                    shape.draw();
+                });
+                // TODO: remove drawBoudingBox
+                that.drawBoundingBox();
+            };
+            
+            /**
+             * Draw BoundingBox of Sprite instance
+             * @return {void}
+             */
+            that.drawBoundingBox = function() {
+                var x = that.boundingBox.x,
+                y = that.boundingBox.y,
+                w = that.boundingBox.w,
+                h = that.boundingBox.h,
+                lineWidth = that.drawingSettings.lineWidth || 0;
+                
+                drawer.beginPath();
+                drawer.strokeRect(x + lineWidth, y + lineWidth,
+                        w - 2 * lineWidth, h - 2 * lineWidth);
+            };
+            
+            /**
+             * Update BoundingBox of Sprite instance
+             * @return {void}
+             */
+            that.updateBoundingBox = function() {
+                var minX, minY, maxX, maxY;
+                that.forEachShape(function(shape) {
+                    var shapeBox = shape.boundingBox;
+                    if (minX === undefined || minX > shapeBox.x) {
+                        minX = shapeBox.x;
+                    }
+                    if (minY === undefined || minY > shapeBox.y) {
+                        minY = shapeBox.y;
+                    }
+                    if (maxX === undefined || maxX &lt; shapeBox.x + shapeBox.width) {
+                        maxX = shapeBox.x + shapeBox.width;
+                    }
+                    if (maxY === undefined || maxY &lt; shapeBox.y + shapeBox.height) {
+                        maxY = shapeBox.y + shapeBox.height;
+                    }
+                });
+                
+                that.boundingBox = new BoundingBox.BoundingBox(minX, minY, maxX - minX, maxY - minY);
+            };
+            
+            /**
+             * Test whether or not a point is within a Sprite.
+             * @param {Point} point         - Point to test
+             * @return {boolean}            If the point is in the Sprite
+             */
+            that.collisionTest = function(point) {
+                var numShapes = that.shapes.length, i, shape;
+                for (i = 0; i &lt; numShapes; i += 1) {
+                    shape = that.shapes[i];
+                    if (shape.collisionTest(point)) {
+                        return true;
+                    }
+                }
+                return false;
             };
         }
     };
@@ -122,13 +222,13 @@
 </div>
 
 <nav>
-    <h2><a href="index.html">Index</a></h2><h3>Modules</h3><ul><li><a href="animation.html">foundation/animation</a></li><li><a href="canvasDrawer.html">foundation/canvasDrawer</a></li><li><a href="circle.html">foundation/circle</a></li><li><a href="rectangle.html">foundation/rectangle</a></li><li><a href="shape.html">foundation/shape</a></li><li><a href="sprite.html">sprite/sprite</a></li><li><a href="tileMap.html">sprite/tileMap</a></li><li><a href="boundingBox.html">util/boundingBox</a></li><li><a href="factory.html">util/factory</a></li><li><a href="mathExtensions.html">util/mathExtensions</a></li><li><a href="matrix.html">util/matrix</a></li><li><a href="objectUtility.html">util/objectUtility</a></li><li><a href="physics.html">util/physics</a></li><li><a href="polygon.html">util/polygon</a></li><li><a href="quadTree.html">util/quadTree</a></li></ul><h3>Classes</h3><ul><li><a href="animation.Animation.html">Animation</a></li><li><a href="canvasDrawer.CanvasDrawer.html">CanvasDrawer</a></li><li><a href="circle.Circle.html">Circle</a></li><li><a href="rectangle.Rectangle.html">Rectangle</a></li><li><a href="shape.Shape.html">Shape</a></li><li><a href="sprite.Sprite.html">Sprite</a></li><li><a href="tileMap.TileMap.html">TileMap</a></li><li><a href="boundingBox.BoundingBox.html">BoundingBox</a></li><li><a href="matrix.Matrix.html">Matrix</a></li><li><a href="polygon.Polygon_.html">Polygon</a></li><li><a href="quadTree.QuadTree.html">QuadTree</a></li></ul>
+    <h2><a href="index.html">Index</a></h2><h3>Modules</h3><ul><li><a href="animation.html">foundation/animation</a></li><li><a href="canvasDrawer.html">foundation/canvasDrawer</a></li><li><a href="circle.html">foundation/circle</a></li><li><a href="rectangle.html">foundation/rectangle</a></li><li><a href="shape.html">foundation/shape</a></li><li><a href="levelBase.html">level/levelBase</a></li><li><a href="mainLevel.html">level/mainLevel</a></li><li><a href="sprite.html">sprite/sprite</a></li><li><a href="tileMap.html">sprite/tileMap</a></li><li><a href="boundingBox.html">util/boundingBox</a></li><li><a href="factory.html">util/factory</a></li><li><a href="mathExtensions.html">util/mathExtensions</a></li><li><a href="matrix.html">util/matrix</a></li><li><a href="physics.html">util/physics</a></li><li><a href="polygon.html">util/polygon</a></li><li><a href="quadTree.html">util/quadTree</a></li></ul><h3>Classes</h3><ul><li><a href="animation.Animation.html">Animation</a></li><li><a href="canvasDrawer.CanvasDrawer.html">CanvasDrawer</a></li><li><a href="circle.Circle.html">Circle</a></li><li><a href="rectangle.Rectangle.html">Rectangle</a></li><li><a href="shape.Shape.html">Shape</a></li><li><a href="levelBase.LevelBase.html">LevelBase</a></li><li><a href="mainLevel.MainLevel.html">MainLevel</a></li><li><a href="sprite.Sprite.html">Sprite</a></li><li><a href="tileMap.TileMap.html">TileMap</a></li><li><a href="boundingBox.BoundingBox.html">BoundingBox</a></li><li><a href="matrix.Matrix.html">Matrix</a></li><li><a href="polygon.Polygon_.html">Polygon</a></li><li><a href="quadTree.QuadTree.html">QuadTree</a></li></ul>
 </nav>
 
 <br clear="both">
 
 <footer>
-    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.3.0-dev</a> on Sat Nov 09 2013 20:27:14 GMT-0500 (EST)
+    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.3.0-dev</a> on Wed Nov 13 2013 18:37:40 GMT-0500 (EST)
 </footer>
 
 <script> prettyPrint(); </script>

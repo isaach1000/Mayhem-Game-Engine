@@ -4,14 +4,14 @@
 This project demostrates the use of HTML5 Canvas in game development.
 
 ## Libraries
-RequireJS, jQuery
+RequireJS, jQuery, UnderscoreJS
 
 ## Structure
 Folders:
 
-* js/ --- Contains all of the Javascript.:
-  * lib/ --- Contains the libraries.
-  * util/ --- Contains utility modules.
-* docs/ --- Contains the documentation.
-* scripts/ --- Contains useful scripts.
+* js/ --- All Javascripts:
+  * lib/ --- Libraries
+  * util/ --- Utility modules
+* docs/ --- Documentation
+* scripts/ --- Useful scripts (e.g. generate docs)
 

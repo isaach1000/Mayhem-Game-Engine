@@ -1,9 +1,10 @@
+
 define([
         'foundation/shape',
-        'util/objectUtility',
+        'underscore',
         'util/boundingBox'
     ], function(Shape,
-        ObjUtil,
+        _,
         BoundingBox) {
     "use strict";
 
@@ -35,19 +36,20 @@ define([
             // Private instance methods/fields //
             /////////////////////////////////////
             
-            var lineWidth = drawingSettings.lineWidth || 0;
+            var that = this, 
+            lineWidth = drawingSettings.lineWidth || 0;
             radius = Math.round(radius);
 
             // Extend Shape constructor
-            Shape.Shape.call(this, x, y, radius * 2, radius * 2,
-                                	drawer, drawingSettings);
+            Shape.Shape.call(that, x, y, radius * 2, radius * 2,
+                                    drawer, drawingSettings);
 
 
             ////////////////////////////////////
             // Public instance methods/fields //
             ////////////////////////////////////
             
-            Object.defineProperties(this, {
+            Object.defineProperties(that, {
                 /**
                  * Radius of circle
                  * @type {float)
@@ -60,8 +62,8 @@ define([
                     },
                     set: function(newRadius) {
                         radius = Math.floor(newRadius);
-                        this.width = radius * 2;
-                        this.height = radius * 2;
+                        that.width = radius * 2;
+                        that.height = radius * 2;
                     }
                 }
             });
@@ -71,22 +73,22 @@ define([
              *
              * @return {void}
              */
-            this.drawShape = function(canvasDrawer) {
+            that.drawShape = function(canvasDrawer) {
                 canvasDrawer.beginPath();
-                canvasDrawer.contextSettings = this.drawingSettings;
+                canvasDrawer.contextSettings = that.drawingSettings;
 
-				var lineWidth = this.drawingSettings.lineWidth || 0;
-                canvasDrawer.arc(this.x + this.radius, this.y + this.radius,
-                	this.radius - lineWidth, 0, 2 * Math.PI, true);
+                var lineWidth = that.drawingSettings.lineWidth || 0;
+                canvasDrawer.arc(that.x + that.radius, that.y + that.radius,
+                    that.radius - lineWidth, 0, 2 * Math.PI, true);
 
                 canvasDrawer.stroke();
                 canvasDrawer.fill();
             };
             
-            this.hitTest = function(point) {
-            	var dx = this.x + this.radius - point.x,
-            		dy = this.y + this.radius - point.y;
-            	return dx * dx + dy * dy <= this.radius * this.radius;
+            that.hitTest = function(point) {
+                var dx = that.x + that.radius - point.x,
+                    dy = that.y + that.radius - point.y;
+                return dx * dx + dy * dy <= that.radius * that.radius;
             };
         }
     };

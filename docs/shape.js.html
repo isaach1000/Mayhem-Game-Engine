@@ -25,7 +25,8 @@
     
     <section>
         <article>
-            <pre class="prettyprint source"><code>define([
+            <pre class="prettyprint source"><code>
+define([
         'foundation/canvasDrawer',
         'util/boundingBox',
         'util/factory'
@@ -62,26 +63,23 @@
             // Private instance methods/fields //
             /////////////////////////////////////
             
-            // Preserve 'this' keyword
-            var _this = this;
+            var that = this,
+                bbox;
 
             // Make floats into integers
             x = Math.round(x);
             y = Math.round(y);
             width = Math.round(width);
             height = Math.round(height);
-            
-            // Make drawingSettings immutable
-    		Object.freeze(drawingSettings);
 
-            var bbox = new BoundingBox.BoundingBox(x, y, width, height);
+            bbox = new BoundingBox.BoundingBox(x, y, width, height);
 
             
             ////////////////////////////////////
             // Public instance methods/fields //
             ////////////////////////////////////
 
-            Object.defineProperties(this, {
+            Object.defineProperties(that, {
                 /**
                  * x coordinate of top-left of Shape instance
                  * @type {integer}
@@ -94,7 +92,7 @@
                     },
                     set: function(newX) {
                         x = Math.round(newX);
-                        this.boundingBox.x = x;
+                        that.boundingBox.x = x;
                     }
                 },
 
@@ -110,7 +108,7 @@
                     },
                     set: function(newY) {
                         y = Math.round(newY);
-                        this.boundingBox.y = y;
+                        that.boundingBox.y = y;
                     }
                 },
 
@@ -126,10 +124,10 @@
                     },
                     set: function(newWidth) {
                         newWidth = Math.round(newWidth);
-                    	if (newWidth !== width) {
-                    		width = newWidth;
-	                        bbox = new BoundingBox.BoundingBox(x, y, width, height);
-                    	}
+                        if (newWidth !== width) {
+                            width = newWidth;
+                            bbox = new BoundingBox.BoundingBox(x, y, width, height);
+                        }
                     }
                 },
 
@@ -145,10 +143,10 @@
                     },
                     set: function(newHeight) {
                         newHeight = Math.round(newHeight);
-                    	if (newHeight !== height) {
-                    		height = newHeight;
-	                        bbox = new BoundingBox.BoundingBox(x, y, width, height);
-                    	}
+                        if (newHeight !== height) {
+                            height = newHeight;
+                            bbox = new BoundingBox.BoundingBox(x, y, width, height);
+                        }
                     }
                 },
 
@@ -166,6 +164,7 @@
 
                 /** 
                  * Drawing settings of Shape instance
+                 * @type {Object}
                  * @memberof module:foundation/shape.Shape
                  * @instance
                  * @return {void}
@@ -176,50 +175,58 @@
                     },
                     set: function(newSettings) {
                         drawingSettings = newSettings;
-                    	Object.freeze(drawingSettings); 
-                        this.clear();
-                        this.draw();
-                        Object.freeze(drawingSettings);
+                        // TODO: approve settings (update?)
                     }
                 }
             });
-
-			/**
-			 * Draw the shape onto the canvas.
-             * @memberof module:foundation/shape.Shape
-			 * @return {void}
-			 */
-            this.draw = function() {
-            	// Call subclass method if exists.
-                if (this.drawShape != null) {
-                    this.drawShape(drawer);
-                }
-                // TODO: remove debug drawing bbox
-                this.drawBoundingBox();
+            
+            /**
+             * Clear and draw Shape onto canvas
+             * @return {void}
+             */
+            that.update = function() {
+                that.clear();
+                that.draw();
             };
 
             /**
-             * Clear the shape.
-             * @memberof module:foundation/shape.Shape
+             * Draw Shape instance onto the canvas
              * @return {void}
              */
-            this.clear = function() {
-                drawer.clearRect(this.x, this.y, this.width, this.height);
+            that.draw = function() {
+                // Call subclass method if exists.
+                if (that.drawShape !== undefined) {
+                    that.drawShape(drawer);
+                }
+                // TODO: remove debug drawing bbox
+                that.drawBoundingBox();
+            };
+
+            /**
+             * Clear the Shape instance
+             * @return {void}
+             */
+            that.clear = function() {
+                drawer.clearRect(that.x, that.y, that.width, that.height);
             };
             
-            this.drawBoundingBox = function() {
-            	var x = this.boundingBox.x,
-            		y = this.boundingBox.y,
-            		w = this.boundingBox.width,
-            		h = this.boundingBox.height,
-            		lineWidth = this.drawingSettings.lineWidth || 0;
-            	drawer.strokeRect(x + lineWidth, y + lineWidth,
-            			w - 2 * lineWidth, h - 2 * lineWidth);
+            /**
+             * Draw BoundingBox of Shape instance
+             * @return {void}
+             */
+            that.drawBoundingBox = function() {
+                var x = that.boundingBox.x,
+                    y = that.boundingBox.y,
+                    w = that.boundingBox.width,
+                    h = that.boundingBox.height,
+                    lineWidth = that.drawingSettings.lineWidth || 0;
+                drawer.strokeRect(x + lineWidth, y + lineWidth,
+                        w - 2 * lineWidth, h - 2 * lineWidth);
             };
             
-            this.collisionTest = function(point) {
-            	// Return result of subclass's test.
-           		return this.hitTest(point);
+            that.collisionTest = function(point) {
+                // Return result of subclass's test.
+                return that.hitTest(point);
             };
         }
     };
@@ -236,13 +243,13 @@
 </div>
 
 <nav>
-    <h2><a href="index.html">Index</a></h2><h3>Modules</h3><ul><li><a href="animation.html">foundation/animation</a></li><li><a href="canvasDrawer.html">foundation/canvasDrawer</a></li><li><a href="circle.html">foundation/circle</a></li><li><a href="rectangle.html">foundation/rectangle</a></li><li><a href="shape.html">foundation/shape</a></li><li><a href="sprite.html">sprite/sprite</a></li><li><a href="tileMap.html">sprite/tileMap</a></li><li><a href="boundingBox.html">util/boundingBox</a></li><li><a href="factory.html">util/factory</a></li><li><a href="mathExtensions.html">util/mathExtensions</a></li><li><a href="matrix.html">util/matrix</a></li><li><a href="objectUtility.html">util/objectUtility</a></li><li><a href="physics.html">util/physics</a></li><li><a href="polygon.html">util/polygon</a></li><li><a href="quadTree.html">util/quadTree</a></li></ul><h3>Classes</h3><ul><li><a href="animation.Animation.html">Animation</a></li><li><a href="canvasDrawer.CanvasDrawer.html">CanvasDrawer</a></li><li><a href="circle.Circle.html">Circle</a></li><li><a href="rectangle.Rectangle.html">Rectangle</a></li><li><a href="shape.Shape.html">Shape</a></li><li><a href="sprite.Sprite.html">Sprite</a></li><li><a href="tileMap.TileMap.html">TileMap</a></li><li><a href="boundingBox.BoundingBox.html">BoundingBox</a></li><li><a href="matrix.Matrix.html">Matrix</a></li><li><a href="polygon.Polygon_.html">Polygon</a></li><li><a href="quadTree.QuadTree.html">QuadTree</a></li></ul>
+    <h2><a href="index.html">Index</a></h2><h3>Modules</h3><ul><li><a href="animation.html">foundation/animation</a></li><li><a href="canvasDrawer.html">foundation/canvasDrawer</a></li><li><a href="circle.html">foundation/circle</a></li><li><a href="rectangle.html">foundation/rectangle</a></li><li><a href="shape.html">foundation/shape</a></li><li><a href="levelBase.html">level/levelBase</a></li><li><a href="mainLevel.html">level/mainLevel</a></li><li><a href="sprite.html">sprite/sprite</a></li><li><a href="tileMap.html">sprite/tileMap</a></li><li><a href="boundingBox.html">util/boundingBox</a></li><li><a href="factory.html">util/factory</a></li><li><a href="mathExtensions.html">util/mathExtensions</a></li><li><a href="matrix.html">util/matrix</a></li><li><a href="physics.html">util/physics</a></li><li><a href="polygon.html">util/polygon</a></li><li><a href="quadTree.html">util/quadTree</a></li></ul><h3>Classes</h3><ul><li><a href="animation.Animation.html">Animation</a></li><li><a href="canvasDrawer.CanvasDrawer.html">CanvasDrawer</a></li><li><a href="circle.Circle.html">Circle</a></li><li><a href="rectangle.Rectangle.html">Rectangle</a></li><li><a href="shape.Shape.html">Shape</a></li><li><a href="levelBase.LevelBase.html">LevelBase</a></li><li><a href="mainLevel.MainLevel.html">MainLevel</a></li><li><a href="sprite.Sprite.html">Sprite</a></li><li><a href="tileMap.TileMap.html">TileMap</a></li><li><a href="boundingBox.BoundingBox.html">BoundingBox</a></li><li><a href="matrix.Matrix.html">Matrix</a></li><li><a href="polygon.Polygon_.html">Polygon</a></li><li><a href="quadTree.QuadTree.html">QuadTree</a></li></ul>
 </nav>
 
 <br clear="both">
 
 <footer>
-    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.3.0-dev</a> on Sat Nov 09 2013 20:27:14 GMT-0500 (EST)
+    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.3.0-dev</a> on Wed Nov 13 2013 18:37:40 GMT-0500 (EST)
 </footer>
 
 <script> prettyPrint(); </script>

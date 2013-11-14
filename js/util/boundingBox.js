@@ -41,7 +41,7 @@ define([], function() {
             }
 
             if (w < 0 || h < 0) {
-            	throw new Error('Invalid dimensions for BoundingBox.');
+                throw new Error('Invalid dimensions for BoundingBox.');
             }
 
 
@@ -62,8 +62,7 @@ define([], function() {
                     set: function(newX) {
                         x = newX;
                     }
-                }
-                ,
+                },
                 
                 /**
                  * y coordinate of top-left of BoundingBox instance
@@ -78,8 +77,8 @@ define([], function() {
                         y = newY;
                     }
                 },
-	
-				/**
+    
+                /**
                  * Width of BoundingBox instance
                  * @type {float}
                  * @memberof module:util/boundingBox.BoundingBox
@@ -90,7 +89,7 @@ define([], function() {
                     }
                 },
 
-				/**
+                /**
                  * Height of BoundingBox instance
                  * @type {float}
                  * @memberof module:util/boundingBox.BoundingBox
@@ -138,7 +137,7 @@ define([], function() {
                     intHeight = y2 - y1;
                     
                 if (intWidth < 0 || intHeight < 0) {
-                	return null;	
+                    return null;    
                 }
                 
                 return new module.BoundingBox(x1, y1, intWidth, intWidth);
@@ -148,4 +147,3 @@ define([], function() {
 
     return module; 
 });
-

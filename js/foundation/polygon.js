@@ -49,7 +49,6 @@ define([
 
         /**
          * Polygon
-         *
          * @constructor
          * @extends {Shape}
          * @param {Array.<Point>} points    -   An array of points that describe the polygon.
@@ -60,12 +59,10 @@ define([
             /////////////////////////////////////
             // Private instance methods/fields //
             /////////////////////////////////////
-            
-            var _this = this;
 
             var bbox = module.generateBbox(points),
                 x = bbox.x,
-               	y = bbox.y,
+                y = bbox.y,
                 w = bbox.width,
                 h = bbox.height;
 
@@ -112,27 +109,29 @@ define([
                     canvasDrawer.drawLine(pts[i], pts[(i + 1) % numPoints]);
                 }
 
-				canvasDrawer.closePath();
+                canvasDrawer.closePath();
                 canvasDrawer.fill();
                 canvasDrawer.stroke();
             };
             
             /**
-             * Hit testing based on <a href="http://stackoverflow.com/a/2922778/1930331">this answer</a>.
-             * @param {Point}		- A point
-             * @return {boolean}	If the point is in the polygon
+             * Hit testing based on [this answer]{@links http://stackoverflow.com/a/2922778/1930331}.
+             * @param {Point}       - A point
+             * @return {boolean}    If the point is in the polygon
              */
             this.hitTest = function(point) {
-				var nvert = this.points.length;
-				var i, j, c = false;
-  				for (i = 0, j = nvert-1; i < nvert; j = i++) {
-    				if ( ((this.points[i].y > point.y) != (this.points[j].y > point.y)) &&
-     					(point.x < (this.points[j].x - this.points[i].x) * (point.y-this.points[i].y) / (this.points[j].y - this.points[i].y) + this.points[i].x) ) {
-       					c = !c;
-       				}
-  				}
-  				return c;
-			};
+                var nvert = this.points.length;
+                var i, j, c = false;
+                for (i = 0, j = nvert-1; i < nvert; j = i++) {
+                    if ( ((this.points[i].y > point.y) != (this.points[j].y > point.y)) &&
+                        (point.x < (this.points[j].x - this.points[i].x) * 
+                            (point.y-this.points[i].y) / (this.points[j].y -
+                                this.points[i].y) + this.points[i].x) ) {
+                        c = !c;
+                    }
+                }
+                return c;
+            };
         }
     };
 

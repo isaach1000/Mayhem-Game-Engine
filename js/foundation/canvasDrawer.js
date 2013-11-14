@@ -1,4 +1,5 @@
-define(['util/objectUtility'], function(ObjUtil) {
+
+define(['underscore'], function(_) {
     "use strict";
 
     //////////////////////////////////
@@ -26,8 +27,8 @@ define(['util/objectUtility'], function(ObjUtil) {
             // Private instance methods/fields //
             /////////////////////////////////////
             
-            var _this = this;
-            var ctxSettings;
+            var that = this,
+                ctxSettings;
             
             
             ////////////////////////////////////
@@ -68,29 +69,30 @@ define(['util/objectUtility'], function(ObjUtil) {
                  */
                 contextSettings: {
                     get: function() {
-                        return ObjUtil.deepClone(ctxSettings);
+                        return ctxSettings;
                     },
                     set: function(settings) {
-                        var VALID_SETTINGS = ['lineWidth', 'fillStyle', 'strokeStyle'];
-                        var success = true;
-                        for (var property in settings) {
-                            success = (success && VALID_SETTINGS.indexOf(property) !== -1);
-                            if (success) {
-                                ctx[property] = settings[property];
+                        var VALID_SETTINGS = ['lineWidth', 'fillStyle', 'strokeStyle'], success = true, property;
+                        for (property in settings) {
+                            if (settings.hasOwnProperty(property)) {
+                                success = (success && _.contains(VALID_SETTINGS, property));
+                                if (success) {
+                                    ctx[property] = settings[property];
+                                }
                             }
                         }
                         if (success) {
-                            ctxSettings = ObjUtil.deepClone(settings);
+                            ctxSettings = settings;
                         }
                     }
                 }
             });
 
             /**
-             * Draw a line between two points.
-             * @param {Point} point1        -   The x coordinate of the first point, or the first point.
-             * @param {Point} point2        -   The y coordinate of the first point, or the second point.
-             * @param {boolean} (moveFirst) -   Whether or not the context perform the moveTo method.
+             * Draw a line between two points
+             * @param {(float|Point)} point1        -   x coordinate of the first point, or the first point
+             * @param {(float|Point)} point2        -   y coordinate of the first point, or the second point
+             * @param {boolean} [moveFirst=false]   -   If true, uses moveTo metho.
              * @return {void}
              */
             this.drawLine = function(point1, point2, moveFirst) {
@@ -101,7 +103,7 @@ define(['util/objectUtility'], function(ObjUtil) {
             };
 
             /**
-             * Wrapper for <code>context.stroke</code>.
+             * Wrapper for <code>context.stroke</code>
              * @return {void}
              */
             this.stroke = function() {
@@ -109,7 +111,7 @@ define(['util/objectUtility'], function(ObjUtil) {
             };
 
             /**
-             * Wrapper for <code>context.fill</code>.
+             * Wrapper for <code>context.fill</code>
              * @return {void}
              */
             this.fill = function() {
@@ -117,7 +119,7 @@ define(['util/objectUtility'], function(ObjUtil) {
             };
 
             /**
-             * Wrapper for <code>context.beginPath</code>.
+             * Wrapper for <code>context.beginPath</code>
              * @return {void}
              */
             this.beginPath = function() {
@@ -125,7 +127,7 @@ define(['util/objectUtility'], function(ObjUtil) {
             };
 
             /**
-             * Wrapper for <code>context.closePath</code>.
+             * Wrapper for <code>context.closePath</code>
              * @return {void}
              */
             this.closePath = function() {
@@ -133,7 +135,7 @@ define(['util/objectUtility'], function(ObjUtil) {
             };
           
             /**
-             * Wrapper for <code>context.rect</code>.
+             * Wrapper for <code>context.rect</code>
              * @param  {float}  x   x coordinate
              * @param  {float}  y   y coordinate
              * @param  {float}  w   Width of rectangle
@@ -171,7 +173,7 @@ define(['util/objectUtility'], function(ObjUtil) {
             };
 
             this.clearCanvas = function() {
-                _this.clearRect(0, 0, _this.width, _this.height);
+                that.clearRect(0, 0, that.width, that.height);
             };
 
             /**
@@ -202,10 +204,10 @@ define(['util/objectUtility'], function(ObjUtil) {
 
             /**
              * Wrapper for <code>context.fillRect</code>
-             * @param  {float} x    - x coordinate of top-left of rectangle
-             * @param  {float} y    - y coordinate of top-left of rectangle
-             * @param  {float} w    - Width of rectangle
-             * @param  {float} h    - Height of rectangle
+             * @param  {float} x    -   x coordinate of top-left of rectangle
+             * @param  {float} y    -   y coordinate of top-left of rectangle
+             * @param  {float} w    -   Width of rectangle
+             * @param  {float} h    -   Height of rectangle
              * @return {void}
              */
             this.fillRect = function(x, y, w, h) {
