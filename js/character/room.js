@@ -22,6 +22,7 @@ define([], function() {
             /////////////////////////////////////
             // Private instance methods/fields //
             /////////////////////////////////////
+      
             var that = this,
                 exits = [],
                 items = [],
@@ -33,16 +34,15 @@ define([], function() {
                 },
             
                 getExitString = function() {
-                    var returnString = "Exits:",
+                    var returnString = "Exits:";
                     for (var i = 0; i < exits.length; i++) {
                         returnString += " " + exits[i];
-                    }   
+                    }
                 },
                 
                 getExit = function(direction) {
                     return exits[direction];
                 },
-                
                 
                 addItem = function(item) {
                     items.push(item);
@@ -71,7 +71,7 @@ define([], function() {
                 searchItems = function(item) {
                     var result = null;
                     for (var i = 0; i < items.size; i++) {
-                        if (items[i].getName() === item.getNmae()) {
+                        if (items[i].getName() === item.getName()) {
                             result = items[i].getName();
                             break;
                         }
@@ -86,10 +86,12 @@ define([], function() {
                     }
                     return exitList;
                 };
+            
                 
             ////////////////////////////////////
             // Public instance methods/fields //
             ////////////////////////////////////
+            
             that.setExit = function(direction, neighbor) {
                 exits[direction] = neightbor;
             };

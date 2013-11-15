@@ -39,7 +39,7 @@ define([
             Object.defineProperties(that, {
                 /**
                  * Shapes of Sprite instance
-                 * @memberof module:sprite/sprite.Sprite
+                 * @memberOf module:sprite/sprite.Sprite
                  * @instance
                  */
                 shapes: {
@@ -53,7 +53,7 @@ define([
                 
                 /**
                  * BoundingBox of Sprite instance
-                 * @memberof module:sprite/sprite.Sprite
+                 * @memberOf module:sprite/sprite.Sprite
                  * @instance
                  */
                 boundingBox: {
@@ -70,7 +70,7 @@ define([
                 
                 /**
                  * Drawing settings of Sprite instance
-                 * @memberof module:sprite/sprite.Sprite
+                 * @memberOf module:sprite/sprite.Sprite
                  * @instance
                  */
                 drawingSettings: {

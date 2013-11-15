@@ -53,7 +53,7 @@ define([], function() {
                 /**
                  * x coordinate of top-left of BoundingBox instance
                  * @type {float}
-                 * @memberof module:util/boundingBox.BoundingBox
+                 * @memberOf module:util/boundingBox.BoundingBox
                  */
                 x: {
                     get: function() {
@@ -67,7 +67,7 @@ define([], function() {
                 /**
                  * y coordinate of top-left of BoundingBox instance
                  * @type {float}
-                 * @memberof module:util/boundingBox.BoundingBox
+                 * @memberOf module:util/boundingBox.BoundingBox
                  */
                 y: {
                     get: function() {
@@ -81,7 +81,7 @@ define([], function() {
                 /**
                  * Width of BoundingBox instance
                  * @type {float}
-                 * @memberof module:util/boundingBox.BoundingBox
+                 * @memberOf module:util/boundingBox.BoundingBox
                  */
                 width: {
                     get: function() {
@@ -92,7 +92,7 @@ define([], function() {
                 /**
                  * Height of BoundingBox instance
                  * @type {float}
-                 * @memberof module:util/boundingBox.BoundingBox
+                 * @memberOf module:util/boundingBox.BoundingBox
                  */
                 height: {
                     get: function() {

@@ -53,7 +53,7 @@ define([
                 /**
                  * Radius of circle
                  * @type {float)
-                 * @memberof module:foundation/circle.Circle
+                 * @memberOf module:foundation/circle.Circle
                  * @instance
                  */
                 radius: {

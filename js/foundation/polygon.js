@@ -78,7 +78,7 @@ define([
                 /**
                  * Points of Polygon instance
                  * @type {Array.<Point>}
-                 * @memberof module:foundation/polygon.Polygon
+                 * @memberOf module:foundation/polygon.Polygon
                  * @instance
                  */
                 points: {

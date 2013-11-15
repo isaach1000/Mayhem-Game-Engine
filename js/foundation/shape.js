@@ -56,7 +56,7 @@ define([
                 /**
                  * x coordinate of top-left of Shape instance
                  * @type {integer}
-                 * @memberof module:foundation/shape.Shape
+                 * @memberOf module:foundation/shape.Shape
                  * @instance
                  */
                 x: {
@@ -72,7 +72,7 @@ define([
                 /**
                  * y coordinate of top-left of Shape instance
                  * @type {integer}
-                 * @memberof module:foundation/shape.Shape
+                 * @memberOf module:foundation/shape.Shape
                  * @instance
                  */
                 y: {
@@ -88,7 +88,7 @@ define([
                 /**
                  * Width of Shape instance
                  * @type {integer}
-                 * @memberof module:foundation/shape.Shape
+                 * @memberOf module:foundation/shape.Shape
                  * @instance
                  */
                 width: {
@@ -107,7 +107,7 @@ define([
                 /**
                  * Height of Shape instance
                  * @type {integer}
-                 * @memberof module:foundation/shape.Shape
+                 * @memberOf module:foundation/shape.Shape
                  * @instance
                  */
                 height: {
@@ -126,7 +126,7 @@ define([
                 /**
                  * BoundingBox of Shape instance
                  * @type {BoundingBox}
-                 * @memberof module:foundation/shape.Shape
+                 * @memberOf module:foundation/shape.Shape
                  * @instance
                  */
                 boundingBox: {
@@ -138,7 +138,7 @@ define([
                 /** 
                  * Drawing settings of Shape instance
                  * @type {Object}
-                 * @memberof module:foundation/shape.Shape
+                 * @memberOf module:foundation/shape.Shape
                  * @instance
                  * @return {void}
                  */
