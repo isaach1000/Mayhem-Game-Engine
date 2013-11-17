@@ -17,24 +17,24 @@ define(['underscore'], function(_) {
          * CanvasDrawer for drawing to a canvas.
          *
          * @constructor
-         * @param {Context} ctxWorker         - Context of the canvas
+         * @param {Context} workerMessenger         - Context of the canvas
          * @param {float} width         - Width of the canvas
          * @param {float} height         - Height of the canvas
          */
-        CanvasDrawer: function(ctxWorker, width, height) {
+        CanvasDrawer: function(workerMessenger, width, height) {
             /////////////////////////////////////
             // Private instance methods/fields //
             /////////////////////////////////////
             
             var that = this,
-                ctxWorkerSettings;
+                ctxSettings;
             
             
             ////////////////////////////////////
             // Public instance methods/fields //
             ////////////////////////////////////
             
-            Object.defineProperties(this, {
+            Object.defineProperties(that, {
                 /**
                  * Width of the canvas
                  * @type {float}
@@ -68,7 +68,7 @@ define(['underscore'], function(_) {
                  */
                 contextSettings: {
                     get: function() {
-                        return ctxWorkerSettings;
+                        return ctxSettings;
                     },
                     set: function(settings) {
                         var VALID_SETTINGS = ['lineWidth', 'fillStyle', 'strokeStyle'], success = true, property;
@@ -76,12 +76,12 @@ define(['underscore'], function(_) {
                             if (settings.hasOwnProperty(property)) {
                                 success = (success && _.contains(VALID_SETTINGS, property));
                                 if (success) {
-                                    ctxWorker[property] = settings[property];
+                                    workerMessenger[property] = settings[property];
                                 }
                             }
                         }
                         if (success) {
-                            ctxWorkerSettings = settings;
+                            ctxSettings = settings;
                         }
                     }
                 }
@@ -94,43 +94,43 @@ define(['underscore'], function(_) {
              * @param {boolean} [moveFirst=false]   -   If true, uses moveTo metho.
              * @return {void}
              */
-            this.drawLine = function(point1, point2, moveFirst) {
+            that.drawLine = function(point1, point2, moveFirst) {
                 if (moveFirst) {
-                    WorkerMessanger.postMessage(new WorkerMessage("moveTo", [point1.x, point1.y]));
+                    workerMessenger.sendMessage("moveTo", [point1.x, point1.y]);
                 }
-                WorkerMessanger.postMessage(new WorkerMessage("lineTo", [point2.x, point2.y]));
+                workerMessenger.sendMessage("lineTo", [point2.x, point2.y]);
             };
 
             /**
              * Wrapper for <code>context.stroke</code>
              * @return {void}
              */
-            this.stroke = function() {
-                WorkerMessanger.stroke();
+            that.stroke = function() {
+                workerMessenger.sendMessage("stroke");
             };
 
             /**
              * Wrapper for <code>context.fill</code>
              * @return {void}
              */
-            this.fill = function() {
-                WorkerMessanger.fill();  
+            that.fill = function() {
+                workerMessenger.sendMessage("fill");  
             };
 
             /**
              * Wrapper for <code>context.beginPath</code>
              * @return {void}
              */
-            this.beginPath = function() {
-                WorkerMessanger.beginPath();
+            that.beginPath = function() {
+                workerMessenger.sendMessage("beginPath");
             };
 
             /**
              * Wrapper for <code>context.closePath</code>
              * @return {void}
              */
-            this.closePath = function() {
-                WorkerMessanger.closePath();
+            that.closePath = function() {
+                workerMessenger.sendMessage("closePath");
             };
           
             /**
@@ -141,8 +141,8 @@ define(['underscore'], function(_) {
              * @param  {float}  h   Height of rectangle
              * @return {void}
              */
-            this.rect = function(x, y, w, h) {
-                WorkerMessanger.postMessage(new WorkerMessage("rect", [x, y, w, h]));
+            that.rect = function(x, y, w, h) {
+                workerMessenger.sendMessage("rect", [x, y, w, h]);
             };
 
             /**
@@ -155,8 +155,8 @@ define(['underscore'], function(_) {
              * @param  {boolean}    ccw        Move counterclockwise
              * @return {void}
              */
-            this.arc = function(x, y, radius, startAngle, endAngle, ccw) {
-                WorkerMessanger.postMessage(new WorkerMessage("arc", [x, y, radius, startAngle, endAngle, ccw]));
+            that.arc = function(x, y, radius, startAngle, endAngle, ccw) {
+                workerMessenger.sendMessage("arc", [x, y, radius, startAngle, endAngle, ccw]);
             };
 
             /**
@@ -167,11 +167,11 @@ define(['underscore'], function(_) {
              * @param  {float} height - Height of area.
              * @return {void}
              */
-            this.clearRect = function(x, y, width, height) {
-                WorkerMessanger.postMessage(new WorkerMessage("clearRect", [x, y, width, height]));
+            that.clearRect = function(x, y, width, height) {
+                workerMessenger.sendMessage("clearRect", [x, y, width, height]);
             };
 
-            this.clearCanvas = function() {
+            that.clearCanvas = function() {
                 that.clearRect(0, 0, that.width, that.height);
             };
 
@@ -179,16 +179,16 @@ define(['underscore'], function(_) {
              * Wrapper for <code>context.save</code>
              * @return {void}
              */
-            this.save = function() {
-                WorkerMessanger.save();
+            that.save = function() {
+                workerMessenger.sendMessage("save");
             };
 
             /**
              * Wrapper for <code>context.restore</code>
              * @return {void}
              */
-            this.restore = function() {
-                WorkerMessanger.restore();
+            that.restore = function() {
+                workerMessenger.sendMessage("restore");
             };
 
             /**
@@ -197,8 +197,8 @@ define(['underscore'], function(_) {
              * @param  {float} y    - y coordinate of destination
              * @return {void}
              */
-            this.translate = function(x, y) {
-                WorkerMessanger.postMessage(new WorkerMessage("translate", [x, y]));
+            that.translate = function(x, y) {
+                workerMessenger.sendMessage("translate", [x, y]);
             };
 
             /**
@@ -209,8 +209,8 @@ define(['underscore'], function(_) {
              * @param  {float} h    -   Height of rectangle
              * @return {void}
              */
-            this.fillRect = function(x, y, w, h) {
-                WorkerMessanger.postMessage(new WorkerMessage("fillRect", [x, y, w, h]));
+            that.fillRect = function(x, y, w, h) {
+                workerMessenger.sendMessage("fillRect", [x, y, w, h]);
             };
             
             /**
@@ -221,8 +221,8 @@ define(['underscore'], function(_) {
              * @param  {float} h    - Height of rectangle
              * @return {void}
              */
-            this.strokeRect = function(x, y, w, h) {
-                WorkerMessanger.postMessage(new WorkerMessage("strokeRect", [x, y, w, h]));
+            that.strokeRect = function(x, y, w, h) {
+                workerMessenger.sendMessage("strokeRect", [x, y, w, h]);
             };
 
             /**
@@ -233,8 +233,8 @@ define(['underscore'], function(_) {
              * @param  {float} height   - Height of image
              * @return {Array}          Image data
              */
-            this.getImageData = function(x, y, w, h) {
-                return WorkerMessanger.postMessage(new WorkerMessage("getImageData", [x, y, w, h]));
+            that.getImageData = function(x, y, w, h) {
+                return workerMessenger.sendMessage("getImageData", [x, y, w, h]);
             };
 
             /**
@@ -244,8 +244,8 @@ define(['underscore'], function(_) {
              * @param  {float} y            - y coordinate of top-left of image
              * @return {void}
              */
-            this.putImageData = function(imageData, x, y) {
-                WorkerMessanger.postMessage(new WorkerMessage("putImageData", [imageData, x, y]));
+            that.putImageData = function(imageData, x, y) {
+                workerMessenger.sendMessage("putImageData", [imageData, x, y]);
             };
         }
     };

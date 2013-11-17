@@ -11,10 +11,26 @@ require.config({
     }
 });
 
-require(['level/mainLevel'], function(MainLevel) {
-        "use strict";
+require([
+    'jquery',
+    'worker/workerMessenger',
+    'worker/workerReceiver'
+], function($,
+    WorkerMessenger,
+    WorkerReceiver) {
+    "use strict";
+    
+    var workerError = function(e) {
+        console.log(e);
+    };
+    
+    $(document).ready(function() {
+        var mainWorker = new Worker('js/workerStartup.js'),
+            messenger = new WorkerMessenger.WorkerMessenger(mainWorker),
+            receiver = new WorkerReceiver.WorkerReceiver(myArray);
         
-        $(document).ready(function() {
-            new MainLevel.MainLevel();         
-        });
+        mainWorker.addEventListener('message', receiver.handleMessage);
+        mainWorker.addEventListener('error', workerError);
+        mainWorker.postMessage();
+    });
 });

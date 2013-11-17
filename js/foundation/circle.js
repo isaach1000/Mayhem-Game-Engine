@@ -22,7 +22,6 @@ define([
         
         /**
          * Circle
-         *
          * @constructor
          * @extends {Shape}
          * @param {float} x                 -   x coordinate of circle
