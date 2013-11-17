@@ -18,17 +18,7 @@ require([
     MainLevel) {
     "use strict";
     
-    var workerError = function(e) {
-        console.log(e);
-    };
-    
-    $(document).ready(function() {   
-        /*var mainWorker = new Worker('js/workerStartup.js'),
-            ctxReceiver = new WorkerReceiver.WorkerReceiver(console);        
-        mainWorker.addEventListener('message', receiver.handleMessage);
-        mainWorker.addEventListener('error', workerError);
-        mainWorker.postMessage();*/
-       
+    $(document).ready(function() {
        new MainLevel.MainLevel();
     });
 });

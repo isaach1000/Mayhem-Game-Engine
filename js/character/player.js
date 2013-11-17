@@ -22,32 +22,27 @@ define([], function() {
             /////////////////////////////////////
             // Private instance methods/fields //
             /////////////////////////////////////
+
             var that = this, 
                 currentRoom = initialRoom, 
                 bag = [],
                 maxWeight = 100;
+
             
             ////////////////////////////////////
             // Public instance methods/fields //
             ////////////////////////////////////                
+
             that.getRoom = function() {
                 return currentRoom;
             };
             
-            that.getBag = function() {
-                return bag;
-            };
-            
-            that.getMaxWeight = function() {
-                return maxWeight;
-            };
-            
-            that.increaseMaxWeight = function() {
-                maxWeight  += 50;
-            };
-            
             that.setRoom = function(newRoom) {
                 currentRoom = newRoom;
+            };
+            
+            that.getBag = function() {
+                return bag;
             };
             
             that.addToBag = function(newItem) {
@@ -57,11 +52,21 @@ define([], function() {
             that.removeFromBag = function(item) {
                 var index = bag.indexOf(item);
                 if (index !== -1) {
-                    bag.splice(index, 1);
+                    // TODO: use UnderscoreJS for this
+                    var itemArr = bag.splice(index, 1);
+                    return itemArr[0];
                 }
                 else {
                     return null;
                 }
+            };
+            
+            that.getMaxWeight = function() {
+                return maxWeight;
+            };
+            
+            that.increaseMaxWeight = function() {
+                maxWeight  += 50;
             };
             
             that.getInventory = function() {
