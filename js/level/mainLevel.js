@@ -32,7 +32,7 @@ define([
         /**
          * MainLevel, extends [LevelBase]{@link module:level/levelBase.LevelBase}
          * @constructor
-         * @extends LevelBase
+         * @extends {LevelBase}
          */
         MainLevel: function() {
             // Extend LevelBase constructor
@@ -148,11 +148,11 @@ define([
             // Public instance methods/fields //
             ////////////////////////////////////
             
-            polyTest(that.bgDrawer, that.qTree);
-            rectTest(that.bgDrawer, that.qTree);
-            circleTest(that.mainDrawer, that.qTree);
-            tileTest(that.bgDrawer, that.qTree);
-            mouseTest(that.qTree);
+            polyTest(that.bgDrawer, that.quadTree);
+            rectTest(that.bgDrawer, that.quadTree);
+            circleTest(that.mainDrawer, that.quadTree);
+            tileTest(that.bgDrawer, that.quadTree);
+            mouseTest(that.quadTree);
         }
     };
 

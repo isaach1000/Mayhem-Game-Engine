@@ -7,7 +7,7 @@ define([], function() {
     
     
     /**
-     * @exportscharacter/item
+     * @exports character/item
      */
     var module = {
         /////////////////////////////////
@@ -18,11 +18,11 @@ define([], function() {
          * Item
          * @constructor
          */
-        ClassName: function(name, description, weight, isCookie) {
+        Item: function(name, description, weight, isCookie) {
             /////////////////////////////////////
             // Private instance methods/fields //
             /////////////////////////////////////
-            var _this = this;
+            var that = this;
             
             ////////////////////////////////////
             // Public instance methods/fields //

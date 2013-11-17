@@ -18,8 +18,7 @@ define([
         /////////////////////////////////
 
         /**
-         * Generate a BoundingBox for a polygon.
-         *
+         * Generate a BoundingBox for a polygon
          * @param {Array.<Point>} points - An array of points describing the polygon.
          * @return {BoundingBox} - A BoundingBox that contains all of the points.
          */
@@ -48,12 +47,12 @@ define([
         },
 
         /**
-         * Polygon
+         * Polygon, extends [Shape]{@link module:foundation/shape.Shape}
          * @constructor
          * @extends {Shape}
-         * @param {Array.<Point>} points    -   An array of points that describe the polygon.
-         * @param {CanvascanvasDrawer} drawer   -   A CanvasDrawer to draw the polygon onto the canvas.
-         * @param {Object} drawingSettings  -   A dictionary of drawing options.
+         * @param   {Array.<Point>} points      -   An array of points that describe the polygon.
+         * @param   {CanvasDrawer} drawer       -   A CanvasDrawer to draw the polygon onto the canvas.
+         * @param   {Object} drawingSettings    -   A dictionary of drawing options.
          */
         Polygon: function(points, drawer, drawingSettings) {
             /////////////////////////////////////

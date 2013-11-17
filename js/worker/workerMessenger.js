@@ -5,7 +5,7 @@ define([], function() {
     // Private class methods/fields //
     //////////////////////////////////
     
-    var globalId = 0;
+    var messengerId = 0;
     
     
     /**
@@ -29,7 +29,7 @@ define([], function() {
             
             target = target || self;
             if (id === undefined) {
-                id = globalId++;
+                id = messengerId++;
             } 
             
             

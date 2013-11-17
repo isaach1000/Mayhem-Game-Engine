@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>JSDoc: Source: foundation/rectangle.js</title>
+    <title>JSDoc: Source: character/player.js</title>
     
     <script src="scripts/prettify/prettify.js"> </script>
     <script src="scripts/prettify/lang-css.js"> </script>
@@ -17,7 +17,7 @@
 
 <div id="main">
     
-    <h1 class="page-title">Source: foundation/rectangle.js</h1>
+    <h1 class="page-title">Source: character/player.js</h1>
     
     
 
@@ -25,19 +25,16 @@
     
     <section>
         <article>
-            <pre class="prettyprint source"><code>define([
-    'foundation/polygon',
-    'util/boundingBox'
-    ], function(Polygon,
-        BoundingBox) {
+            <pre class="prettyprint source"><code>define([], function() {
     "use strict";
 
     //////////////////////////////////
     // Private class methods/fields //
     //////////////////////////////////
     
+    
     /**
-     * @exports foundation/rectangle 
+     * @exports character/player
      */
     var module = {
         /////////////////////////////////
@@ -45,32 +42,93 @@
         /////////////////////////////////
         
         /**
-         * Rectangle, extends [Polygon]{@link module:foundation/polygon.Polygon}
+         * Player
          * @constructor
-         * @extends {Polygon}
-         * @param   {float} x                   -   The x coordinate of the rectangle on the canvas.
-         * @param   {float} y                   -   The y coordinate of the rectangle on the canvas.
-         * @param   {float} width               -   The width of the rectangle.
-         * @param   {float} height              -   The height of the rectangle.
-         * @param   {CanvasDrawer} drawer       -   A CanvasDrawer to draw the rectangle onto the canvas.
-         * @param   {Object} drawingSettings    -   A dictionary of drawing options.
          */
-        Rectangle: function(x, y, width, height, drawer, drawingSettings) {
+        Player: function(initialRoom) {
+            /////////////////////////////////////
+            // Private instance methods/fields //
+            /////////////////////////////////////
+            var that = this, 
+                currentRoom = initialRoom, 
+                bag = [],
+                maxWeight = 100;
+            
             ////////////////////////////////////
             // Public instance methods/fields //
-            ////////////////////////////////////
+            ////////////////////////////////////                
+            that.getRoom = function() {
+                return currentRoom;
+            };
             
-            // Extend Polygon constructor
-            Polygon.Polygon.call(this, [
-                    {x: x, y: y},
-                    {x: x + width, y: y},
-                    {x: x + width, y: y + height},
-                    {x: x, y: y + height}
-                ], drawer, drawingSettings);
+            that.getBag = function() {
+                return bag;
+            };
+            
+            that.getMaxWeight = function() {
+                return maxWeight;
+            };
+            
+            that.increaseMaxWeight = function() {
+                maxWeight  += 50;
+            };
+            
+            that.setRoom = function(newRoom) {
+                currentRoom = newRoom;
+            };
+            
+            that.addToBag = function(newItem) {
+                bag.push(newItem);
+            };
+            
+            that.removeFromBag = function(item) {
+                var index = bag.indexOf(item);
+                if (index !== -1) {
+                    bag.splice(index, 1);
+                }
+                else {
+                    return null;
+                }
+            };
+            
+            that.getInventory = function() {
+                var ret,
+                    i;
+                if (bag.length === 0) {
+                    ret = "You are not carrying anything";
+                }
+                else {
+                    for (i = 0; i &lt; bag.length; i += 1) {
+                        ret += bag[i].getName() + ": " + bag[i].getDescription() + "\n";
+                    }
+                }
+                return ret;
+            };
+            
+            that.searchBag = function(item) {
+                var result = null,
+                    i;
+                for (i = 0; i &lt; bag.length; i += 1) {
+                    if (bag[i].getName() === item) {
+                        result = bag[i];
+                        break;
+                    }
+                }
+                return result;    
+            };
+            
+            that.currentBagWeight = function() {
+                var weight = 0,
+                i;
+                for (i = 0; i &lt; bag.length; i += 1) {
+                    weight += bag[i].getWeight();
+                }
+                return weight;
+            };
         }
     };
 
-    return module;
+    return module; 
 });
 </code></pre>
         </article>

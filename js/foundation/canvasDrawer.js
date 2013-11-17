@@ -1,3 +1,4 @@
+
 define(['underscore'], function(_) {
     "use strict";
 
@@ -17,11 +18,11 @@ define(['underscore'], function(_) {
          * CanvasDrawer for drawing to a canvas.
          *
          * @constructor
-         * @param {Context} workerMessenger         - Context of the canvas
-         * @param {float} width         - Width of the canvas
-         * @param {float} height         - Height of the canvas
+         * @param {Context} ctx         - Context of canvas
+         * @param {float} width         - Width of canvas
+         * @param {float} height        - Height of canvas
          */
-        CanvasDrawer: function(workerMessenger, width, height) {
+        CanvasDrawer: function(ctx, width, height) {
             /////////////////////////////////////
             // Private instance methods/fields //
             /////////////////////////////////////
@@ -38,7 +39,7 @@ define(['underscore'], function(_) {
                 /**
                  * Width of the canvas
                  * @type {float}
-                 * @memberOf module:foundation/canvasDrawer.CanvasDrawer
+                 * @memberof module:foundation/canvasDrawer.CanvasDrawer
                  * @instance
                  */
                 width: {
@@ -50,7 +51,7 @@ define(['underscore'], function(_) {
                 /**
                  * Height of the canvas
                  * @type {float}
-                 * @memberOf module:foundation/canvasDrawer.CanvasDrawer
+                 * @memberof module:foundation/canvasDrawer.CanvasDrawer
                  * @instance
                  */
                 height: {
@@ -63,7 +64,7 @@ define(['underscore'], function(_) {
                  * Properties of the context. Valid settings include:
                  * lineWidth, fillStyle, and strokeStyle.
                  * @type {Object}
-                 * @memberOf module:foundation/canvasDrawer.CanvasDrawer
+                 * @memberof module:foundation/canvasDrawer.CanvasDrawer
                  * @instance
                  */
                 contextSettings: {
@@ -76,7 +77,7 @@ define(['underscore'], function(_) {
                             if (settings.hasOwnProperty(property)) {
                                 success = (success && _.contains(VALID_SETTINGS, property));
                                 if (success) {
-                                    workerMessenger[property] = settings[property];
+                                    ctx[property] = settings[property];
                                 }
                             }
                         }
@@ -96,9 +97,9 @@ define(['underscore'], function(_) {
              */
             that.drawLine = function(point1, point2, moveFirst) {
                 if (moveFirst) {
-                    workerMessenger.sendMessage("moveTo", [point1.x, point1.y]);
+                    ctx.moveTo(point1.x, point1.y);
                 }
-                workerMessenger.sendMessage("lineTo", [point2.x, point2.y]);
+                ctx.lineTo(point2.x, point2.y);
             };
 
             /**
@@ -106,7 +107,7 @@ define(['underscore'], function(_) {
              * @return {void}
              */
             that.stroke = function() {
-                workerMessenger.sendMessage("stroke");
+                ctx.stroke();
             };
 
             /**
@@ -114,7 +115,7 @@ define(['underscore'], function(_) {
              * @return {void}
              */
             that.fill = function() {
-                workerMessenger.sendMessage("fill");  
+                ctx.fill();  
             };
 
             /**
@@ -122,7 +123,7 @@ define(['underscore'], function(_) {
              * @return {void}
              */
             that.beginPath = function() {
-                workerMessenger.sendMessage("beginPath");
+                ctx.beginPath();
             };
 
             /**
@@ -130,7 +131,7 @@ define(['underscore'], function(_) {
              * @return {void}
              */
             that.closePath = function() {
-                workerMessenger.sendMessage("closePath");
+                ctx.closePath();
             };
           
             /**
@@ -142,7 +143,7 @@ define(['underscore'], function(_) {
              * @return {void}
              */
             that.rect = function(x, y, w, h) {
-                workerMessenger.sendMessage("rect", [x, y, w, h]);
+                ctx.rect(x, y, w, h);
             };
 
             /**
@@ -156,7 +157,7 @@ define(['underscore'], function(_) {
              * @return {void}
              */
             that.arc = function(x, y, radius, startAngle, endAngle, ccw) {
-                workerMessenger.sendMessage("arc", [x, y, radius, startAngle, endAngle, ccw]);
+                ctx.arc(x, y, radius, startAngle, endAngle, ccw);
             };
 
             /**
@@ -168,7 +169,7 @@ define(['underscore'], function(_) {
              * @return {void}
              */
             that.clearRect = function(x, y, width, height) {
-                workerMessenger.sendMessage("clearRect", [x, y, width, height]);
+                ctx.clearRect(x, y, width, height);
             };
 
             that.clearCanvas = function() {
@@ -180,7 +181,7 @@ define(['underscore'], function(_) {
              * @return {void}
              */
             that.save = function() {
-                workerMessenger.sendMessage("save");
+                ctx.save();
             };
 
             /**
@@ -188,7 +189,7 @@ define(['underscore'], function(_) {
              * @return {void}
              */
             that.restore = function() {
-                workerMessenger.sendMessage("restore");
+                ctx.restore();
             };
 
             /**
@@ -198,7 +199,7 @@ define(['underscore'], function(_) {
              * @return {void}
              */
             that.translate = function(x, y) {
-                workerMessenger.sendMessage("translate", [x, y]);
+                ctx.translate(x, y);
             };
 
             /**
@@ -210,7 +211,7 @@ define(['underscore'], function(_) {
              * @return {void}
              */
             that.fillRect = function(x, y, w, h) {
-                workerMessenger.sendMessage("fillRect", [x, y, w, h]);
+                ctx.fillRect(x, y, w, h);
             };
             
             /**
@@ -222,7 +223,7 @@ define(['underscore'], function(_) {
              * @return {void}
              */
             that.strokeRect = function(x, y, w, h) {
-                workerMessenger.sendMessage("strokeRect", [x, y, w, h]);
+                ctx.strokeRect(x, y, w, h);
             };
 
             /**
@@ -234,7 +235,7 @@ define(['underscore'], function(_) {
              * @return {Array}          Image data
              */
             that.getImageData = function(x, y, w, h) {
-                return workerMessenger.sendMessage("getImageData", [x, y, w, h]);
+                return ctx.getImageData(x, y, w, h);
             };
 
             /**
@@ -245,7 +246,7 @@ define(['underscore'], function(_) {
              * @return {void}
              */
             that.putImageData = function(imageData, x, y) {
-                workerMessenger.sendMessage("putImageData", [imageData, x, y]);
+                ctx.putImageData(imageData, x, y);
             };
         }
     };

@@ -13,24 +13,22 @@ require.config({
 
 require([
     'jquery',
-    'worker/workerMessenger',
-    'worker/workerReceiver'
+    'level/mainLevel'
 ], function($,
-    WorkerMessenger,
-    WorkerReceiver) {
+    MainLevel) {
     "use strict";
     
     var workerError = function(e) {
         console.log(e);
     };
     
-    $(document).ready(function() {
-        var mainWorker = new Worker('js/workerStartup.js'),
-            messenger = new WorkerMessenger.WorkerMessenger(mainWorker),
-            receiver = new WorkerReceiver.WorkerReceiver(myArray);
-        
+    $(document).ready(function() {   
+        /*var mainWorker = new Worker('js/workerStartup.js'),
+            ctxReceiver = new WorkerReceiver.WorkerReceiver(console);        
         mainWorker.addEventListener('message', receiver.handleMessage);
         mainWorker.addEventListener('error', workerError);
-        mainWorker.postMessage();
+        mainWorker.postMessage();*/
+       
+       new MainLevel.MainLevel();
     });
 });

@@ -5,7 +5,7 @@ define([], function() {
     // Private class methods/fields //
     //////////////////////////////////
     
-    var globalId = 0;
+    var receiverId = 0;
     
     
     /**
@@ -28,7 +28,7 @@ define([], function() {
             var that = this;
             
             if (id === undefined) {
-                id = globalId++;
+                id = receiverId++;
             }
 
             
@@ -38,7 +38,9 @@ define([], function() {
             
             that.handleMessage = function(event) {
                 var data = event.data;
-                console.debug('r%d receiving from m%d: %s, %o', id, data.id, data.functionName, data.params);
+                
+                // TODO
+                console.debug('r-%s receiving from m-%s: %s, %o', id, data.id, data.functionName, data.params);
                 
                 if (data.id !== id) {
                     return;

@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>JSDoc: Source: foundation/rectangle.js</title>
+    <title>JSDoc: Source: character/room.js</title>
     
     <script src="scripts/prettify/prettify.js"> </script>
     <script src="scripts/prettify/lang-css.js"> </script>
@@ -17,7 +17,7 @@
 
 <div id="main">
     
-    <h1 class="page-title">Source: foundation/rectangle.js</h1>
+    <h1 class="page-title">Source: character/room.js</h1>
     
     
 
@@ -25,19 +25,16 @@
     
     <section>
         <article>
-            <pre class="prettyprint source"><code>define([
-    'foundation/polygon',
-    'util/boundingBox'
-    ], function(Polygon,
-        BoundingBox) {
+            <pre class="prettyprint source"><code>define([], function() {
     "use strict";
 
     //////////////////////////////////
     // Private class methods/fields //
     //////////////////////////////////
     
+    
     /**
-     * @exports foundation/rectangle 
+     * @exports character/room
      */
     var module = {
         /////////////////////////////////
@@ -45,32 +42,103 @@
         /////////////////////////////////
         
         /**
-         * Rectangle, extends [Polygon]{@link module:foundation/polygon.Polygon}
+         * Room
          * @constructor
-         * @extends {Polygon}
-         * @param   {float} x                   -   The x coordinate of the rectangle on the canvas.
-         * @param   {float} y                   -   The y coordinate of the rectangle on the canvas.
-         * @param   {float} width               -   The width of the rectangle.
-         * @param   {float} height              -   The height of the rectangle.
-         * @param   {CanvasDrawer} drawer       -   A CanvasDrawer to draw the rectangle onto the canvas.
-         * @param   {Object} drawingSettings    -   A dictionary of drawing options.
          */
-        Rectangle: function(x, y, width, height, drawer, drawingSettings) {
+        Room: function(description) {
+            /////////////////////////////////////
+            // Private instance methods/fields //
+            /////////////////////////////////////
+      
+            var that = this,
+                exits = [],
+                items = [],
+                Directions = {
+                    NORTH: 0,
+                    EAST: 1,
+                    SOUTH: 2,
+                    WEST: 2
+                },
+            
+                getExitString = function() {
+                    var returnString = "Exits:";
+                    for (var i = 0; i &lt; exits.length; i++) {
+                        returnString += " " + exits[i];
+                    }
+                },
+                
+                getExit = function(direction) {
+                    return exits[direction];
+                },
+                
+                addItem = function(item) {
+                    items.push(item);
+                },
+                
+                getItemString = function() {
+                    var returnString = "Items: \n";
+                    for (var i = 0; i &lt; items.length; i++) {
+                        returnString += item.getName() + ": " + item.getDescription() + "\n";
+                    }
+                    return returnString;
+                },
+                
+                removeItem = function(item) {
+                    for (var i = 0; i &lt; items.length; i++) {
+                        if (items[i] === item) {
+                            items.splice(i, 1);
+                            return item;
+                        }
+                        else {
+                            return null;
+                        }
+                    }
+                },
+                
+                searchItems = function(item) {
+                    var result = null;
+                    for (var i = 0; i &lt; items.size; i++) {
+                        if (items[i].getName() === item.getName()) {
+                            result = items[i].getName();
+                            break;
+                        }
+                    }
+                    return result;
+                },                
+                
+                getExitList = function () {
+                    var exitList = [];
+                    for (var i = 0; i &lt; exits.length; i++) {
+                        exitList.push(exits[i]);
+                    }
+                    return exitList;
+                };
+            
+                
             ////////////////////////////////////
             // Public instance methods/fields //
             ////////////////////////////////////
             
-            // Extend Polygon constructor
-            Polygon.Polygon.call(this, [
-                    {x: x, y: y},
-                    {x: x + width, y: y},
-                    {x: x + width, y: y + height},
-                    {x: x, y: y + height}
-                ], drawer, drawingSettings);
+            that.setExit = function(direction, neighbor) {
+                exits[direction] = neightbor;
+            };
+            
+            that.getShortDescription = function() {
+                return description;
+            };
+            
+            that.getLongDescription = function() {
+                var profSentence;
+                /*if (professor.getRoom() === room) {
+                    profSentence += "\n" + professor.toString();
+                }*/
+                return "You are " + description + " .\n" + 
+                    getExitString() + "\n" + getItemString();
+            };
         }
     };
 
-    return module;
+    return module; 
 });
 </code></pre>
         </article>

@@ -53,7 +53,7 @@ define([
             });
             
             that.qBox = new BoundingBox.BoundingBox(0, 0, WIDTH, HEIGHT);
-            that.qTree = new QuadTree.QuadTree(that.qBox);
+            that.quadTree = new QuadTree.QuadTree(that.qBox);
             
             that.bgCtx = that.bgCanvas[0].getContext('2d');
             that.bgDrawer = new CanvasDrawer.CanvasDrawer(that.bgCtx, that.bgCanvas.width(), that.bgCanvas.height());
