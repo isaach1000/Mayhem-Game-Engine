@@ -386,11 +386,11 @@ jasmine.Spy.prototype.andCallFake = function(fakeFunc) {
  *
  * foo.bar();
  *
- * expect(foo.bar.callCount).toEqual(1);
+ * expect(foo.bar.callCount).toBe(1);
  *
  * foo.bar.reset();
  *
- * expect(foo.bar.callCount).toEqual(0);
+ * expect(foo.bar.callCount).toBe(0);
  */
 jasmine.Spy.prototype.reset = function() {
   this.wasCalled = false;
@@ -489,7 +489,7 @@ if (isCommonJS) exports.spyOn = spyOn;
  *
  * @example
  * it('should be true', function() {
- *   expect(true).toEqual(true);
+ *   expect(true).toBe(true);
  * });
  *
  * @param {String} desc description of this specification
@@ -1265,18 +1265,18 @@ jasmine.Matchers.prototype.toNotBe = function(expected) {
 };
 
 /**
- * toEqual: compares the actual to the expected using common sense equality. Handles Objects, Arrays, etc.
+ * toBe: compares the actual to the expected using common sense equality. Handles Objects, Arrays, etc.
  *
  * @param expected
  */
-jasmine.Matchers.prototype.toEqual = function(expected) {
+jasmine.Matchers.prototype.toBe = function(expected) {
   return this.env.equals_(this.actual, expected);
 };
 
 /**
- * toNotEqual: compares the actual to the expected using the ! of jasmine.Matchers.toEqual
+ * toNotEqual: compares the actual to the expected using the ! of jasmine.Matchers.toBe
  * @param expected
- * @deprecated as of 1.0. Use not.toEqual() instead.
+ * @deprecated as of 1.0. Use not.toBe() instead.
  */
 jasmine.Matchers.prototype.toNotEqual = function(expected) {
   return !this.env.equals_(this.actual, expected);

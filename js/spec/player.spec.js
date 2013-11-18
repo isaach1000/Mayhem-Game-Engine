@@ -20,20 +20,20 @@ define(['character/player'], function(Player) {
         };
         it('add to bag & bag getter', function() {
             player.addToBag(item);
-            expect(player.getBag().length).toEqual(1);
+            expect(player.getBag().length).toBe(1);
             expect(player.getBag()[0]).toBe(item);
         });
         
         it('remove from bag', function() {
             expect(player.removeFromBag('a')).toBe(null);
             expect(player.removeFromBag(item)).toBe(item);
-            expect(player.getBag().length).toEqual(0);
+            expect(player.getBag().length).toBe(0);
         });
 
         it('get maxWeight & increase maxWeight', function() {
-            expect(player.getMaxWeight()).toEqual(100);
+            expect(player.getMaxWeight()).toBe(100);
             player.increaseMaxWeight();
-            expect(player.getMaxWeight()).toEqual(150);
+            expect(player.getMaxWeight()).toBe(150);
         });
 
     });

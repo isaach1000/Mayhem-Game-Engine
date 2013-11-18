@@ -1,11 +1,14 @@
 // @formatter:off
 define([], function() {
     "use strict";
-// @formatter:on
+    // @formatter:on
 
     //////////////////////////////////
     // Private class methods/fields //
     //////////////////////////////////
+
+    // TODO
+
 
     /**
      * @exports modulePath // TODO: replace modulePath
@@ -14,6 +17,9 @@ define([], function() {
         /////////////////////////////////
         // Public class methods/fields //
         /////////////////////////////////
+
+        // TODO
+
 
         /**
          * ClassName // TODO: replace ClassName here and below
@@ -25,10 +31,14 @@ define([], function() {
             /////////////////////////////////////
 
             var that = this;
+            // TODO
+
 
             ////////////////////////////////////
             // Public instance methods/fields //
             ////////////////////////////////////
+            
+            // TODO
         }
     };
 

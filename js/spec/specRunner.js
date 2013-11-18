@@ -21,9 +21,9 @@ require.config({
 });
 
 // @formatter:off
-require(['jquery', 'jasmine-html'], function($, jasmine) {
-        "use strict";
-// @formatter:on
+require(['jquery', 'underscore', 'jasmine-html'], function($, _, jasmine) {
+    "use strict";
+    // @formatter:on
 
     var jasmineEnv = jasmine.getEnv();
     jasmineEnv.updateInterval = 1000;
@@ -36,8 +36,14 @@ require(['jquery', 'jasmine-html'], function($, jasmine) {
         return htmlReporter.specFilter(spec);
     };
 
-    // Specify the scripts to test.
-    var specs = ['js/spec/player.spec.js'];
+    //////////////////////////////////
+    // Specify the modules to test. //
+    //////////////////////////////////
+    var specs = ['player', 'hash', 'hashset'];
+    
+    specs = _.map(specs, function(moduleName) {
+        return 'js/spec/' + moduleName + '.spec.js';
+    });
 
     $(document).ready(function() {
         require(specs, function(spec) {
