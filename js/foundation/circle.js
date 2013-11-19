@@ -61,8 +61,8 @@ define([
                     },
                     set: function(newRadius) {
                         radius = Math.floor(newRadius);
-                        _this.width = radius * 2;
-                        _this.height = radius * 2;
+                        this.width = radius * 2;
+                        this.height = radius * 2;
                     }
                 }
             });
@@ -77,17 +77,17 @@ define([
                 canvasDrawer.contextSettings = _this.drawingSettings;
 
                 var lineWidth = _this.drawingSettings.lineWidth || 0;
-                canvasDrawer.arc(_this.x + _this.radius, _this.y + _this.radius,
-                    _this.radius - lineWidth, 0, 2 * Math.PI, true);
+                canvasDrawer.arc(this.x + this.radius, this.y + this.radius,
+                    this.radius - lineWidth, 0, 2 * Math.PI, true);
 
                 canvasDrawer.stroke();
                 canvasDrawer.fill();
             };
             
             this.hitTest = function(point) {
-                var dx = _this.x + _this.radius - point.x,
-                    dy = _this.y + _this.radius - point.y;
-                return dx * dx + dy * dy <= _this.radius * _this.radius;
+                var dx = this.x + this.radius - point.x,
+                    dy = this.y + this.radius - point.y;
+                return dx * dx + dy * dy <= this.radius * this.radius;
             };
         }
     };

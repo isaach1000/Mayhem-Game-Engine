@@ -38,25 +38,25 @@ define([
             // Public instance methods/fields //
             ////////////////////////////////////
 
-            _this.bgCanvas = Factory.createCanvas({
+            this.bgCanvas = Factory.createCanvas({
                 id : 'bgCanvas',
                 width : WIDTH + 'px',
                 height : HEIGHT + 'px'
             });
 
-            _this.mainCanvas = Factory.createCanvas({
+            this.mainCanvas = Factory.createCanvas({
                 id : 'mainCanvas',
                 width : WIDTH + 'px',
                 height : HEIGHT + 'px'
             });
 
-            _this.qBox = new BoundingBox.BoundingBox(0, 0, WIDTH, HEIGHT);
-            _this.quadTree = new QuadTree.QuadTree(_this.qBox);
+            this.quadBox = new BoundingBox.BoundingBox(0, 0, WIDTH, HEIGHT);
+            this.quadTree = new QuadTree.QuadTree(_this.quadBox);
 
-            _this.bgCtx = _this.bgCanvas[0].getContext('2d');
-            _this.bgDrawer = new CanvasDrawer.CanvasDrawer(_this.bgCtx, _this.bgCanvas.width(), _this.bgCanvas.height());
-            _this.mainCtx = _this.mainCanvas[0].getContext('2d');
-            _this.mainDrawer = new CanvasDrawer.CanvasDrawer(_this.mainCtx, _this.mainCanvas.width(), _this.mainCanvas.height());
+            this.bgCtx = _this.bgCanvas[0].getContext('2d');
+            this.bgDrawer = new CanvasDrawer.CanvasDrawer(_this.bgCtx, _this.bgCanvas.width(), _this.bgCanvas.height());
+            this.mainCtx = _this.mainCanvas[0].getContext('2d');
+            this.mainDrawer = new CanvasDrawer.CanvasDrawer(_this.mainCtx, _this.mainCanvas.width(), _this.mainCanvas.height());
         }
     };
 

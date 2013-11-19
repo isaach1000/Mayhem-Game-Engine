@@ -59,7 +59,7 @@ define([
                 boundingBox: {
                     get: function() {
                         if (boundingBox === undefined) {
-                            _this.updateBoundingBox();
+                            this.updateBoundingBox();
                         }
                         return boundingBox;
                     },
@@ -107,8 +107,8 @@ define([
             };
             
             this.update = function() {
-                _this.clear();
-                _this.draw();  
+                this.clear();
+                this.draw();  
             };
             
             /**
@@ -116,11 +116,11 @@ define([
              * @return {void}
              */
             this.draw = function() {
-                _this.forEachShape(function(shape) {
+                this.forEachShape(function(shape) {
                     shape.draw();
                 });
                 // TODO: remove drawBoudingBox
-                _this.drawBoundingBox();
+                this.drawBoundingBox();
             };
             
             /**
@@ -145,7 +145,7 @@ define([
              */
             this.updateBoundingBox = function() {
                 var minX, minY, maxX, maxY;
-                _this.forEachShape(function(shape) {
+                this.forEachShape(function(shape) {
                     var shapeBox = shape.boundingBox;
                     if (minX === undefined || minX > shapeBox.x) {
                         minX = shapeBox.x;
@@ -161,7 +161,7 @@ define([
                     }
                 });
                 
-                _this.boundingBox = new BoundingBox.BoundingBox(minX, minY, maxX - minX, maxY - minY);
+                this.boundingBox = new BoundingBox.BoundingBox(minX, minY, maxX - minX, maxY - minY);
             };
             
             /**
@@ -170,9 +170,9 @@ define([
              * @return {boolean}            If the point is in the Sprite
              */
             this.collisionTest = function(point) {
-                var numShapes = _this.shapes.length, i, shape;
+                var numShapes = this.shapes.length, i, shape;
                 for (i = 0; i < numShapes; i += 1) {
-                    shape = _this.shapes[i];
+                    shape = this.shapes[i];
                     if (shape.collisionTest(point)) {
                         return true;
                     }
