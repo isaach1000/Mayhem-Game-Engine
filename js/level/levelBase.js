@@ -32,31 +32,31 @@ define([
             // Private instance methods/fields //
             /////////////////////////////////////
 
-            var that = this, WIDTH = 1000, HEIGHT = 600;
+            var _this = this, WIDTH = 1000, HEIGHT = 600;
 
             ////////////////////////////////////
             // Public instance methods/fields //
             ////////////////////////////////////
 
-            that.bgCanvas = Factory.createCanvas({
+            _this.bgCanvas = Factory.createCanvas({
                 id : 'bgCanvas',
                 width : WIDTH + 'px',
                 height : HEIGHT + 'px'
             });
 
-            that.mainCanvas = Factory.createCanvas({
+            _this.mainCanvas = Factory.createCanvas({
                 id : 'mainCanvas',
                 width : WIDTH + 'px',
                 height : HEIGHT + 'px'
             });
 
-            that.qBox = new BoundingBox.BoundingBox(0, 0, WIDTH, HEIGHT);
-            that.quadTree = new QuadTree.QuadTree(that.qBox);
+            _this.qBox = new BoundingBox.BoundingBox(0, 0, WIDTH, HEIGHT);
+            _this.quadTree = new QuadTree.QuadTree(_this.qBox);
 
-            that.bgCtx = that.bgCanvas[0].getContext('2d');
-            that.bgDrawer = new CanvasDrawer.CanvasDrawer(that.bgCtx, that.bgCanvas.width(), that.bgCanvas.height());
-            that.mainCtx = that.mainCanvas[0].getContext('2d');
-            that.mainDrawer = new CanvasDrawer.CanvasDrawer(that.mainCtx, that.mainCanvas.width(), that.mainCanvas.height());
+            _this.bgCtx = _this.bgCanvas[0].getContext('2d');
+            _this.bgDrawer = new CanvasDrawer.CanvasDrawer(_this.bgCtx, _this.bgCanvas.width(), _this.bgCanvas.height());
+            _this.mainCtx = _this.mainCanvas[0].getContext('2d');
+            _this.mainDrawer = new CanvasDrawer.CanvasDrawer(_this.mainCtx, _this.mainCanvas.width(), _this.mainCanvas.height());
         }
     };
 

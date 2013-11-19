@@ -19,7 +19,7 @@ define([], function() {
 
         /**
          * Return a hashcode for this object. Does not conform to the Java
-         * standard that two objects that are structurally identical should
+         * standard _this two objects _this are structurally identical should
          * yield the same hashcode.
          * @param   {Object} object     -   Object to get hashcode for
          * @return  {integer}           Hashcode for object

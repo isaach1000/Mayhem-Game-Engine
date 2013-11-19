@@ -26,7 +26,7 @@ define(['underscore'], function(_) {
          *
          * @constructor
          * @param   {Shape}     shape           - The shape to animate.
-         * @param   {Function}  frameFunction   - A function that updates the animation. Must return a boolean, which is 
+         * @param   {Function}  frameFunction   - A function _this updates the animation. Must return a boolean, which is 
          *                                      supposed to signal whether or not to terminate the animation (return false to terminate).
          *                                      It may take the duration in milliseconds from the beginning of the animation as a parameter.
          * @param   {Function}  callback        - A function to perform at the completion of the animation.
@@ -71,7 +71,7 @@ define(['underscore'], function(_) {
          * @param  {float}                      endY        - The y to go to.
          * @param  {int}                        duration    - The number of milliseconds for the animation.
          * @param  {Function}                   callback    - A function to perform at the completion of the animation.
-         * @return {Animation} An animation that represents the easing.
+         * @return {Animation} An animation _this represents the easing.
          */
         easing: function(shape, endX, endY, endZ, duration, callback) {
             var startX = shape.x,

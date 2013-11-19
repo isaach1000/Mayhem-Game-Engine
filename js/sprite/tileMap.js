@@ -16,7 +16,7 @@ define([
             /////////////////////////////////////
 
             // Preserve the "this" keyword to refer to the TileMap instance by storing it in a variable.
-            var that = this,
+            var _this = this,
                 initialShapes = [];
             
             /**
@@ -28,7 +28,7 @@ define([
                 var i, j;
                 for (i = 0; i < numHeight; i += 1) {
                     for (j = 0; j < numWidth; j += 1) {
-                        f(that.tiles[i][j]);
+                        f(_this.tiles[i][j]);
                     }
                 }
             }
@@ -37,7 +37,7 @@ define([
                 // Generate the tiles
                 var index = 0, settingsLen = drawingSettingsArr.length, i, j, settingsIndex, rect;
                 for (i = 0; i < numHeight; i += 1) {
-                    that.tiles.push([]);   // Add a row to the tiles matrix.
+                    _this.tiles.push([]);   // Add a row to the tiles matrix.
                     for (j = 0; j < numWidth; j += 1) {
                         settingsIndex = index % settingsLen;
                         rect = new Rectangle.Rectangle(
@@ -46,7 +46,7 @@ define([
                                             width, height,
                                             drawer,
                                             drawingSettingsArr[settingsIndex]);
-                        that.tiles[i].push(rect);
+                        _this.tiles[i].push(rect);
                         initialShapes.push(rect);
                         index += 1;
                     }
@@ -58,15 +58,15 @@ define([
             // Public instance methods/fields //
             ////////////////////////////////////
             
-            that.tiles = [];
+            _this.tiles = [];
             generateTiles();
 
             // Extend Sprite constructor
-            Sprite.Sprite.call(that, initialShapes, drawer, drawingSettingsArr);
-            that.updateBoundingBox();
+            Sprite.Sprite.call(_this, initialShapes, drawer, drawingSettingsArr);
+            _this.updateBoundingBox();
 
             this.draw = function() {
-                that.forEachShape(function(tile) {
+                _this.forEachShape(function(tile) {
                     tile.draw();
                 });
             };

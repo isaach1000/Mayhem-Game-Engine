@@ -30,7 +30,7 @@ define([], function() {
             // Private instance methods/fields //
             /////////////////////////////////////
 
-            var that = this;
+            var _this = this;
             // TODO
 
 

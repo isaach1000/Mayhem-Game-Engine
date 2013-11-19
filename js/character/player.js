@@ -23,7 +23,7 @@ define([], function() {
             // Private instance methods/fields //
             /////////////////////////////////////
 
-            var that = this, 
+            var _this = this, 
                 currentRoom = initialRoom, 
                 bag = [],
                 maxWeight = 100;

@@ -19,7 +19,7 @@ define(['util/mathExtensions'], function(MathExtensions) {
             // Private instance methods/fields //
             /////////////////////////////////////
             
-            var that = this,
+            var _this = this,
                 rows;
             
             function forEach(f) {
@@ -34,8 +34,8 @@ define(['util/mathExtensions'], function(MathExtensions) {
             function addAll(matrix, coefficient) {
                 var newEntries = [];
 
-                if (that.numRows !== matrix.numRows ||
-                    that.numColumns !== matrix.numColumns) {
+                if (_this.numRows !== matrix.numRows ||
+                    _this.numColumns !== matrix.numColumns) {
                     return null;
                 }
 
@@ -44,17 +44,17 @@ define(['util/mathExtensions'], function(MathExtensions) {
                     newEntries.push(sum);
                 });
 
-                return new module.Matrix(newEntries, that.numRows, that.numColumns);
+                return new module.Matrix(newEntries, _this.numRows, _this.numColumns);
             }
 
             function generateRows() {
                 // Store the matrix in a 2d array.
                 var row, i, j;
                 rows = [];
-                for (i = 0; i < that.numRows; i += 1) {
+                for (i = 0; i < _this.numRows; i += 1) {
                     row = [];
-                    for (j = 0; j < that.numColumns; j += 1) {
-                        row.push(entriesArray[i * that.numColumns + j]);
+                    for (j = 0; j < _this.numColumns; j += 1) {
+                        row.push(entriesArray[i * _this.numColumns + j]);
                     }
                     rows.push(row);
                 }
@@ -64,12 +64,12 @@ define(['util/mathExtensions'], function(MathExtensions) {
             // Public instance methods/fields //
             ////////////////////////////////////
             
-            that.numRows = numRows;
+            _this.numRows = numRows;
             
-            that.numColumns = numColumns;
+            _this.numColumns = numColumns;
 
             this.get = function(row, column) {
-                return that.rows[row][column];
+                return _this.rows[row][column];
             };
 
             this.set = function(row, column, value) {
@@ -83,7 +83,7 @@ define(['util/mathExtensions'], function(MathExtensions) {
 
             this.getColumn = function(columnIndex) {
                 var column = [], i;
-                for (i = 0; i < that.numRows; i += 1) {
+                for (i = 0; i < _this.numRows; i += 1) {
                     column.push(rows[i][columnIndex]);
                 }
                 return column;
@@ -100,23 +100,23 @@ define(['util/mathExtensions'], function(MathExtensions) {
             this.multiply = function(matrix) {
                 var newEntries = [], i, j, vector1, vector2, dotProduct;
 
-                if (that.numColumns !== that.numRows) {
+                if (_this.numColumns !== _this.numRows) {
                     return null;
                 }
 
-                for (i = 0; i < that.numRows; i += 1) {
-                    vector1 = that.getRow(i);
+                for (i = 0; i < _this.numRows; i += 1) {
+                    vector1 = _this.getRow(i);
                     for (j = 0; j < matrix.numColumns; j += 1) {
                         vector2 = matrix.getColumn(j);
                         dotProduct = MathExtensions.dotProduct(vector1, vector2);
                         newEntries.push(dotProduct);
                     }
                 }
-                return new module.Matrix(newEntries, that.numRows, matrix.numColumns);
+                return new module.Matrix(newEntries, _this.numRows, matrix.numColumns);
             };
 
             // Make the instance immutable.
-            Object.freeze(that);
+            Object.freeze(_this);
         }
     };
 

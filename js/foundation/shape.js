@@ -36,7 +36,7 @@ define([
             // Private instance methods/fields //
             /////////////////////////////////////
             
-            var that = this,
+            var _this = this,
                 bbox;
 
             // Make floats into integers
@@ -65,7 +65,7 @@ define([
                     },
                     set: function(newX) {
                         x = Math.round(newX);
-                        that.boundingBox.x = x;
+                        _this.boundingBox.x = x;
                     }
                 },
 
@@ -81,7 +81,7 @@ define([
                     },
                     set: function(newY) {
                         y = Math.round(newY);
-                        that.boundingBox.y = y;
+                        _this.boundingBox.y = y;
                     }
                 },
 
@@ -158,8 +158,8 @@ define([
              * @return {void}
              */
             this.update = function() {
-                that.clear();
-                that.draw();
+                _this.clear();
+                _this.draw();
             };
 
             /**
@@ -168,8 +168,8 @@ define([
              */
             this.draw = function() {
                 // Call subclass method if exists.
-                if (that.drawShape !== undefined) {
-                    that.drawShape(drawer);
+                if (_this.drawShape !== undefined) {
+                    _this.drawShape(drawer);
                 }
             };
 
@@ -178,7 +178,7 @@ define([
              * @return {void}
              */
             this.clear = function() {
-                drawer.clearRect(that.x, that.y, that.width, that.height);
+                drawer.clearRect(_this.x, _this.y, _this.width, _this.height);
             };
             
             /**
@@ -186,18 +186,18 @@ define([
              * @return {void}
              */
             this.drawBoundingBox = function() {
-                var x = that.boundingBox.x,
-                    y = that.boundingBox.y,
-                    w = that.boundingBox.width,
-                    h = that.boundingBox.height,
-                    lineWidth = that.drawingSettings.lineWidth || 0;
+                var x = _this.boundingBox.x,
+                    y = _this.boundingBox.y,
+                    w = _this.boundingBox.width,
+                    h = _this.boundingBox.height,
+                    lineWidth = _this.drawingSettings.lineWidth || 0;
                 drawer.strokeRect(x + lineWidth, y + lineWidth,
                         w - 2 * lineWidth, h - 2 * lineWidth);
             };
             
             this.collisionTest = function(point) {
                 // Return result of subclass's test.
-                return that.hitTest(point);
+                return _this.hitTest(point);
             };
         }
     };

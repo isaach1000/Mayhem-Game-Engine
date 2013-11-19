@@ -24,7 +24,7 @@ define([], function() {
             // Private instance methods/fields //
             /////////////////////////////////////
 
-            var that = this, exits = [], items = [], Directions = {
+            var _this = this, exits = [], items = [], Directions = {
                 NORTH : 0,
                 EAST : 1,
                 SOUTH : 2,

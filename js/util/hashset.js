@@ -28,7 +28,7 @@ define(['util/hash'], function(Hash) {
             // Private instance methods/fields //
             /////////////////////////////////////
 
-            var that = this;
+            var _this = this;
             // TODO
 
 
@@ -69,7 +69,7 @@ define(['util/hash'], function(Hash) {
             
             /**
              * Check if an object is an element of this set
-             * @param   {Object} object     -   An object that may be an element
+             * @param   {Object} object     -   An object _this may be an element
              * @return  {boolean}           Whether or not the object is an element
              */
             this.contains = function(object) {

@@ -20,7 +20,7 @@ define([
         /**
          * Generate a BoundingBox for a polygon
          * @param {Array.<Point>} points - An array of points describing the polygon.
-         * @return {BoundingBox} - A BoundingBox that contains all of the points.
+         * @return {BoundingBox} - A BoundingBox _this contains all of the points.
          */
         generateBbox: function(points) {
             var minX = points[0].x,
@@ -50,7 +50,7 @@ define([
          * Polygon, extends [Shape]{@link module:foundation/shape.Shape}
          * @constructor
          * @extends {Shape}
-         * @param   {Array.<Point>} points      -   An array of points that describe the polygon.
+         * @param   {Array.<Point>} points      -   An array of points _this describe the polygon.
          * @param   {CanvasDrawer} drawer       -   A CanvasDrawer to draw the polygon onto the canvas.
          * @param   {Object} drawingSettings    -   A dictionary of drawing options.
          */

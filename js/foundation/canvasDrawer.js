@@ -27,7 +27,7 @@ define(['underscore'], function(_) {
             // Private instance methods/fields //
             /////////////////////////////////////
             
-            var that = this,
+            var _this = this,
                 ctxSettings;
             
             
@@ -173,7 +173,7 @@ define(['underscore'], function(_) {
             };
 
             this.clearCanvas = function() {
-                that.clearRect(0, 0, that.width, that.height);
+                _this.clearRect(0, 0, _this.width, _this.height);
             };
 
             /**

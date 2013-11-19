@@ -25,7 +25,7 @@ define([], function() {
             // Private instance methods/fields //
             /////////////////////////////////////
 
-            var that = this;
+            var _this = this;
             
             if (id === undefined) {
                 id = receiverId++;

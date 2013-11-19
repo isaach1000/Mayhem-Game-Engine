@@ -35,12 +35,12 @@ define([
             // Private instance methods/fields //
             /////////////////////////////////////
             
-            var that = this, 
+            var _this = this, 
             lineWidth = drawingSettings.lineWidth || 0;
             radius = Math.round(radius);
 
             // Extend Shape constructor
-            Shape.Shape.call(that, x, y, radius * 2, radius * 2,
+            Shape.Shape.call(_this, x, y, radius * 2, radius * 2,
                                     drawer, drawingSettings);
 
 
@@ -61,8 +61,8 @@ define([
                     },
                     set: function(newRadius) {
                         radius = Math.floor(newRadius);
-                        that.width = radius * 2;
-                        that.height = radius * 2;
+                        _this.width = radius * 2;
+                        _this.height = radius * 2;
                     }
                 }
             });
@@ -74,20 +74,20 @@ define([
              */
             this.drawShape = function(canvasDrawer) {
                 canvasDrawer.beginPath();
-                canvasDrawer.contextSettings = that.drawingSettings;
+                canvasDrawer.contextSettings = _this.drawingSettings;
 
-                var lineWidth = that.drawingSettings.lineWidth || 0;
-                canvasDrawer.arc(that.x + that.radius, that.y + that.radius,
-                    that.radius - lineWidth, 0, 2 * Math.PI, true);
+                var lineWidth = _this.drawingSettings.lineWidth || 0;
+                canvasDrawer.arc(_this.x + _this.radius, _this.y + _this.radius,
+                    _this.radius - lineWidth, 0, 2 * Math.PI, true);
 
                 canvasDrawer.stroke();
                 canvasDrawer.fill();
             };
             
             this.hitTest = function(point) {
-                var dx = that.x + that.radius - point.x,
-                    dy = that.y + that.radius - point.y;
-                return dx * dx + dy * dy <= that.radius * that.radius;
+                var dx = _this.x + _this.radius - point.x,
+                    dy = _this.y + _this.radius - point.y;
+                return dx * dx + dy * dy <= _this.radius * _this.radius;
             };
         }
     };

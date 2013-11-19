@@ -26,7 +26,7 @@ define([
             // Private instance methods/fields //
             /////////////////////////////////////
             
-            var that = this,
+            var _this = this,
                 boundingBox;
             
             shapes = shapes || [];
@@ -59,7 +59,7 @@ define([
                 boundingBox: {
                     get: function() {
                         if (boundingBox === undefined) {
-                            that.updateBoundingBox();
+                            _this.updateBoundingBox();
                         }
                         return boundingBox;
                     },
@@ -95,20 +95,20 @@ define([
 
             /**
              * Iterator function
-             * @param {Function} f      -   A function that takes a Shape instance as a parameter.
+             * @param {Function} f      -   A function _this takes a Shape instance as a parameter.
              * @return {void}
              */
             this.forEachShape = function(f) {
-                var numShapes = that.shapes.length, i, shape;
+                var numShapes = _this.shapes.length, i, shape;
                 for (i = 0; i < numShapes; i += 1) {
-                    shape = that.shapes[i];
+                    shape = _this.shapes[i];
                     f(shape);
                 }
             };
             
             this.update = function() {
-                that.clear();
-                that.draw();  
+                _this.clear();
+                _this.draw();  
             };
             
             /**
@@ -116,11 +116,11 @@ define([
              * @return {void}
              */
             this.draw = function() {
-                that.forEachShape(function(shape) {
+                _this.forEachShape(function(shape) {
                     shape.draw();
                 });
                 // TODO: remove drawBoudingBox
-                that.drawBoundingBox();
+                _this.drawBoundingBox();
             };
             
             /**
@@ -128,11 +128,11 @@ define([
              * @return {void}
              */
             this.drawBoundingBox = function() {
-                var x = that.boundingBox.x,
-                y = that.boundingBox.y,
-                w = that.boundingBox.w,
-                h = that.boundingBox.h,
-                lineWidth = that.drawingSettings.lineWidth || 0;
+                var x = _this.boundingBox.x,
+                y = _this.boundingBox.y,
+                w = _this.boundingBox.w,
+                h = _this.boundingBox.h,
+                lineWidth = _this.drawingSettings.lineWidth || 0;
                 
                 drawer.beginPath();
                 drawer.strokeRect(x + lineWidth, y + lineWidth,
@@ -145,7 +145,7 @@ define([
              */
             this.updateBoundingBox = function() {
                 var minX, minY, maxX, maxY;
-                that.forEachShape(function(shape) {
+                _this.forEachShape(function(shape) {
                     var shapeBox = shape.boundingBox;
                     if (minX === undefined || minX > shapeBox.x) {
                         minX = shapeBox.x;
@@ -161,7 +161,7 @@ define([
                     }
                 });
                 
-                that.boundingBox = new BoundingBox.BoundingBox(minX, minY, maxX - minX, maxY - minY);
+                _this.boundingBox = new BoundingBox.BoundingBox(minX, minY, maxX - minX, maxY - minY);
             };
             
             /**
@@ -170,9 +170,9 @@ define([
              * @return {boolean}            If the point is in the Sprite
              */
             this.collisionTest = function(point) {
-                var numShapes = that.shapes.length, i, shape;
+                var numShapes = _this.shapes.length, i, shape;
                 for (i = 0; i < numShapes; i += 1) {
-                    shape = that.shapes[i];
+                    shape = _this.shapes[i];
                     if (shape.collisionTest(point)) {
                         return true;
                     }

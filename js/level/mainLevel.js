@@ -33,7 +33,7 @@ define(['level/levelBase', 'foundation/polygon', 'foundation/rectangle',
             // Private instance methods/fields //
             /////////////////////////////////////
 
-            var that = this, mouseTime = new Date(), MOUSE_WAIT = 50;
+            var _this = this, mouseTime = new Date(), MOUSE_WAIT = 50;
 
             var circleTest = function(drawer, quadTree) {
                 // @formatter:off
@@ -140,11 +140,11 @@ define(['level/levelBase', 'foundation/polygon', 'foundation/rectangle',
             // Public instance methods/fields //
             ////////////////////////////////////
 
-            polyTest(that.bgDrawer, that.quadTree);
-            rectTest(that.bgDrawer, that.quadTree);
-            circleTest(that.mainDrawer, that.quadTree);
-            tileTest(that.bgDrawer, that.quadTree);
-            mouseTest(that.quadTree);
+            polyTest(_this.bgDrawer, _this.quadTree);
+            rectTest(_this.bgDrawer, _this.quadTree);
+            circleTest(_this.mainDrawer, _this.quadTree);
+            tileTest(_this.bgDrawer, _this.quadTree);
+            mouseTest(_this.quadTree);
         }
     };
 
