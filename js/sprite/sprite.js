@@ -36,7 +36,7 @@ define([
             // Public instance methods/fields //
             ////////////////////////////////////
             
-            Object.defineProperties(that, {
+            Object.defineProperties(this, {
                 /**
                  * Shapes of Sprite instance
                  * @memberOf module:sprite/sprite.Sprite
@@ -98,7 +98,7 @@ define([
              * @param {Function} f      -   A function that takes a Shape instance as a parameter.
              * @return {void}
              */
-            that.forEachShape = function(f) {
+            this.forEachShape = function(f) {
                 var numShapes = that.shapes.length, i, shape;
                 for (i = 0; i < numShapes; i += 1) {
                     shape = that.shapes[i];
@@ -106,7 +106,7 @@ define([
                 }
             };
             
-            that.update = function() {
+            this.update = function() {
                 that.clear();
                 that.draw();  
             };
@@ -115,7 +115,7 @@ define([
              * Draw Sprite instance
              * @return {void}
              */
-            that.draw = function() {
+            this.draw = function() {
                 that.forEachShape(function(shape) {
                     shape.draw();
                 });
@@ -127,7 +127,7 @@ define([
              * Draw BoundingBox of Sprite instance
              * @return {void}
              */
-            that.drawBoundingBox = function() {
+            this.drawBoundingBox = function() {
                 var x = that.boundingBox.x,
                 y = that.boundingBox.y,
                 w = that.boundingBox.w,
@@ -143,7 +143,7 @@ define([
              * Update BoundingBox of Sprite instance
              * @return {void}
              */
-            that.updateBoundingBox = function() {
+            this.updateBoundingBox = function() {
                 var minX, minY, maxX, maxY;
                 that.forEachShape(function(shape) {
                     var shapeBox = shape.boundingBox;
@@ -169,7 +169,7 @@ define([
              * @param {Point} point         - Point to test
              * @return {boolean}            If the point is in the Sprite
              */
-            that.collisionTest = function(point) {
+            this.collisionTest = function(point) {
                 var numShapes = that.shapes.length, i, shape;
                 for (i = 0; i < numShapes; i += 1) {
                     shape = that.shapes[i];

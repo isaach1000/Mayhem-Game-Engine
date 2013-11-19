@@ -27,19 +27,19 @@ define([], function() {
             ////////////////////////////////////
             // Public instance methods/fields //
             ////////////////////////////////////
-            that.getWeight = function() {
+            this.getWeight = function() {
                 return weight;
             };
             
-            that.getName = function() {
+            this.getName = function() {
                 return name;
             };
             
-            that.getDescription = function() {
+            this.getDescription = function() {
                 return description;
             };
             
-            that.isCookie = function() {
+            this.isCookie = function() {
                 return isCookie;
             };
         }

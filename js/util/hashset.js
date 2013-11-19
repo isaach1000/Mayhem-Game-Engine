@@ -10,7 +10,7 @@ define(['util/hash'], function(Hash) {
     // TODO
 
     /**
-     * @exports modulePath // TODO: replace modulePath
+     * @exports util/hashset
      */
     var module = {
         /////////////////////////////////
@@ -20,7 +20,7 @@ define(['util/hash'], function(Hash) {
         // TODO
 
         /**
-         * Hashset // TODO: replace Hashset here and below
+         * Hashset
          * @constructor
          */
         Hashset : function() {
@@ -36,7 +36,7 @@ define(['util/hash'], function(Hash) {
             // Public instance methods/fields //
             ////////////////////////////////////
             
-            Object.defineProperties(that, {
+            Object.defineProperties(this, {
                 /**
                  * The size of the Hashset
                  * @type {integer}
@@ -55,7 +55,7 @@ define(['util/hash'], function(Hash) {
              * @param   {Object} object     -   Object to add
              * @return  {boolean}           Whether or not the insertion was successful
              */
-            that.add = function(object) {
+            this.add = function(object) {
                 // TODO
             };
             
@@ -63,7 +63,7 @@ define(['util/hash'], function(Hash) {
              * Clear the Hashset instance of all elements
              * @return  {void}
              */
-            that.clear = function() {
+            this.clear = function() {
                 // TODO
             };
             
@@ -72,7 +72,7 @@ define(['util/hash'], function(Hash) {
              * @param   {Object} object     -   An object that may be an element
              * @return  {boolean}           Whether or not the object is an element
              */
-            that.contains = function(object) {
+            this.contains = function(object) {
                 // TODO
             };
             
@@ -81,7 +81,7 @@ define(['util/hash'], function(Hash) {
              * @param {Object} object       - An object
              * @return {boolean}            True if removed object from set, false if object could not be removed from set
              */
-            that.remove = function(object) {
+            this.remove = function(object) {
                 // TODO  
             };
         }

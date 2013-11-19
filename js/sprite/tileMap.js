@@ -65,13 +65,13 @@ define([
             Sprite.Sprite.call(that, initialShapes, drawer, drawingSettingsArr);
             that.updateBoundingBox();
 
-            that.draw = function() {
+            this.draw = function() {
                 that.forEachShape(function(tile) {
                     tile.draw();
                 });
             };
 
-            that.clear = function() {
+            this.clear = function() {
                 forEachTile(function(tile) {
                     tile.clear();
                 });

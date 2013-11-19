@@ -48,7 +48,7 @@ define([
             // Public instance methods/fields //
             ////////////////////////////////////
             
-            Object.defineProperties(that, {
+            Object.defineProperties(this, {
                 /**
                  * Radius of circle
                  * @type {float)
@@ -72,7 +72,7 @@ define([
              *
              * @return {void}
              */
-            that.drawShape = function(canvasDrawer) {
+            this.drawShape = function(canvasDrawer) {
                 canvasDrawer.beginPath();
                 canvasDrawer.contextSettings = that.drawingSettings;
 
@@ -84,7 +84,7 @@ define([
                 canvasDrawer.fill();
             };
             
-            that.hitTest = function(point) {
+            this.hitTest = function(point) {
                 var dx = that.x + that.radius - point.x,
                     dy = that.y + that.radius - point.y;
                 return dx * dx + dy * dy <= that.radius * that.radius;

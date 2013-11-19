@@ -35,7 +35,7 @@ define(['underscore'], function(_) {
             // Public instance methods/fields //
             ////////////////////////////////////
             
-            Object.defineProperties(that, {
+            Object.defineProperties(this, {
                 /**
                  * Width of the canvas
                  * @type {float}
@@ -95,7 +95,7 @@ define(['underscore'], function(_) {
              * @param {boolean} [moveFirst=false]   -   If true, uses moveTo metho.
              * @return {void}
              */
-            that.drawLine = function(point1, point2, moveFirst) {
+            this.drawLine = function(point1, point2, moveFirst) {
                 if (moveFirst) {
                     ctx.moveTo(point1.x, point1.y);
                 }
@@ -106,7 +106,7 @@ define(['underscore'], function(_) {
              * Wrapper for <code>context.stroke</code>
              * @return {void}
              */
-            that.stroke = function() {
+            this.stroke = function() {
                 ctx.stroke();
             };
 
@@ -114,7 +114,7 @@ define(['underscore'], function(_) {
              * Wrapper for <code>context.fill</code>
              * @return {void}
              */
-            that.fill = function() {
+            this.fill = function() {
                 ctx.fill();  
             };
 
@@ -122,7 +122,7 @@ define(['underscore'], function(_) {
              * Wrapper for <code>context.beginPath</code>
              * @return {void}
              */
-            that.beginPath = function() {
+            this.beginPath = function() {
                 ctx.beginPath();
             };
 
@@ -130,7 +130,7 @@ define(['underscore'], function(_) {
              * Wrapper for <code>context.closePath</code>
              * @return {void}
              */
-            that.closePath = function() {
+            this.closePath = function() {
                 ctx.closePath();
             };
           
@@ -142,7 +142,7 @@ define(['underscore'], function(_) {
              * @param  {float}  h   Height of rectangle
              * @return {void}
              */
-            that.rect = function(x, y, w, h) {
+            this.rect = function(x, y, w, h) {
                 ctx.rect(x, y, w, h);
             };
 
@@ -156,7 +156,7 @@ define(['underscore'], function(_) {
              * @param  {boolean}    ccw        Move counterclockwise
              * @return {void}
              */
-            that.arc = function(x, y, radius, startAngle, endAngle, ccw) {
+            this.arc = function(x, y, radius, startAngle, endAngle, ccw) {
                 ctx.arc(x, y, radius, startAngle, endAngle, ccw);
             };
 
@@ -168,11 +168,11 @@ define(['underscore'], function(_) {
              * @param  {float} height - Height of area.
              * @return {void}
              */
-            that.clearRect = function(x, y, width, height) {
+            this.clearRect = function(x, y, width, height) {
                 ctx.clearRect(x, y, width, height);
             };
 
-            that.clearCanvas = function() {
+            this.clearCanvas = function() {
                 that.clearRect(0, 0, that.width, that.height);
             };
 
@@ -180,7 +180,7 @@ define(['underscore'], function(_) {
              * Wrapper for <code>context.save</code>
              * @return {void}
              */
-            that.save = function() {
+            this.save = function() {
                 ctx.save();
             };
 
@@ -188,7 +188,7 @@ define(['underscore'], function(_) {
              * Wrapper for <code>context.restore</code>
              * @return {void}
              */
-            that.restore = function() {
+            this.restore = function() {
                 ctx.restore();
             };
 
@@ -198,7 +198,7 @@ define(['underscore'], function(_) {
              * @param  {float} y    - y coordinate of destination
              * @return {void}
              */
-            that.translate = function(x, y) {
+            this.translate = function(x, y) {
                 ctx.translate(x, y);
             };
 
@@ -210,7 +210,7 @@ define(['underscore'], function(_) {
              * @param  {float} h    -   Height of rectangle
              * @return {void}
              */
-            that.fillRect = function(x, y, w, h) {
+            this.fillRect = function(x, y, w, h) {
                 ctx.fillRect(x, y, w, h);
             };
             
@@ -222,7 +222,7 @@ define(['underscore'], function(_) {
              * @param  {float} h    - Height of rectangle
              * @return {void}
              */
-            that.strokeRect = function(x, y, w, h) {
+            this.strokeRect = function(x, y, w, h) {
                 ctx.strokeRect(x, y, w, h);
             };
 
@@ -234,7 +234,7 @@ define(['underscore'], function(_) {
              * @param  {float} height   - Height of image
              * @return {Array}          Image data
              */
-            that.getImageData = function(x, y, w, h) {
+            this.getImageData = function(x, y, w, h) {
                 return ctx.getImageData(x, y, w, h);
             };
 
@@ -245,7 +245,7 @@ define(['underscore'], function(_) {
              * @param  {float} y            - y coordinate of top-left of image
              * @return {void}
              */
-            that.putImageData = function(imageData, x, y) {
+            this.putImageData = function(imageData, x, y) {
                 ctx.putImageData(imageData, x, y);
             };
         }

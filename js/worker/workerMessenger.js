@@ -37,7 +37,7 @@ define([], function() {
             // Public instance methods/fields //
             ////////////////////////////////////
            
-            that.sendMessage = function(functionName, params) {
+            this.sendMessage = function(functionName, params) {
                 target.postMessage({
                     id: id,
                     functionName: functionName,

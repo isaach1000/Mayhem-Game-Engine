@@ -25,14 +25,15 @@
     
     <section>
         <article>
-            <pre class="prettyprint source"><code>define([], function() {
+            <pre class="prettyprint source"><code>// @formatter:off
+define([], function() {
     "use strict";
+    // @formatter:on
 
     //////////////////////////////////
     // Private class methods/fields //
     //////////////////////////////////
-    
-    
+
     /**
      * @exports character/room
      */
@@ -40,105 +41,101 @@
         /////////////////////////////////
         // Public class methods/fields //
         /////////////////////////////////
-        
+
         /**
          * Room
          * @constructor
          */
-        Room: function(description) {
+        Room : function(description) {
             /////////////////////////////////////
             // Private instance methods/fields //
             /////////////////////////////////////
-      
-            var that = this,
-                exits = [],
-                items = [],
-                Directions = {
-                    NORTH: 0,
-                    EAST: 1,
-                    SOUTH: 2,
-                    WEST: 2
-                },
-            
-                getExitString = function() {
-                    var returnString = "Exits:";
-                    for (var i = 0; i &lt; exits.length; i++) {
-                        returnString += " " + exits[i];
-                    }
-                },
-                
-                getExit = function(direction) {
-                    return exits[direction];
-                },
-                
-                addItem = function(item) {
-                    items.push(item);
-                },
-                
-                getItemString = function() {
-                    var returnString = "Items: \n";
-                    for (var i = 0; i &lt; items.length; i++) {
-                        returnString += item.getName() + ": " + item.getDescription() + "\n";
-                    }
-                    return returnString;
-                },
-                
-                removeItem = function(item) {
-                    for (var i = 0; i &lt; items.length; i++) {
-                        if (items[i] === item) {
-                            items.splice(i, 1);
-                            return item;
-                        }
-                        else {
-                            return null;
-                        }
-                    }
-                },
-                
-                searchItems = function(item) {
-                    var result = null;
-                    for (var i = 0; i &lt; items.size; i++) {
-                        if (items[i].getName() === item.getName()) {
-                            result = items[i].getName();
-                            break;
-                        }
-                    }
-                    return result;
-                },                
-                
-                getExitList = function () {
-                    var exitList = [];
-                    for (var i = 0; i &lt; exits.length; i++) {
-                        exitList.push(exits[i]);
-                    }
-                    return exitList;
-                };
-            
-                
+
+            var that = this, exits = [], items = [], Directions = {
+                NORTH : 0,
+                EAST : 1,
+                SOUTH : 2,
+                WEST : 3
+            };
+
             ////////////////////////////////////
             // Public instance methods/fields //
             ////////////////////////////////////
-            
-            that.setExit = function(direction, neighbor) {
-                exits[direction] = neightbor;
+
+            this.getExitString = function() {
+                var returnString = "Exits:";
+                for (var i = 0; i &lt; exits.length; i++) {
+                    returnString += " " + exits[i];
+                }
             };
-            
-            that.getShortDescription = function() {
+
+            this.getExit = function(direction) {
+                return exits[direction];
+            };
+
+            this.addItem = function(item) {
+                items.push(item);
+            };
+
+            this.getItemString = function() {
+                var returnString = "Items: \n";
+                for (var i = 0; i &lt; items.length; i++) {
+                    returnString += item.getName() + ": " + item.getDescription() + "\n";
+                }
+                return returnString;
+            };
+
+            this.removeItem = function(item) {
+                for (var i = 0; i &lt; items.length; i++) {
+                    if (items[i] === item) {
+                        items.splice(i, 1);
+                        return item;
+                    }
+                    else {
+                        return null;
+                    }
+                }
+            };
+
+            this.searchItems = function(item) {
+                var result = null;
+                for (var i = 0; i &lt; items.size; i++) {
+                    if (items[i].getName() === item.getName()) {
+                        result = items[i].getName();
+                        break;
+                    }
+                }
+                return result;
+            };
+
+            this.getExitList = function() {
+                var exitList = [];
+                for (var i = 0; i &lt; exits.length; i++) {
+                    exitList.push(exits[i]);
+                }
+                return exitList;
+            };
+
+            this.setExit = function(direction, neighbor) {
+                exits[direction] = neighbor;
+            };
+
+            this.getShortDescription = function() {
                 return description;
             };
-            
-            that.getLongDescription = function() {
+
+            this.getLongDescription = function() {
                 var profSentence;
+                // TODO
                 /*if (professor.getRoom() === room) {
-                    profSentence += "\n" + professor.toString();
-                }*/
-                return "You are " + description + " .\n" + 
-                    getExitString() + "\n" + getItemString();
+                 profSentence += "\n" + professor.toString();
+                 }*/
+                return "You are " + description + " .\n" + getExitString() + "\n" + getItemString();
             };
         }
     };
 
-    return module; 
+    return module;
 });
 </code></pre>
         </article>
@@ -150,13 +147,13 @@
 </div>
 
 <nav>
-    <h2><a href="index.html">Index</a></h2><h3>Modules</h3><ul><li><a href="item.html">character/item</a></li><li><a href="player.html">character/player</a></li><li><a href="room.html">character/room</a></li><li><a href="animation.html">foundation/animation</a></li><li><a href="canvasDrawer.html">foundation/canvasDrawer</a></li><li><a href="circle.html">foundation/circle</a></li><li><a href="rectangle.html">foundation/rectangle</a></li><li><a href="shape.html">foundation/shape</a></li><li><a href="levelBase.html">level/levelBase</a></li><li><a href="mainLevel.html">level/mainLevel</a></li><li><a href="sprite.html">sprite/sprite</a></li><li><a href="tileMap.html">sprite/tileMap</a></li><li><a href="boundingBox.html">util/boundingBox</a></li><li><a href="factory.html">util/factory</a></li><li><a href="mathExtensions.html">util/mathExtensions</a></li><li><a href="matrix.html">util/matrix</a></li><li><a href="physics.html">util/physics</a></li><li><a href="polygon.html">util/polygon</a></li><li><a href="quadTree.html">util/quadTree</a></li><li><a href="workerMessenger.html">worker/workerMessenger</a></li><li><a href="workerReceiver.html">worker/workerReceiver</a></li></ul><h3>Classes</h3><ul><li><a href="item.Item.html">Item</a></li><li><a href="player.Player.html">Player</a></li><li><a href="room.Room.html">Room</a></li><li><a href="animation.Animation.html">Animation</a></li><li><a href="canvasDrawer.CanvasDrawer.html">CanvasDrawer</a></li><li><a href="circle.Circle.html">Circle</a></li><li><a href="rectangle.Rectangle.html">Rectangle</a></li><li><a href="shape.Shape.html">Shape</a></li><li><a href="levelBase.LevelBase.html">LevelBase</a></li><li><a href="mainLevel.MainLevel.html">MainLevel</a></li><li><a href="sprite.Sprite.html">Sprite</a></li><li><a href="tileMap.TileMap.html">TileMap</a></li><li><a href="boundingBox.BoundingBox.html">BoundingBox</a></li><li><a href="matrix.Matrix.html">Matrix</a></li><li><a href="polygon.Polygon_.html">Polygon</a></li><li><a href="quadTree.QuadTree.html">QuadTree</a></li><li><a href="workerMessenger.WorkerMessenger.html">WorkerMessenger</a></li><li><a href="workerReceiver.WorkerReceiver.html">WorkerReceiver</a></li></ul>
+    <h2><a href="index.html">Index</a></h2><h3>Modules</h3><ul><li><a href="item.html">character/item</a></li><li><a href="player.html">character/player</a></li><li><a href="room.html">character/room</a></li><li><a href="animation.html">foundation/animation</a></li><li><a href="canvasDrawer.html">foundation/canvasDrawer</a></li><li><a href="circle.html">foundation/circle</a></li><li><a href="rectangle.html">foundation/rectangle</a></li><li><a href="shape.html">foundation/shape</a></li><li><a href="levelBase.html">level/levelBase</a></li><li><a href="mainLevel.html">level/mainLevel</a></li><li><a href="sprite.html">sprite/sprite</a></li><li><a href="tileMap.html">sprite/tileMap</a></li><li><a href="boundingBox.html">util/boundingBox</a></li><li><a href="factory.html">util/factory</a></li><li><a href="hash.html">util/hash</a></li><li><a href="hashset.html">util/hashset</a></li><li><a href="mathExtensions.html">util/mathExtensions</a></li><li><a href="matrix.html">util/matrix</a></li><li><a href="physics.html">util/physics</a></li><li><a href="polygon.html">util/polygon</a></li><li><a href="quadTree.html">util/quadTree</a></li><li><a href="workerMessenger.html">worker/workerMessenger</a></li><li><a href="workerReceiver.html">worker/workerReceiver</a></li></ul><h3>Classes</h3><ul><li><a href="item.Item.html">Item</a></li><li><a href="player.Player.html">Player</a></li><li><a href="room.Room.html">Room</a></li><li><a href="animation.Animation.html">Animation</a></li><li><a href="canvasDrawer.CanvasDrawer.html">CanvasDrawer</a></li><li><a href="circle.Circle.html">Circle</a></li><li><a href="rectangle.Rectangle.html">Rectangle</a></li><li><a href="shape.Shape.html">Shape</a></li><li><a href="levelBase.LevelBase.html">LevelBase</a></li><li><a href="mainLevel.MainLevel.html">MainLevel</a></li><li><a href="sprite.Sprite.html">Sprite</a></li><li><a href="tileMap.TileMap.html">TileMap</a></li><li><a href="boundingBox.BoundingBox.html">BoundingBox</a></li><li><a href="hashset.Hashset.html">Hashset</a></li><li><a href="matrix.Matrix.html">Matrix</a></li><li><a href="polygon.Polygon_.html">Polygon</a></li><li><a href="quadTree.QuadTree.html">QuadTree</a></li><li><a href="workerMessenger.WorkerMessenger.html">WorkerMessenger</a></li><li><a href="workerReceiver.WorkerReceiver.html">WorkerReceiver</a></li></ul>
 </nav>
 
 <br clear="both">
 
 <footer>
-    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.3.0-dev</a> on Sat Nov 16 2013 22:00:11 GMT-0500 (EST)
+    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.3.0-dev</a> on Mon Nov 18 2013 13:55:01 GMT-0500 (EST)
 </footer>
 
 <script> prettyPrint(); </script>

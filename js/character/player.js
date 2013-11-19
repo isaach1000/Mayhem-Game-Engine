@@ -33,23 +33,23 @@ define([], function() {
             // Public instance methods/fields //
             ////////////////////////////////////                
 
-            that.getRoom = function() {
+            this.getRoom = function() {
                 return currentRoom;
             };
             
-            that.setRoom = function(newRoom) {
+            this.setRoom = function(newRoom) {
                 currentRoom = newRoom;
             };
             
-            that.getBag = function() {
+            this.getBag = function() {
                 return bag;
             };
             
-            that.addToBag = function(newItem) {
+            this.addToBag = function(newItem) {
                 bag.push(newItem);
             };
             
-            that.removeFromBag = function(item) {
+            this.removeFromBag = function(item) {
                 var index = bag.indexOf(item);
                 if (index !== -1) {
                     // TODO: use UnderscoreJS for this
@@ -61,15 +61,15 @@ define([], function() {
                 }
             };
             
-            that.getMaxWeight = function() {
+            this.getMaxWeight = function() {
                 return maxWeight;
             };
             
-            that.increaseMaxWeight = function() {
+            this.increaseMaxWeight = function() {
                 maxWeight  += 50;
             };
             
-            that.getInventory = function() {
+            this.getInventory = function() {
                 var ret,
                     i;
                 if (bag.length === 0) {
@@ -83,7 +83,7 @@ define([], function() {
                 return ret;
             };
             
-            that.searchBag = function(item) {
+            this.searchBag = function(item) {
                 var result = null,
                     i;
                 for (i = 0; i < bag.length; i += 1) {
@@ -95,7 +95,7 @@ define([], function() {
                 return result;    
             };
             
-            that.currentBagWeight = function() {
+            this.currentBagWeight = function() {
                 var weight = 0,
                 i;
                 for (i = 0; i < bag.length; i += 1) {

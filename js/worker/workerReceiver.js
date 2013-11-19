@@ -36,7 +36,7 @@ define([], function() {
             // Public instance methods/fields //
             ////////////////////////////////////
             
-            that.handleMessage = function(event) {
+            this.handleMessage = function(event) {
                 var data = event.data;
                 
                 // TODO

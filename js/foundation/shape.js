@@ -52,7 +52,7 @@ define([
             // Public instance methods/fields //
             ////////////////////////////////////
 
-            Object.defineProperties(that, {
+            Object.defineProperties(this, {
                 /**
                  * x coordinate of top-left of Shape instance
                  * @type {integer}
@@ -157,7 +157,7 @@ define([
              * Clear and draw Shape onto canvas
              * @return {void}
              */
-            that.update = function() {
+            this.update = function() {
                 that.clear();
                 that.draw();
             };
@@ -166,7 +166,7 @@ define([
              * Draw Shape instance onto the canvas
              * @return {void}
              */
-            that.draw = function() {
+            this.draw = function() {
                 // Call subclass method if exists.
                 if (that.drawShape !== undefined) {
                     that.drawShape(drawer);
@@ -177,7 +177,7 @@ define([
              * Clear the Shape instance
              * @return {void}
              */
-            that.clear = function() {
+            this.clear = function() {
                 drawer.clearRect(that.x, that.y, that.width, that.height);
             };
             
@@ -185,7 +185,7 @@ define([
              * Draw BoundingBox of Shape instance
              * @return {void}
              */
-            that.drawBoundingBox = function() {
+            this.drawBoundingBox = function() {
                 var x = that.boundingBox.x,
                     y = that.boundingBox.y,
                     w = that.boundingBox.width,
@@ -195,7 +195,7 @@ define([
                         w - 2 * lineWidth, h - 2 * lineWidth);
             };
             
-            that.collisionTest = function(point) {
+            this.collisionTest = function(point) {
                 // Return result of subclass's test.
                 return that.hitTest(point);
             };

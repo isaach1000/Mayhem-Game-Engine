@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>JSDoc: Module: character/player</title>
+    <title>JSDoc: Source: util/hash.js</title>
     
     <script src="scripts/prettify/prettify.js"> </script>
     <script src="scripts/prettify/lang-css.js"> </script>
@@ -17,94 +17,58 @@
 
 <div id="main">
     
-    <h1 class="page-title">Module: character/player</h1>
+    <h1 class="page-title">Source: util/hash.js</h1>
     
     
 
 
+    
+    <section>
+        <article>
+            <pre class="prettyprint source"><code>// @formatter:off
+define([], function() {
+    "use strict";
+// @formatter:on
 
-<section>
-    
-<header>
-    <h2>
-    character/player
-    </h2>
-    
-</header>  
+    //////////////////////////////////
+    // Private class methods/fields //
+    //////////////////////////////////
 
-<article>
-    <div class="container-overview">
-    
-    
-    
-        
-        
-        
-<dl class="details">
-    
-        
-    
-    
-    
+    var currentHash = 0;
 
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    <dt class="tag-source">Source:</dt>
-    <dd class="tag-source"><ul class="dummy"><li>
-        <a href="player.js.html">character/player.js</a>, <a href="player.js.html#line12">line 12</a>
-    </li></ul></dd>
-    
-    
-    
-    
-    
-    
-    
-</dl>
+    /**
+     * @exports util/hash
+     */
+    var module = {
+        /////////////////////////////////
+        // Public class methods/fields //
+        /////////////////////////////////
 
-        
-        
-    
-    </div>
-    
-    
-    
-    
-    
-    
-    
-    
-        <h3 class="subsection-title">Classes</h3>
-        
-        <dl>
-            <dt><a href="player.Player.html">Player</a></dt>
-            <dd></dd>
-        </dl>
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-</article>
+        /**
+         * Return a hashcode for this object. Does not conform to the Java
+         * standard that two objects that are structurally identical should
+         * yield the same hashcode.
+         * @param   {Object} object     -   Object to get hashcode for
+         * @return  {integer}           Hashcode for object
+         */
+        hashcode : function(object) {
+            if (object._hashId === undefined) {
+                Object.defineProperty(object, '_hashId', {
+                    value : currentHash,
+                    enumerable : false
+                });
+                currentHash++;
+            }
+            
+            return object._hashId;
+        }
+    };
 
-</section>  
+    return module;
+});
+</code></pre>
+        </article>
+    </section>
 
 
 

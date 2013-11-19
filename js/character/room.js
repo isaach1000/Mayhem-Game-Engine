@@ -35,22 +35,22 @@ define([], function() {
             // Public instance methods/fields //
             ////////////////////////////////////
 
-            that.getExitString = function() {
+            this.getExitString = function() {
                 var returnString = "Exits:";
                 for (var i = 0; i < exits.length; i++) {
                     returnString += " " + exits[i];
                 }
             };
 
-            that.getExit = function(direction) {
+            this.getExit = function(direction) {
                 return exits[direction];
             };
 
-            that.addItem = function(item) {
+            this.addItem = function(item) {
                 items.push(item);
             };
 
-            that.getItemString = function() {
+            this.getItemString = function() {
                 var returnString = "Items: \n";
                 for (var i = 0; i < items.length; i++) {
                     returnString += item.getName() + ": " + item.getDescription() + "\n";
@@ -58,7 +58,7 @@ define([], function() {
                 return returnString;
             };
 
-            that.removeItem = function(item) {
+            this.removeItem = function(item) {
                 for (var i = 0; i < items.length; i++) {
                     if (items[i] === item) {
                         items.splice(i, 1);
@@ -70,7 +70,7 @@ define([], function() {
                 }
             };
 
-            that.searchItems = function(item) {
+            this.searchItems = function(item) {
                 var result = null;
                 for (var i = 0; i < items.size; i++) {
                     if (items[i].getName() === item.getName()) {
@@ -81,7 +81,7 @@ define([], function() {
                 return result;
             };
 
-            that.getExitList = function() {
+            this.getExitList = function() {
                 var exitList = [];
                 for (var i = 0; i < exits.length; i++) {
                     exitList.push(exits[i]);
@@ -89,15 +89,15 @@ define([], function() {
                 return exitList;
             };
 
-            that.setExit = function(direction, neighbor) {
+            this.setExit = function(direction, neighbor) {
                 exits[direction] = neighbor;
             };
 
-            that.getShortDescription = function() {
+            this.getShortDescription = function() {
                 return description;
             };
 
-            that.getLongDescription = function() {
+            this.getLongDescription = function() {
                 var profSentence;
                 // TODO
                 /*if (professor.getRoom() === room) {

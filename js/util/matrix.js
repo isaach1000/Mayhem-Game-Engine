@@ -68,20 +68,20 @@ define(['util/mathExtensions'], function(MathExtensions) {
             
             that.numColumns = numColumns;
 
-            that.get = function(row, column) {
+            this.get = function(row, column) {
                 return that.rows[row][column];
             };
 
-            that.set = function(row, column, value) {
+            this.set = function(row, column, value) {
                 rows[row][column] = value;
             };
 
-            that.getRow = function(rowIndex) {
+            this.getRow = function(rowIndex) {
                 // Return a clone of the row.
                 return rows[rowIndex].slice(0);
             };
 
-            that.getColumn = function(columnIndex) {
+            this.getColumn = function(columnIndex) {
                 var column = [], i;
                 for (i = 0; i < that.numRows; i += 1) {
                     column.push(rows[i][columnIndex]);
@@ -89,15 +89,15 @@ define(['util/mathExtensions'], function(MathExtensions) {
                 return column;
             };
 
-            that.add = function(matrix) {
+            this.add = function(matrix) {
                 return addAll(matrix, 1);
             };
 
-            that.subtract = function(matrix) {
+            this.subtract = function(matrix) {
                 return addAll(matrix, -1);
             };
 
-            that.multiply = function(matrix) {
+            this.multiply = function(matrix) {
                 var newEntries = [], i, j, vector1, vector2, dotProduct;
 
                 if (that.numColumns !== that.numRows) {
