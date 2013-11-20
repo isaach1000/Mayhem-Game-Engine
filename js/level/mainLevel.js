@@ -32,12 +32,14 @@ define(['jquery', 'level/levelBase', 'sprite/human'],
             
             var _this = this;
             
-            var human = new Human.Human(200, 200, this.mainDrawer);
-            human.draw();
+            var human1 = new Human.Human(200, 200, this.mainDrawer);
+            var human2 = new Human.Human(-400, -200, this.mainDrawer);
+            human1.draw();
+            human2.turn(Math.PI / 180 * 180);
+            human2.draw();
             $('body').click(function() {
-                human.step(null, function() {
-//                    human.step();
-                });
+                human1.step();
+                human2.step();
             });
 
             ////////////////////////////////////

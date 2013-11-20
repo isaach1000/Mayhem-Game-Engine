@@ -186,9 +186,18 @@ define([
              * @return {void}
              */
             this.draw = function() {
+                if (this.drawingSettings.angle !== undefined) {
+                    drawer.save();
+                    drawer.rotate(this.drawingSettings.angle);
+                }
+                
                 // Call subclass method if exists.
                 if (this.drawShape !== undefined) {
                     this.drawShape(drawer);
+                }
+                
+                if (this.drawingSettings.angle !== undefined) {
+                    drawer.restore();
                 }
             };
 
@@ -197,9 +206,18 @@ define([
              * @return {void}
              */
             this.clear = function() {
+                if (this.drawingSettings.angle !== undefined) {
+                    drawer.save();
+                    drawer.rotate(this.drawingSettings.angle);
+                }
+                
                 var lineWidth = this.drawingSettings.lineWidth || 1;
                 drawer.clearRect(this.x, this.y,
                     this.width + lineWidth, this.height + lineWidth);
+                    
+                if (this.drawingSettings.angle !== undefined) {
+                    drawer.restore();
+                }
             };
             
             /**
@@ -207,6 +225,10 @@ define([
              * @return {void}
              */
             this.drawBoundingBox = function() {
+                if (this.drawingSettings.angle !== undefined) {
+                    drawer.save();
+                    drawer.rotate(this.drawingSettings.angle);
+                }
                 var x = _this.boundingBox.x,
                     y = _this.boundingBox.y,
                     w = _this.boundingBox.width,

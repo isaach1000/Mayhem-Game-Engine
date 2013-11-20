@@ -1,10 +1,11 @@
 // @formatter:off
 define([
+        'underscore',
         'sprite/sprite',
         'foundation/circle',
         'foundation/rectangle',
         'foundation/animation'
-    ], function(Sprite, Circle, Rectangle, Animation) {
+    ], function(_, Sprite, Circle, Rectangle, Animation) {
     "use strict";
     // @formatter:on
 
@@ -15,7 +16,7 @@ define([
     var HEAD_RADIUS = 35,
         ARM_RADIUS = Math.round(HEAD_RADIUS * 0.5),
         FOOT_BREADTH = Math.round(ARM_RADIUS * 0.8),
-        FOOT_LENGTH = Math.round(FOOT_BREADTH * 3);
+        FOOT_LENGTH = Math.round(FOOT_BREADTH * 2.5);
 
     /**
      * @exports sprite/human
@@ -36,7 +37,10 @@ define([
 
             var _this = this;
         
-            drawingSettings = drawingSettings || { strokeStyle: 'black' };
+            drawingSettings = drawingSettings || {
+                strokeStyle: 'black',
+                angle: 0
+            };
             drawingSettings.footColor = drawingSettings.footColor || '#773333';
             drawingSettings.armColor = drawingSettings.armColor || 'purple';
             drawingSettings.headColor = drawingSettings.headColor || '#ddaaaa';
@@ -44,7 +48,8 @@ define([
             var head = new Circle.Circle(x, y, HEAD_RADIUS,
                 drawer, {
                     strokeStyle: drawingSettings.strokeStyle,
-                    fillStyle: drawingSettings.headColor
+                    fillStyle: drawingSettings.headColor,
+                    angle: drawingSettings.angle
                 }
             );                            
 
@@ -54,7 +59,8 @@ define([
                 y + FOOT_BREADTH,
                 FOOT_LENGTH, FOOT_BREADTH, drawer, {
                     strokeStyle: drawingSettings.strokeStyle,
-                    fillStyle: drawingSettings.footColor
+                    fillStyle: drawingSettings.footColor,
+                    angle: drawingSettings.angle
                 }
             ), 
             
@@ -63,7 +69,8 @@ define([
                 FOOT_LENGTH, FOOT_BREADTH,
                 drawer, {
                     strokeStyle: drawingSettings.strokeStyle,
-                    fillStyle: drawingSettings.footColor
+                    fillStyle: drawingSettings.footColor,
+                    angle: drawingSettings.angle
                 }
             );
 
@@ -71,7 +78,8 @@ define([
             var leftArm = new Circle.Circle(x + HEAD_RADIUS - ARM_RADIUS,
                 y - ARM_RADIUS, ARM_RADIUS, drawer, {
                     strokeStyle: drawingSettings.strokeStyle,
-                    fillStyle: drawingSettings.armColor
+                    fillStyle: drawingSettings.armColor,
+                    angle: drawingSettings.angle
                 }
             ),
                 
@@ -79,7 +87,8 @@ define([
                 y + HEAD_RADIUS + ARM_RADIUS, ARM_RADIUS,
                 drawer, {
                     strokeStyle: drawingSettings.strokeStyle,
-                    fillStyle: drawingSettings.armColor
+                    fillStyle: drawingSettings.armColor,
+                    angle: drawingSettings.angle
                 }
             );
            
@@ -102,8 +111,14 @@ define([
                 // TODO
             };
             
-            var isRightFoot = 1;
             this.step = function(direction, callback) {
+                this.halfStep(direction, function() {
+                    _this.halfStep(direction, callback);
+                });
+            };
+            
+            var isRightFoot = 1;
+            this.halfStep = function(direction, callback) {
                 // TODO: direction
                 var X_INIT = head.x;
                 var STEP_DURATION = 500;
@@ -127,6 +142,7 @@ define([
                         rightFoot.x += dx * isRightFoot;
                         
                         if (head.x - X_INIT > STEP_DISTANCE) {
+                            // Change next foot
                             isRightFoot = -isRightFoot;
                             return false;
                         }
@@ -134,19 +150,22 @@ define([
                             return true;
                         }
                 }, function() {
-                    // TODO
-                    var meanX = Math.round((leftFoot.x + rightFoot.x) * 0.5);
+                    var adjustedX = head.x + HEAD_RADIUS;
                     _this.clear();
-                    leftFoot.x = meanX;
-                    rightFoot.x = meanX;
+                    leftFoot.x = adjustedX;
+                    rightFoot.x = adjustedX;
                     _this.draw();
-                    callback();
+                    if (_.isFunction(callback)) {
+                        callback();
+                    }
                 });
                 stepAnimation.start();
             };
             
             this.turn = function(angle) {
-                // TODO
+                this.forEachShape(function(shape) {
+                    shape.drawingSettings.angle += angle;
+                });
             };
         }
     };

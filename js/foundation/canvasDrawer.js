@@ -92,7 +92,7 @@ define(['underscore'], function(_) {
              * Draw a line between two points
              * @param {(float|Point)} point1        -   x coordinate of the first point, or the first point
              * @param {(float|Point)} point2        -   y coordinate of the first point, or the second point
-             * @param {boolean} [moveFirst=false]   -   If true, uses moveTo metho.
+             * @param {boolean} [moveFirst=false]   -   If true, uses moveTo method
              * @return {void}
              */
             this.drawLine = function(point1, point2, moveFirst) {
@@ -200,6 +200,15 @@ define(['underscore'], function(_) {
              */
             this.translate = function(x, y) {
                 ctx.translate(x, y);
+            };
+            
+            /**
+             * Wrapper for <code>context.rotate</code>
+             * @param   {float}     - Angle of rotation
+             * @return  {void}
+             */
+            this.rotate = function(angle) {
+                ctx.rotate(angle);
             };
 
             /**

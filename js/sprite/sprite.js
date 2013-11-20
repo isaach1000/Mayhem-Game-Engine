@@ -106,6 +106,9 @@ define([
                 }
             };
             
+            /**
+             * Clear the Sprite instance and redraw it
+             */
             this.update = function() {
                 this.clear();
                 this.draw();  
