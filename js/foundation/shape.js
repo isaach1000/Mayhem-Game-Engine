@@ -64,8 +64,17 @@ define([
                         return x;
                     },
                     set: function(newX) {
-                        x = Math.round(newX);
-                        _this.boundingBox.x = x;
+                        if (x !== newX) {
+                            var dx = newX - x;
+                            
+                            x = Math.round(newX);
+                            _this.boundingBox.x = x;
+                            
+                            // Allow subclass to handle update too
+                            if (_this.updateShape !== undefined) {
+                                _this.updateShape(dx, 0);
+                            }
+                        }
                     }
                 },
 
@@ -80,8 +89,17 @@ define([
                         return y;
                     },
                     set: function(newY) {
-                        y = Math.round(newY);
-                        _this.boundingBox.y = y;
+                        if (y !== newY) {
+                            var dy = newY - y;
+                            
+                            y = Math.round(newY);
+                            _this.boundingBox.y = y;
+                            
+                            // Allow subclass to handle update too
+                            if (_this.updateShape !== undefined) {
+                                _this.updateShape(0, dy);
+                            }
+                        }
                     }
                 },
 
@@ -99,7 +117,8 @@ define([
                         newWidth = Math.round(newWidth);
                         if (newWidth !== width) {
                             width = newWidth;
-                            bbox = new BoundingBox.BoundingBox(x, y, width, height);
+                            bbox = new BoundingBox.BoundingBox(x, y,
+                                    width, height);
                         }
                     }
                 },
@@ -118,7 +137,8 @@ define([
                         newHeight = Math.round(newHeight);
                         if (newHeight !== height) {
                             height = newHeight;
-                            bbox = new BoundingBox.BoundingBox(x, y, width, height);
+                            bbox = new BoundingBox.BoundingBox(x, y,
+                                width, height);
                         }
                     }
                 },
@@ -148,7 +168,6 @@ define([
                     },
                     set: function(newSettings) {
                         drawingSettings = newSettings;
-                        // TODO: approve settings (update?)
                     }
                 }
             });
@@ -158,8 +177,8 @@ define([
              * @return {void}
              */
             this.update = function() {
-                _this.clear();
-                _this.draw();
+                this.clear();
+                this.draw();
             };
 
             /**
@@ -168,8 +187,8 @@ define([
              */
             this.draw = function() {
                 // Call subclass method if exists.
-                if (_this.drawShape !== undefined) {
-                    _this.drawShape(drawer);
+                if (this.drawShape !== undefined) {
+                    this.drawShape(drawer);
                 }
             };
 
@@ -178,7 +197,9 @@ define([
              * @return {void}
              */
             this.clear = function() {
-                drawer.clearRect(_this.x, _this.y, _this.width, _this.height);
+                var lineWidth = this.drawingSettings.lineWidth || 1;
+                drawer.clearRect(this.x, this.y,
+                    this.width + lineWidth, this.height + lineWidth);
             };
             
             /**
@@ -190,7 +211,7 @@ define([
                     y = _this.boundingBox.y,
                     w = _this.boundingBox.width,
                     h = _this.boundingBox.height,
-                    lineWidth = _this.drawingSettings.lineWidth || 0;
+                    lineWidth = _this.drawingSettings.lineWidth || 1;
                 drawer.strokeRect(x + lineWidth, y + lineWidth,
                         w - 2 * lineWidth, h - 2 * lineWidth);
             };

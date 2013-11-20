@@ -1,5 +1,10 @@
 // @formatter:off
-define(['sprite/sprite', 'foundation/circle'], function(Sprite, Circle) {
+define([
+        'sprite/sprite',
+        'foundation/circle',
+        'foundation/rectangle',
+        'foundation/animation'
+    ], function(Sprite, Circle, Rectangle, Animation) {
     "use strict";
     // @formatter:on
 
@@ -7,7 +12,10 @@ define(['sprite/sprite', 'foundation/circle'], function(Sprite, Circle) {
     // Private class methods/fields //
     //////////////////////////////////
 
-    var HEAD_RADIUS = 40, ARM_RADIUS = HEAD_RADIUS / 2;
+    var HEAD_RADIUS = 35,
+        ARM_RADIUS = Math.round(HEAD_RADIUS * 0.5),
+        FOOT_BREADTH = Math.round(ARM_RADIUS * 0.8),
+        FOOT_LENGTH = Math.round(FOOT_BREADTH * 3);
 
     /**
      * @exports sprite/human
@@ -27,18 +35,60 @@ define(['sprite/sprite', 'foundation/circle'], function(Sprite, Circle) {
             /////////////////////////////////////
 
             var _this = this;
+        
+            drawingSettings = drawingSettings || { strokeStyle: 'black' };
+            drawingSettings.footColor = drawingSettings.footColor || '#773333';
+            drawingSettings.armColor = drawingSettings.armColor || 'purple';
+            drawingSettings.headColor = drawingSettings.headColor || '#ddaaaa';
 
             var head = new Circle.Circle(x, y, HEAD_RADIUS,
-                            drawer, drawingSettings);
-                            
-            var leftHand = new Circle.Circle(x + HEAD_RADIUS - ARM_RADIUS,
-                y - ARM_RADIUS, ARM_RADIUS, drawer, drawingSettings);
+                drawer, {
+                    strokeStyle: drawingSettings.strokeStyle,
+                    fillStyle: drawingSettings.headColor
+                }
+            );                            
+
+            // Feet
+            var leftFoot = new Rectangle.Rectangle(
+                x + HEAD_RADIUS,
+                y + FOOT_BREADTH,
+                FOOT_LENGTH, FOOT_BREADTH, drawer, {
+                    strokeStyle: drawingSettings.strokeStyle,
+                    fillStyle: drawingSettings.footColor
+                }
+            ), 
+            
+            rightFoot = new Rectangle.Rectangle(
+                x + HEAD_RADIUS, y + HEAD_RADIUS + FOOT_BREADTH / 2,
+                FOOT_LENGTH, FOOT_BREADTH,
+                drawer, {
+                    strokeStyle: drawingSettings.strokeStyle,
+                    fillStyle: drawingSettings.footColor
+                }
+            );
+
+            // Arms
+            var leftArm = new Circle.Circle(x + HEAD_RADIUS - ARM_RADIUS,
+                y - ARM_RADIUS, ARM_RADIUS, drawer, {
+                    strokeStyle: drawingSettings.strokeStyle,
+                    fillStyle: drawingSettings.armColor
+                }
+            ),
                 
-            var rightHand = new Circle.Circle(x + HEAD_RADIUS - ARM_RADIUS,
+            rightArm = new Circle.Circle(x + HEAD_RADIUS - ARM_RADIUS,
                 y + HEAD_RADIUS + ARM_RADIUS, ARM_RADIUS,
-                            drawer, drawingSettings);
-                
-            var initialShapes = [leftHand, rightHand, head];
+                drawer, {
+                    strokeStyle: drawingSettings.strokeStyle,
+                    fillStyle: drawingSettings.armColor
+                }
+            );
+           
+
+            var initialShapes = [
+                leftFoot, rightFoot,
+                leftArm, rightArm,
+                head
+            ];
 
             ////////////////////////////////////
             // Public instance methods/fields //
@@ -49,6 +99,53 @@ define(['sprite/sprite', 'foundation/circle'], function(Sprite, Circle) {
             this.updateBoundingBox();
             
             this.walk = function(toX, toY) {
+                // TODO
+            };
+            
+            var isRightFoot = 1;
+            this.step = function(direction, callback) {
+                // TODO: direction
+                var X_INIT = head.x;
+                var STEP_DURATION = 500;
+                var STEP_DISTANCE = 50;
+                var prevTime = 0;
+                var stepAnimation = new Animation.Animation(this,
+                    function(timeElapsed) {
+                        var frameTime = timeElapsed - prevTime;
+                        var step = STEP_DISTANCE * frameTime / STEP_DURATION;
+                        prevTime = timeElapsed;
+                        
+                        _this.forEachShape(function(shape) {
+                            shape.x += step;
+                        });
+                        
+                        var angle = Math.PI * 2 * timeElapsed / STEP_DURATION;
+                        
+                        var dx = Math.sin(angle);
+                        dx = Math.round(dx);
+                        leftFoot.x -= dx * isRightFoot;
+                        rightFoot.x += dx * isRightFoot;
+                        
+                        if (head.x - X_INIT > STEP_DISTANCE) {
+                            isRightFoot = -isRightFoot;
+                            return false;
+                        }
+                        else {
+                            return true;
+                        }
+                }, function() {
+                    // TODO
+                    var meanX = Math.round((leftFoot.x + rightFoot.x) * 0.5);
+                    _this.clear();
+                    leftFoot.x = meanX;
+                    rightFoot.x = meanX;
+                    _this.draw();
+                    callback();
+                });
+                stepAnimation.start();
+            };
+            
+            this.turn = function(angle) {
                 // TODO
             };
         }

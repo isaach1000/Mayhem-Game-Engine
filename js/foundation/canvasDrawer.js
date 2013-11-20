@@ -39,7 +39,7 @@ define(['underscore'], function(_) {
                 /**
                  * Width of the canvas
                  * @type {float}
-                 * @memberof module:foundation/canvasDrawer.CanvasDrawer
+                 * @memberOf module:foundation/canvasDrawer.CanvasDrawer
                  * @instance
                  */
                 width: {
@@ -51,7 +51,7 @@ define(['underscore'], function(_) {
                 /**
                  * Height of the canvas
                  * @type {float}
-                 * @memberof module:foundation/canvasDrawer.CanvasDrawer
+                 * @memberOf module:foundation/canvasDrawer.CanvasDrawer
                  * @instance
                  */
                 height: {
@@ -64,7 +64,7 @@ define(['underscore'], function(_) {
                  * Properties of the context. Valid settings include:
                  * lineWidth, fillStyle, and strokeStyle.
                  * @type {Object}
-                 * @memberof module:foundation/canvasDrawer.CanvasDrawer
+                 * @memberOf module:foundation/canvasDrawer.CanvasDrawer
                  * @instance
                  */
                 contextSettings: {

@@ -95,7 +95,7 @@ define([
 
             /**
              * Iterator function
-             * @param {Function} f      -   A function _this takes a Shape instance as a parameter.
+             * @param {Function} f  - A function _this takes a Shape instance as a parameter.
              * @return {void}
              */
             this.forEachShape = function(f) {
@@ -112,6 +112,16 @@ define([
             };
             
             /**
+             * Clear Sprite instance
+             * @return {void}
+             */
+            this.clear = function() {
+                this.forEachShape(function(shape) {
+                    shape.clear(); 
+                });
+            };
+            
+            /**
              * Draw Sprite instance
              * @return {void}
              */
@@ -119,8 +129,6 @@ define([
                 this.forEachShape(function(shape) {
                     shape.draw();
                 });
-                // TODO: remove drawBoudingBox
-                this.drawBoundingBox();
             };
             
             /**
@@ -165,7 +173,7 @@ define([
             };
             
             /**
-             * Test whether or not a point is within a Sprite.
+             * Test whether or not a point is within a Sprite
              * @param {Point} point         - Point to test
              * @return {boolean}            If the point is in the Sprite
              */

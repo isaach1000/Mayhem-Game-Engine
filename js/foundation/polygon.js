@@ -19,8 +19,8 @@ define([
 
         /**
          * Generate a BoundingBox for a polygon
-         * @param {Array.<Point>} points - An array of points describing the polygon.
-         * @return {BoundingBox} - A BoundingBox _this contains all of the points.
+         * @param   {Array.<Point>} points  - An array of points describing the polygon.
+         * @return  {BoundingBox}           A BoundingBox containing all of the points.
          */
         generateBbox: function(points) {
             var minX = points[0].x,
@@ -59,19 +59,31 @@ define([
             // Private instance methods/fields //
             /////////////////////////////////////
 
+            var _this = this;
+
+            // Variables necessary for Shape constructor.
+            // NOTE: Do not use these variables directly (i.e. x versus this.x).
             var bbox = module.generateBbox(points),
                 x = bbox.x,
                 y = bbox.y,
-                w = bbox.width,
-                h = bbox.height;
+                width = bbox.width,
+                height = bbox.height;
 
+            var forEachPoint = function(f) {
+                var numPoints = _this.points.length;
+                for (var i = 0; i < numPoints; i++) {
+                    var point = _this.points[i];
+                    f(point);
+                }
+            };
 
             ////////////////////////////////////
             // Public instance methods/fields //
             ////////////////////////////////////
 
             // Extend Shape constructor
-            Shape.Shape.call(this, x, y, w, h, drawer, drawingSettings);
+            Shape.Shape.call(this, x, y, width, height,
+                drawer, drawingSettings);
 
             Object.defineProperties(this, {
                 /**
@@ -90,10 +102,16 @@ define([
                     }
                 }
             });
+            
+            this.updateShape = function(dx, dy) {
+                forEachPoint(function(point) {
+                    point.x += Math.round(dx);
+                    point.y += Math.round(dy);
+                });
+            };
 
             /**
-             * Draw the rectangle onto the canvas using the CanvascanvasDrawer.
-             *
+             * Draw the rectangle onto the canvas using the CanvasDrawer.
              * @return {void}
              */
             this.drawShape = function(canvasDrawer) {
@@ -102,6 +120,7 @@ define([
 
                 var pts = this.points,
                     numPoints = pts.length;
+                    
                 canvasDrawer.drawLine(pts[0], pts[1], true);
                 for (var i = 1; i < numPoints; i++) {
                     var point = pts[i];

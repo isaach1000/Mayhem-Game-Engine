@@ -25,21 +25,21 @@ define(['underscore'], function(_) {
          * Animation
          *
          * @constructor
-         * @param   {Shape}     shape           - The shape to animate.
-         * @param   {Function}  frameFunction   - A function _this updates the animation. Must return a boolean, which is 
+         * @param   {drawable}  drawable        - The drawable to animate.
+         * @param   {Function}  frameFunction   - A function that updates the animation. Must return a boolean, which is 
          *                                      supposed to signal whether or not to terminate the animation (return false to terminate).
          *                                      It may take the duration in milliseconds from the beginning of the animation as a parameter.
          * @param   {Function}  callback        - A function to perform at the completion of the animation.
          */
-        Animation: function(shape, frameFunction, callback) {
+        Animation: function(drawable, frameFunction, callback) {
             // Private instance methods/fields
             
             var startTime;
             
             var animate = function() {
-                shape.clear();
+                drawable.clear();
                 var shouldContinue = frameFunction(new Date() - startTime);
-                shape.draw();
+                drawable.draw();
                 if (shouldContinue) {
                     window.requestAnimFrame(function() {
                         animate();
@@ -50,8 +50,9 @@ define(['underscore'], function(_) {
                 }
             };
             
-            
-            // Public instance methods/fields
+            ////////////////////////////////////
+            // Public instance methods/fields //
+            ////////////////////////////////////
             
             /**
              * Start the animation.
@@ -66,29 +67,29 @@ define(['underscore'], function(_) {
         /**
          * Create an easing.
          * 
-         * @param  {Polygon|Rectangle|Circle}   shape       - The shape to animate.
+         * @param  {Polygon|Rectangle|Circle}   drawable       - The drawable to animate.
          * @param  {float}                      endX        - The x to go to.
          * @param  {float}                      endY        - The y to go to.
          * @param  {int}                        duration    - The number of milliseconds for the animation.
          * @param  {Function}                   callback    - A function to perform at the completion of the animation.
          * @return {Animation} An animation _this represents the easing.
          */
-        easing: function(shape, endX, endY, endZ, duration, callback) {
-            var startX = shape.x,
-                startY = shape.y,
+        easing: function(drawable, endX, endY, duration, callback) {
+            var startX = drawable.x,
+                startY = drawable.y,
                 distX = endX - startX,
                 distY = endY - startY,
                 durationX = distX / duration,
                 durationY = distY / duration;
 
             var frameFunction = function(durationElapsed) {
-                shape.x = startX + durationX * durationElapsed;
-                shape.y = startY + durationY * durationElapsed;
-                return shape.x < endX && shape.y < endY &&
+                drawable.x = startX + durationX * durationElapsed;
+                drawable.y = startY + durationY * durationElapsed;
+                return drawable.x < endX && drawable.y < endY &&
                         durationElapsed < duration;
             };
 
-            return new module.Animation(shape, frameFunction, callback);
+            return new module.Animation(drawable, frameFunction, callback);
         }
     };
 

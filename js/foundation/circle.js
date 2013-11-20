@@ -76,8 +76,9 @@ define([
                 canvasDrawer.beginPath();
                 canvasDrawer.contextSettings = _this.drawingSettings;
 
-                var lineWidth = _this.drawingSettings.lineWidth || 0;
-                canvasDrawer.arc(this.x + this.radius, this.y + this.radius,
+                var lineWidth = this.drawingSettings.lineWidth || 1;
+                canvasDrawer.arc(this.x + this.radius,
+                    this.y + this.radius,
                     this.radius - lineWidth, 0, 2 * Math.PI, true);
 
                 canvasDrawer.stroke();

@@ -1,6 +1,6 @@
 // @formatter:off
-define(['level/levelBase', 'sprite/human'],
-    function(LevelBase, Human) {
+define(['jquery', 'level/levelBase', 'sprite/human'],
+    function($, LevelBase, Human) {
     "use strict";
     // @formatter:on
 
@@ -32,11 +32,13 @@ define(['level/levelBase', 'sprite/human'],
             
             var _this = this;
             
-            var human = new Human.Human(200, 200, this.mainDrawer, {
-                fillStyle: 'FFA700',
-                strokeStyle: 'black'    
-            });
+            var human = new Human.Human(200, 200, this.mainDrawer);
             human.draw();
+            $('body').click(function() {
+                human.step(null, function() {
+//                    human.step();
+                });
+            });
 
             ////////////////////////////////////
             // Public instance methods/fields //
