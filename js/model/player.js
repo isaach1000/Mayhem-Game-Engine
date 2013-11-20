@@ -7,7 +7,7 @@ define([], function() {
     
     
     /**
-     * @exports character/player
+     * @exports model/player
      */
     var module = {
         /////////////////////////////////

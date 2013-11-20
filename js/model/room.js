@@ -8,7 +8,7 @@ define([], function() {
     //////////////////////////////////
 
     /**
-     * @exports character/room
+     * @exports model/room
      */
     var module = {
         /////////////////////////////////

@@ -1,10 +1,15 @@
-define(['character/player'], function(Player) {
+define(['model/player'], function(Player) {
     describe('Player', function() {
         var room1 = {
-            name : 'room1'
-        }, room2 = {
-            name : 'room2'
-        }, player = new Player.Player(room1);
+            name: 'room1'
+        },
+        
+        room2 = {
+            name: 'room2'
+        },
+        
+        player = new Player.Player(room1);
+
 
         it('room getter', function() {
             expect(player.getRoom()).toBe(room1);
@@ -18,6 +23,7 @@ define(['character/player'], function(Player) {
         var item = {
             name : 'myItem'
         };
+        
         it('add to bag & bag getter', function() {
             player.addToBag(item);
             expect(player.getBag().length).toBe(1);

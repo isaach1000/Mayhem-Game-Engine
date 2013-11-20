@@ -19,16 +19,16 @@ define([], function() {
 
         /**
          * Return a hashcode for this object. Does not conform to the Java
-         * standard _this two objects _this are structurally identical should
+         * standard that two objects that are structurally identical should
          * yield the same hashcode.
          * @param   {Object} object     -   Object to get hashcode for
          * @return  {integer}           Hashcode for object
          */
-        hashcode : function(object) {
+        hashcode: function(object) {
             if (object._hashId === undefined) {
                 Object.defineProperty(object, '_hashId', {
-                    value : currentHash,
-                    enumerable : false
+                    value: currentHash,
+                    enumerable: false
                 });
                 currentHash++;
             }
