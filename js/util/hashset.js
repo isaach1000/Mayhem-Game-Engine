@@ -28,8 +28,12 @@ define(['util/hash'], function(Hash) {
             // Private instance methods/fields //
             /////////////////////////////////////
 
-            var _this = this;
-            // TODO
+            var _this = this,
+                bucket,
+                capacity = 101,
+                loadFactor,
+                size = 0;
+                
 
 
             ////////////////////////////////////
@@ -56,7 +60,19 @@ define(['util/hash'], function(Hash) {
              * @return  {boolean}           Whether or not the insertion was successful
              */
             this.add = function(object) {
-                // TODO
+                var index = Hash.hashcode(object),
+                n = bucket[index];
+                
+                if (contains(object)) {
+                    return false;
+                }
+                size += 1;
+                if ( size/capacity > loadFactor ) {
+                     rehash();
+                 }
+                int index = hash(elt);
+                bucket[index] = new Node(elt, bucket[index]);
+                 return true;
             };
             
             /**
@@ -73,7 +89,16 @@ define(['util/hash'], function(Hash) {
              * @return  {boolean}           Whether or not the object is an element
              */
             this.contains = function(object) {
-                // TODO
+                var index = hash.hashcode(object),
+                n = bucket[index];
+                
+                while (n !== null) {
+                    if (n.data === object) {
+                        return true;
+                    }
+                    n = n.next;
+                }
+                return false;
             };
             
             /**
@@ -82,7 +107,10 @@ define(['util/hash'], function(Hash) {
              * @return {boolean}            True if removed object from set, false if object could not be removed from set
              */
             this.remove = function(object) {
-                // TODO  
+                var index = hash.hashcode(object),
+                n = bucket[index];
+                
+                
             };
         }
     };
