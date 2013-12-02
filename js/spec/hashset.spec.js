@@ -10,8 +10,12 @@ define(['util/hashset'], function(Hashset) {
             key2 : 2
         };
 
-        it('add & contains', function() {
-            set.add(item);
+        it('add', function() {
+            expect(set.add(item)).toBe(true);
+            expect(set.add(item)).toBe(false);
+        });
+
+        it('contains', function() {
             expect(set.contains(item)).toBe(true);
         });
 
