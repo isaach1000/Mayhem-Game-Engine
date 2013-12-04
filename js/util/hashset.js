@@ -22,7 +22,7 @@ define(['underscore', 'util/hash'], function(_, Hash) {
          * Hashset
          * @constructor
          */
-        Hashset : function() {
+        Hashset: function() {
             /////////////////////////////////////
             // Private instance methods/fields //
             /////////////////////////////////////
@@ -31,8 +31,8 @@ define(['underscore', 'util/hash'], function(_, Hash) {
                 bucket = new Array(INIT_CAPACITY),
                 size = 0,
                 capacity = INIT_CAPACITY;
-                
-            var resolveCollision = function(object, index) {
+            
+            function resolveCollision(object, index) {
                 var location = bucket[index];
                 if (_.isArray(location)) {
                     if (_.contains(location, object)) {
@@ -47,9 +47,9 @@ define(['underscore', 'util/hash'], function(_, Hash) {
                     bucket[index] = [location, object];
                     return true;
                 }
-            };
+            }
                 
-            var rehash = function() {
+            function rehash() {
                 // Create new bucket that is double the size
                 var oldBucket = bucket;
                 capacity *= 2;
@@ -64,30 +64,38 @@ define(['underscore', 'util/hash'], function(_, Hash) {
                             subArrayLen = subArray.length;
                         for (var j = 0; j < subArrayLen; j++) {
                             var element = subArray[j];
-                            insert[element];   
+                            insert(element);   
                         }
                     }
                     else {
                         insert(object);
                     }
                 }
-            };
+            }
                 
-            var insert = function(object) {
-                var hash = Hash.hashcode(object),
-                    index = hash % capacity;
-            
-                if (bucket[index] === undefined) {
+            function insert(object, hashTarget) {
+                var originalTarget = hashTarget || null;
+                hashTarget = hashTarget || object;
+                
+                var index = Hash.hashcode(hashTarget) % capacity,
+                    location = bucket[index];
+                var locKey;
+                if (location) {
+                    locKey = location.key;
+                }
+                
+                if (location === undefined) {
                     bucket[index] = object;
                     return true;
                 }
-                else if (bucket[index] === object){
+                else if (location === object ||
+                    originalTarget === locKey) {
                     return false;
                 }
                 else {
                     return resolveCollision(object, index);
                 };
-            };
+            }
 
 
             ////////////////////////////////////
@@ -110,19 +118,23 @@ define(['underscore', 'util/hash'], function(_, Hash) {
 
             /**
              * Add an object
-             * @param   {Object} object     -   Object to add
+             * @param   {Object} object         -   Object to add
+             * @param   {Object} [hashTarget]   -   Object to hash
              * @return  {boolean}           Whether or not the insertion was successful
              */
-            this.add = function(object) {
+            this.add = function(object, hashTarget) {
+                var originalTarget = hashTarget || null;
+                hashTarget = hashTarget || object;
+                
                 if (!_.isObject(object) || _.isArray(object) || _.isFunction(object)) {
                     return false;
                 }
                 
-                var inserted = insert(object);
+                var inserted = insert(object, hashTarget);
                 if (inserted) {
                     size++;     
-                    if ( size/capacity > LOAD_FACTOR ) {
-                         rehash();
+                    if (size / capacity > LOAD_FACTOR) {
+                        rehash();
                     }
                     return true;
                 }
@@ -144,20 +156,32 @@ define(['underscore', 'util/hash'], function(_, Hash) {
              * @param   {Object} object     -   An object _this may be an element
              * @return  {boolean}           Whether or not the object is an element
              */
-            this.contains = function(object) {
+            this.contains = function(object, hashTarget) {
+                var originalTarget = hashTarget || null;
+                hashTarget = hashTarget || object;
+                
                 if (!_.isObject(object) || _.isArray(object) || _.isFunction(object)) {
                     return false;
                 }
                 
-                var index = Hash.hashcode(object) % capacity,
+                var index = Hash.hashcode(hashTarget) % capacity,
                     location = bucket[index];
+                var locKey;
+                if (location) {
+                    locKey = location.key;
+                }
                 
-                if (location === object) {
+                if (location === object || originalTarget === locKey) {
                     return true;
                 }
-                else if (_.isArray(location) && _.contains(location, object)) {
+                else if (_.isArray(location)) {
                     for (var i = 0; i < location.length; i++) {
-                        if (location[i] === object) {
+                        var elem = location[i];
+                        var elemKey;
+                        if (elem) {
+                            elemKey = elem.key; 
+                        }
+                        if (elem === object || originalTarget === elemKey) {
                             return true;
                         }
                     }
@@ -170,18 +194,25 @@ define(['underscore', 'util/hash'], function(_, Hash) {
              * @param {Object} object       - An object
              * @return {boolean}            True if removed object from set, false if object could not be removed from set
              */
-            this.remove = function(object) {
+            this.remove = function(object, hashTarget) {
+                var originalTarget = hashTarget || null;
+                hashTarget = hashTarget || object;
+                
                 if (!_.isObject(object) || _.isArray(object) || _.isFunction(object)) {
                     return false;
                 }
-                         
-                var contained = _this.contains(object);                  
-                if (contained)  {
-                    var index = Hash.hashcode(object) % capacity,
+                
+                var contained = _this.contains(object, originalTarget);
+                if (contained) {
+                    var index = Hash.hashcode(hashTarget) % capacity,
                         location = bucket[index];
+                    var locKey;
+                    if (location) {
+                        locKey = location.key;
+                    }
                     
-                    if (location === object) {
-                        location = null;
+                    if (location === object || locKey === originalTarget) {
+                        bucket[index] = undefined;
                         size--;
                         return true;
                     }
