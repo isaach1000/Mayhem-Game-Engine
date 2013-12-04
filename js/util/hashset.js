@@ -18,8 +18,6 @@ define(['underscore', 'util/hash'], function(_, Hash) {
         // Public class methods/fields //
         /////////////////////////////////
 
-        // TODO
-
         /**
          * Hashset
          * @constructor
@@ -77,7 +75,7 @@ define(['underscore', 'util/hash'], function(_, Hash) {
                 
             var insert = function(object) {
                 var hash = Hash.hashcode(object),
-                index = hash % capacity;
+                    index = hash % capacity;
             
                 if (bucket[index] === undefined) {
                     bucket[index] = object;
@@ -105,7 +103,7 @@ define(['underscore', 'util/hash'], function(_, Hash) {
                  */
                 length: {
                     get: function() {
-                        // TODO
+                        return size;
                     }
                 } 
             });
@@ -151,8 +149,8 @@ define(['underscore', 'util/hash'], function(_, Hash) {
                     return false;
                 }
                 
-                var index = Hash.hashcode(object),
-                location = bucket[index];
+                var index = Hash.hashcode(object) % capacity,
+                    location = bucket[index];
                 
                 if (location === object) {
                     return true;
@@ -164,9 +162,7 @@ define(['underscore', 'util/hash'], function(_, Hash) {
                         }
                     }
                 }
-                else {
-                    return false;
-                }
+                return false;
             };
             
             /**
@@ -178,11 +174,11 @@ define(['underscore', 'util/hash'], function(_, Hash) {
                 if (!_.isObject(object) || _.isArray(object) || _.isFunction(object)) {
                     return false;
                 }
-                
-                var contained = contains(object);
+                         
+                var contained = _this.contains(object);                  
                 if (contained)  {
-                    var index = hash.hashcode(object),
-                    location = bucket[index];
+                    var index = Hash.hashcode(object) % capacity,
+                        location = bucket[index];
                     
                     if (location === object) {
                         location = null;
@@ -199,9 +195,7 @@ define(['underscore', 'util/hash'], function(_, Hash) {
                         }
                     }
                 }
-                else {
-                    return false;
-                }
+                return false;
             };
         }
     };
