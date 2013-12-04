@@ -103,7 +103,7 @@ define(['underscore', 'util/hash'], function(_, Hash) {
                  */
                 length: {
                     get: function() {
-                        // TODO
+                        return size;
                     }
                 } 
             });
@@ -174,9 +174,10 @@ define(['underscore', 'util/hash'], function(_, Hash) {
                 if (!_.isObject(object) || _.isArray(object) || _.isFunction(object)) {
                     return false;
                 }
-                                           
-                if (contains(object))  {
-                    var index = hash.hashcode(object) % capacity,
+                         
+                var contained = _this.contains(object);                  
+                if (contained)  {
+                    var index = Hash.hashcode(object) % capacity,
                         location = bucket[index];
                     
                     if (location === object) {
