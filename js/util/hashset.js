@@ -23,29 +23,37 @@ define(['underscore', 'util/hash'], function(_, Hash) {
          * @constructor
          */
         Hashset: function() {
+            var _this = this;
+
             /////////////////////////////////////
             // Private instance methods/fields //
             /////////////////////////////////////
 
-            var _this = this,
-                bucket = new Array(INIT_CAPACITY),
+            var bucket = new Array(INIT_CAPACITY),
                 size = 0,
-                capacity = INIT_CAPACITY;
+                capacity = INIT_CAPACITY,
+                indicesTaken = [];
             
             function resolveCollision(object, index) {
                 var location = bucket[index];
                 if (_.isArray(location)) {
                     if (_.contains(location, object)) {
                         return false;
-                    }
-                    else {
+                    } else {
                         location.push(object);
                         return true;
                     }
-                }
-                else {
+                } else {
                     bucket[index] = [location, object];
                     return true;
+                }
+            }
+
+            function addIndex(idx) {
+                // Add idx to the sorted indicesTaken array
+                var spot = _.sortedIndex(indicesTaken, idx);
+                if (indicesTaken[spot] !== idx) {
+                    indicesTaken.splice(spot, 0, idx);
                 }
             }
                 
@@ -54,6 +62,7 @@ define(['underscore', 'util/hash'], function(_, Hash) {
                 var oldBucket = bucket;
                 capacity *= 2;
                 bucket = new Array(capacity);
+                indicesTaken = [];
                 
                 // Transfer all elements to new array
                 var bucketLen = oldBucket.length;
@@ -64,10 +73,9 @@ define(['underscore', 'util/hash'], function(_, Hash) {
                             subArrayLen = subArray.length;
                         for (var j = 0; j < subArrayLen; j++) {
                             var element = subArray[j];
-                            insert(element);   
+                            insert(element);
                         }
-                    }
-                    else {
+                    } else {
                         insert(object);
                     }
                 }
@@ -86,17 +94,15 @@ define(['underscore', 'util/hash'], function(_, Hash) {
                 
                 if (location === undefined) {
                     bucket[index] = object;
+                    addIndex(index);
                     return true;
-                }
-                else if (location === object ||
+                } else if (location === object ||
                     originalTarget === locKey) {
                     return false;
-                }
-                else {
+                } else {
                     return resolveCollision(object, index);
-                };
+                }
             }
-
 
             ////////////////////////////////////
             // Public instance methods/fields //
@@ -149,6 +155,7 @@ define(['underscore', 'util/hash'], function(_, Hash) {
                 bucket = new Array(INIT_CAPACITY);
                 size = 0;
                 capacity = INIT_CAPACITY;
+                indicesTaken = [];
             };
             
             /**
@@ -173,8 +180,7 @@ define(['underscore', 'util/hash'], function(_, Hash) {
                 
                 if (location === object || originalTarget === locKey) {
                     return true;
-                }
-                else if (_.isArray(location)) {
+                } else if (_.isArray(location)) {
                     for (var i = 0; i < location.length; i++) {
                         var elem = location[i];
                         var elemKey;
@@ -213,13 +219,13 @@ define(['underscore', 'util/hash'], function(_, Hash) {
                     
                     if (location === object || locKey === originalTarget) {
                         bucket[index] = undefined;
+                        _.without(indicesTaken, index);
                         size--;
                         return true;
-                    }
-                    else {
+                    } else {
                         for (var i = 0; i < location.length; i++) {
                             if (location[i] === object) {
-                                location[i] = null;
+                                location[i] = undefined;
                                 size--;
                                 return true;
                             }
@@ -228,6 +234,52 @@ define(['underscore', 'util/hash'], function(_, Hash) {
                 }
                 return false;
             };
+
+            this.get = function(object, hashTarget) {
+                var originalTarget = hashTarget || null;
+                hashTarget = hashTarget || object;
+
+                var index = Hash.hashcode(hashTarget) % capacity,
+                    location = bucket[index];
+                var locKey;
+                if (location) {
+                    locKey = location.key;
+                }
+
+                if (location === undefined) {
+                    return null;
+                } else if (location === object || locKey === originalTarget) {
+                    return location;
+                } else {
+                    var arrLen = location.length;
+                    for (var i = 0; i < arrLen; i++) {
+                        var element = location[i],
+                            elemKey = element.key;
+                        if (element === object || elemKey === originalTarget) {
+                            return element;
+                        }
+                    }
+                    return null;
+                }
+            };
+
+            this.forEach = function(f) {
+                var numIndices = indicesTaken.length;
+                for (var i = 0; i < numIndices; i++) {
+                    var idx = indicesTaken[i],
+                        current = bucket[idx];
+                    if (_.isArray(current)) {
+                        var arrLen = current.length;
+                        for (var j = 0; j < arrLen; j++) {
+                            var element = current[j];
+                            f(element);
+                        }
+                    } else {
+                        f(current);
+                    }
+                }
+            };
+            
         }
     };
 

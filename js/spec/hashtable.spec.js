@@ -17,6 +17,11 @@ define(['util/hashtable'], function(Hashtable) {
 
         it('containsKey', function() {
             expect(table.containsKey(key)).toBe(true);
+            expect(table.containsKey(keyClone)).toBe(false);
+        });
+
+        it ('get', function() {
+            expect(table.get(key)).toBe(value);
         });
 
         it('contains only applies to original object, ' +
@@ -40,6 +45,14 @@ define(['util/hashtable'], function(Hashtable) {
             table.put(key, value);
             table.put(key, value);
             expect(table.length).toBe(1);
+        });
+
+        it('forEach', function() {
+            var size = 0;
+            table.forEach(function(k, v) {
+                size++;
+            });
+            expect(size).toBe(table.length);
         });
     });
 });

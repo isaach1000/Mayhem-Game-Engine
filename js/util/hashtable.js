@@ -45,6 +45,10 @@ define(['util/hash', 'util/hashset'], function(Hash, Hashset) {
                 };
                 return hashset.add(entry, key);
             };
+
+            this.get = function(key) {
+                return hashset.get(key, key).value;
+            };
             
             this.containsKey = function(key) {
                 return hashset.contains(key, key);
@@ -56,6 +60,12 @@ define(['util/hash', 'util/hashset'], function(Hash, Hashset) {
             
             this.clear = function() {
                 hashset.clear();
+            };
+
+            this.forEach = function(f) {
+                hashset.forEach(function(entry) {
+                    f(entry.key, entry.value);
+                });
             };
             
             Object.defineProperties(this, {

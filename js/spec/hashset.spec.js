@@ -40,5 +40,17 @@ define(['util/hashset'], function(Hashset) {
             set.add(item);
             expect(set.length).toBe(1);
         });
+
+        it('get', function() {
+            expect(set.get(item)).toBe(item);
+        });
+
+        it('forEach', function() {
+            var size = 0;
+            set.forEach(function(elem) {
+                size++;
+            });
+            expect(size).toBe(set.length);
+        });
     });
 });
