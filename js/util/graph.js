@@ -63,16 +63,40 @@ define([
             // Public instance methods/fields //
             ////////////////////////////////////
             
+            /**
+             * Add a node to the graph
+             * @param   {Object} data   -   Data to be stored in the node
+             * @return  {Node}          A node with the data
+             */
             this.addNode = function(data) {
                 var node = new Node(data);
                 nodes.add(node);
                 return node;
             };
 
+            /**
+             * Add an edge to the graph
+             * @param   {Node} tail     -   The origin node of the edge
+             * @param   {Node} head     -   The destination node of the edge
+             * @return  {Edge}          A directed edge connecting the nodes
+             */
             this.addEdge = function(tail, head) {
                 var edge = new Edge(tail, head);
                 adjacencyList.get(tail).add(edge);
                 return edge;
+            };
+            
+            // TODO
+            this.depthFirstSearch = function(f) {
+                // Inner helper function
+                function depthFirstSearchHelper() {
+                    // TODO
+                }
+            };
+            
+            // TODO
+            this.breadthFirstSearch = function(f) {
+                
             };
         }
     };
