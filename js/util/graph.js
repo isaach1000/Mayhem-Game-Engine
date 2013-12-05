@@ -39,14 +39,25 @@ define([
             
             // Private inner Node class
             function Node(data) {
+                var thisNode = node;
                 this.data = data;
-                var edges = new Hashset.Hashset();
+                var edges = new Hashset.Hashset;
+                
                 adjacencyList.put(this, edges);
 
                 Object.defineProperties(this, {
                     edges: {
                         get: function() {
-                            return adjacencyList.get(this);
+                            return adjacencyList.get(thisNode);
+                        }
+                    },
+                    neighbors: {
+                        get: function() {
+                            var neighborSet = new HashSet.HashSet();
+                            thisNode.edges.forEach(function(edge) {
+                                neighborSet.add(edge.head);
+                            });
+                            return neighborSet;
                         }
                     }
                 });
@@ -88,9 +99,30 @@ define([
             
             // TODO
             this.depthFirstSearch = function(f) {
+                var 
+                    visitedSet = new Hashset.Hashset(),
+                    keepSearching  = true;
+                
+                nodes.forEach(function(node) {
+                    if (keepSearching) {
+                        keepSearching = depthFirstSearchHelper(node);                        
+                    }
+                });
+                
+                
                 // Inner helper function
-                function depthFirstSearchHelper() {
-                    // TODO
+                function depthFirstSearchHelper(node) {
+                    if (visitedSet.contains(node)) {
+                        return true;
+                    }
+                    var shouldContinue = f(node) || true;
+                    if (shouldContinue) {
+                        visitedSet.add(node);
+                        node.neighbors.forEach(function(neighbor) {
+                           depthFirstSearchHelper(neighbor); 
+                        });   
+                    }
+                    return shouldContinue;
                 }
             };
             
