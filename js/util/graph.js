@@ -113,28 +113,27 @@ define([
                 tail.edges.remove(removeEdge);
             };
             
-            // TODO: documentation for DFS
             /**
-             *
+             * Perform a depth first search of the graph
+             * @param {function} func - The operation to perform on the visited nodes
              */
-            this.depthFirstSearch = function(f) {
+            this.depthFirstSearch = function(func) {
                 var 
                     visitedSet = new Hashset.Hashset(),
                     keepSearching  = true;
                 
                 nodes.forEach(function(node) {
                     if (keepSearching) {
-                        keepSearching = depthFirstSearchHelper(node);                        
+                        keepSearching = depthFirstSearchHelper(node);
                     }
                 });
-                
-                
+
                 // Inner helper function
                 function depthFirstSearchHelper(node) {
                     if (visitedSet.contains(node)) {
                         return true;
                     }
-                    var shouldContinue = f(node) || true;
+                    var shouldContinue = func(node) || true;
                     if (shouldContinue) {
                         visitedSet.add(node);
                         node.neighbors.forEach(function(neighbor) {
@@ -145,9 +144,41 @@ define([
                 }
             };
             
-            // TODO: method and docs
-            this.breadthFirstSearch = function(f) {
-                                
+            /**
+             * Perform a breadth first search on the graph
+             * @param {function} func - The operation to perform on the visited nodes
+             */
+            this.breadthFirstSearch = function(func) {
+                var
+                    visitedSet = new HashSet.HashSet();
+                    round2Set = new HashSet.HashSet();
+                
+                nodes.forEach(function(node) {
+                    round2Set.add(node.neighbors);
+                });
+                breadthFirstSearchHelper(round2Set);
+                    
+                
+                // Inner helper function
+                function breadthFirstSearchHelper(currentSet) {
+                    var 
+                        nextRoundSet = new HashSet.HashSet(),
+                        doneSearching = false;
+                        
+                    set.forEach(function(node) {
+                        if (visitedSet.contains(node)) {
+                            return false;
+                        }
+                        doneSearching = func(node) || false;
+                        if(!doneSearching) {
+                            visitedSet.add(node);
+                            node.neighbors.forEach(function(neigh) {
+                                nextRoundSet.add(neigh);
+                            });
+                        }
+                    });
+                    breadthFirstSearchHelper(nextRoundSet);
+                }
             };
         }
     };
