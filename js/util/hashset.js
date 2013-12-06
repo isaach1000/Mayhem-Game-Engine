@@ -219,7 +219,7 @@ define(['underscore', 'util/hash'], function(_, Hash) {
                     
                     if (location === object || locKey === originalTarget) {
                         bucket[index] = undefined;
-                        _.without(indicesTaken, index);
+                        indicesTaken = _.without(indicesTaken, index);
                         size--;
                         return true;
                     } else {

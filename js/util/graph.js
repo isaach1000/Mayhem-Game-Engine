@@ -150,8 +150,8 @@ define([
              */
             this.breadthFirstSearch = function(func) {
                 var
-                    visitedSet = new HashSet.HashSet();
-                    round2Set = new HashSet.HashSet();
+                    visitedSet = new Hashset.Hashset();
+                    round2Set = new Hashset.Hashset();
                 
                 nodes.forEach(function(node) {
                     round2Set.add(node.neighbors);
@@ -162,7 +162,7 @@ define([
                 // Inner helper function
                 function breadthFirstSearchHelper(currentSet) {
                     var 
-                        nextRoundSet = new HashSet.HashSet(),
+                        nextRoundSet = new Hashset.Hashset(),
                         doneSearching = false;
                         
                     set.forEach(function(node) {
@@ -172,8 +172,8 @@ define([
                         doneSearching = func(node) || false;
                         if(!doneSearching) {
                             visitedSet.add(node);
-                            node.neighbors.forEach(function(neigh) {
-                                nextRoundSet.add(neigh);
+                            node.neighbors.forEach(function(neighbor) {
+                                nextRoundSet.add(neighbor);
                             });
                         }
                     });
