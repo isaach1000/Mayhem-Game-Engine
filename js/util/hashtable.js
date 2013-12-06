@@ -3,13 +3,6 @@ define(['util/hash', 'util/hashset'], function(Hash, Hashset) {
     "use strict";
     // @formatter:on
 
-    //////////////////////////////////
-    // Private class methods/fields //
-    //////////////////////////////////
-
-    // TODO
-
-
     /**
      * @exports util/hashtable
      */
@@ -18,19 +11,16 @@ define(['util/hash', 'util/hashset'], function(Hash, Hashset) {
         // Public class methods/fields //
         /////////////////////////////////
 
-        // TODO
-
-
         /**
          * Hashtable
          * @constructor
          */
         Hashtable: function() {
+            var _this = this;
+            
             /////////////////////////////////////
             // Private instance methods/fields //
             /////////////////////////////////////
-
-            var _this = this;
             
             var hashset = new Hashset.Hashset();
 

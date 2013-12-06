@@ -39,9 +39,9 @@ define([
             
             // Private inner Node class
             function Node(data) {
-                var thisNode = node;
+                var thisNode = this;
                 this.data = data;
-                var edges = new Hashset.Hashset;
+                var edges = new Hashset.Hashset();
                 
                 adjacencyList.put(this, edges);
 
@@ -53,7 +53,7 @@ define([
                     },
                     neighbors: {
                         get: function() {
-                            var neighborSet = new HashSet.HashSet();
+                            var neighborSet = new Hashset.Hashset();
                             thisNode.edges.forEach(function(edge) {
                                 neighborSet.add(edge.head);
                             });
@@ -97,7 +97,26 @@ define([
                 return edge;
             };
             
-            // TODO
+            /**
+             * Remove an edge from the graph
+             * @param   {Node} tail     -   The origin node of the edge
+             * @param   {Node} head     -   The destination node of the edge
+             * @return  {void}
+             */
+            this.removeEdge = function(tail, head) {
+                var removeEdge;
+                tail.edges.forEach(function(edge) {
+                    if (edge.tail === tail && edge.head === head) {
+                        removeEdge = edge;
+                    }
+                });
+                tail.edges.remove(removeEdge);
+            };
+            
+            // TODO: documentation for DFS
+            /**
+             *
+             */
             this.depthFirstSearch = function(f) {
                 var 
                     visitedSet = new Hashset.Hashset(),
@@ -126,9 +145,9 @@ define([
                 }
             };
             
-            // TODO
+            // TODO: method and docs
             this.breadthFirstSearch = function(f) {
-                
+                                
             };
         }
     };
