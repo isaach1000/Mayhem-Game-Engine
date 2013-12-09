@@ -1,3 +1,23 @@
+#!/bin/bash
+
+scripts=$(dirname $0)
+
+if [ $# -ne 2 ]; then
+    echo "usage: $scripts/module.sh [FOLDER] [CLASSNAME]"
+    exit 1
+fi
+
+folder=$1
+folderpath=$scripts/../js/$folder
+
+if [ ! -d $folderpath ]; then
+    mkdir $folderpath
+fi
+
+class=$2
+filename=`echo $class | tr '[:upper:]' '[:lower:]'`
+
+cat > $folderpath/$filename.js << MODULE
 // @formatter:off
 define([], function() {
     "use strict";
@@ -7,40 +27,34 @@ define([], function() {
     // Private class methods/fields //
     //////////////////////////////////
 
-    // TODO
-
-
     /**
-     * @exports modulePath // TODO: replace modulePath
+     * @exports $folder/$filename
      */
     var module = {
         /////////////////////////////////
         // Public class methods/fields //
         /////////////////////////////////
 
-        // TODO
-
-
         /**
-         * ClassName // TODO: replace ClassName here and below
+         * $class
          * @constructor
          */
-        ClassName : function() {
+        $class: function() {
+            var _this = this;
+
             /////////////////////////////////////
             // Private instance methods/fields //
             /////////////////////////////////////
-
-            var _this = this;
-            // TODO
 
 
             ////////////////////////////////////
             // Public instance methods/fields //
             ////////////////////////////////////
             
-            // TODO
         }
     };
 
     return module;
 });
+#endif
+MODULE
