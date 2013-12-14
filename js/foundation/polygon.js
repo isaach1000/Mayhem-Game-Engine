@@ -1,8 +1,8 @@
 define([
-        'foundation/shape',
-        'util/boundingBox'
-    ], function(Shape,
-        BoundingBox) {
+    'foundation/shape',
+    'util/boundingBox'
+], function(Shape,
+    BoundingBox) {
     "use strict";
 
     //////////////////////////////////
@@ -10,7 +10,7 @@ define([
     //////////////////////////////////
 
     /**
-     * @exports util/polygon
+     * @module util/polygon
      */
     var module = {
         /////////////////////////////////
@@ -19,7 +19,9 @@ define([
 
         /**
          * Generate a BoundingBox for a polygon
-         * @param   {Array.<Point>} points  - An array of points describing the polygon.
+         *
+         * @static
+         * @param   {Array.<Point>} points  An array of points describing the polygon.
          * @return  {BoundingBox}           A BoundingBox containing all of the points.
          */
         generateBbox: function(points) {
@@ -48,11 +50,13 @@ define([
 
         /**
          * Polygon, extends [Shape]{@link module:foundation/shape.Shape}
+         *
+         * @class Polygon
          * @constructor
          * @extends {Shape}
-         * @param   {Array.<Point>} points      -   An array of points _this describe the polygon.
-         * @param   {CanvasDrawer} drawer       -   A CanvasDrawer to draw the polygon onto the canvas.
-         * @param   {Object} drawingSettings    -   A dictionary of drawing options.
+         * @param   {Array.<Point>} points        An array of points _this describe the polygon.
+         * @param   {CanvasDrawer} drawer         A CanvasDrawer to draw the polygon onto the canvas.
+         * @param   {Object} drawingSettings      A dictionary of drawing options.
          */
         Polygon: function(points, drawer, drawingSettings) {
             /////////////////////////////////////
@@ -88,9 +92,9 @@ define([
             Object.defineProperties(this, {
                 /**
                  * Points of Polygon instance
+                 *
+                 * @property points
                  * @type {Array.<Point>}
-                 * @memberOf module:foundation/polygon.Polygon
-                 * @instance
                  */
                 points: {
                     get: function() {
@@ -102,7 +106,7 @@ define([
                     }
                 }
             });
-            
+
             this.updateShape = function(dx, dy) {
                 forEachPoint(function(point) {
                     point.x += Math.round(dx);
@@ -111,8 +115,13 @@ define([
             };
 
             /**
-             * Draw the rectangle onto the canvas using the CanvasDrawer.
-             * @return {void}
+             * Draw the Polygon instance to the canvas
+             *
+             * @method drawShape
+             *
+             * @param  {CanvasDrawer} canvasDrawer A
+             *
+             * @return {[type]} [description]
              */
             this.drawShape = function(canvasDrawer) {
                 canvasDrawer.beginPath();
@@ -120,7 +129,7 @@ define([
 
                 var pts = this.points,
                     numPoints = pts.length;
-                    
+
                 canvasDrawer.drawLine(pts[0], pts[1], true);
                 for (var i = 1; i < numPoints; i++) {
                     var point = pts[i];
@@ -131,20 +140,20 @@ define([
                 canvasDrawer.fill();
                 canvasDrawer.stroke();
             };
-            
+
             /**
-             * Hit testing based on [this answer]{@links http://stackoverflow.com/a/2922778/1930331}.
-             * @param {Point}       - A point
-             * @return {boolean}    If the point is in the polygon
+             * Hit testing based on {{#crossLinkRaw http://stackoverflow.com/a/2922778/1930331}}this answer{{/crossLinkRaw}}.
+             * @param {Point} A point
+             * @return {boolean} If the point is in the polygon
              */
             this.hitTest = function(point) {
                 var nvert = this.points.length;
                 var i, j, c = false;
-                for (i = 0, j = nvert-1; i < nvert; j = i++) {
-                    if ( ((this.points[i].y > point.y) != (this.points[j].y > point.y)) &&
-                        (point.x < (this.points[j].x - this.points[i].x) * 
-                            (point.y-this.points[i].y) / (this.points[j].y -
-                                this.points[i].y) + this.points[i].x) ) {
+                for (i = 0, j = nvert - 1; i < nvert; j = i++) {
+                    if (((this.points[i].y > point.y) != (this.points[j].y > point.y)) &&
+                        (point.x < (this.points[j].x - this.points[i].x) *
+                            (point.y - this.points[i].y) / (this.points[j].y -
+                                this.points[i].y) + this.points[i].x)) {
                         c = !c;
                     }
                 }
@@ -153,5 +162,5 @@ define([
         }
     };
 
-    return module; 
+    return module;
 });

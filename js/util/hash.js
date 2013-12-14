@@ -1,7 +1,7 @@
 // @formatter:off
 define([], function() {
     "use strict";
-// @formatter:on
+    // @formatter:on
 
     //////////////////////////////////
     // Private class methods/fields //
@@ -10,7 +10,7 @@ define([], function() {
     var currentHash = 0;
 
     /**
-     * @exports util/hash
+     * @module util/hash
      */
     var module = {
         /////////////////////////////////
@@ -21,7 +21,7 @@ define([], function() {
          * Return a hashcode for this object. Does not conform to the Java
          * standard that two objects that are structurally identical should
          * yield the same hashcode.
-         * @param   {Object} object     -   Object to get hashcode for
+         * @param   {Object} object       Object to get hashcode for
          * @return  {integer}           Hashcode for object
          */
         hashcode: function(object) {
@@ -32,7 +32,7 @@ define([], function() {
                 });
                 currentHash++;
             }
-            
+
             return object._hashId;
         }
     };

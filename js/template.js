@@ -11,7 +11,7 @@ define([], function() {
 
 
     /**
-     * @exports modulePath // TODO: replace modulePath
+     * @module modulePath // TODO: replace modulePath
      */
     var module = {
         /////////////////////////////////
@@ -25,7 +25,7 @@ define([], function() {
          * ClassName // TODO: replace ClassName here and below
          * @constructor
          */
-        ClassName : function() {
+        ClassName: function() {
             /////////////////////////////////////
             // Private instance methods/fields //
             /////////////////////////////////////
@@ -37,7 +37,7 @@ define([], function() {
             ////////////////////////////////////
             // Public instance methods/fields //
             ////////////////////////////////////
-            
+
             // TODO
         }
     };
