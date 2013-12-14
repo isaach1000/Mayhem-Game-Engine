@@ -2,7 +2,7 @@ define([], function() {
     "use strict";
 
     /**
-     * @exports util/boundingBox
+     * @module util/boundingBox
      */
     var module = {
         /////////////////////////////////
@@ -12,32 +12,32 @@ define([], function() {
         /**
          * Create a BoundingBox.
          * @constructor
-         * @param {(float|Point)} arg0  - The x coordinate of left side, or left-top point.
-         * @param {(float|Point)} arg1  - The y coordinate of front side, or right-bottom point.
-         * @param {float} arg2          - Width of the box.
-         * @param {float} arg3          - Height of the box.
+         * @param {(float|Point)} arg0  The x coordinate of left side, or left-top point.
+         * @param {(float|Point)} arg1  The y coordinate of front side, or right-bottom point.
+         * @param {float} arg2 Width of the box.
+         * @param {float} arg3 Height of the box.
          */
         BoundingBox: function(arg0, arg1, arg2, arg3) {
             /////////////////////////////////////
             // Private instance methods/fields //
             /////////////////////////////////////
-            
+
             var x, y, w, h;
             switch (arguments.length) {
-            case 2:
-                var point1 = arg0;
-                var point2 = arg1;
-                x = point1.x;
-                y = point1.y;
-                w = point2.x - point1.x;
-                h = point2.y - point1.y;
-                break;
-            case 4:
-                x = arg0;
-                y = arg1;
-                w = arg2;
-                h = arg3;
-                break;
+                case 2:
+                    var point1 = arg0;
+                    var point2 = arg1;
+                    x = point1.x;
+                    y = point1.y;
+                    w = point2.x - point1.x;
+                    h = point2.y - point1.y;
+                    break;
+                case 4:
+                    x = arg0;
+                    y = arg1;
+                    w = arg2;
+                    h = arg3;
+                    break;
             }
 
             if (w < 0 || h < 0) {
@@ -63,7 +63,7 @@ define([], function() {
                         x = newX;
                     }
                 },
-                
+
                 /**
                  * y coordinate of top-left of BoundingBox instance
                  * @type {float}
@@ -77,7 +77,7 @@ define([], function() {
                         y = newY;
                     }
                 },
-    
+
                 /**
                  * Width of BoundingBox instance
                  * @type {float}
@@ -112,18 +112,18 @@ define([], function() {
 
             /**
              * Check if this BoundingBox contains another BoundingBox.
-             * @param {BoundingBox} bbox - The other BoundingBox
+             * @param {BoundingBox} bbox The other BoundingBox
              * @return {boolean} True if contains the other BoundingBox, false otherwise.
              */
             this.containsBoundingBox = function(bbox) {
                 return (bbox.x >= x && bbox.x + bbox.width <= x + w &&
-                        bbox.y >= y && bbox.y + bbox.height <= y + h);
+                    bbox.y >= y && bbox.y + bbox.height <= y + h);
             };
 
             /**
              * Get the intersection of this BoundingBox
              * and another BoundingBox.
-             * @param {BoundingBox} otherBbox - Another BoundingBox instance.
+             * @param {BoundingBox} otherBbox Another BoundingBox instance.
              * @return {BoundingBox}
              */
             this.intersection = function(otherBbox) {
@@ -135,15 +135,15 @@ define([], function() {
                         otherBbox.y + otherBbox.height),
                     intWidth = x2 - x1,
                     intHeight = y2 - y1;
-                    
+
                 if (intWidth < 0 || intHeight < 0) {
-                    return null;    
+                    return null;
                 }
-                
+
                 return new module.BoundingBox(x1, y1, intWidth, intWidth);
             };
         }
     };
 
-    return module; 
+    return module;
 });

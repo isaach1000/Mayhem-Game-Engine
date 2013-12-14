@@ -1,41 +1,42 @@
-
 define([
-        'foundation/canvasDrawer',
-        'util/boundingBox',
-        'util/factory'
-    ], function(CanvasDrawer,
-        BoundingBox,
-        Factory) {
+    'foundation/canvasDrawer',
+    'util/boundingBox',
+    'util/factory'
+], function(CanvasDrawer,
+    BoundingBox,
+    Factory) {
     "use strict";
 
     //////////////////////////////////
     // Private class methods/fields //
     //////////////////////////////////
-    
-    
+
+
     /**
-     * @exports foundation/shape
+     * @module foundation/shape
      */
     var module = {
         /////////////////////////////////
         // Public class methods/fields //
         /////////////////////////////////
-        
+
         /**
          * Shape abstract class
+         *
+         * @class Shape
          * @constructor
-         * @param {float} x                     x coordinate of top-left
-         * @param {float} y                     y coordinate of top-left
-         * @param {float} width                 Width of shape
-         * @param {float} height                Height of shape
-         * @param {CanvasDrawer} drawer         CanvasDrawer to draw image to canvas
-         * @param {Object} drawingSettings      Settings for the CanvasDrawer
+         * @param {float} x x coordinate of top-left
+         * @param {float} y y coordinate of top-left
+         * @param {float} width Width of shape
+         * @param {float} height Height of shape
+         * @param {CanvasDrawer} drawer CanvasDrawer to draw image to canvas
+         * @param {Object} drawingSettings Settings for the CanvasDrawer
          */
         Shape: function(x, y, width, height, drawer, drawingSettings) {
             /////////////////////////////////////
             // Private instance methods/fields //
             /////////////////////////////////////
-            
+
             var _this = this,
                 bbox;
 
@@ -47,7 +48,7 @@ define([
 
             bbox = new BoundingBox.BoundingBox(x, y, width, height);
 
-            
+
             ////////////////////////////////////
             // Public instance methods/fields //
             ////////////////////////////////////
@@ -55,9 +56,9 @@ define([
             Object.defineProperties(this, {
                 /**
                  * x coordinate of top-left of Shape instance
+                 *
+                 * @property x
                  * @type {integer}
-                 * @memberOf module:foundation/shape.Shape
-                 * @instance
                  */
                 x: {
                     get: function() {
@@ -66,10 +67,10 @@ define([
                     set: function(newX) {
                         if (x !== newX) {
                             var dx = newX - x;
-                            
+
                             x = Math.round(newX);
                             _this.boundingBox.x = x;
-                            
+
                             // Allow subclass to handle update too
                             if (_this.updateShape !== undefined) {
                                 _this.updateShape(dx, 0);
@@ -80,9 +81,9 @@ define([
 
                 /**
                  * y coordinate of top-left of Shape instance
+                 *
+                 * @property y
                  * @type {integer}
-                 * @memberOf module:foundation/shape.Shape
-                 * @instance
                  */
                 y: {
                     get: function() {
@@ -91,10 +92,10 @@ define([
                     set: function(newY) {
                         if (y !== newY) {
                             var dy = newY - y;
-                            
+
                             y = Math.round(newY);
                             _this.boundingBox.y = y;
-                            
+
                             // Allow subclass to handle update too
                             if (_this.updateShape !== undefined) {
                                 _this.updateShape(0, dy);
@@ -105,9 +106,9 @@ define([
 
                 /**
                  * Width of Shape instance
+                 *
+                 * @property width
                  * @type {integer}
-                 * @memberOf module:foundation/shape.Shape
-                 * @instance
                  */
                 width: {
                     get: function() {
@@ -118,16 +119,16 @@ define([
                         if (newWidth !== width) {
                             width = newWidth;
                             bbox = new BoundingBox.BoundingBox(x, y,
-                                    width, height);
+                                width, height);
                         }
                     }
                 },
 
                 /**
                  * Height of Shape instance
+                 *
+                 * @property height
                  * @type {integer}
-                 * @memberOf module:foundation/shape.Shape
-                 * @instance
                  */
                 height: {
                     get: function() {
@@ -145,9 +146,9 @@ define([
 
                 /**
                  * BoundingBox of Shape instance
+                 *
+                 * @property boundingBox
                  * @type {BoundingBox}
-                 * @memberOf module:foundation/shape.Shape
-                 * @instance
                  */
                 boundingBox: {
                     get: function() {
@@ -155,12 +156,11 @@ define([
                     }
                 },
 
-                /** 
+                /**
                  * Drawing settings of Shape instance
+                 *
+                 * @property drawingSettings
                  * @type {Object}
-                 * @memberOf module:foundation/shape.Shape
-                 * @instance
-                 * @return {void}
                  */
                 drawingSettings: {
                     get: function() {
@@ -171,7 +171,7 @@ define([
                     }
                 }
             });
-            
+
             /**
              * Clear and draw Shape onto canvas
              * @return {void}
@@ -190,12 +190,12 @@ define([
                     drawer.save();
                     drawer.rotate(this.drawingSettings.angle);
                 }
-                
+
                 // Call subclass method if exists.
                 if (this.drawShape !== undefined) {
                     this.drawShape(drawer);
                 }
-                
+
                 if (this.drawingSettings.angle !== undefined) {
                     drawer.restore();
                 }
@@ -210,16 +210,16 @@ define([
                     drawer.save();
                     drawer.rotate(this.drawingSettings.angle);
                 }
-                
+
                 var lineWidth = this.drawingSettings.lineWidth || 1;
                 drawer.clearRect(this.x, this.y,
                     this.width + lineWidth, this.height + lineWidth);
-                    
+
                 if (this.drawingSettings.angle !== undefined) {
                     drawer.restore();
                 }
             };
-            
+
             /**
              * Draw BoundingBox of Shape instance
              * @return {void}
@@ -235,9 +235,9 @@ define([
                     h = _this.boundingBox.height,
                     lineWidth = _this.drawingSettings.lineWidth || 1;
                 drawer.strokeRect(x + lineWidth, y + lineWidth,
-                        w - 2 * lineWidth, h - 2 * lineWidth);
+                    w - 2 * lineWidth, h 2 * lineWidth);
             };
-            
+
             this.collisionTest = function(point) {
                 // Return result of subclass's test.
                 return _this.hitTest(point);
@@ -245,5 +245,5 @@ define([
         }
     };
 
-    return module; 
+    return module;
 });

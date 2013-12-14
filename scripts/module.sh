@@ -15,7 +15,7 @@ if [ ! -d $folderpath ]; then
 fi
 
 class=$2
-filename=`echo $class | tr '[:upper:]' '[:lower:]'`
+filename=`echo $(tr A-Z a-z <<< ${class:0:1})${class:1}`
 
 cat > $folderpath/$filename.js << MODULE
 // @formatter:off
@@ -50,7 +50,7 @@ define([], function() {
             ////////////////////////////////////
             // Public instance methods/fields //
             ////////////////////////////////////
-            
+
         }
     };
 

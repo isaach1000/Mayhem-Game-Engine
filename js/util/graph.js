@@ -1,8 +1,8 @@
 // @formatter:off
 define([
-        'util/hashset',
-        'util/hashtable'
-    ], function(Hashset, Hashtable) {
+    'util/hashset',
+    'util/hashtable'
+], function(Hashset, Hashtable) {
     "use strict";
     // @formatter:on
 
@@ -14,7 +14,7 @@ define([
 
 
     /**
-     * @exports util/graph
+     * @module util/graph
      */
     var module = {
         /////////////////////////////////
@@ -36,13 +36,13 @@ define([
 
             var nodes = new Hashset.Hashset(),
                 adjacencyList = new Hashtable.Hashtable();
-            
+
             // Private inner Node class
             function Node(data) {
                 var thisNode = this;
                 this.data = data;
                 var edges = new Hashset.Hashset();
-                
+
                 adjacencyList.put(this, edges);
 
                 Object.defineProperties(this, {
@@ -73,10 +73,10 @@ define([
             ////////////////////////////////////
             // Public instance methods/fields //
             ////////////////////////////////////
-            
+
             /**
              * Add a node to the graph
-             * @param   {Object} data   -   Data to be stored in the node
+             * @param   {Object} data     Data to be stored in the node
              * @return  {Node}          A node with the data
              */
             this.addNode = function(data) {
@@ -87,8 +87,8 @@ define([
 
             /**
              * Add an edge to the graph
-             * @param   {Node} tail     -   The origin node of the edge
-             * @param   {Node} head     -   The destination node of the edge
+             * @param   {Node} tail       The origin node of the edge
+             * @param   {Node} head       The destination node of the edge
              * @return  {Edge}          A directed edge connecting the nodes
              */
             this.addEdge = function(tail, head) {
@@ -96,11 +96,11 @@ define([
                 adjacencyList.get(tail).add(edge);
                 return edge;
             };
-            
+
             /**
              * Remove an edge from the graph
-             * @param   {Node} tail     -   The origin node of the edge
-             * @param   {Node} head     -   The destination node of the edge
+             * @param   {Node} tail       The origin node of the edge
+             * @param   {Node} head       The destination node of the edge
              * @return  {void}
              */
             this.removeEdge = function(tail, head) {
@@ -112,16 +112,16 @@ define([
                 });
                 tail.edges.remove(removeEdge);
             };
-            
+
             /**
              * Perform a depth first search of the graph
-             * @param {function} func - The operation to perform on the visited nodes
+             * @param {function} func The operation to perform on the visited nodes
              */
             this.depthFirstSearch = function(func) {
-                var 
-                    visitedSet = new Hashset.Hashset(),
-                    keepSearching  = true;
-                
+                var
+                visitedSet = new Hashset.Hashset(),
+                    keepSearching = true;
+
                 nodes.forEach(function(node) {
                     if (keepSearching) {
                         keepSearching = depthFirstSearchHelper(node);
@@ -137,40 +137,40 @@ define([
                     if (shouldContinue) {
                         visitedSet.add(node);
                         node.neighbors.forEach(function(neighbor) {
-                           depthFirstSearchHelper(neighbor); 
-                        });   
+                            depthFirstSearchHelper(neighbor);
+                        });
                     }
                     return shouldContinue;
                 }
             };
-            
+
             /**
              * Perform a breadth first search on the graph
-             * @param {function} func - The operation to perform on the visited nodes
+             * @param {function} func The operation to perform on the visited nodes
              */
             this.breadthFirstSearch = function(func) {
                 var
-                    visitedSet = new Hashset.Hashset();
-                    round2Set = new Hashset.Hashset();
-                
+                visitedSet = new Hashset.Hashset();
+                round2Set = new Hashset.Hashset();
+
                 nodes.forEach(function(node) {
                     round2Set.add(node.neighbors);
                 });
                 breadthFirstSearchHelper(round2Set);
-                    
-                
+
+
                 // Inner helper function
                 function breadthFirstSearchHelper(currentSet) {
-                    var 
-                        nextRoundSet = new Hashset.Hashset(),
+                    var
+                    nextRoundSet = new Hashset.Hashset(),
                         doneSearching = false;
-                        
+
                     set.forEach(function(node) {
                         if (visitedSet.contains(node)) {
                             return false;
                         }
                         doneSearching = func(node) || false;
-                        if(!doneSearching) {
+                        if (!doneSearching) {
                             visitedSet.add(node);
                             node.neighbors.forEach(function(neighbor) {
                                 nextRoundSet.add(neighbor);

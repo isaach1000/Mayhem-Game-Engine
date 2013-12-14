@@ -4,7 +4,7 @@ define(['util/hash', 'util/hashset'], function(Hash, Hashset) {
     // @formatter:on
 
     /**
-     * @exports util/hashtable
+     * @module util/hashtable
      */
     var module = {
         /////////////////////////////////
@@ -17,17 +17,17 @@ define(['util/hash', 'util/hashset'], function(Hash, Hashset) {
          */
         Hashtable: function() {
             var _this = this;
-            
+
             /////////////////////////////////////
             // Private instance methods/fields //
             /////////////////////////////////////
-            
+
             var hashset = new Hashset.Hashset();
 
             ////////////////////////////////////
             // Public instance methods/fields //
             ////////////////////////////////////
-            
+
             this.put = function(key, value) {
                 var entry = {
                     key: key,
@@ -39,15 +39,15 @@ define(['util/hash', 'util/hashset'], function(Hash, Hashset) {
             this.get = function(key) {
                 return hashset.get(key, key).value;
             };
-            
+
             this.containsKey = function(key) {
                 return hashset.contains(key, key);
             };
-            
+
             this.remove = function(key) {
                 return hashset.remove(key, key);
             };
-            
+
             this.clear = function() {
                 hashset.clear();
             };
@@ -57,13 +57,13 @@ define(['util/hash', 'util/hashset'], function(Hash, Hashset) {
                     f(entry.key, entry.value);
                 });
             };
-            
+
             Object.defineProperties(this, {
                 length: {
                     get: function() {
                         return hashset.length;
                     }
-                } 
+                }
             });
         }
     };
