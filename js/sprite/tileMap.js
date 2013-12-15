@@ -1,4 +1,5 @@
-define(['sprite/sprite', 'foundation/rectangle'], function(Sprite, Rectangle) {"use strict";
+define(['sprite/sprite', 'foundation/rectangle'], function(Sprite, Rectangle) {
+    "use strict";
 
     /**
      * @exports sprite/tileMap
@@ -21,12 +22,13 @@ define(['sprite/sprite', 'foundation/rectangle'], function(Sprite, Rectangle) {"
          *                                                  Iterates through each row.
          * @constructor
          */
-        TileMap : function(x, y, width, height, numWidth, numHeight, drawer, drawingSettingsArr) {
+        TileMap: function(x, y, width, height, numWidth, numHeight, drawer, drawingSettingsArr) {
             /////////////////////////////////////
             // Private instance methods/fields //
             /////////////////////////////////////
 
-            var _this = this, initialShapes = [];
+            var _this = this,
+                initialShapes = [];
 
             /**
              * Iterate through each of the tiles. Iterates through rows.
@@ -35,8 +37,8 @@ define(['sprite/sprite', 'foundation/rectangle'], function(Sprite, Rectangle) {"
              */
             var forEachTile = function(f) {
                 var i, j;
-                for ( i = 0; i < numHeight; i += 1) {
-                    for ( j = 0; j < numWidth; j += 1) {
+                for (i = 0; i < numHeight; i += 1) {
+                    for (j = 0; j < numWidth; j += 1) {
                         f(_this.tiles[i][j]);
                     }
                 }
@@ -44,11 +46,13 @@ define(['sprite/sprite', 'foundation/rectangle'], function(Sprite, Rectangle) {"
 
             var generateTiles = function() {
                 // Generate the tiles
-                var index = 0, settingsLen = drawingSettingsArr.length, i, j, settingsIndex, rect;
-                for ( i = 0; i < numHeight; i += 1) {
+                var index = 0,
+                    settingsLen = drawingSettingsArr.length,
+                    i, j, settingsIndex, rect;
+                for (i = 0; i < numHeight; i += 1) {
                     _this.tiles.push([]);
                     // Add a row to the tiles matrix.
-                    for ( j = 0; j < numWidth; j += 1) {
+                    for (j = 0; j < numWidth; j += 1) {
                         settingsIndex = index % settingsLen;
                         rect = new Rectangle.Rectangle(x + j * width, y + i * height, width, height, drawer, drawingSettingsArr[settingsIndex]);
                         _this.tiles[i].push(rect);

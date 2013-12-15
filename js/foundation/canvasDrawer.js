@@ -1,11 +1,10 @@
-
 define(['underscore'], function(_) {
     "use strict";
 
     //////////////////////////////////
     // Private class methods/fields //
     //////////////////////////////////
-    
+
     /**
      * @exports foundation/canvasDrawer
      */
@@ -13,7 +12,7 @@ define(['underscore'], function(_) {
         /////////////////////////////////
         // Public class methods/fields //
         /////////////////////////////////
-        
+
         /**
          * CanvasDrawer for drawing to a canvas.
          *
@@ -26,15 +25,15 @@ define(['underscore'], function(_) {
             /////////////////////////////////////
             // Private instance methods/fields //
             /////////////////////////////////////
-            
+
             var _this = this,
                 ctxSettings;
-            
-            
+
+
             ////////////////////////////////////
             // Public instance methods/fields //
             ////////////////////////////////////
-            
+
             Object.defineProperties(this, {
                 /**
                  * Width of the canvas
@@ -72,7 +71,9 @@ define(['underscore'], function(_) {
                         return ctxSettings;
                     },
                     set: function(settings) {
-                        var VALID_SETTINGS = ['lineWidth', 'fillStyle', 'strokeStyle'], success = true, property;
+                        var VALID_SETTINGS = ['lineWidth', 'fillStyle', 'strokeStyle'],
+                            success = true,
+                            property;
                         for (property in settings) {
                             if (settings.hasOwnProperty(property)) {
                                 success = (success && _.contains(VALID_SETTINGS, property));
@@ -115,7 +116,7 @@ define(['underscore'], function(_) {
              * @return {void}
              */
             this.fill = function() {
-                ctx.fill();  
+                ctx.fill();
             };
 
             /**
@@ -133,7 +134,7 @@ define(['underscore'], function(_) {
             this.closePath = function() {
                 ctx.closePath();
             };
-          
+
             /**
              * Wrapper for <code>context.rect</code>
              * @param  {float}  x   x coordinate
@@ -201,7 +202,7 @@ define(['underscore'], function(_) {
             this.translate = function(x, y) {
                 ctx.translate(x, y);
             };
-            
+
             /**
              * Wrapper for <code>context.rotate</code>
              * @param   {float}     - Angle of rotation
@@ -222,7 +223,7 @@ define(['underscore'], function(_) {
             this.fillRect = function(x, y, w, h) {
                 ctx.fillRect(x, y, w, h);
             };
-            
+
             /**
              * Wrapper for <code>context.strokeRect</code>
              * @param  {float} x    - x coordinate of top-left of rectangle
@@ -260,5 +261,5 @@ define(['underscore'], function(_) {
         }
     };
 
-    return module; 
+    return module;
 });

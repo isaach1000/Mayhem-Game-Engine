@@ -1,6 +1,6 @@
 define(['util/mathExtensions'], function(MathExtensions) {
     "use strict";
-    
+
     /**
      * @exports util/matrix
      */
@@ -14,14 +14,14 @@ define(['util/mathExtensions'], function(MathExtensions) {
          *
          * @constructor
          */
-        Matrix: function(entriesArray, numRows, numColumns) {           
+        Matrix: function(entriesArray, numRows, numColumns) {
             /////////////////////////////////////
             // Private instance methods/fields //
             /////////////////////////////////////
-            
+
             var _this = this,
                 rows;
-            
+
             function forEach(f) {
                 var i, j;
                 for (i = 0; i < numRows; i += 1) {
@@ -59,13 +59,13 @@ define(['util/mathExtensions'], function(MathExtensions) {
                     rows.push(row);
                 }
             }
-            
+
             ////////////////////////////////////
             // Public instance methods/fields //
             ////////////////////////////////////
-            
+
             _this.numRows = numRows;
-            
+
             _this.numColumns = numColumns;
 
             this.get = function(row, column) {
@@ -82,7 +82,8 @@ define(['util/mathExtensions'], function(MathExtensions) {
             };
 
             this.getColumn = function(columnIndex) {
-                var column = [], i;
+                var column = [],
+                    i;
                 for (i = 0; i < _this.numRows; i += 1) {
                     column.push(rows[i][columnIndex]);
                 }
@@ -98,7 +99,8 @@ define(['util/mathExtensions'], function(MathExtensions) {
             };
 
             this.multiply = function(matrix) {
-                var newEntries = [], i, j, vector1, vector2, dotProduct;
+                var newEntries = [],
+                    i, j, vector1, vector2, dotProduct;
 
                 if (_this.numColumns !== _this.numRows) {
                     return null;
@@ -120,5 +122,5 @@ define(['util/mathExtensions'], function(MathExtensions) {
         }
     };
 
-    return module; 
+    return module;
 });

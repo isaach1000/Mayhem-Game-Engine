@@ -1,14 +1,14 @@
 define([
-        'underscore',
-        'util/boundingBox'
-    ], function(_, BoundingBox) {
+    'underscore',
+    'util/boundingBox'
+], function(_, BoundingBox) {
     "use strict";
 
     //////////////////////////////////
     // Private class methods/fields //
     //////////////////////////////////
-    
-    
+
+
     /**
      * @exports sprite/sprite
      */
@@ -16,7 +16,7 @@ define([
         /////////////////////////////////
         // Public class methods/fields //
         /////////////////////////////////
-        
+
         /**
          * Sprite
          * @constructor
@@ -25,17 +25,17 @@ define([
             /////////////////////////////////////
             // Private instance methods/fields //
             /////////////////////////////////////
-            
+
             var _this = this,
                 boundingBox;
-            
+
             shapes = shapes || [];
-            
-            
+
+
             ////////////////////////////////////
             // Public instance methods/fields //
             ////////////////////////////////////
-            
+
             Object.defineProperties(this, {
                 /**
                  * Shapes of Sprite instance
@@ -50,7 +50,7 @@ define([
                         shapes = newShapes;
                     }
                 },
-                
+
                 /**
                  * BoundingBox of Sprite instance
                  * @memberOf module:sprite/sprite.Sprite
@@ -67,7 +67,7 @@ define([
                         boundingBox = newBbox;
                     }
                 },
-                
+
                 /**
                  * Drawing settings of Sprite instance
                  * @memberOf module:sprite/sprite.Sprite
@@ -80,11 +80,10 @@ define([
                     set: function(newDrawingSettingsArr) {
                         if (!_.isEqual(drawingSettingsArr,
                                 newDrawingSettingsArr) ||
-                            (!_.isArray(newDrawingSettingsArr) &&
-                            !_.isObject(newDrawingSettingsArr))) {
+                            (!_.isArray(newDrawingSettingsArr) && !_.isObject(newDrawingSettingsArr))) {
                             return;
                         }
-                        
+
                         if (!_.isArray(newDrawingSettingsArr)) {
                             newDrawingSettingsArr = [newDrawingSettingsArr];
                         }
@@ -99,31 +98,32 @@ define([
              * @return {void}
              */
             this.forEachShape = function(f) {
-                var numShapes = _this.shapes.length, i, shape;
+                var numShapes = _this.shapes.length,
+                    i, shape;
                 for (i = 0; i < numShapes; i += 1) {
                     shape = _this.shapes[i];
                     f(shape);
                 }
             };
-            
+
             /**
              * Clear the Sprite instance and redraw it
              */
             this.update = function() {
                 this.clear();
-                this.draw();  
+                this.draw();
             };
-            
+
             /**
              * Clear Sprite instance
              * @return {void}
              */
             this.clear = function() {
                 this.forEachShape(function(shape) {
-                    shape.clear(); 
+                    shape.clear();
                 });
             };
-            
+
             /**
              * Draw Sprite instance
              * @return {void}
@@ -133,23 +133,23 @@ define([
                     shape.draw();
                 });
             };
-            
+
             /**
              * Draw BoundingBox of Sprite instance
              * @return {void}
              */
             this.drawBoundingBox = function() {
                 var x = _this.boundingBox.x,
-                y = _this.boundingBox.y,
-                w = _this.boundingBox.w,
-                h = _this.boundingBox.h,
-                lineWidth = _this.drawingSettings.lineWidth || 0;
-                
+                    y = _this.boundingBox.y,
+                    w = _this.boundingBox.w,
+                    h = _this.boundingBox.h,
+                    lineWidth = _this.drawingSettings.lineWidth || 0;
+
                 drawer.beginPath();
                 drawer.strokeRect(x + lineWidth, y + lineWidth,
-                        w - 2 * lineWidth, h - 2 * lineWidth);
+                    w - 2 * lineWidth, h - 2 * lineWidth);
             };
-            
+
             /**
              * Update BoundingBox of Sprite instance
              * @return {void}
@@ -171,17 +171,18 @@ define([
                         maxY = shapeBox.y + shapeBox.height;
                     }
                 });
-                
+
                 this.boundingBox = new BoundingBox.BoundingBox(minX, minY, maxX - minX, maxY - minY);
             };
-            
+
             /**
              * Test whether or not a point is within a Sprite
              * @param {Point} point         - Point to test
              * @return {boolean}            If the point is in the Sprite
              */
             this.collisionTest = function(point) {
-                var numShapes = this.shapes.length, i, shape;
+                var numShapes = this.shapes.length,
+                    i, shape;
                 for (i = 0; i < numShapes; i += 1) {
                     shape = this.shapes[i];
                     if (shape.collisionTest(point)) {
@@ -193,6 +194,5 @@ define([
         }
     };
 
-    return module; 
+    return module;
 });
-

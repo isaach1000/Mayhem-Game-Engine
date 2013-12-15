@@ -19,17 +19,20 @@ define([], function() {
          * Room
          * @constructor
          */
-        Room : function(description) {
+        Room: function(description) {
             /////////////////////////////////////
             // Private instance methods/fields //
             /////////////////////////////////////
 
-            var _this = this, exits = [], items = [], Directions = {
-                NORTH : 0,
-                EAST : 1,
-                SOUTH : 2,
-                WEST : 3
-            };
+            var _this = this,
+                exits = [],
+                items = [],
+                Directions = {
+                    NORTH: 0,
+                    EAST: 1,
+                    SOUTH: 2,
+                    WEST: 3
+                };
 
             ////////////////////////////////////
             // Public instance methods/fields //
@@ -63,8 +66,7 @@ define([], function() {
                     if (items[i] === item) {
                         items.splice(i, 1);
                         return item;
-                    }
-                    else {
+                    } else {
                         return null;
                     }
                 }

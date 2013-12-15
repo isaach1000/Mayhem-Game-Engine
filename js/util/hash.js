@@ -1,7 +1,7 @@
 // @formatter:off
 define([], function() {
     "use strict";
-// @formatter:on
+    // @formatter:on
 
     //////////////////////////////////
     // Private class methods/fields //
@@ -32,7 +32,7 @@ define([], function() {
                 });
                 currentHash++;
             }
-            
+
             return object._hashId;
         }
     };

@@ -1,21 +1,21 @@
 require.config({
-    baseUrl : 'js',
-    paths : {
-        jquery : 'lib/jquery',
-        underscore : 'lib/underscore',
-        jasmine : 'lib/jasmine/jasmine',
-        'jasmine-html' : 'lib/jasmine/jasmine-html'
+    baseUrl: 'js',
+    paths: {
+        jquery: 'lib/jquery',
+        underscore: 'lib/underscore',
+        jasmine: 'lib/jasmine/jasmine',
+        'jasmine-html': 'lib/jasmine/jasmine-html'
     },
-    shim : {
-        underscore : {
-            exports : '_'
+    shim: {
+        underscore: {
+            exports: '_'
         },
-        jasmine : {
-            exports : 'jasmine'
+        jasmine: {
+            exports: 'jasmine'
         },
-        'jasmine-html' : {
-            deps : ['jasmine'],
-            exports : 'jasmine'
+        'jasmine-html': {
+            deps: ['jasmine'],
+            exports: 'jasmine'
         }
     }
 });
@@ -40,7 +40,7 @@ require(['jquery', 'underscore', 'jasmine-html'], function($, _, jasmine) {
     // Specify the modules to test. //
     //////////////////////////////////
     var specs = ['player', 'hash', 'hashset', 'hashtable', 'graph'];
-    
+
     specs = _.map(specs, function(moduleName) {
         return 'js/spec/' + moduleName + '.spec.js';
     });

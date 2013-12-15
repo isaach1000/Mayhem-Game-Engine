@@ -1,8 +1,8 @@
 define([
-        'foundation/shape',
-        'util/boundingBox'
-    ], function(Shape,
-        BoundingBox) {
+    'foundation/shape',
+    'util/boundingBox'
+], function(Shape,
+    BoundingBox) {
     "use strict";
 
     //////////////////////////////////
@@ -102,7 +102,7 @@ define([
                     }
                 }
             });
-            
+
             this.updateShape = function(dx, dy) {
                 forEachPoint(function(point) {
                     point.x += Math.round(dx);
@@ -120,7 +120,7 @@ define([
 
                 var pts = this.points,
                     numPoints = pts.length;
-                    
+
                 canvasDrawer.drawLine(pts[0], pts[1], true);
                 for (var i = 1; i < numPoints; i++) {
                     var point = pts[i];
@@ -131,7 +131,7 @@ define([
                 canvasDrawer.fill();
                 canvasDrawer.stroke();
             };
-            
+
             /**
              * Hit testing based on [this answer]{@links http://stackoverflow.com/a/2922778/1930331}.
              * @param {Point}       - A point
@@ -140,11 +140,11 @@ define([
             this.hitTest = function(point) {
                 var nvert = this.points.length;
                 var i, j, c = false;
-                for (i = 0, j = nvert-1; i < nvert; j = i++) {
-                    if ( ((this.points[i].y > point.y) != (this.points[j].y > point.y)) &&
-                        (point.x < (this.points[j].x - this.points[i].x) * 
-                            (point.y-this.points[i].y) / (this.points[j].y -
-                                this.points[i].y) + this.points[i].x) ) {
+                for (i = 0, j = nvert - 1; i < nvert; j = i++) {
+                    if (((this.points[i].y > point.y) != (this.points[j].y > point.y)) &&
+                        (point.x < (this.points[j].x - this.points[i].x) *
+                            (point.y - this.points[i].y) / (this.points[j].y -
+                                this.points[i].y) + this.points[i].x)) {
                         c = !c;
                     }
                 }
@@ -153,5 +153,5 @@ define([
         }
     };
 
-    return module; 
+    return module;
 });

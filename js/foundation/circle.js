@@ -1,17 +1,16 @@
-
 define([
-        'foundation/shape',
-        'underscore',
-        'util/boundingBox'
-    ], function(Shape,
-        _,
-        BoundingBox) {
+    'foundation/shape',
+    'underscore',
+    'util/boundingBox'
+], function(Shape,
+    _,
+    BoundingBox) {
     "use strict";
 
     //////////////////////////////////
     // Private class methods/fields //
     //////////////////////////////////
-    
+
     /**
      * @exports foundation/circle
      */
@@ -19,7 +18,7 @@ define([
         /////////////////////////////////
         // Public class methods/fields //
         /////////////////////////////////
-        
+
         /**
          * Circle, extends [Shape]{@link module:foundation/shape.Shape}
          * @constructor
@@ -34,20 +33,20 @@ define([
             /////////////////////////////////////
             // Private instance methods/fields //
             /////////////////////////////////////
-            
-            var _this = this, 
-            lineWidth = drawingSettings.lineWidth || 0;
+
+            var _this = this,
+                lineWidth = drawingSettings.lineWidth || 0;
             radius = Math.round(radius);
 
             // Extend Shape constructor
             Shape.Shape.call(_this, x, y, radius * 2, radius * 2,
-                                    drawer, drawingSettings);
+                drawer, drawingSettings);
 
 
             ////////////////////////////////////
             // Public instance methods/fields //
             ////////////////////////////////////
-            
+
             Object.defineProperties(this, {
                 /**
                  * Radius of circle
@@ -84,7 +83,7 @@ define([
                 canvasDrawer.stroke();
                 canvasDrawer.fill();
             };
-            
+
             this.hitTest = function(point) {
                 var dx = this.x + this.radius - point.x,
                     dy = this.y + this.radius - point.y;
@@ -93,5 +92,5 @@ define([
         }
     };
 
-    return module; 
+    return module;
 });

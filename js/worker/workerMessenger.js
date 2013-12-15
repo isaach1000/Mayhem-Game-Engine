@@ -4,10 +4,10 @@ define([], function() {
     //////////////////////////////////
     // Private class methods/fields //
     //////////////////////////////////
-    
+
     var messengerId = 0;
-    
-    
+
+
     /**
      * @exports worker/workerMessenger
      */
@@ -15,7 +15,7 @@ define([], function() {
         /////////////////////////////////
         // Public class methods/fields //
         /////////////////////////////////
-        
+
         /**
          * WorkerMessenger
          * @constructor
@@ -24,19 +24,19 @@ define([], function() {
             /////////////////////////////////////
             // Private instance methods/fields //
             /////////////////////////////////////
-            
+
             var _this = this;
-            
+
             target = target || self;
             if (id === undefined) {
                 id = messengerId++;
-            } 
-            
-            
+            }
+
+
             ////////////////////////////////////
             // Public instance methods/fields //
             ////////////////////////////////////
-           
+
             this.sendMessage = function(functionName, params) {
                 target.postMessage({
                     id: id,
@@ -47,5 +47,5 @@ define([], function() {
         }
     };
 
-    return module; 
+    return module;
 });
