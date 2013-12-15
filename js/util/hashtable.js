@@ -54,7 +54,10 @@ define(['util/hash', 'util/hashset'], function(Hash, Hashset) {
 
             this.forEach = function(f) {
                 hashset.forEach(function(entry) {
-                    f(entry.key, entry.value);
+                    var doneSearching = f(entry.key, entry.value);
+                    if (doneSearching === true) {
+                        return;
+                    }
                 });
             };
 

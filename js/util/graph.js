@@ -119,13 +119,14 @@ define([
              */
             this.depthFirstSearch = function(func) {
                 var
-                visitedSet = new Hashset.Hashset(),
-                    keepSearching = true;
+                    visitedSet = new Hashset.Hashset(),
+                    doneSearching = false;
 
                 nodes.forEach(function(node) {
-                    if (keepSearching) {
-                        keepSearching = depthFirstSearchHelper(node);
+                    if (doneSearching === true) {
+                        return;
                     }
+                    doneSearching = depthFirstSearchHelper(node);
                 });
 
                 // Inner helper function
@@ -133,14 +134,14 @@ define([
                     if (visitedSet.contains(node)) {
                         return true;
                     }
-                    var shouldContinue = func(node) || true;
-                    if (shouldContinue) {
+                    var doneSearching = func(node) || true;
+                    if (doneSearching !== true) {
                         visitedSet.add(node);
                         node.neighbors.forEach(function(neighbor) {
-                            depthFirstSearchHelper(neighbor);
+                            return depthFirstSearchHelper(neighbor);
                         });
                     }
-                    return shouldContinue;
+                    return doneSearching;
                 }
             };
 
@@ -150,8 +151,8 @@ define([
              */
             this.breadthFirstSearch = function(func) {
                 var
-                visitedSet = new Hashset.Hashset();
-                round2Set = new Hashset.Hashset();
+                    visitedSet = new Hashset.Hashset();
+                    round2 = [];
 
                 nodes.forEach(function(node) {
                     round2Set.add(node.neighbors);
@@ -162,7 +163,7 @@ define([
                 // Inner helper function
                 function breadthFirstSearchHelper(currentSet) {
                     var
-                    nextRoundSet = new Hashset.Hashset(),
+                        nextRound = [],
                         doneSearching = false;
 
                     set.forEach(function(node) {

@@ -271,11 +271,18 @@ define(['underscore', 'util/hash'], function(_, Hash) {
                     if (_.isArray(current)) {
                         var arrLen = current.length;
                         for (var j = 0; j < arrLen; j++) {
-                            var element = current[j];
-                            f(element);
+                            var
+                                element = current[j],
+                                doneSearching = f(element);
+                            if (doneSearching === true) {
+                                return;
+                            }
                         }
                     } else {
-                        f(current);
+                        var doneSearching = f(current);
+                        if (doneSearching === true) {
+                            return;
+                        }
                     }
                 }
             };
