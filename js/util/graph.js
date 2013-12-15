@@ -134,9 +134,9 @@ define([
                     if (visitedSet.contains(node)) {
                         return true;
                     }
+                    visitedSet.add(node);
                     var doneSearching = func(node) || true;
                     if (doneSearching !== true) {
-                        visitedSet.add(node);
                         node.neighbors.forEach(function(neighbor) {
                             return depthFirstSearchHelper(neighbor);
                         });
@@ -151,34 +151,31 @@ define([
              */
             this.breadthFirstSearch = function(func) {
                 var
-                    visitedSet = new Hashset.Hashset();
-                    round2 = [];
+                    visitedSet = new Hashset.Hashset(),
+                    nodeQueue = [],
+                    nodeQueueIndex = 0;
 
                 nodes.forEach(function(node) {
-                    round2Set.add(node.neighbors);
+                    nodeQueue.push(node);
                 });
-                breadthFirstSearchHelper(round2Set);
 
+                while (nodeQueueIndex < nodeQueue.length) {
+                    var node = nodeQueue[nodeQueueIndex++];
+                    breadthFirstSearchHelper(node);
+                }
 
                 // Inner helper function
-                function breadthFirstSearchHelper(currentSet) {
-                    var
-                        nextRound = [],
-                        doneSearching = false;
-
-                    set.forEach(function(node) {
-                        if (visitedSet.contains(node)) {
-                            return false;
-                        }
-                        doneSearching = func(node) || false;
-                        if (!doneSearching) {
-                            visitedSet.add(node);
-                            node.neighbors.forEach(function(neighbor) {
-                                nextRoundSet.add(neighbor);
-                            });
-                        }
-                    });
-                    breadthFirstSearchHelper(nextRoundSet);
+                function breadthFirstSearchHelper(node) {
+                    if (visitedSet.contains(node)) {
+                        return; // Skip this node
+                    }
+                    visitedSet.add(node);
+                    var doneSearching = func(node) || false;
+                    if (doneSearching !== true) {
+                        node.neighbors.forEach(function(neighbor) {
+                            nodeQueue.push(neighbor);
+                        });
+                    }
                 }
             };
         }
