@@ -19,6 +19,6 @@ require([
     "use strict";
 
     $(document).ready(function() {
-       new MainLevel.MainLevel();
+        new MainLevel.MainLevel();
     });
 });

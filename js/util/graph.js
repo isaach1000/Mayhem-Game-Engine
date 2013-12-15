@@ -119,7 +119,7 @@ define([
              */
             this.depthFirstSearch = function(func) {
                 var
-                    visitedSet = new Hashset.Hashset(),
+                visitedSet = new Hashset.Hashset(),
                     doneSearching = false;
 
                 nodes.forEach(function(node) {
@@ -151,7 +151,7 @@ define([
              */
             this.breadthFirstSearch = function(func) {
                 var
-                    visitedSet = new Hashset.Hashset(),
+                visitedSet = new Hashset.Hashset(),
                     nodeQueue = [],
                     nodeQueueIndex = 0;
 
@@ -161,7 +161,7 @@ define([
 
                 while (nodeQueueIndex < nodeQueue.length) {
                     var
-                        node = nodeQueue[nodeQueueIndex++],
+                    node = nodeQueue[nodeQueueIndex++],
                         doneSearching = breadthFirstSearchHelper(node);
 
                     if (doneSearching) {

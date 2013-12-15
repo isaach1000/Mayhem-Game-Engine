@@ -5,10 +5,10 @@ define(['util/hashtable'], function(Hashtable) {
         var key = {
             prop: 'property'
         }, value = {
-            prop: 'val'
-        },keyClone = {
-            prop: 'property'
-        };
+                prop: 'val'
+            }, keyClone = {
+                prop: 'property'
+            };
 
         it('put', function() {
             expect(table.put(key, value)).toBe(true);
@@ -20,14 +20,14 @@ define(['util/hashtable'], function(Hashtable) {
             expect(table.containsKey(keyClone)).toBe(false);
         });
 
-        it ('get', function() {
+        it('get', function() {
             expect(table.get(key)).toBe(value);
         });
 
         it('contains only applies to original object, ' +
             'not equal object', function() {
-            expect(table.containsKey(keyClone)).toBe(false);
-        });
+                expect(table.containsKey(keyClone)).toBe(false);
+            });
 
         it('remove & length', function() {
             expect(table.length).toBe(1);
