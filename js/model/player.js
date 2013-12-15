@@ -31,7 +31,7 @@ define([], function() {
 
             ////////////////////////////////////
             // Public instance methods/fields //
-            ////////////////////////////////////                
+            ////////////////////////////////////
 
             this.getRoom = function() {
                 return currentRoom;
