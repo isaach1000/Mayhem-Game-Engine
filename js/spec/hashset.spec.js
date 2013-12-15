@@ -3,12 +3,12 @@ define(['util/hashset'], function(Hashset) {
         var set = new Hashset.Hashset();
 
         var item = {
-            key1 : 'val1',
-            key2 : 2
+            key1: 'val1',
+            key2: 2
         }, itemClone = {
-            key1 : 'val1',
-            key2 : 2
-        };
+                key1: 'val1',
+                key2: 2
+            };
 
         it('add', function() {
             expect(set.add(item)).toBe(true);

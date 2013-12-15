@@ -1,0 +1,21 @@
+{
+    "name": "canvas",
+    "version": "0.0.0",
+    "description": "Canvas game project",
+    "main": "Gruntfile.js",
+    "scripts": {
+        "test": "echo \"Error: no test specified\" && exit 1"
+    },
+    "repository": {
+        "type": "git",
+        "url": "git@gitbub.com:isaach1000/canvas.git"
+    },
+    "author": "Isaac Hier",
+    "license": "MIT",
+    "devDependencies": {
+        "grunt-contrib-watch": "~0.5.3",
+        "grunt-jsbeautifier": "~0.2.6",
+        "grunt-contrib-concat": "~0.3.0",
+        "grunt-contrib-uglify": "~0.2.7"
+    }
+}
