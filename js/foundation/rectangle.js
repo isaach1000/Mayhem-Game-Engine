@@ -1,22 +1,22 @@
 define([
     'foundation/polygon',
     'util/boundingBox'
-    ], function(Polygon,
-        BoundingBox) {
+], function(Polygon,
+    BoundingBox) {
     "use strict";
 
     //////////////////////////////////
     // Private class methods/fields //
     //////////////////////////////////
-    
+
     /**
-     * @exports foundation/rectangle 
+     * @exports foundation/rectangle
      */
     var module = {
         /////////////////////////////////
         // Public class methods/fields //
         /////////////////////////////////
-        
+
         /**
          * Rectangle, extends [Polygon]{@link module:foundation/polygon.Polygon}
          * @constructor
@@ -32,14 +32,21 @@ define([
             ////////////////////////////////////
             // Public instance methods/fields //
             ////////////////////////////////////
-            
+
             // Extend Polygon constructor
-            Polygon.Polygon.call(this, [
-                    {x: x, y: y},
-                    {x: x + width, y: y},
-                    {x: x + width, y: y + height},
-                    {x: x, y: y + height}
-                ], drawer, drawingSettings);
+            Polygon.Polygon.call(this, [{
+                x: x,
+                y: y
+            }, {
+                x: x + width,
+                y: y
+            }, {
+                x: x + width,
+                y: y + height
+            }, {
+                x: x,
+                y: y + height
+            }], drawer, drawingSettings);
         }
     };
 
