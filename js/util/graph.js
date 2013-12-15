@@ -160,8 +160,13 @@ define([
                 });
 
                 while (nodeQueueIndex < nodeQueue.length) {
-                    var node = nodeQueue[nodeQueueIndex++];
-                    breadthFirstSearchHelper(node);
+                    var
+                        node = nodeQueue[nodeQueueIndex++],
+                        doneSearching = breadthFirstSearchHelper(node);
+
+                    if (doneSearching) {
+                        return; // Terminate the search
+                    }
                 }
 
                 // Inner helper function
@@ -176,6 +181,7 @@ define([
                             nodeQueue.push(neighbor);
                         });
                     }
+                    return doneSearching;
                 }
             };
         }
