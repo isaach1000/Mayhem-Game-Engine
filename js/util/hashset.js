@@ -272,7 +272,7 @@ define(['underscore', 'util/hash'], function(_, Hash) {
                         var arrLen = current.length;
                         for (var j = 0; j < arrLen; j++) {
                             var
-                                element = current[j],
+                            element = current[j],
                                 doneSearching = f(element);
                             if (doneSearching === true) {
                                 return;
