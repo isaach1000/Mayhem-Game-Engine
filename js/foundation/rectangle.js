@@ -10,7 +10,7 @@ define([
     //////////////////////////////////
 
     /**
-     * @exports foundation/rectangle
+     * @module foundation/rectangle
      */
     var module = {
         /////////////////////////////////

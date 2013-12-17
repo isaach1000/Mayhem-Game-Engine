@@ -7,7 +7,7 @@ define([], function() {
 
 
     /**
-     * @exports util/physics
+     * @module util/physics
      */
     var module = {};
 

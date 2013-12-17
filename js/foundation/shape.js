@@ -13,7 +13,7 @@ define([
 
 
     /**
-     * @exports foundation/shape
+     * @module foundation/shape
      */
     var module = {
         /////////////////////////////////
@@ -55,8 +55,7 @@ define([
                 /**
                  * x coordinate of top-left of Shape instance
                  * @type {integer}
-                 * @memberOf module:foundation/shape.Shape
-                 * @instance
+                 * @property x
                  */
                 x: {
                     get: function() {
@@ -80,8 +79,7 @@ define([
                 /**
                  * y coordinate of top-left of Shape instance
                  * @type {integer}
-                 * @memberOf module:foundation/shape.Shape
-                 * @instance
+                 * @property y
                  */
                 y: {
                     get: function() {
@@ -105,8 +103,7 @@ define([
                 /**
                  * Width of Shape instance
                  * @type {integer}
-                 * @memberOf module:foundation/shape.Shape
-                 * @instance
+                 * @property width
                  */
                 width: {
                     get: function() {
@@ -125,8 +122,7 @@ define([
                 /**
                  * Height of Shape instance
                  * @type {integer}
-                 * @memberOf module:foundation/shape.Shape
-                 * @instance
+                 * @property height
                  */
                 height: {
                     get: function() {
@@ -145,8 +141,7 @@ define([
                 /**
                  * BoundingBox of Shape instance
                  * @type {BoundingBox}
-                 * @memberOf module:foundation/shape.Shape
-                 * @instance
+                 * @property boundingBox
                  */
                 boundingBox: {
                     get: function() {
@@ -157,7 +152,6 @@ define([
                 /** 
                  * Drawing settings of Shape instance
                  * @type {Object}
-                 * @memberOf module:foundation/shape.Shape
                  * @instance
                  * @return {void}
                  */

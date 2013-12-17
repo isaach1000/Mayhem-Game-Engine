@@ -11,7 +11,7 @@ define(['underscore', 'util/hash'], function(_, Hash) {
         LOAD_FACTOR = 0.5;
 
     /**
-     * @exports util/hashset
+     * @module util/hashset
      */
     var module = {
         /////////////////////////////////
@@ -112,8 +112,7 @@ define(['underscore', 'util/hash'], function(_, Hash) {
                 /**
                  * The size of the Hashset
                  * @type {integer}
-                 * @memberOf module:util/hashset.Hashset
-                 * @instance
+                 * @property length
                  */
                 length: {
                     get: function() {
@@ -124,6 +123,7 @@ define(['underscore', 'util/hash'], function(_, Hash) {
 
             /**
              * Add an object
+             * @function
              * @param   {Object} object         -   Object to add
              * @param   {Object} [hashTarget]   -   Object to hash
              * @return  {boolean}           Whether or not the insertion was successful
@@ -160,6 +160,7 @@ define(['underscore', 'util/hash'], function(_, Hash) {
 
             /**
              * Check if an object is an element of this set
+             * @function
              * @param   {Object} object     -   An object _this may be an element
              * @return  {boolean}           Whether or not the object is an element
              */
@@ -197,6 +198,7 @@ define(['underscore', 'util/hash'], function(_, Hash) {
 
             /**
              * Remove an object
+             * @function
              * @param {Object} object       - An object
              * @return {boolean}            True if removed object from set, false if object could not be removed from set
              */

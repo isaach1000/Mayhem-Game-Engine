@@ -12,7 +12,7 @@ define([
     //////////////////////////////////
 
     /**
-     * @exports foundation/circle
+     * @module foundation/circle
      */
     var module = {
         /////////////////////////////////
@@ -51,8 +51,7 @@ define([
                 /**
                  * Radius of circle
                  * @type {float)
-                 * @memberOf module:foundation/circle.Circle
-                 * @instance
+                 * @property radius
                  */
                 radius: {
                     get: function() {

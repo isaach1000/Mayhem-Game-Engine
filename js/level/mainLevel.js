@@ -9,7 +9,7 @@ define(['jquery', 'level/levelBase', 'sprite/human'],
         //////////////////////////////////
 
         /**
-         * @exports level/mainLevel
+         * @module level/mainLevel
          */
         var module = {
             /////////////////////////////////

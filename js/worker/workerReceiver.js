@@ -9,7 +9,7 @@ define([], function() {
 
 
     /**
-     * @exports worker/workerReceiver
+     * @module worker/workerReceiver
      */
     var module = {
         /////////////////////////////////

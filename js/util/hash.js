@@ -10,7 +10,7 @@ define([], function() {
     var currentHash = 0;
 
     /**
-     * @exports util/hash
+     * @module util/hash
      */
     var module = {
         /////////////////////////////////

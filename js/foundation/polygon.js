@@ -10,7 +10,7 @@ define([
     //////////////////////////////////
 
     /**
-     * @exports util/polygon
+     * @module util/polygon
      */
     var module = {
         /////////////////////////////////
@@ -19,7 +19,9 @@ define([
 
         /**
          * Generate a BoundingBox for a polygon
-         * @param   {Array.<Point>} points  - An array of points describing the polygon.
+         * @method  generateBbox
+         * @static
+         * @param   {Array} points  - An array of points describing the polygon.
          * @return  {BoundingBox}           A BoundingBox containing all of the points.
          */
         generateBbox: function(points) {
@@ -47,10 +49,10 @@ define([
         },
 
         /**
-         * Polygon, extends [Shape]{@link module:foundation/shape.Shape}
+         * Polygon, extends {{#crossLink "Shape"}}{{/crossLink}}
          * @constructor
          * @extends {Shape}
-         * @param   {Array.<Point>} points      -   An array of points _this describe the polygon.
+         * @param   {Array} points      -   An array of points _this describe the polygon.
          * @param   {CanvasDrawer} drawer       -   A CanvasDrawer to draw the polygon onto the canvas.
          * @param   {Object} drawingSettings    -   A dictionary of drawing options.
          */
@@ -69,13 +71,20 @@ define([
                 width = bbox.width,
                 height = bbox.height;
 
-            var forEachPoint = function(f) {
+            /**
+             * Iterate through each point in the polygon.
+             * @method forEachPoint
+             * @private
+             * @param  {Function} f Function to be called on each point
+             * @return {void}
+             */
+            function forEachPoint(f) {
                 var numPoints = _this.points.length;
                 for (var i = 0; i < numPoints; i++) {
                     var point = _this.points[i];
                     f(point);
                 }
-            };
+            }
 
             ////////////////////////////////////
             // Public instance methods/fields //
@@ -88,9 +97,8 @@ define([
             Object.defineProperties(this, {
                 /**
                  * Points of Polygon instance
-                 * @type {Array.<Point>}
-                 * @memberOf module:foundation/polygon.Polygon
-                 * @instance
+                 * @type {Array}
+                 * @property points
                  */
                 points: {
                     get: function() {

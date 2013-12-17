@@ -18,7 +18,6 @@ define([], function() {
         /////////////////////////////////
 
         /**
-         * @class MinHeap
          * @constructor
          */
         MinHeap: function() {
@@ -27,7 +26,7 @@ define([], function() {
             /////////////////////////////////////
 
             var
-                size = DEFAULT_SIZE,
+            size = DEFAULT_SIZE,
                 comparator = function(data1, data2) {
                     return data1 - data2;
                 };
@@ -42,9 +41,9 @@ define([], function() {
             }
 
             var
-                _this = this,
-            	data = new Array(size),
-            	heapSize = 0;
+            _this = this,
+                data = new Array(size),
+                heapSize = 0;
 
             function getLeftChildIndex(nodeIndex) {
                 return 2 * nodeIndex + 1;
@@ -70,8 +69,7 @@ define([], function() {
                     data[nodeIndex] = newNodeIndex;
                     nodeIndex = parentIndex;
                     bubbleUp(nodeIndex);
-                }
-                else {
+                } else {
                     return;
                 }
             }
@@ -89,26 +87,22 @@ define([], function() {
 
             function bubbleDown(nodeIndex) {
                 var
-                    leftChildIndex = getLeftChildIndex(nodeIndex),
+                leftChildIndex = getLeftChildIndex(nodeIndex),
                     rightChildIndex = getRightChildIndex(nodeIndex),
                     smallerValueIndex;
                 // This long if else assigns the smaller child
                 if (leftChildIndex < heapSize && rightChildIndex < heapSize) {
                     if (comparator(data[leftChildIndex],
-                            data[rightChildIndex]) < 0) {
+                        data[rightChildIndex]) < 0) {
                         smallerValueIndex = leftChildIndex;
-                    }
-                    else {
+                    } else {
                         smallerValueIndex = rightChildIndex;
                     }
-                }
-                else if (leftChildIndex < heapSize) {
+                } else if (leftChildIndex < heapSize) {
                     smallerValueIndex = leftChildIndex;
-                }
-                else if (rightChildIndex < heapSize) {
+                } else if (rightChildIndex < heapSize) {
                     smallerValueIndex = rightChildIndex;
-                }
-                else {
+                } else {
                     return;
                 }
 

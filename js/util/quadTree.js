@@ -4,7 +4,7 @@ define(['util/boundingBox'], function(BoundingBox) {
     /**
      * QuadTree for hit-testing. Based on http://en.wikipedia.org/wiki/Quadtree.
      *
-     * @exports util/quadTree
+     * @module util/quadTree
      */
     var module = {
         QT_NODE_CAPACITY: 4,
@@ -23,7 +23,7 @@ define(['util/boundingBox'], function(BoundingBox) {
                  * Create four quadTrees which fully divide this quadTree into four
                  * quads of equal area.
                  *
-                 * @private
+                 * @method subdivide
                  * @return {void}
                  */
                 subdivide = function() {
@@ -43,13 +43,18 @@ define(['util/boundingBox'], function(BoundingBox) {
                     quadTreeSE = new module.QuadTree(bboxSE);
                 };
 
-            /** The bounding box of the QuadTree's coordinates. */
+            /**
+             * The bounding box of the QuadTree's coordinates.
+             * @property boundingBox
+             * @type {BoundingBox}
+             */
             this.boundingBox = bbox;
 
             /**
              * Insert a shape into the QuadTree.
              *
-             * @param {Object.<bbox>} shape -- The shape to insert.
+             * @method insert
+             * @param {Object} shape -- The shape to insert.
              * @return {boolean} Whether or not insertion was successful.
              */
             this.insert = function(shape) {
@@ -87,8 +92,9 @@ define(['util/boundingBox'], function(BoundingBox) {
             /**
              * Query the tree for boxes within a range.
              *
+             * @method queryRange
              * @param {BoundingBox} rangeBbox   - The query range bounding box.
-             * @return {Array.<BoundingBox>}    An array of boxes within the range.
+             * @return {Array}    An array of boxes within the range.
              */
             this.queryRange = function(rangeBbox) {
                 // Prepare an array of results.

@@ -4,7 +4,7 @@ define(['util/hash', 'util/hashset'], function(Hash, Hashset) {
     // @formatter:on
 
     /**
-     * @exports util/hashtable
+     * @module util/hashtable
      */
     var module = {
         /////////////////////////////////

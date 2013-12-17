@@ -2,7 +2,7 @@ define([], function() {
     "use strict";
 
     /**
-     * @exports util/boundingBox
+     * @module util/boundingBox
      */
     var module = {
         /////////////////////////////////
@@ -53,7 +53,6 @@ define([], function() {
                 /**
                  * x coordinate of top-left of BoundingBox instance
                  * @type {float}
-                 * @memberOf module:util/boundingBox.BoundingBox
                  */
                 x: {
                     get: function() {
@@ -67,7 +66,6 @@ define([], function() {
                 /**
                  * y coordinate of top-left of BoundingBox instance
                  * @type {float}
-                 * @memberOf module:util/boundingBox.BoundingBox
                  */
                 y: {
                     get: function() {
@@ -81,7 +79,6 @@ define([], function() {
                 /**
                  * Width of BoundingBox instance
                  * @type {float}
-                 * @memberOf module:util/boundingBox.BoundingBox
                  */
                 width: {
                     get: function() {
@@ -92,7 +89,6 @@ define([], function() {
                 /**
                  * Height of BoundingBox instance
                  * @type {float}
-                 * @memberOf module:util/boundingBox.BoundingBox
                  */
                 height: {
                     get: function() {

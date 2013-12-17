@@ -2,7 +2,7 @@ define(['sprite/sprite', 'foundation/rectangle'], function(Sprite, Rectangle) {
     "use strict";
 
     /**
-     * @exports sprite/tileMap
+     * @module sprite/tileMap
      */
     var module = {
         /////////////////////////////////
@@ -18,8 +18,9 @@ define(['sprite/sprite', 'foundation/rectangle'], function(Sprite, Rectangle) {
          * @param {int} numWidth                        -   The number of tiles in the width of the TileMap
          * @param {int} numHeight                       -   The number of tiles in the height of the TileMap
          * @param {CanvasDrawer} drawer                 -   A CanvasDrawer to draw the TileMap.
-         * @param {Array.<Object>} drawingSettingsArr	-   An array of to apply to the tiles repeatedly using modulo.
+         * @param {Array} drawingSettingsArr	-   An array of to apply to the tiles repeatedly using modulo.
          *                                                  Iterates through each row.
+
          * @constructor
          */
         TileMap: function(x, y, width, height, numWidth, numHeight, drawer, drawingSettingsArr) {

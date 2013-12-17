@@ -10,7 +10,7 @@ define([
 
 
     /**
-     * @exports sprite/sprite
+     * @module sprite/sprite
      */
     var module = {
         /////////////////////////////////
@@ -39,8 +39,7 @@ define([
             Object.defineProperties(this, {
                 /**
                  * Shapes of Sprite instance
-                 * @memberOf module:sprite/sprite.Sprite
-                 * @instance
+                 * @property shapes
                  */
                 shapes: {
                     get: function() {
@@ -53,8 +52,7 @@ define([
 
                 /**
                  * BoundingBox of Sprite instance
-                 * @memberOf module:sprite/sprite.Sprite
-                 * @instance
+                 * @property boundingBox
                  */
                 boundingBox: {
                     get: function() {
@@ -70,8 +68,7 @@ define([
 
                 /**
                  * Drawing settings of Sprite instance
-                 * @memberOf module:sprite/sprite.Sprite
-                 * @instance
+                 * @property drawingSettings
                  */
                 drawingSettings: {
                     get: function() {
@@ -94,6 +91,7 @@ define([
 
             /**
              * Iterator function
+             *
              * @param {Function} f  - A function _this takes a Shape instance as a parameter.
              * @return {void}
              */

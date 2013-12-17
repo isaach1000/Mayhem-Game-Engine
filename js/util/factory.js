@@ -2,7 +2,7 @@ define(['jquery'], function($) {
     "use strict";
 
     /**
-     * @exports util/factory
+     * @module util/factory
      */
     var module = {
         /** Construct a canvas. Should be called during/after `$(document).ready`.

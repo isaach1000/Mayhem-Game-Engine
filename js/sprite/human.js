@@ -19,7 +19,7 @@ define([
         FOOT_LENGTH = Math.round(FOOT_BREADTH * 2.5);
 
     /**
-     * @exports sprite/human
+     * @module sprite/human
      */
     var module = {
         /////////////////////////////////

@@ -1,3 +1,5 @@
+/**
+ */
 define([], function() {
     "use strict";
 
@@ -7,7 +9,7 @@ define([], function() {
 
 
     /**
-     * @exports util/mathExtensions // TODO: replace util/mathExtensions
+     * @module util/mathExtensions
      */
     var module = {
         /////////////////////////////////
@@ -17,6 +19,8 @@ define([], function() {
         /**
          * Generate a random integer.
          *
+         * @method  randomInt
+         * @static
          * @param   {int} [minimum=0]       -   The minimum for the random integer (inclusive).
          * @param   {int} maximum           -   The maximum for the random integer (not inclusive).
          * @return  {int}                   A random integer within the specified range.
@@ -28,6 +32,8 @@ define([], function() {
         /**
          * Generate a random float.
          *
+         * @method randomFloat
+         * @static
          * @param   {float} [minimum=0]     -   The minimum for the random float (inclusive).
          * @param   {float} maximum         -   The maximum for the random float (not inclusive).
          * @return  {float}                 A random float within the specified range.
@@ -50,8 +56,11 @@ define([], function() {
 
         /**
          * Get the dot product of two vectors.
-         * @param  {Array.<number>}  vector1    -   A vector of numbers
-         * @param  {Array.<number>}  vector2    -   A vector of numbers (same length as vector1)
+         *
+         * @method dotProduct
+         * @static
+         * @param  {Array}  vector1    -   A vector of numbers
+         * @param  {Array}  vector2    -   A vector of numbers (same length as vector1)
          * @return {float}                      The dot product of the two vectors.
          */
         dotProduct: function(vector1, vector2) {

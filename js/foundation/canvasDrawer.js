@@ -6,7 +6,7 @@ define(['underscore'], function(_) {
     //////////////////////////////////
 
     /**
-     * @exports foundation/canvasDrawer
+     * @module foundation/canvasDrawer
      */
     var module = {
         /////////////////////////////////
@@ -38,8 +38,7 @@ define(['underscore'], function(_) {
                 /**
                  * Width of the canvas
                  * @type {float}
-                 * @memberOf module:foundation/canvasDrawer.CanvasDrawer
-                 * @instance
+                 * @property width
                  */
                 width: {
                     get: function() {
@@ -50,8 +49,7 @@ define(['underscore'], function(_) {
                 /**
                  * Height of the canvas
                  * @type {float}
-                 * @memberOf module:foundation/canvasDrawer.CanvasDrawer
-                 * @instance
+                 * @property height
                  */
                 height: {
                     get: function() {
@@ -63,8 +61,7 @@ define(['underscore'], function(_) {
                  * Properties of the context. Valid settings include:
                  * lineWidth, fillStyle, and strokeStyle.
                  * @type {Object}
-                 * @memberOf module:foundation/canvasDrawer.CanvasDrawer
-                 * @instance
+                 * @property contextSettings
                  */
                 contextSettings: {
                     get: function() {

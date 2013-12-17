@@ -16,7 +16,7 @@ define([
     //////////////////////////////////
 
     /**
-     * @exports level/levelBase
+     * @module level/levelBase
      */
     var module = {
         /////////////////////////////////

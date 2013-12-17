@@ -2,7 +2,7 @@ define(['util/mathExtensions'], function(MathExtensions) {
     "use strict";
 
     /**
-     * @exports util/matrix
+     * @module util/matrix
      */
     var module = {
         /////////////////////////////////
