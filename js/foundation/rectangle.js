@@ -10,7 +10,7 @@ define([
     //////////////////////////////////
 
     /**
-     * @module foundation/rectangle
+       @module foundation/rectangle
      */
     var module = {
         /////////////////////////////////
@@ -18,15 +18,15 @@ define([
         /////////////////////////////////
 
         /**
-         * Rectangle, extends [Polygon]{@link module:foundation/polygon.Polygon}
-         * @constructor
-         * @extends {Polygon}
-         * @param   {float} x                   -   The x coordinate of the rectangle on the canvas.
-         * @param   {float} y                   -   The y coordinate of the rectangle on the canvas.
-         * @param   {float} width               -   The width of the rectangle.
-         * @param   {float} height              -   The height of the rectangle.
-         * @param   {CanvasDrawer} drawer       -   A CanvasDrawer to draw the rectangle onto the canvas.
-         * @param   {Object} drawingSettings    -   A dictionary of drawing options.
+           Rectangle, extends [Polygon]{@link module:foundation/polygon.Polygon}
+           @constructor
+           @extends {Polygon}
+           @param   {float} x                   -   The x coordinate of the rectangle on the canvas.
+           @param   {float} y                   -   The y coordinate of the rectangle on the canvas.
+           @param   {float} width               -   The width of the rectangle.
+           @param   {float} height              -   The height of the rectangle.
+           @param   {CanvasDrawer} drawer       -   A CanvasDrawer to draw the rectangle onto the canvas.
+           @param   {Object} drawingSettings    -   A dictionary of drawing options.
          */
         Rectangle: function(x, y, width, height, drawer, drawingSettings) {
             ////////////////////////////////////

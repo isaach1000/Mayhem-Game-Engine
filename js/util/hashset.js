@@ -1,7 +1,13 @@
-// @formatter:off
+/**
+   Hashset data structure used to store unique objects without duplicates.
+   The hashset will add identical items of the same type, as long as they are
+   not the exact same object (or the hashcode property is identical). For more
+   info, see the {{#crossLink Hash}}{{/crossLink}} class.
+
+   @class Hashset
+ */
 define(['underscore', 'util/hash'], function(_, Hash) {
     "use strict";
-    // @formatter:on
 
     //////////////////////////////////
     // Private class methods/fields //
@@ -11,7 +17,7 @@ define(['underscore', 'util/hash'], function(_, Hash) {
         LOAD_FACTOR = 0.5;
 
     /**
-     * @module util/hashset
+       @module util/hashset
      */
     var module = {
         /////////////////////////////////
@@ -19,8 +25,9 @@ define(['underscore', 'util/hash'], function(_, Hash) {
         /////////////////////////////////
 
         /**
-         * Hashset
-         * @constructor
+           Hashset
+
+           @constructor
          */
         Hashset: function() {
             var _this = this;
@@ -34,6 +41,15 @@ define(['underscore', 'util/hash'], function(_, Hash) {
                 capacity = INIT_CAPACITY,
                 indicesTaken = [];
 
+            /**
+               Resolve a collision in the hashset.
+
+               @method resolveCollision
+               @private
+               @param  {Object} object
+               @param  {integer} index Index where collision occurred
+               @return {boolean} Whether or not the item was added to the set
+             */
             function resolveCollision(object, index) {
                 var location = bucket[index];
                 if (_.isArray(location)) {
@@ -49,6 +65,14 @@ define(['underscore', 'util/hash'], function(_, Hash) {
                 }
             }
 
+            /**
+               Add the index of a location that is currently occupied in the
+               array.
+
+               @method addIndex
+               @private
+               @param  {integer} idx Index of occupied location
+             */
             function addIndex(idx) {
                 // Add idx to the sorted indicesTaken array
                 var spot = _.sortedIndex(indicesTaken, idx);
@@ -57,6 +81,14 @@ define(['underscore', 'util/hash'], function(_, Hash) {
                 }
             }
 
+            /**
+               Helper method to rehash the array when the objects inserted
+               exceeds half of the total capacity.
+
+               @method rehash
+               @private
+               @return {void}
+             */
             function rehash() {
                 // Create new bucket that is double the size
                 var oldBucket = bucket;
@@ -81,6 +113,17 @@ define(['underscore', 'util/hash'], function(_, Hash) {
                 }
             }
 
+            /**
+               Insert an object into the internal array.
+
+               @method insert
+               @private
+               @param  {Object} object An object to insert into the array
+               @param  {Object} [hashTarget=`object`] An object used to generate a
+               hashcode
+               @return {boolean} Whether or not the object was inserted into the
+               array
+             */
             function insert(object, hashTarget) {
                 var originalTarget = hashTarget || null;
                 hashTarget = hashTarget || object;
@@ -110,9 +153,9 @@ define(['underscore', 'util/hash'], function(_, Hash) {
 
             Object.defineProperties(this, {
                 /**
-                 * The size of the Hashset
-                 * @type {integer}
-                 * @property length
+                   The size of the Hashset
+                   @type {integer}
+                   @property length
                  */
                 length: {
                     get: function() {
@@ -122,11 +165,11 @@ define(['underscore', 'util/hash'], function(_, Hash) {
             });
 
             /**
-             * Add an object
-             * @function
-             * @param   {Object} object         -   Object to add
-             * @param   {Object} [hashTarget]   -   Object to hash
-             * @return  {boolean}           Whether or not the insertion was successful
+               Add an object
+               @function
+               @param   {Object} object         -   Object to add
+               @param   {Object} [hashTarget]   -   Object to hash
+               @return  {boolean}           Whether or not the insertion was successful
              */
             this.add = function(object, hashTarget) {
                 var originalTarget = hashTarget || null;
@@ -148,8 +191,8 @@ define(['underscore', 'util/hash'], function(_, Hash) {
             };
 
             /**
-             * Clear the Hashset instance of all elements
-             * @return  {void}
+               Clear the Hashset instance of all elements
+               @return  {void}
              */
             this.clear = function() {
                 bucket = new Array(INIT_CAPACITY);
@@ -159,10 +202,10 @@ define(['underscore', 'util/hash'], function(_, Hash) {
             };
 
             /**
-             * Check if an object is an element of this set
-             * @function
-             * @param   {Object} object     -   An object _this may be an element
-             * @return  {boolean}           Whether or not the object is an element
+               Check if an object is an element of this set
+               @function
+               @param   {Object} object     -   An object _this may be an element
+               @return  {boolean}           Whether or not the object is an element
              */
             this.contains = function(object, hashTarget) {
                 var originalTarget = hashTarget || null;
@@ -197,10 +240,10 @@ define(['underscore', 'util/hash'], function(_, Hash) {
             };
 
             /**
-             * Remove an object
-             * @function
-             * @param {Object} object       - An object
-             * @return {boolean}            True if removed object from set, false if object could not be removed from set
+               Remove an object
+               @function
+               @param {Object} object       - An object
+               @return {boolean}            True if removed object from set, false if object could not be removed from set
              */
             this.remove = function(object, hashTarget) {
                 var originalTarget = hashTarget || null;

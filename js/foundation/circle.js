@@ -12,7 +12,7 @@ define([
     //////////////////////////////////
 
     /**
-     * @module foundation/circle
+       @module foundation/circle
      */
     var module = {
         /////////////////////////////////
@@ -20,14 +20,14 @@ define([
         /////////////////////////////////
 
         /**
-         * Circle, extends [Shape]{@link module:foundation/shape.Shape}
-         * @constructor
-         * @extends {Shape}
-         * @param   {float} x                   -   x coordinate of circle
-         * @param   {float} y                   -   y coordinate of circle
-         * @param   {float} radius              -   Radius of the circle
-         * @param   {CanvasDrawer} drawer       -   CanvasDrawer to draw circle
-         * @param   {Object} drawingSettings    -   Dictionary of drawing options
+           Circle, extends [Shape]{@link module:foundation/shape.Shape}
+           @constructor
+           @extends {Shape}
+           @param   {float} x                   -   x coordinate of circle
+           @param   {float} y                   -   y coordinate of circle
+           @param   {float} radius              -   Radius of the circle
+           @param   {CanvasDrawer} drawer       -   CanvasDrawer to draw circle
+           @param   {Object} drawingSettings    -   Dictionary of drawing options
          */
         Circle: function(x, y, radius, drawer, drawingSettings) {
             /////////////////////////////////////
@@ -49,9 +49,9 @@ define([
 
             Object.defineProperties(this, {
                 /**
-                 * Radius of circle
-                 * @type {float)
-                 * @property radius
+                   Radius of circle
+                   @type {float)
+                   @property radius
                  */
                 radius: {
                     get: function() {
@@ -66,9 +66,8 @@ define([
             });
 
             /**
-             * Draw circle onto canvas.
-             *
-             * @return {void}
+               Draw circle onto canvas.
+                              @return {void}
              */
             this.drawShape = function(canvasDrawer) {
                 canvasDrawer.beginPath();

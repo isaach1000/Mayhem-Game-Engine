@@ -9,7 +9,7 @@ define([], function() {
 
 
     /**
-     * @module worker/workerMessenger
+       @module worker/workerMessenger
      */
     var module = {
         /////////////////////////////////
@@ -17,8 +17,8 @@ define([], function() {
         /////////////////////////////////
 
         /**
-         * WorkerMessenger
-         * @constructor
+           WorkerMessenger
+           @constructor
          */
         WorkerMessenger: function(target, id) {
             /////////////////////////////////////

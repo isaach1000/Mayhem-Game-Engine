@@ -2,6 +2,7 @@
     "name": "canvas",
     "version": "0.0.0",
     "description": "Canvas game project",
+    "homepage": "github.com/isaach1000/canvas",
     "main": "Gruntfile.js",
     "scripts": {
         "test": "echo \"Error: no test specified\" && exit 1"

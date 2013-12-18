@@ -1,10 +1,8 @@
-// @formatter:off
 define([
     'util/hashset',
     'util/hashtable'
 ], function(Hashset, Hashtable) {
     "use strict";
-    // @formatter:on
 
     //////////////////////////////////
     // Private class methods/fields //
@@ -14,7 +12,7 @@ define([
 
 
     /**
-     * @module util/graph
+       @module util/graph
      */
     var module = {
         /////////////////////////////////
@@ -24,8 +22,8 @@ define([
         // TODO
 
         /**
-         * Graph
-         * @constructor
+           Graph
+           @constructor
          */
         Graph: function() {
             var _this = this;
@@ -75,9 +73,9 @@ define([
             ////////////////////////////////////
 
             /**
-             * Add a node to the graph
-             * @param   {Object} data     Data to be stored in the node
-             * @return  {Node}          A node with the data
+               Add a node to the graph
+               @param   {Object} data     Data to be stored in the node
+               @return  {Node}          A node with the data
              */
             this.addNode = function(data) {
                 var node = new Node(data);
@@ -86,10 +84,10 @@ define([
             };
 
             /**
-             * Add an edge to the graph
-             * @param   {Node} tail       The origin node of the edge
-             * @param   {Node} head       The destination node of the edge
-             * @return  {Edge}          A directed edge connecting the nodes
+               Add an edge to the graph
+               @param   {Node} tail       The origin node of the edge
+               @param   {Node} head       The destination node of the edge
+               @return  {Edge}          A directed edge connecting the nodes
              */
             this.addEdge = function(tail, head) {
                 var edge = new Edge(tail, head);
@@ -98,10 +96,10 @@ define([
             };
 
             /**
-             * Remove an edge from the graph
-             * @param   {Node} tail       The origin node of the edge
-             * @param   {Node} head       The destination node of the edge
-             * @return  {void}
+               Remove an edge from the graph
+               @param   {Node} tail       The origin node of the edge
+               @param   {Node} head       The destination node of the edge
+               @return  {void}
              */
             this.removeEdge = function(tail, head) {
                 var removeEdge;
@@ -114,8 +112,8 @@ define([
             };
 
             /**
-             * Perform a depth first search of the graph
-             * @param {function} func The operation to perform on the visited nodes
+               Perform a depth first search of the graph
+               @param {function} func The operation to perform on the visited nodes
              */
             this.depthFirstSearch = function(func) {
                 var
@@ -146,8 +144,8 @@ define([
             };
 
             /**
-             * Perform a breadth first search on the graph
-             * @param {function} func The operation to perform on the visited nodes
+               Perform a breadth first search on the graph
+               @param {function} func The operation to perform on the visited nodes
              */
             this.breadthFirstSearch = function(func) {
                 var

@@ -1,8 +1,13 @@
+/**
+   A matrix to represent transformations, etc.
+
+   @class Matrix
+ */
 define(['util/mathExtensions'], function(MathExtensions) {
     "use strict";
 
     /**
-     * @module util/matrix
+       @module util/matrix
      */
     var module = {
         /////////////////////////////////
@@ -10,9 +15,9 @@ define(['util/mathExtensions'], function(MathExtensions) {
         /////////////////////////////////
 
         /**
-         * Matrix
-         *
-         * @constructor
+           Matrix
+
+           @constructor
          */
         Matrix: function(entriesArray, numRows, numColumns) {
             /////////////////////////////////////
@@ -23,9 +28,8 @@ define(['util/mathExtensions'], function(MathExtensions) {
                 rows;
 
             function forEach(f) {
-                var i, j;
-                for (i = 0; i < numRows; i += 1) {
-                    for (j = 0; j < numColumns; j += 1) {
+                for (var i = 0; i < numRows; i += 1) {
+                    for (var j = 0; j < numColumns; j += 1) {
                         f(entriesArray[i][j], i, j);
                     }
                 }
@@ -49,11 +53,11 @@ define(['util/mathExtensions'], function(MathExtensions) {
 
             function generateRows() {
                 // Store the matrix in a 2d array.
-                var row, i, j;
+                var row;
                 rows = [];
-                for (i = 0; i < _this.numRows; i += 1) {
+                for (var i = 0; i < _this.numRows; i += 1) {
                     row = [];
-                    for (j = 0; j < _this.numColumns; j += 1) {
+                    for (var j = 0; j < _this.numColumns; j += 1) {
                         row.push(entriesArray[i * _this.numColumns + j]);
                     }
                     rows.push(row);

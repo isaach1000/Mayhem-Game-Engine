@@ -1,15 +1,13 @@
-// @formatter:off
 define(['jquery', 'level/levelBase', 'sprite/human'],
     function($, LevelBase, Human) {
         "use strict";
-        // @formatter:on
 
         //////////////////////////////////
         // Private class methods/fields //
         //////////////////////////////////
 
         /**
-         * @module level/mainLevel
+           @module level/mainLevel
          */
         var module = {
             /////////////////////////////////
@@ -17,10 +15,10 @@ define(['jquery', 'level/levelBase', 'sprite/human'],
             /////////////////////////////////
 
             /**
-             * MainLevel, extends [LevelBase]{@link
-             * module:level/levelBase.LevelBase}
-             * @constructor
-             * @extends {LevelBase}
+               MainLevel, extends [LevelBase]{@link
+               module:level/levelBase.LevelBase}
+               @constructor
+               @extends {LevelBase}
              */
             MainLevel: function() {
                 // Extend LevelBase constructor

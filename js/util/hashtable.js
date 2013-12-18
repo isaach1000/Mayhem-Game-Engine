@@ -1,10 +1,8 @@
-// @formatter:off
 define(['util/hash', 'util/hashset'], function(Hash, Hashset) {
     "use strict";
-    // @formatter:on
 
     /**
-     * @module util/hashtable
+       @module util/hashtable
      */
     var module = {
         /////////////////////////////////
@@ -12,8 +10,8 @@ define(['util/hash', 'util/hashset'], function(Hash, Hashset) {
         /////////////////////////////////
 
         /**
-         * Hashtable
-         * @constructor
+           Hashtable
+           @constructor
          */
         Hashtable: function() {
             var _this = this;

@@ -11,13 +11,22 @@ module.exports = function(grunt) {
             }
         },
         jshint: {
-            main: ['Gruntfile.js', 'js/**/*.js', '!js/lib/**']
+            main: [
+                'Gruntfile.js',
+                'js/**/*.js',
+                '!js/lib/**'
+            ]
         },
         yuidoc: {
             main: {
+                name: '<%= pkg.name %>',
+                description: '<%= pkg.description %>',
+                version: '<%= pkg.version %>',
+                url: '<%= pkg.homepage %>',
                 options: {
-                    paths: ['js/**/*.js', '!js/lib/*'],
-                    outdir: ['docs']
+                    paths: ['js'],
+                    ignorepaths: ['js/lib/*', 'js/template.js'],
+                    outdir: 'docs'
                 }
             }
         }

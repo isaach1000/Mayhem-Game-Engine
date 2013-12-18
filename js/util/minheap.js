@@ -1,7 +1,5 @@
-// @formatter:off
 define([], function() {
     "use strict";
-    // @formatter:on
 
     //////////////////////////////////
     // Private class methods/fields //
@@ -10,7 +8,8 @@ define([], function() {
     var DEFAULT_SIZE = 10;
 
     /**
-     * @module modulePath // TODO: replace modulePath
+       @module modulePath
+       @module modulePath
      */
     var module = {
         /////////////////////////////////
@@ -18,7 +17,7 @@ define([], function() {
         /////////////////////////////////
 
         /**
-         * @constructor
+           @constructor
          */
         MinHeap: function() {
             /////////////////////////////////////

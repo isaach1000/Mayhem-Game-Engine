@@ -1,8 +1,15 @@
+/**
+   A class to represent the bounds of shapes in the canvas. Simplifies
+   calculations certain involving complex shapes. Specifically effective for
+   hit-testing.
+
+   @class BoundingBox
+ */
 define([], function() {
     "use strict";
 
     /**
-     * @module util/boundingBox
+       @module util/boundingBox
      */
     var module = {
         /////////////////////////////////
@@ -10,12 +17,13 @@ define([], function() {
         /////////////////////////////////
 
         /**
-         * Create a BoundingBox.
-         * @constructor
-         * @param {(float|Point)} arg0  - The x coordinate of left side, or left-top point.
-         * @param {(float|Point)} arg1  - The y coordinate of front side, or right-bottom point.
-         * @param {float} arg2          - Width of the box.
-         * @param {float} arg3          - Height of the box.
+           Create a BoundingBox.
+
+           @constructor
+           @param {(float|Point)} arg0  - The x coordinate of left side, or left-top point.
+           @param {(float|Point)} arg1  - The y coordinate of front side, or right-bottom point.
+           @param {float} arg2          - Width of the box.
+           @param {float} arg3          - Height of the box.
          */
         BoundingBox: function(arg0, arg1, arg2, arg3) {
             /////////////////////////////////////
@@ -51,8 +59,9 @@ define([], function() {
 
             Object.defineProperties(this, {
                 /**
-                 * x coordinate of top-left of BoundingBox instance
-                 * @type {float}
+                   x coordinate of top-left of BoundingBox instance
+
+                   @type {float}
                  */
                 x: {
                     get: function() {
@@ -64,8 +73,9 @@ define([], function() {
                 },
 
                 /**
-                 * y coordinate of top-left of BoundingBox instance
-                 * @type {float}
+                   y coordinate of top-left of BoundingBox instance
+
+                   @type {float}
                  */
                 y: {
                     get: function() {
@@ -77,8 +87,9 @@ define([], function() {
                 },
 
                 /**
-                 * Width of BoundingBox instance
-                 * @type {float}
+                   Width of BoundingBox instance
+
+                   @type {float}
                  */
                 width: {
                     get: function() {
@@ -87,8 +98,9 @@ define([], function() {
                 },
 
                 /**
-                 * Height of BoundingBox instance
-                 * @type {float}
+                   Height of BoundingBox instance
+
+                   @type {float}
                  */
                 height: {
                     get: function() {
@@ -96,6 +108,11 @@ define([], function() {
                     }
                 },
 
+                /**
+                   Center of BoundingBox instance
+
+                   @type {Object}
+                 */
                 center: {
                     get: function() {
                         return {
@@ -107,9 +124,11 @@ define([], function() {
             });
 
             /**
-             * Check if this BoundingBox contains another BoundingBox.
-             * @param {BoundingBox} bbox - The other BoundingBox
-             * @return {boolean} True if contains the other BoundingBox, false otherwise.
+               Check if this BoundingBox contains another BoundingBox.
+
+               @method containsBoundingBox
+               @param {BoundingBox} bbox - The other BoundingBox
+               @return {boolean} True if contains the other BoundingBox, false otherwise.
              */
             this.containsBoundingBox = function(bbox) {
                 return (bbox.x >= x && bbox.x + bbox.width <= x + w &&
@@ -117,10 +136,12 @@ define([], function() {
             };
 
             /**
-             * Get the intersection of this BoundingBox
-             * and another BoundingBox.
-             * @param {BoundingBox} otherBbox - Another BoundingBox instance.
-             * @return {BoundingBox}
+               Get the intersection of this BoundingBox
+               and another BoundingBox.
+
+               @method intersection
+               @param {BoundingBox} otherBbox - Another BoundingBox instance.
+               @return {BoundingBox}
              */
             this.intersection = function(otherBbox) {
                 var x1 = Math.max(this.x, otherBbox.x),

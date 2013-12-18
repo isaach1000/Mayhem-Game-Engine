@@ -10,7 +10,7 @@ define([
     //////////////////////////////////
 
     /**
-     * @module util/polygon
+       @module util/polygon
      */
     var module = {
         /////////////////////////////////
@@ -18,11 +18,11 @@ define([
         /////////////////////////////////
 
         /**
-         * Generate a BoundingBox for a polygon
-         * @method  generateBbox
-         * @static
-         * @param   {Array} points  - An array of points describing the polygon.
-         * @return  {BoundingBox}           A BoundingBox containing all of the points.
+           Generate a BoundingBox for a polygon
+           @method  generateBbox
+           @static
+           @param   {Array} points  - An array of points describing the polygon.
+           @return  {BoundingBox}           A BoundingBox containing all of the points.
          */
         generateBbox: function(points) {
             var minX = points[0].x,
@@ -49,12 +49,12 @@ define([
         },
 
         /**
-         * Polygon, extends {{#crossLink "Shape"}}{{/crossLink}}
-         * @constructor
-         * @extends {Shape}
-         * @param   {Array} points      -   An array of points _this describe the polygon.
-         * @param   {CanvasDrawer} drawer       -   A CanvasDrawer to draw the polygon onto the canvas.
-         * @param   {Object} drawingSettings    -   A dictionary of drawing options.
+           Polygon, extends {{#crossLink "Shape"}}{{/crossLink}}
+           @constructor
+           @extends {Shape}
+           @param   {Array} points      -   An array of points _this describe the polygon.
+           @param   {CanvasDrawer} drawer       -   A CanvasDrawer to draw the polygon onto the canvas.
+           @param   {Object} drawingSettings    -   A dictionary of drawing options.
          */
         Polygon: function(points, drawer, drawingSettings) {
             /////////////////////////////////////
@@ -72,11 +72,11 @@ define([
                 height = bbox.height;
 
             /**
-             * Iterate through each point in the polygon.
-             * @method forEachPoint
-             * @private
-             * @param  {Function} f Function to be called on each point
-             * @return {void}
+               Iterate through each point in the polygon.
+               @method forEachPoint
+               @private
+               @param  {Function} f Function to be called on each point
+               @return {void}
              */
             function forEachPoint(f) {
                 var numPoints = _this.points.length;
@@ -96,9 +96,9 @@ define([
 
             Object.defineProperties(this, {
                 /**
-                 * Points of Polygon instance
-                 * @type {Array}
-                 * @property points
+                   Points of Polygon instance
+                   @type {Array}
+                   @property points
                  */
                 points: {
                     get: function() {
@@ -119,8 +119,8 @@ define([
             };
 
             /**
-             * Draw the rectangle onto the canvas using the CanvasDrawer.
-             * @return {void}
+               Draw the rectangle onto the canvas using the CanvasDrawer.
+               @return {void}
              */
             this.drawShape = function(canvasDrawer) {
                 canvasDrawer.beginPath();
@@ -141,18 +141,17 @@ define([
             };
 
             /**
-             * Hit testing based on [this answer]{@links http://stackoverflow.com/a/2922778/1930331}.
-             * @param {Point}       - A point
-             * @return {boolean}    If the point is in the polygon
+               Hit testing based on [this answer]{@links http://stackoverflow.com/a/2922778/1930331}.
+               @param {Point}       - A point
+               @return {boolean}    If the point is in the polygon
              */
             this.hitTest = function(point) {
                 var nvert = this.points.length;
                 var i, j, c = false;
                 for (i = 0, j = nvert - 1; i < nvert; j = i++) {
                     if (((this.points[i].y > point.y) != (this.points[j].y > point.y)) &&
-                        (point.x < (this.points[j].x - this.points[i].x) *
-                            (point.y - this.points[i].y) / (this.points[j].y -
-                                this.points[i].y) + this.points[i].x)) {
+                        (point.x < (this.points[j].x - this.points[i].x) * (point.y - this.points[i].y) / (this.points[j].y -
+                            this.points[i].y) + this.points[i].x)) {
                         c = !c;
                     }
                 }

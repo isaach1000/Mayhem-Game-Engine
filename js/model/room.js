@@ -1,14 +1,12 @@
-// @formatter:off
 define([], function() {
     "use strict";
-    // @formatter:on
 
     //////////////////////////////////
     // Private class methods/fields //
     //////////////////////////////////
 
     /**
-     * @module model/room
+       @module model/room
      */
     var module = {
         /////////////////////////////////
@@ -16,8 +14,8 @@ define([], function() {
         /////////////////////////////////
 
         /**
-         * Room
-         * @constructor
+           Room
+           @constructor
          */
         Room: function(description) {
             /////////////////////////////////////

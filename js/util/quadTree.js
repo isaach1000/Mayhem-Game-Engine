@@ -1,61 +1,68 @@
+/**
+   A QuadTree is a data structure for optimizing hit-testing. Based on
+   this <a href="http://en.wikipedia.org/wiki/Quadtree">Wikipedia article</a>.
+
+   @class QuadTree
+ */
 define(['util/boundingBox'], function(BoundingBox) {
     "use strict";
 
     /**
-     * QuadTree for hit-testing. Based on http://en.wikipedia.org/wiki/Quadtree.
-     *
-     * @module util/quadTree
+       @module util/quadTree
      */
     var module = {
         QT_NODE_CAPACITY: 4,
 
         /**
-         * @constructor
-         * @param {BoundingBox} bbox
+           @constructor
+           @param {BoundingBox} bbox
          */
         QuadTree: function(bbox) {
             // Private instance methods/fields
-            var quadTreeNW, quadTreeNE, quadTreeSW, quadTreeSE,
+            var
+            quadTreeNW, quadTreeNE, quadTreeSW, quadTreeSE,
                 subtrees = [quadTreeNW, quadTreeNE, quadTreeSW, quadTreeSE],
-                shapes = [],
-
-                /**
-                 * Create four quadTrees which fully divide this quadTree into four
-                 * quads of equal area.
-                 *
-                 * @method subdivide
-                 * @return {void}
-                 */
-                subdivide = function() {
-                    var bboxNW = new BoundingBox(bbox.x, bbox.y,
-                        bbox.width / 2, bbox.height / 2),
-                        bboxNE = new BoundingBox(bbox.x + bbox.width / 2, bbox.y,
-                            bbox.width / 2, bbox.height / 2),
-                        bboxSW = new BoundingBox(bbox.x, bbox.y + bbox.height / 2,
-                            bbox.width / 2, bbox.height / 2),
-                        bboxSE = new BoundingBox(bbox.x + bbox.width / 2,
-                            bbox.y + bbox.height / 2,
-                            bbox.width / 2, bbox.height / 2);
-
-                    quadTreeNW = new module.QuadTree(bboxNW);
-                    quadTreeNE = new module.QuadTree(bboxNE);
-                    quadTreeSW = new module.QuadTree(bboxSW);
-                    quadTreeSE = new module.QuadTree(bboxSE);
-                };
+                shapes = [];
 
             /**
-             * The bounding box of the QuadTree's coordinates.
-             * @property boundingBox
-             * @type {BoundingBox}
+                 Create four quadTrees which fully divide this quadTree into four
+                 quads of equal area.
+
+                 @method subdivide
+                 @private
+                 @return {void}
+               */
+            function subdivide() {
+                var bboxNW = new BoundingBox(bbox.x, bbox.y,
+                    bbox.width / 2, bbox.height / 2),
+                    bboxNE = new BoundingBox(bbox.x + bbox.width / 2, bbox.y,
+                        bbox.width / 2, bbox.height / 2),
+                    bboxSW = new BoundingBox(bbox.x, bbox.y + bbox.height / 2,
+                        bbox.width / 2, bbox.height / 2),
+                    bboxSE = new BoundingBox(bbox.x + bbox.width / 2,
+                        bbox.y + bbox.height / 2,
+                        bbox.width / 2, bbox.height / 2);
+
+                quadTreeNW = new module.QuadTree(bboxNW);
+                quadTreeNE = new module.QuadTree(bboxNE);
+                quadTreeSW = new module.QuadTree(bboxSW);
+                quadTreeSE = new module.QuadTree(bboxSE);
+            }
+
+            /**
+               The bounding box of the QuadTree's coordinates.
+
+               @property boundingBox
+               @type {BoundingBox}
              */
             this.boundingBox = bbox;
 
             /**
-             * Insert a shape into the QuadTree.
-             *
-             * @method insert
-             * @param {Object} shape -- The shape to insert.
-             * @return {boolean} Whether or not insertion was successful.
+               Insert a shape into the QuadTree.
+
+               @method insert
+               @param {Object} shape -- The shape to insert.
+               @return {boolean} Whether or not insertion was successful.
              */
             this.insert = function(shape) {
                 var i, subtreesLen = subtrees.length;
@@ -90,11 +97,11 @@ define(['util/boundingBox'], function(BoundingBox) {
             };
 
             /**
-             * Query the tree for boxes within a range.
-             *
-             * @method queryRange
-             * @param {BoundingBox} rangeBbox   - The query range bounding box.
-             * @return {Array}    An array of boxes within the range.
+               Query the tree for boxes within a range.
+
+               @method queryRange
+               @param {BoundingBox} rangeBbox   - The query range bounding box.
+               @return {Array}    An array of boxes within the range.
              */
             this.queryRange = function(rangeBbox) {
                 // Prepare an array of results.

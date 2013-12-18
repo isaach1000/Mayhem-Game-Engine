@@ -7,7 +7,7 @@ define([], function() {
 
 
     /**
-     * @module model/item
+       @module model/item
      */
     var module = {
         /////////////////////////////////
@@ -15,8 +15,8 @@ define([], function() {
         /////////////////////////////////
 
         /**
-         * Item
-         * @constructor
+           Item
+           @constructor
          */
         Item: function(name, description, weight, isCookie) {
             /////////////////////////////////////

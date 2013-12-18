@@ -9,7 +9,7 @@ define([], function() {
 
 
     /**
-     * @module worker/workerReceiver
+       @module worker/workerReceiver
      */
     var module = {
         /////////////////////////////////
@@ -17,8 +17,8 @@ define([], function() {
         /////////////////////////////////
 
         /**
-         * WorkerReceiver
-         * @constructor
+           WorkerReceiver
+           @constructor
          */
         WorkerReceiver: function(objectHandle, id) {
             /////////////////////////////////////

@@ -1,3 +1,9 @@
+/**
+   Abstract class used to implement basic functions of sprites. Sprites inherit
+   from this class and override the necessary drawing methods, etc.
+
+   @class Sprite
+ */
 define([
     'underscore',
     'util/boundingBox'
@@ -10,7 +16,7 @@ define([
 
 
     /**
-     * @module sprite/sprite
+       @module sprite/sprite
      */
     var module = {
         /////////////////////////////////
@@ -18,8 +24,8 @@ define([
         /////////////////////////////////
 
         /**
-         * Sprite
-         * @constructor
+           Sprite
+           @constructor
          */
         Sprite: function(shapes, drawer, drawingSettingsArr) {
             /////////////////////////////////////
@@ -38,8 +44,8 @@ define([
 
             Object.defineProperties(this, {
                 /**
-                 * Shapes of Sprite instance
-                 * @property shapes
+                   Shapes of Sprite instance
+                   @property shapes
                  */
                 shapes: {
                     get: function() {
@@ -51,8 +57,8 @@ define([
                 },
 
                 /**
-                 * BoundingBox of Sprite instance
-                 * @property boundingBox
+                   BoundingBox of Sprite instance
+                   @property boundingBox
                  */
                 boundingBox: {
                     get: function() {
@@ -67,8 +73,8 @@ define([
                 },
 
                 /**
-                 * Drawing settings of Sprite instance
-                 * @property drawingSettings
+                   Drawing settings of Sprite instance
+                   @property drawingSettings
                  */
                 drawingSettings: {
                     get: function() {
@@ -90,10 +96,9 @@ define([
             });
 
             /**
-             * Iterator function
-             *
-             * @param {Function} f  - A function _this takes a Shape instance as a parameter.
-             * @return {void}
+               Iterator function
+                              @param {Function} f  - A function _this takes a Shape instance as a parameter.
+               @return {void}
              */
             this.forEachShape = function(f) {
                 var numShapes = _this.shapes.length,
@@ -105,7 +110,7 @@ define([
             };
 
             /**
-             * Clear the Sprite instance and redraw it
+               Clear the Sprite instance and redraw it
              */
             this.update = function() {
                 this.clear();
@@ -113,8 +118,8 @@ define([
             };
 
             /**
-             * Clear Sprite instance
-             * @return {void}
+               Clear Sprite instance
+               @return {void}
              */
             this.clear = function() {
                 this.forEachShape(function(shape) {
@@ -123,8 +128,8 @@ define([
             };
 
             /**
-             * Draw Sprite instance
-             * @return {void}
+               Draw Sprite instance
+               @return {void}
              */
             this.draw = function() {
                 this.forEachShape(function(shape) {
@@ -133,8 +138,8 @@ define([
             };
 
             /**
-             * Draw BoundingBox of Sprite instance
-             * @return {void}
+               Draw BoundingBox of Sprite instance
+               @return {void}
              */
             this.drawBoundingBox = function() {
                 var x = _this.boundingBox.x,
@@ -149,8 +154,8 @@ define([
             };
 
             /**
-             * Update BoundingBox of Sprite instance
-             * @return {void}
+               Update BoundingBox of Sprite instance
+               @return {void}
              */
             this.updateBoundingBox = function() {
                 var minX, minY, maxX, maxY;
@@ -174,9 +179,9 @@ define([
             };
 
             /**
-             * Test whether or not a point is within a Sprite
-             * @param {Point} point         - Point to test
-             * @return {boolean}            If the point is in the Sprite
+               Test whether or not a point is within a Sprite
+               @param {Point} point         - Point to test
+               @return {boolean}            If the point is in the Sprite
              */
             this.collisionTest = function(point) {
                 var numShapes = this.shapes.length,

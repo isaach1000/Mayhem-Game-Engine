@@ -7,7 +7,7 @@ define([], function() {
 
 
     /**
-     * @module model/player
+       @module model/player
      */
     var module = {
         /////////////////////////////////
@@ -15,8 +15,8 @@ define([], function() {
         /////////////////////////////////
 
         /**
-         * Player
-         * @constructor
+           Player
+           @constructor
          */
         Player: function(initialRoom) {
             /////////////////////////////////////

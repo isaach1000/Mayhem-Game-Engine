@@ -20,10 +20,9 @@ require.config({
     }
 });
 
-// @formatter:off
+
 require(['jquery', 'underscore', 'jasmine-html'], function($, _, jasmine) {
     "use strict";
-    // @formatter:on
 
     var jasmineEnv = jasmine.getEnv();
     jasmineEnv.updateInterval = 1000;

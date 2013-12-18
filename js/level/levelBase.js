@@ -1,4 +1,3 @@
-// @formatter:off
 define([
     'foundation/canvasDrawer',
     'util/factory',
@@ -9,14 +8,13 @@ define([
     BoundingBox,
     QuadTree) {
     "use strict";
-    // @formatter:on
 
     //////////////////////////////////
     // Private class methods/fields //
     //////////////////////////////////
 
     /**
-     * @module level/levelBase
+       @module level/levelBase
      */
     var module = {
         /////////////////////////////////
@@ -24,8 +22,8 @@ define([
         /////////////////////////////////
 
         /**
-         * LevelBase
-         * @constructor
+           LevelBase
+           @constructor
          */
         LevelBase: function() {
             /////////////////////////////////////

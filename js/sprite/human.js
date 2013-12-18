@@ -1,4 +1,3 @@
-// @formatter:off
 define([
     'underscore',
     'sprite/sprite',
@@ -7,7 +6,6 @@ define([
     'foundation/animation'
 ], function(_, Sprite, Circle, Rectangle, Animation) {
     "use strict";
-    // @formatter:on
 
     //////////////////////////////////
     // Private class methods/fields //
@@ -19,7 +17,7 @@ define([
         FOOT_LENGTH = Math.round(FOOT_BREADTH * 2.5);
 
     /**
-     * @module sprite/human
+       @module sprite/human
      */
     var module = {
         /////////////////////////////////
@@ -27,8 +25,8 @@ define([
         /////////////////////////////////
 
         /**
-         * Human
-         * @constructor
+           Human
+           @constructor
          */
         Human: function(x, y, drawer, drawingSettings) {
             /////////////////////////////////////

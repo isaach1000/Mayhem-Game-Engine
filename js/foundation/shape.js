@@ -13,7 +13,7 @@ define([
 
 
     /**
-     * @module foundation/shape
+       @module foundation/shape
      */
     var module = {
         /////////////////////////////////
@@ -21,14 +21,14 @@ define([
         /////////////////////////////////
 
         /**
-         * Shape abstract class
-         * @constructor
-         * @param {float} x                     x coordinate of top-left
-         * @param {float} y                     y coordinate of top-left
-         * @param {float} width                 Width of shape
-         * @param {float} height                Height of shape
-         * @param {CanvasDrawer} drawer         CanvasDrawer to draw image to canvas
-         * @param {Object} drawingSettings      Settings for the CanvasDrawer
+           Shape abstract class
+           @constructor
+           @param {float} x                     x coordinate of top-left
+           @param {float} y                     y coordinate of top-left
+           @param {float} width                 Width of shape
+           @param {float} height                Height of shape
+           @param {CanvasDrawer} drawer         CanvasDrawer to draw image to canvas
+           @param {Object} drawingSettings      Settings for the CanvasDrawer
          */
         Shape: function(x, y, width, height, drawer, drawingSettings) {
             /////////////////////////////////////
@@ -53,9 +53,9 @@ define([
 
             Object.defineProperties(this, {
                 /**
-                 * x coordinate of top-left of Shape instance
-                 * @type {integer}
-                 * @property x
+                   x coordinate of top-left of Shape instance
+                   @type {integer}
+                   @property x
                  */
                 x: {
                     get: function() {
@@ -77,9 +77,9 @@ define([
                 },
 
                 /**
-                 * y coordinate of top-left of Shape instance
-                 * @type {integer}
-                 * @property y
+                   y coordinate of top-left of Shape instance
+                   @type {integer}
+                   @property y
                  */
                 y: {
                     get: function() {
@@ -101,9 +101,9 @@ define([
                 },
 
                 /**
-                 * Width of Shape instance
-                 * @type {integer}
-                 * @property width
+                   Width of Shape instance
+                   @type {integer}
+                   @property width
                  */
                 width: {
                     get: function() {
@@ -120,9 +120,9 @@ define([
                 },
 
                 /**
-                 * Height of Shape instance
-                 * @type {integer}
-                 * @property height
+                   Height of Shape instance
+                   @type {integer}
+                   @property height
                  */
                 height: {
                     get: function() {
@@ -139,9 +139,9 @@ define([
                 },
 
                 /**
-                 * BoundingBox of Shape instance
-                 * @type {BoundingBox}
-                 * @property boundingBox
+                   BoundingBox of Shape instance
+                   @type {BoundingBox}
+                   @property boundingBox
                  */
                 boundingBox: {
                     get: function() {
@@ -150,10 +150,10 @@ define([
                 },
 
                 /** 
-                 * Drawing settings of Shape instance
-                 * @type {Object}
-                 * @instance
-                 * @return {void}
+                   Drawing settings of Shape instance
+                   @type {Object}
+                   @instance
+                   @return {void}
                  */
                 drawingSettings: {
                     get: function() {
@@ -166,8 +166,8 @@ define([
             });
 
             /**
-             * Clear and draw Shape onto canvas
-             * @return {void}
+               Clear and draw Shape onto canvas
+               @return {void}
              */
             this.update = function() {
                 this.clear();
@@ -175,8 +175,8 @@ define([
             };
 
             /**
-             * Draw Shape instance onto the canvas
-             * @return {void}
+               Draw Shape instance onto the canvas
+               @return {void}
              */
             this.draw = function() {
                 if (this.drawingSettings.angle !== undefined) {
@@ -195,8 +195,8 @@ define([
             };
 
             /**
-             * Clear the Shape instance
-             * @return {void}
+               Clear the Shape instance
+               @return {void}
              */
             this.clear = function() {
                 if (this.drawingSettings.angle !== undefined) {
@@ -214,8 +214,8 @@ define([
             };
 
             /**
-             * Draw BoundingBox of Shape instance
-             * @return {void}
+               Draw BoundingBox of Shape instance
+               @return {void}
              */
             this.drawBoundingBox = function() {
                 if (this.drawingSettings.angle !== undefined) {
