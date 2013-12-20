@@ -18,7 +18,7 @@ require([
     MainLevel) {
     "use strict";
 
-    $(document).ready(function() {
+    $(function() {
         new MainLevel.MainLevel();
     });
 });

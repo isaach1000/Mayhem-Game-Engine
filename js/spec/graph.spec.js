@@ -1,5 +1,5 @@
 define(['util/graph'], function(Graph) {
-    'use strict';
+    "use strict";
 
     describe('Graph', function() {
         var

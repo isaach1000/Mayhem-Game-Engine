@@ -1,5 +1,5 @@
 define(['util/minheap'], function(MinHeap) {
-    'use strict';
+    "use strict";
 
     describe('MinHeap', function() {
 

@@ -1,3 +1,10 @@
+/**
+    Human is a subclass of Sprite that handles the rendering of a human
+    character.
+
+    @class Human
+    @extends Sprite
+ */
 define([
     'underscore',
     'sprite/sprite',
@@ -59,8 +66,7 @@ define([
                     strokeStyle: drawingSettings.strokeStyle,
                     fillStyle: drawingSettings.footColor,
                     angle: drawingSettings.angle
-                }
-            ),
+                }),
 
                 rightFoot = new Rectangle.Rectangle(
                     x + HEAD_RADIUS, y + HEAD_RADIUS + FOOT_BREADTH / 2,
@@ -69,8 +75,7 @@ define([
                         strokeStyle: drawingSettings.strokeStyle,
                         fillStyle: drawingSettings.footColor,
                         angle: drawingSettings.angle
-                    }
-                );
+                    });
 
             // Arms
             var leftArm = new Circle.Circle(x + HEAD_RADIUS - ARM_RADIUS,
@@ -78,8 +83,7 @@ define([
                     strokeStyle: drawingSettings.strokeStyle,
                     fillStyle: drawingSettings.armColor,
                     angle: drawingSettings.angle
-                }
-            ),
+                }),
 
                 rightArm = new Circle.Circle(x + HEAD_RADIUS - ARM_RADIUS,
                     y + HEAD_RADIUS + ARM_RADIUS, ARM_RADIUS,
@@ -87,8 +91,7 @@ define([
                         strokeStyle: drawingSettings.strokeStyle,
                         fillStyle: drawingSettings.armColor,
                         angle: drawingSettings.angle
-                    }
-                );
+                    });
 
 
             var initialShapes = [
@@ -160,8 +163,13 @@ define([
             };
 
             this.turn = function(angle) {
+                var first = true; // TODO: remove this test
                 this.forEachShape(function(shape) {
-                    shape.drawingSettings.angle += angle;
+                    if (first) {
+                        shape.drawingSettings.angle += angle;
+                        console.debug(shape.drawingSettings.angle, shape);
+                        first = false;
+                    }
                 });
             };
         }

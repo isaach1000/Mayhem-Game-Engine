@@ -28,7 +28,7 @@ define([], function() {
     //////////////////////////////////
 
     /**
-     * @exports $folder/$filename
+        @exports $folder/$filename
      */
     var module = {
         /////////////////////////////////
@@ -36,8 +36,8 @@ define([], function() {
         /////////////////////////////////
 
         /**
-         * $class
-         * @constructor
+             $class
+             @constructor
          */
         $class: function() {
             var _this = this;

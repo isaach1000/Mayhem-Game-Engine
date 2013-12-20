@@ -167,10 +167,12 @@ define([
                     if (minY === undefined || minY > shapeBox.y) {
                         minY = shapeBox.y;
                     }
-                    if (maxX === undefined || maxX < shapeBox.x + shapeBox.width) {
+                    if (maxX === undefined ||
+                        maxX < shapeBox.x + shapeBox.width) {
                         maxX = shapeBox.x + shapeBox.width;
                     }
-                    if (maxY === undefined || maxY < shapeBox.y + shapeBox.height) {
+                    if (maxY === undefined ||
+                        maxY < shapeBox.y + shapeBox.height) {
                         maxY = shapeBox.y + shapeBox.height;
                     }
                 });

@@ -1,8 +1,3 @@
-/**
-   Wrapper class for CanvasContext
-
-   @class CanvasDrawer
- */
 define(['underscore'], function(_) {
     "use strict";
 
@@ -19,12 +14,14 @@ define(['underscore'], function(_) {
         /////////////////////////////////
 
         /**
-           CanvasDrawer for drawing to a canvas.
+            CanvasDrawer for drawing to a canvas. Wrapper class for HTML5
+            CanvasRenderingContext2D.
 
-           @constructor
-           @param {Context} ctx         - Context of canvas
-           @param {float} width         - Width of canvas
-           @param {float} height        - Height of canvas
+            @class CanvasDrawer
+            @constructor
+            @param {Context} ctx Context of canvas
+            @param {float} width Width of canvas
+            @param {float} height Height of canvas
          */
         CanvasDrawer: function(ctx, width, height) {
             /////////////////////////////////////
@@ -33,7 +30,6 @@ define(['underscore'], function(_) {
 
             var _this = this,
                 ctxSettings;
-
 
             ////////////////////////////////////
             // Public instance methods/fields //
@@ -55,8 +51,8 @@ define(['underscore'], function(_) {
                 /**
                    Height of the canvas
 
-                   @type {float}
                    @property height
+                   @type {float}
                  */
                 height: {
                     get: function() {
@@ -68,8 +64,8 @@ define(['underscore'], function(_) {
                    Properties of the context. Valid settings include:
                    lineWidth, fillStyle, and strokeStyle.
 
-                   @type {Object}
                    @property contextSettings
+                   @type {Object}
                  */
                 contextSettings: {
                     get: function() {
@@ -95,12 +91,13 @@ define(['underscore'], function(_) {
             });
 
             /**
-               Draw a line between two points
+                Draw a line between two points
 
-               @param {(float|Point)} point1        -   x coordinate of the first point, or the first point
-               @param {(float|Point)} point2        -   y coordinate of the first point, or the second point
-               @param {boolean} [moveFirst=false]   -   If true, uses moveTo method
-               @return {void}
+                @method drawLine
+                @param {(float|Point)} point1 x coordinate of the first point, or the first point
+                @param {(float|Point)} point2 y coordinate of the first point, or the second point
+                @param {boolean} [moveFirst=false] If true, uses moveTo method
+                @return {void}
              */
             this.drawLine = function(point1, point2, moveFirst) {
                 if (moveFirst) {
@@ -110,89 +107,103 @@ define(['underscore'], function(_) {
             };
 
             /**
-               Wrapper for <code>context.stroke</code>
+                Wrapper for <code>context.stroke</code>
 
-               @return {void}
+                @method stroke
+                @return {void}
              */
             this.stroke = function() {
                 ctx.stroke();
             };
 
             /**
-               Wrapper for <code>context.fill</code>
+                Wrapper for <code>context.fill</code>
 
-               @return {void}
+                @method fill
+                @return {void}
              */
             this.fill = function() {
                 ctx.fill();
             };
 
             /**
-               Wrapper for <code>context.beginPath</code>
+                Wrapper for <code>context.beginPath</code>
 
-               @return {void}
+                @method beginPath
+                @return {void}
              */
             this.beginPath = function() {
                 ctx.beginPath();
             };
 
             /**
-               Wrapper for <code>context.closePath</code>
+                Wrapper for <code>context.closePath</code>
 
-               @return {void}
+                @method closePath
+                @return {void}
              */
             this.closePath = function() {
                 ctx.closePath();
             };
 
             /**
-               Wrapper for <code>context.rect</code>
-               @param  {float}  x   x coordinate
-               @param  {float}  y   y coordinate
-               @param  {float}  w   Width of rectangle
-               @param  {float}  h   Height of rectangle
+                Wrapper for <code>context.rect</code>
 
-               @return {void}
+                @method rect
+                @param  {float}  x   x coordinate
+                @param  {float}  y   y coordinate
+                @param  {float}  w   Width of rectangle
+                @param  {float}  h   Height of rectangle
+                @return {void}
              */
             this.rect = function(x, y, w, h) {
                 ctx.rect(x, y, w, h);
             };
 
             /**
-               Wrapper for <code>context.arc</code>
+                Wrapper for <code>context.arc</code>
 
-               @param  {float}      x          x coordinate
-               @param  {float}      y          y coordinate
-               @param  {float}      radius     Radius of arc
-               @param  {float}      startAngle Start angle of arc
-               @param  {float}      endAngle   End angle of arc
-               @param  {boolean}    ccw        Move counterclockwise
-               @return {void}
+                @method arc
+                @param  {float}      x          x coordinate
+                @param  {float}      y          y coordinate
+                @param  {float}      radius     Radius of arc
+                @param  {float}      startAngle Start angle of arc
+                @param  {float}      endAngle   End angle of arc
+                @param  {boolean}    ccw        Move counterclockwise
+                @return {void}
              */
             this.arc = function(x, y, radius, startAngle, endAngle, ccw) {
                 ctx.arc(x, y, radius, startAngle, endAngle, ccw);
             };
 
             /**
-               Wrapper for <code>context.clearRect</code>
+                Wrapper for <code>context.clearRect</code>
 
-               @param  {float} x - Minimum x of area.
-               @param  {float} y - Minimum y of area.
-               @param  {float} width  - Width of area.
-               @param  {float} height - Height of area.
-               @return {void}
+                @method clearRect
+                @param  {float} x Minimum x of area.
+                @param  {float} y Minimum y of area.
+                @param  {float} width Width of area.
+                @param  {float} height Height of area.
+                @return {void}
              */
             this.clearRect = function(x, y, width, height) {
                 ctx.clearRect(x, y, width, height);
             };
 
+            /**
+                Clear entire canvas
+
+                @method clearCanvas
+                @return {void}
+             */
             this.clearCanvas = function() {
-                _this.clearRect(0, 0, _this.width, _this.height);
+                this.clearRect(0, 0, this.width, this.height);
             };
 
             /**
                Wrapper for <code>context.save</code>
 
+               @method save
                @return {void}
              */
             this.save = function() {
@@ -200,81 +211,98 @@ define(['underscore'], function(_) {
             };
 
             /**
-               Wrapper for <code>context.restore</code>
+                Wrapper for <code>context.restore</code>
 
-               @return {void}
+                @method restore
+                @return {void}
              */
             this.restore = function() {
                 ctx.restore();
             };
 
             /**
-               Wrapper for <code>context.translate</code>
+                Wrapper for <code>context.translate</code>
 
-               @param  {float} x    - x coordinate of destination
-               @param  {float} y    - y coordinate of destination
-               @return {void}
+                @method translate
+                @param  {float} x x coordinate of destination
+                @param  {float} y y coordinate of destination
+                @return {void}
              */
             this.translate = function(x, y) {
                 ctx.translate(x, y);
             };
 
             /**
-               Wrapper for <code>context.rotate</code>
+                Translate to the center of the canvas.
 
-               @param   {float}     - Angle of rotation
-               @return  {void}
+                @method translateToCenter
+                @return {void}
+             */
+            this.translateToCenter = function() {
+                this.translate(this.width / -2, this.height / -2);
+            };
+
+            /**
+                Wrapper for <code>context.rotate</code>
+
+                @method rotate
+                @param   {float} angle Angle of rotation
+                @return  {void}
              */
             this.rotate = function(angle) {
                 ctx.rotate(angle);
             };
 
             /**
-               Wrapper for <code>context.fillRect</code>
+                Wrapper for <code>context.fillRect</code>
 
-               @param  {float} x    -   x coordinate of top-left of rectangle
-               @param  {float} y    -   y coordinate of top-left of rectangle
-               @param  {float} w    -   Width of rectangle
-               @param  {float} h    -   Height of rectangle
-               @return {void}
+                @method fillRect
+                @param  {float} x x coordinate of top-left of rectangle
+                @param  {float} y y coordinate of top-left of rectangle
+                @param  {float} w Width of rectangle
+                @param  {float} h Height of rectangle
+                @return {void}
              */
             this.fillRect = function(x, y, w, h) {
                 ctx.fillRect(x, y, w, h);
             };
 
             /**
-               Wrapper for <code>context.strokeRect</code>
+                Wrapper for <code>context.strokeRect</code>
 
-               @param  {float} x    - x coordinate of top-left of rectangle
-               @param  {float} y    - y coordinate of top-left of rectangle
-               @param  {float} w    - Width of rectangle
-               @param  {float} h    - Height of rectangle
-               @return {void}
+                @method strokeRect
+                @param  {float} x x coordinate of top-left of rectangle
+                @param  {float} y y coordinate of top-left of rectangle
+                @param  {float} w Width of rectangle
+                @param  {float} h Height of rectangle
+                @return {void}
              */
             this.strokeRect = function(x, y, w, h) {
                 ctx.strokeRect(x, y, w, h);
             };
 
             /**
-               Wrapper for <code>context.getImageData</code>
+                Wrapper for <code>context.getImageData</code>
 
-               @param  {float} x        - x coordinate of top-left of image
-               @param  {float} y        - y coordinate of top-left of image
-               @param  {float} width    - Width of image
-               @param  {float} height   - Height of image
-               @return {Array}          Image data
+                @method getImageData
+                @param  {float} x x coordinate of top-left of image
+                @param  {float} y y coordinate of top-left of image
+                @param  {float} width Width of image
+                @param  {float} height Height of image
+                @return {Array}          Image data
              */
             this.getImageData = function(x, y, w, h) {
                 return ctx.getImageData(x, y, w, h);
             };
 
             /**
-               Wrapper for <code>context.putImageData</code>
+                Wrapper for <code>context.putImageData</code>
 
-               @param  {Array} imageData    - Image data
-               @param  {float} x            - x coordinate of top-left of image
-               @param  {float} y            - y coordinate of top-left of image
-               @return {void}
+                @method putImageData
+                @param  {Array} imageData Image data
+                @param  {float} x x coordinate of top-left of image
+                @param  {float} y y coordinate of top-left of image
+                @return {void}
              */
             this.putImageData = function(imageData, x, y) {
                 ctx.putImageData(imageData, x, y);

@@ -54,9 +54,11 @@ define([
             this.quadTree = new QuadTree.QuadTree(_this.quadBox);
 
             this.bgCtx = _this.bgCanvas[0].getContext('2d');
-            this.bgDrawer = new CanvasDrawer.CanvasDrawer(_this.bgCtx, _this.bgCanvas.width(), _this.bgCanvas.height());
+            this.bgDrawer = new CanvasDrawer.CanvasDrawer(_this.bgCtx,
+                _this.bgCanvas.width(), _this.bgCanvas.height());
             this.mainCtx = _this.mainCanvas[0].getContext('2d');
-            this.mainDrawer = new CanvasDrawer.CanvasDrawer(_this.mainCtx, _this.mainCanvas.width(), _this.mainCanvas.height());
+            this.mainDrawer = new CanvasDrawer.CanvasDrawer(_this.mainCtx,
+                _this.mainCanvas.width(), _this.mainCanvas.height());
         }
     };
 

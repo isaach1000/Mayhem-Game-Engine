@@ -1,9 +1,19 @@
 module.exports = function(grunt) {
     grunt.initConfig({
         pkg: grunt.file.readJSON('package.json'),
-        concat: {},
-        uglify: {},
-        watch: {},
+        watch: {
+            main: {
+                files: ['js/**/*.js', '!js/lib/**'],
+                tasks: ['jsbeautifier:main', 'jshint:main'],
+                options: {
+                    livereload: true
+                }
+            },
+            docs: {
+                files: ['js/**/*.js', '!js/lib/**'],
+                tasks: ['jsbeautifier:main', 'jshint:main', 'yuidoc:main']
+            }
+        },
         jsbeautifier: {
             main: {
                 src: ['js/**/*.js', 'Gruntfile.js', 'package.json'],
@@ -29,6 +39,24 @@ module.exports = function(grunt) {
                     outdir: 'docs'
                 }
             }
+        },
+        requirejs: {
+            compile: {
+                options: {
+                    baseUrl: 'js',
+                    name: 'main',
+                    out: 'build/optimized.js',
+                    paths: {
+                        jquery: 'lib/jquery',
+                        underscore: 'lib/underscore'
+                    },
+                    shim: {
+                        underscore: {
+                            exports: '_'
+                        }
+                    }
+                }
+            }
         }
     });
 
@@ -37,11 +65,17 @@ module.exports = function(grunt) {
     grunt.loadNpmTasks('grunt-contrib-watch');
     grunt.loadNpmTasks('grunt-contrib-jshint');
     grunt.loadNpmTasks('grunt-contrib-yuidoc');
+    grunt.loadNpmTasks('grunt-contrib-requirejs');
     grunt.loadNpmTasks('grunt-jsbeautifier');
 
     grunt.registerTask('default', [
         'jsbeautifier:*',
         'jshint:*',
         'yuidoc:*'
+    ]);
+
+    grunt.registerTask('build', [
+        'default',
+        'requirejs:compile'
     ]);
 };

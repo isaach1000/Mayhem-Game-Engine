@@ -56,8 +56,7 @@ define(['underscore'], function(_) {
 
             var startTime;
 
-            /**
-            var animate = function() {
+            function animate() {
                 drawable.clear();
                 var shouldContinue = frameFunction(new Date() - startTime);
                 drawable.draw();
@@ -66,7 +65,7 @@ define(['underscore'], function(_) {
                 } else if (_.isFunction(callback)) {
                     callback();
                 }
-            };
+            }
 
             ////////////////////////////////////
             // Public instance methods/fields //
