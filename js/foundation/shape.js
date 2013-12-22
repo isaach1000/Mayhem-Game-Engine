@@ -191,11 +191,12 @@ define([
                @return {void}
              */
             this.draw = function() {
-                this.drawBoundingBox();
-                if (this.drawingSettings.angle) {
-                    drawer.save();
-                    drawer.rotate(this.drawingSettings.angle);
-                    console.debug(this);
+                var needsRestore = false;
+
+                if (this.drawingSettings.angle !== undefined) {
+                    needsRestore = true;
+                    drawer.save().translate(this.center.x, this.center.y)
+                        .rotate(this.drawingSettings.angle);
                 }
 
                 // Call subclass method if exists.
@@ -203,7 +204,7 @@ define([
                     this.drawShape(drawer);
                 }
 
-                if (this.drawingSettings.angle) {
+                if (needsRestore) {
                     drawer.restore();
                 }
             };
@@ -302,6 +303,13 @@ define([
             ////////////////////////////////////
 
             Object.defineProperties(this, {
+                center: {
+                    value: {
+                        x: x,
+                        y: y
+                    }
+                },
+
                 /**
                    Radius of circle
 
@@ -330,9 +338,8 @@ define([
                 canvasDrawer.contextSettings = _this.drawingSettings;
 
                 var lineWidth = this.drawingSettings.lineWidth || 1;
-                canvasDrawer.arc(this.x + this.radius,
-                    this.y + this.radius,
-                    this.radius - lineWidth, 0, 2 * Math.PI, true);
+                canvasDrawer.arc(this.x, this.y, this.radius - lineWidth, 0,
+                    2 * Math.PI, true);
 
                 canvasDrawer.stroke();
                 canvasDrawer.fill();
@@ -355,31 +362,38 @@ define([
         /**
             @constructor
             @extends {Polygon}
-            @param   {float} x                   -   The x coordinate of the rectangle on the canvas.
-            @param   {float} y                   -   The y coordinate of the rectangle on the canvas.
-            @param   {float} width               -   The width of the rectangle.
-            @param   {float} height              -   The height of the rectangle.
-            @param   {CanvasDrawer} drawer       -   A CanvasDrawer to draw the rectangle onto the canvas.
-            @param   {Object} drawingSettings    -   A dictionary of drawing options.
+            @param   {float} x The x coordinate of the rectangle's upper left corner.
+            @param   {float} y The y coordinate of the rectangle's upper left corner.
+            @param   {float} width The width of the rectangle.
+            @param   {float} height The height of the rectangle.
+            @param   {CanvasDrawer} drawer A CanvasDrawer to draw the rectangle onto the canvas.
+            @param   {Object} drawingSettings A dictionary of drawing options.
          */
         Rectangle: function(x, y, width, height, drawer, drawingSettings) {
             ////////////////////////////////////
             // Public instance methods/fields //
             ////////////////////////////////////
 
+            var
+            w2 = width / 2,
+                h2 = height / 2;
+
             // Extend Polygon constructor
-            module.Polygon.call(this, [{
-                x: x,
-                y: y
+            module.Polygon.call(this, {
+                x: x + w2,
+                y: y + h2
+            }, [{
+                x: -w2,
+                y: -h2
             }, {
-                x: x + width,
-                y: y
+                x: w2,
+                y: -h2
             }, {
-                x: x + width,
-                y: y + height
+                x: w2,
+                y: h2
             }, {
-                x: x,
-                y: y + height
+                x: -w2,
+                y: h2
             }], drawer, drawingSettings);
         },
 
@@ -393,6 +407,7 @@ define([
 
         /**
            Generate a BoundingBox for a polygon
+
            @method  generateBbox
            @static
            @param   {Array} points An array of points describing the polygon
@@ -562,38 +577,34 @@ define([
                @return {void}
              */
             this.drawShape = function(canvasDrawer) {
-                canvasDrawer.beginPath();
-                canvasDrawer.contextSettings = this.drawingSettings;
+                canvasDrawer.beginPath().contextSettings = this.drawingSettings;
 
                 var
                 pts = this.points,
                     numPoints = pts.length,
                     p1 = {
-                        x: pts[0].x + this.center.x,
-                        y: pts[0].y + this.center.y
+                        x: pts[0].x,
+                        y: pts[0].y
                     },
                     p2 = {
-                        x: pts[1].x + this.center.x,
-                        y: pts[1].y + this.center.y
+                        x: pts[1].x,
+                        y: pts[1].y
                     };
 
                 canvasDrawer.drawLine(p1, p2, true);
                 for (var i = 1; i < numPoints; i++) {
                     p1 = {
-                        x: pts[i].x + this.center.x,
-                        y: pts[i].y + this.center.y
+                        x: pts[i].x,
+                        y: pts[i].y
                     };
                     p2 = {
-                        x: pts[(i + 1) % numPoints].x + _this.center.x,
-                        y: pts[(i + 1) % numPoints].y + _this.center.y
+                        x: pts[(i + 1) % numPoints].x,
+                        y: pts[(i + 1) % numPoints].y
                     };
-                    console.debug(p1, p2);
                     canvasDrawer.drawLine(p1, p2);
                 }
 
-                canvasDrawer.closePath();
-                canvasDrawer.fill();
-                canvasDrawer.stroke();
+                canvasDrawer.closePath().fill().stroke();
             };
 
             /**
@@ -604,15 +615,21 @@ define([
                 @return {boolean} If the point is in the polygon
              */
             this.hitTest = function(point) {
-                var nvert = this.points.length;
-                var i, j, c = false;
+                var
+                cx = this.center.x,
+                    cy = this.center.y,
+                    nvert = this.points.length,
+                    i,
+                    j,
+                    c = false;
+
                 for (i = 0, j = nvert - 1; i < nvert; j = i++) {
-                    if (((this.points[i].y > point.y) !==
-                            (this.points[j].y > point.y)) &&
+                    if (((this.points[i].y + cy > point.y) !==
+                            (this.points[j].y + cy > point.y)) &&
                         (point.x < (this.points[j].x - this.points[i].x) *
-                            (point.y - this.points[i].y) /
+                            (point.y - this.points[i].y - cy) /
                             (this.points[j].y - this.points[i].y) +
-                            this.points[i].x)) {
+                            this.points[i].x + cx)) {
                         c = !c;
                     }
                 }

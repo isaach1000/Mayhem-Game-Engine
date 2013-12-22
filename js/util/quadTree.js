@@ -61,21 +61,21 @@ define(['util/boundingBox'], function(BoundingBox) {
                Insert a shape into the QuadTree.
 
                @method insert
-               @param {Object} shape -- The shape to insert.
-               @return {boolean} Whether or not insertion was successful.
+               @param {Object} shape The shape to insert.
+               @chainable
              */
             this.insert = function(shape) {
                 var i, subtreesLen = subtrees.length;
 
                 if (!bbox.containsBoundingBox(shape.boundingBox)) {
                     // BoundingBox cannot be inserted.
-                    return false;
+                    return this;
                 }
 
                 // If there is space in this quadTree, add the shape here.
                 if (shapes.length < module.QT_NODE_CAPACITY) {
                     shapes.push(shape);
-                    return true;
+                    return this;
                 }
                 // Otherwise, we need to subdivide then add the shape to
                 // whichever node will accept it.
@@ -85,7 +85,7 @@ define(['util/boundingBox'], function(BoundingBox) {
 
                 for (i = 0; i < subtreesLen; i += 1) {
                     if (subtrees[i].insert(shape)) {
-                        return true;
+                        return this;
                     }
                 }
 
@@ -93,15 +93,15 @@ define(['util/boundingBox'], function(BoundingBox) {
                 // despite the capacity limit. The shape is probably lying
                 // on a border.
                 shapes.push(shape);
-                return true;
+                return this;
             };
 
             /**
-               Query the tree for boxes within a range.
+               Query the tree for shapes within a range.
 
                @method queryRange
                @param {BoundingBox} rangeBbox   - The query range bounding box.
-               @return {Array}    An array of boxes within the range.
+               @return {Array}    An array of shapes within the range.
              */
             this.queryRange = function(rangeBbox) {
                 // Prepare an array of results.
@@ -129,6 +129,18 @@ define(['util/boundingBox'], function(BoundingBox) {
                     results = results.concat(subtree.queryRange(rangeBbox));
                 }
                 return results;
+            };
+
+            /**
+                Query the tree for shapes that intersect a point.
+
+                @method query
+                @param  {Point} point A point
+                @return {Array} An array of shapes intersecting the point
+             */
+            this.query = function(point) {
+                var bbox = new BoundingBox.BoundingBox(point.x, point.y, 1, 1);
+                return this.queryRange(bbox);
             };
         }
     };

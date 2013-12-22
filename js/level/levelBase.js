@@ -26,12 +26,14 @@ define([
            @constructor
          */
         LevelBase: function() {
+            var _this = this;
+
             /////////////////////////////////////
             // Private instance methods/fields //
             /////////////////////////////////////
 
-            var _this = this,
-                WIDTH = 1000,
+            var
+            WIDTH = 1000,
                 HEIGHT = 600;
 
             ////////////////////////////////////
@@ -51,14 +53,14 @@ define([
             });
 
             this.quadBox = new BoundingBox.BoundingBox(0, 0, WIDTH, HEIGHT);
-            this.quadTree = new QuadTree.QuadTree(_this.quadBox);
+            this.quadTree = new QuadTree.QuadTree(this.quadBox);
 
-            this.bgCtx = _this.bgCanvas[0].getContext('2d');
-            this.bgDrawer = new CanvasDrawer.CanvasDrawer(_this.bgCtx,
-                _this.bgCanvas.width(), _this.bgCanvas.height());
-            this.mainCtx = _this.mainCanvas[0].getContext('2d');
-            this.mainDrawer = new CanvasDrawer.CanvasDrawer(_this.mainCtx,
-                _this.mainCanvas.width(), _this.mainCanvas.height());
+            this.bgCtx = this.bgCanvas[0].getContext('2d');
+            this.bgDrawer = new CanvasDrawer.CanvasDrawer(this.bgCtx,
+                this.bgCanvas.width(), this.bgCanvas.height());
+            this.mainCtx = this.mainCanvas[0].getContext('2d');
+            this.mainDrawer = new CanvasDrawer.CanvasDrawer(this.mainCtx,
+                this.mainCanvas.width(), this.mainCanvas.height());
         }
     };
 

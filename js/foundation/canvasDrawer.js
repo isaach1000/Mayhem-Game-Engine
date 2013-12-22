@@ -97,53 +97,58 @@ define(['underscore'], function(_) {
                 @param {(float|Point)} point1 x coordinate of the first point, or the first point
                 @param {(float|Point)} point2 y coordinate of the first point, or the second point
                 @param {boolean} [moveFirst=false] If true, uses moveTo method
-                @return {void}
+                @chainable
              */
             this.drawLine = function(point1, point2, moveFirst) {
                 if (moveFirst) {
                     ctx.moveTo(point1.x, point1.y);
                 }
                 ctx.lineTo(point2.x, point2.y);
+                return this;
             };
 
             /**
                 Wrapper for <code>context.stroke</code>
 
                 @method stroke
-                @return {void}
+                @chainable
              */
             this.stroke = function() {
                 ctx.stroke();
+                return this;
             };
 
             /**
                 Wrapper for <code>context.fill</code>
 
                 @method fill
-                @return {void}
+                @chainable
              */
             this.fill = function() {
                 ctx.fill();
+                return this;
             };
 
             /**
                 Wrapper for <code>context.beginPath</code>
 
                 @method beginPath
-                @return {void}
+                @chainable
              */
             this.beginPath = function() {
                 ctx.beginPath();
+                return this;
             };
 
             /**
                 Wrapper for <code>context.closePath</code>
 
                 @method closePath
-                @return {void}
+                @chainable
              */
             this.closePath = function() {
                 ctx.closePath();
+                return this;
             };
 
             /**
@@ -154,10 +159,11 @@ define(['underscore'], function(_) {
                 @param  {float}  y   y coordinate
                 @param  {float}  w   Width of rectangle
                 @param  {float}  h   Height of rectangle
-                @return {void}
+                @chainable
              */
             this.rect = function(x, y, w, h) {
                 ctx.rect(x, y, w, h);
+                return this;
             };
 
             /**
@@ -170,10 +176,11 @@ define(['underscore'], function(_) {
                 @param  {float}      startAngle Start angle of arc
                 @param  {float}      endAngle   End angle of arc
                 @param  {boolean}    ccw        Move counterclockwise
-                @return {void}
+                @chainable
              */
             this.arc = function(x, y, radius, startAngle, endAngle, ccw) {
                 ctx.arc(x, y, radius, startAngle, endAngle, ccw);
+                return this;
             };
 
             /**
@@ -184,40 +191,44 @@ define(['underscore'], function(_) {
                 @param  {float} y Minimum y of area.
                 @param  {float} width Width of area.
                 @param  {float} height Height of area.
-                @return {void}
+                @chainable
              */
             this.clearRect = function(x, y, width, height) {
                 ctx.clearRect(x, y, width, height);
+                return this;
             };
 
             /**
                 Clear entire canvas
 
                 @method clearCanvas
-                @return {void}
+                @chainable
              */
             this.clearCanvas = function() {
                 this.clearRect(0, 0, this.width, this.height);
+                return this;
             };
 
             /**
                Wrapper for <code>context.save</code>
 
                @method save
-               @return {void}
+               @chainable
              */
             this.save = function() {
                 ctx.save();
+                return this;
             };
 
             /**
                 Wrapper for <code>context.restore</code>
 
                 @method restore
-                @return {void}
+                @chainable
              */
             this.restore = function() {
                 ctx.restore();
+                return this;
             };
 
             /**
@@ -226,20 +237,22 @@ define(['underscore'], function(_) {
                 @method translate
                 @param  {float} x x coordinate of destination
                 @param  {float} y y coordinate of destination
-                @return {void}
+                @chainable
              */
             this.translate = function(x, y) {
                 ctx.translate(x, y);
+                return this;
             };
 
             /**
                 Translate to the center of the canvas.
 
                 @method translateToCenter
-                @return {void}
+                @chainable
              */
             this.translateToCenter = function() {
                 this.translate(this.width / -2, this.height / -2);
+                return this;
             };
 
             /**
@@ -251,6 +264,7 @@ define(['underscore'], function(_) {
              */
             this.rotate = function(angle) {
                 ctx.rotate(angle);
+                return this;
             };
 
             /**
@@ -261,10 +275,11 @@ define(['underscore'], function(_) {
                 @param  {float} y y coordinate of top-left of rectangle
                 @param  {float} w Width of rectangle
                 @param  {float} h Height of rectangle
-                @return {void}
+                @chainable
              */
             this.fillRect = function(x, y, w, h) {
                 ctx.fillRect(x, y, w, h);
+                return this;
             };
 
             /**
@@ -275,10 +290,11 @@ define(['underscore'], function(_) {
                 @param  {float} y y coordinate of top-left of rectangle
                 @param  {float} w Width of rectangle
                 @param  {float} h Height of rectangle
-                @return {void}
+                @chainable
              */
             this.strokeRect = function(x, y, w, h) {
                 ctx.strokeRect(x, y, w, h);
+                return this;
             };
 
             /**
@@ -289,7 +305,7 @@ define(['underscore'], function(_) {
                 @param  {float} y y coordinate of top-left of image
                 @param  {float} width Width of image
                 @param  {float} height Height of image
-                @return {Array}          Image data
+                @return {Array} Image data
              */
             this.getImageData = function(x, y, w, h) {
                 return ctx.getImageData(x, y, w, h);
@@ -302,10 +318,11 @@ define(['underscore'], function(_) {
                 @param  {Array} imageData Image data
                 @param  {float} x x coordinate of top-left of image
                 @param  {float} y y coordinate of top-left of image
-                @return {void}
+                @chainable
              */
             this.putImageData = function(imageData, x, y) {
                 ctx.putImageData(imageData, x, y);
+                return this;
             };
         }
     };

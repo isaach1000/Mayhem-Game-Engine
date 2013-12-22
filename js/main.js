@@ -14,11 +14,11 @@ require.config({
 require([
     'jquery',
     'level/mainLevel'
-], function($,
-    MainLevel) {
+], function($, MainLevel) {
     "use strict";
 
     $(function() {
-        new MainLevel.MainLevel();
+        var mainLevel = new MainLevel.MainLevel();
+        mainLevel.start();
     });
 });

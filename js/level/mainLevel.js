@@ -33,39 +33,82 @@ define(['jquery', 'level/levelBase', 'foundation/shape'], //'sprite/human', 'fou
                 // Private instance methods/fields //
                 /////////////////////////////////////
 
-                var poly = new Shape.Polygon({
-                    x: 200,
-                    y: 200
-                }, [{
-                    x: 100,
-                    y: 0
-                }, {
-                    x: -100,
-                    y: 0
-                }, {
-                    x: 0,
-                    y: 100
-                }], this.mainDrawer, {
-                    fillStyle: 'purple'
-                });
+                function hitTest() {
+                    var
+                    CHECK_LIMIT = 50,
+                        lastCheck = new Date();
 
-                poly.draw();
+                    $('body').on('mousemove', function(ev) {
+                        var
+                        dateNow = new Date(),
+                            point = {
+                                x: ev.pageX,
+                                y: ev.pageY
+                            };
 
-                /*
-                var human1 = new Human.Human(200, 200, this.mainDrawer);
-                var human2 = new Human.Human(500, 500, this.mainDrawer);
-                human1.draw();
-                human2.turn(Math.PI / 4);
-                human2.draw();
-                $('body').click(function() {
-                    human2.step();
-                });
-                human1.step();
-                */
+                        if (dateNow - lastCheck < CHECK_LIMIT) {
+                            return;
+                        } else {
+                            lastCheck = dateNow;
+                        }
+
+                        _this.quadTree.query(point)
+                            .forEach(function(shape) {
+                                shape.clear();
+                                shape.drawingSettings.fillStyle = 'yellow';
+                                shape.drawingSettings.angle -= Math.PI / 45;
+                                shape.draw();
+                            });
+                    });
+                }
 
                 ////////////////////////////////////
                 // Public instance methods/fields //
                 ////////////////////////////////////
+
+                this.start = function() {
+                    var poly = new Shape.Polygon({
+                            x: 100,
+                            y: 400
+                        }, [{
+                            x: 100,
+                            y: 0
+                        }, {
+                            x: -100,
+                            y: 0
+                        }, {
+                            x: 0,
+                            y: 100
+                        }],
+                        _this.mainDrawer, {
+                            fillStyle: 'purple',
+                            angle: 0
+                        });
+
+                    var rect = new Shape.Rectangle(100, 100, 50, 50,
+                        _this.mainDrawer, {
+                            fillStyle: 'orange',
+                            angle: 0
+                        });
+
+                    poly.draw();
+                    rect.draw();
+
+                    /*
+                    var human1 = new Human.Human(200, 200, this.mainDrawer);
+                    var human2 = new Human.Human(500, 500, this.mainDrawer);
+                    human1.draw();
+                    human2.turn(Math.PI / 4);
+                    human2.draw();
+                    $('body').click(function() {
+                        human2.step();
+                    });
+                    human1.step();
+                    */
+
+                    this.quadTree.insert(poly).insert(rect);
+                    hitTest();
+                };
             }
         };
 
