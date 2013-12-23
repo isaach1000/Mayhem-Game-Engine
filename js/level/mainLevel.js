@@ -5,8 +5,8 @@
     @class MainLevel
     @extends LevelBase
  */
-define(['jquery', 'level/levelBase', 'foundation/shape'], //'sprite/human', 'foundation/polygon'],
-    function($, LevelBase, Shape) { //Human, Polygon) {
+define(['jquery', 'level/levelBase', 'foundation/shape', 'foundation/animation'], //'sprite/human', 'foundation/polygon'],
+    function($, LevelBase, Shape, Animation) { //Human, Polygon) {
         "use strict";
 
         //////////////////////////////////
@@ -22,6 +22,7 @@ define(['jquery', 'level/levelBase', 'foundation/shape'], //'sprite/human', 'fou
             /////////////////////////////////
 
             /**
+               @class MainLevel
                @constructor
              */
             MainLevel: function() {
@@ -56,7 +57,6 @@ define(['jquery', 'level/levelBase', 'foundation/shape'], //'sprite/human', 'fou
                             .forEach(function(shape) {
                                 shape.clear();
                                 shape.drawingSettings.fillStyle = 'yellow';
-                                shape.drawingSettings.angle -= Math.PI / 45;
                                 shape.draw();
                             });
                     });
@@ -108,6 +108,11 @@ define(['jquery', 'level/levelBase', 'foundation/shape'], //'sprite/human', 'fou
 
                     this.quadTree.insert(poly).insert(rect);
                     hitTest();
+
+                    var anim = new Animation.Animation(poly, function(time) {
+                        poly.drawingSettings.angle = -time * Math.PI / 1000;
+                    });
+                    anim.start();
                 };
             }
         };

@@ -38,16 +38,21 @@ define(['underscore'], function(_) {
         /////////////////////////////////
 
         /**
-           Animation
-
-           @constructor
-           @param   {drawable}  drawable        - The drawable to animate.
-           @param   {Function}  frameFunction   - A function that updates the
-           animation. Must return a boolean, which is supposed to signal whether
-           or not to terminate the animation (return false to terminate). It may
-           take the duration in milliseconds from the beginning of the animation
-           as a parameter.
-           @param   {Function}  callback        - A function to perform at the completion of the animation.
+            @class Animation
+            @constructor
+            @param   {drawable} drawable The drawable to animate.
+            @param   {Function} frameFunction A function that updates the
+            animation. Return false to terminate the animation. It may take the
+            duration in milliseconds from the beginning of the animation as a
+            parameter. For example,
+            <code><pre>
+            function(time) {
+                shape.x = Math.floor(time / 100);
+                return time <= 1000;
+            }
+            </pre></code>
+            @param   {Function} callback A function to perform at the completion
+            of the animation.
          */
         Animation: function(drawable, frameFunction, callback) {
             /////////////////////////////////////
@@ -60,7 +65,7 @@ define(['underscore'], function(_) {
                 drawable.clear();
                 var shouldContinue = frameFunction(new Date() - startTime);
                 drawable.draw();
-                if (shouldContinue) {
+                if (shouldContinue !== false) {
                     requestAnimFrame(animate);
                 } else if (_.isFunction(callback)) {
                     callback();

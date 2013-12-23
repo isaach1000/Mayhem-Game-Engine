@@ -245,17 +245,6 @@ define(['underscore'], function(_) {
             };
 
             /**
-                Translate to the center of the canvas.
-
-                @method translateToCenter
-                @chainable
-             */
-            this.translateToCenter = function() {
-                this.translate(this.width / -2, this.height / -2);
-                return this;
-            };
-
-            /**
                 Wrapper for <code>context.rotate</code>
 
                 @method rotate

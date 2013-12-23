@@ -27,6 +27,8 @@ define([
 
         /**
            Shape abstract class
+
+           @class Shape
            @constructor
            @param {float} x                     x coordinate of top-left
            @param {float} y                     y coordinate of top-left
@@ -41,6 +43,8 @@ define([
             /////////////////////////////////////
             // Private instance methods/fields //
             /////////////////////////////////////
+
+            drawingSettings.angle = drawingSettings.angle || 0;
 
             // Make floats into integers
             x = Math.round(x);
@@ -169,6 +173,7 @@ define([
                     },
                     set: function(newSettings) {
                         drawingSettings = newSettings;
+                        drawingSettings.angle = drawingSettings.angle || 0;
                     }
                 }
             });
@@ -191,22 +196,10 @@ define([
                @return {void}
              */
             this.draw = function() {
-                var needsRestore = false;
-
-                if (this.drawingSettings.angle !== undefined) {
-                    needsRestore = true;
-                    drawer.save().translate(this.center.x, this.center.y)
-                        .rotate(this.drawingSettings.angle);
-                }
-
-                // Call subclass method if exists.
-                if (this.drawShape !== undefined) {
-                    this.drawShape(drawer);
-                }
-
-                if (needsRestore) {
-                    drawer.restore();
-                }
+                drawer.save().translate(this.center.x, this.center.y)
+                    .rotate(this.drawingSettings.angle);
+                this.drawShape(drawer);
+                drawer.restore();
             };
 
             /**
@@ -216,18 +209,10 @@ define([
                @return {void}
              */
             this.clear = function() {
-                if (this.drawingSettings.angle) {
-                    drawer.save();
-                    drawer.rotate(this.drawingSettings.angle);
-                }
-
                 var lineWidth = this.drawingSettings.lineWidth || 1;
-                drawer.clearRect(this.x, this.y,
-                    this.width + lineWidth, this.height + lineWidth);
 
-                if (this.drawingSettings.angle) {
-                    drawer.restore();
-                }
+                drawer.save().translate(this.center.x, this.center.y)
+                    .rotate(this.drawingSettings.angle).clearRect(-this.width - lineWidth, -this.height - lineWidth, (this.width + lineWidth) * 2, (this.height + lineWidth) * 2).restore();
             };
 
             /**
@@ -277,6 +262,7 @@ define([
          */
 
         /**
+           @class Circle
            @constructor
            @param   {float} x x coordinate of circle
            @param   {float} y y coordinate of circle
@@ -360,6 +346,7 @@ define([
         */
 
         /**
+            @class Rectangle
             @constructor
             @extends {Polygon}
             @param   {float} x The x coordinate of the rectangle's upper left corner.

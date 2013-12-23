@@ -84,6 +84,10 @@ define([], function() {
 
             @class Matrix
             @constructor
+            @param {Array} entriesArray An array with all of the values in the
+            matrix
+            @param {number} numRows Number of rows in the matrix
+            @param {number} numRows Number of column in the matrix
         */
         Matrix: function(entriesArray, numRows, numColumns) {
             /////////////////////////////////////
