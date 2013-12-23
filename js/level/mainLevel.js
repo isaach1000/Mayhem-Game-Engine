@@ -5,8 +5,10 @@
     @class MainLevel
     @extends LevelBase
  */
-define(['jquery', 'level/levelBase', 'foundation/shape', 'foundation/animation'], //'sprite/human', 'foundation/polygon'],
-    function($, LevelBase, Shape, Animation) { //Human, Polygon) {
+define(['jquery', 'level/levelBase', 'foundation/shape', 'foundation/animation',
+        'sprite/human', 'sprite/tileMap'
+    ],
+    function($, LevelBase, Shape, Animation, Human, TileMap) {
         "use strict";
 
         //////////////////////////////////
@@ -56,7 +58,8 @@ define(['jquery', 'level/levelBase', 'foundation/shape', 'foundation/animation']
                         _this.quadTree.query(point)
                             .forEach(function(shape) {
                                 shape.clear();
-                                shape.drawingSettings.fillStyle = 'yellow';
+                                shape.drawingSettings.fillStyle =
+                                    'yellow';
                                 shape.draw();
                             });
                     });
@@ -98,7 +101,7 @@ define(['jquery', 'level/levelBase', 'foundation/shape', 'foundation/animation']
                     var human1 = new Human.Human(200, 200, this.mainDrawer);
                     var human2 = new Human.Human(500, 500, this.mainDrawer);
                     human1.draw();
-                    human2.turn(Math.PI / 4);
+                    //human2.turn(Math.PI / 4);
                     human2.draw();
                     $('body').click(function() {
                         human2.step();
@@ -106,13 +109,15 @@ define(['jquery', 'level/levelBase', 'foundation/shape', 'foundation/animation']
                     human1.step();
                     */
 
-                    this.quadTree.insert(poly).insert(rect);
-                    hitTest();
+                    var tileMap = new TileMap.TileMap(10, 10, 10, 10, 10,
+                        10,
+                        this.mainDrawer, [{
+                            fillStyle: 'green'
+                        }]);
+                    tileMap.draw();
 
-                    var anim = new Animation.Animation(poly, function(time) {
-                        poly.drawingSettings.angle = -time * Math.PI / 1000;
-                    });
-                    anim.start();
+                    this.quadTree.insert(poly).insert(rect).insert(tileMap);
+                    hitTest();
                 };
             }
         };

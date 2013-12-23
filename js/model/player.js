@@ -75,7 +75,8 @@ define([], function() {
                     ret = "You are not carrying anything";
                 } else {
                     for (i = 0; i < bag.length; i += 1) {
-                        ret += bag[i].getName() + ": " + bag[i].getDescription() + "\n";
+                        ret += bag[i].getName() + ": " + bag[i].getDescription() +
+                            "\n";
                     }
                 }
                 return ret;

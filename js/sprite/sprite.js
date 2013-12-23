@@ -83,12 +83,15 @@ define([
                     set: function(newDrawingSettingsArr) {
                         if (!_.isEqual(drawingSettingsArr,
                                 newDrawingSettingsArr) ||
-                            (!_.isArray(newDrawingSettingsArr) && !_.isObject(newDrawingSettingsArr))) {
+                            (!_.isArray(newDrawingSettingsArr) && !_.isObject(
+                                newDrawingSettingsArr))) {
                             return;
                         }
 
                         if (!_.isArray(newDrawingSettingsArr)) {
-                            newDrawingSettingsArr = [newDrawingSettingsArr];
+                            newDrawingSettingsArr = [
+                                newDrawingSettingsArr
+                            ];
                         }
                         drawingSettingsArr = newDrawingSettingsArr;
                     }
@@ -177,7 +180,8 @@ define([
                     }
                 });
 
-                this.boundingBox = new BoundingBox.BoundingBox(minX, minY, maxX - minX, maxY - minY);
+                this.boundingBox = new BoundingBox.BoundingBox(minX, minY,
+                    maxX - minX, maxY - minY);
             };
 
             /**

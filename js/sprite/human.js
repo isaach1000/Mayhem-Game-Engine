@@ -8,10 +8,9 @@
 define([
     'underscore',
     'sprite/sprite',
-    'foundation/circle',
-    'foundation/rectangle',
+    'foundation/shape',
     'foundation/animation'
-], function(_, Sprite, Circle, Rectangle, Animation) {
+], function(_, Sprite, Shape, Animation) {
     "use strict";
 
     //////////////////////////////////
@@ -46,11 +45,13 @@ define([
                 strokeStyle: 'black',
                 angle: 0
             };
-            drawingSettings.footColor = drawingSettings.footColor || '#773333';
+            drawingSettings.footColor = drawingSettings.footColor ||
+                '#773333';
             drawingSettings.armColor = drawingSettings.armColor || 'purple';
-            drawingSettings.headColor = drawingSettings.headColor || '#ddaaaa';
+            drawingSettings.headColor = drawingSettings.headColor ||
+                '#ddaaaa';
 
-            var head = new Circle.Circle(x, y, HEAD_RADIUS,
+            var head = new Shape.Circle(x, y, HEAD_RADIUS,
                 drawer, {
                     strokeStyle: drawingSettings.strokeStyle,
                     fillStyle: drawingSettings.headColor,
@@ -59,7 +60,7 @@ define([
             );
 
             // Feet
-            var leftFoot = new Rectangle.Rectangle(
+            var leftFoot = new Shape.Rectangle(
                 x + HEAD_RADIUS,
                 y + FOOT_BREADTH,
                 FOOT_LENGTH, FOOT_BREADTH, drawer, {
@@ -68,7 +69,7 @@ define([
                     angle: drawingSettings.angle
                 }),
 
-                rightFoot = new Rectangle.Rectangle(
+                rightFoot = new Shape.Rectangle(
                     x + HEAD_RADIUS, y + HEAD_RADIUS + FOOT_BREADTH / 2,
                     FOOT_LENGTH, FOOT_BREADTH,
                     drawer, {
@@ -78,14 +79,14 @@ define([
                     });
 
             // Arms
-            var leftArm = new Circle.Circle(x + HEAD_RADIUS - ARM_RADIUS,
+            var leftArm = new Shape.Circle(x + HEAD_RADIUS - ARM_RADIUS,
                 y - ARM_RADIUS, ARM_RADIUS, drawer, {
                     strokeStyle: drawingSettings.strokeStyle,
                     fillStyle: drawingSettings.armColor,
                     angle: drawingSettings.angle
                 }),
 
-                rightArm = new Circle.Circle(x + HEAD_RADIUS - ARM_RADIUS,
+                rightArm = new Shape.Circle(x + HEAD_RADIUS - ARM_RADIUS,
                     y + HEAD_RADIUS + ARM_RADIUS, ARM_RADIUS,
                     drawer, {
                         strokeStyle: drawingSettings.strokeStyle,
@@ -128,14 +129,16 @@ define([
                 var stepAnimation = new Animation.Animation(this,
                     function(timeElapsed) {
                         var frameTime = timeElapsed - prevTime;
-                        var step = STEP_DISTANCE * frameTime / STEP_DURATION;
+                        var step = STEP_DISTANCE * frameTime /
+                            STEP_DURATION;
                         prevTime = timeElapsed;
 
                         _this.forEachShape(function(shape) {
                             shape.x += step;
                         });
 
-                        var angle = Math.PI * 2 * timeElapsed / STEP_DURATION;
+                        var angle = Math.PI * 2 * timeElapsed /
+                            STEP_DURATION;
 
                         var dx = Math.sin(angle);
                         dx = Math.round(dx);
@@ -167,7 +170,8 @@ define([
                 this.forEachShape(function(shape) {
                     if (first) {
                         shape.drawingSettings.angle += angle;
-                        console.debug(shape.drawingSettings.angle, shape);
+                        console.debug(shape.drawingSettings.angle,
+                            shape);
                         first = false;
                     }
                 });

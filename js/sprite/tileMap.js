@@ -2,7 +2,7 @@
    Represents a grid of tiles.
    @class TileMap
  */
-define(['sprite/sprite', 'foundation/rectangle'], function(Sprite, Rectangle) {
+define(['sprite/sprite', 'foundation/shape'], function(Sprite, Shape) {
     "use strict";
 
     /**
@@ -26,7 +26,8 @@ define(['sprite/sprite', 'foundation/rectangle'], function(Sprite, Rectangle) {
            @param {CanvasDrawer} drawer A CanvasDrawer to draw the TileMap.
            @param {Array} drawingSettingsArr An array of to apply to the tiles repeatedly using modulo. Iterates through each row.
          */
-        TileMap: function(x, y, width, height, numWidth, numHeight, drawer, drawingSettingsArr) {
+        TileMap: function(x, y, width, height, numWidth, numHeight, drawer,
+            drawingSettingsArr) {
             /////////////////////////////////////
             // Private instance methods/fields //
             /////////////////////////////////////
@@ -58,7 +59,9 @@ define(['sprite/sprite', 'foundation/rectangle'], function(Sprite, Rectangle) {
                     // Add a row to the tiles matrix.
                     for (j = 0; j < numWidth; j += 1) {
                         settingsIndex = index % settingsLen;
-                        rect = new Rectangle.Rectangle(x + j * width, y + i * height, width, height, drawer, drawingSettingsArr[settingsIndex]);
+                        rect = new Shape.Rectangle(x + j * width, y + i *
+                            height, width, height, drawer,
+                            drawingSettingsArr[settingsIndex]);
                         _this.tiles[i].push(rect);
                         initialShapes.push(rect);
                         index += 1;
@@ -74,7 +77,8 @@ define(['sprite/sprite', 'foundation/rectangle'], function(Sprite, Rectangle) {
             generateTiles();
 
             // Extend Sprite constructor
-            Sprite.Sprite.call(this, initialShapes, drawer, drawingSettingsArr);
+            Sprite.Sprite.call(this, initialShapes, drawer,
+                drawingSettingsArr);
 
             this.updateBoundingBox();
 

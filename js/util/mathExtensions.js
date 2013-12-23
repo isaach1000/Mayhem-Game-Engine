@@ -114,7 +114,8 @@ define([], function() {
                 }
 
                 forEach(function(entry, row, column) {
-                    var sum = entry + coefficient * matrix.get(row, column);
+                    var sum = entry + coefficient * matrix.get(row,
+                        column);
                     newEntries.push(sum);
                 });
 

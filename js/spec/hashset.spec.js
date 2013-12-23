@@ -19,9 +19,10 @@ define(['util/hashset'], function(Hashset) {
             expect(set.contains(item)).toBe(true);
         });
 
-        it('contains only applies to original object, not equal object', function() {
-            expect(set.contains(itemClone)).toBe(false);
-        });
+        it('contains only applies to original object, not equal object',
+            function() {
+                expect(set.contains(itemClone)).toBe(false);
+            });
 
         it('remove & length', function() {
             expect(set.length).toBe(1);

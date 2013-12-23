@@ -40,7 +40,8 @@ define([], function() {
                 var data = event.data;
 
                 // TODO
-                console.debug('r-%s receiving from m-%s: %s, %o', id, data.id, data.functionName, data.params);
+                console.debug('r-%s receiving from m-%s: %s, %o', id, data.id,
+                    data.functionName, data.params);
 
                 if (data.id !== id) {
                     return;

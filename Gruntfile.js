@@ -17,7 +17,12 @@ module.exports = function(grunt) {
         jsbeautifier: {
             main: {
                 src: ['js/**/*.js', 'Gruntfile.js', 'package.json'],
-                options: {}
+                options: {
+                    js: {
+                        indentSize: 4,
+                        wrapLineLength: 80
+                    }
+                }
             }
         },
         jshint: {

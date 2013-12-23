@@ -54,7 +54,8 @@ define([], function() {
             this.getItemString = function() {
                 var returnString = "Items: \n";
                 for (var i = 0; i < items.length; i++) {
-                    returnString += item.getName() + ": " + item.getDescription() + "\n";
+                    returnString += item.getName() + ": " + item.getDescription() +
+                        "\n";
                 }
                 return returnString;
             };
@@ -103,7 +104,8 @@ define([], function() {
                 /*if (professor.getRoom() === room) {
                  profSentence += "\n" + professor.toString();
                  }*/
-                return "You are " + description + " .\n" + getExitString() + "\n" + getItemString();
+                return "You are " + description + " .\n" + getExitString() +
+                    "\n" + getItemString();
             };
         }
     };

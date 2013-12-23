@@ -72,12 +72,15 @@ define(['underscore'], function(_) {
                         return ctxSettings;
                     },
                     set: function(settings) {
-                        var VALID_SETTINGS = ['lineWidth', 'fillStyle', 'strokeStyle'],
+                        var VALID_SETTINGS = ['lineWidth', 'fillStyle',
+                            'strokeStyle'
+                        ],
                             success = true,
                             property;
                         for (property in settings) {
                             if (settings.hasOwnProperty(property)) {
-                                success = (success && _.contains(VALID_SETTINGS, property));
+                                success = (success && _.contains(
+                                    VALID_SETTINGS, property));
                                 if (success) {
                                     ctx[property] = settings[property];
                                 }

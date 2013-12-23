@@ -175,7 +175,8 @@ define(['underscore', 'util/hash'], function(_, Hash) {
                 var originalTarget = hashTarget || null;
                 hashTarget = hashTarget || object;
 
-                if (!_.isObject(object) || _.isArray(object) || _.isFunction(object)) {
+                if (!_.isObject(object) || _.isArray(object) || _.isFunction(
+                    object)) {
                     return false;
                 }
 
@@ -211,7 +212,8 @@ define(['underscore', 'util/hash'], function(_, Hash) {
                 var originalTarget = hashTarget || null;
                 hashTarget = hashTarget || object;
 
-                if (!_.isObject(object) || _.isArray(object) || _.isFunction(object)) {
+                if (!_.isObject(object) || _.isArray(object) || _.isFunction(
+                    object)) {
                     return false;
                 }
 
@@ -249,7 +251,8 @@ define(['underscore', 'util/hash'], function(_, Hash) {
                 var originalTarget = hashTarget || null;
                 hashTarget = hashTarget || object;
 
-                if (!_.isObject(object) || _.isArray(object) || _.isFunction(object)) {
+                if (!_.isObject(object) || _.isArray(object) || _.isFunction(
+                    object)) {
                     return false;
                 }
 
@@ -300,7 +303,8 @@ define(['underscore', 'util/hash'], function(_, Hash) {
                     for (var i = 0; i < arrLen; i++) {
                         var element = location[i],
                             elemKey = element.key;
-                        if (element === object || elemKey === originalTarget) {
+                        if (element === object || elemKey ===
+                            originalTarget) {
                             return element;
                         }
                     }

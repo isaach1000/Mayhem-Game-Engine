@@ -37,7 +37,8 @@ define(['util/boundingBox'], function(BoundingBox) {
                     bbox.width / 2, bbox.height / 2),
                     bboxNE = new BoundingBox(bbox.x + bbox.width / 2, bbox.y,
                         bbox.width / 2, bbox.height / 2),
-                    bboxSW = new BoundingBox(bbox.x, bbox.y + bbox.height / 2,
+                    bboxSW = new BoundingBox(bbox.x, bbox.y + bbox.height /
+                        2,
                         bbox.width / 2, bbox.height / 2),
                     bboxSE = new BoundingBox(bbox.x + bbox.width / 2,
                         bbox.y + bbox.height / 2,
@@ -139,7 +140,8 @@ define(['util/boundingBox'], function(BoundingBox) {
                 @return {Array} An array of shapes intersecting the point
              */
             this.query = function(point) {
-                var bbox = new BoundingBox.BoundingBox(point.x, point.y, 1, 1);
+                var bbox = new BoundingBox.BoundingBox(point.x, point.y, 1,
+                    1);
                 return this.queryRange(bbox);
             };
         }

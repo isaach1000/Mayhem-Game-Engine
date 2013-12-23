@@ -36,7 +36,8 @@ define([], function() {
             } else if (arguments.length === 1) {
                 comparator = arguments[0];
             } else if (arguments.length > 2) {
-                throw new Error('Invalid parameters for MinHeap constructor');
+                throw new Error(
+                    'Invalid parameters for MinHeap constructor');
             }
 
             var
@@ -106,7 +107,8 @@ define([], function() {
                 }
 
                 if (smallerValueIndex >= 0 &&
-                    comparator(data[smallerValueIndex], data[nodeIndex]) < 0) {
+                    comparator(data[smallerValueIndex], data[nodeIndex]) <
+                    0) {
                     var temp = data[nodeIndex];
                     data[nodeIndex] = data[smallerValueIndex];
                     data[smallerValueIndex] = temp;

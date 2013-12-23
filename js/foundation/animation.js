@@ -110,7 +110,8 @@ define(['underscore'], function(_) {
             var frameFunction = function(durationElapsed) {
                 drawable.x = startX + durationX * durationElapsed;
                 drawable.y = startY + durationY * durationElapsed;
-                return drawable.x < endX && drawable.y < endY && durationElapsed < duration;
+                return drawable.x < endX && drawable.y < endY &&
+                    durationElapsed < duration;
             };
 
             return new module.Animation(drawable, frameFunction, callback);

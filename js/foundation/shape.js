@@ -173,7 +173,8 @@ define([
                     },
                     set: function(newSettings) {
                         drawingSettings = newSettings;
-                        drawingSettings.angle = drawingSettings.angle || 0;
+                        drawingSettings.angle = drawingSettings.angle ||
+                            0;
                     }
                 }
             });
@@ -212,7 +213,9 @@ define([
                 var lineWidth = this.drawingSettings.lineWidth || 1;
 
                 drawer.save().translate(this.center.x, this.center.y)
-                    .rotate(this.drawingSettings.angle).clearRect(-this.width - lineWidth, -this.height - lineWidth, (this.width + lineWidth) * 2, (this.height + lineWidth) * 2).restore();
+                    .rotate(this.drawingSettings.angle).clearRect(-this.width -
+                        lineWidth, -this.height - lineWidth, (this.width +
+                            lineWidth) * 2, (this.height + lineWidth) * 2).restore();
             };
 
             /**
@@ -281,7 +284,7 @@ define([
             var lineWidth = drawingSettings.lineWidth || 0;
 
             // Extend Shape constructor
-            Shape.Shape.call(_this, x, y, radius * 2, radius * 2,
+            module.Shape.call(_this, x, y, radius * 2, radius * 2,
                 drawer, drawingSettings);
 
             ////////////////////////////////////
