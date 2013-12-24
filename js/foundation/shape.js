@@ -45,6 +45,7 @@ define([
             /////////////////////////////////////
 
             drawingSettings.angle = drawingSettings.angle || 0;
+            console.debug(x, y, width, height, drawingSettings.angle);
 
             // Make floats into integers
             x = Math.round(x);
@@ -292,6 +293,12 @@ define([
             ////////////////////////////////////
 
             Object.defineProperties(this, {
+                /**
+                   Center of circle
+
+                   @property center
+                   @type {Point)
+                 */
                 center: {
                     value: {
                         x: x,
@@ -327,7 +334,7 @@ define([
                 canvasDrawer.contextSettings = _this.drawingSettings;
 
                 var lineWidth = this.drawingSettings.lineWidth || 1;
-                canvasDrawer.arc(this.x, this.y, this.radius - lineWidth, 0,
+                canvasDrawer.arc(this.x, this.y, this.radius, 0,
                     2 * Math.PI, true);
 
                 canvasDrawer.stroke();
@@ -432,9 +439,8 @@ define([
             w = maxX - minX,
                 h = maxY - minY;
 
-            return new BoundingBox.BoundingBox(center.x + minX,
-                center.y + minY,
-                w, h);
+            return new BoundingBox.BoundingBox(center.x - w / 2,
+                center.y - h / 2, w, h);
         },
 
         findPolygonCenter: function(points) {

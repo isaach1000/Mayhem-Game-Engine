@@ -18,7 +18,11 @@ define(['util/boundingBox'], function(BoundingBox) {
            @param {BoundingBox} bbox
          */
         QuadTree: function(bbox) {
-            // Private instance methods/fields
+            var _this = this;
+
+            /////////////////////////////////////
+            // Private instance methods/fields //
+            /////////////////////////////////////
             var
             quadTreeNW, quadTreeNE, quadTreeSW, quadTreeSE,
                 subtrees = [quadTreeNW, quadTreeNE, quadTreeSW, quadTreeSE],
@@ -33,14 +37,16 @@ define(['util/boundingBox'], function(BoundingBox) {
                  @return {void}
                */
             function subdivide() {
-                var bboxNW = new BoundingBox(bbox.x, bbox.y,
+                var bboxNW = new BoundingBox.BoundingBox(bbox.x, bbox.y,
                     bbox.width / 2, bbox.height / 2),
-                    bboxNE = new BoundingBox(bbox.x + bbox.width / 2, bbox.y,
+                    bboxNE = new BoundingBox.BoundingBox(bbox.x + bbox.width /
+                        2, bbox.y,
                         bbox.width / 2, bbox.height / 2),
-                    bboxSW = new BoundingBox(bbox.x, bbox.y + bbox.height /
+                    bboxSW = new BoundingBox.BoundingBox(bbox.x, bbox.y +
+                        bbox.height / 2,
+                        bbox.width / 2, bbox.height / 2),
+                    bboxSE = new BoundingBox.BoundingBox(bbox.x + bbox.width /
                         2,
-                        bbox.width / 2, bbox.height / 2),
-                    bboxSE = new BoundingBox(bbox.x + bbox.width / 2,
                         bbox.y + bbox.height / 2,
                         bbox.width / 2, bbox.height / 2);
 
@@ -62,7 +68,7 @@ define(['util/boundingBox'], function(BoundingBox) {
                Insert a shape into the QuadTree.
 
                @method insert
-               @param {Object} shape The shape to insert.
+               @param {Shape} shape The shape to insert.
                @chainable
              */
             this.insert = function(shape) {
@@ -81,7 +87,8 @@ define(['util/boundingBox'], function(BoundingBox) {
                 // Otherwise, we need to subdivide then add the shape to
                 // whichever node will accept it.
                 if (quadTreeNW === undefined) {
-                    this.subdivide();
+                    subdivide();
+                    return this.insert(shape);
                 }
 
                 for (i = 0; i < subtreesLen; i += 1) {
@@ -94,6 +101,20 @@ define(['util/boundingBox'], function(BoundingBox) {
                 // despite the capacity limit. The shape is probably lying
                 // on a border.
                 shapes.push(shape);
+                return this;
+            };
+
+            /**
+                Insert multiple shapes
+
+                @method insertShapes
+                @param  {Array} shapeArray An array of shapes
+                @chainable
+             */
+            this.insertShapes = function(shapeArray) {
+                shapeArray.forEach(function(shape) {
+                    _this.insert(shape);
+                });
                 return this;
             };
 

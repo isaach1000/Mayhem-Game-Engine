@@ -97,10 +97,10 @@ define(['jquery', 'level/levelBase', 'foundation/shape', 'foundation/animation',
                     poly.draw();
                     rect.draw();
 
-                    /*
                     var human1 = new Human.Human(200, 200, this.mainDrawer);
-                    var human2 = new Human.Human(500, 500, this.mainDrawer);
                     human1.draw();
+                    /*
+                    var human2 = new Human.Human(500, 500, this.mainDrawer);
                     //human2.turn(Math.PI / 4);
                     human2.draw();
                     $('body').click(function() {
@@ -109,14 +109,17 @@ define(['jquery', 'level/levelBase', 'foundation/shape', 'foundation/animation',
                     human1.step();
                     */
 
+                    /*
                     var tileMap = new TileMap.TileMap(10, 10, 10, 10, 10,
                         10,
                         this.mainDrawer, [{
                             fillStyle: 'green'
                         }]);
                     tileMap.draw();
+                    */
 
-                    this.quadTree.insert(poly).insert(rect).insert(tileMap);
+                    this.quadTree.insert(poly).insert(rect).insertShapes(human1
+                        .shapes); //.insert(tileMap);
                     hitTest();
                 };
             }

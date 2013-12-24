@@ -61,17 +61,14 @@ define([
 
             // Feet
             var leftFoot = new Shape.Rectangle(
-                x + HEAD_RADIUS,
-                y + FOOT_BREADTH,
-                FOOT_LENGTH, FOOT_BREADTH, drawer, {
+                x, y, FOOT_LENGTH, FOOT_BREADTH, drawer, {
                     strokeStyle: drawingSettings.strokeStyle,
                     fillStyle: drawingSettings.footColor,
                     angle: drawingSettings.angle
                 }),
 
                 rightFoot = new Shape.Rectangle(
-                    x + HEAD_RADIUS, y + HEAD_RADIUS + FOOT_BREADTH / 2,
-                    FOOT_LENGTH, FOOT_BREADTH,
+                    x, y, FOOT_LENGTH, FOOT_BREADTH,
                     drawer, {
                         strokeStyle: drawingSettings.strokeStyle,
                         fillStyle: drawingSettings.footColor,
@@ -79,15 +76,15 @@ define([
                     });
 
             // Arms
-            var leftArm = new Shape.Circle(x + HEAD_RADIUS - ARM_RADIUS,
-                y - ARM_RADIUS, ARM_RADIUS, drawer, {
+            var leftArm = new Shape.Circle(x, y - ARM_RADIUS, ARM_RADIUS,
+                drawer, {
                     strokeStyle: drawingSettings.strokeStyle,
                     fillStyle: drawingSettings.armColor,
                     angle: drawingSettings.angle
                 }),
 
-                rightArm = new Shape.Circle(x + HEAD_RADIUS - ARM_RADIUS,
-                    y + HEAD_RADIUS + ARM_RADIUS, ARM_RADIUS,
+                rightArm = new Shape.Circle(x,
+                    y + HEAD_RADIUS / 2, ARM_RADIUS,
                     drawer, {
                         strokeStyle: drawingSettings.strokeStyle,
                         fillStyle: drawingSettings.armColor,
