@@ -2303,8 +2303,8 @@
                 r.nodeType ? x.find.matchesSelector(r, e) ? [
                     r
             ] : [] : x.find.matches(e, x.grep(t, function(e) {
-                return 1 === e.nodeType
-            }))
+                    return 1 === e.nodeType
+                }))
         },
         dir: function(e, t, n) {
             var r = [],
@@ -2425,7 +2425,7 @@
                         .innerHTML;
                     if ("string" == typeof e && !it.test(e) && !ct[
                         (nt.exec(e) || ["", ""])[1].toLowerCase()
-                    ]) {
+                        ]) {
                         e = e.replace(tt, "<$1></$2>");
                         try {
                             for (; r > n; n++) t = this[n] || {},

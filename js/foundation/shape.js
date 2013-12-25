@@ -3,43 +3,21 @@
 
     @class Shape
  */
-define(['foundation/canvasDrawer', 'util/boundingBox', 'util/factory'],
-    function(CanvasDrawer, BoundingBox, Factory) {
+define(['foundation/canvasDrawer', 'util/boundingBox', 'util/mathExtensions'],
+    function(CanvasDrawer, BoundingBox, MathExtensions) {
         "use strict";
         //////////////////////////////////
         // Private class methods/fields //
         //////////////////////////////////
+
         /**
            @module foundation/shape
          */
+
         var module = {
             /////////////////////////////////
             // Public class methods/fields //
             /////////////////////////////////
-
-            /**
-                Adjust point to compensate for rotation of a Shape
-
-                @method adjustPoint
-                @static
-                @param  {Point} point Point to adjust
-                @param  {Point} origin Point to adjust
-                @param  {number} angle Angle of rotation of shape (clockwise, radian)
-                @return {Point} Adjusted point
-             */
-            adjustPoint: function(point, origin, angle) {
-                var
-                dx = point.x - origin.x,
-                    dy = point.y - origin.y,
-                    theta = Math.atan(dy / dx),
-                    x = origin.x + dx * Math.cos(angle + theta),
-                    y = origin.y + dy * Math.sin(angle + theta);
-
-                return {
-                    x: x,
-                    y: y
-                };
-            },
 
             /**
                Generate a BoundingBox for a polygon
@@ -126,7 +104,6 @@ define(['foundation/canvasDrawer', 'util/boundingBox', 'util/factory'],
                 /////////////////////////////////////
 
                 drawingSettings.angle = drawingSettings.angle || 0;
-                console.debug(x, y, width, height, drawingSettings.angle);
 
                 // Make floats into integers
                 x = Math.round(x);
@@ -135,7 +112,9 @@ define(['foundation/canvasDrawer', 'util/boundingBox', 'util/factory'],
                 height = Math.round(height);
 
                 // Bbox with rounded numbers
-                var bbox = new BoundingBox.BoundingBox(x, y, width, height);
+                var
+                bbox = new BoundingBox.BoundingBox(x, y, width, height),
+                    transformation = new MathExtensions.Transformation();
 
                 ////////////////////////////////////
                 // Public instance methods/fields //
@@ -236,10 +215,10 @@ define(['foundation/canvasDrawer', 'util/boundingBox', 'util/factory'],
                      */
                     angle: {
                         get: function() {
-                            return _this.drawingSettings.angle;
+                            return _this.transformation.angle;
                         },
                         set: function(value) {
-                            _this.drawingSettings.angle = value;
+                            _this.transformation.angle = value;
                         }
                     },
 
@@ -269,6 +248,22 @@ define(['foundation/canvasDrawer', 'util/boundingBox', 'util/factory'],
                             drawingSettings = newSettings;
                             drawingSettings.angle = drawingSettings.angle ||
                                 0;
+                            _this.transformation.angle = drawingSettings.angle;
+                        }
+                    },
+
+                    /**
+                        Transformation matrix
+
+                        @property transformation
+                        @type {Transformation}
+                     */
+                    transformation: {
+                        get: function() {
+                            return transformation;
+                        },
+                        set: function(newTransformation) {
+                            transformation = newTransformation;
                         }
                     }
                 });
@@ -291,8 +286,9 @@ define(['foundation/canvasDrawer', 'util/boundingBox', 'util/factory'],
                    @return {void}
                  */
                 this.draw = function() {
-                    drawer.save().translate(this.center.x, this.center.y).rotate(
-                        this.drawingSettings.angle);
+                    drawer.save().translate(this.transformation.x, this.transformation
+                        .y).rotate(
+                        this.transformation.angle);
                     this.drawShape(drawer);
                     drawer.restore();
                 };
@@ -335,12 +331,12 @@ define(['foundation/canvasDrawer', 'util/boundingBox', 'util/factory'],
                     }
                 };
                 /**
-                Check if a point is within the Shape instance
+                    Check if a point is within the Shape instance
 
-                @method collisionTest
-                @param  {Point} point A 2D point
-                @return {boolean} Whether or not the point is within the Shape
-             */
+                    @method collisionTest
+                    @param  {Point} point A 2D point
+                    @return {boolean} Whether or not the point is within the Shape
+                 */
                 this.collisionTest = function(point) {
                     // Return result of subclass's test.
                     return _this.hitTest(point);
@@ -496,6 +492,7 @@ define(['foundation/canvasDrawer', 'util/boundingBox', 'util/factory'],
              */
             Polygon: function(center, points, drawer, drawingSettings) {
                 var _this = this;
+
                 /////////////////////////////////////
                 // Private instance methods/fields //
                 /////////////////////////////////////
@@ -512,6 +509,13 @@ define(['foundation/canvasDrawer', 'util/boundingBox', 'util/factory'],
                     y = bbox.y,
                     width = bbox.width,
                     height = bbox.height;
+
+                // Extend Shape constructor
+                module.Shape.call(this, x, y, width, height, drawer,
+                    drawingSettings);
+
+                this.transformation.tx = center.x;
+                this.transformation.ty = center.y;
 
                 /**
                     Iterate through each point in the polygon.
@@ -532,10 +536,6 @@ define(['foundation/canvasDrawer', 'util/boundingBox', 'util/factory'],
                 ////////////////////////////////////
                 // Public instance methods/fields //
                 ////////////////////////////////////
-
-                // Extend Shape constructor
-                module.Shape.call(this, x, y, width, height, drawer,
-                    drawingSettings);
 
                 Object.defineProperties(this, {
                     /**
@@ -570,9 +570,12 @@ define(['foundation/canvasDrawer', 'util/boundingBox', 'util/factory'],
                                 .width / 2;
                             _this.boundingBox.y = center.y - _this.boundingBox
                                 .height / 2;
+                            _this.transformation.tx = center.x;
+                            _this.transformation.ty = center.y;
                         }
                     }
                 });
+                // TODO: is this necessary?
                 this.updateShape = function(dx, dy) {
                     _this.center.x += dx;
                     _this.center.y += dy;

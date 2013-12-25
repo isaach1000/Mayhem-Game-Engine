@@ -14,7 +14,7 @@ define(['foundation/shape'], function(Shape) {
                 },
                 angle = Math.PI / 2,
                 exp = {},
-                result = Shape.adjustPoint(point, origin, angle);
+                result = null; // TODO
 
             expect(result.x).toBeCloseTo(exp.x);
             expect(result.y).toBeCloseTo(exp.y);
