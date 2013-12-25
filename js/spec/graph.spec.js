@@ -19,7 +19,6 @@ define(['util/graph'], function(Graph) {
             node1.edges.forEach(function(edge) {
                 expect(edges).toContain(edge);
             });
-
             expect(node2.edges.length).toBe(0);
         });
 
@@ -62,7 +61,11 @@ define(['util/graph'], function(Graph) {
         });
 
         it('dijkstra\'s algorithm', function() {
-            
+            graph.dijkstra(node1);
+            expect(node1.dist).toBe(0);
+            expect(node2.dist).toBe(1);
+            expect(node3.dist).toBe(1);
+            expect(node4.dist).toBe(2);
         });
 
     });
