@@ -20,30 +20,25 @@ define(['jquery', 'level/levelBase', 'foundation/shape', 'foundation/animation',
         // Public class methods/fields //
         /////////////////////////////////
         /**
-               @class MainLevel
-               @constructor
-             */
+            @class MainLevel
+            @constructor
+        */
         MainLevel: function() {
+            var _this = this;
+
             // Extend LevelBase constructor
             LevelBase.LevelBase.call(this);
-            var _this = this;
+
             /////////////////////////////////////
             // Private instance methods/fields //
             /////////////////////////////////////
+
             function hitTest() {
-                var CHECK_LIMIT = 50,
-                    lastCheck = new Date();
-                $('body').on('mousemove', function(ev) {
-                    var dateNow = new Date(),
-                        point = {
-                            x: ev.pageX,
-                            y: ev.pageY
-                        };
-                    if (dateNow - lastCheck < CHECK_LIMIT) {
-                        return;
-                    } else {
-                        lastCheck = dateNow;
-                    }
+                _this.inputHandler.bind('mousemove', function(ev) {
+                    var point = {
+                        x: ev.pageX,
+                        y: ev.pageY
+                    };
                     _this.quadTree.query(point).forEach(function(shape) {
                         if (shape.collisionTest(point)) {
                             shape.clear();
@@ -51,12 +46,14 @@ define(['jquery', 'level/levelBase', 'foundation/shape', 'foundation/animation',
                                 'yellow';
                             shape.draw();
                         }
-                    });
+                    }, 50);
                 });
             }
+
             ////////////////////////////////////
             // Public instance methods/fields //
             ////////////////////////////////////
+
             this.start = function() {
                 var poly = new Shape.Polygon({
                     x: 100,
@@ -81,7 +78,7 @@ define(['jquery', 'level/levelBase', 'foundation/shape', 'foundation/animation',
                 poly.draw();
                 rect.draw();
                 var human1 = new Human.Human(200, 200, this.mainDrawer);
-                human1.turn(Math.PI / 4);
+                //human1.turn(Math.PI / 4);
                 human1.draw();
                 /*var human2 = new Human.Human(500, 500, this.mainDrawer);
                     human2.turn(Math.PI / 4);

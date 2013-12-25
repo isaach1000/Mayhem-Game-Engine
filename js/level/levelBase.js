@@ -1,7 +1,8 @@
 define(['foundation/canvasDrawer', 'util/factory', 'util/boundingBox',
-    'util/quadTree'
-], function(CanvasDrawer, Factory, BoundingBox, QuadTree) {
+    'util/quadTree', 'events/inputHandler'
+], function(CanvasDrawer, Factory, BoundingBox, QuadTree, InputHandler) {
     "use strict";
+
     //////////////////////////////////
     // Private class methods/fields //
     //////////////////////////////////
@@ -44,6 +45,7 @@ define(['foundation/canvasDrawer', 'util/factory', 'util/boundingBox',
             this.mainCtx = this.mainCanvas[0].getContext('2d');
             this.mainDrawer = new CanvasDrawer.CanvasDrawer(this.mainCtx,
                 this.mainCanvas.width(), this.mainCanvas.height());
+            this.inputHandler = new InputHandler.InputHandler('body');
         }
     };
     return module;

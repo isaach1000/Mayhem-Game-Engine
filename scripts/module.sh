@@ -18,17 +18,20 @@ class=$2
 filename=`echo $(tr A-Z a-z <<< ${class:0:1})${class:1}`
 
 cat > $folderpath/$filename.js << MODULE
-// @formatter:off
+/**
+    Description of class
+
+    @class $class
+ */
 define([], function() {
     "use strict";
-    // @formatter:on
 
     //////////////////////////////////
     // Private class methods/fields //
     //////////////////////////////////
 
     /**
-        @exports $folder/$filename
+        @module $folder/$filename
      */
     var module = {
         /////////////////////////////////
@@ -36,7 +39,7 @@ define([], function() {
         /////////////////////////////////
 
         /**
-             $class
+             @class $class
              @constructor
          */
         $class: function() {
@@ -56,5 +59,4 @@ define([], function() {
 
     return module;
 });
-#endif
 MODULE
