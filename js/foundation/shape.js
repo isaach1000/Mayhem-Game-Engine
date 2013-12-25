@@ -10,48 +10,144 @@ define(['foundation/canvasDrawer', 'util/boundingBox', 'util/factory'],
         // Private class methods/fields //
         //////////////////////////////////
         /**
-       @module foundation/shape
-     */
+           @module foundation/shape
+         */
         var module = {
             /////////////////////////////////
             // Public class methods/fields //
             /////////////////////////////////
-            /**
-           Shape abstract class
 
-           @class Shape
-           @constructor
-           @param {float} x                     x coordinate of top-left
-           @param {float} y                     y coordinate of top-left
-           @param {float} width                 Width of shape
-           @param {float} height                Height of shape
-           @param {CanvasDrawer} drawer         CanvasDrawer to draw image to canvas
-           @param {Object} drawingSettings      Settings for the CanvasDrawer
-         */
+            /**
+                Adjust point to compensate for rotation of a Shape
+
+                @method adjustPoint
+                @static
+                @param  {Point} point Point to adjust
+                @param  {Point} origin Point to adjust
+                @param  {number} angle Angle of rotation of shape (clockwise, radian)
+                @return {Point} Adjusted point
+             */
+            adjustPoint: function(point, origin, angle) {
+                var
+                dx = point.x - origin.x,
+                    dy = point.y - origin.y,
+                    theta = Math.atan(dy / dx),
+                    x = origin.x + dx * Math.cos(angle + theta),
+                    y = origin.y + dy * Math.sin(angle + theta);
+
+                return {
+                    x: x,
+                    y: y
+                };
+            },
+
+            /**
+               Generate a BoundingBox for a polygon
+
+               @method  generateBbox
+               @static
+               @param   {Array} points An array of points describing the polygon
+               @param   {Point} center Center of polygon
+               @return  {BoundingBox} A BoundingBox containing all of the points
+             */
+            generateBbox: function(points, center) {
+                var minX = points[0].x,
+                    maxX = points[0].x,
+                    minY = points[0].y,
+                    maxY = points[0].y,
+                    numPoints = points.length;
+                for (var i = 0; i < numPoints; i++) {
+                    var point = points[i];
+                    if (minX > point.x) {
+                        minX = point.x;
+                    }
+                    if (maxX < point.x) {
+                        maxX = point.x;
+                    }
+                    if (minY > point.y) {
+                        minY = point.y;
+                    }
+                    if (maxY < point.y) {
+                        maxY = point.y;
+                    }
+                }
+                var w = maxX - minX,
+                    h = maxY - minY;
+                return new BoundingBox.BoundingBox(center.x - w / 2, center.y -
+                    h / 2, w, h);
+            },
+
+            /**
+                Find center of a polygon
+
+                @method findPolygonCenter
+                @static
+                @param  {Array} points An array of the points of the polygon
+                @return {Point} Center of polygon
+             */
+            findPolygonCenter: function(points) {
+                var numPoints = points.length,
+                    cx = 0,
+                    cy = 0,
+                    area = 0;
+                for (var i = 0; i < numPoints - 1; i++) {
+                    var p1 = points[i],
+                        p2 = points[i + 1],
+                        k = p1.x * p2.y - p2.x * p1.y;
+                    cx += (p1.x + p2.x) * k;
+                    cy += (p1.y + p2.y) * k;
+                    area += k;
+                }
+                area *= 0.5;
+                cx /= area * 6;
+                cy /= area * 6;
+                return {
+                    x: cx,
+                    y: cy
+                };
+            },
+
+            /**
+               Shape abstract class
+
+               @class Shape
+               @constructor
+               @param {float} x                     x coordinate of top-left
+               @param {float} y                     y coordinate of top-left
+               @param {float} width                 Width of shape
+               @param {float} height                Height of shape
+               @param {CanvasDrawer} drawer         CanvasDrawer to draw image to canvas
+               @param {Object} drawingSettings      Settings for the CanvasDrawer
+             */
             Shape: function(x, y, width, height, drawer, drawingSettings) {
                 var _this = this;
                 /////////////////////////////////////
                 // Private instance methods/fields //
                 /////////////////////////////////////
+
                 drawingSettings.angle = drawingSettings.angle || 0;
                 console.debug(x, y, width, height, drawingSettings.angle);
+
                 // Make floats into integers
                 x = Math.round(x);
                 y = Math.round(y);
                 width = Math.round(width);
                 height = Math.round(height);
+
                 // Bbox with rounded numbers
                 var bbox = new BoundingBox.BoundingBox(x, y, width, height);
+
                 ////////////////////////////////////
                 // Public instance methods/fields //
                 ////////////////////////////////////
+
                 Object.defineProperties(this, {
                     /**
-                   x coordinate of top-left of Shape instance
+                       x coordinate of top-left of Shape instance
 
-                   @property x
-                   @type {integer}
-                 */
+                       @property x
+                       @type {integer}
+                     */
                     x: {
                         get: function() {
                             return x;
@@ -68,12 +164,13 @@ define(['foundation/canvasDrawer', 'util/boundingBox', 'util/factory'],
                             }
                         }
                     },
-                    /**
-                   y coordinate of top-left of Shape instance
 
-                   @property y
-                   @type {integer}
-                 */
+                    /**
+                       y coordinate of top-left of Shape instance
+
+                       @property y
+                       @type {integer}
+                     */
                     y: {
                         get: function() {
                             return y;
@@ -90,12 +187,13 @@ define(['foundation/canvasDrawer', 'util/boundingBox', 'util/factory'],
                             }
                         }
                     },
-                    /**
-                   Width of Shape instance
 
-                   @property width
-                   @type {integer}
-                 */
+                    /**
+                       Width of Shape instance
+
+                       @property width
+                       @type {integer}
+                     */
                     width: {
                         get: function() {
                             return width;
@@ -109,12 +207,13 @@ define(['foundation/canvasDrawer', 'util/boundingBox', 'util/factory'],
                             }
                         }
                     },
-                    /**
-                   Height of Shape instance
 
-                   @property height
-                   @type {integer}
-                 */
+                    /**
+                       Height of Shape instance
+
+                       @property height
+                       @type {integer}
+                     */
                     height: {
                         get: function() {
                             return height;
@@ -128,23 +227,40 @@ define(['foundation/canvasDrawer', 'util/boundingBox', 'util/factory'],
                             }
                         }
                     },
-                    /**
-                   BoundingBox of Shape instance
 
-                   @property boundingBox
-                   @type {BoundingBox}
-                 */
+                    /**
+                        Angle of rotation of shape
+
+                        @property angle
+                        @type number
+                     */
+                    angle: {
+                        get: function() {
+                            return _this.drawingSettings.angle;
+                        },
+                        set: function(value) {
+                            _this.drawingSettings.angle = value;
+                        }
+                    },
+
+                    /**
+                        BoundingBox of Shape instance
+
+                        @property boundingBox
+                        @type {BoundingBox}
+                     */
                     boundingBox: {
                         get: function() {
                             return bbox;
                         }
                     },
-                    /**
-                   Drawing settings of Shape instance
 
-                   @property drawingSettings
-                   @type {Object}
-                 */
+                    /**
+                       Drawing settings of Shape instance
+
+                       @property drawingSettings
+                       @type {Object}
+                     */
                     drawingSettings: {
                         get: function() {
                             return drawingSettings;
@@ -156,34 +272,37 @@ define(['foundation/canvasDrawer', 'util/boundingBox', 'util/factory'],
                         }
                     }
                 });
-                /**
-               Clear and draw Shape onto canvas
 
-               @method update
-               @return {void}
-             */
+                /**
+                   Clear and draw Shape onto canvas
+
+                   @method update
+                   @return {void}
+                 */
                 this.update = function() {
                     this.clear();
                     this.draw();
                 };
-                /**
-               Draw Shape instance onto the canvas
 
-               @method draw
-               @return {void}
-             */
+                /**
+                   Draw Shape instance onto the canvas
+
+                   @method draw
+                   @return {void}
+                 */
                 this.draw = function() {
                     drawer.save().translate(this.center.x, this.center.y).rotate(
                         this.drawingSettings.angle);
                     this.drawShape(drawer);
                     drawer.restore();
                 };
-                /**
-               Clear the Shape instance
 
-               @method clear
-               @return {void}
-             */
+                /**
+                   Clear the Shape instance
+
+                   @method clear
+                   @return {void}
+                 */
                 this.clear = function() {
                     var lineWidth = this.drawingSettings.lineWidth || 1;
                     drawer.save().translate(this.center.x, this.center.y).rotate(
@@ -191,12 +310,13 @@ define(['foundation/canvasDrawer', 'util/boundingBox', 'util/factory'],
                         lineWidth, -this.height - lineWidth, (this.width +
                             lineWidth) * 2, (this.height + lineWidth) * 2).restore();
                 };
-                /**
-                Draw BoundingBox of Shape instance
 
-                @method drawBoundingBox
-                @return {void}
-             */
+                /**
+                    Draw BoundingBox of Shape instance
+
+                    @method drawBoundingBox
+                    @return {void}
+                 */
                 this.drawBoundingBox = function() {
                     // As long as angle is not undefined, 0, or otherwise falsy
                     if (this.drawingSettings.angle) {
@@ -226,53 +346,62 @@ define(['foundation/canvasDrawer', 'util/boundingBox', 'util/factory'],
                     return _this.hitTest(point);
                 };
             },
-            /**
-            Circle shape
 
-            @class Circle
-            @extends Shape
-         */
             /**
-           @class Circle
-           @constructor
-           @param   {float} x x coordinate of circle
-           @param   {float} y y coordinate of circle
-           @param   {float} radius Radius of the circle
-           @param   {CanvasDrawer} drawer CanvasDrawer to draw circle
-           @param   {Object} drawingSettings Dictionary of drawing options
-         */
+                Circle shape
+
+                @class Circle
+                @extends Shape
+             */
+
+            /**
+               @class Circle
+               @constructor
+               @param   {float} x x coordinate of circle
+               @param   {float} y y coordinate of circle
+               @param   {float} radius Radius of the circle
+               @param   {CanvasDrawer} drawer CanvasDrawer to draw circle
+               @param   {Object} drawingSettings Dictionary of drawing options
+             */
             Circle: function(x, y, radius, drawer, drawingSettings) {
                 var _this = this;
+
                 /////////////////////////////////////
                 // Private instance methods/fields //
                 /////////////////////////////////////
+
                 radius = Math.round(radius);
                 var lineWidth = drawingSettings.lineWidth || 0;
                 // Extend Shape constructor
                 module.Shape.call(_this, x, y, radius * 2, radius * 2, drawer,
                     drawingSettings);
+
                 ////////////////////////////////////
                 // Public instance methods/fields //
                 ////////////////////////////////////
+
                 Object.defineProperties(this, {
                     /**
-                   Center of circle
+                        Center of circle
 
-                   @property center
-                   @type {Point)
-                 */
+                        @property center
+                        @type {Point)
+                    */
                     center: {
-                        value: {
-                            x: x,
-                            y: y
+                        get: function() {
+                            return {
+                                x: x,
+                                y: y
+                            };
                         }
                     },
-                    /**
-                   Radius of circle
 
-                   @property radius
-                   @type {float)
-                 */
+                    /**
+                        Radius of circle
+
+                        @property radius
+                        @type {float)
+                    */
                     radius: {
                         get: function() {
                             return radius;
@@ -284,11 +413,12 @@ define(['foundation/canvasDrawer', 'util/boundingBox', 'util/factory'],
                         }
                     }
                 });
-                /**
-                Draw circle onto canvas.
 
-                @return {void}
-             */
+                /**
+                    Draw circle onto canvas.
+
+                    @return {void}
+                */
                 this.drawShape = function(canvasDrawer) {
                     canvasDrawer.beginPath();
                     canvasDrawer.contextSettings = _this.drawingSettings;
@@ -303,23 +433,24 @@ define(['foundation/canvasDrawer', 'util/boundingBox', 'util/factory'],
                     return dx * dx + dy * dy <= this.radius * this.radius;
                 };
             },
-            /**
-            Rectangle
 
-            @class Rectangle
-            @extends Shape
-        */
             /**
-            @class Rectangle
-            @constructor
-            @extends {Polygon}
-            @param   {float} x The x coordinate of the rectangle's upper left corner.
-            @param   {float} y The y coordinate of the rectangle's upper left corner.
-            @param   {float} width The width of the rectangle.
-            @param   {float} height The height of the rectangle.
-            @param   {CanvasDrawer} drawer A CanvasDrawer to draw the rectangle onto the canvas.
-            @param   {Object} drawingSettings A dictionary of drawing options.
-         */
+                Rectangle
+
+                @class Rectangle
+                @extends Polygon
+            */
+
+            /**
+                @class Rectangle
+                @constructor
+                @param   {float} x The x coordinate of the rectangle's upper left corner.
+                @param   {float} y The y coordinate of the rectangle's upper left corner.
+                @param   {float} width The width of the rectangle.
+                @param   {float} height The height of the rectangle.
+                @param   {CanvasDrawer} drawer A CanvasDrawer to draw the rectangle onto the canvas.
+                @param   {Object} drawingSettings A dictionary of drawing options.
+             */
             Rectangle: function(x, y, width, height, drawer, drawingSettings) {
                 ////////////////////////////////////
                 // Public instance methods/fields //
@@ -344,88 +475,36 @@ define(['foundation/canvasDrawer', 'util/boundingBox', 'util/factory'],
                     y: h2
                 }], drawer, drawingSettings);
             },
-            /**
-            Polygon class
 
-            @class Polygon
-            @extends Shapes
-         */
             /**
-           Generate a BoundingBox for a polygon
+                Polygon
 
-           @method  generateBbox
-           @static
-           @param   {Array} points An array of points describing the polygon
-           @param   {Point} center Center of polygon
-           @return  {BoundingBox} A BoundingBox containing all of the points
-         */
-            generateBbox: function(points, center) {
-                var minX = points[0].x,
-                    maxX = points[0].x,
-                    minY = points[0].y,
-                    maxY = points[0].y,
-                    numPoints = points.length;
-                for (var i = 0; i < numPoints; i++) {
-                    var point = points[i];
-                    if (minX > point.x) {
-                        minX = point.x;
-                    }
-                    if (maxX < point.x) {
-                        maxX = point.x;
-                    }
-                    if (minY > point.y) {
-                        minY = point.y;
-                    }
-                    if (maxY < point.y) {
-                        maxY = point.y;
-                    }
-                }
-                var w = maxX - minX,
-                    h = maxY - minY;
-                return new BoundingBox.BoundingBox(center.x - w / 2, center.y -
-                    h / 2, w, h);
-            },
-            findPolygonCenter: function(points) {
-                var numPoints = points.length,
-                    cx = 0,
-                    cy = 0,
-                    area = 0;
-                for (var i = 0; i < numPoints - 1; i++) {
-                    var p1 = points[i],
-                        p2 = points[i + 1],
-                        k = p1.x * p2.y - p2.x * p1.y;
-                    cx += (p1.x + p2.x) * k;
-                    cy += (p1.y + p2.y) * k;
-                    area += k;
-                }
-                area *= 0.5;
-                cx /= area * 6;
-                cy /= area * 6;
-                return {
-                    x: cx,
-                    y: cy
-                };
-            },
+                @class Polygon
+                @extends Shape
+            */
+
             /**
-           @class Polygon
-           @constructor
-           @param   {Point} [center=0,0] The center of the polygon
-           @param   {Array} points An array of points that describe the polygon,
-           Should be relative to the center so rotation can be performed more
-           easily.
-           @param   {CanvasDrawer} drawer A CanvasDrawer to draw the polygon
-            onto the canvas
-           @param   {Object} drawingSettings A dictionary of drawing options.
-         */
+                @class Polygon
+                @constructor
+                @param   {Point} [center=0,0] The center of the polygon
+                @param   {Array} points An array of points that describe the polygon,
+                Should be relative to the center so rotation can be performed more
+                easily.
+                @param   {CanvasDrawer} drawer A CanvasDrawer to draw the polygon
+                onto the canvas
+                @param   {Object} drawingSettings A dictionary of drawing options.
+             */
             Polygon: function(center, points, drawer, drawingSettings) {
                 var _this = this;
                 /////////////////////////////////////
                 // Private instance methods/fields //
                 /////////////////////////////////////
+
                 center = center || {
                     x: 0,
                     y: 0
                 };
+
                 // Variables necessary for Shape constructor.
                 // NOTE: Do not use these variables directly (i.e. x versus this.x).
                 var bbox = module.generateBbox(points, center),
@@ -433,14 +512,15 @@ define(['foundation/canvasDrawer', 'util/boundingBox', 'util/factory'],
                     y = bbox.y,
                     width = bbox.width,
                     height = bbox.height;
-                /**
-               Iterate through each point in the polygon.
 
-               @method forEachPoint
-               @private
-               @param  {Function} f Function to be called on each point
-               @return {void}
-             */
+                /**
+                    Iterate through each point in the polygon.
+
+                    @method forEachPoint
+                    @private
+                    @param  {Function} f Function to be called on each point
+                    @return {void}
+                */
                 function forEachPoint(f) {
                     var numPoints = _this.points.length;
                     for (var i = 0; i < numPoints; i++) {
@@ -448,19 +528,22 @@ define(['foundation/canvasDrawer', 'util/boundingBox', 'util/factory'],
                         f(point, i);
                     }
                 }
+
                 ////////////////////////////////////
                 // Public instance methods/fields //
                 ////////////////////////////////////
+
                 // Extend Shape constructor
                 module.Shape.call(this, x, y, width, height, drawer,
                     drawingSettings);
+
                 Object.defineProperties(this, {
                     /**
-                   Points of Polygon instance
+                        Points of Polygon instance
 
-                   @property points
-                   @type {Array}
-                 */
+                        @property points
+                        @type {Array}
+                    */
                     points: {
                         get: function() {
                             return points;
@@ -470,12 +553,13 @@ define(['foundation/canvasDrawer', 'util/boundingBox', 'util/factory'],
                             _this.boundingBox = generateBbox(this.points);
                         }
                     },
-                    /**
-                    Center of polygon
 
-                    @property center
-                    @type {Point}
-                 */
+                    /**
+                        Center of polygon
+
+                        @property center
+                        @type {Point}
+                    */
                     center: {
                         get: function() {
                             return center;
@@ -494,9 +578,10 @@ define(['foundation/canvasDrawer', 'util/boundingBox', 'util/factory'],
                     _this.center.y += dy;
                 };
                 /**
-               Draw the rectangle onto the canvas using the CanvasDrawer.
-               @return {void}
-             */
+                   Draw the rectangle onto the canvas using the CanvasDrawer.
+
+                   @return {void}
+                 */
                 this.drawShape = function(canvasDrawer) {
                     canvasDrawer.beginPath().contextSettings = this.drawingSettings;
                     var pts = this.points,
@@ -523,14 +608,17 @@ define(['foundation/canvasDrawer', 'util/boundingBox', 'util/factory'],
                     }
                     canvasDrawer.closePath().fill().stroke();
                 };
-                /**
-                Hit testing based on
-                <a href="http://stackoverflow.com/a/2922778/1930331</a>.
 
-                @param {Point} point A point
-                @return {boolean} If the point is in the polygon
-             */
+                /**
+                    Hit testing based on
+                    <a href="http://stackoverflow.com/a/2922778/1930331</a>.
+
+                    @param {Point} point A point
+                    @return {boolean} If the point is in the polygon
+                 */
                 this.hitTest = function(point) {
+                    var adjustedPoint = module.adjustPoint(point, this.center,
+                        this.angle);
                     var cx = this.center.x,
                         cy = this.center.y,
                         nvert = this.points.length,

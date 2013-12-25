@@ -9,7 +9,7 @@ define(['underscore'], function(_) {
     // Private class methods/fields //
     //////////////////////////////////
     /**
-       Based on <a href="http://www.html5canvastutorials.com/">
+       Based on <a href="http://www.html5canvastutorials.com">
        html5canvastutorials</a>
        @method requestAnimFrame
        @private
@@ -35,13 +35,13 @@ define(['underscore'], function(_) {
             @constructor
             @param   {drawable} drawable The drawable to animate.
             @param   {Function} frameFunction A function that updates the
-            animation. Return false to terminate the animation. It may take the
+            animation. Return true to terminate the animation. It may take the
             duration in milliseconds from the beginning of the animation as a
             parameter. For example,
             <code><pre>
-            function(time) {
+            function(time, timeDiff) {
                 shape.x = Math.floor(time / 100);
-                return time <= 1000;
+                return time > 1000;
             }
             </pre></code>
             @param   {Function} callback A function to perform at the completion
@@ -51,13 +51,17 @@ define(['underscore'], function(_) {
             /////////////////////////////////////
             // Private instance methods/fields //
             /////////////////////////////////////
-            var startTime;
+            var startTime, lastCallTime;
 
             function animate() {
                 drawable.clear();
-                var shouldContinue = frameFunction(new Date() - startTime);
+                var
+                callTime = new Date(),
+                    shouldTerminate = frameFunction(callTime - startTime,
+                        callTime - lastCallTime);
+                lastCallTime = new Date();
                 drawable.draw();
-                if (shouldContinue !== false) {
+                if (shouldTerminate !== true) {
                     requestAnimFrame(animate);
                 } else if (_.isFunction(callback)) {
                     callback();
@@ -67,12 +71,13 @@ define(['underscore'], function(_) {
             // Public instance methods/fields //
             ////////////////////////////////////
             /**
-               Start the animation.
-                              @method start
-               @return {void}
+                Start the animation.
+
+                @method start
+                @return {void}
              */
             this.start = function() {
-                startTime = new Date();
+                startTime = lastCallTime = new Date();
                 animate();
             };
         },

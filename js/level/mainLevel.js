@@ -12,9 +12,10 @@ define(['jquery', 'level/levelBase', 'foundation/shape', 'foundation/animation',
     //////////////////////////////////
     // Private class methods/fields //
     //////////////////////////////////
+
     /**
-           @module level/mainLevel
-         */
+       @module level/mainLevel
+     */
     var module = {
         /////////////////////////////////
         // Public class methods/fields //
@@ -77,24 +78,29 @@ define(['jquery', 'level/levelBase', 'foundation/shape', 'foundation/animation',
                 });
                 poly.draw();
                 rect.draw();
-                var human1 = new Human.Human(200, 200, this.mainDrawer);
-                //human1.turn(Math.PI / 4);
-                human1.draw();
-                /*var human2 = new Human.Human(500, 500, this.mainDrawer);
-                    human2.turn(Math.PI / 4);
-                    human2.draw();
-                    $('body').click(function() {
-                        human2.step();
-                    });*/
-                //human1.step();
-                var tileMap = new TileMap.TileMap(10, 10, 10, 10, 10, 10,
-                    this.mainDrawer, [{
-                        fillStyle: 'green'
-                    }]);
-                tileMap.draw();
-                this.quadTree.insert(poly).insert(rect).insert(human1).insert(
-                    tileMap);
+
+                var
+                speed = 0.1,
+                    omega = Math.PI / 1000;
+
+                var polyAnimation = new Animation.Animation(poly, function(
+                    time, timeDiff) {
+                    poly.x += timeDiff * speed;
+                    poly.angle += timeDiff * omega;
+                    return poly.x >= 500;
+                }, function() {
+                    poly.angle = 0;
+                    polyAnimation = new Animation.Animation(poly,
+                        function(time, timeDiff) {
+                            poly.y -= timeDiff * speed;
+                            return poly.y <= 100;
+                        });
+                    polyAnimation.start();
+                });
+
+                this.quadTree.insert(poly).insert(rect);
                 hitTest();
+                polyAnimation.start();
             };
         }
     };

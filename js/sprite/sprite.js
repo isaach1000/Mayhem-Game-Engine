@@ -9,6 +9,7 @@ define(['underscore', 'util/boundingBox'], function(_, BoundingBox) {
     //////////////////////////////////
     // Private class methods/fields //
     //////////////////////////////////
+
     /**
        @module sprite/sprite
      */

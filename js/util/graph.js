@@ -133,7 +133,7 @@ define(['util/hash'], function(Hash) {
                     nodeQueue = [],
                     nodeQueueIndex = 0;
                 nodes.forEach(function(node) {
-                    nodeQueue.putsh(node);
+                    nodeQueue.push(node);
                 });
                 while (nodeQueueIndex < nodeQueue.length) {
                     var node = nodeQueue[nodeQueueIndex++],
