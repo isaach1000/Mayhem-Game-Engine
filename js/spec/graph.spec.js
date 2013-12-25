@@ -61,6 +61,10 @@ define(['util/graph'], function(Graph) {
             });
         });
 
+        it('dijkstra\'s algorithm', function() {
+            
+        });
+
     });
 
 });
