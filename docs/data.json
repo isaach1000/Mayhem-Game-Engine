@@ -1,0 +1,4757 @@
+{
+    "project": {
+        "name": "canvas",
+        "description": "Canvas game project",
+        "version": "0.0.0",
+        "url": "github.com/isaach1000/canvas"
+    },
+    "files": {
+        "js/foundation/animation.js": {
+            "name": "js/foundation/animation.js",
+            "modules": {
+                "foundation/animation": 1
+            },
+            "classes": {
+                "Animation": 1
+            },
+            "fors": {},
+            "namespaces": {}
+        },
+        "js/foundation/canvasDrawer.js": {
+            "name": "js/foundation/canvasDrawer.js",
+            "modules": {
+                "foundation/canvasDrawer": 1
+            },
+            "classes": {
+                "CanvasDrawer": 1
+            },
+            "fors": {},
+            "namespaces": {}
+        },
+        "js/foundation/shape.js": {
+            "name": "js/foundation/shape.js",
+            "modules": {
+                "foundation/shape": 1
+            },
+            "classes": {
+                "Shape": 1,
+                "Circle": 1,
+                "Rectangle": 1,
+                "Polygon": 1
+            },
+            "fors": {},
+            "namespaces": {}
+        },
+        "js/level/levelBase.js": {
+            "name": "js/level/levelBase.js",
+            "modules": {
+                "level/levelBase": 1
+            },
+            "classes": {},
+            "fors": {},
+            "namespaces": {}
+        },
+        "js/level/mainLevel.js": {
+            "name": "js/level/mainLevel.js",
+            "modules": {
+                "level/mainLevel": 1
+            },
+            "classes": {
+                "MainLevel": 1
+            },
+            "fors": {},
+            "namespaces": {}
+        },
+        "js/lib/jasmine/jasmine.js": {
+            "name": "js/lib/jasmine/jasmine.js",
+            "modules": {},
+            "classes": {},
+            "fors": {},
+            "namespaces": {}
+        },
+        "js/model/item.js": {
+            "name": "js/model/item.js",
+            "modules": {
+                "model/item": 1
+            },
+            "classes": {},
+            "fors": {},
+            "namespaces": {}
+        },
+        "js/model/player.js": {
+            "name": "js/model/player.js",
+            "modules": {
+                "model/player": 1
+            },
+            "classes": {},
+            "fors": {},
+            "namespaces": {}
+        },
+        "js/model/room.js": {
+            "name": "js/model/room.js",
+            "modules": {
+                "model/room": 1
+            },
+            "classes": {},
+            "fors": {},
+            "namespaces": {}
+        },
+        "js/sprite/human.js": {
+            "name": "js/sprite/human.js",
+            "modules": {
+                "sprite/human": 1
+            },
+            "classes": {
+                "Human": 1
+            },
+            "fors": {},
+            "namespaces": {}
+        },
+        "js/sprite/sprite.js": {
+            "name": "js/sprite/sprite.js",
+            "modules": {
+                "sprite/sprite": 1
+            },
+            "classes": {
+                "Sprite": 1
+            },
+            "fors": {},
+            "namespaces": {}
+        },
+        "js/sprite/tileMap.js": {
+            "name": "js/sprite/tileMap.js",
+            "modules": {
+                "sprite/tileMap": 1
+            },
+            "classes": {
+                "TileMap": 1
+            },
+            "fors": {},
+            "namespaces": {}
+        },
+        "js/util/boundingBox.js": {
+            "name": "js/util/boundingBox.js",
+            "modules": {
+                "util/boundingBox": 1
+            },
+            "classes": {
+                "BoundingBox": 1
+            },
+            "fors": {},
+            "namespaces": {}
+        },
+        "js/util/factory.js": {
+            "name": "js/util/factory.js",
+            "modules": {
+                "util/factory": 1
+            },
+            "classes": {
+                "Factory": 1
+            },
+            "fors": {},
+            "namespaces": {}
+        },
+        "js/util/graph.js": {
+            "name": "js/util/graph.js",
+            "modules": {
+                "util/graph": 1
+            },
+            "classes": {},
+            "fors": {},
+            "namespaces": {}
+        },
+        "js/util/hash.js": {
+            "name": "js/util/hash.js",
+            "modules": {
+                "util/hash": 1
+            },
+            "classes": {
+                "Hash": 1,
+                "Hashset": 1,
+                "Hashtable": 1
+            },
+            "fors": {},
+            "namespaces": {}
+        },
+        "js/util/mathExtensions.js": {
+            "name": "js/util/mathExtensions.js",
+            "modules": {
+                "util/mathExtensions": 1
+            },
+            "classes": {
+                "MathExtensions": 1,
+                "Matrix": 1
+            },
+            "fors": {},
+            "namespaces": {}
+        },
+        "js/util/minheap.js": {
+            "name": "js/util/minheap.js",
+            "modules": {
+                "modulePath": 1
+            },
+            "classes": {
+                "MinHeap": 1
+            },
+            "fors": {},
+            "namespaces": {}
+        },
+        "js/util/physics.js": {
+            "name": "js/util/physics.js",
+            "modules": {
+                "util/physics": 1
+            },
+            "classes": {},
+            "fors": {},
+            "namespaces": {}
+        },
+        "js/util/quadTree.js": {
+            "name": "js/util/quadTree.js",
+            "modules": {
+                "util/quadTree": 1
+            },
+            "classes": {
+                "QuadTree": 1
+            },
+            "fors": {},
+            "namespaces": {}
+        },
+        "js/worker/workerMessenger.js": {
+            "name": "js/worker/workerMessenger.js",
+            "modules": {
+                "worker/workerMessenger": 1
+            },
+            "classes": {
+                "WorkerMessenger": 1
+            },
+            "fors": {},
+            "namespaces": {}
+        },
+        "js/worker/workerReceiver.js": {
+            "name": "js/worker/workerReceiver.js",
+            "modules": {
+                "worker/workerReceiver": 1
+            },
+            "classes": {
+                "WorkerReceiver": 1
+            },
+            "fors": {},
+            "namespaces": {}
+        }
+    },
+    "modules": {
+        "foundation/animation": {
+            "name": "foundation/animation",
+            "submodules": {},
+            "classes": {
+                "Animation": 1
+            },
+            "fors": {},
+            "namespaces": {},
+            "tag": "module",
+            "file": "js/foundation/animation.js",
+            "line": 33
+        },
+        "foundation/canvasDrawer": {
+            "name": "foundation/canvasDrawer",
+            "submodules": {},
+            "classes": {
+                "CanvasDrawer": 1
+            },
+            "fors": {},
+            "namespaces": {},
+            "tag": "module",
+            "file": "js/foundation/canvasDrawer.js",
+            "line": 13
+        },
+        "foundation/shape": {
+            "name": "foundation/shape",
+            "submodules": {},
+            "classes": {
+                "Shape": 1,
+                "Circle": 1,
+                "Rectangle": 1,
+                "Polygon": 1
+            },
+            "fors": {},
+            "namespaces": {},
+            "tag": "module",
+            "file": "js/foundation/shape.js",
+            "line": 409
+        },
+        "level/levelBase": {
+            "name": "level/levelBase",
+            "submodules": {},
+            "classes": {},
+            "fors": {},
+            "namespaces": {},
+            "tag": "module",
+            "file": "js/level/levelBase.js",
+            "line": 8
+        },
+        "level/mainLevel": {
+            "name": "level/mainLevel",
+            "submodules": {},
+            "classes": {
+                "MainLevel": 1
+            },
+            "fors": {},
+            "namespaces": {},
+            "tag": "module",
+            "file": "js/level/mainLevel.js",
+            "line": 22
+        },
+        "model/item": {
+            "name": "model/item",
+            "submodules": {},
+            "classes": {},
+            "fors": {},
+            "namespaces": {},
+            "tag": "module",
+            "file": "js/model/item.js",
+            "line": 6
+        },
+        "model/player": {
+            "name": "model/player",
+            "submodules": {},
+            "classes": {},
+            "fors": {},
+            "namespaces": {},
+            "tag": "module",
+            "file": "js/model/player.js",
+            "line": 6
+        },
+        "model/room": {
+            "name": "model/room",
+            "submodules": {},
+            "classes": {},
+            "fors": {},
+            "namespaces": {},
+            "tag": "module",
+            "file": "js/model/room.js",
+            "line": 6
+        },
+        "sprite/human": {
+            "name": "sprite/human",
+            "submodules": {},
+            "classes": {
+                "Human": 1
+            },
+            "fors": {},
+            "namespaces": {},
+            "tag": "module",
+            "file": "js/sprite/human.js",
+            "line": 1
+        },
+        "sprite/sprite": {
+            "name": "sprite/sprite",
+            "submodules": {},
+            "classes": {
+                "Sprite": 1
+            },
+            "fors": {},
+            "namespaces": {},
+            "tag": "module",
+            "file": "js/sprite/sprite.js",
+            "line": 1
+        },
+        "sprite/tileMap": {
+            "name": "sprite/tileMap",
+            "submodules": {},
+            "classes": {
+                "TileMap": 1
+            },
+            "fors": {},
+            "namespaces": {},
+            "tag": "module",
+            "file": "js/sprite/tileMap.js",
+            "line": 1
+        },
+        "util/boundingBox": {
+            "name": "util/boundingBox",
+            "submodules": {},
+            "classes": {
+                "BoundingBox": 1
+            },
+            "fors": {},
+            "namespaces": {},
+            "tag": "module",
+            "file": "js/util/boundingBox.js",
+            "line": 1
+        },
+        "util/factory": {
+            "name": "util/factory",
+            "submodules": {},
+            "classes": {
+                "Factory": 1
+            },
+            "fors": {},
+            "namespaces": {},
+            "tag": "module",
+            "file": "js/util/factory.js",
+            "line": 1
+        },
+        "util/graph": {
+            "name": "util/graph",
+            "submodules": {},
+            "classes": {},
+            "fors": {},
+            "namespaces": {},
+            "tag": "module",
+            "file": "js/util/graph.js",
+            "line": 7
+        },
+        "util/hash": {
+            "name": "util/hash",
+            "submodules": {},
+            "classes": {
+                "Hash": 1,
+                "Hashset": 1,
+                "Hashtable": 1
+            },
+            "fors": {},
+            "namespaces": {},
+            "tag": "module",
+            "file": "js/util/hash.js",
+            "line": 327,
+            "description": "Hash class used to generate hashcodes for JavaScript objects. The hashcode\nis stored as a property of the object, but it is set to non-enumerable and\ncannot be changed, thereby guaranteeing the consistency of hashcodes."
+        },
+        "util/mathExtensions": {
+            "name": "util/mathExtensions",
+            "submodules": {},
+            "classes": {
+                "MathExtensions": 1,
+                "Matrix": 1
+            },
+            "fors": {},
+            "namespaces": {},
+            "tag": "module",
+            "file": "js/util/mathExtensions.js",
+            "line": 73
+        },
+        "modulePath": {
+            "name": "modulePath",
+            "submodules": {},
+            "classes": {
+                "MinHeap": 1
+            },
+            "fors": {},
+            "namespaces": {},
+            "tag": "module",
+            "file": "js/util/minheap.js",
+            "line": 15
+        },
+        "util/physics": {
+            "name": "util/physics",
+            "submodules": {},
+            "classes": {},
+            "fors": {},
+            "namespaces": {},
+            "tag": "module",
+            "file": "js/util/physics.js",
+            "line": 6
+        },
+        "util/quadTree": {
+            "name": "util/quadTree",
+            "submodules": {},
+            "classes": {
+                "QuadTree": 1
+            },
+            "fors": {},
+            "namespaces": {},
+            "tag": "module",
+            "file": "js/util/quadTree.js",
+            "line": 1
+        },
+        "worker/workerMessenger": {
+            "name": "worker/workerMessenger",
+            "submodules": {},
+            "classes": {
+                "WorkerMessenger": 1
+            },
+            "fors": {},
+            "namespaces": {},
+            "tag": "module",
+            "file": "js/worker/workerMessenger.js",
+            "line": 18
+        },
+        "worker/workerReceiver": {
+            "name": "worker/workerReceiver",
+            "submodules": {},
+            "classes": {
+                "WorkerReceiver": 1
+            },
+            "fors": {},
+            "namespaces": {},
+            "tag": "module",
+            "file": "js/worker/workerReceiver.js",
+            "line": 18
+        }
+    },
+    "classes": {
+        "Animation": {
+            "name": "Animation",
+            "shortname": "Animation",
+            "classitems": [],
+            "plugins": [],
+            "extensions": [],
+            "plugin_for": [],
+            "extension_for": [],
+            "module": "foundation/animation",
+            "file": "js/foundation/animation.js",
+            "line": 33,
+            "description": "Defines the behavior of animations.",
+            "is_constructor": 1,
+            "params": [
+                {
+                    "name": "drawable",
+                    "description": "The drawable to animate.",
+                    "type": "Drawable"
+                },
+                {
+                    "name": "frameFunction",
+                    "description": "A function that updates the\nanimation. Return false to terminate the animation. It may take the\nduration in milliseconds from the beginning of the animation as a\nparameter. For example,\n<code><pre>\nfunction(time) {\n    shape.x = Math.floor(time / 100);\n    return time <= 1000;\n}\n</pre></code>",
+                    "type": "Function"
+                },
+                {
+                    "name": "callback",
+                    "description": "A function to perform at the completion\nof the animation.",
+                    "type": "Function"
+                }
+            ]
+        },
+        "CanvasDrawer": {
+            "name": "CanvasDrawer",
+            "shortname": "CanvasDrawer",
+            "classitems": [],
+            "plugins": [],
+            "extensions": [],
+            "plugin_for": [],
+            "extension_for": [],
+            "module": "foundation/canvasDrawer",
+            "namespace": "",
+            "file": "js/foundation/canvasDrawer.js",
+            "line": 13,
+            "description": "CanvasDrawer for drawing to a canvas. Wrapper class for HTML5\nCanvasRenderingContext2D.",
+            "is_constructor": 1,
+            "params": [
+                {
+                    "name": "ctx",
+                    "description": "Context of canvas",
+                    "type": "Context"
+                },
+                {
+                    "name": "width",
+                    "description": "Width of canvas",
+                    "type": "Float"
+                },
+                {
+                    "name": "height",
+                    "description": "Height of canvas",
+                    "type": "Float"
+                }
+            ]
+        },
+        "Shape": {
+            "name": "Shape",
+            "shortname": "Shape",
+            "classitems": [],
+            "plugins": [],
+            "extensions": [],
+            "plugin_for": [],
+            "extension_for": [],
+            "module": "foundation/shape",
+            "namespace": "",
+            "file": "js/foundation/shape.js",
+            "line": 19,
+            "description": "Shape abstract class",
+            "is_constructor": 1,
+            "params": [
+                {
+                    "name": "x",
+                    "description": "x coordinate of top-left",
+                    "type": "Float"
+                },
+                {
+                    "name": "y",
+                    "description": "y coordinate of top-left",
+                    "type": "Float"
+                },
+                {
+                    "name": "width",
+                    "description": "Width of shape",
+                    "type": "Float"
+                },
+                {
+                    "name": "height",
+                    "description": "Height of shape",
+                    "type": "Float"
+                },
+                {
+                    "name": "drawer",
+                    "description": "CanvasDrawer to draw image to canvas",
+                    "type": "CanvasDrawer"
+                },
+                {
+                    "name": "drawingSettings",
+                    "description": "Settings for the CanvasDrawer",
+                    "type": "Object"
+                }
+            ]
+        },
+        "Circle": {
+            "name": "Circle",
+            "shortname": "Circle",
+            "classitems": [],
+            "plugins": [],
+            "extensions": [],
+            "plugin_for": [],
+            "extension_for": [],
+            "module": "foundation/shape",
+            "namespace": "",
+            "file": "js/foundation/shape.js",
+            "line": 235,
+            "description": "Circle shape",
+            "extends": "Shape",
+            "is_constructor": 1,
+            "params": [
+                {
+                    "name": "x",
+                    "description": "x coordinate of circle",
+                    "type": "Float"
+                },
+                {
+                    "name": "y",
+                    "description": "y coordinate of circle",
+                    "type": "Float"
+                },
+                {
+                    "name": "radius",
+                    "description": "Radius of the circle",
+                    "type": "Float"
+                },
+                {
+                    "name": "drawer",
+                    "description": "CanvasDrawer to draw circle",
+                    "type": "CanvasDrawer"
+                },
+                {
+                    "name": "drawingSettings",
+                    "description": "Dictionary of drawing options",
+                    "type": "Object"
+                }
+            ]
+        },
+        "Rectangle": {
+            "name": "Rectangle",
+            "shortname": "Rectangle",
+            "classitems": [],
+            "plugins": [],
+            "extensions": [],
+            "plugin_for": [],
+            "extension_for": [],
+            "module": "foundation/shape",
+            "namespace": "",
+            "file": "js/foundation/shape.js",
+            "line": 312,
+            "description": "Rectangle",
+            "extends": "Shape",
+            "is_constructor": 1,
+            "params": [
+                {
+                    "name": "x",
+                    "description": "The x coordinate of the rectangle's upper left corner.",
+                    "type": "Float"
+                },
+                {
+                    "name": "y",
+                    "description": "The y coordinate of the rectangle's upper left corner.",
+                    "type": "Float"
+                },
+                {
+                    "name": "width",
+                    "description": "The width of the rectangle.",
+                    "type": "Float"
+                },
+                {
+                    "name": "height",
+                    "description": "The height of the rectangle.",
+                    "type": "Float"
+                },
+                {
+                    "name": "drawer",
+                    "description": "A CanvasDrawer to draw the rectangle onto the canvas.",
+                    "type": "CanvasDrawer"
+                },
+                {
+                    "name": "drawingSettings",
+                    "description": "A dictionary of drawing options.",
+                    "type": "Object"
+                }
+            ]
+        },
+        "Polygon": {
+            "name": "Polygon",
+            "shortname": "Polygon",
+            "classitems": [],
+            "plugins": [],
+            "extensions": [],
+            "plugin_for": [],
+            "extension_for": [],
+            "module": "foundation/shape",
+            "namespace": "",
+            "file": "js/foundation/shape.js",
+            "line": 409,
+            "description": "Polygon class",
+            "extends": "Shapes",
+            "is_constructor": 1,
+            "params": [
+                {
+                    "name": "center",
+                    "description": "The center of the polygon",
+                    "type": "Point",
+                    "optional": true,
+                    "optdefault": "0,0"
+                },
+                {
+                    "name": "points",
+                    "description": "An array of points that describe the polygon,\nShould be relative to the center so rotation can be performed more\neasily.",
+                    "type": "Array"
+                },
+                {
+                    "name": "drawer",
+                    "description": "A CanvasDrawer to draw the polygon\n onto the canvas",
+                    "type": "CanvasDrawer"
+                },
+                {
+                    "name": "drawingSettings",
+                    "description": "A dictionary of drawing options.",
+                    "type": "Object"
+                }
+            ]
+        },
+        "MainLevel": {
+            "name": "MainLevel",
+            "shortname": "MainLevel",
+            "classitems": [],
+            "plugins": [],
+            "extensions": [],
+            "plugin_for": [],
+            "extension_for": [],
+            "module": "level/mainLevel",
+            "namespace": "",
+            "file": "js/level/mainLevel.js",
+            "line": 22,
+            "description": "MainLevel contains all of the logic necessary for the main level of the\ngame.",
+            "extends": "LevelBase",
+            "is_constructor": 1
+        },
+        "Human": {
+            "name": "Human",
+            "shortname": "Human",
+            "classitems": [],
+            "plugins": [],
+            "extensions": [],
+            "plugin_for": [],
+            "extension_for": [],
+            "module": "sprite/human",
+            "namespace": "",
+            "file": "js/sprite/human.js",
+            "line": 1,
+            "description": "Human is a subclass of Sprite that handles the rendering of a human\ncharacter.",
+            "extends": "Sprite"
+        },
+        "Sprite": {
+            "name": "Sprite",
+            "shortname": "Sprite",
+            "classitems": [],
+            "plugins": [],
+            "extensions": [],
+            "plugin_for": [],
+            "extension_for": [],
+            "module": "sprite/sprite",
+            "namespace": "",
+            "file": "js/sprite/sprite.js",
+            "line": 1,
+            "description": "Abstract class used to implement basic functions of sprites. Sprites inherit\nfrom this class and override the necessary drawing methods, etc."
+        },
+        "TileMap": {
+            "name": "TileMap",
+            "shortname": "TileMap",
+            "classitems": [],
+            "plugins": [],
+            "extensions": [],
+            "plugin_for": [],
+            "extension_for": [],
+            "module": "sprite/tileMap",
+            "namespace": "",
+            "file": "js/sprite/tileMap.js",
+            "line": 1,
+            "description": "Represents a grid of tiles."
+        },
+        "BoundingBox": {
+            "name": "BoundingBox",
+            "shortname": "BoundingBox",
+            "classitems": [],
+            "plugins": [],
+            "extensions": [],
+            "plugin_for": [],
+            "extension_for": [],
+            "module": "util/boundingBox",
+            "namespace": "",
+            "file": "js/util/boundingBox.js",
+            "line": 1,
+            "description": "A class to represent the bounds of shapes in the canvas. Simplifies\ncalculations certain involving complex shapes. Specifically effective for\nhit-testing."
+        },
+        "Factory": {
+            "name": "Factory",
+            "shortname": "Factory",
+            "classitems": [],
+            "plugins": [],
+            "extensions": [],
+            "plugin_for": [],
+            "extension_for": [],
+            "module": "util/factory",
+            "namespace": "",
+            "file": "js/util/factory.js",
+            "line": 1,
+            "description": "Factory class to produce HTML elements."
+        },
+        "Hash": {
+            "name": "Hash",
+            "shortname": "Hash",
+            "classitems": [],
+            "plugins": [],
+            "extensions": [],
+            "plugin_for": [],
+            "extension_for": [],
+            "module": "util/hash",
+            "namespace": "",
+            "file": "js/util/hash.js",
+            "line": 1,
+            "description": "Hash class used to generate hashcodes for JavaScript objects. The hashcode\nis stored as a property of the object, but it is set to non-enumerable and\ncannot be changed, thereby guaranteeing the consistency of hashcodes."
+        },
+        "Hashset": {
+            "name": "Hashset",
+            "shortname": "Hashset",
+            "classitems": [],
+            "plugins": [],
+            "extensions": [],
+            "plugin_for": [],
+            "extension_for": [],
+            "module": "util/hash",
+            "namespace": "",
+            "file": "js/util/hash.js",
+            "line": 46,
+            "description": "Hashset data structure used to store unique objects without duplicates.\nThe hashset will add identical items of the same type, as long as they are\nnot the exact same object (or the hashcode property is identical). For more\ninfo, see the {{#crossLink module}}{{/crossLink}} class.",
+            "is_constructor": 1
+        },
+        "Hashtable": {
+            "name": "Hashtable",
+            "shortname": "Hashtable",
+            "classitems": [],
+            "plugins": [],
+            "extensions": [],
+            "plugin_for": [],
+            "extension_for": [],
+            "module": "util/hash",
+            "namespace": "",
+            "file": "js/util/hash.js",
+            "line": 327,
+            "description": "Hashtable implementation to map objects to other objects.",
+            "is_constructor": 1
+        },
+        "MathExtensions": {
+            "name": "MathExtensions",
+            "shortname": "MathExtensions",
+            "classitems": [],
+            "plugins": [],
+            "extensions": [],
+            "plugin_for": [],
+            "extension_for": [],
+            "module": "util/mathExtensions",
+            "namespace": "",
+            "file": "js/util/mathExtensions.js",
+            "line": 1,
+            "description": "Math extensions"
+        },
+        "Matrix": {
+            "name": "Matrix",
+            "shortname": "Matrix",
+            "classitems": [],
+            "plugins": [],
+            "extensions": [],
+            "plugin_for": [],
+            "extension_for": [],
+            "module": "util/mathExtensions",
+            "namespace": "",
+            "file": "js/util/mathExtensions.js",
+            "line": 73,
+            "description": "A matrix to represent transformations, etc.",
+            "is_constructor": 1,
+            "params": [
+                {
+                    "name": "entriesArray",
+                    "description": "An array with all of the values in the\nmatrix",
+                    "type": "Array"
+                },
+                {
+                    "name": "numRows",
+                    "description": "Number of rows in the matrix",
+                    "type": "Number"
+                },
+                {
+                    "name": "numRows",
+                    "description": "Number of column in the matrix",
+                    "type": "Number"
+                }
+            ]
+        },
+        "MinHeap": {
+            "name": "MinHeap",
+            "shortname": "MinHeap",
+            "classitems": [],
+            "plugins": [],
+            "extensions": [],
+            "plugin_for": [],
+            "extension_for": [],
+            "module": "modulePath",
+            "namespace": "",
+            "file": "js/util/minheap.js",
+            "line": 15,
+            "is_constructor": 1,
+            "params": [
+                {
+                    "name": "arg1",
+                    "description": "Comparator function (if one argument) or size (if two arguments)",
+                    "type": "Function|number",
+                    "optional": true,
+                    "optdefault": "numeric_comparator|16"
+                },
+                {
+                    "name": "arg2",
+                    "description": "Comparator function",
+                    "type": "Function",
+                    "optional": true,
+                    "optdefault": "numeric_comparator"
+                }
+            ]
+        },
+        "QuadTree": {
+            "name": "QuadTree",
+            "shortname": "QuadTree",
+            "classitems": [],
+            "plugins": [],
+            "extensions": [],
+            "plugin_for": [],
+            "extension_for": [],
+            "module": "util/quadTree",
+            "namespace": "",
+            "file": "js/util/quadTree.js",
+            "line": 1,
+            "description": "A QuadTree is a data structure for optimizing hit-testing. Based on\nthis <a href=\"http://en.wikipedia.org/wiki/Quadtree\">Wikipedia article</a>."
+        },
+        "WorkerMessenger": {
+            "name": "WorkerMessenger",
+            "shortname": "WorkerMessenger",
+            "classitems": [],
+            "plugins": [],
+            "extensions": [],
+            "plugin_for": [],
+            "extension_for": [],
+            "module": "worker/workerMessenger",
+            "namespace": "",
+            "file": "js/worker/workerMessenger.js",
+            "line": 18,
+            "description": "Class to abstract sending messages to WebWorker.",
+            "is_constructor": 1
+        },
+        "WorkerReceiver": {
+            "name": "WorkerReceiver",
+            "shortname": "WorkerReceiver",
+            "classitems": [],
+            "plugins": [],
+            "extensions": [],
+            "plugin_for": [],
+            "extension_for": [],
+            "module": "worker/workerReceiver",
+            "namespace": "",
+            "file": "js/worker/workerReceiver.js",
+            "line": 18,
+            "description": "Class to abstract receiving messages from a WebWorker.",
+            "is_constructor": 1,
+            "params": [
+                {
+                    "name": "objectHandle",
+                    "description": "An object to be affected by the worker",
+                    "type": "Object"
+                },
+                {
+                    "name": "id",
+                    "description": "An ID number",
+                    "type": "Integer"
+                }
+            ]
+        }
+    },
+    "classitems": [
+        {
+            "file": "js/foundation/animation.js",
+            "line": 11,
+            "description": "Based on <a href=\"http://www.html5canvastutorials.com/\">\nhtml5canvastutorials</a>",
+            "itemtype": "method",
+            "name": "requestAnimFrame",
+            "access": "private",
+            "tagname": "",
+            "params": [
+                {
+                    "name": "callback",
+                    "description": "A function to perform after one frame",
+                    "type": "Function"
+                }
+            ],
+            "return": {
+                "description": "",
+                "type": "Void"
+            },
+            "class": "Animation"
+        },
+        {
+            "file": "js/foundation/animation.js",
+            "line": 69,
+            "description": "Start the animation.",
+            "itemtype": "method",
+            "name": "start",
+            "return": {
+                "description": "",
+                "type": "Void"
+            },
+            "class": "Animation",
+            "module": "foundation/animation"
+        },
+        {
+            "file": "js/foundation/animation.js",
+            "line": 79,
+            "description": "Create an easing.",
+            "itemtype": "method",
+            "name": "easing",
+            "static": 1,
+            "params": [
+                {
+                    "name": "drawable",
+                    "description": "The drawable to animate.",
+                    "type": "Polygon|Rectangle|Circle"
+                },
+                {
+                    "name": "endX",
+                    "description": "The x to go to.",
+                    "type": "Float"
+                },
+                {
+                    "name": "endY",
+                    "description": "The y to go to.",
+                    "type": "Float"
+                },
+                {
+                    "name": "duration",
+                    "description": "The number of milliseconds for the animation.",
+                    "type": "Int"
+                },
+                {
+                    "name": "callback",
+                    "description": "A function to perform at the completion of the animation.",
+                    "type": "Function"
+                }
+            ],
+            "return": {
+                "description": "An animation representing the easing",
+                "type": "Animation"
+            },
+            "class": "Animation",
+            "module": "foundation/animation"
+        },
+        {
+            "file": "js/foundation/canvasDrawer.js",
+            "line": 33,
+            "description": "Width of the canvas",
+            "type": "{float}",
+            "itemtype": "property",
+            "name": "width",
+            "class": "CanvasDrawer",
+            "module": "foundation/canvasDrawer"
+        },
+        {
+            "file": "js/foundation/canvasDrawer.js",
+            "line": 44,
+            "description": "Height of the canvas",
+            "itemtype": "property",
+            "name": "height",
+            "type": "{float}",
+            "class": "CanvasDrawer",
+            "module": "foundation/canvasDrawer"
+        },
+        {
+            "file": "js/foundation/canvasDrawer.js",
+            "line": 55,
+            "description": "Properties of the context. Valid settings include:\nlineWidth, fillStyle, and strokeStyle.",
+            "itemtype": "property",
+            "name": "contextSettings",
+            "type": "{Object}",
+            "class": "CanvasDrawer",
+            "module": "foundation/canvasDrawer"
+        },
+        {
+            "file": "js/foundation/canvasDrawer.js",
+            "line": 87,
+            "description": "Draw a line between two points",
+            "itemtype": "method",
+            "name": "drawLine",
+            "params": [
+                {
+                    "name": "point1",
+                    "description": "x coordinate of the first point, or the first point",
+                    "type": "(float|Point)"
+                },
+                {
+                    "name": "point2",
+                    "description": "y coordinate of the first point, or the second point",
+                    "type": "(float|Point)"
+                },
+                {
+                    "name": "moveFirst",
+                    "description": "If true, uses moveTo method",
+                    "type": "Boolean",
+                    "optional": true,
+                    "optdefault": "false"
+                }
+            ],
+            "chainable": 1,
+            "class": "CanvasDrawer",
+            "module": "foundation/canvasDrawer"
+        },
+        {
+            "file": "js/foundation/canvasDrawer.js",
+            "line": 103,
+            "description": "Wrapper for <code>context.stroke</code>",
+            "itemtype": "method",
+            "name": "stroke",
+            "chainable": 1,
+            "class": "CanvasDrawer",
+            "module": "foundation/canvasDrawer"
+        },
+        {
+            "file": "js/foundation/canvasDrawer.js",
+            "line": 113,
+            "description": "Wrapper for <code>context.fill</code>",
+            "itemtype": "method",
+            "name": "fill",
+            "chainable": 1,
+            "class": "CanvasDrawer",
+            "module": "foundation/canvasDrawer"
+        },
+        {
+            "file": "js/foundation/canvasDrawer.js",
+            "line": 123,
+            "description": "Wrapper for <code>context.beginPath</code>",
+            "itemtype": "method",
+            "name": "beginPath",
+            "chainable": 1,
+            "class": "CanvasDrawer",
+            "module": "foundation/canvasDrawer"
+        },
+        {
+            "file": "js/foundation/canvasDrawer.js",
+            "line": 133,
+            "description": "Wrapper for <code>context.closePath</code>",
+            "itemtype": "method",
+            "name": "closePath",
+            "chainable": 1,
+            "class": "CanvasDrawer",
+            "module": "foundation/canvasDrawer"
+        },
+        {
+            "file": "js/foundation/canvasDrawer.js",
+            "line": 143,
+            "description": "Wrapper for <code>context.rect</code>",
+            "itemtype": "method",
+            "name": "rect",
+            "params": [
+                {
+                    "name": "x",
+                    "description": "x coordinate",
+                    "type": "Float"
+                },
+                {
+                    "name": "y",
+                    "description": "y coordinate",
+                    "type": "Float"
+                },
+                {
+                    "name": "w",
+                    "description": "Width of rectangle",
+                    "type": "Float"
+                },
+                {
+                    "name": "h",
+                    "description": "Height of rectangle",
+                    "type": "Float"
+                }
+            ],
+            "chainable": 1,
+            "class": "CanvasDrawer",
+            "module": "foundation/canvasDrawer"
+        },
+        {
+            "file": "js/foundation/canvasDrawer.js",
+            "line": 157,
+            "description": "Wrapper for <code>context.arc</code>",
+            "itemtype": "method",
+            "name": "arc",
+            "params": [
+                {
+                    "name": "x",
+                    "description": "x coordinate",
+                    "type": "Float"
+                },
+                {
+                    "name": "y",
+                    "description": "y coordinate",
+                    "type": "Float"
+                },
+                {
+                    "name": "radius",
+                    "description": "Radius of arc",
+                    "type": "Float"
+                },
+                {
+                    "name": "startAngle",
+                    "description": "Start angle of arc",
+                    "type": "Float"
+                },
+                {
+                    "name": "endAngle",
+                    "description": "End angle of arc",
+                    "type": "Float"
+                },
+                {
+                    "name": "ccw",
+                    "description": "Move counterclockwise",
+                    "type": "Boolean"
+                }
+            ],
+            "chainable": 1,
+            "class": "CanvasDrawer",
+            "module": "foundation/canvasDrawer"
+        },
+        {
+            "file": "js/foundation/canvasDrawer.js",
+            "line": 173,
+            "description": "Wrapper for <code>context.clearRect</code>",
+            "itemtype": "method",
+            "name": "clearRect",
+            "params": [
+                {
+                    "name": "x",
+                    "description": "Minimum x of area.",
+                    "type": "Float"
+                },
+                {
+                    "name": "y",
+                    "description": "Minimum y of area.",
+                    "type": "Float"
+                },
+                {
+                    "name": "width",
+                    "description": "Width of area.",
+                    "type": "Float"
+                },
+                {
+                    "name": "height",
+                    "description": "Height of area.",
+                    "type": "Float"
+                }
+            ],
+            "chainable": 1,
+            "class": "CanvasDrawer",
+            "module": "foundation/canvasDrawer"
+        },
+        {
+            "file": "js/foundation/canvasDrawer.js",
+            "line": 187,
+            "description": "Clear entire canvas",
+            "itemtype": "method",
+            "name": "clearCanvas",
+            "chainable": 1,
+            "class": "CanvasDrawer",
+            "module": "foundation/canvasDrawer"
+        },
+        {
+            "file": "js/foundation/canvasDrawer.js",
+            "line": 197,
+            "description": "Wrapper for <code>context.save</code>",
+            "itemtype": "method",
+            "name": "save",
+            "chainable": 1,
+            "class": "CanvasDrawer",
+            "module": "foundation/canvasDrawer"
+        },
+        {
+            "file": "js/foundation/canvasDrawer.js",
+            "line": 207,
+            "description": "Wrapper for <code>context.restore</code>",
+            "itemtype": "method",
+            "name": "restore",
+            "chainable": 1,
+            "class": "CanvasDrawer",
+            "module": "foundation/canvasDrawer"
+        },
+        {
+            "file": "js/foundation/canvasDrawer.js",
+            "line": 217,
+            "description": "Wrapper for <code>context.translate</code>",
+            "itemtype": "method",
+            "name": "translate",
+            "params": [
+                {
+                    "name": "x",
+                    "description": "x coordinate of destination",
+                    "type": "Float"
+                },
+                {
+                    "name": "y",
+                    "description": "y coordinate of destination",
+                    "type": "Float"
+                }
+            ],
+            "chainable": 1,
+            "class": "CanvasDrawer",
+            "module": "foundation/canvasDrawer"
+        },
+        {
+            "file": "js/foundation/canvasDrawer.js",
+            "line": 229,
+            "description": "Wrapper for <code>context.rotate</code>",
+            "itemtype": "method",
+            "name": "rotate",
+            "params": [
+                {
+                    "name": "angle",
+                    "description": "Angle of rotation",
+                    "type": "Float"
+                }
+            ],
+            "return": {
+                "description": "",
+                "type": "Void"
+            },
+            "class": "CanvasDrawer",
+            "module": "foundation/canvasDrawer"
+        },
+        {
+            "file": "js/foundation/canvasDrawer.js",
+            "line": 240,
+            "description": "Wrapper for <code>context.fillRect</code>",
+            "itemtype": "method",
+            "name": "fillRect",
+            "params": [
+                {
+                    "name": "x",
+                    "description": "x coordinate of top-left of rectangle",
+                    "type": "Float"
+                },
+                {
+                    "name": "y",
+                    "description": "y coordinate of top-left of rectangle",
+                    "type": "Float"
+                },
+                {
+                    "name": "w",
+                    "description": "Width of rectangle",
+                    "type": "Float"
+                },
+                {
+                    "name": "h",
+                    "description": "Height of rectangle",
+                    "type": "Float"
+                }
+            ],
+            "chainable": 1,
+            "class": "CanvasDrawer",
+            "module": "foundation/canvasDrawer"
+        },
+        {
+            "file": "js/foundation/canvasDrawer.js",
+            "line": 254,
+            "description": "Wrapper for <code>context.strokeRect</code>",
+            "itemtype": "method",
+            "name": "strokeRect",
+            "params": [
+                {
+                    "name": "x",
+                    "description": "x coordinate of top-left of rectangle",
+                    "type": "Float"
+                },
+                {
+                    "name": "y",
+                    "description": "y coordinate of top-left of rectangle",
+                    "type": "Float"
+                },
+                {
+                    "name": "w",
+                    "description": "Width of rectangle",
+                    "type": "Float"
+                },
+                {
+                    "name": "h",
+                    "description": "Height of rectangle",
+                    "type": "Float"
+                }
+            ],
+            "chainable": 1,
+            "class": "CanvasDrawer",
+            "module": "foundation/canvasDrawer"
+        },
+        {
+            "file": "js/foundation/canvasDrawer.js",
+            "line": 268,
+            "description": "Wrapper for <code>context.getImageData</code>",
+            "itemtype": "method",
+            "name": "getImageData",
+            "params": [
+                {
+                    "name": "x",
+                    "description": "x coordinate of top-left of image",
+                    "type": "Float"
+                },
+                {
+                    "name": "y",
+                    "description": "y coordinate of top-left of image",
+                    "type": "Float"
+                },
+                {
+                    "name": "width",
+                    "description": "Width of image",
+                    "type": "Float"
+                },
+                {
+                    "name": "height",
+                    "description": "Height of image",
+                    "type": "Float"
+                }
+            ],
+            "return": {
+                "description": "Image data",
+                "type": "Array"
+            },
+            "class": "CanvasDrawer",
+            "module": "foundation/canvasDrawer"
+        },
+        {
+            "file": "js/foundation/canvasDrawer.js",
+            "line": 281,
+            "description": "Wrapper for <code>context.putImageData</code>",
+            "itemtype": "method",
+            "name": "putImageData",
+            "params": [
+                {
+                    "name": "imageData",
+                    "description": "Image data",
+                    "type": "Array"
+                },
+                {
+                    "name": "x",
+                    "description": "x coordinate of top-left of image",
+                    "type": "Float"
+                },
+                {
+                    "name": "y",
+                    "description": "y coordinate of top-left of image",
+                    "type": "Float"
+                }
+            ],
+            "chainable": 1,
+            "class": "CanvasDrawer",
+            "module": "foundation/canvasDrawer"
+        },
+        {
+            "file": "js/foundation/shape.js",
+            "line": 49,
+            "description": "x coordinate of top-left of Shape instance",
+            "itemtype": "property",
+            "name": "x",
+            "type": "{integer}",
+            "class": "Shape",
+            "module": "foundation/shape"
+        },
+        {
+            "file": "js/foundation/shape.js",
+            "line": 71,
+            "description": "y coordinate of top-left of Shape instance",
+            "itemtype": "property",
+            "name": "y",
+            "type": "{integer}",
+            "class": "Shape",
+            "module": "foundation/shape"
+        },
+        {
+            "file": "js/foundation/shape.js",
+            "line": 93,
+            "description": "Width of Shape instance",
+            "itemtype": "property",
+            "name": "width",
+            "type": "{integer}",
+            "class": "Shape",
+            "module": "foundation/shape"
+        },
+        {
+            "file": "js/foundation/shape.js",
+            "line": 112,
+            "description": "Height of Shape instance",
+            "itemtype": "property",
+            "name": "height",
+            "type": "{integer}",
+            "class": "Shape",
+            "module": "foundation/shape"
+        },
+        {
+            "file": "js/foundation/shape.js",
+            "line": 131,
+            "description": "BoundingBox of Shape instance",
+            "itemtype": "property",
+            "name": "boundingBox",
+            "type": "{BoundingBox}",
+            "class": "Shape",
+            "module": "foundation/shape"
+        },
+        {
+            "file": "js/foundation/shape.js",
+            "line": 142,
+            "description": "Drawing settings of Shape instance",
+            "itemtype": "property",
+            "name": "drawingSettings",
+            "type": "{Object}",
+            "class": "Shape",
+            "module": "foundation/shape"
+        },
+        {
+            "file": "js/foundation/shape.js",
+            "line": 159,
+            "description": "Clear and draw Shape onto canvas",
+            "itemtype": "method",
+            "name": "update",
+            "return": {
+                "description": "",
+                "type": "Void"
+            },
+            "class": "Shape",
+            "module": "foundation/shape"
+        },
+        {
+            "file": "js/foundation/shape.js",
+            "line": 169,
+            "description": "Draw Shape instance onto the canvas",
+            "itemtype": "method",
+            "name": "draw",
+            "return": {
+                "description": "",
+                "type": "Void"
+            },
+            "class": "Shape",
+            "module": "foundation/shape"
+        },
+        {
+            "file": "js/foundation/shape.js",
+            "line": 181,
+            "description": "Clear the Shape instance",
+            "itemtype": "method",
+            "name": "clear",
+            "return": {
+                "description": "",
+                "type": "Void"
+            },
+            "class": "Shape",
+            "module": "foundation/shape"
+        },
+        {
+            "file": "js/foundation/shape.js",
+            "line": 194,
+            "description": "Draw BoundingBox of Shape instance",
+            "itemtype": "method",
+            "name": "drawBoundingBox",
+            "return": {
+                "description": "",
+                "type": "Void"
+            },
+            "class": "Shape",
+            "module": "foundation/shape"
+        },
+        {
+            "file": "js/foundation/shape.js",
+            "line": 217,
+            "description": "Check if a point is within the Shape instance",
+            "itemtype": "method",
+            "name": "collisionTest",
+            "params": [
+                {
+                    "name": "point",
+                    "description": "A 2D point",
+                    "type": "Point"
+                }
+            ],
+            "return": {
+                "description": "Whether or not the point is within the Shape",
+                "type": "Boolean"
+            },
+            "class": "Shape",
+            "module": "foundation/shape"
+        },
+        {
+            "file": "js/foundation/shape.js",
+            "line": 258,
+            "description": "Center of circle",
+            "itemtype": "property",
+            "name": "center",
+            "type": "{Point)",
+            "class": "Circle",
+            "module": "foundation/shape"
+        },
+        {
+            "file": "js/foundation/shape.js",
+            "line": 270,
+            "description": "Radius of circle",
+            "itemtype": "property",
+            "name": "radius",
+            "type": "{float)",
+            "class": "Circle",
+            "module": "foundation/shape"
+        },
+        {
+            "file": "js/foundation/shape.js",
+            "line": 287,
+            "description": "Draw circle onto canvas.",
+            "return": {
+                "description": "",
+                "type": "Void"
+            },
+            "class": "Circle",
+            "module": "foundation/shape"
+        },
+        {
+            "file": "js/foundation/shape.js",
+            "line": 353,
+            "description": "Generate a BoundingBox for a polygon",
+            "itemtype": "method",
+            "name": "generateBbox",
+            "static": 1,
+            "params": [
+                {
+                    "name": "points",
+                    "description": "An array of points describing the polygon",
+                    "type": "Array"
+                },
+                {
+                    "name": "center",
+                    "description": "Center of polygon",
+                    "type": "Point"
+                }
+            ],
+            "return": {
+                "description": "A BoundingBox containing all of the points",
+                "type": "BoundingBox"
+            },
+            "class": "Polygon",
+            "module": "foundation/shape"
+        },
+        {
+            "file": "js/foundation/shape.js",
+            "line": 436,
+            "description": "Iterate through each point in the polygon.",
+            "itemtype": "method",
+            "name": "forEachPoint",
+            "access": "private",
+            "tagname": "",
+            "params": [
+                {
+                    "name": "f",
+                    "description": "Function to be called on each point",
+                    "type": "Function"
+                }
+            ],
+            "return": {
+                "description": "",
+                "type": "Void"
+            },
+            "class": "Polygon",
+            "module": "foundation/shape"
+        },
+        {
+            "file": "js/foundation/shape.js",
+            "line": 458,
+            "description": "Points of Polygon instance",
+            "itemtype": "property",
+            "name": "points",
+            "type": "{Array}",
+            "class": "Polygon",
+            "module": "foundation/shape"
+        },
+        {
+            "file": "js/foundation/shape.js",
+            "line": 473,
+            "description": "Center of polygon",
+            "itemtype": "property",
+            "name": "center",
+            "type": "{Point}",
+            "class": "Polygon",
+            "module": "foundation/shape"
+        },
+        {
+            "file": "js/foundation/shape.js",
+            "line": 496,
+            "description": "Draw the rectangle onto the canvas using the CanvasDrawer.",
+            "return": {
+                "description": "",
+                "type": "Void"
+            },
+            "class": "Polygon",
+            "module": "foundation/shape"
+        },
+        {
+            "file": "js/foundation/shape.js",
+            "line": 526,
+            "description": "Hit testing based on\n<a href=\"http://stackoverflow.com/a/2922778/1930331</a>.",
+            "params": [
+                {
+                    "name": "point",
+                    "description": "A point",
+                    "type": "Point"
+                }
+            ],
+            "return": {
+                "description": "If the point is in the polygon",
+                "type": "Boolean"
+            },
+            "class": "Polygon",
+            "module": "foundation/shape"
+        },
+        {
+            "file": "js/level/levelBase.js",
+            "line": 15,
+            "description": "LevelBase",
+            "is_constructor": 1,
+            "class": "MainLevel",
+            "module": "level/levelBase"
+        },
+        {
+            "file": "js/lib/jasmine/jasmine.js",
+            "line": 2,
+            "description": "Top level namespace for Jasmine, a lightweight JavaScript BDD/spec/testing framework.",
+            "class": "Human",
+            "module": "level/mainLevel"
+        },
+        {
+            "file": "js/lib/jasmine/jasmine.js",
+            "line": 9,
+            "access": "private",
+            "tagname": "",
+            "class": "Human",
+            "module": "level/mainLevel"
+        },
+        {
+            "file": "js/lib/jasmine/jasmine.js",
+            "line": 15,
+            "description": "Use <code>jasmine.undefined</code> instead of <code>undefined</code>, since <code>undefined</code> is just\na plain old variable and may be redefined by somebody else.",
+            "access": "private",
+            "tagname": "",
+            "class": "Human",
+            "module": "level/mainLevel"
+        },
+        {
+            "file": "js/lib/jasmine/jasmine.js",
+            "line": 22,
+            "description": "Show diagnostic messages in the console if set to true",
+            "class": "Human",
+            "module": "level/mainLevel"
+        },
+        {
+            "file": "js/lib/jasmine/jasmine.js",
+            "line": 27,
+            "description": "Default interval in milliseconds for event loop yields (e.g. to allow network activity or to refresh the screen with the HTML-based runner). Small values here may result in slow test running. Zero means no updates until all tests have completed.",
+            "class": "Human",
+            "module": "level/mainLevel"
+        },
+        {
+            "file": "js/lib/jasmine/jasmine.js",
+            "line": 32,
+            "description": "Maximum levels of nesting that will be included when an object is pretty-printed",
+            "class": "Human",
+            "module": "level/mainLevel"
+        },
+        {
+            "file": "js/lib/jasmine/jasmine.js",
+            "line": 36,
+            "description": "Default timeout interval in milliseconds for waitsFor() blocks.",
+            "class": "Human",
+            "module": "level/mainLevel"
+        },
+        {
+            "file": "js/lib/jasmine/jasmine.js",
+            "line": 40,
+            "description": "By default exceptions thrown in the context of a test are caught by jasmine so that it can run the remaining tests in the suite.\nSet to false to let the exception bubble up in the browser.",
+            "class": "Human",
+            "module": "level/mainLevel"
+        },
+        {
+            "file": "js/lib/jasmine/jasmine.js",
+            "line": 52,
+            "description": "Allows for bound functions to be compared.  Internal use only.",
+            "ignore": "",
+            "access": "private",
+            "tagname": "",
+            "params": [
+                {
+                    "name": "base",
+                    "description": "bound 'this' for the function",
+                    "type": "Object"
+                },
+                {
+                    "name": "name",
+                    "description": "function to find",
+                    "type": "Function"
+                }
+            ],
+            "class": "Human",
+            "module": "level/mainLevel"
+        },
+        {
+            "file": "js/lib/jasmine/jasmine.js",
+            "line": 110,
+            "description": "Getter for the Jasmine environment. Ensures one gets created",
+            "class": "Human",
+            "module": "level/mainLevel"
+        },
+        {
+            "file": "js/lib/jasmine/jasmine.js",
+            "line": 117,
+            "ignore": "",
+            "access": "private",
+            "tagname": "",
+            "params": [
+                {
+                    "name": "value",
+                    "description": ""
+                }
+            ],
+            "return": {
+                "description": "",
+                "type": "Boolean"
+            },
+            "class": "Human",
+            "module": "level/mainLevel"
+        },
+        {
+            "file": "js/lib/jasmine/jasmine.js",
+            "line": 126,
+            "ignore": "",
+            "access": "private",
+            "tagname": "",
+            "params": [
+                {
+                    "name": "value",
+                    "description": ""
+                }
+            ],
+            "return": {
+                "description": "",
+                "type": "Boolean"
+            },
+            "class": "Human",
+            "module": "level/mainLevel"
+        },
+        {
+            "file": "js/lib/jasmine/jasmine.js",
+            "line": 135,
+            "ignore": "",
+            "access": "private",
+            "tagname": "",
+            "params": [
+                {
+                    "name": "value",
+                    "description": ""
+                }
+            ],
+            "return": {
+                "description": "",
+                "type": "Boolean"
+            },
+            "class": "Human",
+            "module": "level/mainLevel"
+        },
+        {
+            "file": "js/lib/jasmine/jasmine.js",
+            "line": 144,
+            "ignore": "",
+            "access": "private",
+            "tagname": "",
+            "params": [
+                {
+                    "name": "typeName",
+                    "description": "",
+                    "type": "String"
+                },
+                {
+                    "name": "value",
+                    "description": ""
+                }
+            ],
+            "return": {
+                "description": "",
+                "type": "Boolean"
+            },
+            "class": "Human",
+            "module": "level/mainLevel"
+        },
+        {
+            "file": "js/lib/jasmine/jasmine.js",
+            "line": 155,
+            "description": "Pretty printer for expecations.  Takes any object and turns it into a human-readable string.",
+            "params": [
+                {
+                    "name": "value",
+                    "description": "an object to be outputted",
+                    "type": "Object"
+                }
+            ],
+            "return": {
+                "description": "",
+                "type": "String"
+            },
+            "class": "Human",
+            "module": "level/mainLevel"
+        },
+        {
+            "file": "js/lib/jasmine/jasmine.js",
+            "line": 166,
+            "description": "Returns true if the object is a DOM Node.",
+            "params": [
+                {
+                    "name": "obj",
+                    "description": "object to check",
+                    "type": "Object"
+                }
+            ],
+            "return": {
+                "description": "",
+                "type": "Boolean"
+            },
+            "class": "Human",
+            "module": "level/mainLevel"
+        },
+        {
+            "file": "js/lib/jasmine/jasmine.js",
+            "line": 175,
+            "description": "Returns a matchable 'generic' object of the class type.  For use in expecations of type when values don't matter.",
+            "example": [
+                "\n// don't care about which function is passed in, as long as it's a function\nexpect(mySpy).toHaveBeenCalledWith(jasmine.any(Function));"
+            ],
+            "params": [
+                {
+                    "name": "clazz",
+                    "description": "",
+                    "type": "Class"
+                }
+            ],
+            "return": {
+                "description": "matchable object of the type clazz"
+            },
+            "class": "Human",
+            "module": "level/mainLevel"
+        },
+        {
+            "file": "js/lib/jasmine/jasmine.js",
+            "line": 188,
+            "description": "Returns a matchable subset of a JSON object. For use in expectations when you don't care about all of the\nattributes on the object.",
+            "example": [
+                "\n// don't care about any other attributes than foo.\nexpect(mySpy).toHaveBeenCalledWith(jasmine.objectContaining({foo: \"bar\"});"
+            ],
+            "params": [
+                {
+                    "name": "sample",
+                    "description": "sample",
+                    "type": "Object"
+                }
+            ],
+            "return": {
+                "description": "matchable object for the sample"
+            },
+            "class": "Human",
+            "module": "level/mainLevel"
+        },
+        {
+            "file": "js/lib/jasmine/jasmine.js",
+            "line": 202,
+            "description": "Jasmine Spies are test doubles that can act as stubs, spies, fakes or when used in an expecation, mocks.\n\nSpies should be created in test setup, before expectations.  They can then be checked, using the standard Jasmine\nexpectation syntax. Spies can be checked if they were called or not and what the calling params were.\n\nA Spy has the following fields: wasCalled, callCount, mostRecentCall, and argsForCall (see docs).\n\nSpies are torn down at the end of every spec.\n\nNote: Do <b>not</b> call new jasmine.Spy() directly - a spy must be created using spyOn, jasmine.createSpy or jasmine.createSpyObj.",
+            "example": [
+                "\n// a stub\nvar myStub = jasmine.createSpy('myStub');  // can be used anywhere\n\n// spy example\nvar foo = {\n  not: function(bool) { return !bool; }\n}\n\n// actual foo.not will not be called, execution stops\nspyOn(foo, 'not');\n\n// foo.not spied upon, execution will continue to implementation\nspyOn(foo, 'not').andCallThrough();\n\n// fake example\nvar foo = {\n  not: function(bool) { return !bool; }\n}\n\n// foo.not(val) will return val\nspyOn(foo, 'not').andCallFake(function(value) {return value;});\n\n// mock example\nfoo.not(7 == 7);\nexpect(foo.not).toHaveBeenCalled();\nexpect(foo.not).toHaveBeenCalledWith(true);"
+            ],
+            "is_constructor": 1,
+            "see": [
+                "spyOn",
+                "jasmine.createSpy",
+                "jasmine.createSpyObj"
+            ],
+            "params": [
+                {
+                    "name": "name",
+                    "description": "",
+                    "type": "String"
+                }
+            ],
+            "class": "Human",
+            "module": "level/mainLevel"
+        },
+        {
+            "file": "js/lib/jasmine/jasmine.js",
+            "line": 247,
+            "description": "The name of the spy, if provided.",
+            "class": "Human",
+            "module": "level/mainLevel"
+        },
+        {
+            "file": "js/lib/jasmine/jasmine.js",
+            "line": 251,
+            "description": "Is this Object a spy?",
+            "class": "Human",
+            "module": "level/mainLevel"
+        },
+        {
+            "file": "js/lib/jasmine/jasmine.js",
+            "line": 255,
+            "description": "The actual function this spy stubs.",
+            "class": "Human",
+            "module": "level/mainLevel"
+        },
+        {
+            "file": "js/lib/jasmine/jasmine.js",
+            "line": 259,
+            "description": "Tracking of the most recent call to the spy.",
+            "example": [
+                "\nvar mySpy = jasmine.createSpy('foo');\nmySpy(1, 2);\nmySpy.mostRecentCall.args = [1, 2];"
+            ],
+            "class": "Human",
+            "module": "level/mainLevel"
+        },
+        {
+            "file": "js/lib/jasmine/jasmine.js",
+            "line": 267,
+            "description": "Holds arguments for each call to the spy, indexed by call count",
+            "example": [
+                "\nvar mySpy = jasmine.createSpy('foo');\nmySpy(1, 2);\nmySpy(7, 8);\nmySpy.mostRecentCall.args = [7, 8];\nmySpy.argsForCall[0] = [1, 2];\nmySpy.argsForCall[1] = [7, 8];"
+            ],
+            "class": "Human",
+            "module": "level/mainLevel"
+        },
+        {
+            "file": "js/lib/jasmine/jasmine.js",
+            "line": 280,
+            "description": "Tells a spy to call through to the actual implemenatation.",
+            "example": [
+                "\nvar foo = {\n  bar: function() { // do some stuff }\n}\n\n// defining a spy on an existing property: foo.bar\nspyOn(foo, 'bar').andCallThrough();"
+            ],
+            "class": "Human",
+            "module": "level/mainLevel"
+        },
+        {
+            "file": "js/lib/jasmine/jasmine.js",
+            "line": 295,
+            "description": "For setting the return value of a spy.",
+            "example": [
+                "\n// defining a spy from scratch: foo() returns 'baz'\nvar foo = jasmine.createSpy('spy on foo').andReturn('baz');\n\n// defining a spy on an existing property: foo.bar() returns 'baz'\nspyOn(foo, 'bar').andReturn('baz');"
+            ],
+            "params": [
+                {
+                    "name": "value",
+                    "description": "",
+                    "type": "Object"
+                }
+            ],
+            "class": "Human",
+            "module": "level/mainLevel"
+        },
+        {
+            "file": "js/lib/jasmine/jasmine.js",
+            "line": 313,
+            "description": "For throwing an exception when a spy is called.",
+            "example": [
+                "\n// defining a spy from scratch: foo() throws an exception w/ message 'ouch'\nvar foo = jasmine.createSpy('spy on foo').andThrow('baz');\n\n// defining a spy on an existing property: foo.bar() throws an exception w/ message 'ouch'\nspyOn(foo, 'bar').andThrow('baz');"
+            ],
+            "params": [
+                {
+                    "name": "exceptionMsg",
+                    "description": "",
+                    "type": "String"
+                }
+            ],
+            "class": "Human",
+            "module": "level/mainLevel"
+        },
+        {
+            "file": "js/lib/jasmine/jasmine.js",
+            "line": 331,
+            "description": "Calls an alternate implementation when a spy is called.",
+            "example": [
+                "\nvar baz = function() {\n  // do some stuff, return something\n}\n// defining a spy from scratch: foo() calls the function baz\nvar foo = jasmine.createSpy('spy on foo').andCall(baz);\n\n// defining a spy on an existing property: foo.bar() calls an anonymnous function\nspyOn(foo, 'bar').andCall(function() { return 'baz';} );"
+            ],
+            "params": [
+                {
+                    "name": "fakeFunc",
+                    "description": "",
+                    "type": "Function"
+                }
+            ],
+            "class": "Human",
+            "module": "level/mainLevel"
+        },
+        {
+            "file": "js/lib/jasmine/jasmine.js",
+            "line": 350,
+            "description": "Resets all of a spy's the tracking variables so that it can be used again.",
+            "example": [
+                "\nspyOn(foo, 'bar');\n\nfoo.bar();\n\nexpect(foo.bar.callCount).toBe(1);\n\nfoo.bar.reset();\n\nexpect(foo.bar.callCount).toBe(0);"
+            ],
+            "class": "Human",
+            "module": "level/mainLevel"
+        },
+        {
+            "file": "js/lib/jasmine/jasmine.js",
+            "line": 392,
+            "description": "Determines whether an object is a spy.",
+            "params": [
+                {
+                    "name": "putativeSpy",
+                    "description": "",
+                    "type": "jasmine.Spy|Object"
+                }
+            ],
+            "return": {
+                "description": "",
+                "type": "Boolean"
+            },
+            "class": "Human",
+            "module": "level/mainLevel"
+        },
+        {
+            "file": "js/lib/jasmine/jasmine.js",
+            "line": 401,
+            "description": "Creates a more complicated spy: an Object that has every property a function that is a spy.  Used for stubbing something\nlarge in one call.",
+            "params": [
+                {
+                    "name": "baseName",
+                    "description": "name of spy class",
+                    "type": "String"
+                },
+                {
+                    "name": "methodNames",
+                    "description": "array of names of methods to make spies",
+                    "type": "Array"
+                }
+            ],
+            "class": "Human",
+            "module": "level/mainLevel"
+        },
+        {
+            "file": "js/lib/jasmine/jasmine.js",
+            "line": 420,
+            "description": "All parameters are pretty-printed and concatenated together, then written to the current spec's output.\n\nBe careful not to leave calls to <code>jasmine.log</code> in production code.",
+            "class": "Human",
+            "module": "level/mainLevel"
+        },
+        {
+            "file": "js/lib/jasmine/jasmine.js",
+            "line": 429,
+            "description": "Function that installs a spy on an existing object's method name.  Used within a Spec to create a spy.",
+            "example": [
+                "\n// spy example\nvar foo = {\n  not: function(bool) { return !bool; }\n}\nspyOn(foo, 'not'); // actual foo.not will not be called, execution stops"
+            ],
+            "see": [
+                "jasmine.createSpy"
+            ],
+            "params": [
+                {
+                    "name": "obj",
+                    "description": ""
+                },
+                {
+                    "name": "methodName",
+                    "description": ""
+                }
+            ],
+            "return": {
+                "description": "a Jasmine spy that can be chained with all spy methods",
+                "type": "jasmine.Spy"
+            },
+            "class": "Human",
+            "module": "level/mainLevel"
+        },
+        {
+            "file": "js/lib/jasmine/jasmine.js",
+            "line": 448,
+            "description": "Creates a Jasmine spec that will be added to the current suite.\n\n// TODO: pending tests",
+            "example": [
+                "\nit('should be true', function() {\n  expect(true).toBe(true);\n});"
+            ],
+            "params": [
+                {
+                    "name": "desc",
+                    "description": "description of this specification",
+                    "type": "String"
+                },
+                {
+                    "name": "func",
+                    "description": "defines the preconditions and expectations of the spec",
+                    "type": "Function"
+                }
+            ],
+            "class": "Human",
+            "module": "level/mainLevel"
+        },
+        {
+            "file": "js/lib/jasmine/jasmine.js",
+            "line": 465,
+            "description": "Creates a <em>disabled</em> Jasmine spec.\n\nA convenience method that allows existing specs to be disabled temporarily during development.",
+            "params": [
+                {
+                    "name": "desc",
+                    "description": "description of this specification",
+                    "type": "String"
+                },
+                {
+                    "name": "func",
+                    "description": "defines the preconditions and expectations of the spec",
+                    "type": "Function"
+                }
+            ],
+            "class": "Human",
+            "module": "level/mainLevel"
+        },
+        {
+            "file": "js/lib/jasmine/jasmine.js",
+            "line": 477,
+            "description": "Starts a chain for a Jasmine expectation.\n\nIt is passed an Object that is the actual value and should chain to one of the many\njasmine.Matchers functions.",
+            "params": [
+                {
+                    "name": "actual",
+                    "description": "Actual value to test against and expected value",
+                    "type": "Object"
+                }
+            ],
+            "return": {
+                "description": "",
+                "type": "jasmine.Matchers"
+            },
+            "class": "Human",
+            "module": "level/mainLevel"
+        },
+        {
+            "file": "js/lib/jasmine/jasmine.js",
+            "line": 490,
+            "description": "Defines part of a jasmine spec.  Used in cominbination with waits or waitsFor in asynchrnous specs.",
+            "params": [
+                {
+                    "name": "func",
+                    "description": "Function that defines part of a jasmine spec.",
+                    "type": "Function"
+                }
+            ],
+            "class": "Human",
+            "module": "level/mainLevel"
+        },
+        {
+            "file": "js/lib/jasmine/jasmine.js",
+            "line": 499,
+            "description": "Waits a fixed time period before moving to the next block.",
+            "deprecated": true,
+            "deprecationMessage": "Use waitsFor() instead",
+            "params": [
+                {
+                    "name": "timeout",
+                    "description": "milliseconds to wait",
+                    "type": "Number"
+                }
+            ],
+            "class": "Human",
+            "module": "level/mainLevel"
+        },
+        {
+            "file": "js/lib/jasmine/jasmine.js",
+            "line": 509,
+            "description": "Waits for the latchFunction to return true before proceeding to the next block.",
+            "params": [
+                {
+                    "name": "latchFunction",
+                    "description": "",
+                    "type": "Function"
+                },
+                {
+                    "name": "optional_timeoutMessage",
+                    "description": "",
+                    "type": "String"
+                },
+                {
+                    "name": "optional_timeout",
+                    "description": "",
+                    "type": "Number"
+                }
+            ],
+            "class": "Human",
+            "module": "level/mainLevel"
+        },
+        {
+            "file": "js/lib/jasmine/jasmine.js",
+            "line": 522,
+            "description": "A function that is called before each spec in a suite.\n\nUsed for spec setup, including validating assumptions.",
+            "params": [
+                {
+                    "name": "beforeEachFunction",
+                    "description": "",
+                    "type": "Function"
+                }
+            ],
+            "class": "Human",
+            "module": "level/mainLevel"
+        },
+        {
+            "file": "js/lib/jasmine/jasmine.js",
+            "line": 533,
+            "description": "A function that is called after each spec in a suite.\n\nUsed for restoring any state that is hijacked during spec execution.",
+            "params": [
+                {
+                    "name": "afterEachFunction",
+                    "description": "",
+                    "type": "Function"
+                }
+            ],
+            "class": "Human",
+            "module": "level/mainLevel"
+        },
+        {
+            "file": "js/lib/jasmine/jasmine.js",
+            "line": 544,
+            "description": "Defines a suite of specifications.\n\nStores the description and all defined specs in the Jasmine environment as one suite of specs. Variables declared\nare accessible by calls to beforeEach, it, and afterEach. Describe blocks can be nested, allowing for specialization\nof setup in some tests.",
+            "example": [
+                "\n// TODO: a simple suite\n\n// TODO: a simple suite with a nested describe block"
+            ],
+            "params": [
+                {
+                    "name": "description",
+                    "description": "A string, usually the class under test.",
+                    "type": "String"
+                },
+                {
+                    "name": "specDefinitions",
+                    "description": "function that defines several specs.",
+                    "type": "Function"
+                }
+            ],
+            "class": "Human",
+            "module": "level/mainLevel"
+        },
+        {
+            "file": "js/lib/jasmine/jasmine.js",
+            "line": 563,
+            "description": "Disables a suite of specifications.  Used to disable some suites in a file, or files, temporarily during development.",
+            "params": [
+                {
+                    "name": "description",
+                    "description": "A string, usually the class under test.",
+                    "type": "String"
+                },
+                {
+                    "name": "specDefinitions",
+                    "description": "function that defines several specs.",
+                    "type": "Function"
+                }
+            ],
+            "class": "Human",
+            "module": "level/mainLevel"
+        },
+        {
+            "file": "js/lib/jasmine/jasmine.js",
+            "line": 593,
+            "class": "Human",
+            "module": "level/mainLevel"
+        },
+        {
+            "file": "js/lib/jasmine/jasmine.js",
+            "line": 597,
+            "description": "Declare that a child class inherit it's prototype from the parent class.",
+            "access": "private",
+            "tagname": "",
+            "params": [
+                {
+                    "name": "childClass",
+                    "description": "",
+                    "type": "Function"
+                },
+                {
+                    "name": "parentClass",
+                    "description": "",
+                    "type": "Function"
+                }
+            ],
+            "class": "Human",
+            "module": "level/mainLevel"
+        },
+        {
+            "file": "js/lib/jasmine/jasmine.js",
+            "line": 605,
+            "access": "private",
+            "tagname": "",
+            "class": "Human",
+            "module": "level/mainLevel"
+        },
+        {
+            "file": "js/lib/jasmine/jasmine.js",
+            "line": 645,
+            "description": "Environment for Jasmine",
+            "is_constructor": 1,
+            "class": "Human",
+            "module": "level/mainLevel"
+        },
+        {
+            "file": "js/lib/jasmine/jasmine.js",
+            "line": 675,
+            "return": {
+                "description": "an object containing jasmine version build info, if set."
+            },
+            "class": "Human",
+            "module": "level/mainLevel"
+        },
+        {
+            "file": "js/lib/jasmine/jasmine.js",
+            "line": 685,
+            "return": {
+                "description": "string containing jasmine version build info, if set."
+            },
+            "class": "Human",
+            "module": "level/mainLevel"
+        },
+        {
+            "file": "js/lib/jasmine/jasmine.js",
+            "line": 700,
+            "return": {
+                "description": "a sequential integer starting at 0"
+            },
+            "class": "Human",
+            "module": "level/mainLevel"
+        },
+        {
+            "file": "js/lib/jasmine/jasmine.js",
+            "line": 706,
+            "return": {
+                "description": "a sequential integer starting at 0"
+            },
+            "class": "Human",
+            "module": "level/mainLevel"
+        },
+        {
+            "file": "js/lib/jasmine/jasmine.js",
+            "line": 712,
+            "description": "Register a reporter to receive status updates from Jasmine.",
+            "params": [
+                {
+                    "name": "reporter",
+                    "description": "An object which will receive status updates.",
+                    "type": "jasmine.Reporter"
+                }
+            ],
+            "class": "Human",
+            "module": "level/mainLevel"
+        },
+        {
+            "file": "js/lib/jasmine/jasmine.js",
+            "line": 899,
+            "is_constructor": 1,
+            "class": "Human",
+            "module": "level/mainLevel"
+        },
+        {
+            "file": "js/lib/jasmine/jasmine.js",
+            "line": 916,
+            "description": "Blocks are functions with executable code that make up a spec.",
+            "is_constructor": 1,
+            "params": [
+                {
+                    "name": "env",
+                    "description": "",
+                    "type": "jasmine.Env"
+                },
+                {
+                    "name": "func",
+                    "description": "",
+                    "type": "Function"
+                },
+                {
+                    "name": "spec",
+                    "description": "",
+                    "type": "jasmine.Spec"
+                }
+            ],
+            "class": "Human",
+            "module": "level/mainLevel"
+        },
+        {
+            "file": "js/lib/jasmine/jasmine.js",
+            "line": 941,
+            "is_constructor": 1,
+            "class": "Human",
+            "module": "level/mainLevel"
+        },
+        {
+            "file": "js/lib/jasmine/jasmine.js",
+            "line": 1029,
+            "is_constructor": 1,
+            "params": [
+                {
+                    "name": "env",
+                    "description": "",
+                    "type": "jasmine.Env"
+                },
+                {
+                    "name": "actual",
+                    "description": ""
+                },
+                {
+                    "name": "spec",
+                    "description": "",
+                    "type": "jasmine.Spec"
+                }
+            ],
+            "class": "Human",
+            "module": "level/mainLevel"
+        },
+        {
+            "file": "js/lib/jasmine/jasmine.js",
+            "line": 1104,
+            "description": "toBe: compares the actual to the expected using ===",
+            "params": [
+                {
+                    "name": "expected",
+                    "description": ""
+                }
+            ],
+            "class": "Human",
+            "module": "level/mainLevel"
+        },
+        {
+            "file": "js/lib/jasmine/jasmine.js",
+            "line": 1111,
+            "description": "toNotBe: compares the actual to the expected using !==",
+            "params": [
+                {
+                    "name": "expected",
+                    "description": ""
+                }
+            ],
+            "deprecated": true,
+            "deprecationMessage": "as of 1.0. Use not.toBe() instead.",
+            "class": "Human",
+            "module": "level/mainLevel"
+        },
+        {
+            "file": "js/lib/jasmine/jasmine.js",
+            "line": 1119,
+            "description": "toBe: compares the actual to the expected using common sense equality. Handles Objects, Arrays, etc.",
+            "params": [
+                {
+                    "name": "expected",
+                    "description": ""
+                }
+            ],
+            "class": "Human",
+            "module": "level/mainLevel"
+        },
+        {
+            "file": "js/lib/jasmine/jasmine.js",
+            "line": 1127,
+            "description": "toNotEqual: compares the actual to the expected using the ! of jasmine.Matchers.toBe",
+            "params": [
+                {
+                    "name": "expected",
+                    "description": ""
+                }
+            ],
+            "deprecated": true,
+            "deprecationMessage": "as of 1.0. Use not.toBe() instead.",
+            "class": "Human",
+            "module": "level/mainLevel"
+        },
+        {
+            "file": "js/lib/jasmine/jasmine.js",
+            "line": 1135,
+            "description": "Matcher that compares the actual to the expected using a regular expression.  Constructs a RegExp, so takes\na pattern or a String.",
+            "params": [
+                {
+                    "name": "expected",
+                    "description": ""
+                }
+            ],
+            "class": "Human",
+            "module": "level/mainLevel"
+        },
+        {
+            "file": "js/lib/jasmine/jasmine.js",
+            "line": 1144,
+            "description": "Matcher that compares the actual to the expected using the boolean inverse of jasmine.Matchers.toMatch",
+            "params": [
+                {
+                    "name": "expected",
+                    "description": ""
+                }
+            ],
+            "deprecated": true,
+            "deprecationMessage": "as of 1.0. Use not.toMatch() instead.",
+            "class": "Human",
+            "module": "level/mainLevel"
+        },
+        {
+            "file": "js/lib/jasmine/jasmine.js",
+            "line": 1152,
+            "description": "Matcher that compares the actual to jasmine.undefined.",
+            "class": "Human",
+            "module": "level/mainLevel"
+        },
+        {
+            "file": "js/lib/jasmine/jasmine.js",
+            "line": 1158,
+            "description": "Matcher that compares the actual to jasmine.undefined.",
+            "class": "Human",
+            "module": "level/mainLevel"
+        },
+        {
+            "file": "js/lib/jasmine/jasmine.js",
+            "line": 1164,
+            "description": "Matcher that compares the actual to null.",
+            "class": "Human",
+            "module": "level/mainLevel"
+        },
+        {
+            "file": "js/lib/jasmine/jasmine.js",
+            "line": 1170,
+            "description": "Matcher that compares the actual to NaN.",
+            "class": "Human",
+            "module": "level/mainLevel"
+        },
+        {
+            "file": "js/lib/jasmine/jasmine.js",
+            "line": 1179,
+            "description": "Matcher that boolean not-nots the actual.",
+            "class": "Human",
+            "module": "level/mainLevel"
+        },
+        {
+            "file": "js/lib/jasmine/jasmine.js",
+            "line": 1185,
+            "description": "Matcher that boolean nots the actual.",
+            "class": "Human",
+            "module": "level/mainLevel"
+        },
+        {
+            "file": "js/lib/jasmine/jasmine.js",
+            "line": 1191,
+            "description": "Matcher that checks to see if the actual, a Jasmine spy, was called.",
+            "class": "Human",
+            "module": "level/mainLevel"
+        },
+        {
+            "file": "js/lib/jasmine/jasmine.js",
+            "line": 1211,
+            "class": "Human",
+            "module": "level/mainLevel"
+        },
+        {
+            "file": "js/lib/jasmine/jasmine.js",
+            "line": 1213,
+            "description": "Matcher that checks to see if the actual, a Jasmine spy, was not called.",
+            "deprecated": true,
+            "deprecationMessage": "Use expect(xxx).not.toHaveBeenCalled() instead",
+            "class": "Human",
+            "module": "level/mainLevel"
+        },
+        {
+            "file": "js/lib/jasmine/jasmine.js",
+            "line": 1233,
+            "description": "Matcher that checks to see if the actual, a Jasmine spy, was called with a set of parameters.",
+            "example": [
+                "\n"
+            ],
+            "class": "Human",
+            "module": "level/mainLevel"
+        },
+        {
+            "file": "js/lib/jasmine/jasmine.js",
+            "line": 1264,
+            "class": "Human",
+            "module": "level/mainLevel"
+        },
+        {
+            "file": "js/lib/jasmine/jasmine.js",
+            "line": 1266,
+            "class": "Human",
+            "module": "level/mainLevel"
+        },
+        {
+            "file": "js/lib/jasmine/jasmine.js",
+            "line": 1281,
+            "description": "Matcher that checks that the expected item is an element in the actual Array.",
+            "params": [
+                {
+                    "name": "expected",
+                    "description": "",
+                    "type": "Object"
+                }
+            ],
+            "class": "Human",
+            "module": "level/mainLevel"
+        },
+        {
+            "file": "js/lib/jasmine/jasmine.js",
+            "line": 1289,
+            "description": "Matcher that checks that the expected item is NOT an element in the actual Array.",
+            "params": [
+                {
+                    "name": "expected",
+                    "description": "",
+                    "type": "Object"
+                }
+            ],
+            "deprecated": true,
+            "deprecationMessage": "as of 1.0. Use not.toContain() instead.",
+            "class": "Human",
+            "module": "level/mainLevel"
+        },
+        {
+            "file": "js/lib/jasmine/jasmine.js",
+            "line": 1304,
+            "description": "Matcher that checks that the expected item is equal to the actual item\nup to a given level of decimal precision (default 2).",
+            "params": [
+                {
+                    "name": "expected",
+                    "description": "",
+                    "type": "Number"
+                },
+                {
+                    "name": "precision,",
+                    "description": "as number of decimal places",
+                    "type": "Number"
+                }
+            ],
+            "class": "Human",
+            "module": "level/mainLevel"
+        },
+        {
+            "file": "js/lib/jasmine/jasmine.js",
+            "line": 1317,
+            "description": "Matcher that checks that the expected exception was thrown by the actual.",
+            "params": [
+                {
+                    "name": "expected",
+                    "description": "",
+                    "type": "String",
+                    "optional": true
+                }
+            ],
+            "class": "Human",
+            "module": "level/mainLevel"
+        },
+        {
+            "file": "js/lib/jasmine/jasmine.js",
+            "line": 1475,
+            "class": "Human",
+            "module": "level/mainLevel"
+        },
+        {
+            "file": "js/lib/jasmine/jasmine.js",
+            "line": 1557,
+            "is_constructor": 1,
+            "class": "Human",
+            "module": "level/mainLevel"
+        },
+        {
+            "file": "js/lib/jasmine/jasmine.js",
+            "line": 1588,
+            "description": "Holds results for a set of Jasmine spec. Allows for the results array to hold another jasmine.NestedResults",
+            "is_constructor": 1,
+            "class": "Human",
+            "module": "level/mainLevel"
+        },
+        {
+            "file": "js/lib/jasmine/jasmine.js",
+            "line": 1594,
+            "description": "The total count of results",
+            "class": "Human",
+            "module": "level/mainLevel"
+        },
+        {
+            "file": "js/lib/jasmine/jasmine.js",
+            "line": 1598,
+            "description": "Number of passed results",
+            "class": "Human",
+            "module": "level/mainLevel"
+        },
+        {
+            "file": "js/lib/jasmine/jasmine.js",
+            "line": 1602,
+            "description": "Number of failed results",
+            "class": "Human",
+            "module": "level/mainLevel"
+        },
+        {
+            "file": "js/lib/jasmine/jasmine.js",
+            "line": 1606,
+            "description": "Was this suite/spec skipped?",
+            "class": "Human",
+            "module": "level/mainLevel"
+        },
+        {
+            "file": "js/lib/jasmine/jasmine.js",
+            "line": 1610,
+            "ignore": "",
+            "class": "Human",
+            "module": "level/mainLevel"
+        },
+        {
+            "file": "js/lib/jasmine/jasmine.js",
+            "line": 1615,
+            "description": "Roll up the result counts.",
+            "params": [
+                {
+                    "name": "result",
+                    "description": ""
+                }
+            ],
+            "class": "Human",
+            "module": "level/mainLevel"
+        },
+        {
+            "file": "js/lib/jasmine/jasmine.js",
+            "line": 1625,
+            "description": "Adds a log message.",
+            "params": [
+                {
+                    "name": "values",
+                    "description": "Array of message parts which will be concatenated later."
+                }
+            ],
+            "class": "Human",
+            "module": "level/mainLevel"
+        },
+        {
+            "file": "js/lib/jasmine/jasmine.js",
+            "line": 1632,
+            "description": "Getter for the results: message & results.",
+            "class": "Human",
+            "module": "level/mainLevel"
+        },
+        {
+            "file": "js/lib/jasmine/jasmine.js",
+            "line": 1638,
+            "description": "Adds a result, tracking counts (total, passed, & failed)",
+            "params": [
+                {
+                    "name": "result",
+                    "description": "",
+                    "type": "jasmine.ExpectationResult|jasmine.NestedResults"
+                }
+            ],
+            "class": "Human",
+            "module": "level/mainLevel"
+        },
+        {
+            "file": "js/lib/jasmine/jasmine.js",
+            "line": 1657,
+            "return": {
+                "description": "True if <b>everything</b> below passed",
+                "type": "Boolean"
+            },
+            "class": "Human",
+            "module": "level/mainLevel"
+        },
+        {
+            "file": "js/lib/jasmine/jasmine.js",
+            "line": 1663,
+            "description": "Base class for pretty printing for expectation results.",
+            "class": "Human",
+            "module": "level/mainLevel"
+        },
+        {
+            "file": "js/lib/jasmine/jasmine.js",
+            "line": 1669,
+            "description": "Formats a value in a nice, human-readable string.",
+            "params": [
+                {
+                    "name": "value",
+                    "description": ""
+                }
+            ],
+            "class": "Human",
+            "module": "level/mainLevel"
+        },
+        {
+            "file": "js/lib/jasmine/jasmine.js",
+            "line": 1879,
+            "description": "Runner",
+            "is_constructor": 1,
+            "params": [
+                {
+                    "name": "env",
+                    "description": "",
+                    "type": "jasmine.Env"
+                }
+            ],
+            "class": "Human",
+            "module": "level/mainLevel"
+        },
+        {
+            "file": "js/lib/jasmine/jasmine.js",
+            "line": 1945,
+            "description": "Internal representation of a Jasmine specification, or test.",
+            "is_constructor": 1,
+            "params": [
+                {
+                    "name": "env",
+                    "description": "",
+                    "type": "jasmine.Env"
+                },
+                {
+                    "name": "suite",
+                    "description": "",
+                    "type": "jasmine.Suite"
+                },
+                {
+                    "name": "description",
+                    "description": "",
+                    "type": "String"
+                }
+            ],
+            "class": "Human",
+            "module": "level/mainLevel"
+        },
+        {
+            "file": "js/lib/jasmine/jasmine.js",
+            "line": 1978,
+            "description": "All parameters are pretty-printed and concatenated together, then written to the spec's output.\n\nBe careful not to leave calls to <code>jasmine.log</code> in production code.",
+            "class": "Human",
+            "module": "level/mainLevel"
+        },
+        {
+            "file": "js/lib/jasmine/jasmine.js",
+            "line": 1998,
+            "params": [
+                {
+                    "name": "result",
+                    "description": "",
+                    "type": "jasmine.ExpectationResult"
+                }
+            ],
+            "class": "Human",
+            "module": "level/mainLevel"
+        },
+        {
+            "file": "js/lib/jasmine/jasmine.js",
+            "line": 2009,
+            "description": "Waits a fixed time period before moving to the next block.",
+            "deprecated": true,
+            "deprecationMessage": "Use waitsFor() instead",
+            "params": [
+                {
+                    "name": "timeout",
+                    "description": "milliseconds to wait",
+                    "type": "Number"
+                }
+            ],
+            "class": "Human",
+            "module": "level/mainLevel"
+        },
+        {
+            "file": "js/lib/jasmine/jasmine.js",
+            "line": 2020,
+            "description": "Waits for the latchFunction to return true before proceeding to the next block.",
+            "params": [
+                {
+                    "name": "latchFunction",
+                    "description": "",
+                    "type": "Function"
+                },
+                {
+                    "name": "optional_timeoutMessage",
+                    "description": "",
+                    "type": "String"
+                },
+                {
+                    "name": "optional_timeout",
+                    "description": "",
+                    "type": "Number"
+                }
+            ],
+            "class": "Human",
+            "module": "level/mainLevel"
+        },
+        {
+            "file": "js/lib/jasmine/jasmine.js",
+            "line": 2162,
+            "description": "Internal representation of a Jasmine suite.",
+            "is_constructor": 1,
+            "params": [
+                {
+                    "name": "env",
+                    "description": "",
+                    "type": "jasmine.Env"
+                },
+                {
+                    "name": "description",
+                    "description": "",
+                    "type": "String"
+                },
+                {
+                    "name": "specDefinitions",
+                    "description": "",
+                    "type": "Function"
+                },
+                {
+                    "name": "parentSuite",
+                    "description": "",
+                    "type": "jasmine.Suite"
+                }
+            ],
+            "class": "Human",
+            "module": "level/mainLevel"
+        },
+        {
+            "file": "js/lib/jasmine/jasmine.js",
+            "line": 2249,
+            "description": "A block which waits for some condition to become true, with timeout.",
+            "is_constructor": 1,
+            "extends": "jasmine.Block",
+            "params": [
+                {
+                    "name": "env",
+                    "description": "The Jasmine environment.",
+                    "type": "jasmine.Env"
+                },
+                {
+                    "name": "timeout",
+                    "description": "The maximum time in milliseconds to wait for the condition to become true.",
+                    "type": "Number"
+                },
+                {
+                    "name": "latchFunction",
+                    "description": "A function which returns true when the desired condition has been met.",
+                    "type": "Function"
+                },
+                {
+                    "name": "message",
+                    "description": "The message to display if the desired condition hasn't been met within the given time period.",
+                    "type": "String"
+                },
+                {
+                    "name": "spec",
+                    "description": "The Jasmine spec.",
+                    "type": "jasmine.Spec"
+                }
+            ],
+            "class": "Human",
+            "module": "level/mainLevel"
+        },
+        {
+            "file": "js/model/item.js",
+            "line": 13,
+            "description": "Item",
+            "is_constructor": 1,
+            "class": "Human",
+            "module": "model/item"
+        },
+        {
+            "file": "js/model/player.js",
+            "line": 13,
+            "description": "Player",
+            "is_constructor": 1,
+            "class": "Human",
+            "module": "model/player"
+        },
+        {
+            "file": "js/model/room.js",
+            "line": 13,
+            "description": "Room",
+            "is_constructor": 1,
+            "class": "Human",
+            "module": "model/room"
+        },
+        {
+            "file": "js/sprite/human.js",
+            "line": 26,
+            "description": "Human",
+            "is_constructor": 1,
+            "class": "Human",
+            "module": "sprite/human"
+        },
+        {
+            "file": "js/sprite/sprite.js",
+            "line": 19,
+            "description": "Sprite",
+            "is_constructor": 1,
+            "class": "Sprite",
+            "module": "sprite/sprite"
+        },
+        {
+            "file": "js/sprite/sprite.js",
+            "line": 34,
+            "description": "Shapes of Sprite instance",
+            "itemtype": "property",
+            "name": "shapes",
+            "class": "Sprite",
+            "module": "sprite/sprite"
+        },
+        {
+            "file": "js/sprite/sprite.js",
+            "line": 46,
+            "description": "BoundingBox of Sprite instance",
+            "itemtype": "property",
+            "name": "boundingBox",
+            "class": "Sprite",
+            "module": "sprite/sprite"
+        },
+        {
+            "file": "js/sprite/sprite.js",
+            "line": 61,
+            "description": "Drawing settings of Sprite instance",
+            "itemtype": "property",
+            "name": "drawingSettings",
+            "class": "Sprite",
+            "module": "sprite/sprite"
+        },
+        {
+            "file": "js/sprite/sprite.js",
+            "line": 85,
+            "description": "Iterator function",
+            "params": [
+                {
+                    "name": "f",
+                    "description": "- A function _this takes a Shape instance as a parameter.",
+                    "type": "Function"
+                }
+            ],
+            "return": {
+                "description": "",
+                "type": "Void"
+            },
+            "class": "Sprite",
+            "module": "sprite/sprite"
+        },
+        {
+            "file": "js/sprite/sprite.js",
+            "line": 98,
+            "description": "Clear the Sprite instance and redraw it",
+            "class": "Sprite",
+            "module": "sprite/sprite"
+        },
+        {
+            "file": "js/sprite/sprite.js",
+            "line": 105,
+            "description": "Clear Sprite instance",
+            "return": {
+                "description": "",
+                "type": "Void"
+            },
+            "class": "Sprite",
+            "module": "sprite/sprite"
+        },
+        {
+            "file": "js/sprite/sprite.js",
+            "line": 114,
+            "description": "Draw Sprite instance",
+            "return": {
+                "description": "",
+                "type": "Void"
+            },
+            "class": "Sprite",
+            "module": "sprite/sprite"
+        },
+        {
+            "file": "js/sprite/sprite.js",
+            "line": 123,
+            "description": "Draw BoundingBox of Sprite instance",
+            "return": {
+                "description": "",
+                "type": "Void"
+            },
+            "class": "Sprite",
+            "module": "sprite/sprite"
+        },
+        {
+            "file": "js/sprite/sprite.js",
+            "line": 137,
+            "description": "Update BoundingBox of Sprite instance",
+            "return": {
+                "description": "",
+                "type": "Void"
+            },
+            "class": "Sprite",
+            "module": "sprite/sprite"
+        },
+        {
+            "file": "js/sprite/sprite.js",
+            "line": 163,
+            "description": "Test whether or not a point is within a Sprite",
+            "params": [
+                {
+                    "name": "point",
+                    "description": "Point to test",
+                    "type": "Point"
+                }
+            ],
+            "return": {
+                "description": "If the point is in the Sprite",
+                "type": "Boolean"
+            },
+            "class": "Sprite",
+            "module": "sprite/sprite"
+        },
+        {
+            "file": "js/sprite/tileMap.js",
+            "line": 14,
+            "description": "TileMap",
+            "is_constructor": 1,
+            "params": [
+                {
+                    "name": "x",
+                    "description": "The x coordinate of the TileMap.",
+                    "type": "Int"
+                },
+                {
+                    "name": "y",
+                    "description": "The y coordinate of the TileMap.",
+                    "type": "Int"
+                },
+                {
+                    "name": "width",
+                    "description": "The width of a standard tile.",
+                    "type": "Int"
+                },
+                {
+                    "name": "height",
+                    "description": "The height of a standard tile.",
+                    "type": "Int"
+                },
+                {
+                    "name": "numWidth",
+                    "description": "The number of tiles in the width of the TileMap",
+                    "type": "Int"
+                },
+                {
+                    "name": "numHeight",
+                    "description": "The number of tiles in the height of the TileMap",
+                    "type": "Int"
+                },
+                {
+                    "name": "drawer",
+                    "description": "A CanvasDrawer to draw the TileMap.",
+                    "type": "CanvasDrawer"
+                },
+                {
+                    "name": "drawingSettingsArr",
+                    "description": "An array of to apply to the tiles repeatedly using modulo. Iterates through each row.",
+                    "type": "Array"
+                }
+            ],
+            "class": "TileMap",
+            "module": "sprite/tileMap"
+        },
+        {
+            "file": "js/sprite/tileMap.js",
+            "line": 34,
+            "description": "Iterate through each of the tiles. Iterates through rows.",
+            "params": [
+                {
+                    "name": "f",
+                    "description": "- A function to apply to each tile. The function is given each tile as a parameter.",
+                    "type": "Function"
+                }
+            ],
+            "return": {
+                "description": "",
+                "type": "Void"
+            },
+            "class": "TileMap",
+            "module": "sprite/tileMap"
+        },
+        {
+            "file": "js/util/boundingBox.js",
+            "line": 17,
+            "description": "Create a BoundingBox.",
+            "is_constructor": 1,
+            "params": [
+                {
+                    "name": "arg0",
+                    "description": "- The x coordinate of left side, or left-top point.",
+                    "type": "(float|Point)"
+                },
+                {
+                    "name": "arg1",
+                    "description": "- The y coordinate of front side, or right-bottom point.",
+                    "type": "(float|Point)"
+                },
+                {
+                    "name": "arg2",
+                    "description": "- Width of the box.",
+                    "type": "Float"
+                },
+                {
+                    "name": "arg3",
+                    "description": "- Height of the box.",
+                    "type": "Float"
+                }
+            ],
+            "class": "BoundingBox",
+            "module": "util/boundingBox"
+        },
+        {
+            "file": "js/util/boundingBox.js",
+            "line": 54,
+            "description": "x coordinate of top-left of BoundingBox instance",
+            "type": "{float}",
+            "class": "BoundingBox",
+            "module": "util/boundingBox"
+        },
+        {
+            "file": "js/util/boundingBox.js",
+            "line": 67,
+            "description": "y coordinate of top-left of BoundingBox instance",
+            "type": "{float}",
+            "class": "BoundingBox",
+            "module": "util/boundingBox"
+        },
+        {
+            "file": "js/util/boundingBox.js",
+            "line": 80,
+            "description": "Width of BoundingBox instance",
+            "type": "{float}",
+            "class": "BoundingBox",
+            "module": "util/boundingBox"
+        },
+        {
+            "file": "js/util/boundingBox.js",
+            "line": 90,
+            "description": "Height of BoundingBox instance",
+            "type": "{float}",
+            "class": "BoundingBox",
+            "module": "util/boundingBox"
+        },
+        {
+            "file": "js/util/boundingBox.js",
+            "line": 100,
+            "description": "Center of BoundingBox instance",
+            "type": "{Object}",
+            "class": "BoundingBox",
+            "module": "util/boundingBox"
+        },
+        {
+            "file": "js/util/boundingBox.js",
+            "line": 114,
+            "description": "Check if this BoundingBox contains another BoundingBox.",
+            "itemtype": "method",
+            "name": "containsBoundingBox",
+            "params": [
+                {
+                    "name": "bbox",
+                    "description": "- The other BoundingBox",
+                    "type": "BoundingBox"
+                }
+            ],
+            "return": {
+                "description": "True if contains the other BoundingBox, false otherwise.",
+                "type": "Boolean"
+            },
+            "class": "BoundingBox",
+            "module": "util/boundingBox"
+        },
+        {
+            "file": "js/util/boundingBox.js",
+            "line": 125,
+            "description": "Get the intersection of this BoundingBox\nand another BoundingBox.",
+            "itemtype": "method",
+            "name": "intersection",
+            "params": [
+                {
+                    "name": "otherBbox",
+                    "description": "- Another BoundingBox instance.",
+                    "type": "BoundingBox"
+                }
+            ],
+            "return": {
+                "description": "",
+                "type": "BoundingBox"
+            },
+            "class": "BoundingBox",
+            "module": "util/boundingBox"
+        },
+        {
+            "file": "js/util/factory.js",
+            "line": 12,
+            "params": [
+                {
+                    "name": "options",
+                    "description": "A dictionary of attributes for a new\n            HTML canvas.",
+                    "type": "(Object)"
+                },
+                {
+                    "name": "cssRules",
+                    "description": "A dictionary of CSS rules for a new\n            HTML canvas.",
+                    "type": "(Object)"
+                }
+            ],
+            "return": {
+                "description": "The canvas jQuery object.",
+                "type": "JQueryObject"
+            },
+            "class": "Factory",
+            "module": "util/factory"
+        },
+        {
+            "file": "js/util/graph.js",
+            "line": 15,
+            "description": "Graph",
+            "is_constructor": 1,
+            "class": "Hash",
+            "module": "util/graph"
+        },
+        {
+            "file": "js/util/graph.js",
+            "line": 58,
+            "description": "Add a node to the graph",
+            "params": [
+                {
+                    "name": "data",
+                    "description": "Data to be stored in the node",
+                    "type": "Object"
+                }
+            ],
+            "return": {
+                "description": "A node with the data",
+                "type": "Node"
+            },
+            "class": "Hash",
+            "module": "util/graph"
+        },
+        {
+            "file": "js/util/graph.js",
+            "line": 68,
+            "description": "Add an edge to the graph",
+            "params": [
+                {
+                    "name": "tail",
+                    "description": "The origin node of the edge",
+                    "type": "Node"
+                },
+                {
+                    "name": "head",
+                    "description": "The destination node of the edge",
+                    "type": "Node"
+                }
+            ],
+            "return": {
+                "description": "A directed edge connecting the nodes",
+                "type": "Edge"
+            },
+            "class": "Hash",
+            "module": "util/graph"
+        },
+        {
+            "file": "js/util/graph.js",
+            "line": 79,
+            "description": "Remove an edge from the graph",
+            "params": [
+                {
+                    "name": "tail",
+                    "description": "The origin node of the edge",
+                    "type": "Node"
+                },
+                {
+                    "name": "head",
+                    "description": "The destination node of the edge",
+                    "type": "Node"
+                }
+            ],
+            "return": {
+                "description": "",
+                "type": "Void"
+            },
+            "class": "Hash",
+            "module": "util/graph"
+        },
+        {
+            "file": "js/util/graph.js",
+            "line": 94,
+            "description": "Perform a depth first search of the graph",
+            "itemtype": "method",
+            "name": "depthFirstSearch",
+            "params": [
+                {
+                    "name": "func",
+                    "description": "The operation to perform on the visited nodes",
+                    "type": "Function"
+                }
+            ],
+            "class": "Hash",
+            "module": "util/graph"
+        },
+        {
+            "file": "js/util/graph.js",
+            "line": 124,
+            "description": "Perform a breadth first search on the graph",
+            "itemtype": "method",
+            "name": "breadthFirstSearch",
+            "params": [
+                {
+                    "name": "func",
+                    "description": "The operation to perform on the visited nodes",
+                    "type": "Function"
+                }
+            ],
+            "return": {
+                "description": "",
+                "type": "Void"
+            },
+            "class": "Hash",
+            "module": "util/graph"
+        },
+        {
+            "file": "js/util/hash.js",
+            "line": 21,
+            "description": "Return a hashcode for this object. Does not conform to the Java\nstandard that two objects that are structurally identical should\nyield the same hashcode.",
+            "params": [
+                {
+                    "name": "object",
+                    "description": "-   Object to get hashcode for",
+                    "type": "Object"
+                }
+            ],
+            "return": {
+                "description": "Hashcode for object",
+                "type": "Integer"
+            },
+            "class": "Hash",
+            "module": "util/hash"
+        },
+        {
+            "file": "js/util/hash.js",
+            "line": 59,
+            "description": "Resolve a collision in the hashset.",
+            "itemtype": "method",
+            "name": "resolveCollision",
+            "access": "private",
+            "tagname": "",
+            "params": [
+                {
+                    "name": "object",
+                    "description": "",
+                    "type": "Object"
+                },
+                {
+                    "name": "index",
+                    "description": "Index where collision occurred",
+                    "type": "Integer"
+                }
+            ],
+            "return": {
+                "description": "Whether or not the item was added to the set",
+                "type": "Boolean"
+            },
+            "class": "Hashset",
+            "module": "util/hash"
+        },
+        {
+            "file": "js/util/hash.js",
+            "line": 82,
+            "description": "Add the index of a location that is currently occupied in the\narray.",
+            "itemtype": "method",
+            "name": "addIndex",
+            "access": "private",
+            "tagname": "",
+            "params": [
+                {
+                    "name": "idx",
+                    "description": "Index of occupied location",
+                    "type": "Integer"
+                }
+            ],
+            "class": "Hashset",
+            "module": "util/hash"
+        },
+        {
+            "file": "js/util/hash.js",
+            "line": 97,
+            "description": "Helper method to rehash the array when the objects inserted\nexceeds half of the total capacity.",
+            "itemtype": "method",
+            "name": "rehash",
+            "access": "private",
+            "tagname": "",
+            "return": {
+                "description": "",
+                "type": "Void"
+            },
+            "class": "Hashset",
+            "module": "util/hash"
+        },
+        {
+            "file": "js/util/hash.js",
+            "line": 127,
+            "description": "Insert an object into the internal array.",
+            "itemtype": "method",
+            "name": "insert",
+            "access": "private",
+            "tagname": "",
+            "params": [
+                {
+                    "name": "object",
+                    "description": "An object to insert into the array",
+                    "type": "Object"
+                },
+                {
+                    "name": "hashTarget",
+                    "description": "An object used to generate a\nhashcode",
+                    "type": "Object",
+                    "optional": true,
+                    "optdefault": "`object`"
+                }
+            ],
+            "return": {
+                "description": "Whether or not the object was inserted into the\narray",
+                "type": "Boolean"
+            },
+            "class": "Hashset",
+            "module": "util/hash"
+        },
+        {
+            "file": "js/util/hash.js",
+            "line": 161,
+            "description": "The size of the Hashset",
+            "type": "{integer}",
+            "itemtype": "property",
+            "name": "length",
+            "class": "Hashset",
+            "module": "util/hash"
+        },
+        {
+            "file": "js/util/hash.js",
+            "line": 172,
+            "description": "Add an object",
+            "itemtype": "method",
+            "name": "",
+            "params": [
+                {
+                    "name": "object",
+                    "description": "-   Object to add",
+                    "type": "Object"
+                },
+                {
+                    "name": "hashTarget",
+                    "description": "-   Object to module",
+                    "type": "Object",
+                    "optional": true
+                }
+            ],
+            "return": {
+                "description": "Whether or not the insertion was successful",
+                "type": "Boolean"
+            },
+            "class": "Hashset",
+            "module": "util/hash"
+        },
+        {
+            "file": "js/util/hash.js",
+            "line": 196,
+            "description": "Clear the Hashset instance of all elements",
+            "return": {
+                "description": "",
+                "type": "Void"
+            },
+            "class": "Hashset",
+            "module": "util/hash"
+        },
+        {
+            "file": "js/util/hash.js",
+            "line": 206,
+            "description": "Check if an object is an element of this set",
+            "itemtype": "method",
+            "name": "",
+            "params": [
+                {
+                    "name": "object",
+                    "description": "-   An object _this may be an element",
+                    "type": "Object"
+                }
+            ],
+            "return": {
+                "description": "Whether or not the object is an element",
+                "type": "Boolean"
+            },
+            "class": "Hashset",
+            "module": "util/hash"
+        },
+        {
+            "file": "js/util/hash.js",
+            "line": 241,
+            "description": "Remove an object",
+            "itemtype": "method",
+            "name": "",
+            "params": [
+                {
+                    "name": "object",
+                    "description": "- An object",
+                    "type": "Object"
+                }
+            ],
+            "return": {
+                "description": "True if removed object from set, false if object could not be removed from set",
+                "type": "Boolean"
+            },
+            "class": "Hashset",
+            "module": "util/hash"
+        },
+        {
+            "file": "js/util/mathExtensions.js",
+            "line": 18,
+            "description": "Generate a random integer.",
+            "itemtype": "method",
+            "name": "randomInt",
+            "static": 1,
+            "params": [
+                {
+                    "name": "minimum",
+                    "description": "-   The minimum for the random integer (inclusive).",
+                    "type": "Int",
+                    "optional": true,
+                    "optdefault": "0"
+                },
+                {
+                    "name": "maximum",
+                    "description": "-   The maximum for the random integer (not inclusive).",
+                    "type": "Int"
+                }
+            ],
+            "return": {
+                "description": "A random integer within the specified range.",
+                "type": "Int"
+            },
+            "class": "MathExtensions",
+            "module": "util/mathExtensions"
+        },
+        {
+            "file": "js/util/mathExtensions.js",
+            "line": 30,
+            "description": "Generate a random float.",
+            "itemtype": "method",
+            "name": "randomFloat",
+            "static": 1,
+            "params": [
+                {
+                    "name": "minimum",
+                    "description": "-   The minimum for the random float (inclusive).",
+                    "type": "Float",
+                    "optional": true,
+                    "optdefault": "0"
+                },
+                {
+                    "name": "maximum",
+                    "description": "-   The maximum for the random float (not inclusive).",
+                    "type": "Float"
+                }
+            ],
+            "return": {
+                "description": "A random float within the specified range.",
+                "type": "Float"
+            },
+            "class": "MathExtensions",
+            "module": "util/mathExtensions"
+        },
+        {
+            "file": "js/util/mathExtensions.js",
+            "line": 54,
+            "description": "Get the dot product of two vectors.",
+            "itemtype": "method",
+            "name": "dotProduct",
+            "static": 1,
+            "params": [
+                {
+                    "name": "vector1",
+                    "description": "A vector of numbers",
+                    "type": "Array"
+                },
+                {
+                    "name": "vector2",
+                    "description": "A vector of numbers (same length as vector1)",
+                    "type": "Array"
+                }
+            ],
+            "return": {
+                "description": "The dot product of the two vectors.",
+                "type": "Float"
+            },
+            "class": "MathExtensions",
+            "module": "util/mathExtensions"
+        },
+        {
+            "file": "js/util/minheap.js",
+            "line": 44,
+            "description": "Get index in array of left child",
+            "itemtype": "method",
+            "name": "getLeftChildIndex",
+            "access": "private",
+            "tagname": "",
+            "params": [
+                {
+                    "name": "nodeIndex",
+                    "description": "Index of parent",
+                    "type": "Number"
+                }
+            ],
+            "return": {
+                "description": "Index of left child in array",
+                "type": "Number"
+            },
+            "class": "MinHeap",
+            "module": "modulePath"
+        },
+        {
+            "file": "js/util/minheap.js",
+            "line": 56,
+            "description": "Get index in array of right child",
+            "itemtype": "method",
+            "name": "getRightChildIndex",
+            "access": "private",
+            "tagname": "",
+            "params": [
+                {
+                    "name": "nodeIndex",
+                    "description": "Index of parent",
+                    "type": "Number"
+                }
+            ],
+            "return": {
+                "description": "Index of right child in array",
+                "type": "Number"
+            },
+            "class": "MinHeap",
+            "module": "modulePath"
+        },
+        {
+            "file": "js/util/minheap.js",
+            "line": 68,
+            "description": "Get index of parent",
+            "itemtype": "method",
+            "name": "getParentIndex",
+            "access": "private",
+            "tagname": "",
+            "params": [
+                {
+                    "name": "nodeIndex",
+                    "description": "Index of child",
+                    "type": "Number"
+                }
+            ],
+            "return": {
+                "description": "Index of parent",
+                "type": "Number"
+            },
+            "class": "MinHeap",
+            "module": "modulePath"
+        },
+        {
+            "file": "js/util/minheap.js",
+            "line": 80,
+            "description": "Heapify",
+            "itemtype": "method",
+            "name": "bubbleUp",
+            "access": "private",
+            "tagname": "",
+            "params": [
+                {
+                    "name": "nodeIndex",
+                    "description": "Index to bubbleUp",
+                    "type": "Number"
+                }
+            ],
+            "return": {
+                "description": "",
+                "type": "Void"
+            },
+            "class": "MinHeap",
+            "module": "modulePath"
+        },
+        {
+            "file": "js/util/minheap.js",
+            "line": 105,
+            "description": "Remove minimum element from heap",
+            "itemtype": "method",
+            "name": "removeMin",
+            "access": "private",
+            "tagname": "",
+            "return": {
+                "description": "Data of minimum node",
+                "type": "Object"
+            },
+            "class": "MinHeap",
+            "module": "modulePath"
+        },
+        {
+            "file": "js/util/minheap.js",
+            "line": 123,
+            "description": "Heapify",
+            "itemtype": "method",
+            "name": "bubbleDown",
+            "access": "private",
+            "tagname": "",
+            "params": [
+                {
+                    "name": "nodeIndex",
+                    "description": "Index of node to modify",
+                    "type": "Number"
+                }
+            ],
+            "return": {
+                "description": "",
+                "type": "Void"
+            },
+            "class": "MinHeap",
+            "module": "modulePath"
+        },
+        {
+            "file": "js/util/minheap.js",
+            "line": 164,
+            "description": "Add object to MinHeap",
+            "itemtype": "method",
+            "name": "add",
+            "params": [
+                {
+                    "name": "object",
+                    "description": "Object to add",
+                    "type": "Object"
+                }
+            ],
+            "return": {
+                "description": "",
+                "type": "Void"
+            },
+            "class": "MinHeap",
+            "module": "modulePath"
+        },
+        {
+            "file": "js/util/minheap.js",
+            "line": 178,
+            "description": "Return the minimum element and extract it",
+            "itemtype": "method",
+            "name": "poll",
+            "return": {
+                "description": "The minimum element",
+                "type": "Object"
+            },
+            "class": "MinHeap",
+            "module": "modulePath"
+        },
+        {
+            "file": "js/util/minheap.js",
+            "line": 190,
+            "description": "Return the minimum element without extracting it",
+            "itemtype": "method",
+            "name": "peek",
+            "return": {
+                "description": "The minimum element",
+                "type": "Object"
+            },
+            "class": "MinHeap",
+            "module": "modulePath"
+        },
+        {
+            "file": "js/util/minheap.js",
+            "line": 200,
+            "description": "Clear the MinHeap of all elements",
+            "itemtype": "method",
+            "name": "clear",
+            "return": {
+                "description": "",
+                "type": "Void"
+            },
+            "class": "MinHeap",
+            "module": "modulePath"
+        },
+        {
+            "file": "js/util/minheap.js",
+            "line": 214,
+            "description": "Number of elements in the MinHeap",
+            "itemtype": "property",
+            "name": "length",
+            "type": "{number}",
+            "class": "MinHeap",
+            "module": "modulePath"
+        },
+        {
+            "file": "js/util/quadTree.js",
+            "line": 14,
+            "is_constructor": 1,
+            "params": [
+                {
+                    "name": "bbox",
+                    "description": "",
+                    "type": "BoundingBox"
+                }
+            ],
+            "class": "QuadTree",
+            "module": "util/quadTree"
+        },
+        {
+            "file": "js/util/quadTree.js",
+            "line": 26,
+            "description": "Create four quadTrees which fully divide this quadTree into four\nquads of equal area.",
+            "itemtype": "method",
+            "name": "subdivide",
+            "access": "private",
+            "tagname": "",
+            "return": {
+                "description": "",
+                "type": "Void"
+            },
+            "class": "QuadTree",
+            "module": "util/quadTree"
+        },
+        {
+            "file": "js/util/quadTree.js",
+            "line": 52,
+            "description": "The bounding box of the QuadTree's coordinates.",
+            "itemtype": "property",
+            "name": "boundingBox",
+            "type": "{BoundingBox}",
+            "class": "QuadTree",
+            "module": "util/quadTree"
+        },
+        {
+            "file": "js/util/quadTree.js",
+            "line": 59,
+            "description": "Insert a shape into the QuadTree.",
+            "itemtype": "method",
+            "name": "insert",
+            "params": [
+                {
+                    "name": "shape",
+                    "description": "The shape to insert.",
+                    "type": "Shape"
+                }
+            ],
+            "chainable": 1,
+            "class": "QuadTree",
+            "module": "util/quadTree"
+        },
+        {
+            "file": "js/util/quadTree.js",
+            "line": 94,
+            "description": "Insert multiple shapes",
+            "itemtype": "method",
+            "name": "insertShapes",
+            "params": [
+                {
+                    "name": "shapeArray",
+                    "description": "An array of shapes",
+                    "type": "Array"
+                }
+            ],
+            "chainable": 1,
+            "class": "QuadTree",
+            "module": "util/quadTree"
+        },
+        {
+            "file": "js/util/quadTree.js",
+            "line": 107,
+            "description": "Query the tree for shapes within a range.",
+            "itemtype": "method",
+            "name": "queryRange",
+            "params": [
+                {
+                    "name": "rangeBbox",
+                    "description": "- The query range bounding box.",
+                    "type": "BoundingBox"
+                }
+            ],
+            "return": {
+                "description": "An array of shapes within the range.",
+                "type": "Array"
+            },
+            "class": "QuadTree",
+            "module": "util/quadTree"
+        },
+        {
+            "file": "js/util/quadTree.js",
+            "line": 140,
+            "description": "Query the tree for shapes that intersect a point.",
+            "itemtype": "method",
+            "name": "query",
+            "params": [
+                {
+                    "name": "point",
+                    "description": "A point",
+                    "type": "Point"
+                }
+            ],
+            "return": {
+                "description": "An array of shapes intersecting the point",
+                "type": "Array"
+            },
+            "class": "QuadTree",
+            "module": "util/quadTree"
+        },
+        {
+            "file": "js/worker/workerReceiver.js",
+            "line": 35,
+            "description": "Handle a received message.",
+            "itemtype": "method",
+            "name": "handleMessage",
+            "params": [
+                {
+                    "name": "event",
+                    "description": "An event from a WebWorker.",
+                    "type": "Event"
+                }
+            ],
+            "return": {
+                "description": "",
+                "type": "Void"
+            },
+            "class": "WorkerReceiver",
+            "module": "worker/workerReceiver"
+        }
+    ],
+    "warnings": [
+        {
+            "message": "unknown tag: ignore",
+            "line": " js/lib/jasmine/jasmine.js:52"
+        },
+        {
+            "message": "unknown tag: ignore",
+            "line": " js/lib/jasmine/jasmine.js:117"
+        },
+        {
+            "message": "replacing incorrect tag: returns with return",
+            "line": " js/lib/jasmine/jasmine.js:117"
+        },
+        {
+            "message": "unknown tag: ignore",
+            "line": " js/lib/jasmine/jasmine.js:126"
+        },
+        {
+            "message": "replacing incorrect tag: returns with return",
+            "line": " js/lib/jasmine/jasmine.js:126"
+        },
+        {
+            "message": "unknown tag: ignore",
+            "line": " js/lib/jasmine/jasmine.js:135"
+        },
+        {
+            "message": "replacing incorrect tag: returns with return",
+            "line": " js/lib/jasmine/jasmine.js:135"
+        },
+        {
+            "message": "unknown tag: ignore",
+            "line": " js/lib/jasmine/jasmine.js:144"
+        },
+        {
+            "message": "replacing incorrect tag: returns with return",
+            "line": " js/lib/jasmine/jasmine.js:144"
+        },
+        {
+            "message": "replacing incorrect tag: returns with return",
+            "line": " js/lib/jasmine/jasmine.js:155"
+        },
+        {
+            "message": "replacing incorrect tag: returns with return",
+            "line": " js/lib/jasmine/jasmine.js:166"
+        },
+        {
+            "message": "replacing incorrect tag: returns with return",
+            "line": " js/lib/jasmine/jasmine.js:175"
+        },
+        {
+            "message": "replacing incorrect tag: returns with return",
+            "line": " js/lib/jasmine/jasmine.js:188"
+        },
+        {
+            "message": "replacing incorrect tag: returns with return",
+            "line": " js/lib/jasmine/jasmine.js:392"
+        },
+        {
+            "message": "replacing incorrect tag: returns with return",
+            "line": " js/lib/jasmine/jasmine.js:675"
+        },
+        {
+            "message": "replacing incorrect tag: returns with return",
+            "line": " js/lib/jasmine/jasmine.js:685"
+        },
+        {
+            "message": "replacing incorrect tag: returns with return",
+            "line": " js/lib/jasmine/jasmine.js:700"
+        },
+        {
+            "message": "replacing incorrect tag: returns with return",
+            "line": " js/lib/jasmine/jasmine.js:706"
+        },
+        {
+            "message": "unknown tag: ignore",
+            "line": " js/lib/jasmine/jasmine.js:1610"
+        },
+        {
+            "message": "replacing incorrect tag: returns with return",
+            "line": " js/lib/jasmine/jasmine.js:1657"
+        },
+        {
+            "message": "replacing incorrect tag: function with method",
+            "line": " js/util/hash.js:172"
+        },
+        {
+            "message": "replacing incorrect tag: function with method",
+            "line": " js/util/hash.js:206"
+        },
+        {
+            "message": "replacing incorrect tag: function with method",
+            "line": " js/util/hash.js:241"
+        },
+        {
+            "message": "Missing item type\nDraw circle onto canvas.",
+            "line": " js/foundation/shape.js:287"
+        },
+        {
+            "message": "Missing item type\nDraw the rectangle onto the canvas using the CanvasDrawer.",
+            "line": " js/foundation/shape.js:496"
+        },
+        {
+            "message": "Missing item type\nHit testing based on\n<a href=\"http://stackoverflow.com/a/2922778/1930331</a>.",
+            "line": " js/foundation/shape.js:526"
+        },
+        {
+            "message": "Missing item type\nLevelBase",
+            "line": " js/level/levelBase.js:15"
+        },
+        {
+            "message": "Missing item type\nTop level namespace for Jasmine, a lightweight JavaScript BDD/spec/testing framework.",
+            "line": " js/lib/jasmine/jasmine.js:2"
+        },
+        {
+            "message": "Missing item type",
+            "line": " js/lib/jasmine/jasmine.js:9"
+        },
+        {
+            "message": "Missing item type\nUse <code>jasmine.undefined</code> instead of <code>undefined</code>, since <code>undefined</code> is just\na plain old variable and may be redefined by somebody else.",
+            "line": " js/lib/jasmine/jasmine.js:15"
+        },
+        {
+            "message": "Missing item type\nShow diagnostic messages in the console if set to true",
+            "line": " js/lib/jasmine/jasmine.js:22"
+        },
+        {
+            "message": "Missing item type\nDefault interval in milliseconds for event loop yields (e.g. to allow network activity or to refresh the screen with the HTML-based runner). Small values here may result in slow test running. Zero means no updates until all tests have completed.",
+            "line": " js/lib/jasmine/jasmine.js:27"
+        },
+        {
+            "message": "Missing item type\nMaximum levels of nesting that will be included when an object is pretty-printed",
+            "line": " js/lib/jasmine/jasmine.js:32"
+        },
+        {
+            "message": "Missing item type\nDefault timeout interval in milliseconds for waitsFor() blocks.",
+            "line": " js/lib/jasmine/jasmine.js:36"
+        },
+        {
+            "message": "Missing item type\nBy default exceptions thrown in the context of a test are caught by jasmine so that it can run the remaining tests in the suite.\nSet to false to let the exception bubble up in the browser.",
+            "line": " js/lib/jasmine/jasmine.js:40"
+        },
+        {
+            "message": "Missing item type\nAllows for bound functions to be compared.  Internal use only.",
+            "line": " js/lib/jasmine/jasmine.js:52"
+        },
+        {
+            "message": "Missing item type\nGetter for the Jasmine environment. Ensures one gets created",
+            "line": " js/lib/jasmine/jasmine.js:110"
+        },
+        {
+            "message": "Missing item type",
+            "line": " js/lib/jasmine/jasmine.js:117"
+        },
+        {
+            "message": "Missing item type",
+            "line": " js/lib/jasmine/jasmine.js:126"
+        },
+        {
+            "message": "Missing item type",
+            "line": " js/lib/jasmine/jasmine.js:135"
+        },
+        {
+            "message": "Missing item type",
+            "line": " js/lib/jasmine/jasmine.js:144"
+        },
+        {
+            "message": "Missing item type\nPretty printer for expecations.  Takes any object and turns it into a human-readable string.",
+            "line": " js/lib/jasmine/jasmine.js:155"
+        },
+        {
+            "message": "Missing item type\nReturns true if the object is a DOM Node.",
+            "line": " js/lib/jasmine/jasmine.js:166"
+        },
+        {
+            "message": "Missing item type\nReturns a matchable 'generic' object of the class type.  For use in expecations of type when values don't matter.",
+            "line": " js/lib/jasmine/jasmine.js:175"
+        },
+        {
+            "message": "Missing item type\nReturns a matchable subset of a JSON object. For use in expectations when you don't care about all of the\nattributes on the object.",
+            "line": " js/lib/jasmine/jasmine.js:188"
+        },
+        {
+            "message": "Missing item type\nJasmine Spies are test doubles that can act as stubs, spies, fakes or when used in an expecation, mocks.\n\nSpies should be created in test setup, before expectations.  They can then be checked, using the standard Jasmine\nexpectation syntax. Spies can be checked if they were called or not and what the calling params were.\n\nA Spy has the following fields: wasCalled, callCount, mostRecentCall, and argsForCall (see docs).\n\nSpies are torn down at the end of every spec.\n\nNote: Do <b>not</b> call new jasmine.Spy() directly - a spy must be created using spyOn, jasmine.createSpy or jasmine.createSpyObj.",
+            "line": " js/lib/jasmine/jasmine.js:202"
+        },
+        {
+            "message": "Missing item type\nThe name of the spy, if provided.",
+            "line": " js/lib/jasmine/jasmine.js:247"
+        },
+        {
+            "message": "Missing item type\nIs this Object a spy?",
+            "line": " js/lib/jasmine/jasmine.js:251"
+        },
+        {
+            "message": "Missing item type\nThe actual function this spy stubs.",
+            "line": " js/lib/jasmine/jasmine.js:255"
+        },
+        {
+            "message": "Missing item type\nTracking of the most recent call to the spy.",
+            "line": " js/lib/jasmine/jasmine.js:259"
+        },
+        {
+            "message": "Missing item type\nHolds arguments for each call to the spy, indexed by call count",
+            "line": " js/lib/jasmine/jasmine.js:267"
+        },
+        {
+            "message": "Missing item type\nTells a spy to call through to the actual implemenatation.",
+            "line": " js/lib/jasmine/jasmine.js:280"
+        },
+        {
+            "message": "Missing item type\nFor setting the return value of a spy.",
+            "line": " js/lib/jasmine/jasmine.js:295"
+        },
+        {
+            "message": "Missing item type\nFor throwing an exception when a spy is called.",
+            "line": " js/lib/jasmine/jasmine.js:313"
+        },
+        {
+            "message": "Missing item type\nCalls an alternate implementation when a spy is called.",
+            "line": " js/lib/jasmine/jasmine.js:331"
+        },
+        {
+            "message": "Missing item type\nResets all of a spy's the tracking variables so that it can be used again.",
+            "line": " js/lib/jasmine/jasmine.js:350"
+        },
+        {
+            "message": "Missing item type\nDetermines whether an object is a spy.",
+            "line": " js/lib/jasmine/jasmine.js:392"
+        },
+        {
+            "message": "Missing item type\nCreates a more complicated spy: an Object that has every property a function that is a spy.  Used for stubbing something\nlarge in one call.",
+            "line": " js/lib/jasmine/jasmine.js:401"
+        },
+        {
+            "message": "Missing item type\nAll parameters are pretty-printed and concatenated together, then written to the current spec's output.\n\nBe careful not to leave calls to <code>jasmine.log</code> in production code.",
+            "line": " js/lib/jasmine/jasmine.js:420"
+        },
+        {
+            "message": "Missing item type\nFunction that installs a spy on an existing object's method name.  Used within a Spec to create a spy.",
+            "line": " js/lib/jasmine/jasmine.js:429"
+        },
+        {
+            "message": "Missing item type\nCreates a Jasmine spec that will be added to the current suite.\n\n// TODO: pending tests",
+            "line": " js/lib/jasmine/jasmine.js:448"
+        },
+        {
+            "message": "Missing item type\nCreates a <em>disabled</em> Jasmine spec.\n\nA convenience method that allows existing specs to be disabled temporarily during development.",
+            "line": " js/lib/jasmine/jasmine.js:465"
+        },
+        {
+            "message": "Missing item type\nStarts a chain for a Jasmine expectation.\n\nIt is passed an Object that is the actual value and should chain to one of the many\njasmine.Matchers functions.",
+            "line": " js/lib/jasmine/jasmine.js:477"
+        },
+        {
+            "message": "Missing item type\nDefines part of a jasmine spec.  Used in cominbination with waits or waitsFor in asynchrnous specs.",
+            "line": " js/lib/jasmine/jasmine.js:490"
+        },
+        {
+            "message": "Missing item type\nWaits a fixed time period before moving to the next block.",
+            "line": " js/lib/jasmine/jasmine.js:499"
+        },
+        {
+            "message": "Missing item type\nWaits for the latchFunction to return true before proceeding to the next block.",
+            "line": " js/lib/jasmine/jasmine.js:509"
+        },
+        {
+            "message": "Missing item type\nA function that is called before each spec in a suite.\n\nUsed for spec setup, including validating assumptions.",
+            "line": " js/lib/jasmine/jasmine.js:522"
+        },
+        {
+            "message": "Missing item type\nA function that is called after each spec in a suite.\n\nUsed for restoring any state that is hijacked during spec execution.",
+            "line": " js/lib/jasmine/jasmine.js:533"
+        },
+        {
+            "message": "Missing item type\nDefines a suite of specifications.\n\nStores the description and all defined specs in the Jasmine environment as one suite of specs. Variables declared\nare accessible by calls to beforeEach, it, and afterEach. Describe blocks can be nested, allowing for specialization\nof setup in some tests.",
+            "line": " js/lib/jasmine/jasmine.js:544"
+        },
+        {
+            "message": "Missing item type\nDisables a suite of specifications.  Used to disable some suites in a file, or files, temporarily during development.",
+            "line": " js/lib/jasmine/jasmine.js:563"
+        },
+        {
+            "message": "Missing item type",
+            "line": " js/lib/jasmine/jasmine.js:593"
+        },
+        {
+            "message": "Missing item type\nDeclare that a child class inherit it's prototype from the parent class.",
+            "line": " js/lib/jasmine/jasmine.js:597"
+        },
+        {
+            "message": "Missing item type",
+            "line": " js/lib/jasmine/jasmine.js:605"
+        },
+        {
+            "message": "Missing item type\nEnvironment for Jasmine",
+            "line": " js/lib/jasmine/jasmine.js:645"
+        },
+        {
+            "message": "Missing item type",
+            "line": " js/lib/jasmine/jasmine.js:675"
+        },
+        {
+            "message": "Missing item type",
+            "line": " js/lib/jasmine/jasmine.js:685"
+        },
+        {
+            "message": "Missing item type",
+            "line": " js/lib/jasmine/jasmine.js:700"
+        },
+        {
+            "message": "Missing item type",
+            "line": " js/lib/jasmine/jasmine.js:706"
+        },
+        {
+            "message": "Missing item type\nRegister a reporter to receive status updates from Jasmine.",
+            "line": " js/lib/jasmine/jasmine.js:712"
+        },
+        {
+            "message": "Missing item type",
+            "line": " js/lib/jasmine/jasmine.js:899"
+        },
+        {
+            "message": "Missing item type\nBlocks are functions with executable code that make up a spec.",
+            "line": " js/lib/jasmine/jasmine.js:916"
+        },
+        {
+            "message": "Missing item type",
+            "line": " js/lib/jasmine/jasmine.js:941"
+        },
+        {
+            "message": "Missing item type",
+            "line": " js/lib/jasmine/jasmine.js:1029"
+        },
+        {
+            "message": "Missing item type\ntoBe: compares the actual to the expected using ===",
+            "line": " js/lib/jasmine/jasmine.js:1104"
+        },
+        {
+            "message": "Missing item type\ntoNotBe: compares the actual to the expected using !==",
+            "line": " js/lib/jasmine/jasmine.js:1111"
+        },
+        {
+            "message": "Missing item type\ntoBe: compares the actual to the expected using common sense equality. Handles Objects, Arrays, etc.",
+            "line": " js/lib/jasmine/jasmine.js:1119"
+        },
+        {
+            "message": "Missing item type\ntoNotEqual: compares the actual to the expected using the ! of jasmine.Matchers.toBe",
+            "line": " js/lib/jasmine/jasmine.js:1127"
+        },
+        {
+            "message": "Missing item type\nMatcher that compares the actual to the expected using a regular expression.  Constructs a RegExp, so takes\na pattern or a String.",
+            "line": " js/lib/jasmine/jasmine.js:1135"
+        },
+        {
+            "message": "Missing item type\nMatcher that compares the actual to the expected using the boolean inverse of jasmine.Matchers.toMatch",
+            "line": " js/lib/jasmine/jasmine.js:1144"
+        },
+        {
+            "message": "Missing item type\nMatcher that compares the actual to jasmine.undefined.",
+            "line": " js/lib/jasmine/jasmine.js:1152"
+        },
+        {
+            "message": "Missing item type\nMatcher that compares the actual to jasmine.undefined.",
+            "line": " js/lib/jasmine/jasmine.js:1158"
+        },
+        {
+            "message": "Missing item type\nMatcher that compares the actual to null.",
+            "line": " js/lib/jasmine/jasmine.js:1164"
+        },
+        {
+            "message": "Missing item type\nMatcher that compares the actual to NaN.",
+            "line": " js/lib/jasmine/jasmine.js:1170"
+        },
+        {
+            "message": "Missing item type\nMatcher that boolean not-nots the actual.",
+            "line": " js/lib/jasmine/jasmine.js:1179"
+        },
+        {
+            "message": "Missing item type\nMatcher that boolean nots the actual.",
+            "line": " js/lib/jasmine/jasmine.js:1185"
+        },
+        {
+            "message": "Missing item type\nMatcher that checks to see if the actual, a Jasmine spy, was called.",
+            "line": " js/lib/jasmine/jasmine.js:1191"
+        },
+        {
+            "message": "Missing item type",
+            "line": " js/lib/jasmine/jasmine.js:1211"
+        },
+        {
+            "message": "Missing item type\nMatcher that checks to see if the actual, a Jasmine spy, was not called.",
+            "line": " js/lib/jasmine/jasmine.js:1213"
+        },
+        {
+            "message": "Missing item type\nMatcher that checks to see if the actual, a Jasmine spy, was called with a set of parameters.",
+            "line": " js/lib/jasmine/jasmine.js:1233"
+        },
+        {
+            "message": "Missing item type",
+            "line": " js/lib/jasmine/jasmine.js:1264"
+        },
+        {
+            "message": "Missing item type",
+            "line": " js/lib/jasmine/jasmine.js:1266"
+        },
+        {
+            "message": "Missing item type\nMatcher that checks that the expected item is an element in the actual Array.",
+            "line": " js/lib/jasmine/jasmine.js:1281"
+        },
+        {
+            "message": "Missing item type\nMatcher that checks that the expected item is NOT an element in the actual Array.",
+            "line": " js/lib/jasmine/jasmine.js:1289"
+        },
+        {
+            "message": "Missing item type\nMatcher that checks that the expected item is equal to the actual item\nup to a given level of decimal precision (default 2).",
+            "line": " js/lib/jasmine/jasmine.js:1304"
+        },
+        {
+            "message": "Missing item type\nMatcher that checks that the expected exception was thrown by the actual.",
+            "line": " js/lib/jasmine/jasmine.js:1317"
+        },
+        {
+            "message": "Missing item type",
+            "line": " js/lib/jasmine/jasmine.js:1475"
+        },
+        {
+            "message": "Missing item type",
+            "line": " js/lib/jasmine/jasmine.js:1557"
+        },
+        {
+            "message": "Missing item type\nHolds results for a set of Jasmine spec. Allows for the results array to hold another jasmine.NestedResults",
+            "line": " js/lib/jasmine/jasmine.js:1588"
+        },
+        {
+            "message": "Missing item type\nThe total count of results",
+            "line": " js/lib/jasmine/jasmine.js:1594"
+        },
+        {
+            "message": "Missing item type\nNumber of passed results",
+            "line": " js/lib/jasmine/jasmine.js:1598"
+        },
+        {
+            "message": "Missing item type\nNumber of failed results",
+            "line": " js/lib/jasmine/jasmine.js:1602"
+        },
+        {
+            "message": "Missing item type\nWas this suite/spec skipped?",
+            "line": " js/lib/jasmine/jasmine.js:1606"
+        },
+        {
+            "message": "Missing item type",
+            "line": " js/lib/jasmine/jasmine.js:1610"
+        },
+        {
+            "message": "Missing item type\nRoll up the result counts.",
+            "line": " js/lib/jasmine/jasmine.js:1615"
+        },
+        {
+            "message": "Missing item type\nAdds a log message.",
+            "line": " js/lib/jasmine/jasmine.js:1625"
+        },
+        {
+            "message": "Missing item type\nGetter for the results: message & results.",
+            "line": " js/lib/jasmine/jasmine.js:1632"
+        },
+        {
+            "message": "Missing item type\nAdds a result, tracking counts (total, passed, & failed)",
+            "line": " js/lib/jasmine/jasmine.js:1638"
+        },
+        {
+            "message": "Missing item type",
+            "line": " js/lib/jasmine/jasmine.js:1657"
+        },
+        {
+            "message": "Missing item type\nBase class for pretty printing for expectation results.",
+            "line": " js/lib/jasmine/jasmine.js:1663"
+        },
+        {
+            "message": "Missing item type\nFormats a value in a nice, human-readable string.",
+            "line": " js/lib/jasmine/jasmine.js:1669"
+        },
+        {
+            "message": "Missing item type\nRunner",
+            "line": " js/lib/jasmine/jasmine.js:1879"
+        },
+        {
+            "message": "Missing item type\nInternal representation of a Jasmine specification, or test.",
+            "line": " js/lib/jasmine/jasmine.js:1945"
+        },
+        {
+            "message": "Missing item type\nAll parameters are pretty-printed and concatenated together, then written to the spec's output.\n\nBe careful not to leave calls to <code>jasmine.log</code> in production code.",
+            "line": " js/lib/jasmine/jasmine.js:1978"
+        },
+        {
+            "message": "Missing item type",
+            "line": " js/lib/jasmine/jasmine.js:1998"
+        },
+        {
+            "message": "Missing item type\nWaits a fixed time period before moving to the next block.",
+            "line": " js/lib/jasmine/jasmine.js:2009"
+        },
+        {
+            "message": "Missing item type\nWaits for the latchFunction to return true before proceeding to the next block.",
+            "line": " js/lib/jasmine/jasmine.js:2020"
+        },
+        {
+            "message": "Missing item type\nInternal representation of a Jasmine suite.",
+            "line": " js/lib/jasmine/jasmine.js:2162"
+        },
+        {
+            "message": "Missing item type\nA block which waits for some condition to become true, with timeout.",
+            "line": " js/lib/jasmine/jasmine.js:2249"
+        },
+        {
+            "message": "Missing item type\nItem",
+            "line": " js/model/item.js:13"
+        },
+        {
+            "message": "Missing item type\nPlayer",
+            "line": " js/model/player.js:13"
+        },
+        {
+            "message": "Missing item type\nRoom",
+            "line": " js/model/room.js:13"
+        },
+        {
+            "message": "Missing item type\nHuman",
+            "line": " js/sprite/human.js:26"
+        },
+        {
+            "message": "Missing item type\nSprite",
+            "line": " js/sprite/sprite.js:19"
+        },
+        {
+            "message": "Missing item type\nIterator function",
+            "line": " js/sprite/sprite.js:85"
+        },
+        {
+            "message": "Missing item type\nClear the Sprite instance and redraw it",
+            "line": " js/sprite/sprite.js:98"
+        },
+        {
+            "message": "Missing item type\nClear Sprite instance",
+            "line": " js/sprite/sprite.js:105"
+        },
+        {
+            "message": "Missing item type\nDraw Sprite instance",
+            "line": " js/sprite/sprite.js:114"
+        },
+        {
+            "message": "Missing item type\nDraw BoundingBox of Sprite instance",
+            "line": " js/sprite/sprite.js:123"
+        },
+        {
+            "message": "Missing item type\nUpdate BoundingBox of Sprite instance",
+            "line": " js/sprite/sprite.js:137"
+        },
+        {
+            "message": "Missing item type\nTest whether or not a point is within a Sprite",
+            "line": " js/sprite/sprite.js:163"
+        },
+        {
+            "message": "Missing item type\nTileMap",
+            "line": " js/sprite/tileMap.js:14"
+        },
+        {
+            "message": "Missing item type\nIterate through each of the tiles. Iterates through rows.",
+            "line": " js/sprite/tileMap.js:34"
+        },
+        {
+            "message": "Missing item type\nCreate a BoundingBox.",
+            "line": " js/util/boundingBox.js:17"
+        },
+        {
+            "message": "Missing item type\nx coordinate of top-left of BoundingBox instance",
+            "line": " js/util/boundingBox.js:54"
+        },
+        {
+            "message": "Missing item type\ny coordinate of top-left of BoundingBox instance",
+            "line": " js/util/boundingBox.js:67"
+        },
+        {
+            "message": "Missing item type\nWidth of BoundingBox instance",
+            "line": " js/util/boundingBox.js:80"
+        },
+        {
+            "message": "Missing item type\nHeight of BoundingBox instance",
+            "line": " js/util/boundingBox.js:90"
+        },
+        {
+            "message": "Missing item type\nCenter of BoundingBox instance",
+            "line": " js/util/boundingBox.js:100"
+        },
+        {
+            "message": "Missing item type",
+            "line": " js/util/factory.js:12"
+        },
+        {
+            "message": "Missing item type\nGraph",
+            "line": " js/util/graph.js:15"
+        },
+        {
+            "message": "Missing item type\nAdd a node to the graph",
+            "line": " js/util/graph.js:58"
+        },
+        {
+            "message": "Missing item type\nAdd an edge to the graph",
+            "line": " js/util/graph.js:68"
+        },
+        {
+            "message": "Missing item type\nRemove an edge from the graph",
+            "line": " js/util/graph.js:79"
+        },
+        {
+            "message": "Missing item type\nReturn a hashcode for this object. Does not conform to the Java\nstandard that two objects that are structurally identical should\nyield the same hashcode.",
+            "line": " js/util/hash.js:21"
+        },
+        {
+            "message": "Missing item type\nClear the Hashset instance of all elements",
+            "line": " js/util/hash.js:196"
+        },
+        {
+            "message": "Missing item type",
+            "line": " js/util/quadTree.js:14"
+        }
+    ]
+}
