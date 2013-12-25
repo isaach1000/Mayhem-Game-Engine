@@ -4,7 +4,7 @@
 This project demostrates the use of HTML5 Canvas in game development.
 
 ## Libraries
-RequireJS, jQuery, UnderscoreJS
+RequireJS, jQuery, UnderscoreJS, Jasmine
 
 ## Structure
 Folders:
