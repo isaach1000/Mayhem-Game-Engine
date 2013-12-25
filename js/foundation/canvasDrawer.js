@@ -1,10 +1,8 @@
 define(['underscore'], function(_) {
     "use strict";
-
     //////////////////////////////////
     // Private class methods/fields //
     //////////////////////////////////
-
     /**
        @module foundation/canvasDrawer
      */
@@ -12,7 +10,6 @@ define(['underscore'], function(_) {
         /////////////////////////////////
         // Public class methods/fields //
         /////////////////////////////////
-
         /**
             CanvasDrawer for drawing to a canvas. Wrapper class for HTML5
             CanvasRenderingContext2D.
@@ -27,14 +24,11 @@ define(['underscore'], function(_) {
             /////////////////////////////////////
             // Private instance methods/fields //
             /////////////////////////////////////
-
             var _this = this,
                 ctxSettings;
-
             ////////////////////////////////////
             // Public instance methods/fields //
             ////////////////////////////////////
-
             Object.defineProperties(this, {
                 /**
                    Width of the canvas
@@ -47,7 +41,6 @@ define(['underscore'], function(_) {
                         return width;
                     }
                 },
-
                 /**
                    Height of the canvas
 
@@ -59,7 +52,6 @@ define(['underscore'], function(_) {
                         return height;
                     }
                 },
-
                 /**
                    Properties of the context. Valid settings include:
                    lineWidth, fillStyle, and strokeStyle.
@@ -92,7 +84,6 @@ define(['underscore'], function(_) {
                     }
                 }
             });
-
             /**
                 Draw a line between two points
 
@@ -109,7 +100,6 @@ define(['underscore'], function(_) {
                 ctx.lineTo(point2.x, point2.y);
                 return this;
             };
-
             /**
                 Wrapper for <code>context.stroke</code>
 
@@ -120,7 +110,6 @@ define(['underscore'], function(_) {
                 ctx.stroke();
                 return this;
             };
-
             /**
                 Wrapper for <code>context.fill</code>
 
@@ -131,7 +120,6 @@ define(['underscore'], function(_) {
                 ctx.fill();
                 return this;
             };
-
             /**
                 Wrapper for <code>context.beginPath</code>
 
@@ -142,7 +130,6 @@ define(['underscore'], function(_) {
                 ctx.beginPath();
                 return this;
             };
-
             /**
                 Wrapper for <code>context.closePath</code>
 
@@ -153,7 +140,6 @@ define(['underscore'], function(_) {
                 ctx.closePath();
                 return this;
             };
-
             /**
                 Wrapper for <code>context.rect</code>
 
@@ -168,7 +154,6 @@ define(['underscore'], function(_) {
                 ctx.rect(x, y, w, h);
                 return this;
             };
-
             /**
                 Wrapper for <code>context.arc</code>
 
@@ -185,7 +170,6 @@ define(['underscore'], function(_) {
                 ctx.arc(x, y, radius, startAngle, endAngle, ccw);
                 return this;
             };
-
             /**
                 Wrapper for <code>context.clearRect</code>
 
@@ -200,7 +184,6 @@ define(['underscore'], function(_) {
                 ctx.clearRect(x, y, width, height);
                 return this;
             };
-
             /**
                 Clear entire canvas
 
@@ -211,7 +194,6 @@ define(['underscore'], function(_) {
                 this.clearRect(0, 0, this.width, this.height);
                 return this;
             };
-
             /**
                Wrapper for <code>context.save</code>
 
@@ -222,7 +204,6 @@ define(['underscore'], function(_) {
                 ctx.save();
                 return this;
             };
-
             /**
                 Wrapper for <code>context.restore</code>
 
@@ -233,7 +214,6 @@ define(['underscore'], function(_) {
                 ctx.restore();
                 return this;
             };
-
             /**
                 Wrapper for <code>context.translate</code>
 
@@ -246,7 +226,6 @@ define(['underscore'], function(_) {
                 ctx.translate(x, y);
                 return this;
             };
-
             /**
                 Wrapper for <code>context.rotate</code>
 
@@ -258,7 +237,6 @@ define(['underscore'], function(_) {
                 ctx.rotate(angle);
                 return this;
             };
-
             /**
                 Wrapper for <code>context.fillRect</code>
 
@@ -273,7 +251,6 @@ define(['underscore'], function(_) {
                 ctx.fillRect(x, y, w, h);
                 return this;
             };
-
             /**
                 Wrapper for <code>context.strokeRect</code>
 
@@ -288,7 +265,6 @@ define(['underscore'], function(_) {
                 ctx.strokeRect(x, y, w, h);
                 return this;
             };
-
             /**
                 Wrapper for <code>context.getImageData</code>
 
@@ -302,7 +278,6 @@ define(['underscore'], function(_) {
             this.getImageData = function(x, y, w, h) {
                 return ctx.getImageData(x, y, w, h);
             };
-
             /**
                 Wrapper for <code>context.putImageData</code>
 
@@ -318,6 +293,5 @@ define(['underscore'], function(_) {
             };
         }
     };
-
     return module;
 });

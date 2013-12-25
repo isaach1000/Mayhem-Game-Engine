@@ -1,7 +1,6 @@
-define(['util/hashtable'], function(Hashtable) {
+define(['util/hash'], function(Hash) {
     describe('Hashtable', function() {
-        var table = new Hashtable.Hashtable();
-
+        var table = new Hash.Hashtable();
         var key = {
             prop: 'property'
         }, value = {
@@ -9,26 +8,21 @@ define(['util/hashtable'], function(Hashtable) {
             }, keyClone = {
                 prop: 'property'
             };
-
         it('put', function() {
             expect(table.put(key, value)).toBe(true);
             expect(table.put(key, value)).toBe(false);
         });
-
         it('containsKey', function() {
             expect(table.containsKey(key)).toBe(true);
             expect(table.containsKey(keyClone)).toBe(false);
         });
-
         it('get', function() {
             expect(table.get(key)).toBe(value);
         });
-
         it('contains only applies to original object, ' +
             'not equal object', function() {
                 expect(table.containsKey(keyClone)).toBe(false);
             });
-
         it('remove & length', function() {
             expect(table.length).toBe(1);
             expect(table.remove(keyClone)).toBe(false);
@@ -40,13 +34,11 @@ define(['util/hashtable'], function(Hashtable) {
             table.clear();
             expect(table.length).toBe(0);
         });
-
         it('only puts unique keys', function() {
             table.put(key, value);
             table.put(key, value);
             expect(table.length).toBe(1);
         });
-
         it('forEach', function() {
             var size = 0;
             table.forEach(function(k, v) {

@@ -5,12 +5,9 @@
  */
 define([], function() {
     "use strict";
-
     //////////////////////////////////
     // Private class methods/fields //
     //////////////////////////////////
-
-
     /**
        @module util/mathExtensions
      */
@@ -18,7 +15,6 @@ define([], function() {
         /////////////////////////////////
         // Public class methods/fields //
         /////////////////////////////////
-
         /**
            Generate a random integer.
 
@@ -31,7 +27,6 @@ define([], function() {
         randomInt: function(minimum, maximum) {
             return Math.floor(module.randomFloat(minimum, maximum));
         },
-
         /**
            Generate a random float.
 
@@ -56,7 +51,6 @@ define([], function() {
             range = max - min;
             return Math.random() * range + min;
         },
-
         /**
             Get the dot product of two vectors.
 
@@ -68,17 +62,14 @@ define([], function() {
          */
         dotProduct: function(vector1, vector2) {
             var total = 0;
-
             if (vector1.length !== vector2.length) {
                 return null;
             }
-
             for (var i = 0; i < vector1.length; i += 1) {
                 total += vector1[i] * vector2[i];
             }
             return total;
         },
-
         /**
             A matrix to represent transformations, etc.
 
@@ -93,7 +84,6 @@ define([], function() {
             /////////////////////////////////////
             // Private instance methods/fields //
             /////////////////////////////////////
-
             var _this = this,
                 rows;
 
@@ -107,20 +97,16 @@ define([], function() {
 
             function addAll(matrix, coefficient) {
                 var newEntries = [];
-
-                if (_this.numRows !== matrix.numRows ||
-                    _this.numColumns !== matrix.numColumns) {
+                if (_this.numRows !== matrix.numRows || _this.numColumns !==
+                    matrix.numColumns) {
                     return null;
                 }
-
                 forEach(function(entry, row, column) {
                     var sum = entry + coefficient * matrix.get(row,
                         column);
                     newEntries.push(sum);
                 });
-
-                return new module.Matrix(newEntries, _this.numRows,
-                    _this.numColumns);
+                return new module.Matrix(newEntries, _this.numRows, _this.numColumns);
             }
 
             function generateRows() {
@@ -135,28 +121,21 @@ define([], function() {
                     rows.push(row);
                 }
             }
-
             ////////////////////////////////////
             // Public instance methods/fields //
             ////////////////////////////////////
-
             _this.numRows = numRows;
-
             _this.numColumns = numColumns;
-
             this.get = function(row, column) {
                 return _this.rows[row][column];
             };
-
             this.set = function(row, column, value) {
                 rows[row][column] = value;
             };
-
             this.getRow = function(rowIndex) {
                 // Return a clone of the row.
                 return rows[rowIndex].slice(0);
             };
-
             this.getColumn = function(columnIndex) {
                 var column = [],
                     i;
@@ -165,23 +144,18 @@ define([], function() {
                 }
                 return column;
             };
-
             this.add = function(matrix) {
                 return addAll(matrix, 1);
             };
-
             this.subtract = function(matrix) {
                 return addAll(matrix, -1);
             };
-
             this.multiply = function(matrix) {
                 var newEntries = [],
                     i, j, vector1, vector2, dotProduct;
-
                 if (_this.numColumns !== _this.numRows) {
                     return null;
                 }
-
                 for (i = 0; i < _this.numRows; i += 1) {
                     vector1 = _this.getRow(i);
                     for (j = 0; j < matrix.numColumns; j += 1) {
@@ -190,14 +164,11 @@ define([], function() {
                         newEntries.push(dotProduct);
                     }
                 }
-                return new module.Matrix(newEntries, _this.numRows,
-                    matrix.numColumns);
+                return new module.Matrix(newEntries, _this.numRows, matrix.numColumns);
             };
-
             // Make the instance immutable.
             Object.freeze(_this);
         }
     };
-
     return module;
 });

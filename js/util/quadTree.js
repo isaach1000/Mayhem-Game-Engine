@@ -6,28 +6,23 @@
  */
 define(['util/boundingBox'], function(BoundingBox) {
     "use strict";
-
     /**
        @module util/quadTree
      */
     var module = {
         QT_NODE_CAPACITY: 4,
-
         /**
            @constructor
            @param {BoundingBox} bbox
          */
         QuadTree: function(bbox) {
             var _this = this;
-
             /////////////////////////////////////
             // Private instance methods/fields //
             /////////////////////////////////////
-            var
-            quadTreeNW, quadTreeNE, quadTreeSW, quadTreeSE,
-                subtrees = [quadTreeNW, quadTreeNE, quadTreeSW, quadTreeSE],
+            var quadTreeNW, quadTreeNE, quadTreeSW, quadTreeSE,
+                subtrees = [],
                 shapes = [];
-
             /**
                  Create four quadTrees which fully divide this quadTree into four
                  quads of equal area.
@@ -40,22 +35,20 @@ define(['util/boundingBox'], function(BoundingBox) {
                 var bboxNW = new BoundingBox.BoundingBox(bbox.x, bbox.y,
                     bbox.width / 2, bbox.height / 2),
                     bboxNE = new BoundingBox.BoundingBox(bbox.x + bbox.width /
-                        2, bbox.y,
-                        bbox.width / 2, bbox.height / 2),
+                        2, bbox.y, bbox.width / 2, bbox.height / 2),
                     bboxSW = new BoundingBox.BoundingBox(bbox.x, bbox.y +
-                        bbox.height / 2,
-                        bbox.width / 2, bbox.height / 2),
+                        bbox.height / 2, bbox.width / 2, bbox.height / 2),
                     bboxSE = new BoundingBox.BoundingBox(bbox.x + bbox.width /
-                        2,
-                        bbox.y + bbox.height / 2,
-                        bbox.width / 2, bbox.height / 2);
-
+                        2, bbox.y + bbox.height / 2, bbox.width / 2, bbox.height /
+                        2);
                 quadTreeNW = new module.QuadTree(bboxNW);
                 quadTreeNE = new module.QuadTree(bboxNE);
                 quadTreeSW = new module.QuadTree(bboxSW);
                 quadTreeSE = new module.QuadTree(bboxSE);
+                subtrees = [quadTreeNW, quadTreeNE, quadTreeSW,
+                    quadTreeSE
+                ];
             }
-
             /**
                The bounding box of the QuadTree's coordinates.
 
@@ -63,7 +56,6 @@ define(['util/boundingBox'], function(BoundingBox) {
                @type {BoundingBox}
              */
             this.boundingBox = bbox;
-
             /**
                Insert a shape into the QuadTree.
 
@@ -72,13 +64,10 @@ define(['util/boundingBox'], function(BoundingBox) {
                @chainable
              */
             this.insert = function(shape) {
-                var i, subtreesLen = subtrees.length;
-
                 if (!bbox.containsBoundingBox(shape.boundingBox)) {
                     // BoundingBox cannot be inserted.
                     return this;
                 }
-
                 // If there is space in this quadTree, add the shape here.
                 if (shapes.length < module.QT_NODE_CAPACITY) {
                     shapes.push(shape);
@@ -90,20 +79,18 @@ define(['util/boundingBox'], function(BoundingBox) {
                     subdivide();
                     return this.insert(shape);
                 }
-
-                for (i = 0; i < subtreesLen; i += 1) {
+                var subtreesLen = subtrees.length;
+                for (var i = 0; i < subtreesLen; i += 1) {
                     if (subtrees[i].insert(shape)) {
                         return this;
                     }
                 }
-
                 // If no child can insert the shape, insert it into the parent
                 // despite the capacity limit. The shape is probably lying
                 // on a border.
                 shapes.push(shape);
                 return this;
             };
-
             /**
                 Insert multiple shapes
 
@@ -117,7 +104,6 @@ define(['util/boundingBox'], function(BoundingBox) {
                 });
                 return this;
             };
-
             /**
                Query the tree for shapes within a range.
 
@@ -131,7 +117,6 @@ define(['util/boundingBox'], function(BoundingBox) {
                     i, shape, box, numShapes = shapes.length,
                     subtreesLen = subtrees.length,
                     subtree;
-
                 if (bbox.intersection(rangeBbox) !== null) {
                     for (i = 0; i < numShapes; i += 1) {
                         shape = shapes[i];
@@ -152,7 +137,6 @@ define(['util/boundingBox'], function(BoundingBox) {
                 }
                 return results;
             };
-
             /**
                 Query the tree for shapes that intersect a point.
 
@@ -167,6 +151,5 @@ define(['util/boundingBox'], function(BoundingBox) {
             };
         }
     };
-
     return module;
 });

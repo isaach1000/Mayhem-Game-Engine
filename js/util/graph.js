@@ -1,16 +1,9 @@
-define([
-    'util/hashset',
-    'util/hashtable'
-], function(Hashset, Hashtable) {
+define(['util/hash'], function(Hash) {
     "use strict";
-
     //////////////////////////////////
     // Private class methods/fields //
     //////////////////////////////////
-
     // TODO
-
-
     /**
        @module util/graph
      */
@@ -18,31 +11,24 @@ define([
         /////////////////////////////////
         // Public class methods/fields //
         /////////////////////////////////
-
         // TODO
-
         /**
            Graph
            @constructor
          */
         Graph: function() {
             var _this = this;
-
             /////////////////////////////////////
             // Private instance methods/fields //
             /////////////////////////////////////
-
-            var nodes = new Hashset.Hashset(),
-                adjacencyList = new Hashtable.Hashtable();
-
+            var nodes = new Hash.Hashset(),
+                adjacencyList = new Hash.Hashtable();
             // Private inner Node class
             function Node(data) {
                 var thisNode = this;
                 this.data = data;
-                var edges = new Hashset.Hashset();
-
+                var edges = new Hash.Hashset();
                 adjacencyList.put(this, edges);
-
                 Object.defineProperties(this, {
                     edges: {
                         get: function() {
@@ -51,7 +37,7 @@ define([
                     },
                     neighbors: {
                         get: function() {
-                            var neighborSet = new Hashset.Hashset();
+                            var neighborSet = new Hash.Hashset();
                             thisNode.edges.forEach(function(edge) {
                                 neighborSet.add(edge.head);
                             });
@@ -60,18 +46,15 @@ define([
                     }
                 });
             }
-
             // Private inner Edge class
             function Edge(tail, head) {
                 this.tail = tail;
                 this.head = head;
                 this.weight = 0;
             }
-
             ////////////////////////////////////
             // Public instance methods/fields //
             ////////////////////////////////////
-
             /**
                Add a node to the graph
                @param   {Object} data     Data to be stored in the node
@@ -82,7 +65,6 @@ define([
                 nodes.add(node);
                 return node;
             };
-
             /**
                Add an edge to the graph
                @param   {Node} tail       The origin node of the edge
@@ -94,7 +76,6 @@ define([
                 adjacencyList.get(tail).add(edge);
                 return edge;
             };
-
             /**
                Remove an edge from the graph
                @param   {Node} tail       The origin node of the edge
@@ -110,23 +91,21 @@ define([
                 });
                 tail.edges.remove(removeEdge);
             };
-
             /**
-               Perform a depth first search of the graph
-               @param {function} func The operation to perform on the visited nodes
+                Perform a depth first search of the graph
+
+                @method depthFirstSearch
+                @param {Function} func The operation to perform on the visited nodes
              */
             this.depthFirstSearch = function(func) {
-                var
-                visitedSet = new Hashset.Hashset(),
+                var visitedSet = new Hash.Hashset(),
                     doneSearching = false;
-
                 nodes.forEach(function(node) {
                     if (doneSearching === true) {
                         return;
                     }
                     doneSearching = depthFirstSearchHelper(node);
                 });
-
                 // Inner helper function
                 function depthFirstSearchHelper(node) {
                     if (visitedSet.contains(node)) {
@@ -142,31 +121,27 @@ define([
                     return doneSearching;
                 }
             };
-
             /**
                Perform a breadth first search on the graph
+
+               @method breadthFirstSearch
                @param {function} func The operation to perform on the visited nodes
+               @return {void}
              */
             this.breadthFirstSearch = function(func) {
-                var
-                visitedSet = new Hashset.Hashset(),
+                var visitedSet = new Hash.Hashset(),
                     nodeQueue = [],
                     nodeQueueIndex = 0;
-
                 nodes.forEach(function(node) {
-                    nodeQueue.push(node);
+                    nodeQueue.putsh(node);
                 });
-
                 while (nodeQueueIndex < nodeQueue.length) {
-                    var
-                    node = nodeQueue[nodeQueueIndex++],
+                    var node = nodeQueue[nodeQueueIndex++],
                         doneSearching = breadthFirstSearchHelper(node);
-
                     if (doneSearching) {
                         return; // Terminate the search
                     }
                 }
-
                 // Inner helper function
                 function breadthFirstSearchHelper(node) {
                     if (visitedSet.contains(node)) {
@@ -184,6 +159,5 @@ define([
             };
         }
     };
-
     return module;
 });

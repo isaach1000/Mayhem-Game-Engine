@@ -1,16 +1,12 @@
 define([], function() {
     "use strict";
-
     //////////////////////////////////
     // Private class methods/fields //
     //////////////////////////////////
-
-
     /**
        @module util/physics
      */
     var module = {};
-
     Object.defineProperties(module, {
         GRAVITY: {
             value: 0.008,
@@ -21,6 +17,5 @@ define([], function() {
             enumerable: true
         }
     });
-
     return module;
 });

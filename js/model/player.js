@@ -1,11 +1,8 @@
 define([], function() {
     "use strict";
-
     //////////////////////////////////
     // Private class methods/fields //
     //////////////////////////////////
-
-
     /**
        @module model/player
      */
@@ -13,7 +10,6 @@ define([], function() {
         /////////////////////////////////
         // Public class methods/fields //
         /////////////////////////////////
-
         /**
            Player
            @constructor
@@ -22,33 +18,25 @@ define([], function() {
             /////////////////////////////////////
             // Private instance methods/fields //
             /////////////////////////////////////
-
             var _this = this,
                 currentRoom = initialRoom,
                 bag = [],
                 maxWeight = 100;
-
-
             ////////////////////////////////////
             // Public instance methods/fields //
             ////////////////////////////////////
-
             this.getRoom = function() {
                 return currentRoom;
             };
-
             this.setRoom = function(newRoom) {
                 currentRoom = newRoom;
             };
-
             this.getBag = function() {
                 return bag;
             };
-
             this.addToBag = function(newItem) {
                 bag.push(newItem);
             };
-
             this.removeFromBag = function(item) {
                 var index = bag.indexOf(item);
                 if (index !== -1) {
@@ -59,15 +47,12 @@ define([], function() {
                     return null;
                 }
             };
-
             this.getMaxWeight = function() {
                 return maxWeight;
             };
-
             this.increaseMaxWeight = function() {
                 maxWeight += 50;
             };
-
             this.getInventory = function() {
                 var ret,
                     i;
@@ -81,7 +66,6 @@ define([], function() {
                 }
                 return ret;
             };
-
             this.searchBag = function(item) {
                 var result = null,
                     i;
@@ -93,7 +77,6 @@ define([], function() {
                 }
                 return result;
             };
-
             this.currentBagWeight = function() {
                 var weight = 0,
                     i;
@@ -104,6 +87,5 @@ define([], function() {
             };
         }
     };
-
     return module;
 });

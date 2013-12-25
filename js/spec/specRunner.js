@@ -19,33 +19,22 @@ require.config({
         }
     }
 });
-
-
 require(['jquery', 'underscore', 'jasmine-html'], function($, _, jasmine) {
     "use strict";
-
     var jasmineEnv = jasmine.getEnv();
     jasmineEnv.updateInterval = 1000;
-
     var htmlReporter = new jasmine.HtmlReporter();
-
     jasmineEnv.addReporter(htmlReporter);
-
     jasmineEnv.specFilter = function(spec) {
         return htmlReporter.specFilter(spec);
     };
-
     //////////////////////////////////
     // Specify the modules to test. //
     //////////////////////////////////
-    var specs = ['player', 'hash', 'hashset', 'hashtable', 'graph',
-        'minheap'
-    ];
-
+    var specs = ['player', 'hash', 'graph', 'hash', 'minheap'];
     specs = _.map(specs, function(moduleName) {
         return 'js/spec/' + moduleName + '.spec.js';
     });
-
     $(document).ready(function() {
         require(specs, function(spec) {
             jasmineEnv.execute();
@@ -55,5 +44,4 @@ require(['jquery', 'underscore', 'jasmine-html'], function($, _, jasmine) {
     function execJasmine() {
         jasmineEnv.execute();
     }
-
 });

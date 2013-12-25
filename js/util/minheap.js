@@ -1,12 +1,9 @@
 define([], function() {
     "use strict";
-
     //////////////////////////////////
     // Private class methods/fields //
     //////////////////////////////////
-
-    var DEFAULT_SIZE = 10;
-
+    var DEFAULT_SIZE = 16;
     /**
        @module modulePath
        @module modulePath
@@ -15,17 +12,18 @@ define([], function() {
         /////////////////////////////////
         // Public class methods/fields //
         /////////////////////////////////
-
         /**
+           @class MinHeap
            @constructor
+           @param {Function|number} [arg1=numeric_comparator|16] Comparator function (if one argument) or size (if two arguments)
+           @param {Function} [arg2=numeric_comparator] Comparator function
          */
         MinHeap: function() {
             /////////////////////////////////////
             // Private instance methods/fields //
             /////////////////////////////////////
 
-            var
-            size = DEFAULT_SIZE,
+            var size = DEFAULT_SIZE,
                 comparator = function(data1, data2) {
                     return data1 - data2;
                 };
@@ -39,24 +37,54 @@ define([], function() {
                 throw new Error(
                     'Invalid parameters for MinHeap constructor');
             }
-
-            var
-            _this = this,
+            var _this = this,
                 data = new Array(size),
                 heapSize = 0;
 
+            /**
+                Get index in array of left child
+
+                @method getLeftChildIndex
+                @private
+                @param  {number} nodeIndex Index of parent
+                @return {number} Index of left child in array
+             */
             function getLeftChildIndex(nodeIndex) {
                 return 2 * nodeIndex + 1;
             }
 
+            /**
+                Get index in array of right child
+
+                @method getRightChildIndex
+                @private
+                @param  {number} nodeIndex Index of parent
+                @return {number} Index of right child in array
+             */
             function getRightChildIndex(nodeIndex) {
                 return 2 * nodeIndex + 2;
             }
 
+            /**
+                Get index of parent
+
+                @method getParentIndex
+                @private
+                @param  {number} nodeIndex Index of child
+                @return {number} Index of parent
+             */
             function getParentIndex(nodeIndex) {
                 return Math.floor((nodeIndex + 1) / 2) - 1;
             }
 
+            /**
+                Heapify
+
+                @method bubbleUp
+                @private
+                @param  {number} nodeIndex Index to bubbleUp
+                @return {void}
+             */
             function bubbleUp(nodeIndex) {
                 if (nodeIndex === 0) {
                     return;
@@ -74,6 +102,13 @@ define([], function() {
                 }
             }
 
+            /**
+                Remove minimum element from heap
+
+                @method removeMin
+                @private
+                @return {Object} Data of minimum node
+             */
             function removeMin() {
                 if (heapSize === 0) {
                     return;
@@ -85,15 +120,22 @@ define([], function() {
                 }
             }
 
+            /**
+                Heapify
+
+                @method bubbleDown
+                @private
+                @param  {number} nodeIndex Index of node to modify
+                @return {void}
+             */
             function bubbleDown(nodeIndex) {
-                var
-                leftChildIndex = getLeftChildIndex(nodeIndex),
+                var leftChildIndex = getLeftChildIndex(nodeIndex),
                     rightChildIndex = getRightChildIndex(nodeIndex),
                     smallerValueIndex;
                 // This long if else assigns the smaller child
                 if (leftChildIndex < heapSize && rightChildIndex < heapSize) {
-                    if (comparator(data[leftChildIndex],
-                        data[rightChildIndex]) < 0) {
+                    if (comparator(data[leftChildIndex], data[
+                        rightChildIndex]) < 0) {
                         smallerValueIndex = leftChildIndex;
                     } else {
                         smallerValueIndex = rightChildIndex;
@@ -105,10 +147,8 @@ define([], function() {
                 } else {
                     return;
                 }
-
-                if (smallerValueIndex >= 0 &&
-                    comparator(data[smallerValueIndex], data[nodeIndex]) <
-                    0) {
+                if (smallerValueIndex >= 0 && comparator(data[
+                    smallerValueIndex], data[nodeIndex]) < 0) {
                     var temp = data[nodeIndex];
                     data[nodeIndex] = data[smallerValueIndex];
                     data[smallerValueIndex] = temp;
@@ -121,6 +161,13 @@ define([], function() {
             // Public instance methods/fields //
             ////////////////////////////////////
 
+            /**
+                Add object to MinHeap
+
+                @method add
+                @param  {Object} object Object to add
+                @return {void}
+             */
             this.add = function(object) {
                 heapSize++;
                 var currentIndex = heapSize - 1;
@@ -128,16 +175,34 @@ define([], function() {
                 bubbleUp(currentIndex);
             };
 
+            /**
+                Return the minimum element and extract it
+
+                @method poll
+                @return {Object} The minimum element
+             */
             this.poll = function() {
                 var min = data[0];
                 removeMin();
                 return min;
             };
 
+            /**
+                Return the minimum element without extracting it
+
+                @method peek
+                @return {Object} The minimum element
+             */
             this.peek = function() {
                 return data[0];
             };
 
+            /**
+                Clear the MinHeap of all elements
+
+                @method clear
+                @return {void}
+             */
             this.clear = function() {
                 heapSize = 0;
                 data.forEach(function(element, index) {
@@ -146,6 +211,12 @@ define([], function() {
             };
 
             Object.defineProperties(this, {
+                /**
+                    Number of elements in the MinHeap
+
+                    @property length
+                    @type {number}
+                 */
                 length: {
                     get: function() {
                         return heapSize;

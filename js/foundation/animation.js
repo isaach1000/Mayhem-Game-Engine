@@ -5,11 +5,9 @@
  */
 define(['underscore'], function(_) {
     "use strict";
-
     //////////////////////////////////
     // Private class methods/fields //
     //////////////////////////////////
-
     /**
        Based on <a href="http://www.html5canvastutorials.com/">
        html5canvastutorials</a>
@@ -19,16 +17,12 @@ define(['underscore'], function(_) {
        @return {void}
     */
     var requestAnimFrame = (function(callback) {
-        return window.requestAnimationFrame ||
-            window.webkitRequestAnimationFrame ||
-            window.mozRequestAnimationFrame ||
-            window.oRequestAnimationFrame ||
-            window.msRequestAnimationFrame ||
-            function(callback) {
+        return window.requestAnimationFrame || window.webkitRequestAnimationFrame ||
+            window.mozRequestAnimationFrame || window.oRequestAnimationFrame ||
+            window.msRequestAnimationFrame || function(callback) {
                 window.setTimeout(callback, 1000 / 60);
         };
     })();
-
     /**
       @module foundation/animation
     */
@@ -36,7 +30,6 @@ define(['underscore'], function(_) {
         /////////////////////////////////
         // Public class methods/fields //
         /////////////////////////////////
-
         /**
             @class Animation
             @constructor
@@ -58,7 +51,6 @@ define(['underscore'], function(_) {
             /////////////////////////////////////
             // Private instance methods/fields //
             /////////////////////////////////////
-
             var startTime;
 
             function animate() {
@@ -71,11 +63,9 @@ define(['underscore'], function(_) {
                     callback();
                 }
             }
-
             ////////////////////////////////////
             // Public instance methods/fields //
             ////////////////////////////////////
-
             /**
                Start the animation.
                               @method start
@@ -86,7 +76,6 @@ define(['underscore'], function(_) {
                 animate();
             };
         },
-
         /**
             Create an easing.
 
@@ -106,17 +95,14 @@ define(['underscore'], function(_) {
                 distY = endY - startY,
                 durationX = distX / duration,
                 durationY = distY / duration;
-
             var frameFunction = function(durationElapsed) {
                 drawable.x = startX + durationX * durationElapsed;
                 drawable.y = startY + durationY * durationElapsed;
                 return drawable.x < endX && drawable.y < endY &&
                     durationElapsed < duration;
             };
-
             return new module.Animation(drawable, frameFunction, callback);
         }
     };
-
     return module;
 });

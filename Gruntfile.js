@@ -26,11 +26,7 @@ module.exports = function(grunt) {
             }
         },
         jshint: {
-            main: [
-                'Gruntfile.js',
-                'js/**/*.js',
-                '!js/lib/**'
-            ]
+            main: ['Gruntfile.js', 'js/**/*.js', '!js/lib/**']
         },
         yuidoc: {
             main: {
@@ -64,7 +60,6 @@ module.exports = function(grunt) {
             }
         }
     });
-
     grunt.loadNpmTasks('grunt-contrib-concat');
     grunt.loadNpmTasks('grunt-contrib-uglify');
     grunt.loadNpmTasks('grunt-contrib-watch');
@@ -72,15 +67,6 @@ module.exports = function(grunt) {
     grunt.loadNpmTasks('grunt-contrib-yuidoc');
     grunt.loadNpmTasks('grunt-contrib-requirejs');
     grunt.loadNpmTasks('grunt-jsbeautifier');
-
-    grunt.registerTask('default', [
-        'jsbeautifier:*',
-        'jshint:*',
-        'yuidoc:*'
-    ]);
-
-    grunt.registerTask('build', [
-        'default',
-        'requirejs:compile'
-    ]);
+    grunt.registerTask('default', ['jsbeautifier:*', 'jshint:*', 'yuidoc:*']);
+    grunt.registerTask('build', ['default', 'requirejs:compile']);
 };

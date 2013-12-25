@@ -10,13 +10,8 @@ require.config({
         }
     }
 });
-
-require([
-    'jquery',
-    'level/mainLevel'
-], function($, MainLevel) {
+require(['jquery', 'level/mainLevel'], function($, MainLevel) {
     "use strict";
-
     $(function() {
         var mainLevel = new MainLevel.MainLevel();
         mainLevel.start();

@@ -590,8 +590,9 @@
                 return "\\" + B[n]
             }), r && (a += "'+\n((__t=(" + r +
                 "))==null?'':_.escape(__t))+\n'"), e && (a +=
-                "'+\n((__t=(" + e + "))==null?'':__t)+\n'"), u && (a +=
-                "';\n" + u + "\n__p+='"), i = o + t.length, t
+                "'+\n((__t=(" + e + "))==null?'':__t)+\n'"),
+            u && (a += "';\n" + u + "\n__p+='"), i = o + t.length,
+            t
         }), a += "';\n", r.variable || (a = "with(obj||{}){\n" + a + "}\n"),
         a = "var __t,__p='',__j=Array.prototype.join," +
             "print=function(){__p+=__j.call(arguments,'');};\n" + a +

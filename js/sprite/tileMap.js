@@ -4,7 +4,6 @@
  */
 define(['sprite/sprite', 'foundation/shape'], function(Sprite, Shape) {
     "use strict";
-
     /**
        @module sprite/tileMap
      */
@@ -12,7 +11,6 @@ define(['sprite/sprite', 'foundation/shape'], function(Sprite, Shape) {
         /////////////////////////////////
         // Public class methods/fields //
         /////////////////////////////////
-
         /**
            TileMap
 
@@ -31,10 +29,8 @@ define(['sprite/sprite', 'foundation/shape'], function(Sprite, Shape) {
             /////////////////////////////////////
             // Private instance methods/fields //
             /////////////////////////////////////
-
             var _this = this,
                 initialShapes = [];
-
             /**
                Iterate through each of the tiles. Iterates through rows.
                @param {function} f      - A function to apply to each tile. The function is given each tile as a parameter.
@@ -48,7 +44,6 @@ define(['sprite/sprite', 'foundation/shape'], function(Sprite, Shape) {
                     }
                 }
             };
-
             var generateTiles = function() {
                 // Generate the tiles
                 var index = 0,
@@ -68,26 +63,20 @@ define(['sprite/sprite', 'foundation/shape'], function(Sprite, Shape) {
                     }
                 }
             };
-
             ////////////////////////////////////
             // Public instance methods/fields //
             ////////////////////////////////////
-
             this.tiles = [];
             generateTiles();
-
             // Extend Sprite constructor
             Sprite.Sprite.call(this, initialShapes, drawer,
                 drawingSettingsArr);
-
             this.updateBoundingBox();
-
             this.draw = function() {
                 this.forEachShape(function(tile) {
                     tile.draw();
                 });
             };
-
             this.clear = function() {
                 forEachTile(function(tile) {
                     tile.clear();
@@ -95,6 +84,5 @@ define(['sprite/sprite', 'foundation/shape'], function(Sprite, Shape) {
             };
         }
     };
-
     return module;
 });

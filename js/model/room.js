@@ -1,10 +1,8 @@
 define([], function() {
     "use strict";
-
     //////////////////////////////////
     // Private class methods/fields //
     //////////////////////////////////
-
     /**
        @module model/room
      */
@@ -12,7 +10,6 @@ define([], function() {
         /////////////////////////////////
         // Public class methods/fields //
         /////////////////////////////////
-
         /**
            Room
            @constructor
@@ -21,7 +18,6 @@ define([], function() {
             /////////////////////////////////////
             // Private instance methods/fields //
             /////////////////////////////////////
-
             var _this = this,
                 exits = [],
                 items = [],
@@ -31,26 +27,21 @@ define([], function() {
                     SOUTH: 2,
                     WEST: 3
                 };
-
             ////////////////////////////////////
             // Public instance methods/fields //
             ////////////////////////////////////
-
             this.getExitString = function() {
                 var returnString = "Exits:";
                 for (var i = 0; i < exits.length; i++) {
                     returnString += " " + exits[i];
                 }
             };
-
             this.getExit = function(direction) {
                 return exits[direction];
             };
-
             this.addItem = function(item) {
                 items.push(item);
             };
-
             this.getItemString = function() {
                 var returnString = "Items: \n";
                 for (var i = 0; i < items.length; i++) {
@@ -59,7 +50,6 @@ define([], function() {
                 }
                 return returnString;
             };
-
             this.removeItem = function(item) {
                 for (var i = 0; i < items.length; i++) {
                     if (items[i] === item) {
@@ -70,7 +60,6 @@ define([], function() {
                     }
                 }
             };
-
             this.searchItems = function(item) {
                 var result = null;
                 for (var i = 0; i < items.size; i++) {
@@ -81,7 +70,6 @@ define([], function() {
                 }
                 return result;
             };
-
             this.getExitList = function() {
                 var exitList = [];
                 for (var i = 0; i < exits.length; i++) {
@@ -89,15 +77,12 @@ define([], function() {
                 }
                 return exitList;
             };
-
             this.setExit = function(direction, neighbor) {
                 exits[direction] = neighbor;
             };
-
             this.getShortDescription = function() {
                 return description;
             };
-
             this.getLongDescription = function() {
                 var profSentence;
                 // TODO
@@ -109,6 +94,5 @@ define([], function() {
             };
         }
     };
-
     return module;
 });
