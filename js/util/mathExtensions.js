@@ -15,26 +15,28 @@ define([], function() {
         /////////////////////////////////
         // Public class methods/fields //
         /////////////////////////////////
+
         /**
            Generate a random integer.
 
            @method  randomInt
            @static
-           @param   {int} [minimum=0]       -   The minimum for the random integer (inclusive).
-           @param   {int} maximum           -   The maximum for the random integer (not inclusive).
-           @return  {int}                   A random integer within the specified range.
+           @param   {int} [minimum=0] The minimum for the random integer (inclusive).
+           @param   {int} maximum The maximum for the random integer (not inclusive).
+           @return  {int} A random integer within the specified range.
          */
         randomInt: function(minimum, maximum) {
             return Math.floor(module.randomFloat(minimum, maximum));
         },
+
         /**
            Generate a random float.
 
            @method randomFloat
            @static
-           @param   {float} [minimum=0]     -   The minimum for the random float (inclusive).
-           @param   {float} maximum         -   The maximum for the random float (not inclusive).
-           @return  {float}                 A random float within the specified range.
+           @param   {float} [minimum=0] The minimum for the random float (inclusive).
+           @param   {float} maximum The maximum for the random float (not inclusive).
+           @return  {float} A random float within the specified range.
          */
         randomFloat: function(minimum, maximum) {
             var min, max, range;
@@ -51,6 +53,7 @@ define([], function() {
             range = max - min;
             return Math.random() * range + min;
         },
+
         /**
             Get the dot product of two vectors.
 
@@ -70,6 +73,7 @@ define([], function() {
             }
             return total;
         },
+
         /**
             A matrix to represent transformations, etc.
 
@@ -163,7 +167,7 @@ define([], function() {
                 @return {number} Number at row and column
              */
             this.get = function(row, column) {
-                return _this.rows[row][column];
+                return rows[row][column];
             };
 
             /**
@@ -253,7 +257,7 @@ define([], function() {
                 return new module.Matrix(newEntries, _this.numRows, matrix.numColumns);
             };
 
-            // Call generateRows
+            // Call generateRows to do setup
             generateRows();
         },
 
@@ -344,6 +348,36 @@ define([], function() {
                 },
 
                 /**
+                    Shear in x
+
+                    @property x
+                    @type {number}
+                 */
+                shx: {
+                    get: function() {
+                        return matrix.get(0, 1);
+                    },
+                    set: function(value) {
+                        matrix.set(0, 1, value);
+                    }
+                },
+
+                /**
+                    Shear in y
+
+                    @property y
+                    @type {number}
+                 */
+                shy: {
+                    get: function() {
+                        return matrix.get(1, 0);
+                    },
+                    set: function(value) {
+                        matrix.set(1, 0, value);
+                    }
+                },
+
+                /**
                     Angle of rotation (counterclockwise in radian)
 
                     @property angle
@@ -354,8 +388,8 @@ define([], function() {
                         return angle;
                     },
                     set: function(newAngle) {
-                        angle = newAngle;
-                        // TODO: non-relative rotation
+                        // Subtract current angle to reset and add new angle
+                        this.rotate(-angle + newAngle);
                     }
                 }
             });
@@ -377,13 +411,14 @@ define([], function() {
                 Rotate matrix
 
                 @method rotate
-                @param  {number} angle Counterclockwise angle in radian
+                @param  {number} rotateAngle Counterclockwise angle in radian
                 @return {void}
              */
-            this.rotate = function(angle) {
+            this.rotate = function(rotateAngle) {
+                angle = (angle + rotateAngle) % (Math.PI * 2);
                 var rotationMatrix = new module.Matrix([
-                    Math.cos(angle), Math.sin(angle), 0,
-                    -Math.sin(angle), Math.cos(angle), 0,
+                    Math.cos(rotateAngle), Math.sin(rotateAngle), 0,
+                    -Math.sin(rotateAngle), Math.cos(rotateAngle), 0,
                     0, 0, 1
                 ], 3, 3);
                 matrix = matrix.multiply(rotationMatrix);

@@ -34,21 +34,29 @@ define(['jquery', 'level/levelBase', 'foundation/shape', 'foundation/animation',
             // Private instance methods/fields //
             /////////////////////////////////////
 
+            // mousePoint to keep track of cursor
+            var mousePoint;
+
             function hitTest() {
+                // Update mousePoint on every mousemove
                 _this.inputHandler.bind('mousemove', function(ev) {
-                    var point = {
+                    mousePoint = {
                         x: ev.pageX,
                         y: ev.pageY
                     };
-                    _this.quadTree.query(point).forEach(function(shape) {
-                        if (shape.collisionTest(point)) {
+                });
+                // QuadTree on mousemove with 50 ms delay
+                _this.inputHandler.bind('mousemove', function() {
+                    _this.quadTree.query(mousePoint).forEach(function(
+                        shape) {
+                        if (shape.collisionTest(mousePoint)) {
                             shape.clear();
                             shape.drawingSettings.fillStyle =
                                 'yellow';
                             shape.draw();
                         }
-                    }, 50);
-                });
+                    });
+                }, 50);
             }
 
             ////////////////////////////////////
@@ -81,18 +89,23 @@ define(['jquery', 'level/levelBase', 'foundation/shape', 'foundation/animation',
 
                 var
                 speed = 0.1,
-                    omega = Math.PI / 1000;
+                    omega = Math.PI / 500,
+                    omega2 = omega / 5,
+                    angleTolerance = Math.PI / 1000;
 
                 var polyAnimation = new Animation.Animation(poly, function(
                     time, timeDiff) {
                     poly.x += timeDiff * speed;
-                    poly.angle += timeDiff * omega;
+                    poly.transformation.rotate(timeDiff * omega);
                     return poly.x >= 500;
                 }, function() {
-                    poly.angle = 0;
                     polyAnimation = new Animation.Animation(poly,
                         function(time, timeDiff) {
                             poly.y -= timeDiff * speed;
+                            // Readjust
+                            if (poly.angle > angleTolerance) {
+                                poly.transformation.rotate(-omega2);
+                            }
                             return poly.y <= 100;
                         });
                     polyAnimation.start();

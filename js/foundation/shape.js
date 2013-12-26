@@ -103,8 +103,6 @@ define(['foundation/canvasDrawer', 'util/boundingBox', 'util/mathExtensions'],
                 // Private instance methods/fields //
                 /////////////////////////////////////
 
-                drawingSettings.angle = drawingSettings.angle || 0;
-
                 // Make floats into integers
                 x = Math.round(x);
                 y = Math.round(y);
@@ -136,10 +134,7 @@ define(['foundation/canvasDrawer', 'util/boundingBox', 'util/mathExtensions'],
                                 var dx = newX - x;
                                 x = Math.round(newX);
                                 _this.boundingBox.x = x;
-                                // Allow subclass to handle update too
-                                if (_this.updateShape !== undefined) {
-                                    _this.updateShape(dx, 0);
-                                }
+                                _this.transformation.tx = x;
                             }
                         }
                     },
@@ -159,10 +154,7 @@ define(['foundation/canvasDrawer', 'util/boundingBox', 'util/mathExtensions'],
                                 var dy = newY - y;
                                 y = Math.round(newY);
                                 _this.boundingBox.y = y;
-                                // Allow subclass to handle update too
-                                if (_this.updateShape !== undefined) {
-                                    _this.updateShape(0, dy);
-                                }
+                                _this.transformation.ty = y;
                             }
                         }
                     },
@@ -246,8 +238,6 @@ define(['foundation/canvasDrawer', 'util/boundingBox', 'util/mathExtensions'],
                         },
                         set: function(newSettings) {
                             drawingSettings = newSettings;
-                            drawingSettings.angle = drawingSettings.angle ||
-                                0;
                             _this.transformation.angle = drawingSettings.angle;
                         }
                     },
@@ -286,9 +276,7 @@ define(['foundation/canvasDrawer', 'util/boundingBox', 'util/mathExtensions'],
                    @return {void}
                  */
                 this.draw = function() {
-                    drawer.save().translate(this.transformation.x, this.transformation
-                        .y).rotate(
-                        this.transformation.angle);
+                    drawer.save().transform(this.transformation);
                     this.drawShape(drawer);
                     drawer.restore();
                 };
@@ -301,10 +289,10 @@ define(['foundation/canvasDrawer', 'util/boundingBox', 'util/mathExtensions'],
                  */
                 this.clear = function() {
                     var lineWidth = this.drawingSettings.lineWidth || 1;
-                    drawer.save().translate(this.center.x, this.center.y).rotate(
-                        this.drawingSettings.angle).clearRect(-this.width -
-                        lineWidth, -this.height - lineWidth, (this.width +
-                            lineWidth) * 2, (this.height + lineWidth) * 2).restore();
+                    drawer.save().transform(this.transformation).clearRect(-
+                        this.width - lineWidth, -this.height - lineWidth, (this
+                            .width + lineWidth) * 2, (this.height + lineWidth) *
+                        2).restore();
                 };
 
                 /**
@@ -440,12 +428,15 @@ define(['foundation/canvasDrawer', 'util/boundingBox', 'util/mathExtensions'],
             /**
                 @class Rectangle
                 @constructor
-                @param   {float} x The x coordinate of the rectangle's upper left corner.
-                @param   {float} y The y coordinate of the rectangle's upper left corner.
-                @param   {float} width The width of the rectangle.
-                @param   {float} height The height of the rectangle.
-                @param   {CanvasDrawer} drawer A CanvasDrawer to draw the rectangle onto the canvas.
-                @param   {Object} drawingSettings A dictionary of drawing options.
+                @param   {float} x The x coordinate of the rectangle's upper
+                left corner
+                @param   {float} y The y coordinate of the rectangle's upper
+                left corner
+                @param   {float} width The width of the rectangle
+                @param   {float} height The height of the rectangle
+                @param   {CanvasDrawer} drawer A CanvasDrawer to draw the
+                rectangle onto the canvas
+                @param   {Object} drawingSettings A dictionary of drawing options
              */
             Rectangle: function(x, y, width, height, drawer, drawingSettings) {
                 ////////////////////////////////////
@@ -575,11 +566,7 @@ define(['foundation/canvasDrawer', 'util/boundingBox', 'util/mathExtensions'],
                         }
                     }
                 });
-                // TODO: is this necessary?
-                this.updateShape = function(dx, dy) {
-                    _this.center.x += dx;
-                    _this.center.y += dy;
-                };
+
                 /**
                    Draw the rectangle onto the canvas using the CanvasDrawer.
 
@@ -641,5 +628,6 @@ define(['foundation/canvasDrawer', 'util/boundingBox', 'util/mathExtensions'],
                 };
             }
         };
+
         return module;
     });

@@ -1,4 +1,4 @@
-define(['underscore'], function(_) {
+define(['underscore', 'util/mathExtensions'], function(_, MathExtensions) {
     "use strict";
     //////////////////////////////////
     // Private class methods/fields //
@@ -41,6 +41,7 @@ define(['underscore'], function(_) {
                         return width;
                     }
                 },
+
                 /**
                    Height of the canvas
 
@@ -52,6 +53,7 @@ define(['underscore'], function(_) {
                         return height;
                     }
                 },
+
                 /**
                    Properties of the context. Valid settings include:
                    lineWidth, fillStyle, and strokeStyle.
@@ -84,12 +86,15 @@ define(['underscore'], function(_) {
                     }
                 }
             });
+
             /**
                 Draw a line between two points
 
                 @method drawLine
-                @param {(float|Point)} point1 x coordinate of the first point, or the first point
-                @param {(float|Point)} point2 y coordinate of the first point, or the second point
+                @param {(float|Point)} point1 x coordinate of the first point
+                or the first point
+                @param {(float|Point)} point2 y coordinate of the first point
+                or the second point
                 @param {boolean} [moveFirst=false] If true, uses moveTo method
                 @chainable
              */
@@ -100,6 +105,7 @@ define(['underscore'], function(_) {
                 ctx.lineTo(point2.x, point2.y);
                 return this;
             };
+
             /**
                 Wrapper for <code>context.stroke</code>
 
@@ -110,6 +116,7 @@ define(['underscore'], function(_) {
                 ctx.stroke();
                 return this;
             };
+
             /**
                 Wrapper for <code>context.fill</code>
 
@@ -120,6 +127,7 @@ define(['underscore'], function(_) {
                 ctx.fill();
                 return this;
             };
+
             /**
                 Wrapper for <code>context.beginPath</code>
 
@@ -130,6 +138,7 @@ define(['underscore'], function(_) {
                 ctx.beginPath();
                 return this;
             };
+
             /**
                 Wrapper for <code>context.closePath</code>
 
@@ -140,6 +149,7 @@ define(['underscore'], function(_) {
                 ctx.closePath();
                 return this;
             };
+
             /**
                 Wrapper for <code>context.rect</code>
 
@@ -154,6 +164,7 @@ define(['underscore'], function(_) {
                 ctx.rect(x, y, w, h);
                 return this;
             };
+
             /**
                 Wrapper for <code>context.arc</code>
 
@@ -170,6 +181,7 @@ define(['underscore'], function(_) {
                 ctx.arc(x, y, radius, startAngle, endAngle, ccw);
                 return this;
             };
+
             /**
                 Wrapper for <code>context.clearRect</code>
 
@@ -184,6 +196,7 @@ define(['underscore'], function(_) {
                 ctx.clearRect(x, y, width, height);
                 return this;
             };
+
             /**
                 Clear entire canvas
 
@@ -194,6 +207,7 @@ define(['underscore'], function(_) {
                 this.clearRect(0, 0, this.width, this.height);
                 return this;
             };
+
             /**
                Wrapper for <code>context.save</code>
 
@@ -204,6 +218,7 @@ define(['underscore'], function(_) {
                 ctx.save();
                 return this;
             };
+
             /**
                 Wrapper for <code>context.restore</code>
 
@@ -214,6 +229,34 @@ define(['underscore'], function(_) {
                 ctx.restore();
                 return this;
             };
+
+            /**
+                Wrapper for <code>context.restore</code>
+
+                @method transform
+                @param  {Transformation|number}  [a] Either a transformation or
+                <em>a</em> of transformation matrix
+                @param  {number}  b <em>b</em> of transformation matrix
+                @param  {number}  c <em>c</em> of transformation matrix
+                @param  {number}  d <em>d</em> of transformation matrix
+                @param  {number}  e <em>e</em> of transformation matrix
+                @param  {number}  f <em>f</em> of transformation matrix
+                @chainable
+             */
+            this.transform = function(a, b, c, d, e, f) {
+                if (a instanceof MathExtensions.Transformation) {
+                    var transformation = a;
+                    a = transformation.sx;
+                    b = transformation.shx;
+                    c = transformation.shy;
+                    d = transformation.sy;
+                    e = transformation.tx;
+                    f = transformation.ty;
+                }
+                ctx.transform(a, b, c, d, e, f);
+                return this;
+            };
+
             /**
                 Wrapper for <code>context.translate</code>
 
@@ -226,6 +269,7 @@ define(['underscore'], function(_) {
                 ctx.translate(x, y);
                 return this;
             };
+
             /**
                 Wrapper for <code>context.rotate</code>
 
@@ -237,6 +281,7 @@ define(['underscore'], function(_) {
                 ctx.rotate(angle);
                 return this;
             };
+
             /**
                 Wrapper for <code>context.fillRect</code>
 
@@ -251,6 +296,7 @@ define(['underscore'], function(_) {
                 ctx.fillRect(x, y, w, h);
                 return this;
             };
+
             /**
                 Wrapper for <code>context.strokeRect</code>
 
@@ -265,6 +311,7 @@ define(['underscore'], function(_) {
                 ctx.strokeRect(x, y, w, h);
                 return this;
             };
+
             /**
                 Wrapper for <code>context.getImageData</code>
 
