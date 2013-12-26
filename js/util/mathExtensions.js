@@ -600,6 +600,13 @@ define(['underscore'], function(_) {
                 matrix = matrix.multiply(rotationMatrix);
             };
 
+            /**
+                Apply this transformation to a point
+
+                @method applyToPoint
+                @param  {Point}     point Point to apply transformation to
+                @return {Point}     New point with transformation applied
+             */
             this.applyToPoint = function(point) {
                 var
                 coords = new module.Matrix([point.x, point.y, 1], 3, 1),

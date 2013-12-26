@@ -4,8 +4,13 @@
 
    @class Sprite
  */
-define(['underscore', 'util/boundingBox'], function(_, BoundingBox) {
+define([
+        'underscore',
+        'util/boundingBox',
+        'util/mathExtensions'
+    ], function(_, BoundingBox, MathExtensions) {
     "use strict";
+
     //////////////////////////////////
     // Private class methods/fields //
     //////////////////////////////////
@@ -14,27 +19,38 @@ define(['underscore', 'util/boundingBox'], function(_, BoundingBox) {
        @module sprite/sprite
      */
     var module = {
+
         /////////////////////////////////
         // Public class methods/fields //
         /////////////////////////////////
+
         /**
-           Sprite
-           @constructor
+            @class Sprite
+            @constructor
+            @param  {Array} shapes Array of shapes for sprite
+            @param  {CanvasDrawer} drawer Drawer to draw shapes
+            @param  {Array} drawingSettingsArr Array with settings for shapes at corresponding index
          */
         Sprite: function(shapes, drawer, drawingSettingsArr) {
             /////////////////////////////////////
             // Private instance methods/fields //
             /////////////////////////////////////
+
             var _this = this,
-                boundingBox;
+                boundingBox,
+                transformation = new MathExtensions.Transformation();
             shapes = shapes || [];
+
             ////////////////////////////////////
             // Public instance methods/fields //
             ////////////////////////////////////
+
             Object.defineProperties(this, {
                 /**
                    Shapes of Sprite instance
+
                    @property shapes
+                   @type {Array}
                  */
                 shapes: {
                     get: function() {
@@ -46,7 +62,9 @@ define(['underscore', 'util/boundingBox'], function(_, BoundingBox) {
                 },
                 /**
                    BoundingBox of Sprite instance
+
                    @property boundingBox
+                   @type {BoundingBox}
                  */
                 boundingBox: {
                     get: function() {
@@ -61,7 +79,9 @@ define(['underscore', 'util/boundingBox'], function(_, BoundingBox) {
                 },
                 /**
                    Drawing settings of Sprite instance
+
                    @property drawingSettings
+                   @type {Object}
                  */
                 drawingSettings: {
                     get: function() {
@@ -81,12 +101,30 @@ define(['underscore', 'util/boundingBox'], function(_, BoundingBox) {
                         }
                         drawingSettingsArr = newDrawingSettingsArr;
                     }
+                },
+
+                /**
+                    Transformation matrix
+
+                    @property transformation
+                    @type {Transformation}
+                 */
+                transformation: {
+                    get: function() {
+                        return transformation;
+                    },
+                    set: function(newTransformation) {
+                        transformation = newTransformation;
+                    }
                 }
             });
             /**
-               Iterator function
-                              @param {Function} f  - A function _this takes a Shape instance as a parameter.
-               @return {void}
+                Iterator function
+
+                @method forEachShape
+                @param {Function} f A function _this takes a Shape instance as a
+                parameter
+                @return {void}
              */
             this.forEachShape = function(f) {
                 var numShapes = _this.shapes.length,
@@ -97,33 +135,47 @@ define(['underscore', 'util/boundingBox'], function(_, BoundingBox) {
                 }
             };
             /**
-               Clear the Sprite instance and redraw it
+                Clear the Sprite instance and redraw it
+
+                @method clear
+                @return {void}
              */
             this.update = function() {
                 this.clear();
                 this.draw();
             };
+
             /**
-               Clear Sprite instance
-               @return {void}
+                Clear Sprite instance
+
+                @method clear
+                @return {void}
              */
             this.clear = function() {
                 this.forEachShape(function(shape) {
                     shape.clear();
                 });
             };
+
             /**
-               Draw Sprite instance
-               @return {void}
+                Draw Sprite instance
+
+                @method draw
+                @return {void}
              */
             this.draw = function() {
+                drawer.save().transform(this.transformation);
                 this.forEachShape(function(shape) {
                     shape.draw();
                 });
+                drawer.restore();
             };
+
             /**
-               Draw BoundingBox of Sprite instance
-               @return {void}
+                Draw BoundingBox of Sprite instance
+
+                @method drawBoundingBox
+                @return {void}
              */
             this.drawBoundingBox = function() {
                 var x = _this.boundingBox.x,
@@ -135,9 +187,12 @@ define(['underscore', 'util/boundingBox'], function(_, BoundingBox) {
                 drawer.strokeRect(x + lineWidth, y + lineWidth, w - 2 *
                     lineWidth, h - 2 * lineWidth);
             };
+
             /**
-               Update BoundingBox of Sprite instance
-               @return {void}
+                Update BoundingBox of Sprite instance
+
+                @method updateBoundingBox
+                @return {void}
              */
             this.updateBoundingBox = function() {
                 var minX, minY, maxX, maxY;

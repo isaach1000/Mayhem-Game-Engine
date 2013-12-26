@@ -12,39 +12,54 @@ define(['sprite/sprite', 'foundation/shape'], function(Sprite, Shape) {
         // Public class methods/fields //
         /////////////////////////////////
         /**
-           TileMap
-
-           @constructor
-           @param {int} x The x coordinate of the TileMap.
-           @param {int} y The y coordinate of the TileMap.
-           @param {int} width The width of a standard tile.
-           @param {int} height The height of a standard tile.
-           @param {int} numWidth The number of tiles in the width of the TileMap
-           @param {int} numHeight The number of tiles in the height of the TileMap
-           @param {CanvasDrawer} drawer A CanvasDrawer to draw the TileMap.
-           @param {Array} drawingSettingsArr An array of to apply to the tiles repeatedly using modulo. Iterates through each row.
+            @class TileMap
+            @constructor
+            @param {int} x The x coordinate of the TileMap.
+            @param {int} y The y coordinate of the TileMap.
+            @param {int} width The width of a standard tile.
+            @param {int} height The height of a standard tile.
+            @param {int} numWidth The number of tiles in the width of the TileMap
+            @param {int} numHeight The number of tiles in the height of the TileMap
+            @param {CanvasDrawer} drawer A CanvasDrawer to draw the TileMap.
+            @param {Array} drawingSettingsArr An array of to apply to the tiles
+            repeatedly using modulo. Iterates through each row.
          */
         TileMap: function(x, y, width, height, numWidth, numHeight, drawer,
             drawingSettingsArr) {
+            var _this = this;
+
             /////////////////////////////////////
             // Private instance methods/fields //
             /////////////////////////////////////
-            var _this = this,
-                initialShapes = [];
+
+            var initialShapes = [];
+
             /**
-               Iterate through each of the tiles. Iterates through rows.
-               @param {function} f      - A function to apply to each tile. The function is given each tile as a parameter.
-               @return {void}
+                Iterate through each of the tiles. Iterates through rows.
+
+                @method forEachTile
+                @private
+                @param {function} f A function to apply to each tile. The
+                function is given each tile as a parameter.
+                @return {void}
              */
-            var forEachTile = function(f) {
+            function forEachTile(f) {
                 var i, j;
                 for (i = 0; i < numHeight; i += 1) {
                     for (j = 0; j < numWidth; j += 1) {
                         f(_this.tiles[i][j]);
                     }
                 }
-            };
-            var generateTiles = function() {
+            }
+
+            /**
+                Generate tiles for TileMap
+
+                @method generateTiles
+                @private
+                @return {void}
+             */
+            function generateTiles() {
                 // Generate the tiles
                 var index = 0,
                     settingsLen = drawingSettingsArr.length,
@@ -62,21 +77,25 @@ define(['sprite/sprite', 'foundation/shape'], function(Sprite, Shape) {
                         index += 1;
                     }
                 }
-            };
+            }
+
             ////////////////////////////////////
             // Public instance methods/fields //
             ////////////////////////////////////
+
             this.tiles = [];
             generateTiles();
             // Extend Sprite constructor
             Sprite.Sprite.call(this, initialShapes, drawer,
                 drawingSettingsArr);
             this.updateBoundingBox();
+
             this.draw = function() {
-                this.forEachShape(function(tile) {
+                forEachTile(function(tile) {
                     tile.draw();
                 });
             };
+
             this.clear = function() {
                 forEachTile(function(tile) {
                     tile.clear();

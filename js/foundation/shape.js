@@ -347,9 +347,12 @@ define(['foundation/canvasDrawer', 'util/boundingBox', 'util/mathExtensions'],
 
                 radius = Math.round(radius);
                 var lineWidth = drawingSettings.lineWidth || 0;
+
                 // Extend Shape constructor
                 module.Shape.call(_this, x, y, radius * 2, radius * 2, drawer,
                     drawingSettings);
+                this.transformation.tx = x;
+                this.transformation.ty = y;
 
                 ////////////////////////////////////
                 // Public instance methods/fields //

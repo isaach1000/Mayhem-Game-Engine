@@ -19,25 +19,52 @@ define(['foundation/canvasDrawer', 'util/factory', 'util/boundingBox',
          */
         LevelBase: function() {
             var _this = this;
-            /////////////////////////////////////
-            // Private instance methods/fields //
-            /////////////////////////////////////
-            var WIDTH = 1000,
-                HEIGHT = 600;
+
             ////////////////////////////////////
             // Public instance methods/fields //
             ////////////////////////////////////
-            this.bgCanvas = Factory.createCanvas({
-                id: 'bgCanvas',
-                width: WIDTH + 'px',
-                height: HEIGHT + 'px'
-            });
-            this.mainCanvas = Factory.createCanvas({
-                id: 'mainCanvas',
-                width: WIDTH + 'px',
-                height: HEIGHT + 'px'
-            });
-            this.quadBox = new BoundingBox.BoundingBox(0, 0, WIDTH, HEIGHT);
+
+            /**
+                Create a canvas with the dimensions this.WIDTH by this.HEIGHT
+
+                @method createCanvas
+                @param  {string} [id] String to use as HTML id
+                @return {JQueryObject} A new jQuery object of the new canvas
+             */
+            this.createCanvas = function(id) {
+                return Factory.createCanvas({
+                    id: id,
+                    width: this.WIDTH + 'px',
+                    height: this.HEIGHT + 'px'
+                });
+            };
+
+            /**
+                Create a canvas with the createCanvas method and return a new
+                CanvasDrawer for that canvas
+
+                @method createContext
+                @param  {string} [id] String to use as HTML id
+                @return {CanvasDrawer} CanvasDrawer for new canvas
+             */
+            this.createContext = function(id) {
+                var
+                $canvas = this.createCanvas(id),
+                    w = $canvas.width(),
+                    h = $canvas.height(),
+                    ctx = $canvas[0].getContext('2d');
+                return new CanvasDrawer.CanvasDrawer(ctx, w, h);
+            };
+
+
+            this.WIDTH = 1000;
+            this.HEIGHT = 600;
+
+            this.bgCanvas = this.createCanvas('bgCanvas');
+            this.mainCanvas = this.createCanvas('mainCanvas');
+
+            this.quadBox = new BoundingBox.BoundingBox(0, 0, this.WIDTH,
+                this.HEIGHT);
             this.quadTree = new QuadTree.QuadTree(this.quadBox);
             this.bgCtx = this.bgCanvas[0].getContext('2d');
             this.bgDrawer = new CanvasDrawer.CanvasDrawer(this.bgCtx, this.bgCanvas

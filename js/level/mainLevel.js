@@ -5,9 +5,12 @@
     @class MainLevel
     @extends LevelBase
  */
-define(['jquery', 'level/levelBase', 'foundation/shape', 'foundation/animation',
-    'sprite/human', 'sprite/tileMap'
-], function($, LevelBase, Shape, Animation, Human, TileMap) {
+define([
+    'level/levelBase',
+    'foundation/shape',
+    'foundation/animation',
+    'sprite/tileMap'
+], function(LevelBase, Shape, Animation, TileMap) {
     "use strict";
     //////////////////////////////////
     // Private class methods/fields //
@@ -81,47 +84,62 @@ define(['jquery', 'level/levelBase', 'foundation/shape', 'foundation/animation',
                 }], _this.mainDrawer, {
                     fillStyle: 'purple',
                     angle: 0
-                });
-                var rect = new Shape.Rectangle(100, 100, 50, 50, _this.mainDrawer, {
-                    fillStyle: 'orange',
-                    angle: 0
-                });
+                }),
+                    rect = new Shape.Rectangle(100, 100, 50, 50, _this.mainDrawer, {
+                        fillStyle: 'orange',
+                        angle: 0
+                    }),
+                    circle = new Shape.Circle(105, 105, 30, _this.createContext(
+                        'circle'), {
+                        fillStyle: 'green'
+                    }),
+                    tileMap = new TileMap.TileMap(0, 0, 70, 70, 20, 10,
+                        _this.bgDrawer, [{
+                            fillStyle: '#7CF2EC'
+                    }]);
+
+                tileMap.draw();
                 poly.draw();
                 rect.draw();
+                circle.draw();
 
-                var
-                speed = 0.1,
+                var speed = 0.1,
                     omega = Math.PI / 2000,
                     omega2 = omega / 2,
                     angleTolerance = Math.PI / 1000;
 
-                var polyAnimation = new Animation.Animation(poly, function(
-                    time, timeDiff) {
-                    poly.x += timeDiff * speed;
-                    poly.transformation.rotate(timeDiff * omega);
-                    return poly.x >= 500;
-                }, function() {
-                    polyAnimation = new Animation.Animation(poly,
-                        function(time, timeDiff) {
-                            poly.y -= timeDiff * speed;
-                            // Readjust
-                            if (poly.angle > angleTolerance) {
-                                poly.transformation.rotate(-omega2);
-                            }
-                            return poly.y <= 100;
-                        });
-                    polyAnimation.start();
-                });
+                var polyAnimation = new Animation.Animation(poly,
+                    function(
+                        time, timeDiff) {
+                        poly.x += timeDiff * speed;
+                        poly.transformation.rotate(timeDiff * omega);
+                        return poly.x >= 500;
+                    }, function() {
+                        polyAnimation = new Animation.Animation(
+                            poly,
+                            function(time, timeDiff) {
+                                poly.y -= timeDiff * speed;
+                                // Readjust
+                                if (poly.angle > angleTolerance) {
+                                    poly.transformation.rotate(-
+                                        omega2);
+                                }
+                                return poly.y <= 100;
+                            });
+                        polyAnimation.start();
+                    });
 
-                var rectAnimation = new Animation.Animation(rect, function(
-                    time, timeDiff) {
-                    rect.transformation.rotate(timeDiff * omega);
-                });
+                var rectAnimation = new Animation.Animation(rect,
+                    function(
+                        time, timeDiff) {
+                        rect.transformation.rotate(timeDiff * omega);
+                    });
                 rectAnimation.start();
 
                 this.quadTree.insert(poly).insert(rect);
                 hitTest();
-                polyAnimation.start();
+                polyAnimation
+                    .start();
             };
         }
     };
