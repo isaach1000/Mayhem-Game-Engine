@@ -3,7 +3,7 @@
 
    @class MathExtensions
  */
-define([], function() {
+define(['underscore'], function(_) {
     "use strict";
     //////////////////////////////////
     // Private class methods/fields //
@@ -75,6 +75,37 @@ define([], function() {
         },
 
         /**
+            Rotation matrix
+
+            @method rotationMatrix
+            @param  {number}    angle Counterclockwise angle in radian
+            @return {Matrix}    Rotation matrix
+         */
+        rotationMatrix: function(angle) {
+            return new module.Matrix([
+                Math.cos(-angle), Math.sin(-angle), 0,
+                -Math.sin(-angle), Math.cos(-angle), 0,
+                0, 0, 1
+            ], 3, 3);
+        },
+
+        /**
+            Build a matrix from a 2d array
+
+            @method buildMatrix
+            @static
+            @param  {Array}     rows 2d array
+            @return {Matrix}    Matrix from 2d array
+         */
+        buildMatrix: function(rows) {
+            var
+            numRows = rows.length,
+                numColumns = rows[0].length;
+
+            return new module.Matrix(_.flatten(rows), numRows, numColumns);
+        },
+
+        /**
             A matrix to represent transformations, etc.
 
             @class Matrix
@@ -85,27 +116,13 @@ define([], function() {
             @param {number} numRows Number of column in the matrix
         */
         Matrix: function(entriesArray, numRows, numColumns) {
+            var _this = this;
+
             /////////////////////////////////////
             // Private instance methods/fields //
             /////////////////////////////////////
-            var _this = this,
-                rows;
 
-            /**
-                Apply a function to each element in the matrix (in order)
-
-                @method forEach
-                @private
-                @param  {Function} f Function that takes element as parameter
-                @return {void}
-             */
-            function forEach(f) {
-                for (var i = 0; i < numRows; i += 1) {
-                    for (var j = 0; j < numColumns; j += 1) {
-                        f(entriesArray[i][j], i, j);
-                    }
-                }
-            }
+            var rows;
 
             /**
                 Add the elements of a matrix to this matrix
@@ -123,7 +140,7 @@ define([], function() {
                     matrix.numColumns) {
                     return null;
                 }
-                forEach(function(entry, row, column) {
+                _this.forEachEntry(function(entry, row, column) {
                     var sum = entry + coefficient * matrix.get(row,
                         column);
                     newEntries.push(sum);
@@ -155,8 +172,23 @@ define([], function() {
             // Public instance methods/fields //
             ////////////////////////////////////
 
-            _this.numRows = numRows;
-            _this.numColumns = numColumns;
+            this.numRows = numRows;
+            this.numColumns = numColumns;
+
+            /**
+                Apply a function to each element in the matrix (in order)
+
+                @method forEachEntry
+                @param  {Function} f Function that takes element as parameter
+                @return {void}
+             */
+            this.forEachEntry = function(f) {
+                for (var i = 0; i < numRows; i += 1) {
+                    for (var j = 0; j < numColumns; j += 1) {
+                        f(rows[i][j], i, j);
+                    }
+                }
+            };
 
             /**
                 Get an element from the matrix
@@ -203,12 +235,22 @@ define([], function() {
                 @return {Array} Column as array
              */
             this.getColumn = function(columnIndex) {
-                var column = [],
-                    i;
-                for (i = 0; i < _this.numRows; i += 1) {
+                var column = [];
+                for (var i = 0; i < _this.numRows; i += 1) {
                     column.push(rows[i][columnIndex]);
                 }
                 return column;
+            };
+
+            this.toArray2D = function() {
+                var arr = [];
+                this.forEachEntry(function(entry, i, j) {
+                    while (i >= arr.length) {
+                        arr.push([]);
+                    }
+                    arr[i].push(entry);
+                });
+                return arr;
             };
 
             /**
@@ -242,19 +284,157 @@ define([], function() {
              */
             this.multiply = function(matrix) {
                 var newEntries = [],
-                    i, j, vector1, vector2, dotProduct;
-                if (_this.numColumns !== _this.numRows) {
+                    vector1, vector2, dotProduct;
+                if (_this.numColumns !== matrix.numRows) {
                     return null;
                 }
-                for (i = 0; i < _this.numRows; i += 1) {
+                for (var i = 0; i < _this.numRows; i += 1) {
                     vector1 = _this.getRow(i);
-                    for (j = 0; j < matrix.numColumns; j += 1) {
+                    for (var j = 0; j < matrix.numColumns; j += 1) {
                         vector2 = matrix.getColumn(j);
                         dotProduct = module.dotProduct(vector1, vector2);
                         newEntries.push(dotProduct);
                     }
                 }
-                return new module.Matrix(newEntries, _this.numRows, matrix.numColumns);
+                return new module.Matrix(newEntries, this.numRows,
+                    matrix.numColumns);
+            };
+
+            this.multiplyCoefficient = function(k) {
+                var newEntries = [];
+                this.forEachEntry(function(entry, i, j) {
+                    newEntries.push(entry * k);
+                });
+                return new module.Matrix(newEntries, this.numRows,
+                    this.numRows);
+            };
+
+            /**
+                LU Decomposition (only for square matrices). Based on
+                <a href="http://rosettacode.org/wiki/LU_decomposition#Python">
+                this</a> article.
+
+                @method luDecomposition
+                @return {Object} Lower, upper, and pivot matrices in hash with
+                keys l, u, and p respectively
+             */
+            this.luDecomposition = function() {
+                // Inner helper functio
+                function pivotize() {
+                    var
+                    n = _this.numRows,
+                        id = [],
+                        maxIter = function(i) {
+                            return _this.get(i, j);
+                        };
+
+                    for (var j = 0; j < n; j++) {
+                        id.push([]);
+                        for (var i = 0; i < n; i++) {
+                            id[j].push((i === j ? 1 : 0));
+                        }
+                    }
+                    for (j = 0; j < n; j++) {
+                        var row = _.max(_.range(j, n), maxIter);
+                        if (j !== row) {
+                            var tmp = id[j];
+                            id[j] = id[row];
+                            id[row] = tmp;
+                        }
+                    }
+                    return module.buildMatrix(id);
+                }
+
+                // Main function
+                var n = _this.numRows,
+                    l = [],
+                    u = [],
+                    p = pivotize(),
+                    i, j, k;
+                var a2 = p.multiply(_this).toArray2D();
+                for (i = 0; i < n; i++) {
+                    l.push([]);
+                    u.push([]);
+                    for (j = 0; j < n; j++) {
+                        l[i].push(0);
+                        u[i].push(0);
+                    }
+                }
+                for (j = 0; j < n; j++) {
+                    l[j][j] = 1;
+                    for (i = 0; i <= j; i++) {
+                        var s1 = 0;
+                        for (k = 0; k < i; k++) {
+                            s1 += u[k][j] * l[i][k];
+                        }
+                        u[i][j] = a2[i][j] - s1;
+                    }
+                    for (i = j; i < n; i++) {
+                        var s2 = 0;
+                        for (k = 0; k < j; k++) {
+                            s2 += u[k][j] * l[i][k];
+                        }
+                        l[i][j] = (a2[i][j] - s2) / u[j][j];
+                    }
+                }
+                return {
+                    l: module.buildMatrix(l),
+                    u: module.buildMatrix(u),
+                    p: p
+                };
+            };
+
+            /**
+                Get the determinant of the matrix (must be a square matrix)
+
+                @method determinant
+                @return {number}    The determinant
+             */
+            this.determinant = function() {
+                var luDec = this.luDecomposition(),
+                    l = luDec.l,
+                    u = luDec.u,
+                    p = luDec.p,
+                    det = 1;
+
+                for (var i = 0; i < this.numRows; i++) {
+                    det *= l.get(i, i) * u.get(i, i) * p.get(i, i);
+                }
+
+                return det;
+            };
+
+            /**
+                Get the inverse of the matrix (must be a square matrix)
+
+                @method inverse
+                @return {Matrix}    The inverse matrix
+             */
+            this.inverse = function() {
+                if (this.numRows === 3) {
+                    var
+                    a = this.get(0, 0),
+                        b = this.get(0, 1),
+                        c = this.get(0, 2),
+                        d = this.get(1, 0),
+                        e = this.get(1, 1),
+                        f = this.get(1, 2),
+                        g = this.get(2, 0),
+                        h = this.get(2, 1),
+                        i = this.get(2, 2),
+                        det = a * (e * i - f * h) - b * (i * d - f * g) +
+                            c * (d * h - e * g),
+                        inv = new module.Matrix([
+                            (e * i - f * h), -(b * i - c * h), (b * f -
+                                c * e),
+                            -(d * i - f * g), (a * i - c * g), -(a * f - c * d),
+                            (d * h - e * g), -(a * h - b * g), (a * e -
+                                b * d)
+                        ], 3, 3);
+                    return inv.multiplyCoefficient(1 / det);
+                } else {
+                    // TODO: n by n matrix inverse
+                }
             };
 
             // Call generateRows to do setup
@@ -416,12 +596,40 @@ define([], function() {
              */
             this.rotate = function(rotateAngle) {
                 angle = (angle + rotateAngle) % (Math.PI * 2);
-                var rotationMatrix = new module.Matrix([
-                    Math.cos(rotateAngle), Math.sin(rotateAngle), 0,
-                    -Math.sin(rotateAngle), Math.cos(rotateAngle), 0,
-                    0, 0, 1
-                ], 3, 3);
+                var rotationMatrix = module.rotationMatrix(rotateAngle);
                 matrix = matrix.multiply(rotationMatrix);
+            };
+
+            this.applyToPoint = function(point) {
+                var
+                coords = new module.Matrix([point.x, point.y, 1], 3, 1),
+                    newCoords = matrix.multiply(coords),
+                    x = newCoords.get(0, 0),
+                    y = newCoords.get(1, 0);
+                return {
+                    x: x,
+                    y: y
+                };
+            };
+
+            /**
+                Apply the inverse of the transformation to a point to do
+                collision detection
+
+                @method adjustPoint
+                @param  {Point}    point Point to apply transformation to
+                @return {Point}    A new point with the transformation
+             */
+            this.adjustPoint = function(point) {
+                var
+                coords = new module.Matrix([point.x, point.y, 1], 3, 1),
+                    newCoords = matrix.inverse().multiply(coords),
+                    x = newCoords.get(0, 0),
+                    y = newCoords.get(1, 0);
+                return {
+                    x: x,
+                    y: y
+                };
             };
         }
     };

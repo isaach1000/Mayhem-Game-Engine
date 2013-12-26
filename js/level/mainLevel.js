@@ -13,6 +13,8 @@ define(['jquery', 'level/levelBase', 'foundation/shape', 'foundation/animation',
     // Private class methods/fields //
     //////////////////////////////////
 
+    var QUAD_DELAY = 10;
+
     /**
        @module level/mainLevel
      */
@@ -45,7 +47,7 @@ define(['jquery', 'level/levelBase', 'foundation/shape', 'foundation/animation',
                         y: ev.pageY
                     };
                 });
-                // QuadTree on mousemove with 50 ms delay
+                // Search QuadTree on mousemove with QUAD_DELAY ms delay
                 _this.inputHandler.bind('mousemove', function() {
                     _this.quadTree.query(mousePoint).forEach(function(
                         shape) {
@@ -56,7 +58,7 @@ define(['jquery', 'level/levelBase', 'foundation/shape', 'foundation/animation',
                             shape.draw();
                         }
                     });
-                }, 50);
+                }, QUAD_DELAY);
             }
 
             ////////////////////////////////////
@@ -68,10 +70,10 @@ define(['jquery', 'level/levelBase', 'foundation/shape', 'foundation/animation',
                     x: 100,
                     y: 400
                 }, [{
-                    x: 100,
+                    x: -100,
                     y: 0
                 }, {
-                    x: -100,
+                    x: 100,
                     y: 0
                 }, {
                     x: 0,
@@ -89,8 +91,8 @@ define(['jquery', 'level/levelBase', 'foundation/shape', 'foundation/animation',
 
                 var
                 speed = 0.1,
-                    omega = Math.PI / 500,
-                    omega2 = omega / 5,
+                    omega = Math.PI / 2000,
+                    omega2 = omega / 2,
                     angleTolerance = Math.PI / 1000;
 
                 var polyAnimation = new Animation.Animation(poly, function(
@@ -110,6 +112,12 @@ define(['jquery', 'level/levelBase', 'foundation/shape', 'foundation/animation',
                         });
                     polyAnimation.start();
                 });
+
+                var rectAnimation = new Animation.Animation(rect, function(
+                    time, timeDiff) {
+                    rect.transformation.rotate(timeDiff * omega);
+                });
+                rectAnimation.start();
 
                 this.quadTree.insert(poly).insert(rect);
                 hitTest();

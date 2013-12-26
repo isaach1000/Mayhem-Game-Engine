@@ -278,6 +278,7 @@ define(['foundation/canvasDrawer', 'util/boundingBox', 'util/mathExtensions'],
                 this.draw = function() {
                     drawer.save().transform(this.transformation);
                     this.drawShape(drawer);
+                    this.drawBoundingBox(drawer);
                     drawer.restore();
                 };
 
@@ -301,22 +302,12 @@ define(['foundation/canvasDrawer', 'util/boundingBox', 'util/mathExtensions'],
                     @method drawBoundingBox
                     @return {void}
                  */
-                this.drawBoundingBox = function() {
-                    // As long as angle is not undefined, 0, or otherwise falsy
-                    if (this.drawingSettings.angle) {
-                        drawer.save();
-                        drawer.rotate(this.drawingSettings.angle);
-                    }
+                this.drawBoundingBox = function(drawer) {
                     var x = _this.boundingBox.x,
                         y = _this.boundingBox.y,
                         w = _this.boundingBox.width,
                         h = _this.boundingBox.height,
                         lineWidth = _this.drawingSettings.lineWidth || 1;
-                    drawer.strokeRect(x + lineWidth, y + lineWidth, w - 2 *
-                        lineWidth, h - 2 * lineWidth);
-                    if (this.drawingSettings.angle) {
-                        drawer.restore();
-                    }
                 };
                 /**
                     Check if a point is within the Shape instance
@@ -327,7 +318,7 @@ define(['foundation/canvasDrawer', 'util/boundingBox', 'util/mathExtensions'],
                  */
                 this.collisionTest = function(point) {
                     // Return result of subclass's test.
-                    return _this.hitTest(point);
+                    return _this._hitTest(point);
                 };
             },
 
@@ -411,7 +402,7 @@ define(['foundation/canvasDrawer', 'util/boundingBox', 'util/mathExtensions'],
                     canvasDrawer.stroke();
                     canvasDrawer.fill();
                 };
-                this.hitTest = function(point) {
+                this._hitTest = function(point) {
                     var dx = this.x + this.radius - point.x,
                         dy = this.y + this.radius - point.y;
                     return dx * dx + dy * dy <= this.radius * this.radius;
@@ -601,26 +592,26 @@ define(['foundation/canvasDrawer', 'util/boundingBox', 'util/mathExtensions'],
 
                 /**
                     Hit testing based on
-                    <a href="http://stackoverflow.com/a/2922778/1930331</a>.
+                    <a href="http://stackoverflow.com/a/2922778/1930331">this
+                    </a> StackOverflow answer.
 
+                    @method _hitTest
+                    @protected
                     @param {Point} point A point
                     @return {boolean} If the point is in the polygon
                  */
-                this.hitTest = function(point) {
-                    var adjustedPoint = module.adjustPoint(point, this.center,
-                        this.angle);
-                    var cx = this.center.x,
-                        cy = this.center.y,
+                this._hitTest = function(point) {
+                    var p = this.transformation.adjustPoint(point),
                         nvert = this.points.length,
                         i,
                         j,
                         c = false;
                     for (i = 0, j = nvert - 1; i < nvert; j = i++) {
-                        if (((this.points[i].y + cy > point.y) !== (this.points[
-                            j].y + cy > point.y)) && (point.x < (this.points[
-                            j].x - this.points[i].x) * (point.y - this.points[
-                            i].y - cy) / (this.points[j].y - this.points[
-                            i].y) + this.points[i].x + cx)) {
+                        if (((this.points[i].y > p.y) !== (this.points[
+                            j].y > p.y)) && (p.x < (this.points[
+                            j].x - this.points[i].x) * (p.y - this.points[
+                            i].y) / (this.points[j].y - this.points[
+                            i].y) + this.points[i].x)) {
                             c = !c;
                         }
                     }
