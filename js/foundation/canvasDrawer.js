@@ -4,7 +4,7 @@ define(['underscore', 'util/mathExtensions'], function(_, MathExtensions) {
     //////////////////////////////////
     // Private class methods/fields //
     //////////////////////////////////
-    
+
     /**
        @module foundation/canvasDrawer
      */
@@ -12,7 +12,7 @@ define(['underscore', 'util/mathExtensions'], function(_, MathExtensions) {
         /////////////////////////////////
         // Public class methods/fields //
         /////////////////////////////////
-        
+
         /**
             CanvasDrawer for drawing to a canvas. Wrapper class for HTML5
             CanvasRenderingContext2D.
@@ -27,15 +27,15 @@ define(['underscore', 'util/mathExtensions'], function(_, MathExtensions) {
             /////////////////////////////////////
             // Private instance methods/fields //
             /////////////////////////////////////
-            
+
             var _this = this,
                 ctxSettings;
-            
-            
+
+
             ////////////////////////////////////
             // Public instance methods/fields //
             ////////////////////////////////////
-            
+
             Object.defineProperties(this, {
                 /**
                    Width of the canvas

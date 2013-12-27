@@ -23,7 +23,7 @@ define(['underscore'], function(_) {
                 window.setTimeout(callback, 1000 / 60);
         };
     })();
-    
+
     /**
       @module foundation/animation
     */
@@ -71,7 +71,7 @@ define(['underscore'], function(_) {
             ////////////////////////////////////
             // Public instance methods/fields //
             ////////////////////////////////////
-            
+
             /**
                 Start the animation.
 

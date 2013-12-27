@@ -38,12 +38,14 @@ jasmine.HtmlReporterHelpers.getSpecStatus = function(child) {
 
 jasmine.HtmlReporterHelpers.appendToSummary = function(child, childElement) {
     var parentDiv = this.dom.summary;
-    var parentSuite = (typeof child.parentSuite == 'undefined') ? 'suite' : 'parentSuite';
+    var parentSuite = (typeof child.parentSuite == 'undefined') ? 'suite' :
+        'parentSuite';
     var parent = child[parentSuite];
 
     if (parent) {
         if (typeof this.views.suites[parent.id] == 'undefined') {
-            this.views.suites[parent.id] = new jasmine.HtmlReporter.SuiteView(parent, this.dom, this.views);
+            this.views.suites[parent.id] = new jasmine.HtmlReporter.SuiteView(
+                parent, this.dom, this.views);
         }
         parentDiv = this.views.suites[parent.id].element;
     }
@@ -94,7 +96,8 @@ jasmine.HtmlReporter = function(_doc) {
 
     self.reportSpecStarting = function(spec) {
         if (self.logRunningSpecs) {
-            self.log('>> Jasmine Running ' + spec.suite.description + ' ' + spec.description + '...');
+            self.log('>> Jasmine Running ' + spec.suite.description + ' ' +
+                spec.description + '...');
         }
     };
 
@@ -273,7 +276,8 @@ jasmine.HtmlReporter.ReporterView = function(dom) {
             }, '0 failing'));
 
         this.summaryMenuItem.onclick = function() {
-            dom.reporter.className = dom.reporter.className.replace(/ showDetails/g, '');
+            dom.reporter.className = dom.reporter.className.replace(
+                / showDetails/g, '');
         };
 
         this.detailsMenuItem.onclick = function() {
@@ -291,7 +295,8 @@ jasmine.HtmlReporter.ReporterView = function(dom) {
 
         for (var i = 0; i < specs.length; i++) {
             var spec = specs[i];
-            this.views.specs[spec.id] = new jasmine.HtmlReporter.SpecView(spec, dom, this.views);
+            this.views.specs[spec.id] = new jasmine.HtmlReporter.SpecView(spec,
+                dom, this.views);
             if (specFilter(spec)) {
                 this.runningSpecCount++;
             }
@@ -302,7 +307,8 @@ jasmine.HtmlReporter.ReporterView = function(dom) {
         this.completeSpecCount++;
 
         if (isUndefined(this.views.specs[spec.id])) {
-            this.views.specs[spec.id] = new jasmine.HtmlReporter.SpecView(spec, dom);
+            this.views.specs[spec.id] = new jasmine.HtmlReporter.SpecView(spec,
+                dom);
         }
 
         var specView = this.views.specs[spec.id];
@@ -347,7 +353,8 @@ jasmine.HtmlReporter.ReporterView = function(dom) {
             });
             dom.alert.appendChild(this.runningAlert);
         }
-        this.runningAlert.innerHTML = "Running " + this.completeSpecCount + " of " + specPluralizedFor(this.totalSpecCount);
+        this.runningAlert.innerHTML = "Running " + this.completeSpecCount +
+            " of " + specPluralizedFor(this.totalSpecCount);
 
         // skipped specs UI
         if (isUndefined(this.skippedAlert)) {
@@ -357,7 +364,8 @@ jasmine.HtmlReporter.ReporterView = function(dom) {
             });
         }
 
-        this.skippedAlert.innerHTML = "Skipping " + this.skippedCount + " of " + specPluralizedFor(this.totalSpecCount) + " - run all";
+        this.skippedAlert.innerHTML = "Skipping " + this.skippedCount + " of " +
+            specPluralizedFor(this.totalSpecCount) + " - run all";
 
         if (this.skippedCount === 1 && isDefined(dom.alert)) {
             dom.alert.appendChild(this.skippedAlert);
@@ -394,7 +402,8 @@ jasmine.HtmlReporter.ReporterView = function(dom) {
     this.complete = function() {
         dom.alert.removeChild(this.runningAlert);
 
-        this.skippedAlert.innerHTML = "Ran " + this.runningSpecCount + " of " + specPluralizedFor(this.totalSpecCount) + " - run all";
+        this.skippedAlert.innerHTML = "Ran " + this.runningSpecCount + " of " +
+            specPluralizedFor(this.totalSpecCount) + " - run all";
 
         if (this.failedCount === 0) {
             dom.alert.appendChild(this.createDom('span', {
@@ -406,7 +415,8 @@ jasmine.HtmlReporter.ReporterView = function(dom) {
 
         dom.banner.appendChild(this.createDom('span', {
             className: 'duration'
-        }, "finished in " + ((new Date().getTime() - this.startedAt.getTime()) / 1000) + "s"));
+        }, "finished in " + ((new Date().getTime() - this.startedAt.getTime()) /
+            1000) + "s"));
     };
 
     return this;
@@ -566,7 +576,8 @@ jasmine.TrivialReporter = function(doc) {
     this.logRunningSpecs = false;
 };
 
-jasmine.TrivialReporter.prototype.createDom = function(type, attrs, childrenVarArgs) {
+jasmine.TrivialReporter.prototype.createDom = function(type, attrs,
+    childrenVarArgs) {
     var el = document.createElement(type);
 
     for (var i = 2; i < arguments.length; i++) {
@@ -676,7 +687,8 @@ jasmine.TrivialReporter.prototype.reportRunnerStarting = function(runner) {
         if (showPassed.checked) {
             self.outerDiv.className += ' show-passed';
         } else {
-            self.outerDiv.className = self.outerDiv.className.replace(/ show-passed/, '');
+            self.outerDiv.className = self.outerDiv.className.replace(
+                / show-passed/, '');
         }
     };
 
@@ -684,14 +696,16 @@ jasmine.TrivialReporter.prototype.reportRunnerStarting = function(runner) {
         if (showSkipped.checked) {
             self.outerDiv.className += ' show-skipped';
         } else {
-            self.outerDiv.className = self.outerDiv.className.replace(/ show-skipped/, '');
+            self.outerDiv.className = self.outerDiv.className.replace(
+                / show-skipped/, '');
         }
     };
 };
 
 jasmine.TrivialReporter.prototype.reportRunnerResults = function(runner) {
     var results = runner.results();
-    var className = (results.failedCount > 0) ? "runner failed" : "runner passed";
+    var className = (results.failedCount > 0) ? "runner failed" :
+        "runner passed";
     this.runnerDiv.setAttribute("class", className);
     //do it twice for IE
     this.runnerDiv.setAttribute("className", className);
@@ -702,14 +716,18 @@ jasmine.TrivialReporter.prototype.reportRunnerResults = function(runner) {
             specCount++;
         }
     }
-    var message = "" + specCount + " spec" + (specCount == 1 ? "" : "s") + ", " + results.failedCount + " failure" + ((results.failedCount == 1) ? "" : "s");
-    message += " in " + ((new Date().getTime() - this.startedAt.getTime()) / 1000) + "s";
+    var message = "" + specCount + " spec" + (specCount == 1 ? "" : "s") + ", " +
+        results.failedCount + " failure" + ((results.failedCount == 1) ? "" :
+            "s");
+    message += " in " + ((new Date().getTime() - this.startedAt.getTime()) /
+        1000) + "s";
     this.runnerMessageSpan.replaceChild(this.createDom('a', {
         className: 'description',
         href: '?'
     }, message), this.runnerMessageSpan.firstChild);
 
-    this.finishedAtSpan.appendChild(document.createTextNode("Finished at " + new Date().toString()));
+    this.finishedAtSpan.appendChild(document.createTextNode("Finished at " +
+        new Date().toString()));
 };
 
 jasmine.TrivialReporter.prototype.reportSuiteResults = function(suite) {
@@ -723,7 +741,8 @@ jasmine.TrivialReporter.prototype.reportSuiteResults = function(suite) {
 
 jasmine.TrivialReporter.prototype.reportSpecStarting = function(spec) {
     if (this.logRunningSpecs) {
-        this.log('>> Jasmine Running ' + spec.suite.description + ' ' + spec.description + '...');
+        this.log('>> Jasmine Running ' + spec.suite.description + ' ' + spec.description +
+            '...');
     }
 };
 

@@ -10,29 +10,9 @@ define(['foundation/canvasDrawer', 'util/boundingBox', 'util/mathExtensions'],
         // Private class methods/fields //
         //////////////////////////////////
 
-    //////////////////////////////////
-    // Private class methods/fields //
-    //////////////////////////////////
-    
-    
-    /**
-     * @exports foundation/shape
-     */
-    var module = {
-        /////////////////////////////////
-        // Public class methods/fields //
-        /////////////////////////////////
-        
         /**
            @module foundation/shape
          */
-        Shape: function(x, y, width, height, drawer, drawingSettings) {
-            /////////////////////////////////////
-            // Private instance methods/fields //
-            /////////////////////////////////////
-            
-            var _this = this,
-                bbox;
 
         var module = {
             /////////////////////////////////
@@ -356,10 +336,6 @@ define(['foundation/canvasDrawer', 'util/boundingBox', 'util/mathExtensions'],
                 @class Circle
                 @extends Shape
              */
-            this.update = function() {
-                this.clear();
-                this.draw();
-            };
 
             /**
                @class Circle
@@ -551,21 +527,6 @@ define(['foundation/canvasDrawer', 'util/boundingBox', 'util/mathExtensions'],
                         f(point, i);
                     }
                 }
-                var x = _this.boundingBox.x,
-                    y = _this.boundingBox.y,
-                    w = _this.boundingBox.width,
-                    h = _this.boundingBox.height,
-                    lineWidth = _this.drawingSettings.lineWidth || 1;
-                drawer.strokeRect(x + lineWidth, y + lineWidth,
-                        w - 2 * lineWidth, h - 2 * lineWidth);
-            };
-            
-            this.collisionTest = function(point) {
-                // Return result of subclass's test.
-                return _this.hitTest(point);
-            };
-        }
-    };
 
                 ////////////////////////////////////
                 // Public instance methods/fields //

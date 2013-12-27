@@ -26,9 +26,12 @@
         w = Object.keys,
         _ = i.bind,
         j = function(n) {
-            return n instanceof j ? n : this instanceof j ? (this._wrapped = n, void 0) : new j(n)
+            return n instanceof j ? n : this instanceof j ? (this._wrapped =
+                n, void 0) : new j(n)
         };
-    "undefined" != typeof exports ? ("undefined" != typeof module && module.exports && (exports = module.exports = j), exports._ = j) : n._ = j, j.VERSION = "1.5.2";
+    "undefined" != typeof exports ? ("undefined" != typeof module && module
+        .exports && (exports = module.exports = j), exports._ = j) : n._ =
+        j, j.VERSION = "1.5.2";
     var A = j.each = j.forEach = function(n, t, e) {
         if (null != n)
             if (s && n.forEach === s) n.forEach(t, e);
@@ -41,28 +44,32 @@
     };
     j.map = j.collect = function(n, t, r) {
         var e = [];
-        return null == n ? e : p && n.map === p ? n.map(t, r) : (A(n, function(n, u, i) {
-            e.push(t.call(r, n, u, i))
-        }), e)
+        return null == n ? e : p && n.map === p ? n.map(t, r) : (A(n,
+            function(n, u, i) {
+                e.push(t.call(r, n, u, i))
+            }), e)
     };
     var E = "Reduce of empty array with no initial value";
     j.reduce = j.foldl = j.inject = function(n, t, r, e) {
         var u = arguments.length > 2;
-        if (null == n && (n = []), h && n.reduce === h) return e && (t = j.bind(t, e)), u ? n.reduce(t, r) : n.reduce(t);
+        if (null == n && (n = []), h && n.reduce === h) return e && (t = j.bind(
+            t, e)), u ? n.reduce(t, r) : n.reduce(t);
         if (A(n, function(n, i, a) {
             u ? r = t.call(e, r, n, i, a) : (r = n, u = !0)
         }), !u) throw new TypeError(E);
         return r
     }, j.reduceRight = j.foldr = function(n, t, r, e) {
         var u = arguments.length > 2;
-        if (null == n && (n = []), v && n.reduceRight === v) return e && (t = j.bind(t, e)), u ? n.reduceRight(t, r) : n.reduceRight(t);
+        if (null == n && (n = []), v && n.reduceRight === v) return e && (t =
+            j.bind(t, e)), u ? n.reduceRight(t, r) : n.reduceRight(t);
         var i = n.length;
         if (i !== +i) {
             var a = j.keys(n);
             i = a.length
         }
         if (A(n, function(o, c, l) {
-            c = a ? a[--i] : --i, u ? r = t.call(e, r, n[c], c, l) : (r = n[c], u = !0)
+            c = a ? a[--i] : --i, u ? r = t.call(e, r, n[c], c, l) :
+                (r = n[c], u = !0)
         }), !u) throw new TypeError(E);
         return r
     }, j.find = j.detect = function(n, t, r) {
@@ -72,9 +79,10 @@
         }), e
     }, j.filter = j.select = function(n, t, r) {
         var e = [];
-        return null == n ? e : g && n.filter === g ? n.filter(t, r) : (A(n, function(n, u, i) {
-            t.call(r, n, u, i) && e.push(n)
-        }), e)
+        return null == n ? e : g && n.filter === g ? n.filter(t, r) : (A(n,
+            function(n, u, i) {
+                t.call(r, n, u, i) && e.push(n)
+            }), e)
     }, j.reject = function(n, t, r) {
         return j.filter(n, function(n, e, u) {
             return !t.call(r, n, e, u)
@@ -82,21 +90,24 @@
     }, j.every = j.all = function(n, t, e) {
         t || (t = j.identity);
         var u = !0;
-        return null == n ? u : d && n.every === d ? n.every(t, e) : (A(n, function(n, i, a) {
-            return (u = u && t.call(e, n, i, a)) ? void 0 : r
-        }), !! u)
+        return null == n ? u : d && n.every === d ? n.every(t, e) : (A(n,
+            function(n, i, a) {
+                return (u = u && t.call(e, n, i, a)) ? void 0 : r
+            }), !! u)
     };
     var O = j.some = j.any = function(n, t, e) {
         t || (t = j.identity);
         var u = !1;
-        return null == n ? u : m && n.some === m ? n.some(t, e) : (A(n, function(n, i, a) {
-            return u || (u = t.call(e, n, i, a)) ? r : void 0
-        }), !! u)
+        return null == n ? u : m && n.some === m ? n.some(t, e) : (A(n,
+            function(n, i, a) {
+                return u || (u = t.call(e, n, i, a)) ? r : void 0
+            }), !! u)
     };
     j.contains = j.include = function(n, t) {
-        return null == n ? !1 : y && n.indexOf === y ? n.indexOf(t) != -1 : O(n, function(n) {
-            return n === t
-        })
+        return null == n ? !1 : y && n.indexOf === y ? n.indexOf(t) != -1 :
+            O(n, function(n) {
+                return n === t
+            })
     }, j.invoke = function(n, t) {
         var r = o.call(arguments, 2),
             e = j.isFunction(t);
@@ -108,15 +119,17 @@
             return n[t]
         })
     }, j.where = function(n, t, r) {
-        return j.isEmpty(t) ? r ? void 0 : [] : j[r ? "find" : "filter"](n, function(n) {
-            for (var r in t)
-                if (t[r] !== n[r]) return !1;
-            return !0
-        })
+        return j.isEmpty(t) ? r ? void 0 : [] : j[r ? "find" : "filter"](n,
+            function(n) {
+                for (var r in t)
+                    if (t[r] !== n[r]) return !1;
+                return !0
+            })
     }, j.findWhere = function(n, t) {
         return j.where(n, t, !0)
     }, j.max = function(n, t, r) {
-        if (!t && j.isArray(n) && n[0] === +n[0] && n.length < 65535) return Math.max.apply(Math, n);
+        if (!t && j.isArray(n) && n[0] === +n[0] && n.length < 65535) return Math
+            .max.apply(Math, n);
         if (!t && j.isEmpty(n)) return -1 / 0;
         var e = {
             computed: -1 / 0,
@@ -130,7 +143,8 @@
             })
         }), e.value
     }, j.min = function(n, t, r) {
-        if (!t && j.isArray(n) && n[0] === +n[0] && n.length < 65535) return Math.min.apply(Math, n);
+        if (!t && j.isArray(n) && n[0] === +n[0] && n.length < 65535) return Math
+            .min.apply(Math, n);
         if (!t && j.isEmpty(n)) return 1 / 0;
         var e = {
             computed: 1 / 0,
@@ -150,7 +164,8 @@
             t = j.random(r++), e[r - 1] = e[t], e[t] = n
         }), e
     }, j.sample = function(n, t, r) {
-        return arguments.length < 2 || r ? n[j.random(n.length - 1)] : j.shuffle(n).slice(0, Math.max(0, t))
+        return arguments.length < 2 || r ? n[j.random(n.length - 1)] : j.shuffle(
+            n).slice(0, Math.max(0, t))
     };
     var k = function(n) {
         return j.isFunction(n) ? n : function(t) {
@@ -198,23 +213,28 @@
         }
         return i
     }, j.toArray = function(n) {
-        return n ? j.isArray(n) ? o.call(n) : n.length === +n.length ? j.map(n, j.identity) : j.values(n) : []
+        return n ? j.isArray(n) ? o.call(n) : n.length === +n.length ? j.map(
+            n, j.identity) : j.values(n) : []
     }, j.size = function(n) {
-        return null == n ? 0 : n.length === +n.length ? n.length : j.keys(n).length
+        return null == n ? 0 : n.length === +n.length ? n.length : j.keys(n)
+            .length
     }, j.first = j.head = j.take = function(n, t, r) {
         return null == n ? void 0 : null == t || r ? n[0] : o.call(n, 0, t)
     }, j.initial = function(n, t, r) {
         return o.call(n, 0, n.length - (null == t || r ? 1 : t))
     }, j.last = function(n, t, r) {
-        return null == n ? void 0 : null == t || r ? n[n.length - 1] : o.call(n, Math.max(n.length - t, 0))
+        return null == n ? void 0 : null == t || r ? n[n.length - 1] : o.call(
+            n, Math.max(n.length - t, 0))
     }, j.rest = j.tail = j.drop = function(n, t, r) {
         return o.call(n, null == t || r ? 1 : t)
     }, j.compact = function(n) {
         return j.filter(n, j.identity)
     };
     var M = function(n, t, r) {
-        return t && j.every(n, j.isArray) ? c.apply(r, n) : (A(n, function(n) {
-            j.isArray(n) || j.isArguments(n) ? t ? a.apply(r, n) : M(n, t, r) : r.push(n)
+        return t && j.every(n, j.isArray) ? c.apply(r, n) : (A(n, function(
+            n) {
+            j.isArray(n) || j.isArguments(n) ? t ? a.apply(r, n) :
+                M(n, t, r) : r.push(n)
         }), r)
     };
     j.flatten = function(n, t) {
@@ -227,7 +247,8 @@
             i = [],
             a = [];
         return A(u, function(r, e) {
-            (t ? e && a[a.length - 1] === r : j.contains(a, r)) || (a.push(r), i.push(n[e]))
+            (t ? e && a[a.length - 1] === r : j.contains(a, r)) || (a.push(
+                r), i.push(n[e]))
         }), i
     }, j.union = function() {
         return j.uniq(j.flatten(arguments, !0))
@@ -244,18 +265,21 @@
             return !j.contains(t, n)
         })
     }, j.zip = function() {
-        for (var n = j.max(j.pluck(arguments, "length").concat(0)), t = new Array(n), r = 0; n > r; r++) t[r] = j.pluck(arguments, "" + r);
+        for (var n = j.max(j.pluck(arguments, "length").concat(0)), t = new Array(
+                n), r = 0; n > r; r++) t[r] = j.pluck(arguments, "" + r);
         return t
     }, j.object = function(n, t) {
         if (null == n) return {};
-        for (var r = {}, e = 0, u = n.length; u > e; e++) t ? r[n[e]] = t[e] : r[n[e][0]] = n[e][1];
+        for (var r = {}, e = 0, u = n.length; u > e; e++) t ? r[n[e]] = t[e] :
+            r[n[e][0]] = n[e][1];
         return r
     }, j.indexOf = function(n, t, r) {
         if (null == n) return -1;
         var e = 0,
             u = n.length;
         if (r) {
-            if ("number" != typeof r) return e = j.sortedIndex(n, t), n[e] === t ? e : -1;
+            if ("number" != typeof r) return e = j.sortedIndex(n, t), n[e] ===
+                t ? e : -1;
             e = 0 > r ? Math.max(0, u + r) : r
         }
         if (y && n.indexOf === y) return n.indexOf(t, r);
@@ -265,13 +289,15 @@
     }, j.lastIndexOf = function(n, t, r) {
         if (null == n) return -1;
         var e = null != r;
-        if (b && n.lastIndexOf === b) return e ? n.lastIndexOf(t, r) : n.lastIndexOf(t);
+        if (b && n.lastIndexOf === b) return e ? n.lastIndexOf(t, r) : n.lastIndexOf(
+            t);
         for (var u = e ? r : n.length; u--;)
             if (n[u] === t) return u;
         return -1
     }, j.range = function(n, t, r) {
         arguments.length <= 1 && (t = n || 0, n = 0), r = arguments[2] || 1;
-        for (var e = Math.max(Math.ceil((t - n) / r), 0), u = 0, i = new Array(e); e > u;) i[u++] = n, n += r;
+        for (var e = Math.max(Math.ceil((t - n) / r), 0), u = 0, i = new Array(
+                e); e > u;) i[u++] = n, n += r;
         return i
     };
     var R = function() {};
@@ -280,7 +306,8 @@
         if (_ && n.bind === _) return _.apply(n, o.call(arguments, 1));
         if (!j.isFunction(n)) throw new TypeError;
         return r = o.call(arguments, 2), e = function() {
-            if (!(this instanceof e)) return n.apply(t, r.concat(o.call(arguments)));
+            if (!(this instanceof e)) return n.apply(t, r.concat(o.call(
+                arguments)));
             R.prototype = n.prototype;
             var u = new R;
             R.prototype = null;
@@ -294,7 +321,8 @@
         }
     }, j.bindAll = function(n) {
         var t = o.call(arguments, 1);
-        if (0 === t.length) throw new Error("bindAll must be passed function names");
+        if (0 === t.length) throw new Error(
+            "bindAll must be passed function names");
         return A(t, function(t) {
             n[t] = j.bind(n[t], n)
         }), n
@@ -323,7 +351,9 @@
             var l = new Date;
             o || r.leading !== !1 || (o = l);
             var f = t - (l - o);
-            return e = this, u = arguments, 0 >= f ? (clearTimeout(a), a = null, o = l, i = n.apply(e, u)) : a || r.trailing === !1 || (a = setTimeout(c, f)), i
+            return e = this, u = arguments, 0 >= f ? (clearTimeout(a), a =
+                null, o = l, i = n.apply(e, u)) : a || r.trailing === !1 ||
+                (a = setTimeout(c, f)), i
         }
     }, j.debounce = function(n, t, r) {
         var e, u, i, a, o;
@@ -331,14 +361,16 @@
             i = this, u = arguments, a = new Date;
             var c = function() {
                 var l = new Date - a;
-                t > l ? e = setTimeout(c, t - l) : (e = null, r || (o = n.apply(i, u)))
+                t > l ? e = setTimeout(c, t - l) : (e = null, r || (o = n.apply(
+                    i, u)))
             }, l = r && !e;
             return e || (e = setTimeout(c, t)), l && (o = n.apply(i, u)), o
         }
     }, j.once = function(n) {
         var t, r = !1;
         return function() {
-            return r ? t : (r = !0, t = n.apply(this, arguments), n = null, t)
+            return r ? t : (r = !0, t = n.apply(this, arguments), n = null,
+                t)
         }
     }, j.wrap = function(n, t) {
         return function() {
@@ -348,7 +380,8 @@
     }, j.compose = function() {
         var n = arguments;
         return function() {
-            for (var t = arguments, r = n.length - 1; r >= 0; r--) t = [n[r].apply(this, t)];
+            for (var t = arguments, r = n.length - 1; r >= 0; r--) t = [n[r]
+                .apply(this, t)];
             return t[0]
         }
     }, j.after = function(n, t) {
@@ -361,13 +394,16 @@
         for (var r in n) j.has(n, r) && t.push(r);
         return t
     }, j.values = function(n) {
-        for (var t = j.keys(n), r = t.length, e = new Array(r), u = 0; r > u; u++) e[u] = n[t[u]];
+        for (var t = j.keys(n), r = t.length, e = new Array(r), u = 0; r >
+            u; u++) e[u] = n[t[u]];
         return e
     }, j.pairs = function(n) {
-        for (var t = j.keys(n), r = t.length, e = new Array(r), u = 0; r > u; u++) e[u] = [t[u], n[t[u]]];
+        for (var t = j.keys(n), r = t.length, e = new Array(r), u = 0; r >
+            u; u++) e[u] = [t[u], n[t[u]]];
         return e
     }, j.invert = function(n) {
-        for (var t = {}, r = j.keys(n), e = 0, u = r.length; u > e; e++) t[n[r[e]]] = r[e];
+        for (var t = {}, r = j.keys(n), e = 0, u = r.length; u > e; e++) t[
+            n[r[e]]] = r[e];
         return t
     }, j.functions = j.methods = function(n) {
         var t = [];
@@ -393,7 +429,8 @@
                 for (var r in t) n[r] === void 0 && (n[r] = t[r])
         }), n
     }, j.clone = function(n) {
-        return j.isObject(n) ? j.isArray(n) ? n.slice() : j.extend({}, n) : n
+        return j.isObject(n) ? j.isArray(n) ? n.slice() : j.extend({}, n) :
+            n
     }, j.tap = function(n, t) {
         return t(n), n
     };
@@ -407,19 +444,22 @@
             case "[object String]":
                 return n == String(t);
             case "[object Number]":
-                return n != +n ? t != +t : 0 == n ? 1 / n == 1 / t : n == +t;
+                return n != +n ? t != +t : 0 == n ? 1 / n == 1 / t : n == +
+                    t;
             case "[object Date]":
             case "[object Boolean]":
                 return +n == +t;
             case "[object RegExp]":
-                return n.source == t.source && n.global == t.global && n.multiline == t.multiline && n.ignoreCase == t.ignoreCase
+                return n.source == t.source && n.global == t.global && n.multiline ==
+                    t.multiline && n.ignoreCase == t.ignoreCase
         }
         if ("object" != typeof n || "object" != typeof t) return !1;
         for (var i = r.length; i--;)
             if (r[i] == n) return e[i] == t;
         var a = n.constructor,
             o = t.constructor;
-        if (a !== o && !(j.isFunction(a) && a instanceof a && j.isFunction(o) && o instanceof o)) return !1;
+        if (a !== o && !(j.isFunction(a) && a instanceof a && j.isFunction(
+            o) && o instanceof o)) return !1;
         r.push(n), e.push(t);
         var c = 0,
             f = !0;
@@ -428,7 +468,8 @@
                 for (; c-- && (f = S(n[c], t[c], r, e)););
         } else {
             for (var s in n)
-                if (j.has(n, s) && (c++, !(f = j.has(t, s) && S(n[s], t[s], r, e)))) break;
+                if (j.has(n, s) && (c++, !(f = j.has(t, s) && S(n[s], t[s],
+                    r, e)))) break;
             if (f) {
                 for (s in t)
                     if (j.has(t, s) && !c--) break;
@@ -451,11 +492,12 @@
         return "[object Array]" == l.call(n)
     }, j.isObject = function(n) {
         return n === Object(n)
-    }, A(["Arguments", "Function", "String", "Number", "Date", "RegExp"], function(n) {
-        j["is" + n] = function(t) {
-            return l.call(t) == "[object " + n + "]"
-        }
-    }), j.isArguments(arguments) || (j.isArguments = function(n) {
+    }, A(["Arguments", "Function", "String", "Number", "Date", "RegExp"],
+        function(n) {
+            j["is" + n] = function(t) {
+                return l.call(t) == "[object " + n + "]"
+            }
+        }), j.isArguments(arguments) || (j.isArguments = function(n) {
         return !(!n || !j.has(n, "callee"))
     }), "function" != typeof / . / && (j.isFunction = function(n) {
         return "function" == typeof n
@@ -476,10 +518,12 @@
     }, j.identity = function(n) {
         return n
     }, j.times = function(n, t, r) {
-        for (var e = Array(Math.max(0, n)), u = 0; n > u; u++) e[u] = t.call(r, u);
+        for (var e = Array(Math.max(0, n)), u = 0; n > u; u++) e[u] = t.call(
+            r, u);
         return e
     }, j.random = function(n, t) {
-        return null == t && (t = n, n = 0), n + Math.floor(Math.random() * (t - n + 1))
+        return null == t && (t = n, n = 0), n + Math.floor(Math.random() *
+            (t - n + 1))
     };
     var I = {
         escape: {
@@ -536,14 +580,21 @@
     j.template = function(n, t, r) {
         var e;
         r = j.defaults({}, r, j.templateSettings);
-        var u = new RegExp([(r.escape || q).source, (r.interpolate || q).source, (r.evaluate || q).source].join("|") + "|$", "g"),
+        var u = new RegExp([(r.escape || q).source, (r.interpolate || q).source, (
+            r.evaluate || q).source].join("|") + "|$", "g"),
             i = 0,
             a = "__p+='";
         n.replace(u, function(t, r, e, u, o) {
             return a += n.slice(i, o).replace(D, function(n) {
                 return "\\" + B[n]
-            }), r && (a += "'+\n((__t=(" + r + "))==null?'':_.escape(__t))+\n'"), e && (a += "'+\n((__t=(" + e + "))==null?'':__t)+\n'"), u && (a += "';\n" + u + "\n__p+='"), i = o + t.length, t
-        }), a += "';\n", r.variable || (a = "with(obj||{}){\n" + a + "}\n"), a = "var __t,__p='',__j=Array.prototype.join," + "print=function(){__p+=__j.call(arguments,'');};\n" + a + "return __p;\n";
+            }), r && (a += "'+\n((__t=(" + r +
+                "))==null?'':_.escape(__t))+\n'"), e && (a +=
+                "'+\n((__t=(" + e + "))==null?'':__t)+\n'"), u && (a +=
+                "';\n" + u + "\n__p+='"), i = o + t.length, t
+        }), a += "';\n", r.variable || (a = "with(obj||{}){\n" + a + "}\n"),
+        a = "var __t,__p='',__j=Array.prototype.join," +
+            "print=function(){__p+=__j.call(arguments,'');};\n" + a +
+            "return __p;\n";
         try {
             e = new Function(r.variable || "obj", "_", a)
         } catch (o) {
@@ -553,18 +604,21 @@
         var c = function(n) {
             return e.call(this, n, j)
         };
-        return c.source = "function(" + (r.variable || "obj") + "){\n" + a + "}", c
+        return c.source = "function(" + (r.variable || "obj") + "){\n" + a +
+            "}", c
     }, j.chain = function(n) {
         return j(n).chain()
     };
     var z = function(n) {
         return this._chain ? j(n).chain() : n
     };
-    j.mixin(j), A(["pop", "push", "reverse", "shift", "sort", "splice", "unshift"], function(n) {
+    j.mixin(j), A(["pop", "push", "reverse", "shift", "sort", "splice",
+        "unshift"], function(n) {
         var t = e[n];
         j.prototype[n] = function() {
             var r = this._wrapped;
-            return t.apply(r, arguments), "shift" != n && "splice" != n || 0 !== r.length || delete r[0], z.call(this, r)
+            return t.apply(r, arguments), "shift" != n && "splice" != n ||
+                0 !== r.length || delete r[0], z.call(this, r)
         }
     }), A(["concat", "join", "slice"], function(n) {
         var t = e[n];
