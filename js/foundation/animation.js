@@ -23,6 +23,7 @@ define(['underscore'], function(_) {
                 window.setTimeout(callback, 1000 / 60);
         };
     })();
+    
     /**
       @module foundation/animation
     */
@@ -70,6 +71,7 @@ define(['underscore'], function(_) {
             ////////////////////////////////////
             // Public instance methods/fields //
             ////////////////////////////////////
+            
             /**
                 Start the animation.
 
@@ -100,12 +102,14 @@ define(['underscore'], function(_) {
                 distY = endY - startY,
                 durationX = distX / duration,
                 durationY = distY / duration;
+
             var frameFunction = function(durationElapsed) {
                 drawable.x = startX + durationX * durationElapsed;
                 drawable.y = startY + durationY * durationElapsed;
                 return drawable.x < endX && drawable.y < endY &&
                     durationElapsed < duration;
             };
+
             return new module.Animation(drawable, frameFunction, callback);
         }
     };

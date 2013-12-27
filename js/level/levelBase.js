@@ -2,10 +2,12 @@ define(['foundation/canvasDrawer', 'util/factory', 'util/boundingBox',
     'util/physics', 'events/inputHandler'
 ], function(CanvasDrawer, Factory, BoundingBox, Physics, InputHandler) {
     "use strict";
+    // @formatter:on
 
     //////////////////////////////////
     // Private class methods/fields //
     //////////////////////////////////
+
     /**
        @module level/levelBase
      */
@@ -13,6 +15,7 @@ define(['foundation/canvasDrawer', 'util/factory', 'util/boundingBox',
         /////////////////////////////////
         // Public class methods/fields //
         /////////////////////////////////
+
         /**
            LevelBase
            @constructor
@@ -73,5 +76,6 @@ define(['foundation/canvasDrawer', 'util/factory', 'util/boundingBox',
             this.inputHandler = new InputHandler.InputHandler('body');
         }
     };
+
     return module;
 });

@@ -25,6 +25,7 @@ define([
         /////////////////////////////////
         // Public class methods/fields //
         /////////////////////////////////
+
         /**
             @class MainLevel
             @constructor
