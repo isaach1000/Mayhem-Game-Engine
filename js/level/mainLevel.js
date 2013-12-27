@@ -97,7 +97,6 @@ define([
 
                 this.physicsEngine.objects = [rect];
                 hitTest();
-                polyAnimation.start();
             };
         }
     };
