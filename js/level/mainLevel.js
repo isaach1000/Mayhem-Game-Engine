@@ -16,7 +16,7 @@ define([
     // Private class methods/fields //
     //////////////////////////////////
 
-    var QUAD_DELAY = 10;
+    var QUAD_DELAY = 100;
 
     /**
        @module level/mainLevel
@@ -55,10 +55,9 @@ define([
                     _this.quadTree.query(mousePoint).forEach(function(
                         shape) {
                         if (shape.collisionTest(mousePoint)) {
-                            shape.clear();
                             shape.drawingSettings.fillStyle =
                                 'yellow';
-                            shape.draw();
+                            shape.update();
                         }
                     });
                 }, QUAD_DELAY);
@@ -70,10 +69,10 @@ define([
 
             this.start = function() {
                 var poly = new Shape.Polygon({
-                    x: 100,
+                    x: 0,
                     y: 400
                 }, [{
-                    x: -100,
+                    x: 0,
                     y: 0
                 }, {
                     x: 100,
@@ -109,20 +108,17 @@ define([
                     angleTolerance = Math.PI / 1000;
 
                 var polyAnimation = new Animation.Animation(poly,
-                    function(
-                        time, timeDiff) {
+                    function(time, timeDiff) {
                         poly.x += timeDiff * speed;
-                        poly.transformation.rotate(timeDiff * omega);
+                        poly.rotate(timeDiff * omega);
                         return poly.x >= 500;
                     }, function() {
                         polyAnimation = new Animation.Animation(
-                            poly,
-                            function(time, timeDiff) {
+                            poly, function(time, timeDiff) {
                                 poly.y -= timeDiff * speed;
                                 // Readjust
                                 if (poly.angle > angleTolerance) {
-                                    poly.transformation.rotate(-
-                                        omega2);
+                                    poly.rotate(-omega2);
                                 }
                                 return poly.y <= 100;
                             });
@@ -130,16 +126,14 @@ define([
                     });
 
                 var rectAnimation = new Animation.Animation(rect,
-                    function(
-                        time, timeDiff) {
-                        rect.transformation.rotate(timeDiff * omega);
+                    function(time, timeDiff) {
+                        rect.rotate(timeDiff * omega);
                     });
                 rectAnimation.start();
 
                 this.quadTree.insert(poly).insert(rect);
                 hitTest();
-                polyAnimation
-                    .start();
+                polyAnimation.start();
             };
         }
     };

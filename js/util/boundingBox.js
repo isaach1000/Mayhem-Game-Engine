@@ -15,18 +15,20 @@ define([], function() {
         // Public class methods/fields //
         /////////////////////////////////
         /**
-           Create a BoundingBox.
+            Create a BoundingBox.
 
-           @constructor
-           @param {(float|Point)} arg0  - The x coordinate of left side, or left-top point.
-           @param {(float|Point)} arg1  - The y coordinate of front side, or right-bottom point.
-           @param {float} arg2          - Width of the box.
-           @param {float} arg3          - Height of the box.
+            @class BoundingBox
+            @constructor
+            @param {(float|Point)} arg0 The x coordinate of left side, or left-top point.
+            @param {(float|Point)} arg1 The y coordinate of front side, or right-bottom point.
+            @param {float} arg2 Width of the box.
+            @param {float} arg3 Height of the box.
          */
         BoundingBox: function(arg0, arg1, arg2, arg3) {
             /////////////////////////////////////
             // Private instance methods/fields //
             /////////////////////////////////////
+
             var x, y, w, h;
             switch (arguments.length) {
                 case 2:
@@ -47,14 +49,17 @@ define([], function() {
             if (w < 0 || h < 0) {
                 throw new Error('Invalid dimensions for BoundingBox.');
             }
+
             ////////////////////////////////////
             // Public instance methods/fields //
             ////////////////////////////////////
+
             Object.defineProperties(this, {
                 /**
-                   x coordinate of top-left of BoundingBox instance
+                    x coordinate of top-left of BoundingBox instance
 
-                   @type {float}
+                    @property x
+                    @type {float}
                  */
                 x: {
                     get: function() {
@@ -64,10 +69,12 @@ define([], function() {
                         x = newX;
                     }
                 },
-                /**
-                   y coordinate of top-left of BoundingBox instance
 
-                   @type {float}
+                /**
+                    y coordinate of top-left of BoundingBox instance
+
+                    @property y
+                    @type {float}
                  */
                 y: {
                     get: function() {
@@ -77,30 +84,36 @@ define([], function() {
                         y = newY;
                     }
                 },
-                /**
-                   Width of BoundingBox instance
 
-                   @type {float}
+                /**
+                    Width of BoundingBox instance
+
+                    @property width
+                    @type {float}
                  */
                 width: {
                     get: function() {
                         return w;
                     }
                 },
-                /**
-                   Height of BoundingBox instance
 
-                   @type {float}
+                /**
+                    Height of BoundingBox instance
+
+                    @property height
+                    @type {float}
                  */
                 height: {
                     get: function() {
                         return h;
                     }
                 },
-                /**
-                   Center of BoundingBox instance
 
-                   @type {Object}
+                /**
+                    Center of BoundingBox instance
+
+                    @property center
+                    @type {Object}
                  */
                 center: {
                     get: function() {
@@ -111,24 +124,26 @@ define([], function() {
                     }
                 }
             });
-            /**
-               Check if this BoundingBox contains another BoundingBox.
 
-               @method containsBoundingBox
-               @param {BoundingBox} bbox - The other BoundingBox
-               @return {boolean} True if contains the other BoundingBox, false otherwise.
+            /**
+                Check if this BoundingBox contains another BoundingBox.
+
+                @method containsBoundingBox
+                @param {BoundingBox} bbox - The other BoundingBox
+                @return {boolean} True if contains the other BoundingBox, false otherwise.
              */
             this.containsBoundingBox = function(bbox) {
                 return (bbox.x >= x && bbox.x + bbox.width <= x + w && bbox
                     .y >= y && bbox.y + bbox.height <= y + h);
             };
-            /**
-               Get the intersection of this BoundingBox
-               and another BoundingBox.
 
-               @method intersection
-               @param {BoundingBox} otherBbox - Another BoundingBox instance.
-               @return {BoundingBox}
+            /**
+                Get the intersection of this BoundingBox
+                and another BoundingBox.
+
+                @method intersection
+                @param {BoundingBox} otherBbox - Another BoundingBox instance.
+                @return {BoundingBox}
              */
             this.intersection = function(otherBbox) {
                 var x1 = Math.max(this.x, otherBbox.x),

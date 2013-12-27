@@ -12,8 +12,9 @@ define(['util/boundingBox'], function(BoundingBox) {
     var module = {
         QT_NODE_CAPACITY: 4,
         /**
-           @constructor
-           @param {BoundingBox} bbox
+            @class QuadTree
+            @constructor
+            @param {BoundingBox} bbox
          */
         QuadTree: function(bbox) {
             var _this = this;

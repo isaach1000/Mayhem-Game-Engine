@@ -25,10 +25,9 @@ define(['foundation/canvasDrawer', 'util/boundingBox', 'util/mathExtensions'],
                @method  generateBbox
                @static
                @param   {Array} points An array of points describing the polygon
-               @param   {Point} center Center of polygon
                @return  {BoundingBox} A BoundingBox containing all of the points
              */
-            generateBbox: function(points, center) {
+            generateBbox: function(points) {
                 var minX = points[0].x,
                     maxX = points[0].x,
                     minY = points[0].y,
@@ -51,8 +50,7 @@ define(['foundation/canvasDrawer', 'util/boundingBox', 'util/mathExtensions'],
                 }
                 var w = maxX - minX,
                     h = maxY - minY;
-                return new BoundingBox.BoundingBox(center.x - w / 2, center.y -
-                    h / 2, w, h);
+                return new BoundingBox.BoundingBox(minX, minY, w, h);
             },
 
             /**
@@ -94,7 +92,8 @@ define(['foundation/canvasDrawer', 'util/boundingBox', 'util/mathExtensions'],
                @param {float} y                     y coordinate of top-left
                @param {float} width                 Width of shape
                @param {float} height                Height of shape
-               @param {CanvasDrawer} drawer         CanvasDrawer to draw image to canvas
+               @param {CanvasDrawer} drawer         CanvasDrawer to draw image
+               to canvas
                @param {Object} drawingSettings      Settings for the CanvasDrawer
              */
             Shape: function(x, y, width, height, drawer, drawingSettings) {
@@ -131,10 +130,9 @@ define(['foundation/canvasDrawer', 'util/boundingBox', 'util/mathExtensions'],
                         },
                         set: function(newX) {
                             if (x !== newX) {
-                                var dx = newX - x;
                                 x = Math.round(newX);
-                                _this.boundingBox.x = x;
                                 _this.transformation.tx = x;
+                                _this.boundingBox.x = x;
                             }
                         }
                     },
@@ -151,10 +149,9 @@ define(['foundation/canvasDrawer', 'util/boundingBox', 'util/mathExtensions'],
                         },
                         set: function(newY) {
                             if (y !== newY) {
-                                var dy = newY - y;
                                 y = Math.round(newY);
-                                _this.boundingBox.y = y;
                                 _this.transformation.ty = y;
+                                _this.boundingBox.y = y;
                             }
                         }
                     },
@@ -173,8 +170,7 @@ define(['foundation/canvasDrawer', 'util/boundingBox', 'util/mathExtensions'],
                             newWidth = Math.round(newWidth);
                             if (newWidth !== width) {
                                 width = newWidth;
-                                bbox = new BoundingBox.BoundingBox(x, y,
-                                    width, height);
+                                _this.boundingBox.width = width;
                             }
                         }
                     },
@@ -193,8 +189,7 @@ define(['foundation/canvasDrawer', 'util/boundingBox', 'util/mathExtensions'],
                             newHeight = Math.round(newHeight);
                             if (newHeight !== height) {
                                 height = newHeight;
-                                bbox = new BoundingBox.BoundingBox(x, y,
-                                    width, height);
+                                _this.boundingBox.height = height;
                             }
                         }
                     },
@@ -211,6 +206,7 @@ define(['foundation/canvasDrawer', 'util/boundingBox', 'util/mathExtensions'],
                         },
                         set: function(value) {
                             _this.transformation.angle = value;
+                            _this._updateBoundingBox();
                         }
                     },
 
@@ -223,6 +219,9 @@ define(['foundation/canvasDrawer', 'util/boundingBox', 'util/mathExtensions'],
                     boundingBox: {
                         get: function() {
                             return bbox;
+                        },
+                        set: function(newBbox) {
+                            bbox = newBbox;
                         }
                     },
 
@@ -254,6 +253,7 @@ define(['foundation/canvasDrawer', 'util/boundingBox', 'util/mathExtensions'],
                         },
                         set: function(newTransformation) {
                             transformation = newTransformation;
+                            _this.updateBoundingBox();
                         }
                     }
                 });
@@ -278,8 +278,8 @@ define(['foundation/canvasDrawer', 'util/boundingBox', 'util/mathExtensions'],
                 this.draw = function() {
                     drawer.save().transform(this.transformation);
                     this.drawShape(drawer);
-                    this.drawBoundingBox(drawer);
                     drawer.restore();
+                    this.drawBoundingBox(drawer);
                 };
 
                 /**
@@ -303,11 +303,14 @@ define(['foundation/canvasDrawer', 'util/boundingBox', 'util/mathExtensions'],
                     @return {void}
                  */
                 this.drawBoundingBox = function(drawer) {
-                    var x = _this.boundingBox.x,
+                    var
+                    x = _this.boundingBox.x,
                         y = _this.boundingBox.y,
                         w = _this.boundingBox.width,
                         h = _this.boundingBox.height,
                         lineWidth = _this.drawingSettings.lineWidth || 1;
+
+                    drawer.strokeRect(x, y, w - lineWidth, h - lineWidth);
                 };
                 /**
                     Check if a point is within the Shape instance
@@ -319,6 +322,11 @@ define(['foundation/canvasDrawer', 'util/boundingBox', 'util/mathExtensions'],
                 this.collisionTest = function(point) {
                     // Return result of subclass's test.
                     return _this._hitTest(point);
+                };
+
+                this.rotate = function(angle) {
+                    this.transformation.rotate(angle);
+                    this._updateBoundingBox();
                 };
             },
 
@@ -360,21 +368,6 @@ define(['foundation/canvasDrawer', 'util/boundingBox', 'util/mathExtensions'],
 
                 Object.defineProperties(this, {
                     /**
-                        Center of circle
-
-                        @property center
-                        @type {Point)
-                    */
-                    center: {
-                        get: function() {
-                            return {
-                                x: x,
-                                y: y
-                            };
-                        }
-                    },
-
-                    /**
                         Radius of circle
 
                         @property radius
@@ -386,8 +379,8 @@ define(['foundation/canvasDrawer', 'util/boundingBox', 'util/mathExtensions'],
                         },
                         set: function(newRadius) {
                             radius = Math.floor(newRadius);
-                            this.width = radius * 2;
-                            this.height = radius * 2;
+                            _this.width = radius * 2;
+                            _this.height = radius * 2;
                         }
                     }
                 });
@@ -405,10 +398,22 @@ define(['foundation/canvasDrawer', 'util/boundingBox', 'util/mathExtensions'],
                     canvasDrawer.stroke();
                     canvasDrawer.fill();
                 };
+
+                /**
+                    _hitTest to call from collisionTest
+
+                    @method _hitTest
+                    @param  {Point} point [description]
+                    @return {boolean} [description]
+                 */
                 this._hitTest = function(point) {
                     var dx = this.x + this.radius - point.x,
                         dy = this.y + this.radius - point.y;
                     return dx * dx + dy * dy <= this.radius * this.radius;
+                };
+
+                this._updateBoundingBox = function() {
+                    return; // Do nothing
                 };
             },
 
@@ -489,7 +494,7 @@ define(['foundation/canvasDrawer', 'util/boundingBox', 'util/mathExtensions'],
 
                 // Variables necessary for Shape constructor.
                 // NOTE: Do not use these variables directly (i.e. x versus this.x).
-                var bbox = module.generateBbox(points, center),
+                var bbox = module.generateBbox(points),
                     x = bbox.x,
                     y = bbox.y,
                     width = bbox.width,
@@ -535,30 +540,9 @@ define(['foundation/canvasDrawer', 'util/boundingBox', 'util/mathExtensions'],
                         },
                         set: function(newPoints) {
                             points = newPoints;
-                            _this.boundingBox = generateBbox(this.points);
+                            _this._updateBoundingBox();
                         }
                     },
-
-                    /**
-                        Center of polygon
-
-                        @property center
-                        @type {Point}
-                    */
-                    center: {
-                        get: function() {
-                            return center;
-                        },
-                        set: function(newCenter) {
-                            center = newCenter;
-                            _this.boundingBox.x = center.x - _this.boundingBox
-                                .width / 2;
-                            _this.boundingBox.y = center.y - _this.boundingBox
-                                .height / 2;
-                            _this.transformation.tx = center.x;
-                            _this.transformation.ty = center.y;
-                        }
-                    }
                 });
 
                 /**
@@ -619,6 +603,18 @@ define(['foundation/canvasDrawer', 'util/boundingBox', 'util/mathExtensions'],
                         }
                     }
                     return c;
+                };
+
+                var first = true; // TODO: remove
+                this._updateBoundingBox = function() {
+                    var transformedPoints = this.points.map(function(p) {
+                        return _this.transformation.applyToPoint(p);
+                    });
+                    this.boundingBox = module.generateBbox(transformedPoints);
+                    if (first && this.angle > Math.PI) {
+                        console.debug(transformedPoints, this.boundingBox);
+                        first = false;
+                    }
                 };
             }
         };

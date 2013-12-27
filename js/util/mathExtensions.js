@@ -3,7 +3,7 @@
 
    @class MathExtensions
  */
-define(['underscore'], function(_) {
+define(['underscore', 'util/boundingBox'], function(_, BoundingBox) {
     "use strict";
     //////////////////////////////////
     // Private class methods/fields //

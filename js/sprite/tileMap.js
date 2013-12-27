@@ -90,12 +90,24 @@ define(['sprite/sprite', 'foundation/shape'], function(Sprite, Shape) {
                 drawingSettingsArr);
             this.updateBoundingBox();
 
+            /**
+                Draw the Sprite
+
+                @method draw
+                @return {void}
+             */
             this.draw = function() {
                 forEachTile(function(tile) {
                     tile.draw();
                 });
             };
 
+            /**
+                Clear the Sprite
+
+                @method clear
+                @return {void}
+             */
             this.clear = function() {
                 forEachTile(function(tile) {
                     tile.clear();
