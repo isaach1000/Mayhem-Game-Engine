@@ -16,7 +16,7 @@ define([
     // Private class methods/fields //
     //////////////////////////////////
 
-    var QUAD_DELAY = 100;
+    var COLLISION_DELAY = 50;
 
     /**
        @module level/mainLevel
@@ -50,17 +50,19 @@ define([
                         y: ev.pageY
                     };
                 });
-                // Search QuadTree on mousemove with QUAD_DELAY ms delay
+
+                // Search QuadTree on mousemove with COLLISION_DELAY ms delay
                 _this.inputHandler.bind('mousemove', function() {
-                    _this.quadTree.query(mousePoint).forEach(function(
-                        shape) {
-                        if (shape.collisionTest(mousePoint)) {
-                            shape.drawingSettings.fillStyle =
-                                'yellow';
-                            shape.update();
-                        }
-                    });
-                }, QUAD_DELAY);
+                    _this.physicsEngine.collisionQuery(
+                        mousePoint).forEach(
+                        function(shape) {
+                            if (shape.collisionTest(mousePoint)) {
+                                shape.drawingSettings.fillStyle =
+                                    'yellow';
+                                shape.update();
+                            }
+                        });
+                }, COLLISION_DELAY);
             }
 
             ////////////////////////////////////
@@ -68,29 +70,11 @@ define([
             ////////////////////////////////////
 
             this.start = function() {
-                var poly = new Shape.Polygon({
-                    x: 0,
-                    y: 400
-                }, [{
-                    x: 0,
-                    y: 0
-                }, {
-                    x: 100,
-                    y: 0
-                }, {
-                    x: 0,
-                    y: 100
-                }], _this.mainDrawer, {
-                    fillStyle: 'purple',
-                    angle: 0
-                }),
-                    rect = new Shape.Rectangle(100, 100, 50, 50, _this.mainDrawer, {
+                var
+                rect = new Shape.Rectangle(300, 300, 100, 100,
+                    _this.mainDrawer, {
                         fillStyle: 'orange',
                         angle: 0
-                    }),
-                    circle = new Shape.Circle(105, 105, 30, _this.createContext(
-                        'circle'), {
-                        fillStyle: 'green'
                     }),
                     tileMap = new TileMap.TileMap(0, 0, 70, 70, 20, 10,
                         _this.bgDrawer, [{
@@ -98,40 +82,19 @@ define([
                     }]);
 
                 tileMap.draw();
-                poly.draw();
                 rect.draw();
-                circle.draw();
 
-                var speed = 0.1,
-                    omega = Math.PI / 2000,
-                    omega2 = omega / 2,
-                    angleTolerance = Math.PI / 1000;
+                var
+                omega = Math.PI / 2000,
+                    angleTolerance = Math.PI / 1000,
+                    rectAnimation = new Animation.Animation(rect,
+                        function(time, timeDiff) {
+                            rect.rotate(timeDiff * omega);
+                        });
 
-                var polyAnimation = new Animation.Animation(poly,
-                    function(time, timeDiff) {
-                        poly.x += timeDiff * speed;
-                        poly.rotate(timeDiff * omega);
-                        return poly.x >= 500;
-                    }, function() {
-                        polyAnimation = new Animation.Animation(
-                            poly, function(time, timeDiff) {
-                                poly.y -= timeDiff * speed;
-                                // Readjust
-                                if (poly.angle > angleTolerance) {
-                                    poly.rotate(-omega2);
-                                }
-                                return poly.y <= 100;
-                            });
-                        polyAnimation.start();
-                    });
-
-                var rectAnimation = new Animation.Animation(rect,
-                    function(time, timeDiff) {
-                        rect.rotate(timeDiff * omega);
-                    });
                 rectAnimation.start();
 
-                this.quadTree.insert(poly).insert(rect);
+                this.physicsEngine.objects = [rect];
                 hitTest();
                 polyAnimation.start();
             };

@@ -126,20 +126,26 @@ define([], function() {
             });
 
             /**
-                Check if this BoundingBox contains another BoundingBox.
+                Check if this BoundingBox contains another BoundingBox
 
                 @method containsBoundingBox
                 @param {BoundingBox} bbox - The other BoundingBox
-                @return {boolean} True if contains the other BoundingBox, false otherwise.
+                @return {boolean} True if contains the other BoundingBox, false
+                otherwise.
              */
             this.containsBoundingBox = function(bbox) {
                 return (bbox.x >= x && bbox.x + bbox.width <= x + w && bbox
                     .y >= y && bbox.y + bbox.height <= y + h);
             };
 
+            this.containsPoint = function(point) {
+                return point.x >= x && point.x <= x + w && point.y >= y &&
+                    point.y <= y + h;
+            };
+
             /**
                 Get the intersection of this BoundingBox
-                and another BoundingBox.
+                and another BoundingBox
 
                 @method intersection
                 @param {BoundingBox} otherBbox - Another BoundingBox instance.

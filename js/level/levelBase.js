@@ -1,6 +1,6 @@
 define(['foundation/canvasDrawer', 'util/factory', 'util/boundingBox',
-    'util/quadTree', 'events/inputHandler'
-], function(CanvasDrawer, Factory, BoundingBox, QuadTree, InputHandler) {
+    'util/physics', 'events/inputHandler'
+], function(CanvasDrawer, Factory, BoundingBox, Physics, InputHandler) {
     "use strict";
 
     //////////////////////////////////
@@ -63,9 +63,7 @@ define(['foundation/canvasDrawer', 'util/factory', 'util/boundingBox',
             this.bgCanvas = this.createCanvas('bgCanvas');
             this.mainCanvas = this.createCanvas('mainCanvas');
 
-            this.quadBox = new BoundingBox.BoundingBox(0, 0, this.WIDTH,
-                this.HEIGHT);
-            this.quadTree = new QuadTree.QuadTree(this.quadBox);
+            this.physicsEngine = new Physics.Engine();
             this.bgCtx = this.bgCanvas[0].getContext('2d');
             this.bgDrawer = new CanvasDrawer.CanvasDrawer(this.bgCtx, this.bgCanvas
                 .width(), this.bgCanvas.height());

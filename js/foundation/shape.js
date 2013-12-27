@@ -413,7 +413,8 @@ define(['foundation/canvasDrawer', 'util/boundingBox', 'util/mathExtensions'],
                 };
 
                 this._updateBoundingBox = function() {
-                    return; // Do nothing
+                    this.boundingBox = new BoundingBox.BoundingBox(this.x,
+                        this.y, this.radius * 2, this.radius * 2);
                 };
             },
 
@@ -473,12 +474,13 @@ define(['foundation/canvasDrawer', 'util/boundingBox', 'util/mathExtensions'],
                 @class Polygon
                 @constructor
                 @param   {Point} [center=0,0] The center of the polygon
-                @param   {Array} points An array of points that describe the polygon,
-                Should be relative to the center so rotation can be performed more
-                easily.
-                @param   {CanvasDrawer} drawer A CanvasDrawer to draw the polygon
-                onto the canvas
-                @param   {Object} drawingSettings A dictionary of drawing options.
+                @param   {Array} points An array of points that describe the
+                polygon. Should be relative to the center so rotation can be
+                performed more easily.
+                @param   {CanvasDrawer} drawer A CanvasDrawer to draw the
+                polygon onto the canvas
+                @param   {Object} drawingSettings A dictionary of drawing
+                options
              */
             Polygon: function(center, points, drawer, drawingSettings) {
                 var _this = this;
@@ -492,10 +494,13 @@ define(['foundation/canvasDrawer', 'util/boundingBox', 'util/mathExtensions'],
                     y: 0
                 };
 
-                // Variables necessary for Shape constructor.
-                // NOTE: Do not use these variables directly (i.e. x versus this.x).
-                var bbox = module.generateBbox(points),
-                    x = bbox.x,
+                var bbox = module.generateBbox(points);
+                bbox.x += center.x;
+                bbox.y += center.y;
+
+                // Variables necessary for Shape constructor
+                var
+                x = bbox.x,
                     y = bbox.y,
                     width = bbox.width,
                     height = bbox.height;
@@ -605,16 +610,11 @@ define(['foundation/canvasDrawer', 'util/boundingBox', 'util/mathExtensions'],
                     return c;
                 };
 
-                var first = true; // TODO: remove
                 this._updateBoundingBox = function() {
                     var transformedPoints = this.points.map(function(p) {
                         return _this.transformation.applyToPoint(p);
                     });
                     this.boundingBox = module.generateBbox(transformedPoints);
-                    if (first && this.angle > Math.PI) {
-                        console.debug(transformedPoints, this.boundingBox);
-                        first = false;
-                    }
                 };
             }
         };
