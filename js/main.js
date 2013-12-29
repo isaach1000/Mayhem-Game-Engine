@@ -19,7 +19,6 @@ require(['jquery', 'level/mainLevel'], function($, MainLevel) {
         worker.addEventListener('message', function(ev) {
             console.debug(ev.data);
         });
-        worker.postMessage();
         worker.postMessage('Worker succeeded in echo!');
     });
 });
