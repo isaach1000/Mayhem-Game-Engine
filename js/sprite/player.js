@@ -1,27 +1,7 @@
-#!/bin/bash
-
-scripts=$(dirname $0)
-
-if [ $# -ne 2 ]; then
-    echo "usage: $scripts/module.sh [FOLDER] [CLASSNAME]"
-    exit 1
-fi
-
-folder=$1
-folderpath=$scripts/../js/$folder
-
-if [ ! -d $folderpath ]; then
-    mkdir $folderpath
-fi
-
-class=$2
-filename=`echo $(tr A-Z a-z <<< ${class:0:1})${class:1}`
-
-cat > $folderpath/$filename.js << MODULE
 /**
     Description of class
 
-    @class $class
+    @class Player
  */
 define([], function() {
     "use strict";
@@ -31,7 +11,7 @@ define([], function() {
     //////////////////////////////////
 
     /**
-        @module $folder/$filename
+        @module sprite/player
      */
     var module = {
         /////////////////////////////////
@@ -39,11 +19,11 @@ define([], function() {
         /////////////////////////////////
 
         /**
-             @class $class
+             @class Player
              @constructor
          */
 
-        $class: function() {
+        Player: function() {
             var _this = this;
 
             /////////////////////////////////////
@@ -60,4 +40,3 @@ define([], function() {
 
     return module;
 });
-MODULE
