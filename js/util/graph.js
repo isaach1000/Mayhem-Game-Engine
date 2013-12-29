@@ -1,9 +1,14 @@
+/**
+    Graph abstract data structure to represent maze structure.
+
+    @class Graph
+ */
 define(['util/hash'], function(Hash) {
     "use strict";
     //////////////////////////////////
     // Private class methods/fields //
     //////////////////////////////////
-    // TODO
+
     /**
        @module util/graph
      */
@@ -11,9 +16,9 @@ define(['util/hash'], function(Hash) {
         /////////////////////////////////
         // Public class methods/fields //
         /////////////////////////////////
-        // TODO
+
         /**
-           Graph
+           @class Graph
            @constructor
          */
         Graph: function() {
@@ -21,20 +26,43 @@ define(['util/hash'], function(Hash) {
             /////////////////////////////////////
             // Private instance methods/fields //
             /////////////////////////////////////
+
             var nodes = new Hash.Hashset(),
                 adjacencyList = new Hash.Hashtable();
-            // Private inner Node class
-            function Node(data) {
+
+            /**
+                Private inner GraphNode class
+
+                @class GraphNode
+                @for Graph
+                @constructor
+                @param  {[type]} data [description]
+             */
+            function GraphNode(data) {
                 var thisNode = this;
                 this.data = data;
                 var edges = new Hash.Hashset();
                 adjacencyList.put(this, edges);
+
                 Object.defineProperties(this, {
+                    /**
+                        Edges of node
+
+                        @property edges
+                        @type {Hashset}
+                     */
                     edges: {
                         get: function() {
                             return adjacencyList.get(thisNode);
                         }
                     },
+
+                    /**
+                        Neighbors of node
+
+						@property neighbors
+                        @type {Hashset}
+                     */
                     neighbors: {
                         get: function() {
                             var neighborSet = new Hash.Hashset();
@@ -45,41 +73,105 @@ define(['util/hash'], function(Hash) {
                         }
                     }
                 });
+
+                /**
+                    Find all the nodes that are reachable from this node
+
+                    @for Graph
+                    @method reachableNodes
+                    @return {Hashset} Set of reachable nodes
+                 */
+                function reachableNodes() {
+                    // Inner helper function
+                    function reachableNodesHelper(node, set, visitedSet) {
+                        if (visitedSet.contains(node)) {
+                            return;
+                        }
+                        set.add(node);
+                        node.neighbors.forEach(function(otherNode) {
+                            reachableNodesHelper(otherNode, set,
+                                visitedSet);
+                        });
+                    }
+
+                    // Main code
+                    var reachableSet = new Hash.Hashset();
+                    reachableSet.add(thisNode);
+                    node.neighbors.forEach(function(otherNode) {
+                        reachableNodesHelper(otherNode, reachableSet,
+                            new Hash.Hashset());
+                    });
+                    return reachableSet;
+                }
             }
-            // Private inner Edge class
-            function Edge(tail, head) {
+
+            /**
+                @class GraphEdge
+                @for Graph
+                @constructor
+                @param  {[type]} tail [description]
+                @param  {[type]} head [description]
+             */
+            function GraphEdge(tail, head) {
+                /**
+                    Tail node of edge
+
+                    @property tail
+                    @type {GraphNode}
+                 */
                 this.tail = tail;
+
+                /**
+                    Head node of edge
+
+                    @property head
+                    @type {GraphNode}
+                 */
                 this.head = head;
+
+                /**
+                    Weight of edge
+
+                    @property weight
+                    @type {number}
+                    @for Graph
+                 */
                 this.weight = 0;
             }
+
             ////////////////////////////////////
             // Public instance methods/fields //
             ////////////////////////////////////
+
             /**
-               Add a node to the graph
-               @param   {Object} data     Data to be stored in the node
-               @return  {Node}          A node with the data
+                Add a node to the graph
+
+                @param   {Object} data Data to be stored in the node
+                @return  {GraphNode} A node with the data
              */
             this.addNode = function(data) {
-                var node = new Node(data);
+                var node = new GraphNode(data);
                 nodes.add(node);
                 return node;
             };
+
             /**
-               Add an edge to the graph
-               @param   {Node} tail       The origin node of the edge
-               @param   {Node} head       The destination node of the edge
-               @return  {Edge}          A directed edge connecting the nodes
+                Add an edge to the graph
+
+                @param   {GraphNode} tail The origin node of the edge
+                @param   {GraphNode} head The destination node of the edge
+                @return  {GraphEdge} A directed edge connecting the nodes
              */
             this.addEdge = function(tail, head) {
-                var edge = new Edge(tail, head);
+                var edge = new GraphEdge(tail, head);
                 adjacencyList.get(tail).add(edge);
                 return edge;
             };
+
             /**
                Remove an edge from the graph
-               @param   {Node} tail       The origin node of the edge
-               @param   {Node} head       The destination node of the edge
+               @param   {GraphNode} tail       The origin node of the edge
+               @param   {GraphNode} head       The destination node of the edge
                @return  {void}
              */
             this.removeEdge = function(tail, head) {
@@ -91,6 +183,7 @@ define(['util/hash'], function(Hash) {
                 });
                 tail.edges.remove(removeEdge);
             };
+
             /**
                 Perform a depth first search of the graph
 
@@ -98,14 +191,6 @@ define(['util/hash'], function(Hash) {
                 @param {Function} func The operation to perform on the visited nodes
              */
             this.depthFirstSearch = function(func) {
-                var visitedSet = new Hash.Hashset(),
-                    doneSearching = false;
-                nodes.forEach(function(node) {
-                    if (doneSearching === true) {
-                        return;
-                    }
-                    doneSearching = depthFirstSearchHelper(node);
-                });
                 // Inner helper function
                 function depthFirstSearchHelper(node) {
                     if (visitedSet.contains(node)) {
@@ -120,12 +205,24 @@ define(['util/hash'], function(Hash) {
                     }
                     return doneSearching;
                 }
+
+                // Main code
+                var visitedSet = new Hash.Hashset(),
+                    doneSearching = false;
+                nodes.forEach(function(node) {
+                    if (doneSearching === true) {
+                        return;
+                    }
+                    doneSearching = depthFirstSearchHelper(node);
+                });
             };
+
             /**
                Perform a breadth first search on the graph
 
                @method breadthFirstSearch
-               @param {function} func The operation to perform on the visited nodes
+               @param {function} func The operation to perform on the visited
+               nodes
                @return {void}
              */
             this.breadthFirstSearch = function(func) {
@@ -157,7 +254,66 @@ define(['util/hash'], function(Hash) {
                     return doneSearching;
                 }
             };
+
+            /**
+                Dijkstra's algorithm
+
+                @method dijkstra
+                @param  {GraphNode} source Source node
+                @return {void}
+             */
+            this.dijkstra = function(source) {
+                nodes.forEach(function(node) {
+                    node.dist = Infinity;
+                    node.visited = false;
+                    // Set node.previous to undefined
+                    delete node.previous;
+                });
+
+                // Distance of source to itself is 0
+                source.dist = 0;
+
+                var queue = new MinHeap.MinHeap(function(graphNode1,
+                    graphNode2) {
+                    if (isFinite(graphNode1.dist) && isFinite(
+                        graphNode2)) {
+                        return graphNode1.dist - graphNode2.dist;
+                    } else if (isFinite(graphNode1)) {
+                        return -1;
+                    } else if (isFinite(graphNode2)) {
+                        return 1;
+                    } else {
+                        return 0;
+                    }
+                });
+                queue.add(source);
+
+                // Function to use as parameter in forEach function
+                var relaxEdge = function(v) {
+                    // Assuming all edges have equal distance, distance
+                    // between nodes is 1
+                    var alt = u.dist + 1;
+                    if (alt < v.dist) {
+                        v.dist = alt;
+                        v.previous = u;
+                        if (!v.visited) {
+                            queue.add(v);
+                        }
+                    }
+                };
+
+                while (queue.length !== 0) {
+                    var u = queue.poll();
+                    u.visited = true;
+                    u.neighbors.forEach(relaxEdge);
+                }
+            };
+
+            this.kruskal = function(set) {
+                // TODO
+            };
         }
     };
+
     return module;
 });

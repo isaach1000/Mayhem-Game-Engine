@@ -31,11 +31,7 @@ define([], function() {
     //////////////////////////////////
 
     /**
-<<<<<<< HEAD:scripts/module.sh
         @module $folder/$filename
-=======
-     * @module modulePath // TODO: replace modulePath
->>>>>>> a99ffd0755ee2aff10b35d5e9ad0a7ca83328ea5:js/template.js
      */
     var module = {
         /////////////////////////////////
@@ -46,27 +42,14 @@ define([], function() {
              @class $class
              @constructor
          */
-<<<<<<< HEAD:scripts/module.sh
+
         $class: function() {
             var _this = this;
 
-=======
-        ClassName: function() {
->>>>>>> a99ffd0755ee2aff10b35d5e9ad0a7ca83328ea5:js/template.js
-            /////////////////////////////////////
-            // Private instance methods/fields //
-            /////////////////////////////////////
-
-
-            ////////////////////////////////////
-            // Public instance methods/fields //
-            ////////////////////////////////////
-
-<<<<<<< HEAD:scripts/module.sh
-=======
             // TODO
->>>>>>> a99ffd0755ee2aff10b35d5e9ad0a7ca83328ea5:js/template.js
+
         }
+
     };
 
     return module;

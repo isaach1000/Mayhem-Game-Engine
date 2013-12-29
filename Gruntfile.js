@@ -20,6 +20,7 @@ module.exports = function(grunt) {
                 options: {
                     js: {
                         indentSize: 4,
+                        jsLintHappy: true,
                         wrapLineLength: 80,
                         keepArrayIndentation: true
                     }
