@@ -83,8 +83,8 @@ define(['underscore', 'util/boundingBox'], function(_, BoundingBox) {
          */
         rotationMatrix: function(angle) {
             return new module.Matrix([
-                Math.cos(-angle), Math.sin(-angle), 0,
-                -Math.sin(-angle), Math.cos(-angle), 0,
+                Math.cos(angle), -Math.sin(angle), 0,
+                Math.sin(angle), Math.cos(angle), 0,
                 0, 0, 1
             ], 3, 3);
         },
@@ -242,6 +242,12 @@ define(['underscore', 'util/boundingBox'], function(_, BoundingBox) {
                 return column;
             };
 
+            /**
+                Get a 2d array representing the matrix
+
+                @method toArray2D
+                @return {Array} 2d array of matrix
+             */
             this.toArray2D = function() {
                 var arr = [];
                 this.forEachEntry(function(entry, i, j) {
@@ -300,6 +306,13 @@ define(['underscore', 'util/boundingBox'], function(_, BoundingBox) {
                     matrix.numColumns);
             };
 
+            /**
+                Multiply the matrix by a coefficient
+
+                @method multiplyCoefficient
+                @param  {number} k Coefficient
+                @return {Matrix} New matrix multiplied by coefficient
+             */
             this.multiplyCoefficient = function(k) {
                 var newEntries = [];
                 this.forEachEntry(function(entry, i, j) {

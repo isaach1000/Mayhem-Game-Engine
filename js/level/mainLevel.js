@@ -73,15 +73,15 @@ define([
 
             this.start = function() {
                 var
-                rect = new Shape.Rectangle(300, 300, 100, 100,
-                    _this.mainDrawer, {
-                        fillStyle: 'orange',
-                        angle: 0
-                    }),
-                    tileMap = new TileMap.TileMap(0, 0, 50, 50, 20, 10,
-                        _this.bgDrawer, [{
-                            fillStyle: '#7CF2EC'
+                tileMap = new TileMap.TileMap(0, 0, 50, 50, 20, 10,
+                    this.createContext('tileMap'), [{
+                        fillStyle: '#7CF2EC'
                     }]),
+                    rect = new Shape.Rectangle(300, 300, 100, 100,
+                        this.createContext('rect'), {
+                            fillStyle: 'orange',
+                            angle: 0
+                        }),
                     player = new Player.Player(this.createContext('player'),
                         this.inputHandler, this.physicsEngine);
 

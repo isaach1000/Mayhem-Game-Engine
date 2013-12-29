@@ -2,7 +2,6 @@ define(['foundation/canvasDrawer', 'util/factory', 'util/boundingBox',
     'util/physics', 'events/inputHandler'
 ], function(CanvasDrawer, Factory, BoundingBox, Physics, InputHandler) {
     'use strict';
-    // @formatter:on
 
     //////////////////////////////////
     // Private class methods/fields //
@@ -59,20 +58,36 @@ define(['foundation/canvasDrawer', 'util/factory', 'util/boundingBox',
                 return new CanvasDrawer.CanvasDrawer(ctx, w, h);
             };
 
+            /**
+                Width of canvas
 
+                @property WIDTH
+                @type {number}
+             */
             this.WIDTH = 1000;
+
+            /**
+                Height of canvas
+
+                @property HEIGHT
+                @type {number}
+             */
             this.HEIGHT = 600;
 
-            this.bgCanvas = this.createCanvas('bgCanvas');
-            this.mainCanvas = this.createCanvas('mainCanvas');
+            /**
+                Physics engine
 
+                @property physicsEngine
+                @type {Engine}
+             */
             this.physicsEngine = new Physics.Engine();
-            this.bgCtx = this.bgCanvas[0].getContext('2d');
-            this.bgDrawer = new CanvasDrawer.CanvasDrawer(this.bgCtx, this.bgCanvas
-                .width(), this.bgCanvas.height());
-            this.mainCtx = this.mainCanvas[0].getContext('2d');
-            this.mainDrawer = new CanvasDrawer.CanvasDrawer(this.mainCtx,
-                this.mainCanvas.width(), this.mainCanvas.height());
+
+            /**
+                Input handler
+
+                @property inputHandler
+                @type {InputHandler}
+             */
             this.inputHandler = new InputHandler.InputHandler('body');
         }
     };

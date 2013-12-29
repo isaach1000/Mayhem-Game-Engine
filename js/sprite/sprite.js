@@ -88,7 +88,6 @@ define([
                         return transformation;
                     },
                     set: function(newTransformation) {
-                        console.debug(newTransformation);
                         transformation = newTransformation;
                     }
                 }

@@ -357,18 +357,10 @@ define([
                         headClone = clonedNodesTable.get(edge.head),
                         headSet = headClone.reachableNodes();
 
-                    console.debug(tailClone.data, headClone.data);
-                    console.debug(_.pluck(tailSet.toArray(), 'data'),
-                        _.pluck(headSet.toArray(), 'data'));
-
                     if (!tailSet.equals(headSet)) {
                         minSpanningTree.addEdge(tailClone, headClone);
                     }
                 });
-
-                console.debug(edges.toArray().map(function(e) {
-                    return [e.tail.data, e.head.data];
-                }));
                 return minSpanningTree;
             };
 
