@@ -29,9 +29,8 @@ define([
             @constructor
             @param  {Array} shapes Array of shapes for sprite
             @param  {CanvasDrawer} drawer Drawer to draw shapes
-            @param  {Array} drawingSettingsArr Array with settings for shapes at corresponding index
          */
-        Sprite: function(shapes, drawer, drawingSettingsArr) {
+        Sprite: function(shapes, drawer) {
             /////////////////////////////////////
             // Private instance methods/fields //
             /////////////////////////////////////
@@ -77,31 +76,6 @@ define([
                         boundingBox = newBbox;
                     }
                 },
-                /**
-                   Drawing settings of Sprite instance
-
-                   @property drawingSettings
-                   @type {Object}
-                 */
-                drawingSettings: {
-                    get: function() {
-                        return drawingSettingsArr;
-                    },
-                    set: function(newDrawingSettingsArr) {
-                        if (!_.isEqual(drawingSettingsArr,
-                            newDrawingSettingsArr) || (!_.isArray(
-                            newDrawingSettingsArr) && !_.isObject(
-                            newDrawingSettingsArr))) {
-                            return;
-                        }
-                        if (!_.isArray(newDrawingSettingsArr)) {
-                            newDrawingSettingsArr = [
-                                newDrawingSettingsArr
-                            ];
-                        }
-                        drawingSettingsArr = newDrawingSettingsArr;
-                    }
-                },
 
                 /**
                     Transformation matrix
@@ -114,10 +88,12 @@ define([
                         return transformation;
                     },
                     set: function(newTransformation) {
+                        console.debug(newTransformation);
                         transformation = newTransformation;
                     }
                 }
             });
+
             /**
                 Iterator function
 
@@ -152,9 +128,11 @@ define([
                 @return {void}
              */
             this.clear = function() {
+                drawer.save().transform(this.transformation);
                 this.forEachShape(function(shape) {
                     shape.clear();
                 });
+                drawer.restore();
             };
 
             /**

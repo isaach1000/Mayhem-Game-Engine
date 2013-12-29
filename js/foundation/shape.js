@@ -119,7 +119,7 @@ define(['foundation/canvasDrawer', 'util/boundingBox', 'util/mathExtensions'],
 
                 Object.defineProperties(this, {
                     /**
-                       x coordinate of top-left of Shape instance
+                       x coordinate of Shape instance
 
                        @property x
                        @type {integer}
@@ -138,7 +138,7 @@ define(['foundation/canvasDrawer', 'util/boundingBox', 'util/mathExtensions'],
                     },
 
                     /**
-                       y coordinate of top-left of Shape instance
+                       y coordinate of Shape instance
 
                        @property y
                        @type {integer}
@@ -279,7 +279,7 @@ define(['foundation/canvasDrawer', 'util/boundingBox', 'util/mathExtensions'],
                     drawer.save().transform(this.transformation);
                     this.drawShape(drawer);
                     drawer.restore();
-                    this.drawBoundingBox(drawer);
+                    //this.drawBoundingBox(drawer);
                 };
 
                 /**
@@ -340,8 +340,8 @@ define(['foundation/canvasDrawer', 'util/boundingBox', 'util/mathExtensions'],
             /**
                @class Circle
                @constructor
-               @param   {float} x x coordinate of circle
-               @param   {float} y y coordinate of circle
+               @param   {float} x x coordinate of center of circle
+               @param   {float} y y coordinate of center of circle
                @param   {float} radius Radius of the circle
                @param   {CanvasDrawer} drawer CanvasDrawer to draw circle
                @param   {Object} drawingSettings Dictionary of drawing options
@@ -357,7 +357,8 @@ define(['foundation/canvasDrawer', 'util/boundingBox', 'util/mathExtensions'],
                 var lineWidth = drawingSettings.lineWidth || 0;
 
                 // Extend Shape constructor
-                module.Shape.call(_this, x, y, radius * 2, radius * 2, drawer,
+                module.Shape.call(_this, x - radius, y - radius,
+                    radius * 2, radius * 2, drawer,
                     drawingSettings);
                 this.transformation.tx = x;
                 this.transformation.ty = y;
@@ -403,6 +404,7 @@ define(['foundation/canvasDrawer', 'util/boundingBox', 'util/mathExtensions'],
                     _hitTest to call from collisionTest
 
                     @method _hitTest
+                    @protected
                     @param  {Point} point [description]
                     @return {boolean} [description]
                  */
@@ -428,10 +430,8 @@ define(['foundation/canvasDrawer', 'util/boundingBox', 'util/mathExtensions'],
             /**
                 @class Rectangle
                 @constructor
-                @param   {float} x The x coordinate of the rectangle's upper
-                left corner
-                @param   {float} y The y coordinate of the rectangle's upper
-                left corner
+                @param   {float} x The x coordinate of the rectangle's top-left
+                @param   {float} y The y coordinate of the rectangle's top-left
                 @param   {float} width The width of the rectangle
                 @param   {float} height The height of the rectangle
                 @param   {CanvasDrawer} drawer A CanvasDrawer to draw the

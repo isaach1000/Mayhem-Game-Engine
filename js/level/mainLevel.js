@@ -9,8 +9,9 @@ define([
     'level/levelBase',
     'foundation/shape',
     'foundation/animation',
-    'sprite/tileMap'
-], function(LevelBase, Shape, Animation, TileMap) {
+    'sprite/tileMap',
+    'sprite/player'
+], function(LevelBase, Shape, Animation, TileMap, Player) {
     "use strict";
     //////////////////////////////////
     // Private class methods/fields //
@@ -77,13 +78,16 @@ define([
                         fillStyle: 'orange',
                         angle: 0
                     }),
-                    tileMap = new TileMap.TileMap(0, 0, 70, 70, 20, 10,
+                    tileMap = new TileMap.TileMap(0, 0, 50, 50, 20, 10,
                         _this.bgDrawer, [{
                             fillStyle: '#7CF2EC'
-                    }]);
+                    }]),
+                    player = new Player.Player(this.createContext('player'),
+                        this.inputHandler, this.physicsEngine);
 
                 tileMap.draw();
                 rect.draw();
+                player.draw();
 
                 var
                 omega = Math.PI / 2000,
