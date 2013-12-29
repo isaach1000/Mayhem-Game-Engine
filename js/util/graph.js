@@ -3,7 +3,7 @@
 
     @class Graph
  */
-define(['util/hash'], function(Hash) {
+define(['util/hash', 'util/minheap'], function(Hash, MinHeap) {
     "use strict";
     //////////////////////////////////
     // Private class methods/fields //
@@ -288,10 +288,10 @@ define(['util/hash'], function(Hash) {
                 });
                 queue.add(source);
 
-                // Function to use as parameter in forEach function
+                // Function to use as parameter in forEach function below
                 var relaxEdge = function(v) {
-                    // Assuming all edges have equal distance, distance
-                    // between nodes is 1
+                    // Assuming all edges have equal distance, the distance
+                    // between all nodes is 1
                     var alt = u.dist + 1;
                     if (alt < v.dist) {
                         v.dist = alt;

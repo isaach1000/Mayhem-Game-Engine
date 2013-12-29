@@ -11,6 +11,7 @@ define(['util/graph'], function(Graph) {
             edge42 = graph.addEdge(node4, node2),
             edge43 = graph.addEdge(node4, node3),
             edge41 = graph.addEdge(node4, node1);
+
         it('add nodes and edges', function() {
             var edges = [edge12, edge13];
             node1.edges.forEach(function(edge) {
@@ -18,9 +19,11 @@ define(['util/graph'], function(Graph) {
             });
             expect(node2.edges.length).toBe(0);
         });
+
         it('remove edges', function() {
             graph.removeEdge(node4, node1);
         });
+
         it('depth first search', function() {
             var index = 0,
                 validNodes = [
@@ -35,6 +38,7 @@ define(['util/graph'], function(Graph) {
                 expect(validNodeGroup).toContain(node);
             });
         });
+
         it('breadth first search', function() {
             var index = 0,
                 validNodes = [
@@ -48,6 +52,14 @@ define(['util/graph'], function(Graph) {
                 index++;
                 expect(validNodeGroup).toContain(node);
             });
+        });
+
+        it('dijkstra\'s algorithm', function() {
+            graph.dijkstra(node1);
+            expect(node1.dist).toBe(0);
+            expect(node2.dist).toBe(1);
+            expect(node3.dist).toBe(1);
+            expect(node4.dist).toBe(2);
         });
     });
 });
