@@ -10,6 +10,7 @@ require.config({
         }
     }
 });
+
 require(['jquery', 'level/mainLevel'], function($, MainLevel) {
     "use strict";
     $(function() {
