@@ -7,7 +7,7 @@
    @class Hash
  */
 define([], function() {
-    "use strict";
+    'use strict';
     //////////////////////////////////
     // Private class methods/fields //
     //////////////////////////////////

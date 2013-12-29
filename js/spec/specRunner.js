@@ -20,7 +20,7 @@ require.config({
     }
 });
 require(['jquery', 'underscore', 'jasmine-html'], function($, _, jasmine) {
-    "use strict";
+    'use strict';
     var jasmineEnv = jasmine.getEnv();
     jasmineEnv.updateInterval = 1000;
     var htmlReporter = new jasmine.HtmlReporter();

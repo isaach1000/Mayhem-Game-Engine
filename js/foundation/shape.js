@@ -5,7 +5,7 @@
  */
 define(['foundation/canvasDrawer', 'util/boundingBox', 'util/mathExtensions'],
     function(CanvasDrawer, BoundingBox, MathExtensions) {
-        "use strict";
+        'use strict';
         //////////////////////////////////
         // Private class methods/fields //
         //////////////////////////////////

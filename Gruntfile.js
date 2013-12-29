@@ -38,7 +38,8 @@ module.exports = function(grunt) {
                 url: '<%= pkg.homepage %>',
                 options: {
                     paths: ['js'],
-                    ignorepaths: ['js/lib/*', 'js/template.js'],
+                    ignorepaths: ['js/lib/*'],
+                    lint: true,
                     outdir: 'docs'
                 }
             }

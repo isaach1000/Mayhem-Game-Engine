@@ -1,5 +1,5 @@
 define(['util/minheap'], function(MinHeap) {
-    "use strict";
+    'use strict';
     describe('MinHeap', function() {
         describe('with primitive data', function() {
             var minheap = new MinHeap.MinHeap();

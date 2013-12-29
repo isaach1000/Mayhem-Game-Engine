@@ -6,7 +6,7 @@
    @class BoundingBox
  */
 define([], function() {
-    "use strict";
+    'use strict';
     /**
        @module util/boundingBox
      */

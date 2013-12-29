@@ -1,5 +1,5 @@
 define(['foundation/shape'], function(Shape) {
-    "use strict";
+    'use strict';
 
     describe('Shape', function() {
         // TODO

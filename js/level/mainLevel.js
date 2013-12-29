@@ -12,7 +12,7 @@ define([
     'sprite/tileMap',
     'sprite/player'
 ], function(LevelBase, Shape, Animation, TileMap, Player) {
-    "use strict";
+    'use strict';
     //////////////////////////////////
     // Private class methods/fields //
     //////////////////////////////////

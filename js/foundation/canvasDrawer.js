@@ -1,5 +1,5 @@
 define(['underscore', 'util/mathExtensions'], function(_, MathExtensions) {
-    "use strict";
+    'use strict';
 
     //////////////////////////////////
     // Private class methods/fields //

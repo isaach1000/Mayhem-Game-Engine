@@ -4,7 +4,7 @@
    @class Animation
  */
 define(['underscore'], function(_) {
-    "use strict";
+    'use strict';
     //////////////////////////////////
     // Private class methods/fields //
     //////////////////////////////////

@@ -8,7 +8,7 @@ define([
     'util/hash',
     'util/minheap'
 ], function(_, Hash, MinHeap) {
-    "use strict";
+    'use strict';
     //////////////////////////////////
     // Private class methods/fields //
     //////////////////////////////////

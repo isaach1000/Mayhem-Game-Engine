@@ -1,7 +1,7 @@
 define(['foundation/canvasDrawer', 'util/factory', 'util/boundingBox',
     'util/physics', 'events/inputHandler'
 ], function(CanvasDrawer, Factory, BoundingBox, Physics, InputHandler) {
-    "use strict";
+    'use strict';
     // @formatter:on
 
     //////////////////////////////////

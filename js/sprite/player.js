@@ -9,7 +9,7 @@ define([
     'foundation/animation',
     'enum/direction'
 ], function(Sprite, Shape, Animation, Direction) {
-    "use strict";
+    'use strict';
 
     //////////////////////////////////
     // Private class methods/fields //

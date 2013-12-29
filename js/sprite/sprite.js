@@ -9,7 +9,7 @@ define([
         'util/boundingBox',
         'util/mathExtensions'
     ], function(_, BoundingBox, MathExtensions) {
-    "use strict";
+    'use strict';
 
     //////////////////////////////////
     // Private class methods/fields //

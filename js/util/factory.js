@@ -4,7 +4,7 @@
     @class Factory
  */
 define(['jquery'], function($) {
-    "use strict";
+    'use strict';
     /**
        @module util/factory
      */

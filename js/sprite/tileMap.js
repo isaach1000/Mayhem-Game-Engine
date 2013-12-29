@@ -3,7 +3,7 @@
    @class TileMap
  */
 define(['sprite/sprite', 'foundation/shape'], function(Sprite, Shape) {
-    "use strict";
+    'use strict';
     /**
        @module sprite/tileMap
      */

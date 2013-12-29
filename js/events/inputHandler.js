@@ -4,7 +4,7 @@
     @class InputHandler
  */
 define(['jquery'], function($) {
-    "use strict";
+    'use strict';
 
     //////////////////////////////////
     // Private class methods/fields //
