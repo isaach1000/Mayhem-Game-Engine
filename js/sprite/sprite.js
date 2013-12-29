@@ -216,8 +216,10 @@ define([
                 this.boundingBox = new BoundingBox.BoundingBox(minX, minY,
                     maxX - minX, maxY - minY);
             };
+
             /**
                Test whether or not a point is within a Sprite
+
                @param {Point} point Point to test
                @return {boolean} If the point is in the Sprite
              */

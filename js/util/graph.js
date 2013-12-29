@@ -3,7 +3,11 @@
 
     @class Graph
  */
-define(['util/hash', 'util/minheap'], function(Hash, MinHeap) {
+define([
+    'underscore',
+    'util/hash',
+    'util/minheap'
+], function(_, Hash, MinHeap) {
     "use strict";
     //////////////////////////////////
     // Private class methods/fields //
@@ -28,10 +32,36 @@ define(['util/hash', 'util/minheap'], function(Hash, MinHeap) {
             /////////////////////////////////////
 
             var nodes = new Hash.Hashset(),
+                edges = new Hash.Hashset(),
                 adjacencyList = new Hash.Hashtable();
 
+
+            ////////////////////////////////////
+            // Public instance methods/fields //
+            ////////////////////////////////////
+
+            Object.defineProperties(this, {
+                nodes: {
+                    get: function() {
+                        return nodes;
+                    }
+                },
+
+                edges: {
+                    get: function() {
+                        return edges;
+                    }
+                },
+
+                adjacencyList: {
+                    get: function() {
+                        return adjacencyList;
+                    }
+                }
+            });
+
             /**
-                Private inner GraphNode class
+                Inner GraphNode class
 
                 @class GraphNode
                 @for Graph
@@ -60,7 +90,7 @@ define(['util/hash', 'util/minheap'], function(Hash, MinHeap) {
                     /**
                         Neighbors of node
 
-						@property neighbors
+                        @property neighbors
                         @type {Hashset}
                      */
                     neighbors: {
@@ -81,7 +111,7 @@ define(['util/hash', 'util/minheap'], function(Hash, MinHeap) {
                     @method reachableNodes
                     @return {Hashset} Set of reachable nodes
                  */
-                function reachableNodes() {
+                this.reachableNodes = function() {
                     // Inner helper function
                     function reachableNodesHelper(node, set, visitedSet) {
                         if (visitedSet.contains(node)) {
@@ -96,13 +126,10 @@ define(['util/hash', 'util/minheap'], function(Hash, MinHeap) {
 
                     // Main code
                     var reachableSet = new Hash.Hashset();
-                    reachableSet.add(thisNode);
-                    node.neighbors.forEach(function(otherNode) {
-                        reachableNodesHelper(otherNode, reachableSet,
-                            new Hash.Hashset());
-                    });
+                    reachableNodesHelper(thisNode, reachableSet,
+                        new Hash.Hashset());
                     return reachableSet;
-                }
+                };
             }
 
             /**
@@ -139,10 +166,6 @@ define(['util/hash', 'util/minheap'], function(Hash, MinHeap) {
                 this.weight = 0;
             }
 
-            ////////////////////////////////////
-            // Public instance methods/fields //
-            ////////////////////////////////////
-
             /**
                 Add a node to the graph
 
@@ -164,12 +187,14 @@ define(['util/hash', 'util/minheap'], function(Hash, MinHeap) {
              */
             this.addEdge = function(tail, head) {
                 var edge = new GraphEdge(tail, head);
+                edges.add(edge);
                 adjacencyList.get(tail).add(edge);
                 return edge;
             };
 
             /**
                Remove an edge from the graph
+
                @param   {GraphNode} tail       The origin node of the edge
                @param   {GraphNode} head       The destination node of the edge
                @return  {void}
@@ -179,8 +204,11 @@ define(['util/hash', 'util/minheap'], function(Hash, MinHeap) {
                 tail.edges.forEach(function(edge) {
                     if (edge.tail === tail && edge.head === head) {
                         removeEdge = edge;
+                        // Terminate iter
+                        return true;
                     }
                 });
+                edges.remove(removeEdge);
                 tail.edges.remove(removeEdge);
             };
 
@@ -188,7 +216,8 @@ define(['util/hash', 'util/minheap'], function(Hash, MinHeap) {
                 Perform a depth first search of the graph
 
                 @method depthFirstSearch
-                @param {Function} func The operation to perform on the visited nodes
+                @param {Function} func The operation to perform on the visited
+                nodes
              */
             this.depthFirstSearch = function(func) {
                 // Inner helper function
@@ -264,20 +293,20 @@ define(['util/hash', 'util/minheap'], function(Hash, MinHeap) {
              */
             this.dijkstra = function(source) {
                 nodes.forEach(function(node) {
-                    node.dist = Infinity;
+                    node.weight = Infinity;
                     node.visited = false;
                     // Set node.previous to undefined
                     delete node.previous;
                 });
 
                 // Distance of source to itself is 0
-                source.dist = 0;
+                source.weight = 0;
 
                 var queue = new MinHeap.MinHeap(function(graphNode1,
                     graphNode2) {
-                    if (isFinite(graphNode1.dist) && isFinite(
+                    if (isFinite(graphNode1.weight) && isFinite(
                         graphNode2)) {
-                        return graphNode1.dist - graphNode2.dist;
+                        return graphNode1.weight - graphNode2.weight;
                     } else if (isFinite(graphNode1)) {
                         return -1;
                     } else if (isFinite(graphNode2)) {
@@ -292,9 +321,9 @@ define(['util/hash', 'util/minheap'], function(Hash, MinHeap) {
                 var relaxEdge = function(v) {
                     // Assuming all edges have equal distance, the distance
                     // between all nodes is 1
-                    var alt = u.dist + 1;
-                    if (alt < v.dist) {
-                        v.dist = alt;
+                    var alt = u.weight + 1;
+                    if (alt < v.weight) {
+                        v.weight = alt;
                         v.previous = u;
                         if (!v.visited) {
                             queue.add(v);
@@ -310,8 +339,39 @@ define(['util/hash', 'util/minheap'], function(Hash, MinHeap) {
             };
 
             this.kruskal = function(set) {
-                // TODO
+                var minSpanningTree = new module.Graph(),
+                    clonedNodesTable = new Hash.Hashtable();
+
+                nodes.forEach(function(node) {
+                    var nodeClone = minSpanningTree.addNode(node.data);
+                    clonedNodesTable.put(node, nodeClone);
+                });
+
+                var edgeArr = edges.toArray();
+                edgeArr.sort(function(edge1, edge2) {
+                    return edge1.weight - edge2.weight;
+                });
+                edgeArr.forEach(function(edge) {
+                    var tailClone = clonedNodesTable.get(edge.tail),
+                        tailSet = tailClone.reachableNodes(),
+                        headClone = clonedNodesTable.get(edge.head),
+                        headSet = headClone.reachableNodes();
+
+                    console.debug(tailClone.data, headClone.data);
+                    console.debug(_.pluck(tailSet.toArray(), 'data'),
+                        _.pluck(headSet.toArray(), 'data'));
+
+                    if (!tailSet.equals(headSet)) {
+                        minSpanningTree.addEdge(tailClone, headClone);
+                    }
+                });
+
+                console.debug(edges.toArray().map(function(e) {
+                    return [e.tail.data, e.head.data];
+                }));
+                return minSpanningTree;
             };
+
         }
     };
 

@@ -8,9 +8,7 @@ define(['util/graph'], function(Graph) {
             node4 = graph.addNode(4),
             edge12 = graph.addEdge(node1, node2),
             edge13 = graph.addEdge(node1, node3),
-            edge42 = graph.addEdge(node4, node2),
-            edge43 = graph.addEdge(node4, node3),
-            edge41 = graph.addEdge(node4, node1);
+            edge34 = graph.addEdge(node3, node4);
 
         it('add nodes and edges', function() {
             var edges = [edge12, edge13];
@@ -56,10 +54,15 @@ define(['util/graph'], function(Graph) {
 
         it('dijkstra\'s algorithm', function() {
             graph.dijkstra(node1);
-            expect(node1.dist).toBe(0);
-            expect(node2.dist).toBe(1);
-            expect(node3.dist).toBe(1);
-            expect(node4.dist).toBe(2);
+            expect(node1.weight).toBe(0);
+            expect(node2.weight).toBe(1);
+            expect(node3.weight).toBe(1);
+            expect(node4.weight).toBe(2);
+        });
+
+        it('kruskal\'s algorithm', function() {
+            var kruskalTree = graph.kruskal();
+            expect(kruskalTree.edges.length).toBe(3);
         });
     });
 });
