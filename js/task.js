@@ -1,5 +1,3 @@
-console.debug("worker succeeded");
-
 /*
 self.addEventListener('message', runGraph(), false);
 
