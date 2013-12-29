@@ -13,7 +13,11 @@ require.config({
 require(['jquery', 'level/mainLevel'], function($, MainLevel) {
     "use strict";
     $(function() {
-        var mainLevel = new MainLevel.MainLevel();
-        mainLevel.start();
+        /*var mainLevel = new MainLevel.MainLevel();
+        mainLevel.start();*/
+        var worker = new Worker('js/task.js');
+        worker.addEventListener('message', function(ev) {
+            console.debug(ev.data);
+        });
     });
 });
