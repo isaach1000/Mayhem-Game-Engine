@@ -3,7 +3,7 @@
 
     @class Direction
  */
-define([], function() {
+define(['util/mathExtensions'], function(MathExtensions) {
     var module = {
         LEFT: 37,
         UP: 38,
@@ -17,6 +17,10 @@ define([], function() {
         opposite: function(dir) {
             return [module.RIGHT, module.DOWN, module.LEFT, module.UP][dir -
                 module.LEFT];
+        },
+
+        random: function() {
+            return module.LEFT + MathExtensions.randomInt(4);
         }
     };
 

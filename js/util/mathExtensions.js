@@ -43,7 +43,6 @@ define(['underscore', 'util/boundingBox'], function(_, BoundingBox) {
            @return  {float} A random float within the specified range.
          */
         randomFloat: function(minimum, maximum) {
-            console.debug(arguments);
             var min, max, range;
             switch (arguments.length) {
                 case 1:

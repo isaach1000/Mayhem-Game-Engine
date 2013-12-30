@@ -15,6 +15,8 @@ define([
     // Private class methods/fields //
     //////////////////////////////////
 
+    var MOUTH_MAX = 2;
+
     /**
         @module sprite/player
      */
@@ -43,7 +45,7 @@ define([
             }, {
                 fillStyle: 'black'
             }],
-                location = maze.get(1, 1),
+                location = maze.get(5, 10),
                 center = {
                     x: 0,
                     y: 0
@@ -57,6 +59,27 @@ define([
                 shapes = [head, eye, mouth],
                 isAnimating = false,
                 previousMove;
+
+            function init() {
+                // Extend Sprite constructor
+                Sprite.Sprite.call(_this, shapes, drawer,
+                    drawingSettingsArr);
+
+                // After constructing shapes around origin, translate to
+                // position
+                _this.x = location.x + location.width / 2;
+                _this.y = location.y + location.height / 2;
+
+                var
+                cycleDuration = 600,
+                    mouthAnim = new Animation.Animation(_this, function(
+                        time) {
+                        mouth.transformation.sy = MOUTH_MAX * Math.sin(
+                            time / cycleDuration * Math.PI * 2);
+                    });
+
+                mouthAnim.start();
+            }
 
             ////////////////////////////////////
             // Public instance methods/fields //
@@ -97,50 +120,63 @@ define([
                 }
             });
 
-            // Extend Sprite constructor
-            Sprite.Sprite.call(this, shapes, drawer, drawingSettingsArr);
-
-            // After constructing shapes around origin, translate to position
-            this.x = location.x + location.width / 2;
-            this.y = location.y + location.height / 2;
-
             this.move = function(keyCode) {
                 if (this.isAnimating) {
                     return;
                 }
 
-                var newLocation, dx, dy;
+                var newLocation, dx, dy, sx, angle;
 
                 switch (keyCode) {
                     case Direction.LEFT:
                         newLocation = location.left;
-                        this.transformation.angle = 0;
-                        this.transformation.sx = -1;
+                        angle = 0;
+                        sx = -1;
                         break;
                     case Direction.UP:
                         newLocation = location.up;
                         if (previousMove === Direction.LEFT) {
-                            this.transformation.sx = 1;
+                            sx = 1;
                         }
-                        this.transformation.angle = Math.PI / 2;
+                        angle = Math.PI / 2;
                         break;
                     case Direction.RIGHT:
                         newLocation = location.right;
-                        this.transformation.angle = 0;
-                        this.transformation.sx = 1;
+                        angle = 0;
+                        sx = 1;
                         break;
                     case Direction.DOWN:
                         newLocation = location.down;
                         if (previousMove === Direction.LEFT) {
-                            this.transformation.sx = 1;
+                            sx = 1;
                         }
-                        this.transformation.angle = -Math.PI / 2;
+                        angle = -Math.PI / 2;
                         break;
                     default:
                         return;
                 }
-                if (newLocation === null || location.walls[keyCode]) {
+
+                if (newLocation === null || !location.walls[keyCode]
+                    .isPenetrable) {
                     return;
+                }
+
+                if (angle !== undefined) {
+                    if (keyCode === Direction.UP || keyCode ===
+                        Direction.DOWN) {
+                        if (sx !== undefined) {
+                            this.transformation.sx = sx;
+                        }
+                    }
+                    this.transformation.angle = angle;
+                    if (keyCode === Direction.LEFT || keyCode ===
+                        Direction.RIGHT) {
+                        if (sx !== undefined) {
+                            this.transformation.sx = sx;
+                        }
+                    }
+                } else if (sx !== undefined) {
+                    this.transformation.sx = sx;
                 }
 
                 previousMove = keyCode;
@@ -177,8 +213,10 @@ define([
             inputHandler.bind('keydown', function(ev) {
                 _this.move(ev.keyCode);
             });
-        }
 
+            // Call init to perform setup
+            init();
+        }
     };
 
     return module;

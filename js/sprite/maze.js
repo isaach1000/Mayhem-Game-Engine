@@ -20,6 +20,7 @@ define([
     TILE_SIDE = 50,
         FILL_STYLE = '#7CF2EC',
         WALL_STYLE = '#FFFFFF',
+        EMPTY_STYLE = '#000000',
         WALL_THICKNESS = 5;
 
     /**
@@ -72,7 +73,7 @@ define([
                  */
                 this.column = j;
 
-                /**
+                /***
                     x coordination of tile
 
                     @property x
@@ -152,33 +153,20 @@ define([
 
                     @property walls
                     @type {Object}
-                    @for Maze
                  */
                 this.walls = {};
 
-                this.walls[Direction.UP] = new Shape.Rectangle(this.x,
-                    this.y, TILE_SIDE, WALL_THICKNESS, drawer, {
-                        fillStyle: WALL_STYLE,
-                        strokeStyle: WALL_STYLE
-                    });
+                this.walls[Direction.UP] = new MazeWall(this.x, this.y,
+                    false);
 
-                this.walls[Direction.DOWN] = new Shape.Rectangle(this.x,
-                    this.y + TILE_SIDE, TILE_SIDE, WALL_THICKNESS, drawer, {
-                        fillStyle: WALL_STYLE,
-                        strokeStyle: WALL_STYLE
-                    });
+                this.walls[Direction.DOWN] = new MazeWall(this.x,
+                    this.y + TILE_SIDE, false);
 
-                this.walls[Direction.RIGHT] = new Shape.Rectangle(this.x +
-                    TILE_SIDE, this.y, WALL_THICKNESS, TILE_SIDE, drawer, {
-                        fillStyle: WALL_STYLE,
-                        strokeStyle: WALL_STYLE
-                    });
+                this.walls[Direction.RIGHT] = new MazeWall(this.x +
+                    TILE_SIDE, this.y, true);
 
-                this.walls[Direction.LEFT] = new Shape.Rectangle(this.x,
-                    this.y, WALL_THICKNESS, TILE_SIDE, drawer, {
-                        fillStyle: WALL_STYLE,
-                        strokeStyle: WALL_STYLE
-                    });
+                this.walls[Direction.LEFT] = new MazeWall(this.x,
+                    this.y, true);
 
                 /**
                     Get the locaton in a given direction from this locaton
@@ -191,6 +179,82 @@ define([
                     var neighbors = [this.left, this.up, this.right, this.down];
                     return neighbors[direction - Direction.LEFT];
                 };
+
+                /**
+                    Get an impenetrable location adjacent to this location
+
+                    @method getImpenetrable
+                    @for Maze
+                    @return {MazeLocation} Impenetrable location if exists,
+                    null otherwise
+                 */
+                this.getImpenetrable = function() {
+                    for (var i = 0; i < 4; i++) {
+                        var dir = Direction.LEFT + i,
+                            location = this.get(dir);
+
+                        if (location !== null && !this.walls[dir].isPenetrable) {
+                            return location;
+                        }
+                    }
+                    return null;
+                };
+            }
+
+            /**
+                Class to represent walls of MazeLocation
+
+                @class MazeWall
+                @constructor
+                @for Maze
+                @param  {number} x x coordinate of wall
+                @param  {number} y y coordinate of wall
+                @param  {boolean} isVertical Whether or not wall is vertical
+             */
+            function MazeWall(x, y, isVertical) {
+                var
+                w = isVertical ? WALL_THICKNESS : TILE_SIDE +
+                    WALL_THICKNESS,
+                    h = isVertical ? TILE_SIDE + WALL_THICKNESS :
+                        WALL_THICKNESS,
+                    isPenetrable = false;
+
+                /**
+                    Rectangle to display on canvas
+
+                    @property rect
+                    @type {Shape}
+                 */
+                this.rect = new Shape.Rectangle(x, y,
+                    w, h,
+                    drawer, {
+                        fillStyle: WALL_STYLE,
+                        strokeStyle: WALL_STYLE
+                    });
+
+                Object.defineProperties(this, {
+                    /**
+                        Whether or not the wall is penetrable
+
+                        @property isPenetrable
+                        @type {boolean}
+                        @for Maze
+                     */
+                    isPenetrable: {
+                        get: function() {
+                            return isPenetrable;
+                        },
+                        set: function(value) {
+                            isPenetrable = value;
+                            if (isPenetrable) {
+                                this.rect.drawingSettings.fillStyle =
+                                    EMPTY_STYLE;
+                                this.rect.drawingSettings.strokeStyle =
+                                    EMPTY_STYLE;
+                            }
+                        }
+                    }
+                });
             }
 
             /**
@@ -207,10 +271,10 @@ define([
                     for (j = 0; j < numWidth; j++) {
                         var location = new MazeLocation(i, j);
                         shapes.push(location.tile);
-                        shapes.push(location.walls[Direction.UP]);
-                        shapes.push(location.walls[Direction.DOWN]);
-                        shapes.push(location.walls[Direction.LEFT]);
-                        shapes.push(location.walls[Direction.RIGHT]);
+                        shapes.push(location.walls[Direction.UP].rect);
+                        shapes.push(location.walls[Direction.DOWN].rect);
+                        shapes.push(location.walls[Direction.LEFT].rect);
+                        shapes.push(location.walls[Direction.RIGHT].rect);
                         locationRow.push(location);
                     }
                     locations.push(locationRow);
@@ -265,21 +329,30 @@ define([
                         return;
                     }
 
+                    location.tile.drawingSettings.fillStyle = EMPTY_STYLE;
+
                     // TODO: improve
                     var
                     randomInt = MathExtensions.randomInt(4),
                         randomDir = Direction.LEFT + randomInt,
                         randomLocation = location.get(randomInt +
-                            Direction.LEFT);
+                            Direction.LEFT),
+                        wall = location.walls[randomDir];
 
-                    delete location.walls[randomDir];
-                    delete randomLocation.walls[Direction.opposite(
-                        randomDir)];
+                    wall.isPenetrable = true;
+                    if (randomLocation !== null) {
+                        var oppWall = randomLocation.walls[Direction
+                            .opposite(randomDir)];
+                        oppWall.isPenetrable = true;
+                        randomLocation.tile.drawingSettings.fillStyle =
+                            EMPTY_STYLE;
+                    }
+
                     visited.add(location);
                     generateMazeHelper(randomLocation);
                 }
 
-                generateMazeHelper(_this.get(1, 1));
+                generateMazeHelper(_this.get(5, 10));
             }
 
             ////////////////////////////////////
