@@ -15,8 +15,6 @@ define([
     // Private class methods/fields //
     //////////////////////////////////
 
-    var STEP_DIST = 50;
-
     /**
         @module sprite/player
      */
@@ -30,7 +28,7 @@ define([
              @constructor
          */
 
-        Player: function(drawer, inputHandler, physicsEngine) {
+        Player: function(drawer, inputHandler, physicsEngine, maze) {
             var _this = this;
 
             /////////////////////////////////////
@@ -45,16 +43,17 @@ define([
             }, {
                 fillStyle: 'black'
             }],
+                location = maze.get(0, 0),
                 center = {
                     x: 0,
                     y: 0
                 },
-                head = new Shape.Circle(center.x, center.y, 20,
+                head = new Shape.Circle(center.x, center.y, 18,
                     drawer, drawingSettingsArr[0]),
                 eye = new Shape.Circle(center.x + 10, center.y - 5, 4,
                     drawer, drawingSettingsArr[1]),
-                mouth = new Shape.Rectangle(center.x + 5, center.y + 5, 15,
-                    5, drawer, drawingSettingsArr[2]),
+                mouth = new Shape.Rectangle(center.x + 5, center.y + 5, 12,
+                    3, drawer, drawingSettingsArr[2]),
                 shapes = [head, eye, mouth],
                 isAnimating = false,
                 previousMove;
@@ -102,47 +101,47 @@ define([
             Sprite.Sprite.call(this, shapes, drawer, drawingSettingsArr);
 
             // After constructing shapes around origin, translate to position
-            this.x = 75;
-            this.y = 75;
+            this.x = location.x + location.width / 2;
+            this.y = location.y + location.height / 2;
 
             this.move = function(keyCode) {
                 if (this.isAnimating) {
                     return;
                 }
 
-                var
-                dx = 0,
-                    dy = 0;
+                var newLocation, dx, dy;
 
                 switch (keyCode) {
                     case Direction.LEFT:
-                        dx = -STEP_DIST;
+                        newLocation = location.left;
                         this.transformation.angle = 0;
                         this.transformation.sx = -1;
                         break;
                     case Direction.UP:
+                        newLocation = location.up;
                         if (previousMove === Direction.LEFT) {
                             this.transformation.sx = 1;
                         }
-                        dy = -STEP_DIST;
                         this.transformation.angle = Math.PI / 2;
                         break;
                     case Direction.RIGHT:
-                        dx = STEP_DIST;
+                        newLocation = location.right;
                         this.transformation.angle = 0;
                         this.transformation.sx = 1;
                         break;
                     case Direction.DOWN:
+                        newLocation = location.down;
                         if (previousMove === Direction.LEFT) {
                             this.transformation.sx = 1;
                         }
-                        dy = STEP_DIST;
                         this.transformation.angle = -Math.PI / 2;
                         break;
                     default:
                         return;
                 }
                 previousMove = keyCode;
+                dx = newLocation.x - location.x;
+                dy = newLocation.y - location.y;
 
                 var
                 newCenter = {
@@ -154,9 +153,9 @@ define([
                     idealTime = 100,
                     animation = new Animation.Animation(this, function(time,
                         timeDiff) {
-                        _this.x += Math.floor(dx / idealTime *
+                        _this.x += Math.round(dx / idealTime *
                             timeDiff);
-                        _this.y += Math.floor(dy / idealTime *
+                        _this.y += Math.round(dy / idealTime *
                             timeDiff);
                         return dirX * _this.x > dirX * newCenter.x ||
                             dirY * _this.y > dirY * newCenter.y;

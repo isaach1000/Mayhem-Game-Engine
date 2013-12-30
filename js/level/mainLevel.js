@@ -9,9 +9,9 @@ define([
     'level/levelBase',
     'foundation/shape',
     'foundation/animation',
-    'sprite/tileMap',
+    'sprite/maze',
     'sprite/player'
-], function(LevelBase, Shape, Animation, TileMap, Player) {
+], function(LevelBase, Shape, Animation, Maze, Player) {
     'use strict';
     //////////////////////////////////
     // Private class methods/fields //
@@ -73,19 +73,16 @@ define([
 
             this.start = function() {
                 var
-                tileMap = new TileMap.TileMap(0, 0, 50, 50, 20, 10,
-                    this.createContext('tileMap'), [{
-                        fillStyle: '#7CF2EC'
-                    }]),
+                maze = new Maze.Maze(20, 10, this.createContext('maze')),
                     rect = new Shape.Rectangle(300, 300, 100, 100,
                         this.createContext('rect'), {
                             fillStyle: 'orange',
                             angle: 0
                         }),
                     player = new Player.Player(this.createContext('player'),
-                        this.inputHandler, this.physicsEngine);
+                        this.inputHandler, this.physicsEngine, maze);
 
-                tileMap.draw();
+                maze.draw();
                 rect.draw();
                 player.draw();
 

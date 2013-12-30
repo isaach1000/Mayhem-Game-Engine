@@ -13,7 +13,7 @@ define([], function() {
     //////////////////////////////////
     var currentHash = 0,
         INIT_CAPACITY = 16,
-        LOAD_FACTOR = 2;
+        LOAD_FACTOR = 0.5;
     var module = {
         /////////////////////////////////
         // Public class methods/fields //
@@ -113,23 +113,29 @@ define([], function() {
              */
             function rehash() {
                 // Create new bucket that is double the size
-                var oldBucket = bucket;
+                var
+                oldBucket = bucket,
+                    oldIndices = indicesTaken,
+                    hashTarget;
+
                 capacity *= 2;
                 bucket = new Array(capacity);
                 indicesTaken = [];
                 // Transfer all elements to new array
-                var bucketLen = oldBucket.length;
-                for (var i = 0; i < bucketLan; i++) {
-                    var object = oldBucket[i];
+                var idxLen = oldIndices.length;
+                for (var i = 0; i < idxLen; i++) {
+                    var object = oldBucket[oldIndices[i]];
                     if (_.isArray(object)) {
                         var subArray = object,
                             subArrayLen = subArray.length;
                         for (var j = 0; j < subArrayLen; j++) {
                             var element = subArray[j];
-                            insert(element);
+                            hashTarget = element.key || element;
+                            insert(element, hashTarget);
                         }
                     } else {
-                        insert(object);
+                        hashTarget = object.key || object;
+                        insert(object, hashTarget);
                     }
                 }
             }

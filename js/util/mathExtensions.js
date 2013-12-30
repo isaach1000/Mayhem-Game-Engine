@@ -21,12 +21,14 @@ define(['underscore', 'util/boundingBox'], function(_, BoundingBox) {
 
            @method  randomInt
            @static
-           @param   {int} [minimum=0] The minimum for the random integer (inclusive).
-           @param   {int} maximum The maximum for the random integer (not inclusive).
-           @return  {int} A random integer within the specified range.
+           @param   {integer} [minimum=0] The minimum for the random integer
+           (inclusive)
+           @param   {integer} maximum The maximum for the random integer
+           (not inclusive)
+           @return  {integer} A random integer within the specified range.
          */
         randomInt: function(minimum, maximum) {
-            return Math.floor(module.randomFloat(minimum, maximum));
+            return Math.floor(module.randomFloat.apply(this, arguments));
         },
 
         /**
@@ -34,8 +36,10 @@ define(['underscore', 'util/boundingBox'], function(_, BoundingBox) {
 
            @method randomFloat
            @static
-           @param   {float} [minimum=0] The minimum for the random float (inclusive).
-           @param   {float} maximum The maximum for the random float (not inclusive).
+           @param   {float} [minimum=0] The minimum for the random float
+           (inclusive)
+           @param   {float} maximum The maximum for the random float
+           (not inclusive)
            @return  {float} A random float within the specified range.
          */
         randomFloat: function(minimum, maximum) {

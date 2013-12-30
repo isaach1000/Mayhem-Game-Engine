@@ -136,10 +136,12 @@ define([
                 @class GraphEdge
                 @for Graph
                 @constructor
-                @param  {[type]} tail [description]
-                @param  {[type]} head [description]
+                @param {GraphNode} tail Tail node of edge
+                @param {GraphNode} head Head node of edge
+                @param {number} [weight=0] Weight of edge
+                @param {Object} [data=undefined] Data object for node
              */
-            function GraphEdge(tail, head) {
+            function GraphEdge(tail, head, weight, data) {
                 /**
                     Tail node of edge
 
@@ -163,12 +165,15 @@ define([
                     @type {number}
                     @for Graph
                  */
-                this.weight = 0;
+                this.weight = weight || 0;
+
+                this.data = data;
             }
 
             /**
                 Add a node to the graph
 
+                @method addNode
                 @param   {Object} data Data to be stored in the node
                 @return  {GraphNode} A node with the data
              */
@@ -181,6 +186,7 @@ define([
             /**
                 Add an edge to the graph
 
+                @method addEdge
                 @param   {GraphNode} tail The origin node of the edge
                 @param   {GraphNode} head The destination node of the edge
                 @return  {GraphEdge} A directed edge connecting the nodes
@@ -193,11 +199,28 @@ define([
             };
 
             /**
-               Remove an edge from the graph
+                Get edge with given tail and head.
 
-               @param   {GraphNode} tail       The origin node of the edge
-               @param   {GraphNode} head       The destination node of the edge
-               @return  {void}
+                @method getEdge
+                @param  {GraphNode} tail Tail node
+                @param  {GraphNode} head Head node
+                @return {GraphEdge} If edge exists, the edge, otherwise,
+                undefined.
+             */
+            this.getEdge = function(tail, head) {
+                return this.adjacencyList.get(tail).toArray()
+                    .filter(function(edge) {
+                        return edge.head === head;
+                    })[0];
+            };
+
+            /**
+                Remove an edge from the graph
+
+                @method removeEdge
+                @param   {GraphNode} tail       The origin node of the edge
+                @param   {GraphNode} head       The destination node of the edge
+                @return  {void}
              */
             this.removeEdge = function(tail, head) {
                 var removeEdge;
@@ -218,6 +241,7 @@ define([
                 @method depthFirstSearch
                 @param {Function} func The operation to perform on the visited
                 nodes
+                @return {void}
              */
             this.depthFirstSearch = function(func) {
                 // Inner helper function
@@ -226,11 +250,14 @@ define([
                         return true;
                     }
                     visitedSet.add(node);
-                    var doneSearching = func(node) || true;
+                    var doneSearching = func(node);
                     if (doneSearching !== true) {
+                        var ret;
                         node.neighbors.forEach(function(neighbor) {
-                            return depthFirstSearchHelper(neighbor);
+                            ret = depthFirstSearchHelper(neighbor) ||
+                                ret;
                         });
+                        return ret;
                     }
                     return doneSearching;
                 }
@@ -364,6 +391,11 @@ define([
                 return minSpanningTree;
             };
 
+            // TODO
+            this.json = function() {
+                var jsonGraph = {};
+                this.depthFirstSearch(function() {});
+            };
         }
     };
 

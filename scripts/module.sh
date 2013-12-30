@@ -19,12 +19,12 @@ filename=`echo $(tr A-Z a-z <<< ${class:0:1})${class:1}`
 
 cat > $folderpath/$filename.js << MODULE
 /**
-    Description of class
+    TODO: Description of class
 
     @class $class
  */
 define([], function() {
-    "use strict";
+    'use strict';
 
     //////////////////////////////////
     // Private class methods/fields //
