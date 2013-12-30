@@ -2,6 +2,13 @@ module.exports = function(grunt) {
     grunt.initConfig({
         pkg: grunt.file.readJSON('package.json'),
         watch: {
+            css: {
+                files: ['style.css'],
+                tasks: ['cssmin:main'],
+                options: {
+                    livereload: true
+                }
+            },
             main: {
                 files: ['js/**/*.js', '!js/lib/**'],
                 tasks: ['jsbeautifier:main', 'jshint:main'],
@@ -60,6 +67,13 @@ module.exports = function(grunt) {
                     }
                 }
             }
+        },
+        cssmin: {
+            main: {
+                files: {
+                    'build/style.min.css': 'style.css'
+                }
+            }
         }
     });
     grunt.loadNpmTasks('grunt-contrib-concat');
@@ -68,7 +82,9 @@ module.exports = function(grunt) {
     grunt.loadNpmTasks('grunt-contrib-jshint');
     grunt.loadNpmTasks('grunt-contrib-yuidoc');
     grunt.loadNpmTasks('grunt-contrib-requirejs');
+    grunt.loadNpmTasks('grunt-contrib-cssmin');
     grunt.loadNpmTasks('grunt-jsbeautifier');
-    grunt.registerTask('default', ['jsbeautifier:*', 'jshint:*', 'yuidoc:*']);
+    grunt.registerTask('default', ['jsbeautifier:*', 'jshint:*', 'yuidoc:*',
+        'cssmin:*']);
     grunt.registerTask('build', ['default', 'requirejs:compile']);
 };

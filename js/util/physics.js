@@ -7,25 +7,6 @@ define([], function() {
        @module util/physics
      */
     var module = {};
-    Object.defineProperties(module, {
-        /**
-            @property GRAVITY
-            @type {number}
-         */
-        GRAVITY: {
-            value: 0.008,
-            enumerable: true
-        },
-
-        /**
-            @property ENERGY_LOSS_RATIO
-            @type {number}
-        */
-        ENERGY_LOSS_RATIO: {
-            value: 0.8,
-            enumerable: true
-        }
-    });
 
     /**
         Physics engine

@@ -43,7 +43,7 @@ define([
             }, {
                 fillStyle: 'black'
             }],
-                location = maze.get(0, 0),
+                location = maze.get(1, 1),
                 center = {
                     x: 0,
                     y: 0
@@ -139,6 +139,10 @@ define([
                     default:
                         return;
                 }
+                if (newLocation === null || location.walls[keyCode]) {
+                    return;
+                }
+
                 previousMove = keyCode;
                 dx = newLocation.x - location.x;
                 dy = newLocation.y - location.y;
@@ -163,6 +167,7 @@ define([
                         _this.isAnimating = false;
                         _this.x = newCenter.x;
                         _this.y = newCenter.y;
+                        location = newLocation;
                     });
 
                 this.isAnimating = true;

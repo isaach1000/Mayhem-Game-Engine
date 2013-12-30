@@ -32,8 +32,8 @@ define(['jquery'], function($) {
             }
             var defaultCss = {
                 position: 'absolute',
-                top: '0',
-                left: '0'
+                top: '50px',
+                left: '50px'
             };
             for (var key in defaultCss) {
                 if (cssRules[key] === undefined) {

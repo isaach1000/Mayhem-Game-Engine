@@ -44,8 +44,7 @@ define([
 
             var
             locations = [],
-                shapes = [],
-                i, j;
+                shapes = [];
 
             /**
                 MazeLocation represents locations within a maze
@@ -145,9 +144,53 @@ define([
 
                     @property down
                     @type {MazeLocation}
-                    @for Maze
                  */
                 this.down = null;
+
+                /**
+                    A hash of walls with Direction enums as keys
+
+                    @property walls
+                    @type {Object}
+                    @for Maze
+                 */
+                this.walls = {};
+
+                this.walls[Direction.UP] = new Shape.Rectangle(this.x,
+                    this.y, TILE_SIDE, WALL_THICKNESS, drawer, {
+                        fillStyle: WALL_STYLE,
+                        strokeStyle: WALL_STYLE
+                    });
+
+                this.walls[Direction.DOWN] = new Shape.Rectangle(this.x,
+                    this.y + TILE_SIDE, TILE_SIDE, WALL_THICKNESS, drawer, {
+                        fillStyle: WALL_STYLE,
+                        strokeStyle: WALL_STYLE
+                    });
+
+                this.walls[Direction.RIGHT] = new Shape.Rectangle(this.x +
+                    TILE_SIDE, this.y, WALL_THICKNESS, TILE_SIDE, drawer, {
+                        fillStyle: WALL_STYLE,
+                        strokeStyle: WALL_STYLE
+                    });
+
+                this.walls[Direction.LEFT] = new Shape.Rectangle(this.x,
+                    this.y, WALL_THICKNESS, TILE_SIDE, drawer, {
+                        fillStyle: WALL_STYLE,
+                        strokeStyle: WALL_STYLE
+                    });
+
+                /**
+                    Get the locaton in a given direction from this locaton
+
+                    @method get
+                    @param  {Direction} direction Direction enum
+                    @return {MazeLocation} Adjacent location
+                 */
+                this.get = function(direction) {
+                    var neighbors = [this.left, this.up, this.right, this.down];
+                    return neighbors[direction - Direction.LEFT];
+                };
             }
 
             /**
@@ -158,11 +201,16 @@ define([
                 @return {void}
              */
             function init() {
+                var i, j;
                 for (i = 0; i < numHeight; i++) {
                     var locationRow = [];
                     for (j = 0; j < numWidth; j++) {
                         var location = new MazeLocation(i, j);
                         shapes.push(location.tile);
+                        shapes.push(location.walls[Direction.UP]);
+                        shapes.push(location.walls[Direction.DOWN]);
+                        shapes.push(location.walls[Direction.LEFT]);
+                        shapes.push(location.walls[Direction.RIGHT]);
                         locationRow.push(location);
                     }
                     locations.push(locationRow);
@@ -210,7 +258,28 @@ define([
                 @return {void}
              */
             function generateMaze() {
-                // TODO
+                var visited = new Hash.Hashset();
+
+                function generateMazeHelper(location) {
+                    if (location === null || visited.contains(location)) {
+                        return;
+                    }
+
+                    // TODO: improve
+                    var
+                    randomInt = MathExtensions.randomInt(4),
+                        randomDir = Direction.LEFT + randomInt,
+                        randomLocation = location.get(randomInt +
+                            Direction.LEFT);
+
+                    delete location.walls[randomDir];
+                    delete randomLocation.walls[Direction.opposite(
+                        randomDir)];
+                    visited.add(location);
+                    generateMazeHelper(randomLocation);
+                }
+
+                generateMazeHelper(_this.get(1, 1));
             }
 
             ////////////////////////////////////
@@ -221,12 +290,12 @@ define([
                 Get MazeLocation with given row and column indices
 
                 @method get
-                @param  {integer} i Row index
-                @param  {integer} j Column index
+                @param  {integer} row Row index
+                @param  {integer} column Column index
                 @return {MazeLocation} MazeLocation at specified indices
              */
-            this.get = function(i, j) {
-                return locations[i][j];
+            this.get = function(row, column) {
+                return locations[row][column];
             };
 
             // Call init to do setup
