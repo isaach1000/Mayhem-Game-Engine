@@ -312,6 +312,15 @@ define(['util/hash'], function(Hash) {
             this.kruskal = function(set) {
                 // TODO
             };
+
+            /**
+                Convert the graph to dictionary of node hashcodes with a
+                corresponding array of edges.
+
+                @method toDictionary
+                @return {Object} Dictionary representing graph
+             */
+            this.toDictionary = function() {}
         }
     };
 
