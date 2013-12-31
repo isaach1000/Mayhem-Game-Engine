@@ -21,7 +21,7 @@ define([
         FILL_STYLE = '#7CF2EC',
         WALL_STYLE = '#FFFFFF',
         EMPTY_STYLE = '#000000',
-        WALL_THICKNESS = 5;
+        WALL_THICKNESS = 4;
 
     /**
         @module sprite/maze
@@ -331,33 +331,99 @@ define([
 
                     location.tile.drawingSettings.fillStyle = EMPTY_STYLE;
 
-                    // TODO: improve
-                    var
-                    randomInt = MathExtensions.randomInt(4),
-                        randomDir = Direction.LEFT + randomInt,
-                        randomLocation = location.get(randomInt +
-                            Direction.LEFT),
-                        wall = location.walls[randomDir];
+                    var randomResult = randomNeighbor(location, visited),
+                        randomDir = randomResult.dir,
+                        randomLocation = randomResult.location;
 
-                    wall.isPenetrable = true;
                     if (randomLocation !== null) {
-                        var oppWall = randomLocation.walls[Direction
-                            .opposite(randomDir)];
+                        var
+                        wall = location.walls[randomDir],
+                            oppWall = randomLocation.walls[Direction
+                                .opposite(randomDir)];
+
+                        wall.isPenetrable = true;
                         oppWall.isPenetrable = true;
                         randomLocation.tile.drawingSettings.fillStyle =
                             EMPTY_STYLE;
+                        visited.add(location);
+                        generateMazeHelper(randomLocation);
                     }
-
-                    visited.add(location);
-                    generateMazeHelper(randomLocation);
                 }
 
-                generateMazeHelper(_this.get(5, 10));
+                _this.forEachLocationRandom(function(location) {
+                    generateMazeHelper(location);
+                });
+            }
+
+            /**
+                Random neighbor of location that is not in visited set
+
+                @method randomNeighbor
+                @param  {MazeLocation} location Starting location
+                @param  {Hashset} visited Visited location set
+                @return {MazeLocation} Adjacent location
+             */
+            function randomNeighbor(location, visited) {
+                var ret, usedDirs = [false, false, false, false];
+                while (!usedDirs[0] || !usedDirs[1] || !usedDirs[2] || !
+                    usedDirs[3]) {
+                    var dir = Direction.random(),
+                        idx = dir - Direction.MIN;
+                    ret = {
+                        dir: dir,
+                        location: location.get(dir)
+                    };
+                    if (ret.dir !== null && !visited.contains(ret.location)) {
+                        return ret;
+                    }
+                    if (!usedDirs[idx]) {
+                        usedDirs[idx] = true;
+                    }
+                }
+                return {
+                    dir: null,
+                    location: null
+                };
             }
 
             ////////////////////////////////////
             // Public instance methods/fields //
             ////////////////////////////////////
+
+            /**
+                Iterate through each location in the maze
+
+                @method forEachLocation
+                @param  {Function} f Function to apply to each location.
+                Function can exit iteration by returning true.
+                @return {void}
+             */
+            this.forEachLocation = function(f) {
+                for (var i = 0; i < numHeight; i++) {
+                    for (var j = 0; j < numWidth; j++) {
+                        var done = f(_this.get(i, j), i, j);
+                        if (done === true) {
+                            return;
+                        }
+                    }
+                }
+            };
+
+            /**
+                Iterate randomly through each location in the maze
+
+                @method forEachLocationRandom
+                @param  {Function} f Function to apply to each location.
+                Function can exit iteration by returning true.
+                @return {void}
+             */
+            this.forEachLocationRandom = function(f) {
+                MathExtensions.randomIterator(numHeight, function(i) {
+                    MathExtensions.randomIterator(numWidth, function(j) {
+                        return f(_this.get(i, j), i, j);
+                    });
+                });
+            };
 
             /**
                 Get MazeLocation with given row and column indices

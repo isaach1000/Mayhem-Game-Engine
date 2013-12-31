@@ -239,18 +239,18 @@ define([
                 Perform a depth first search of the graph
 
                 @method depthFirstSearch
-                @param {Function} func The operation to perform on the visited
+                @param {Function} f The operation to perform on the visited
                 nodes
                 @return {void}
              */
-            this.depthFirstSearch = function(func) {
+            this.depthFirstSearch = function(f) {
                 // Inner helper function
                 function depthFirstSearchHelper(node) {
                     if (visitedSet.contains(node)) {
                         return true;
                     }
                     visitedSet.add(node);
-                    var doneSearching = func(node);
+                    var doneSearching = f(node);
                     if (doneSearching !== true) {
                         var ret;
                         node.neighbors.forEach(function(neighbor) {
@@ -277,11 +277,11 @@ define([
                Perform a breadth first search on the graph
 
                @method breadthFirstSearch
-               @param {function} func The operation to perform on the visited
+               @param {function} f The operation to perform on the visited
                nodes
                @return {void}
              */
-            this.breadthFirstSearch = function(func) {
+            this.breadthFirstSearch = function(f) {
                 var visitedSet = new Hash.Hashset(),
                     nodeQueue = [],
                     nodeQueueIndex = 0;
@@ -301,7 +301,7 @@ define([
                         return; // Skip this node
                     }
                     visitedSet.add(node);
-                    var doneSearching = func(node) || false;
+                    var doneSearching = f(node) || false;
                     if (doneSearching !== true) {
                         node.neighbors.forEach(function(neighbor) {
                             nodeQueue.push(neighbor);

@@ -10,17 +10,19 @@ define(['util/mathExtensions'], function(MathExtensions) {
         RIGHT: 39,
         DOWN: 40,
 
+        MIN: 37,
+
         toString: function(dir) {
-            return ['left', 'up', 'right', 'down'][dir - module.LEFT];
+            return ['left', 'up', 'right', 'down'][dir - module.MIN];
         },
 
         opposite: function(dir) {
             return [module.RIGHT, module.DOWN, module.LEFT, module.UP][dir -
-                module.LEFT];
+                module.MIN];
         },
 
         random: function() {
-            return module.LEFT + MathExtensions.randomInt(4);
+            return module.MIN + MathExtensions.randomInt(4);
         }
     };
 

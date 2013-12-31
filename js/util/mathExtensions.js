@@ -59,6 +59,32 @@ define(['underscore', 'util/boundingBox'], function(_, BoundingBox) {
         },
 
         /**
+            Iterate randomly from 0 to a given maximum. Stores the range of
+            numbers internally inside an array, so do not use with large
+            numbers.
+
+            @method randomIterator
+            @param  {number} max Maximum (not inclusive)
+            @param  {Function} f Function to apply to index. Takes a number as a
+            parameter. Function can exit iteration by returning true.
+            @return {void}
+         */
+        randomIterator: function(max, f) {
+            var range = [];
+            for (var i = 0; i < max; i++) {
+                range.push(i);
+            }
+            while (range.length > 0) {
+                var randomIdx = module.randomInt(range.length),
+                    done = f(range[randomIdx]);
+                if (done === true) {
+                    return;
+                }
+                range.splice(randomIdx, 1);
+            }
+        },
+
+        /**
             Get the dot product of two vectors.
 
             @method dotProduct

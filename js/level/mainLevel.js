@@ -74,29 +74,12 @@ define([
             this.start = function() {
                 var
                 maze = new Maze.Maze(20, 10, this.createContext('maze')),
-                    rect = new Shape.Rectangle(300, 300, 100, 100,
-                        this.createContext('rect'), {
-                            fillStyle: 'orange',
-                            angle: 0
-                        }),
                     player = new Player.Player(this.createContext('player'),
                         this.inputHandler, this.physicsEngine, maze);
 
                 maze.draw();
-                rect.draw();
                 player.draw();
-
-                var
-                omega = Math.PI / 2000,
-                    angleTolerance = Math.PI / 1000,
-                    rectAnimation = new Animation.Animation(rect,
-                        function(time, timeDiff) {
-                            rect.rotate(timeDiff * omega);
-                        });
-
-                rectAnimation.start();
-
-                this.physicsEngine.objects = [rect];
+                this.physicsEngine.objects = [];
                 hitTest();
             };
         }

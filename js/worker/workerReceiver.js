@@ -47,10 +47,10 @@ define([], function() {
                 if (data.id !== id) {
                     return;
                 }
-                var func = data.functionName;
-                if (objectHandle[func] !== undefined) {
+                var f = data.functionName;
+                if (objectHandle[f] !== undefined) {
                     var params = data.params;
-                    objectHandle[func].apply(objectHandle, params);
+                    objectHandle[f].apply(objectHandle, params);
                 }
             };
         }
