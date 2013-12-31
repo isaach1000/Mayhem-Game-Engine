@@ -79,7 +79,6 @@ define([
 
                 maze.draw();
                 player.draw();
-                console.debug(maze.toGraph());
                 this.physicsEngine.objects = [];
                 hitTest();
             };
