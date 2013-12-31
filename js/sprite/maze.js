@@ -58,6 +58,8 @@ define([
                 @param  {integer} j Column index of location
              */
             function MazeLocation(i, j) {
+                var _thisLocation = this;
+
                 /**
                     Row index of MazeLocation in Maze
 
@@ -170,6 +172,21 @@ define([
                     this.y, true);
 
                 /**
+                    Iterate through each wall of this location
+
+                    @method forEachWall
+                    @param  {Function} f Function to apply to each location.
+                    Function can exit iteration by returning true.
+                    @return {void}
+                 */
+                this.forEachWall = function(f) {
+                    for (var i = 0; i < 4; i++) {
+                        var dir = Direction.MIN + 1;
+                        f(_thisLocation.walls[dir]);
+                    }
+                };
+
+                /**
                     Get the locaton in a given direction from this locaton
 
                     @method get
@@ -253,6 +270,11 @@ define([
                                     EMPTY_STYLE;
                                 this.rect.drawingSettings.strokeStyle =
                                     EMPTY_STYLE;
+                            } else {
+                                this.rect.drawingSettings.fillStyle =
+                                    WALL_STYLE;
+                                this.rect.drawingSettings.strokeStyle =
+                                    WALL_STYLE;
                             }
                         }
                     }
@@ -385,8 +407,33 @@ define([
                 };
             }
 
-            function eliminateWalls() {
-                // TODO
+            function eliminateBarriers() {
+                _this.forEachLocation(function(location) {
+                    var numReachable = numReachableLocations(location);
+                    location.forEachWall(function(wall) {
+                        if (wall.isPenetrable) {
+                            return;
+                        }
+
+                        wall.isPenetrable = true;
+                        var newNumReachable = numReachableLocations(
+                            location);
+                        if (newNumReachable === numWidth *
+                            numHeight) {
+                            return true; // Terminate iteration
+                        } else if (newNumReachable <= numReachable) {
+                            wall.isPenetrable = false;
+                        } else {
+                            numReachable = newNumReachable;
+                        }
+                    });
+                });
+            }
+
+            function numReachableLocations(origin) {
+                var total = 0;
+
+                function numReachableLocationsHelper(location) {}
             }
 
             ////////////////////////////////////

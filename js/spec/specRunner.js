@@ -31,7 +31,7 @@ require(['jquery', 'underscore', 'jasmine-html'], function($, _, jasmine) {
     //////////////////////////////////
     // Specify the modules to test. //
     //////////////////////////////////
-    var specs = ['hash', 'graph', 'shape', 'minheap',
+    var specs = ['hash', 'graph', 'shape', 'minHeap',
         'mathExtensions'];
     specs = _.map(specs, function(moduleName) {
         return 'js/spec/' + moduleName + '.spec.js';

@@ -6,7 +6,7 @@
 define([
     'underscore',
     'util/hash',
-    'util/minheap'
+    'util/minHeap'
 ], function(_, Hash, MinHeap) {
     'use strict';
     //////////////////////////////////
