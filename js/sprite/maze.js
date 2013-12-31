@@ -441,7 +441,7 @@ define([
                     currentRowIndex,
                     currentRow;
 
-                forEachLocation(function(location, i, j) {
+                _this.forEachLocation(function(location, i, j) {
                     if (i !== currentRowIndex) {
                         if (currentRow !== undefined) {
                             nodes.push(currentRow);
@@ -453,7 +453,7 @@ define([
                     currentRow.push(node);
                 });
 
-                forEachLocation(function(location, i, j) {
+                _this.forEachLocation(function(location, i, j) {
                     var
                     u = nodes[i][j],
                         v;
