@@ -36,8 +36,8 @@ define(['foundation/canvasDrawer', 'util/factory', 'util/boundingBox',
             this.createCanvas = function(id) {
                 return Factory.createCanvas({
                     id: id,
-                    width: this.WIDTH + 'px',
-                    height: this.HEIGHT + 'px'
+                    width: this.WIDTH + this.MARGIN + 'px',
+                    height: this.HEIGHT + this.MARGIN + 'px'
                 });
             };
 
@@ -52,8 +52,8 @@ define(['foundation/canvasDrawer', 'util/factory', 'util/boundingBox',
             this.createContext = function(id) {
                 var
                 $canvas = this.createCanvas(id),
-                    w = $canvas.width(),
-                    h = $canvas.height(),
+                    w = this.WIDTH,
+                    h = this.HEIGHT,
                     ctx = $canvas[0].getContext('2d');
                 return new CanvasDrawer.CanvasDrawer(ctx, w, h);
             };
@@ -73,6 +73,14 @@ define(['foundation/canvasDrawer', 'util/factory', 'util/boundingBox',
                 @type {number}
              */
             this.HEIGHT = 600;
+
+            /**
+                Margin add to width and height when creating canvas
+
+                @property MARGIN
+                @type {Number}
+             */
+            this.MARGIN = 5;
 
             /**
                 Physics engine

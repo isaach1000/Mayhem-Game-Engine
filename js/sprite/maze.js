@@ -7,9 +7,10 @@ define([
     'sprite/sprite',
     'foundation/shape',
     'util/hash',
+    'util/graph',
     'util/mathExtensions',
     'enum/direction'
-], function(Sprite, Shape, Hash, MathExtensions, Direction) {
+], function(Sprite, Shape, Hash, Graph, MathExtensions, Direction) {
     'use strict';
 
     //////////////////////////////////
@@ -193,7 +194,8 @@ define([
                         var dir = Direction.LEFT + i,
                             location = this.get(dir);
 
-                        if (location !== null && !this.walls[dir].isPenetrable) {
+                        if (location !== null && !this.walls[dir]
+                            .isPenetrable) {
                             return location;
                         }
                     }
@@ -294,24 +296,20 @@ define([
                 @return {void}
              */
             function connectLocations() {
-                for (var i = 0; i < numHeight; i++) {
-                    for (var j = 0; j < numWidth; j++) {
-                        var location = _this.get(i, j);
-
-                        if (i > 0) {
-                            location.up = _this.get(i - 1, j);
-                        }
-                        if (i < numHeight - 1) {
-                            location.down = _this.get(i + 1, j);
-                        }
-                        if (j > 0) {
-                            location.left = _this.get(i, j - 1);
-                        }
-                        if (j < numWidth - 1) {
-                            location.right = _this.get(i, j + 1);
-                        }
+                _this.forEachLocation(function(location, i, j) {
+                    if (i > 0) {
+                        location.up = _this.get(i - 1, j);
                     }
-                }
+                    if (i < numHeight - 1) {
+                        location.down = _this.get(i + 1, j);
+                    }
+                    if (j > 0) {
+                        location.left = _this.get(i, j - 1);
+                    }
+                    if (j < numWidth - 1) {
+                        location.right = _this.get(i, j + 1);
+                    }
+                });
             }
 
             /**
@@ -359,6 +357,7 @@ define([
                 Random neighbor of location that is not in visited set
 
                 @method randomNeighbor
+                @private
                 @param  {MazeLocation} location Starting location
                 @param  {Hashset} visited Visited location set
                 @return {MazeLocation} Adjacent location
@@ -384,6 +383,10 @@ define([
                     dir: null,
                     location: null
                 };
+            }
+
+            function eliminateWalls() {
+                // TODO
             }
 
             ////////////////////////////////////
@@ -423,6 +426,57 @@ define([
                         return f(_this.get(i, j), i, j);
                     });
                 });
+            };
+
+            /**
+                Generate a graph representing the maze
+
+                @method toGraph
+                @return {Graph} The graph
+             */
+            this.toGraph = function() {
+                var
+                graph = new Graph.Graph(),
+                    nodes = [],
+                    currentRowIndex,
+                    currentRow;
+
+                forEachLocation(function(location, i, j) {
+                    if (i !== currentRowIndex) {
+                        if (currentRow !== undefined) {
+                            nodes.push(currentRow);
+                        }
+                        currentRow = [];
+                        currentRowIndex = i;
+                    }
+                    var node = graph.addNode(location);
+                    currentRow.push(node);
+                });
+
+                forEachLocation(function(location, i, j) {
+                    var
+                    u = nodes[i][j],
+                        v;
+
+                    if (location.up !== null) {
+                        v = nodes[i - 1][j];
+                        graph.addEdge(u, v);
+                    }
+                    if (location.down !== null) {
+                        v = nodes[i + 1][j];
+                        graph.addEdge(u, v);
+                    }
+                    if (location.left !== null) {
+                        v = nodes[i][j - 1];
+                        graph.addEdge(u, v);
+                    }
+                    if (location.right !== null) {
+                        v = nodes[i][j + 1];
+                        graph.addEdge(u, v);
+                    }
+                });
+
+                return graph;
             };
 
             /**
