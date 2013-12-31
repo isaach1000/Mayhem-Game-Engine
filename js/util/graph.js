@@ -3,8 +3,12 @@
 
     @class Graph
  */
-define(['util/hash'], function(Hash) {
-    "use strict";
+define([
+    'underscore',
+    'util/hash',
+    'util/minheap'
+], function(_, Hash, MinHeap) {
+    'use strict';
     //////////////////////////////////
     // Private class methods/fields //
     //////////////////////////////////
@@ -17,6 +21,30 @@ define(['util/hash'], function(Hash) {
         // Public class methods/fields //
         /////////////////////////////////
 
+        construct: function(dictionary) {
+            var graph = new module.Graph();
+            // Add the nodes to the graph
+            for (var key in dictionary) {
+                if (dictionary.hasOwnProperty(key)) {
+                    graph.addNode(key);
+                }
+            }
+            // Add the edges
+            for (var key in dictionary) {
+                if (dictionary.hasOwnProperty(key)) {
+                    var node = graph.getNode(key),
+                        neighborArr = dictionary[key],
+                        neighborArrLen = neighborArr.length;
+                    for (var i = 0; i < neighborArrLen; i++) {
+                        var neighborKey = neighborArr[i],
+                            neighbor = graph.getNode(neighborKey);
+                        graph.addEdge(node, neighbor);
+                    }
+                }
+            }
+            return graph;
+        },
+
         /**
            @class Graph
            @constructor
@@ -28,10 +56,36 @@ define(['util/hash'], function(Hash) {
             /////////////////////////////////////
 
             var nodes = new Hash.Hashset(),
+                edges = new Hash.Hashset(),
                 adjacencyList = new Hash.Hashtable();
 
+
+            ////////////////////////////////////
+            // Public instance methods/fields //
+            ////////////////////////////////////
+
+            Object.defineProperties(this, {
+                nodes: {
+                    get: function() {
+                        return nodes;
+                    }
+                },
+
+                edges: {
+                    get: function() {
+                        return edges;
+                    }
+                },
+
+                adjacencyList: {
+                    get: function() {
+                        return adjacencyList;
+                    }
+                }
+            });
+
             /**
-                Private inner GraphNode class
+                Inner GraphNode class
 
                 @class GraphNode
                 @for Graph
@@ -60,7 +114,7 @@ define(['util/hash'], function(Hash) {
                     /**
                         Neighbors of node
 
-						@property neighbors
+                        @property neighbors
                         @type {Hashset}
                      */
                     neighbors: {
@@ -81,7 +135,7 @@ define(['util/hash'], function(Hash) {
                     @method reachableNodes
                     @return {Hashset} Set of reachable nodes
                  */
-                function reachableNodes() {
+                this.reachableNodes = function() {
                     // Inner helper function
                     function reachableNodesHelper(node, set, visitedSet) {
                         if (visitedSet.contains(node)) {
@@ -96,23 +150,22 @@ define(['util/hash'], function(Hash) {
 
                     // Main code
                     var reachableSet = new Hash.Hashset();
-                    reachableSet.add(thisNode);
-                    node.neighbors.forEach(function(otherNode) {
-                        reachableNodesHelper(otherNode, reachableSet,
-                            new Hash.Hashset());
-                    });
+                    reachableNodesHelper(thisNode, reachableSet,
+                        new Hash.Hashset());
                     return reachableSet;
-                }
+                };
             }
 
             /**
                 @class GraphEdge
                 @for Graph
                 @constructor
-                @param  {[type]} tail [description]
-                @param  {[type]} head [description]
+                @param {GraphNode} tail Tail node of edge
+                @param {GraphNode} head Head node of edge
+                @param {number} [weight=0] Weight of edge
+                @param {Object} [data=undefined] Data object for node
              */
-            function GraphEdge(tail, head) {
+            function GraphEdge(tail, head, weight, data) {
                 /**
                     Tail node of edge
 
@@ -136,16 +189,15 @@ define(['util/hash'], function(Hash) {
                     @type {number}
                     @for Graph
                  */
-                this.weight = 0;
-            }
+                this.weight = weight || 0;
 
-            ////////////////////////////////////
-            // Public instance methods/fields //
-            ////////////////////////////////////
+                this.data = data;
+            }
 
             /**
                 Add a node to the graph
 
+                @method addNode
                 @param   {Object} data Data to be stored in the node
                 @return  {GraphNode} A node with the data
              */
@@ -158,29 +210,52 @@ define(['util/hash'], function(Hash) {
             /**
                 Add an edge to the graph
 
+                @method addEdge
                 @param   {GraphNode} tail The origin node of the edge
                 @param   {GraphNode} head The destination node of the edge
                 @return  {GraphEdge} A directed edge connecting the nodes
              */
             this.addEdge = function(tail, head) {
                 var edge = new GraphEdge(tail, head);
+                edges.add(edge);
                 adjacencyList.get(tail).add(edge);
                 return edge;
             };
 
             /**
-               Remove an edge from the graph
-               @param   {GraphNode} tail       The origin node of the edge
-               @param   {GraphNode} head       The destination node of the edge
-               @return  {void}
+                Get edge with given tail and head.
+
+                @method getEdge
+                @param  {GraphNode} tail Tail node
+                @param  {GraphNode} head Head node
+                @return {GraphEdge} If edge exists, the edge, otherwise,
+                undefined.
+             */
+            this.getEdge = function(tail, head) {
+                return this.adjacencyList.get(tail).toArray()
+                    .filter(function(edge) {
+                        return edge.head === head;
+                    })[0];
+            };
+
+            /**
+                Remove an edge from the graph
+
+                @method removeEdge
+                @param   {GraphNode} tail       The origin node of the edge
+                @param   {GraphNode} head       The destination node of the edge
+                @return  {void}
              */
             this.removeEdge = function(tail, head) {
                 var removeEdge;
                 tail.edges.forEach(function(edge) {
                     if (edge.tail === tail && edge.head === head) {
                         removeEdge = edge;
+                        // Terminate iter
+                        return true;
                     }
                 });
+                edges.remove(removeEdge);
                 tail.edges.remove(removeEdge);
             };
 
@@ -188,20 +263,25 @@ define(['util/hash'], function(Hash) {
                 Perform a depth first search of the graph
 
                 @method depthFirstSearch
-                @param {Function} func The operation to perform on the visited nodes
+                @param {Function} f The operation to perform on the visited
+                nodes
+                @return {void}
              */
-            this.depthFirstSearch = function(func) {
+            this.depthFirstSearch = function(f) {
                 // Inner helper function
                 function depthFirstSearchHelper(node) {
                     if (visitedSet.contains(node)) {
                         return true;
                     }
                     visitedSet.add(node);
-                    var doneSearching = func(node) || true;
+                    var doneSearching = f(node);
                     if (doneSearching !== true) {
+                        var ret;
                         node.neighbors.forEach(function(neighbor) {
-                            return depthFirstSearchHelper(neighbor);
+                            ret = depthFirstSearchHelper(neighbor) ||
+                                ret;
                         });
+                        return ret;
                     }
                     return doneSearching;
                 }
@@ -221,11 +301,11 @@ define(['util/hash'], function(Hash) {
                Perform a breadth first search on the graph
 
                @method breadthFirstSearch
-               @param {function} func The operation to perform on the visited
+               @param {function} f The operation to perform on the visited
                nodes
                @return {void}
              */
-            this.breadthFirstSearch = function(func) {
+            this.breadthFirstSearch = function(f) {
                 var visitedSet = new Hash.Hashset(),
                     nodeQueue = [],
                     nodeQueueIndex = 0;
@@ -245,7 +325,7 @@ define(['util/hash'], function(Hash) {
                         return; // Skip this node
                     }
                     visitedSet.add(node);
-                    var doneSearching = func(node) || false;
+                    var doneSearching = f(node) || false;
                     if (doneSearching !== true) {
                         node.neighbors.forEach(function(neighbor) {
                             nodeQueue.push(neighbor);
@@ -264,20 +344,20 @@ define(['util/hash'], function(Hash) {
              */
             this.dijkstra = function(source) {
                 nodes.forEach(function(node) {
-                    node.dist = Infinity;
+                    node.weight = Infinity;
                     node.visited = false;
                     // Set node.previous to undefined
                     delete node.previous;
                 });
 
                 // Distance of source to itself is 0
-                source.dist = 0;
+                source.weight = 0;
 
                 var queue = new MinHeap.MinHeap(function(graphNode1,
                     graphNode2) {
-                    if (isFinite(graphNode1.dist) && isFinite(
+                    if (isFinite(graphNode1.weight) && isFinite(
                         graphNode2)) {
-                        return graphNode1.dist - graphNode2.dist;
+                        return graphNode1.weight - graphNode2.weight;
                     } else if (isFinite(graphNode1)) {
                         return -1;
                     } else if (isFinite(graphNode2)) {
@@ -288,13 +368,13 @@ define(['util/hash'], function(Hash) {
                 });
                 queue.add(source);
 
-                // Function to use as parameter in forEach function
+                // Function to use as parameter in forEach function below
                 var relaxEdge = function(v) {
-                    // Assuming all edges have equal distance, distance
-                    // between nodes is 1
-                    var alt = u.dist + 1;
-                    if (alt < v.dist) {
-                        v.dist = alt;
+                    // Assuming all edges have equal distance, the distance
+                    // between all nodes is 1
+                    var alt = u.weight + 1;
+                    if (alt < v.weight) {
+                        v.weight = alt;
                         v.previous = u;
                         if (!v.visited) {
                             queue.add(v);
@@ -310,7 +390,29 @@ define(['util/hash'], function(Hash) {
             };
 
             this.kruskal = function(set) {
-                // TODO
+                var minSpanningTree = new module.Graph(),
+                    clonedNodesTable = new Hash.Hashtable();
+
+                nodes.forEach(function(node) {
+                    var nodeClone = minSpanningTree.addNode(node.data);
+                    clonedNodesTable.put(node, nodeClone);
+                });
+
+                var edgeArr = edges.toArray();
+                edgeArr.sort(function(edge1, edge2) {
+                    return edge1.weight - edge2.weight;
+                });
+                edgeArr.forEach(function(edge) {
+                    var tailClone = clonedNodesTable.get(edge.tail),
+                        tailSet = tailClone.reachableNodes(),
+                        headClone = clonedNodesTable.get(edge.head),
+                        headSet = headClone.reachableNodes();
+
+                    if (!tailSet.equals(headSet)) {
+                        minSpanningTree.addEdge(tailClone, headClone);
+                    }
+                });
+                return minSpanningTree;
             };
 
             /**
@@ -320,7 +422,18 @@ define(['util/hash'], function(Hash) {
                 @method toDictionary
                 @return {Object} Dictionary representing graph
              */
-            this.toDictionary = function() {}
+            this.toDictionary = function() {
+                var dictionary = {};
+                this.nodes.forEach(function(node) {
+                    var neighbors = [];
+                    node.forEach(function(neighbor) {
+                        var hashcode = Hash.hashcode(neighbor);
+                        neighbors.push(hashcode);
+                    });
+                    dictionary[hashcode(node)] = neighbors;
+                });
+                return dictionary;
+            };
         }
     };
 

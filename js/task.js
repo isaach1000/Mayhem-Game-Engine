@@ -22,6 +22,15 @@ function messageHandler(mainEvent) {
         }
 
         self.postMessage(runGraph());
+        var graph = new Graph.Graph();
+        var a = graph.addNode("a");
+        var b = graph.addNode("b");
+        var c = graph.addNode("c");
+        graph.addEdge(a, b);
+        graph.addEdge(a, c);
+        graph.addEdge(c, b);
+        graph.addEdge(c, a);
+        console.debug(graph.toDictionary());
     });
 }
 
