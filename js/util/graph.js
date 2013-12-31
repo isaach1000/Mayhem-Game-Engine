@@ -179,8 +179,26 @@ define([
              */
             this.addNode = function(data) {
                 var node = new GraphNode(data);
-                nodes.add(node);
+                this.nodes.add(node);
                 return node;
+            };
+
+            /**
+                Get a node with the given data
+
+                @method getNode
+                @param  {Object} data The data in the desired node
+                @return {GraphNode} The desired node
+             */
+            this.getNode = function(data) {
+                var ret;
+                this.nodes.forEach(function(node) {
+                    if (node.data === data) {
+                        ret = node;
+                        return true;
+                    }
+                });
+                return ret;
             };
 
             /**
@@ -365,7 +383,13 @@ define([
                 }
             };
 
-            this.kruskal = function(set) {
+            /**
+                Kruskal's algorithm
+
+                @method kruskal
+                @return {Graph} Graph of minimum spanning tree
+             */
+            this.kruskal = function() {
                 var minSpanningTree = new module.Graph(),
                     clonedNodesTable = new Hash.Hashtable();
 
@@ -389,12 +413,6 @@ define([
                     }
                 });
                 return minSpanningTree;
-            };
-
-            // TODO
-            this.json = function() {
-                var jsonGraph = {};
-                this.depthFirstSearch(function() {});
             };
         }
     };

@@ -442,6 +442,7 @@ define([
                     currentRow;
 
                 _this.forEachLocation(function(location, i, j) {
+                    console.debug(i, j);
                     if (i !== currentRowIndex) {
                         if (currentRow !== undefined) {
                             nodes.push(currentRow);
@@ -453,6 +454,8 @@ define([
                     currentRow.push(node);
                 });
 
+                console.debug(nodes);
+
                 _this.forEachLocation(function(location, i, j) {
                     var
                     u = nodes[i][j],
@@ -463,6 +466,7 @@ define([
                         graph.addEdge(u, v);
                     }
                     if (location.down !== null) {
+                        if (i === 19) console.debug(location.down);
                         v = nodes[i + 1][j];
                         graph.addEdge(u, v);
                     }
