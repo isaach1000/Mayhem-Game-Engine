@@ -9,6 +9,17 @@ module.exports = function(grunt) {
                     livereload: true
                 }
             },
+            worker: {
+                files: ['js/**/*.js', '!js/lib/**'],
+                tasks: [
+                    'jsbeautifier:main',
+                    'jshint:main',
+                    'requirejs:worker'
+                ],
+                options: {
+                    livereload: true
+                }
+            },
             docs: {
                 files: ['js/**/*.js', '!js/lib/**'],
                 tasks: ['jsbeautifier:main', 'jshint:main', 'yuidoc:main']
@@ -59,11 +70,28 @@ module.exports = function(grunt) {
                         }
                     }
                 }
+            },
+            worker: {
+                options: {
+                    baseUrl: 'js',
+                    name: 'task',
+                    out: 'build/task.js',
+                    paths: {
+                        jquery: 'lib/jquery',
+                        underscore: 'lib/underscore'
+                    },
+                    shim: {
+                        underscore: {
+                            exports: '_'
+                        }
+                    },
+                    include: ['lib/require.js'],
+                    optimize: 'none'
+                }
             }
         }
     });
-    grunt.loadNpmTasks('grunt-contrib-concat');
-    grunt.loadNpmTasks('grunt-contrib-uglify');
+
     grunt.loadNpmTasks('grunt-contrib-watch');
     grunt.loadNpmTasks('grunt-contrib-jshint');
     grunt.loadNpmTasks('grunt-contrib-yuidoc');

@@ -16,7 +16,7 @@ require(['jquery', 'level/mainLevel'], function($, MainLevel) {
     $(function() {
         /*var mainLevel = new MainLevel.MainLevel();
         mainLevel.start();*/
-        var worker = new Worker('js/task.js');
+        var worker = new Worker('build/task.js');
         worker.addEventListener('message', function(ev) {
             alert(ev.data);
         });

@@ -1,5 +1,3 @@
-importScripts('./lib/require.js');
-
 require.config({
     baseUrl: './',
     paths: {
@@ -26,7 +24,9 @@ require(['util/graph'], function(Graph) {
     var c = graph.addNode('c');
     graph.addEdge(a, b);
     graph.addEdge(a, c);
+    graph.addEdge(b, c);
     graph.addEdge(c, b);
     graph.addEdge(c, a);
     var dict = graph.toDictionary();
+    console.debug(JSON.stringify(dict));
 });

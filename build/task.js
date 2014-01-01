@@ -1,3 +1,4 @@
+
 /** vim: et:ts=4:sw=4:sts=4
  * @license RequireJS 2.1.9+ Copyright (c) 2010-2012, The Dojo Foundation All Rights Reserved.
  * Available via the MIT or new BSD license.
@@ -2123,3 +2124,1742 @@ var requirejs, require, define;
     //Set up with config info.
     req(cfg);
 }(this));
+
+define("lib/require.js", function(){});
+
+//     Underscore.js 1.5.2
+//     http://underscorejs.org
+//     (c) 2009-2013 Jeremy Ashkenas, DocumentCloud and Investigative Reporters & Editors
+//     Underscore may be freely distributed under the MIT license.
+(function() {
+    var n = this,
+        t = n._,
+        r = {}, e = Array.prototype,
+        u = Object.prototype,
+        i = Function.prototype,
+        a = e.push,
+        o = e.slice,
+        c = e.concat,
+        l = u.toString,
+        f = u.hasOwnProperty,
+        s = e.forEach,
+        p = e.map,
+        h = e.reduce,
+        v = e.reduceRight,
+        g = e.filter,
+        d = e.every,
+        m = e.some,
+        y = e.indexOf,
+        b = e.lastIndexOf,
+        x = Array.isArray,
+        w = Object.keys,
+        _ = i.bind,
+        j = function(n) {
+            return n instanceof j ? n : this instanceof j ? (this._wrapped =
+                n, void 0) : new j(n)
+        };
+    "undefined" != typeof exports ? ("undefined" != typeof module && module
+        .exports && (exports = module.exports = j), exports._ = j) : n._ =
+        j, j.VERSION = "1.5.2";
+    var A = j.each = j.forEach = function(n, t, e) {
+        if (null != n)
+            if (s && n.forEach === s) n.forEach(t, e);
+            else if (n.length === +n.length) {
+            for (var u = 0, i = n.length; i > u; u++)
+                if (t.call(e, n[u], u, n) === r) return
+        } else
+            for (var a = j.keys(n), u = 0, i = a.length; i > u; u++)
+                if (t.call(e, n[a[u]], a[u], n) === r) return
+    };
+    j.map = j.collect = function(n, t, r) {
+        var e = [];
+        return null == n ? e : p && n.map === p ? n.map(t, r) : (A(n,
+            function(n, u, i) {
+                e.push(t.call(r, n, u, i))
+            }), e)
+    };
+    var E = "Reduce of empty array with no initial value";
+    j.reduce = j.foldl = j.inject = function(n, t, r, e) {
+        var u = arguments.length > 2;
+        if (null == n && (n = []), h && n.reduce === h) return e && (t = j.bind(
+            t, e)), u ? n.reduce(t, r) : n.reduce(t);
+        if (A(n, function(n, i, a) {
+            u ? r = t.call(e, r, n, i, a) : (r = n, u = !0)
+        }), !u) throw new TypeError(E);
+        return r
+    }, j.reduceRight = j.foldr = function(n, t, r, e) {
+        var u = arguments.length > 2;
+        if (null == n && (n = []), v && n.reduceRight === v) return e && (t =
+            j.bind(t, e)), u ? n.reduceRight(t, r) : n.reduceRight(t);
+        var i = n.length;
+        if (i !== +i) {
+            var a = j.keys(n);
+            i = a.length
+        }
+        if (A(n, function(o, c, l) {
+            c = a ? a[--i] : --i, u ? r = t.call(e, r, n[c], c, l) :
+                (r = n[c], u = !0)
+        }), !u) throw new TypeError(E);
+        return r
+    }, j.find = j.detect = function(n, t, r) {
+        var e;
+        return O(n, function(n, u, i) {
+            return t.call(r, n, u, i) ? (e = n, !0) : void 0
+        }), e
+    }, j.filter = j.select = function(n, t, r) {
+        var e = [];
+        return null == n ? e : g && n.filter === g ? n.filter(t, r) : (A(n,
+            function(n, u, i) {
+                t.call(r, n, u, i) && e.push(n)
+            }), e)
+    }, j.reject = function(n, t, r) {
+        return j.filter(n, function(n, e, u) {
+            return !t.call(r, n, e, u)
+        }, r)
+    }, j.every = j.all = function(n, t, e) {
+        t || (t = j.identity);
+        var u = !0;
+        return null == n ? u : d && n.every === d ? n.every(t, e) : (A(n,
+            function(n, i, a) {
+                return (u = u && t.call(e, n, i, a)) ? void 0 : r
+            }), !! u)
+    };
+    var O = j.some = j.any = function(n, t, e) {
+        t || (t = j.identity);
+        var u = !1;
+        return null == n ? u : m && n.some === m ? n.some(t, e) : (A(n,
+            function(n, i, a) {
+                return u || (u = t.call(e, n, i, a)) ? r : void 0
+            }), !! u)
+    };
+    j.contains = j.include = function(n, t) {
+        return null == n ? !1 : y && n.indexOf === y ? n.indexOf(t) != -1 :
+            O(n, function(n) {
+                return n === t
+            })
+    }, j.invoke = function(n, t) {
+        var r = o.call(arguments, 2),
+            e = j.isFunction(t);
+        return j.map(n, function(n) {
+            return (e ? t : n[t]).apply(n, r)
+        })
+    }, j.pluck = function(n, t) {
+        return j.map(n, function(n) {
+            return n[t]
+        })
+    }, j.where = function(n, t, r) {
+        return j.isEmpty(t) ? r ? void 0 : [] : j[r ? "find" : "filter"](n,
+            function(n) {
+                for (var r in t)
+                    if (t[r] !== n[r]) return !1;
+                return !0
+            })
+    }, j.findWhere = function(n, t) {
+        return j.where(n, t, !0)
+    }, j.max = function(n, t, r) {
+        if (!t && j.isArray(n) && n[0] === +n[0] && n.length < 65535) return Math
+            .max.apply(Math, n);
+        if (!t && j.isEmpty(n)) return -1 / 0;
+        var e = {
+            computed: -1 / 0,
+            value: -1 / 0
+        };
+        return A(n, function(n, u, i) {
+            var a = t ? t.call(r, n, u, i) : n;
+            a > e.computed && (e = {
+                value: n,
+                computed: a
+            })
+        }), e.value
+    }, j.min = function(n, t, r) {
+        if (!t && j.isArray(n) && n[0] === +n[0] && n.length < 65535) return Math
+            .min.apply(Math, n);
+        if (!t && j.isEmpty(n)) return 1 / 0;
+        var e = {
+            computed: 1 / 0,
+            value: 1 / 0
+        };
+        return A(n, function(n, u, i) {
+            var a = t ? t.call(r, n, u, i) : n;
+            a < e.computed && (e = {
+                value: n,
+                computed: a
+            })
+        }), e.value
+    }, j.shuffle = function(n) {
+        var t, r = 0,
+            e = [];
+        return A(n, function(n) {
+            t = j.random(r++), e[r - 1] = e[t], e[t] = n
+        }), e
+    }, j.sample = function(n, t, r) {
+        return arguments.length < 2 || r ? n[j.random(n.length - 1)] : j.shuffle(
+            n).slice(0, Math.max(0, t))
+    };
+    var k = function(n) {
+        return j.isFunction(n) ? n : function(t) {
+            return t[n]
+        }
+    };
+    j.sortBy = function(n, t, r) {
+        var e = k(t);
+        return j.pluck(j.map(n, function(n, t, u) {
+            return {
+                value: n,
+                index: t,
+                criteria: e.call(r, n, t, u)
+            }
+        }).sort(function(n, t) {
+            var r = n.criteria,
+                e = t.criteria;
+            if (r !== e) {
+                if (r > e || r === void 0) return 1;
+                if (e > r || e === void 0) return -1
+            }
+            return n.index - t.index
+        }), "value")
+    };
+    var F = function(n) {
+        return function(t, r, e) {
+            var u = {}, i = null == r ? j.identity : k(r);
+            return A(t, function(r, a) {
+                var o = i.call(e, r, a, t);
+                n(u, o, r)
+            }), u
+        }
+    };
+    j.groupBy = F(function(n, t, r) {
+        (j.has(n, t) ? n[t] : n[t] = []).push(r)
+    }), j.indexBy = F(function(n, t, r) {
+        n[t] = r
+    }), j.countBy = F(function(n, t) {
+        j.has(n, t) ? n[t]++ : n[t] = 1
+    }), j.sortedIndex = function(n, t, r, e) {
+        r = null == r ? j.identity : k(r);
+        for (var u = r.call(e, t), i = 0, a = n.length; a > i;) {
+            var o = i + a >>> 1;
+            r.call(e, n[o]) < u ? i = o + 1 : a = o
+        }
+        return i
+    }, j.toArray = function(n) {
+        return n ? j.isArray(n) ? o.call(n) : n.length === +n.length ? j.map(
+            n, j.identity) : j.values(n) : []
+    }, j.size = function(n) {
+        return null == n ? 0 : n.length === +n.length ? n.length : j.keys(n)
+            .length
+    }, j.first = j.head = j.take = function(n, t, r) {
+        return null == n ? void 0 : null == t || r ? n[0] : o.call(n, 0, t)
+    }, j.initial = function(n, t, r) {
+        return o.call(n, 0, n.length - (null == t || r ? 1 : t))
+    }, j.last = function(n, t, r) {
+        return null == n ? void 0 : null == t || r ? n[n.length - 1] : o.call(
+            n, Math.max(n.length - t, 0))
+    }, j.rest = j.tail = j.drop = function(n, t, r) {
+        return o.call(n, null == t || r ? 1 : t)
+    }, j.compact = function(n) {
+        return j.filter(n, j.identity)
+    };
+    var M = function(n, t, r) {
+        return t && j.every(n, j.isArray) ? c.apply(r, n) : (A(n, function(
+            n) {
+            j.isArray(n) || j.isArguments(n) ? t ? a.apply(r, n) :
+                M(n, t, r) : r.push(n)
+        }), r)
+    };
+    j.flatten = function(n, t) {
+        return M(n, t, [])
+    }, j.without = function(n) {
+        return j.difference(n, o.call(arguments, 1))
+    }, j.uniq = j.unique = function(n, t, r, e) {
+        j.isFunction(t) && (e = r, r = t, t = !1);
+        var u = r ? j.map(n, r, e) : n,
+            i = [],
+            a = [];
+        return A(u, function(r, e) {
+            (t ? e && a[a.length - 1] === r : j.contains(a, r)) || (a.push(
+                r), i.push(n[e]))
+        }), i
+    }, j.union = function() {
+        return j.uniq(j.flatten(arguments, !0))
+    }, j.intersection = function(n) {
+        var t = o.call(arguments, 1);
+        return j.filter(j.uniq(n), function(n) {
+            return j.every(t, function(t) {
+                return j.indexOf(t, n) >= 0
+            })
+        })
+    }, j.difference = function(n) {
+        var t = c.apply(e, o.call(arguments, 1));
+        return j.filter(n, function(n) {
+            return !j.contains(t, n)
+        })
+    }, j.zip = function() {
+        for (var n = j.max(j.pluck(arguments, "length").concat(0)), t = new Array(
+                n), r = 0; n > r; r++) t[r] = j.pluck(arguments, "" + r);
+        return t
+    }, j.object = function(n, t) {
+        if (null == n) return {};
+        for (var r = {}, e = 0, u = n.length; u > e; e++) t ? r[n[e]] = t[e] :
+            r[n[e][0]] = n[e][1];
+        return r
+    }, j.indexOf = function(n, t, r) {
+        if (null == n) return -1;
+        var e = 0,
+            u = n.length;
+        if (r) {
+            if ("number" != typeof r) return e = j.sortedIndex(n, t), n[e] ===
+                t ? e : -1;
+            e = 0 > r ? Math.max(0, u + r) : r
+        }
+        if (y && n.indexOf === y) return n.indexOf(t, r);
+        for (; u > e; e++)
+            if (n[e] === t) return e;
+        return -1
+    }, j.lastIndexOf = function(n, t, r) {
+        if (null == n) return -1;
+        var e = null != r;
+        if (b && n.lastIndexOf === b) return e ? n.lastIndexOf(t, r) : n.lastIndexOf(
+            t);
+        for (var u = e ? r : n.length; u--;)
+            if (n[u] === t) return u;
+        return -1
+    }, j.range = function(n, t, r) {
+        arguments.length <= 1 && (t = n || 0, n = 0), r = arguments[2] || 1;
+        for (var e = Math.max(Math.ceil((t - n) / r), 0), u = 0, i = new Array(
+                e); e > u;) i[u++] = n, n += r;
+        return i
+    };
+    var R = function() {};
+    j.bind = function(n, t) {
+        var r, e;
+        if (_ && n.bind === _) return _.apply(n, o.call(arguments, 1));
+        if (!j.isFunction(n)) throw new TypeError;
+        return r = o.call(arguments, 2), e = function() {
+            if (!(this instanceof e)) return n.apply(t, r.concat(o.call(
+                arguments)));
+            R.prototype = n.prototype;
+            var u = new R;
+            R.prototype = null;
+            var i = n.apply(u, r.concat(o.call(arguments)));
+            return Object(i) === i ? i : u
+        }
+    }, j.partial = function(n) {
+        var t = o.call(arguments, 1);
+        return function() {
+            return n.apply(this, t.concat(o.call(arguments)))
+        }
+    }, j.bindAll = function(n) {
+        var t = o.call(arguments, 1);
+        if (0 === t.length) throw new Error(
+            "bindAll must be passed function names");
+        return A(t, function(t) {
+            n[t] = j.bind(n[t], n)
+        }), n
+    }, j.memoize = function(n, t) {
+        var r = {};
+        return t || (t = j.identity),
+        function() {
+            var e = t.apply(this, arguments);
+            return j.has(r, e) ? r[e] : r[e] = n.apply(this, arguments)
+        }
+    }, j.delay = function(n, t) {
+        var r = o.call(arguments, 2);
+        return setTimeout(function() {
+            return n.apply(null, r)
+        }, t)
+    }, j.defer = function(n) {
+        return j.delay.apply(j, [n, 1].concat(o.call(arguments, 1)))
+    }, j.throttle = function(n, t, r) {
+        var e, u, i, a = null,
+            o = 0;
+        r || (r = {});
+        var c = function() {
+            o = r.leading === !1 ? 0 : new Date, a = null, i = n.apply(e, u)
+        };
+        return function() {
+            var l = new Date;
+            o || r.leading !== !1 || (o = l);
+            var f = t - (l - o);
+            return e = this, u = arguments, 0 >= f ? (clearTimeout(a), a =
+                null, o = l, i = n.apply(e, u)) : a || r.trailing === !1 ||
+                (a = setTimeout(c, f)), i
+        }
+    }, j.debounce = function(n, t, r) {
+        var e, u, i, a, o;
+        return function() {
+            i = this, u = arguments, a = new Date;
+            var c = function() {
+                var l = new Date - a;
+                t > l ? e = setTimeout(c, t - l) : (e = null, r || (o = n.apply(
+                    i, u)))
+            }, l = r && !e;
+            return e || (e = setTimeout(c, t)), l && (o = n.apply(i, u)), o
+        }
+    }, j.once = function(n) {
+        var t, r = !1;
+        return function() {
+            return r ? t : (r = !0, t = n.apply(this, arguments), n = null,
+                t)
+        }
+    }, j.wrap = function(n, t) {
+        return function() {
+            var r = [n];
+            return a.apply(r, arguments), t.apply(this, r)
+        }
+    }, j.compose = function() {
+        var n = arguments;
+        return function() {
+            for (var t = arguments, r = n.length - 1; r >= 0; r--) t = [n[r]
+                .apply(this, t)];
+            return t[0]
+        }
+    }, j.after = function(n, t) {
+        return function() {
+            return --n < 1 ? t.apply(this, arguments) : void 0
+        }
+    }, j.keys = w || function(n) {
+        if (n !== Object(n)) throw new TypeError("Invalid object");
+        var t = [];
+        for (var r in n) j.has(n, r) && t.push(r);
+        return t
+    }, j.values = function(n) {
+        for (var t = j.keys(n), r = t.length, e = new Array(r), u = 0; r >
+            u; u++) e[u] = n[t[u]];
+        return e
+    }, j.pairs = function(n) {
+        for (var t = j.keys(n), r = t.length, e = new Array(r), u = 0; r >
+            u; u++) e[u] = [t[u], n[t[u]]];
+        return e
+    }, j.invert = function(n) {
+        for (var t = {}, r = j.keys(n), e = 0, u = r.length; u > e; e++) t[
+            n[r[e]]] = r[e];
+        return t
+    }, j.functions = j.methods = function(n) {
+        var t = [];
+        for (var r in n) j.isFunction(n[r]) && t.push(r);
+        return t.sort()
+    }, j.extend = function(n) {
+        return A(o.call(arguments, 1), function(t) {
+            if (t)
+                for (var r in t) n[r] = t[r]
+        }), n
+    }, j.pick = function(n) {
+        var t = {}, r = c.apply(e, o.call(arguments, 1));
+        return A(r, function(r) {
+            r in n && (t[r] = n[r])
+        }), t
+    }, j.omit = function(n) {
+        var t = {}, r = c.apply(e, o.call(arguments, 1));
+        for (var u in n) j.contains(r, u) || (t[u] = n[u]);
+        return t
+    }, j.defaults = function(n) {
+        return A(o.call(arguments, 1), function(t) {
+            if (t)
+                for (var r in t) n[r] === void 0 && (n[r] = t[r])
+        }), n
+    }, j.clone = function(n) {
+        return j.isObject(n) ? j.isArray(n) ? n.slice() : j.extend({}, n) :
+            n
+    }, j.tap = function(n, t) {
+        return t(n), n
+    };
+    var S = function(n, t, r, e) {
+        if (n === t) return 0 !== n || 1 / n == 1 / t;
+        if (null == n || null == t) return n === t;
+        n instanceof j && (n = n._wrapped), t instanceof j && (t = t._wrapped);
+        var u = l.call(n);
+        if (u != l.call(t)) return !1;
+        switch (u) {
+            case "[object String]":
+                return n == String(t);
+            case "[object Number]":
+                return n != +n ? t != +t : 0 == n ? 1 / n == 1 / t : n == +
+                    t;
+            case "[object Date]":
+            case "[object Boolean]":
+                return +n == +t;
+            case "[object RegExp]":
+                return n.source == t.source && n.global == t.global && n.multiline ==
+                    t.multiline && n.ignoreCase == t.ignoreCase
+        }
+        if ("object" != typeof n || "object" != typeof t) return !1;
+        for (var i = r.length; i--;)
+            if (r[i] == n) return e[i] == t;
+        var a = n.constructor,
+            o = t.constructor;
+        if (a !== o && !(j.isFunction(a) && a instanceof a && j.isFunction(
+            o) && o instanceof o)) return !1;
+        r.push(n), e.push(t);
+        var c = 0,
+            f = !0;
+        if ("[object Array]" == u) {
+            if (c = n.length, f = c == t.length)
+                for (; c-- && (f = S(n[c], t[c], r, e)););
+        } else {
+            for (var s in n)
+                if (j.has(n, s) && (c++, !(f = j.has(t, s) && S(n[s], t[s],
+                    r, e)))) break;
+            if (f) {
+                for (s in t)
+                    if (j.has(t, s) && !c--) break;
+                f = !c
+            }
+        }
+        return r.pop(), e.pop(), f
+    };
+    j.isEqual = function(n, t) {
+        return S(n, t, [], [])
+    }, j.isEmpty = function(n) {
+        if (null == n) return !0;
+        if (j.isArray(n) || j.isString(n)) return 0 === n.length;
+        for (var t in n)
+            if (j.has(n, t)) return !1;
+        return !0
+    }, j.isElement = function(n) {
+        return !(!n || 1 !== n.nodeType)
+    }, j.isArray = x || function(n) {
+        return "[object Array]" == l.call(n)
+    }, j.isObject = function(n) {
+        return n === Object(n)
+    }, A(["Arguments", "Function", "String", "Number", "Date", "RegExp"],
+        function(n) {
+            j["is" + n] = function(t) {
+                return l.call(t) == "[object " + n + "]"
+            }
+        }), j.isArguments(arguments) || (j.isArguments = function(n) {
+        return !(!n || !j.has(n, "callee"))
+    }), "function" != typeof / . / && (j.isFunction = function(n) {
+        return "function" == typeof n
+    }), j.isFinite = function(n) {
+        return isFinite(n) && !isNaN(parseFloat(n))
+    }, j.isNaN = function(n) {
+        return j.isNumber(n) && n != +n
+    }, j.isBoolean = function(n) {
+        return n === !0 || n === !1 || "[object Boolean]" == l.call(n)
+    }, j.isNull = function(n) {
+        return null === n
+    }, j.isUndefined = function(n) {
+        return n === void 0
+    }, j.has = function(n, t) {
+        return f.call(n, t)
+    }, j.noConflict = function() {
+        return n._ = t, this
+    }, j.identity = function(n) {
+        return n
+    }, j.times = function(n, t, r) {
+        for (var e = Array(Math.max(0, n)), u = 0; n > u; u++) e[u] = t.call(
+            r, u);
+        return e
+    }, j.random = function(n, t) {
+        return null == t && (t = n, n = 0), n + Math.floor(Math.random() *
+            (t - n + 1))
+    };
+    var I = {
+        escape: {
+            "&": "&amp;",
+            "<": "&lt;",
+            ">": "&gt;",
+            '"': "&quot;",
+            "'": "&#x27;"
+        }
+    };
+    I.unescape = j.invert(I.escape);
+    var T = {
+        escape: new RegExp("[" + j.keys(I.escape).join("") + "]", "g"),
+        unescape: new RegExp("(" + j.keys(I.unescape).join("|") + ")", "g")
+    };
+    j.each(["escape", "unescape"], function(n) {
+        j[n] = function(t) {
+            return null == t ? "" : ("" + t).replace(T[n], function(t) {
+                return I[n][t]
+            })
+        }
+    }), j.result = function(n, t) {
+        if (null == n) return void 0;
+        var r = n[t];
+        return j.isFunction(r) ? r.call(n) : r
+    }, j.mixin = function(n) {
+        A(j.functions(n), function(t) {
+            var r = j[t] = n[t];
+            j.prototype[t] = function() {
+                var n = [this._wrapped];
+                return a.apply(n, arguments), z.call(this, r.apply(j, n))
+            }
+        })
+    };
+    var N = 0;
+    j.uniqueId = function(n) {
+        var t = ++N + "";
+        return n ? n + t : t
+    }, j.templateSettings = {
+        evaluate: /<%([\s\S]+?)%>/g,
+        interpolate: /<%=([\s\S]+?)%>/g,
+        escape: /<%-([\s\S]+?)%>/g
+    };
+    var q = /(.)^/,
+        B = {
+            "'": "'",
+            "\\": "\\",
+            "\r": "r",
+            "\n": "n",
+            "	": "t",
+            "\u2028": "u2028",
+            "\u2029": "u2029"
+        }, D = /\\|'|\r|\n|\t|\u2028|\u2029/g;
+    j.template = function(n, t, r) {
+        var e;
+        r = j.defaults({}, r, j.templateSettings);
+        var u = new RegExp([(r.escape || q).source, (r.interpolate || q).source, (
+            r.evaluate || q).source].join("|") + "|$", "g"),
+            i = 0,
+            a = "__p+='";
+        n.replace(u, function(t, r, e, u, o) {
+            return a += n.slice(i, o).replace(D, function(n) {
+                return "\\" + B[n]
+            }), r && (a += "'+\n((__t=(" + r +
+                "))==null?'':_.escape(__t))+\n'"), e && (a +=
+                "'+\n((__t=(" + e + "))==null?'':__t)+\n'"), u && (a +=
+                "';\n" + u + "\n__p+='"), i = o + t.length, t
+        }), a += "';\n", r.variable || (a = "with(obj||{}){\n" + a + "}\n"),
+        a = "var __t,__p='',__j=Array.prototype.join," +
+            "print=function(){__p+=__j.call(arguments,'');};\n" + a +
+            "return __p;\n";
+        try {
+            e = new Function(r.variable || "obj", "_", a)
+        } catch (o) {
+            throw o.source = a, o
+        }
+        if (t) return e(t, j);
+        var c = function(n) {
+            return e.call(this, n, j)
+        };
+        return c.source = "function(" + (r.variable || "obj") + "){\n" + a +
+            "}", c
+    }, j.chain = function(n) {
+        return j(n).chain()
+    };
+    var z = function(n) {
+        return this._chain ? j(n).chain() : n
+    };
+    j.mixin(j), A(["pop", "push", "reverse", "shift", "sort", "splice",
+        "unshift"], function(n) {
+        var t = e[n];
+        j.prototype[n] = function() {
+            var r = this._wrapped;
+            return t.apply(r, arguments), "shift" != n && "splice" != n ||
+                0 !== r.length || delete r[0], z.call(this, r)
+        }
+    }), A(["concat", "join", "slice"], function(n) {
+        var t = e[n];
+        j.prototype[n] = function() {
+            return z.call(this, t.apply(this._wrapped, arguments))
+        }
+    }), j.extend(j.prototype, {
+        chain: function() {
+            return this._chain = !0, this
+        },
+        value: function() {
+            return this._wrapped
+        }
+    })
+}).call(this);
+//# sourceMappingURL=underscore-min.map
+;
+define("underscore", (function (global) {
+    return function () {
+        var ret, fn;
+        return ret || global._;
+    };
+}(this)));
+
+/**
+   Hash class used to generate hashcodes for JavaScript objects. The hashcode
+   is stored as a property of the object, but it is set to non-enumerable and
+   cannot be changed, thereby guaranteeing the consistency of hashcodes.
+
+   @module util/hash
+   @class Hash
+ */
+define('util/hash',['underscore'], function(_) {
+    
+
+    console.debug(_);
+
+    //////////////////////////////////
+    // Private class methods/fields //
+    //////////////////////////////////
+
+    var currentHash = 0,
+        INIT_CAPACITY = 16,
+        LOAD_FACTOR = 2;
+
+    var module = {
+
+        /////////////////////////////////
+        // Public class methods/fields //
+        /////////////////////////////////
+
+        /**
+           Return a hashcode for this object. Does not conform to the Java
+           standard that two objects that are structurally identical should
+           yield the same hashcode.
+           @param   {Object} object     -   Object to get hashcode for
+           @return  {integer}           Hashcode for object
+         */
+        hashcode: function(object) {
+            if (object._hashId === undefined) {
+                Object.defineProperty(object, '_hashId', {
+                    value: currentHash,
+                    enumerable: false
+                });
+                currentHash++;
+            }
+            return object._hashId;
+        },
+        /**
+           Hashset data structure used to store unique objects without duplicates.
+           The hashset will add identical items of the same type, as long as they are
+           not the exact same object (or the hashcode property is identical). For more
+           info, see the {{#crossLink module}}{{/crossLink}} class.
+
+           @class Hashset
+        */
+        /**
+           @class Hashset
+           @constructor
+         */
+        Hashset: function() {
+            var _this = this;
+            /////////////////////////////////////
+            // Private instance methods/fields //
+            /////////////////////////////////////
+            var bucket = new Array(INIT_CAPACITY),
+                size = 0,
+                capacity = INIT_CAPACITY,
+                indicesTaken = [];
+            /**
+               Resolve a collision in the hashset.
+
+               @method resolveCollision
+               @private
+               @param  {Object} object
+               @param  {integer} index Index where collision occurred
+               @return {boolean} Whether or not the item was added to the set
+             */
+            function resolveCollision(object, index) {
+                var location = bucket[index];
+                if (_.isArray(location)) {
+                    if (_.contains(location, object)) {
+                        return false;
+                    } else {
+                        location.push(object);
+                        return true;
+                    }
+                } else {
+                    bucket[index] = [location, object];
+                    return true;
+                }
+            }
+            /**
+               Add the index of a location that is currently occupied in the
+               array.
+
+               @method addIndex
+               @private
+               @param  {integer} idx Index of occupied location
+             */
+            function addIndex(idx) {
+                // Add idx to the sorted indicesTaken array
+                var spot = _.sortedIndex(indicesTaken, idx);
+                if (indicesTaken[spot] !== idx) {
+                    indicesTaken.splice(spot, 0, idx);
+                }
+            }
+            /**
+               Helper method to rehash the array when the objects inserted
+               exceeds half of the total capacity.
+
+               @method rehash
+               @private
+               @return {void}
+             */
+            function rehash() {
+                // Create new bucket that is double the size
+                var oldBucket = bucket;
+                capacity *= 2;
+                bucket = new Array(capacity);
+                indicesTaken = [];
+                // Transfer all elements to new array
+                var bucketLen = oldBucket.length;
+                for (var i = 0; i < bucketLan; i++) {
+                    var object = oldBucket[i];
+                    if (_.isArray(object)) {
+                        var subArray = object,
+                            subArrayLen = subArray.length;
+                        for (var j = 0; j < subArrayLen; j++) {
+                            var element = subArray[j];
+                            insert(element);
+                        }
+                    } else {
+                        insert(object);
+                    }
+                }
+            }
+            /**
+               Insert an object into the internal array.
+
+               @method insert
+               @private
+               @param  {Object} object An object to insert into the array
+               @param  {Object} [hashTarget=`object`] An object used to generate a
+               hashcode
+               @return {boolean} Whether or not the object was inserted into the
+               array
+             */
+            function insert(object, hashTarget) {
+                var originalTarget = hashTarget || null;
+                hashTarget = hashTarget || object;
+                var index = module.hashcode(hashTarget) % capacity,
+                    location = bucket[index];
+                var locKey;
+                if (location) {
+                    locKey = location.key;
+                }
+                if (location === undefined) {
+                    bucket[index] = object;
+                    addIndex(index);
+                    return true;
+                } else if (location === object || originalTarget === locKey) {
+                    return false;
+                } else {
+                    return resolveCollision(object, index);
+                }
+            }
+            ////////////////////////////////////
+            // Public instance methods/fields //
+            ////////////////////////////////////
+            Object.defineProperties(this, {
+                /**
+                   The size of the Hashset
+                   @type {integer}
+                   @property length
+                 */
+                length: {
+                    get: function() {
+                        return size;
+                    }
+                }
+            });
+            /**
+               Add an object
+               @function
+               @param   {Object} object         -   Object to add
+               @param   {Object} [hashTarget]   -   Object to module
+               @return  {boolean}           Whether or not the insertion was successful
+             */
+            this.add = function(object, hashTarget) {
+                var originalTarget = hashTarget || null;
+                hashTarget = hashTarget || object;
+                if (!_.isObject(object) || _.isArray(object) || _.isFunction(
+                    object)) {
+                    return false;
+                }
+                var inserted = insert(object, hashTarget);
+                if (inserted) {
+                    size++;
+                    if (size / capacity > LOAD_FACTOR) {
+                        rehash();
+                    }
+                    return true;
+                }
+                return false;
+            };
+            /**
+               Clear the Hashset instance of all elements
+               @return  {void}
+             */
+            this.clear = function() {
+                bucket = new Array(INIT_CAPACITY);
+                size = 0;
+                capacity = INIT_CAPACITY;
+                indicesTaken = [];
+            };
+            /**
+               Check if an object is an element of this set
+               @function
+               @param   {Object} object     -   An object _this may be an element
+               @return  {boolean}           Whether or not the object is an element
+             */
+            this.contains = function(object, hashTarget) {
+                var originalTarget = hashTarget || null;
+                hashTarget = hashTarget || object;
+                if (!_.isObject(object) || _.isArray(object) || _.isFunction(
+                    object)) {
+                    return false;
+                }
+                var index = module.hashcode(hashTarget) % capacity,
+                    location = bucket[index];
+                var locKey;
+                if (location) {
+                    locKey = location.key;
+                }
+                if (location === object || originalTarget === locKey) {
+                    return true;
+                } else if (_.isArray(location)) {
+                    for (var i = 0; i < location.length; i++) {
+                        var elem = location[i];
+                        var elemKey;
+                        if (elem) {
+                            elemKey = elem.key;
+                        }
+                        if (elem === object || originalTarget === elemKey) {
+                            return true;
+                        }
+                    }
+                }
+                return false;
+            };
+            /**
+               Remove an object
+               @function
+               @param {Object} object       - An object
+               @return {boolean}            True if removed object from set, false if object could not be removed from set
+             */
+            this.remove = function(object, hashTarget) {
+                var originalTarget = hashTarget || null;
+                hashTarget = hashTarget || object;
+                if (!_.isObject(object) || _.isArray(object) || _.isFunction(
+                    object)) {
+                    return false;
+                }
+                var contained = _this.contains(object, originalTarget);
+                if (contained) {
+                    var index = module.hashcode(hashTarget) % capacity,
+                        location = bucket[index];
+                    var locKey;
+                    if (location) {
+                        locKey = location.key;
+                    }
+                    if (location === object || locKey === originalTarget) {
+                        bucket[index] = undefined;
+                        indicesTaken = _.without(indicesTaken, index);
+                        size--;
+                        return true;
+                    } else {
+                        for (var i = 0; i < location.length; i++) {
+                            if (location[i] === object) {
+                                location[i] = undefined;
+                                size--;
+                                return true;
+                            }
+                        }
+                    }
+                }
+                return false;
+            };
+            this.get = function(object, hashTarget) {
+                var originalTarget = hashTarget || null;
+                hashTarget = hashTarget || object;
+                var index = module.hashcode(hashTarget) % capacity,
+                    location = bucket[index];
+                var locKey;
+                if (location) {
+                    locKey = location.key;
+                }
+                if (location === undefined) {
+                    return null;
+                } else if (location === object || locKey === originalTarget) {
+                    return location;
+                } else {
+                    var arrLen = location.length;
+                    for (var i = 0; i < arrLen; i++) {
+                        var element = location[i],
+                            elemKey = element.key;
+                        if (element === object || elemKey ===
+                            originalTarget) {
+                            return element;
+                        }
+                    }
+                    return null;
+                }
+            };
+            this.forEach = function(f) {
+                var numIndices = indicesTaken.length;
+                for (var i = 0; i < numIndices; i++) {
+                    var idx = indicesTaken[i],
+                        current = bucket[idx];
+                    if (_.isArray(current)) {
+                        var arrLen = current.length;
+                        for (var j = 0; j < arrLen; j++) {
+                            var element = current[j];
+                            f(element);
+                        }
+                    } else {
+                        f(current);
+                    }
+                }
+            };
+        },
+        /**
+            Hashtable implementation to map objects to other objects.
+
+            @class Hashtable
+         */
+        /**
+            @class Hashtable
+            @constructor
+         */
+        Hashtable: function() {
+            var _this = this;
+            /////////////////////////////////////
+            // Private instance methods/fields //
+            /////////////////////////////////////
+            var hashset = new module.Hashset();
+            ////////////////////////////////////
+            // Public instance methods/fields //
+            ////////////////////////////////////
+            this.put = function(key, value) {
+                var entry = {
+                    key: key,
+                    value: value
+                };
+                return hashset.add(entry, key);
+            };
+            this.get = function(key) {
+                return hashset.get(key, key).value;
+            };
+            this.containsKey = function(key) {
+                return hashset.contains(key, key);
+            };
+            this.remove = function(key) {
+                return hashset.remove(key, key);
+            };
+            this.clear = function() {
+                hashset.clear();
+            };
+            this.forEach = function(f) {
+                hashset.forEach(function(entry) {
+                    f(entry.key, entry.value);
+                });
+            };
+            Object.defineProperties(this, {
+                length: {
+                    get: function() {
+                        return hashset.length;
+                    }
+                }
+            });
+        }
+    };
+    return module;
+});
+
+define('util/minheap',[], function() {
+    
+    //////////////////////////////////
+    // Private class methods/fields //
+    //////////////////////////////////
+    var DEFAULT_SIZE = 16;
+    /**
+       @module modulePath
+       @module modulePath
+     */
+    var module = {
+        /////////////////////////////////
+        // Public class methods/fields //
+        /////////////////////////////////
+        /**
+           @class MinHeap
+           @constructor
+           @param {Function|number} [arg1=numeric_comparator|16] Comparator function (if one argument) or size (if two arguments)
+           @param {Function} [arg2=numeric_comparator] Comparator function
+         */
+        MinHeap: function() {
+            /////////////////////////////////////
+            // Private instance methods/fields //
+            /////////////////////////////////////
+
+            var size = DEFAULT_SIZE,
+                comparator = function(data1, data2) {
+                    return data1 - data2;
+                };
+            if (arguments.length === 2) {
+                // parameters are size then comparator
+                size = arguments[0];
+                comparator = arguments[1];
+            } else if (arguments.length === 1) {
+                comparator = arguments[0];
+            } else if (arguments.length > 2) {
+                throw new Error(
+                    'Invalid parameters for MinHeap constructor');
+            }
+            var _this = this,
+                data = new Array(size),
+                heapSize = 0;
+
+            /**
+                Get index in array of left child
+
+                @method getLeftChildIndex
+                @private
+                @param  {number} nodeIndex Index of parent
+                @return {number} Index of left child in array
+             */
+            function getLeftChildIndex(nodeIndex) {
+                return 2 * nodeIndex + 1;
+            }
+
+            /**
+                Get index in array of right child
+
+                @method getRightChildIndex
+                @private
+                @param  {number} nodeIndex Index of parent
+                @return {number} Index of right child in array
+             */
+            function getRightChildIndex(nodeIndex) {
+                return 2 * nodeIndex + 2;
+            }
+
+            /**
+                Get index of parent
+
+                @method getParentIndex
+                @private
+                @param  {number} nodeIndex Index of child
+                @return {number} Index of parent
+             */
+            function getParentIndex(nodeIndex) {
+                return Math.floor((nodeIndex + 1) / 2) - 1;
+            }
+
+            /**
+                Heapify
+
+                @method bubbleUp
+                @private
+                @param  {number} nodeIndex Index to bubbleUp
+                @return {void}
+             */
+            function bubbleUp(nodeIndex) {
+                if (nodeIndex === 0) {
+                    return;
+                }
+                var parentIndex = getParentIndex(nodeIndex);
+                if (comparator(data[parentIndex], data[nodeIndex]) > 0 &&
+                    parentIndex >= 0) {
+                    var newNodeIndex = data[parentIndex];
+                    data[parentIndex] = data[nodeIndex];
+                    data[nodeIndex] = newNodeIndex;
+                    nodeIndex = parentIndex;
+                    bubbleUp(nodeIndex);
+                } else {
+                    return;
+                }
+            }
+
+            /**
+                Remove minimum element from heap
+
+                @method removeMin
+                @private
+                @return {Object} Data of minimum node
+             */
+            function removeMin() {
+                if (heapSize === 0) {
+                    return;
+                }
+                data[0] = data[heapSize - 1];
+                heapSize--;
+                if (heapSize > 0) {
+                    bubbleDown(0);
+                }
+            }
+
+            /**
+                Heapify
+
+                @method bubbleDown
+                @private
+                @param  {number} nodeIndex Index of node to modify
+                @return {void}
+             */
+            function bubbleDown(nodeIndex) {
+                var leftChildIndex = getLeftChildIndex(nodeIndex),
+                    rightChildIndex = getRightChildIndex(nodeIndex),
+                    smallerValueIndex;
+                // This long if else assigns the smaller child
+                if (leftChildIndex < heapSize && rightChildIndex < heapSize) {
+                    if (comparator(data[leftChildIndex], data[
+                        rightChildIndex]) < 0) {
+                        smallerValueIndex = leftChildIndex;
+                    } else {
+                        smallerValueIndex = rightChildIndex;
+                    }
+                } else if (leftChildIndex < heapSize) {
+                    smallerValueIndex = leftChildIndex;
+                } else if (rightChildIndex < heapSize) {
+                    smallerValueIndex = rightChildIndex;
+                } else {
+                    return;
+                }
+                if (smallerValueIndex >= 0 && comparator(data[
+                    smallerValueIndex], data[nodeIndex]) < 0) {
+                    var temp = data[nodeIndex];
+                    data[nodeIndex] = data[smallerValueIndex];
+                    data[smallerValueIndex] = temp;
+                    nodeIndex = smallerValueIndex;
+                    bubbleDown(nodeIndex);
+                }
+            }
+
+            ////////////////////////////////////
+            // Public instance methods/fields //
+            ////////////////////////////////////
+
+            /**
+                Add object to MinHeap
+
+                @method add
+                @param  {Object} object Object to add
+                @return {void}
+             */
+            this.add = function(object) {
+                heapSize++;
+                var currentIndex = heapSize - 1;
+                data[currentIndex] = object;
+                bubbleUp(currentIndex);
+            };
+
+            /**
+                Return the minimum element and extract it
+
+                @method poll
+                @return {Object} The minimum element
+             */
+            this.poll = function() {
+                var min = data[0];
+                removeMin();
+                return min;
+            };
+
+            /**
+                Return the minimum element without extracting it
+
+                @method peek
+                @return {Object} The minimum element
+             */
+            this.peek = function() {
+                return data[0];
+            };
+
+            /**
+                Clear the MinHeap of all elements
+
+                @method clear
+                @return {void}
+             */
+            this.clear = function() {
+                heapSize = 0;
+                data.forEach(function(element, index) {
+                    delete data[index];
+                });
+            };
+
+            Object.defineProperties(this, {
+                /**
+                    Number of elements in the MinHeap
+
+                    @property length
+                    @type {number}
+                 */
+                length: {
+                    get: function() {
+                        return heapSize;
+                    }
+                }
+            });
+        }
+    };
+
+    return module;
+});
+
+/**
+    Graph abstract data structure to represent maze structure.
+
+    @class Graph
+ */
+define('util/graph',[
+    'util/hash',
+    'util/minheap'
+], function(Hash, MinHeap) {
+    
+
+    //////////////////////////////////
+    // Private class methods/fields //
+    //////////////////////////////////
+
+    /**
+       @module util/graph
+     */
+    var module = {
+        /////////////////////////////////
+        // Public class methods/fields //
+        /////////////////////////////////
+
+        construct: function(dictionary) {
+            var graph = new module.Graph(),
+                key;
+            // Add the nodes to the graph
+            for (key in dictionary) {
+                if (dictionary.hasOwnProperty(key)) {
+                    graph.addNode(key);
+                }
+            }
+            // Add the edges
+            for (key in dictionary) {
+                if (dictionary.hasOwnProperty(key)) {
+                    var node = graph.getNode(key),
+                        neighborArr = dictionary[key],
+                        neighborArrLen = neighborArr.length;
+                    for (var i = 0; i < neighborArrLen; i++) {
+                        var neighborKey = neighborArr[i],
+                            neighbor = graph.getNode(neighborKey);
+                        graph.addEdge(node, neighbor);
+                    }
+                }
+            }
+            return graph;
+        },
+
+        /**
+           @class Graph
+           @constructor
+         */
+        Graph: function() {
+            var _this = this;
+            /////////////////////////////////////
+            // Private instance methods/fields //
+            /////////////////////////////////////
+
+            var nodes = new Hash.Hashset(),
+                edges = new Hash.Hashset(),
+                adjacencyList = new Hash.Hashtable();
+
+
+            ////////////////////////////////////
+            // Public instance methods/fields //
+            ////////////////////////////////////
+
+            Object.defineProperties(this, {
+                nodes: {
+                    get: function() {
+                        return nodes;
+                    }
+                },
+
+                edges: {
+                    get: function() {
+                        return edges;
+                    }
+                },
+
+                adjacencyList: {
+                    get: function() {
+                        return adjacencyList;
+                    }
+                }
+            });
+
+            /**
+                Inner GraphNode class
+
+                @class GraphNode
+                @for Graph
+                @constructor
+                @param  {[type]} data [description]
+             */
+            function GraphNode(data) {
+                var thisNode = this;
+                this.data = data;
+                var edges = new Hash.Hashset();
+                adjacencyList.put(this, edges);
+
+                Object.defineProperties(this, {
+                    /**
+                        Edges of node
+
+                        @property edges
+                        @type {Hashset}
+                     */
+                    edges: {
+                        get: function() {
+                            return adjacencyList.get(thisNode);
+                        }
+                    },
+
+                    /**
+                        Neighbors of node
+
+                        @property neighbors
+                        @type {Hashset}
+                     */
+                    neighbors: {
+                        get: function() {
+                            var neighborSet = new Hash.Hashset();
+                            thisNode.edges.forEach(function(edge) {
+                                neighborSet.add(edge.head);
+                            });
+                            return neighborSet;
+                        }
+                    }
+                });
+
+                /**
+                    Find all the nodes that are reachable from this node
+
+                    @for Graph
+                    @method reachableNodes
+                    @return {Hashset} Set of reachable nodes
+                 */
+                this.reachableNodes = function() {
+                    // Inner helper function
+                    function reachableNodesHelper(node, set, visitedSet) {
+                        if (visitedSet.contains(node)) {
+                            return;
+                        }
+                        set.add(node);
+                        node.neighbors.forEach(function(otherNode) {
+                            reachableNodesHelper(otherNode, set,
+                                visitedSet);
+                        });
+                    }
+
+                    // Main code
+                    var reachableSet = new Hash.Hashset();
+                    reachableNodesHelper(thisNode, reachableSet,
+                        new Hash.Hashset());
+                    return reachableSet;
+                };
+            }
+
+            /**
+                @class GraphEdge
+                @for Graph
+                @constructor
+                @param {GraphNode} tail Tail node of edge
+                @param {GraphNode} head Head node of edge
+                @param {number} [weight=0] Weight of edge
+                @param {Object} [data=undefined] Data object for node
+             */
+            function GraphEdge(tail, head, weight, data) {
+                /**
+                    Tail node of edge
+
+                    @property tail
+                    @type {GraphNode}
+                 */
+                this.tail = tail;
+
+                /**
+                    Head node of edge
+
+                    @property head
+                    @type {GraphNode}
+                 */
+                this.head = head;
+
+                /**
+                    Weight of edge
+
+                    @property weight
+                    @type {number}
+                    @for Graph
+                 */
+                this.weight = weight || 0;
+
+                this.data = data;
+            }
+
+            /**
+                Add a node to the graph
+
+                @method addNode
+                @param   {Object} data Data to be stored in the node
+                @return  {GraphNode} A node with the data
+             */
+            this.addNode = function(data) {
+                var node = new GraphNode(data);
+                nodes.add(node);
+                return node;
+            };
+
+            /**
+                Add an edge to the graph
+
+                @method addEdge
+                @param   {GraphNode} tail The origin node of the edge
+                @param   {GraphNode} head The destination node of the edge
+                @return  {GraphEdge} A directed edge connecting the nodes
+             */
+            this.addEdge = function(tail, head) {
+                var edge = new GraphEdge(tail, head);
+                edges.add(edge);
+                adjacencyList.get(tail).add(edge);
+                return edge;
+            };
+
+            /**
+                Get edge with given tail and head.
+
+                @method getEdge
+                @param  {GraphNode} tail Tail node
+                @param  {GraphNode} head Head node
+                @return {GraphEdge} If edge exists, the edge, otherwise,
+                undefined.
+             */
+            this.getEdge = function(tail, head) {
+                return this.adjacencyList.get(tail).toArray()
+                    .filter(function(edge) {
+                        return edge.head === head;
+                    })[0];
+            };
+
+            /**
+                Remove an edge from the graph
+
+                @method removeEdge
+                @param   {GraphNode} tail       The origin node of the edge
+                @param   {GraphNode} head       The destination node of the edge
+                @return  {void}
+             */
+            this.removeEdge = function(tail, head) {
+                var removeEdge;
+                tail.edges.forEach(function(edge) {
+                    if (edge.tail === tail && edge.head === head) {
+                        removeEdge = edge;
+                        // Terminate iter
+                        return true;
+                    }
+                });
+                edges.remove(removeEdge);
+                tail.edges.remove(removeEdge);
+            };
+
+            /**
+                Perform a depth first search of the graph
+
+                @method depthFirstSearch
+                @param {Function} f The operation to perform on the visited
+                nodes
+                @return {void}
+             */
+            this.depthFirstSearch = function(f) {
+                // Inner helper function
+                function depthFirstSearchHelper(node) {
+                    if (visitedSet.contains(node)) {
+                        return true;
+                    }
+                    visitedSet.add(node);
+                    var doneSearching = f(node);
+                    if (doneSearching !== true) {
+                        var ret;
+                        node.neighbors.forEach(function(neighbor) {
+                            ret = depthFirstSearchHelper(neighbor) ||
+                                ret;
+                        });
+                        return ret;
+                    }
+                    return doneSearching;
+                }
+
+                // Main code
+                var visitedSet = new Hash.Hashset(),
+                    doneSearching = false;
+                nodes.forEach(function(node) {
+                    if (doneSearching === true) {
+                        return;
+                    }
+                    doneSearching = depthFirstSearchHelper(node);
+                });
+            };
+
+            /**
+               Perform a breadth first search on the graph
+
+               @method breadthFirstSearch
+               @param {function} f The operation to perform on the visited
+               nodes
+               @return {void}
+             */
+            this.breadthFirstSearch = function(f) {
+                var visitedSet = new Hash.Hashset(),
+                    nodeQueue = [],
+                    nodeQueueIndex = 0;
+                nodes.forEach(function(node) {
+                    nodeQueue.push(node);
+                });
+                while (nodeQueueIndex < nodeQueue.length) {
+                    var node = nodeQueue[nodeQueueIndex++],
+                        doneSearching = breadthFirstSearchHelper(node);
+                    if (doneSearching) {
+                        return; // Terminate the search
+                    }
+                }
+                // Inner helper function
+                function breadthFirstSearchHelper(node) {
+                    if (visitedSet.contains(node)) {
+                        return; // Skip this node
+                    }
+                    visitedSet.add(node);
+                    var doneSearching = f(node) || false;
+                    if (doneSearching !== true) {
+                        node.neighbors.forEach(function(neighbor) {
+                            nodeQueue.push(neighbor);
+                        });
+                    }
+                    return doneSearching;
+                }
+            };
+
+            /**
+                Dijkstra's algorithm
+
+                @method dijkstra
+                @param  {GraphNode} source Source node
+                @return {void}
+             */
+            this.dijkstra = function(source) {
+                nodes.forEach(function(node) {
+                    node.weight = Infinity;
+                    node.visited = false;
+                    // Set node.previous to undefined
+                    delete node.previous;
+                });
+
+                // Distance of source to itself is 0
+                source.weight = 0;
+
+                var queue = new MinHeap.MinHeap(function(graphNode1,
+                    graphNode2) {
+                    if (isFinite(graphNode1.weight) && isFinite(
+                        graphNode2)) {
+                        return graphNode1.weight - graphNode2.weight;
+                    } else if (isFinite(graphNode1)) {
+                        return -1;
+                    } else if (isFinite(graphNode2)) {
+                        return 1;
+                    } else {
+                        return 0;
+                    }
+                });
+                queue.add(source);
+
+                // Function to use as parameter in forEach function below
+                var relaxEdge = function(v) {
+                    // Assuming all edges have equal distance, the distance
+                    // between all nodes is 1
+                    var alt = u.weight + 1;
+                    if (alt < v.weight) {
+                        v.weight = alt;
+                        v.previous = u;
+                        if (!v.visited) {
+                            queue.add(v);
+                        }
+                    }
+                };
+
+                while (queue.length !== 0) {
+                    var u = queue.poll();
+                    u.visited = true;
+                    u.neighbors.forEach(relaxEdge);
+                }
+            };
+
+            this.kruskal = function(set) {
+                var minSpanningTree = new module.Graph(),
+                    clonedNodesTable = new Hash.Hashtable();
+
+                nodes.forEach(function(node) {
+                    var nodeClone = minSpanningTree.addNode(node.data);
+                    clonedNodesTable.put(node, nodeClone);
+                });
+
+                var edgeArr = edges.toArray();
+                edgeArr.sort(function(edge1, edge2) {
+                    return edge1.weight - edge2.weight;
+                });
+                edgeArr.forEach(function(edge) {
+                    var tailClone = clonedNodesTable.get(edge.tail),
+                        tailSet = tailClone.reachableNodes(),
+                        headClone = clonedNodesTable.get(edge.head),
+                        headSet = headClone.reachableNodes();
+
+                    if (!tailSet.equals(headSet)) {
+                        minSpanningTree.addEdge(tailClone, headClone);
+                    }
+                });
+                return minSpanningTree;
+            };
+
+            /**
+                Convert the graph to dictionary of node hashcodes with a
+                corresponding array of edges.
+
+                @method toDictionary
+                @return {Object} Dictionary representing graph
+             */
+            this.toDictionary = function() {
+                var dictionary = {};
+                this.nodes.forEach(function(node) {
+                    var neighbors = [];
+                    node.neighbors.forEach(function(neighbor) {
+                        var hashcode = Hash.hashcode(neighbor);
+                        neighbors.push(hashcode);
+                    });
+                    var hashId = Hash.hashcode(node);
+                    dictionary[hashId] = neighbors;
+                });
+                return dictionary;
+            };
+        }
+    };
+
+    return module;
+});
+
+require.config({
+    baseUrl: './',
+    paths: {
+        jquery: 'lib/jquery',
+        underscore: 'lib/underscore'
+    },
+    shim: {
+        underscore: {
+            exports: '_'
+        }
+    }
+});
+
+addEventListener('message', function(mainEvent) {
+    console.debug('hello');
+});
+
+require(['util/graph'], function(Graph) {
+    
+
+    var graph = new Graph.Graph();
+    var a = graph.addNode('a');
+    var b = graph.addNode('b');
+    var c = graph.addNode('c');
+    graph.addEdge(a, b);
+    graph.addEdge(a, c);
+    graph.addEdge(b, c);
+    graph.addEdge(c, b);
+    graph.addEdge(c, a);
+    var dict = graph.toDictionary();
+    console.debug(JSON.stringify(dict));
+});
+
+define("task", function(){});

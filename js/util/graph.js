@@ -427,7 +427,7 @@ define([
                 var dictionary = {};
                 this.nodes.forEach(function(node) {
                     var neighbors = [];
-                    node.forEach(function(neighbor) {
+                    node.neighbors.forEach(function(neighbor) {
                         var hashcode = Hash.hashcode(neighbor);
                         neighbors.push(hashcode);
                     });
