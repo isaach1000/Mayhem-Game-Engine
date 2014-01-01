@@ -3821,6 +3821,24 @@ define('util/graph',[
                 });
                 return dictionary;
             };
+
+            /**
+               Get a node with the given data
+
+               @method getNode
+               @param  {Object} data The data in the desired node
+               @return {GraphNode} The desired node
+            */
+            this.getNode = function(data) {
+                var ret;
+                this.nodes.forEach(function(node) {
+                    if (node.data === data) {
+                        ret = node;
+                        return true;
+                    }
+                });
+                return ret;
+            };
         }
     };
 
@@ -3844,17 +3862,21 @@ addEventListener('message', function(mainEvent) {
     require(['util/graph'], function(Graph) {
         
 
-        var graph = new Graph.Graph(),
-            a = graph.addNode('a'),
-            b = graph.addNode('b'),
-            c = graph.addNode('c');
-        graph.addEdge(a, b);
-        graph.addEdge(a, c);
-        graph.addEdge(b, c);
-        graph.addEdge(c, b);
-        graph.addEdge(c, a);
-        var dict = graph.toDictionary();
-        console.debug(JSON.stringify(dict));
+        var obj = {
+            0: [1, 2, 3],
+            1: [0, 3],
+            2: [0, 2],
+            3: [1, 2]
+        },
+            graph = Graph.construct(obj),
+
+            nodes = graph.getNode('1').neighbors;
+        console.debug(nodes);
+        console.debug("Now the loop:");
+
+        nodes.forEach(function(neighbor) {
+            console.debug(neighbor.data);
+        });
     });
 });
 

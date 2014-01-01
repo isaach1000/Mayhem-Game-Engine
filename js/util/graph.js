@@ -436,6 +436,24 @@ define([
                 });
                 return dictionary;
             };
+
+            /**
+               Get a node with the given data
+
+               @method getNode
+               @param  {Object} data The data in the desired node
+               @return {GraphNode} The desired node
+            */
+            this.getNode = function(data) {
+                var ret;
+                this.nodes.forEach(function(node) {
+                    if (node.data === data) {
+                        ret = node;
+                        return true;
+                    }
+                });
+                return ret;
+            };
         }
     };
 
