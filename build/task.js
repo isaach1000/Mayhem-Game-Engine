@@ -3082,7 +3082,10 @@ define('util/hash',['underscore'], function(_) {
                 }
             };
             this.forEach = function(f) {
-                var numIndices = indicesTaken.length;
+                var
+                numIndices = indicesTaken.length,
+                    done;
+
                 for (var i = 0; i < numIndices; i++) {
                     var idx = indicesTaken[i],
                         current = bucket[idx];
@@ -3090,10 +3093,16 @@ define('util/hash',['underscore'], function(_) {
                         var arrLen = current.length;
                         for (var j = 0; j < arrLen; j++) {
                             var element = current[j];
-                            f(element);
+                            done = f(element);
+                        }
+                        if (done === true) {
+                            return;
                         }
                     } else {
-                        f(current);
+                        done = f(current);
+                        if (done === true) {
+                            return;
+                        }
                     }
                 }
             };
@@ -3407,23 +3416,32 @@ define('util/graph',[
         /////////////////////////////////
 
         construct: function(dictionary) {
-            var graph = new module.Graph(),
+            var
+            graph = new module.Graph(),
                 key;
+
             // Add the nodes to the graph
             for (key in dictionary) {
                 if (dictionary.hasOwnProperty(key)) {
+                    key = parseInt(key);
                     graph.addNode(key);
                 }
             }
             // Add the edges
             for (key in dictionary) {
                 if (dictionary.hasOwnProperty(key)) {
-                    var node = graph.getNode(key),
+                    key = parseInt(key);
+
+                    var
+                    node = graph.getNode(key),
                         neighborArr = dictionary[key],
                         neighborArrLen = neighborArr.length;
+
                     for (var i = 0; i < neighborArrLen; i++) {
-                        var neighborKey = neighborArr[i],
+                        var
+                        neighborKey = neighborArr[i],
                             neighbor = graph.getNode(neighborKey);
+
                         graph.addEdge(node, neighbor);
                     }
                 }
@@ -3862,20 +3880,19 @@ addEventListener('message', function(mainEvent) {
     require(['util/graph'], function(Graph) {
         
 
-        var obj = {
+        var
+        obj = {
             0: [1, 2, 3],
             1: [0, 3],
             2: [0, 2],
             3: [1, 2]
         },
-            graph = Graph.construct(obj),
+            graph = Graph.construct(obj);
 
-            nodes = graph.getNode('1').neighbors;
-        console.debug(nodes);
-        console.debug("Now the loop:");
+        nodes = graph.getNode(1).neighbors;
 
         nodes.forEach(function(neighbor) {
-            console.debug(neighbor.data);
+            // TODO
         });
     });
 });

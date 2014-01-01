@@ -308,7 +308,10 @@ define(['underscore'], function(_) {
                 }
             };
             this.forEach = function(f) {
-                var numIndices = indicesTaken.length;
+                var
+                numIndices = indicesTaken.length,
+                    done;
+
                 for (var i = 0; i < numIndices; i++) {
                     var idx = indicesTaken[i],
                         current = bucket[idx];
@@ -316,10 +319,16 @@ define(['underscore'], function(_) {
                         var arrLen = current.length;
                         for (var j = 0; j < arrLen; j++) {
                             var element = current[j];
-                            f(element);
+                            done = f(element);
+                        }
+                        if (done === true) {
+                            return;
                         }
                     } else {
-                        f(current);
+                        done = f(current);
+                        if (done === true) {
+                            return;
+                        }
                     }
                 }
             };
