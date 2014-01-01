@@ -175,14 +175,15 @@ define([
                     Iterate through each wall of this location
 
                     @method forEachWall
-                    @param  {Function} f Function to apply to each location.
-                    Function can exit iteration by returning true.
+                    @param  {Function} f Function to apply to each wall. It is
+                    given the wall and the direction of the wall as parameters.
+                    The function can exit iteration by returning true.
                     @return {void}
                  */
                 this.forEachWall = function(f) {
                     for (var i = 0; i < 4; i++) {
                         var dir = Direction.MIN + 1;
-                        f(_thisLocation.walls[dir]);
+                        f(_thisLocation.walls[dir], dir);
                     }
                 };
 
@@ -308,6 +309,7 @@ define([
 
                 connectLocations();
                 generateMaze();
+                eliminateBarriers();
             }
 
             /**
@@ -407,22 +409,49 @@ define([
                 };
             }
 
+            /**
+                Eliminate walls from the maze that make traversing the entrie
+                maze impossible
+
+                @method eliminateBarriers
+                @private
+                @return {void}
+             */
             function eliminateBarriers() {
                 _this.forEachLocation(function(location) {
                     var numReachable = numReachableLocations(location);
-                    location.forEachWall(function(wall) {
+                    if (numReachable >= numWidth * numHeight) {
+                        return true;
+                    }
+                    location.forEachWall(function(wall, dir) {
                         if (wall.isPenetrable) {
                             return;
                         }
 
+                        var adjLocation = location.get(dir),
+                            oppWall;
+
+                        if (adjLocation !== null) {
+                            oppWall = adjLocation.walls[Direction
+                                .opposite(dir)];
+                        }
+
                         wall.isPenetrable = true;
+                        if (oppWall !== undefined) {
+                            oppWall.isPenetrable = true;
+                        }
+
                         var newNumReachable = numReachableLocations(
                             location);
+
                         if (newNumReachable === numWidth *
                             numHeight) {
                             return true; // Terminate iteration
                         } else if (newNumReachable <= numReachable) {
                             wall.isPenetrable = false;
+                            if (oppWall !== undefined) {
+                                oppWall.isPenetrable = false;
+                            }
                         } else {
                             numReachable = newNumReachable;
                         }
@@ -430,10 +459,42 @@ define([
                 });
             }
 
-            function numReachableLocations(origin) {
-                var total = 0;
+            /**
+                Count the number of reachable locations from an origin location
 
-                function numReachableLocationsHelper(location) {}
+                @method numReachableLocations
+                @private
+                @param  {MazeLocation} origin Origin location
+                @return {number} Number of reachable locations (including self)
+             */
+            function numReachableLocations(origin) {
+                var visitedSet = new Hash.Hashset();
+
+                function numReachableLocationsHelper(location) {
+                    if (visitedSet.contains(location)) {
+                        return 0;
+                    }
+                    visitedSet.add(location);
+                    if (location.up !== null &&
+                        location.walls[Direction.UP].isPenetrable) {
+                        numReachableLocationsHelper(location.up);
+                    }
+                    if (location.down !== null &&
+                        location.walls[Direction.DOWN].isPenetrable) {
+                        numReachableLocationsHelper(location.down);
+                    }
+                    if (location.left !== null &&
+                        location.walls[Direction.LEFT].isPenetrable) {
+                        numReachableLocationsHelper(location.left);
+                    }
+                    if (location.right !== null &&
+                        location.walls[Direction.RIGHT].isPenetrable) {
+                        numReachableLocationsHelper(location.right);
+                    }
+                }
+
+                numReachableLocationsHelper(origin);
+                return visitedSet.length;
             }
 
             ////////////////////////////////////
