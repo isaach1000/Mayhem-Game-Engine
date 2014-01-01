@@ -98,5 +98,9 @@ module.exports = function(grunt) {
     grunt.loadNpmTasks('grunt-contrib-requirejs');
     grunt.loadNpmTasks('grunt-jsbeautifier');
     grunt.registerTask('default', ['jsbeautifier:*', 'jshint:*', 'yuidoc:*']);
-    grunt.registerTask('build', ['default', 'requirejs:compile']);
+    grunt.registerTask('build', [
+        'default',
+        'requirejs:compile',
+        'requirejs:worker'
+    ]);
 };
