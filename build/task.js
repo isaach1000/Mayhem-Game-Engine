@@ -2783,8 +2783,6 @@ define("underscore", (function (global) {
 define('util/hash',['underscore'], function(_) {
     
 
-    console.debug(_);
-
     //////////////////////////////////
     // Private class methods/fields //
     //////////////////////////////////
@@ -3843,23 +3841,21 @@ require.config({
 });
 
 addEventListener('message', function(mainEvent) {
-    console.debug('hello');
-});
+    require(['util/graph'], function(Graph) {
+        
 
-require(['util/graph'], function(Graph) {
-    
-
-    var graph = new Graph.Graph();
-    var a = graph.addNode('a');
-    var b = graph.addNode('b');
-    var c = graph.addNode('c');
-    graph.addEdge(a, b);
-    graph.addEdge(a, c);
-    graph.addEdge(b, c);
-    graph.addEdge(c, b);
-    graph.addEdge(c, a);
-    var dict = graph.toDictionary();
-    console.debug(JSON.stringify(dict));
+        var graph = new Graph.Graph();
+        var a = graph.addNode('a');
+        var b = graph.addNode('b');
+        var c = graph.addNode('c');
+        graph.addEdge(a, b);
+        graph.addEdge(a, c);
+        graph.addEdge(b, c);
+        graph.addEdge(c, b);
+        graph.addEdge(c, a);
+        var dict = graph.toDictionary();
+        console.debug(JSON.stringify(dict));
+    });
 });
 
 define("task", function(){});

@@ -9,8 +9,6 @@
 define(['underscore'], function(_) {
     'use strict';
 
-    console.debug(_);
-
     //////////////////////////////////
     // Private class methods/fields //
     //////////////////////////////////
