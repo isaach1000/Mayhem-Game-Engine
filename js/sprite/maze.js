@@ -20,7 +20,6 @@ define([
 
     var
     TILE_SIDE = 50,
-        FILL_STYLE = '#7CF2EC',
         WALL_STYLE = '#FFFFFF',
         EMPTY_STYLE = '#000000',
         WALL_THICKNESS = 4;
@@ -117,7 +116,7 @@ define([
                  */
                 this.tile = new Shape.Rectangle(this.x, this.y, TILE_SIDE,
                     TILE_SIDE, drawer, {
-                        fillStyle: FILL_STYLE
+                        fillStyle: EMPTY_STYLE
                     });
 
                 /**

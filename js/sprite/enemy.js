@@ -5,11 +5,10 @@
     @extends Sprite
  */
 define([
-    'sprite/sprite',
+    'sprite/abstractPlayer',
     'foundation/shape',
-    'foundation/animation',
-    'enum/direction'
-], function(Sprite, Shape, Animation, Direction) {
+    'foundation/animation'
+], function(AbstractPlayer, Shape, Animation) {
     'use strict';
 
     //////////////////////////////////
@@ -17,7 +16,8 @@ define([
     //////////////////////////////////
 
     var
-    FILL_STYLE = '#7CF2EC',
+    MOVE_DELAY = 1000,
+        FILL_STYLE = '#7CF2EC',
         RADIUS = 20,
         MARGIN = 1;
 
@@ -59,56 +59,68 @@ define([
                         strokeStyle: 'black'
                     }),
                 shapes = [head],
-                isAnimating = false;
+                movesQueue = [];
 
+            /**
+                Initialization method
+
+                @method init
+                @private
+                @return {void}
+             */
             function init() {
-                // Extend Sprite constructor
-                Sprite.Sprite.call(_this, shapes, drawer);
-
-                // After constructing shapes around origin, translate to
-                // position
-                _this.x = location.x + location.width / 2;
-                _this.y = location.y + location.height / 2;
+                // Extend AbstractPlayer constructor
+                AbstractPlayer.AbstractPlayer.call(_this, row, column, maze,
+                    physicsEngine, drawer, shapes);
             }
 
             ////////////////////////////////////
             // Public instance methods/fields //
             ////////////////////////////////////
 
-            Object.defineProperties(this, {
-                x: {
-                    get: function() {
-                        return center.x;
-                    },
-                    set: function(newX) {
-                        if (center.x !== newX) {
-                            center.x = newX;
-                            _this.transformation.tx = center.x;
-                        }
-                    }
-                },
+            /**
+                Perform an action if possible
 
-                y: {
-                    get: function() {
-                        return center.y;
-                    },
-                    set: function(newY) {
-                        if (center.y !== newY) {
-                            center.y = newY;
-                            _this.transformation.ty = center.y;
-                        }
-                    }
-                },
+                @method act
+                @return {void}
+             */
+            this.act = function() {
+                if (!this.isAnimating && movesQueue.length > 0) {
+                    this.move(movesQueue.pop());
+                }
+            };
 
-                isAnimating: {
-                    get: function() {
-                        return isAnimating;
-                    },
-                    set: function(value) {
-                        isAnimating = value;
+            /**
+                Add moves to the moves queue
+
+                @method addMoves
+                @param  {Array} moves An array of directions to move in
+             */
+            this.addMoves = function(moves) {
+                movesQueue = moves.reverse().concat(movesQueue);
+            };
+
+            /**
+                Clear moves from the moves queue
+
+                @method clearMoves
+                @return {void}
+             */
+            this.clearMoves = function() {
+                movesQueue = [];
+            };
+
+            this.start = function() {
+                function recursiveAct() {
+                    if (_this.canMove()) {
+                        _this.act();
+                        setTimeout(function() {
+                            recursiveAct();
+                        }, MOVE_DELAY);
                     }
                 }
-            });
+                recursiveAct();
+            };
 
             // Call init to perform setup
             init();

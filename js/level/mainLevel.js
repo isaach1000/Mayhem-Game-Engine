@@ -11,8 +11,9 @@ define([
     'foundation/animation',
     'sprite/maze',
     'sprite/player',
-    'sprite/enemy'
-], function(LevelBase, Shape, Animation, Maze, Player, Enemy) {
+    'sprite/enemy',
+    'enum/direction'
+], function(LevelBase, Shape, Animation, Maze, Player, Enemy, Direction) {
     'use strict';
     //////////////////////////////////
     // Private class methods/fields //
@@ -75,16 +76,19 @@ define([
             this.start = function() {
                 var
                 maze = new Maze.Maze(20, 10, this.createContext('maze')),
-                    player = new Player.Player(1, 1, maze, this.inputHandler,
-                        this.physicsEngine, this.createContext('player')),
                     enemy = new Enemy.Enemy(8, 8, maze, this.physicsEngine,
-                        this.createContext('enemy'));
+                        this.createContext('enemy')),
+                    player = new Player.Player(1, 1, maze, this.inputHandler,
+                        this.physicsEngine, this.createContext('player'));
 
                 maze.draw();
-                player.draw();
                 enemy.draw();
+                player.draw();
                 this.physicsEngine.objects = [];
                 hitTest();
+
+                enemy.addMoves([Direction.UP, Direction.DOWN, Direction.DOWN]);
+                enemy.start();
             };
         }
     };
