@@ -15,10 +15,10 @@ addEventListener('message', function(mainEvent) {
     require(['util/graph'], function(Graph) {
         'use strict';
 
-        var graph = new Graph.Graph();
-        var a = graph.addNode('a');
-        var b = graph.addNode('b');
-        var c = graph.addNode('c');
+        var graph = new Graph.Graph(),
+            a = graph.addNode('a'),
+            b = graph.addNode('b'),
+            c = graph.addNode('c');
         graph.addEdge(a, b);
         graph.addEdge(a, c);
         graph.addEdge(b, c);

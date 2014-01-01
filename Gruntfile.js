@@ -89,6 +89,13 @@ module.exports = function(grunt) {
                     optimize: 'none'
                 }
             }
+        },
+        connect: {
+            server: {
+                options: {
+                    port: '8888'
+                }
+            }
         }
     });
 
@@ -97,7 +104,9 @@ module.exports = function(grunt) {
     grunt.loadNpmTasks('grunt-contrib-yuidoc');
     grunt.loadNpmTasks('grunt-contrib-requirejs');
     grunt.loadNpmTasks('grunt-jsbeautifier');
+    grunt.loadNpmTasks('grunt-contrib-connect');
     grunt.registerTask('default', ['jsbeautifier:*', 'jshint:*', 'yuidoc:*']);
+    grunt.registerTask('worker', ['connect:server', 'watch:worker']);
     grunt.registerTask('build', [
         'default',
         'requirejs:compile',
