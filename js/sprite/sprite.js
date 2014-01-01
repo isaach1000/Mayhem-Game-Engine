@@ -19,7 +19,6 @@ define([
        @module sprite/sprite
      */
     var module = {
-
         /////////////////////////////////
         // Public class methods/fields //
         /////////////////////////////////

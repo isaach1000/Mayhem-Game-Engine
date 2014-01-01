@@ -2,6 +2,7 @@
     Maze class generates a maze from a graph.
 
     @class Maze
+    @extends Sprite
  */
 define([
     'sprite/sprite',

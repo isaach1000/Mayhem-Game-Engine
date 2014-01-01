@@ -10,8 +10,9 @@ define([
     'foundation/shape',
     'foundation/animation',
     'sprite/maze',
-    'sprite/player'
-], function(LevelBase, Shape, Animation, Maze, Player) {
+    'sprite/player',
+    'sprite/enemy'
+], function(LevelBase, Shape, Animation, Maze, Player, Enemy) {
     'use strict';
     //////////////////////////////////
     // Private class methods/fields //
@@ -74,11 +75,14 @@ define([
             this.start = function() {
                 var
                 maze = new Maze.Maze(20, 10, this.createContext('maze')),
-                    player = new Player.Player(this.createContext('player'),
-                        this.inputHandler, this.physicsEngine, maze);
+                    player = new Player.Player(1, 1, maze, this.inputHandler,
+                        this.physicsEngine, this.createContext('player')),
+                    enemy = new Enemy.Enemy(8, 8, maze, this.physicsEngine,
+                        this.createContext('enemy'));
 
                 maze.draw();
                 player.draw();
+                enemy.draw();
                 this.physicsEngine.objects = [];
                 hitTest();
             };

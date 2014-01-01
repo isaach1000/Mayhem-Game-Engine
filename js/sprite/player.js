@@ -2,6 +2,7 @@
     The Player class handles the actions and drawing of the main player.
 
     @class Player
+    @extends Sprite
  */
 define([
     'sprite/sprite',
@@ -15,7 +16,11 @@ define([
     // Private class methods/fields //
     //////////////////////////////////
 
-    var MOUTH_MAX = 2;
+    var
+    HEAD_STYLE = 'yellow',
+        EYE_STYLE = 'black',
+        MOUTH_STYLE = 'black',
+        MOUTH_MAX = 2;
 
     /**
         @module sprite/player
@@ -28,9 +33,16 @@ define([
         /**
              @class Player
              @constructor
+             @param {integer} row Row in maze
+             @param {integer} column Column in maze
+             @param {Maze} maze Maze instance
+             @param {InputHandler} InputHandler instance
+             @param {Engine} Engine instance
+             @param {CanvasDrawer} CanvasDrawer instance
          */
 
-        Player: function(drawer, inputHandler, physicsEngine, maze) {
+        Player: function(row, column, maze, inputHandler, physicsEngine,
+            drawer) {
             var _this = this;
 
             /////////////////////////////////////
@@ -38,32 +50,30 @@ define([
             /////////////////////////////////////
 
             var
-            drawingSettingsArr = [{
-                fillStyle: 'yellow'
-            }, {
-                fillStyle: 'black'
-            }, {
-                fillStyle: 'black'
-            }],
-                location = maze.get(5, 10),
+            location = maze.get(row, column),
                 center = {
                     x: 0,
                     y: 0
                 },
                 head = new Shape.Circle(center.x, center.y, 18,
-                    drawer, drawingSettingsArr[0]),
+                    drawer, {
+                        fillStyle: HEAD_STYLE
+                    }),
                 eye = new Shape.Circle(center.x + 10, center.y - 5, 4,
-                    drawer, drawingSettingsArr[1]),
+                    drawer, {
+                        fillStyle: EYE_STYLE
+                    }),
                 mouth = new Shape.Rectangle(center.x + 5, center.y + 5, 12,
-                    3, drawer, drawingSettingsArr[2]),
+                    3, drawer, {
+                        fillStyle: MOUTH_STYLE
+                    }),
                 shapes = [head, eye, mouth],
                 isAnimating = false,
                 previousMove;
 
             function init() {
                 // Extend Sprite constructor
-                Sprite.Sprite.call(_this, shapes, drawer,
-                    drawingSettingsArr);
+                Sprite.Sprite.call(_this, shapes, drawer);
 
                 // After constructing shapes around origin, translate to
                 // position
