@@ -4,11 +4,11 @@
     @class Graph
  */
 define([
-    'underscore',
     'util/hash',
     'util/minheap'
-], function(_, Hash, MinHeap) {
+], function(Hash, MinHeap) {
     'use strict';
+
     //////////////////////////////////
     // Private class methods/fields //
     //////////////////////////////////
@@ -22,15 +22,16 @@ define([
         /////////////////////////////////
 
         construct: function(dictionary) {
-            var graph = new module.Graph();
+            var graph = new module.Graph(),
+                key;
             // Add the nodes to the graph
-            for (var key in dictionary) {
+            for (key in dictionary) {
                 if (dictionary.hasOwnProperty(key)) {
                     graph.addNode(key);
                 }
             }
             // Add the edges
-            for (var key in dictionary) {
+            for (key in dictionary) {
                 if (dictionary.hasOwnProperty(key)) {
                     var node = graph.getNode(key),
                         neighborArr = dictionary[key],
@@ -430,7 +431,8 @@ define([
                         var hashcode = Hash.hashcode(neighbor);
                         neighbors.push(hashcode);
                     });
-                    dictionary[hashcode(node)] = neighbors;
+                    var hashId = Hash.hashcode(node);
+                    dictionary[hashId] = neighbors;
                 });
                 return dictionary;
             };

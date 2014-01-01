@@ -6,18 +6,25 @@
    @module util/hash
    @class Hash
  */
-define([], function() {
-    "use strict";
+define(['underscore'], function(_) {
+    'use strict';
+
+    console.debug(_);
+
     //////////////////////////////////
     // Private class methods/fields //
     //////////////////////////////////
+
     var currentHash = 0,
         INIT_CAPACITY = 16,
         LOAD_FACTOR = 2;
+
     var module = {
+
         /////////////////////////////////
         // Public class methods/fields //
         /////////////////////////////////
+
         /**
            Return a hashcode for this object. Does not conform to the Java
            standard that two objects that are structurally identical should

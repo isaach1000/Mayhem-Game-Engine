@@ -1,4 +1,4 @@
-# Canvas Project
+# Mayhem Game Engine
 
 ## Introduction
 This project demostrates the use of HTML5 Canvas in game development.
@@ -14,7 +14,7 @@ Folders:
 	* foundation/ --- Basic shapes and drawing
 	* level/ --- Levels
 	* lib/ --- Libraries
-	* sprite/ --- Multi-shape structures 
+	* sprite/ --- Multi-shape structures
 	* util/ --- Data structures and math
 * docs/ --- Documentation
 * scripts/ --- Useful scripts (e.g. generate docs)
