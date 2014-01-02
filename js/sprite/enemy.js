@@ -22,7 +22,7 @@ MOVE_DELAY = 1000,
 /**
     @module sprite/enemy
  */
-var thisModule = {
+module.exports = {
     /////////////////////////////////
     // Public class methods/fields //
     /////////////////////////////////
@@ -124,5 +124,3 @@ var thisModule = {
         init();
     }
 };
-
-module.exports = thisModule;

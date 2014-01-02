@@ -9,7 +9,7 @@ var $ = require('../lib/jquery');
 /**
    @module util/factory
  */
-var thisModule = {
+module.exports = {
     /** Construct a canvas. Should be called during/after .
 
         @param   {(Object)} options A dictionary of attributes for a new
@@ -48,4 +48,3 @@ var thisModule = {
             'height', height).appendTo('body');
     }
 };
-module.exports = thisModule;

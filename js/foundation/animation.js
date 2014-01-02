@@ -28,7 +28,7 @@ var requestAnimFrame = (function(callback) {
 /**
   @module foundation/animation
 */
-var thisModule = {
+module.exports = {
     /////////////////////////////////
     // Public class methods/fields //
     /////////////////////////////////
@@ -111,7 +111,6 @@ var thisModule = {
                 durationElapsed < duration;
         };
 
-        return new thisModule.Animation(drawable, frameFunction, callback);
+        return new module.exports.Animation(drawable, frameFunction, callback);
     }
 };
-module.exports = thisModule;

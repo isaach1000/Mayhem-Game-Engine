@@ -18,7 +18,7 @@ var Sprite = require('./sprite'),
 /**
     @module sprite/abstractPlayer
  */
-var thisModule = {
+module.exports = {
     /////////////////////////////////
     // Public class methods/fields //
     /////////////////////////////////
@@ -222,5 +222,3 @@ var thisModule = {
     }
 
 };
-
-module.exports = thisModule;

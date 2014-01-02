@@ -26,7 +26,7 @@ TILE_SIDE = 50,
 /**
     @module sprite/maze
  */
-var thisModule = {
+module.exports = {
     /////////////////////////////////
     // Public class methods/fields //
     /////////////////////////////////
@@ -603,5 +603,3 @@ var thisModule = {
         init();
     }
 };
-
-module.exports = thisModule;

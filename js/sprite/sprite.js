@@ -17,7 +17,7 @@ var _ = require('underscore'),
 /**
    @module sprite/sprite
  */
-var thisModule = {
+module.exports = {
     /////////////////////////////////
     // Public class methods/fields //
     /////////////////////////////////
@@ -281,4 +281,3 @@ var thisModule = {
         };
     }
 };
-module.exports = thisModule;

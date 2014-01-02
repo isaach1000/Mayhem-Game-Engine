@@ -15,7 +15,7 @@ var _ = require('underscore');
 var currentHash = 0,
     INIT_CAPACITY = 16,
     LOAD_FACTOR = 0.5;
-var thisModule = {
+module.exports = {
     /////////////////////////////////
     // Public class methods/fields //
     /////////////////////////////////
@@ -155,7 +155,7 @@ var thisModule = {
         function insert(object, hashTarget) {
             var originalTarget = hashTarget || null;
             hashTarget = hashTarget || object;
-            var index = thisModule.hashcode(hashTarget) % capacity,
+            var index = module.exports.hashcode(hashTarget) % capacity,
                 location = bucket[index];
             var locKey;
             if (location) {
@@ -260,7 +260,7 @@ var thisModule = {
                 object)) {
                 return false;
             }
-            var index = thisModule.hashcode(hashTarget) % capacity,
+            var index = module.exports.hashcode(hashTarget) % capacity,
                 location = bucket[index];
             var locKey;
             if (location) {
@@ -322,7 +322,7 @@ var thisModule = {
             }
             var contained = _this.contains(object, originalTarget);
             if (contained) {
-                var index = thisModule.hashcode(hashTarget) % capacity,
+                var index = module.exports.hashcode(hashTarget) % capacity,
                     location = bucket[index];
                 var locKey;
                 if (location) {
@@ -359,7 +359,7 @@ var thisModule = {
         this.get = function(object, hashTarget) {
             var originalTarget = hashTarget || null;
             hashTarget = hashTarget || object;
-            var index = thisModule.hashcode(hashTarget) % capacity,
+            var index = module.exports.hashcode(hashTarget) % capacity,
                 location = bucket[index];
             var locKey;
             if (location) {
@@ -449,7 +449,7 @@ var thisModule = {
         // Private instance methods/fields //
         /////////////////////////////////////
 
-        var hashset = new thisModule.Hashset();
+        var hashset = new module.exports.Hashset();
 
         ////////////////////////////////////
         // Public instance methods/fields //
@@ -536,4 +536,3 @@ var thisModule = {
         });
     }
 };
-module.exports = thisModule;

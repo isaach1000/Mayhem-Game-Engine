@@ -24,7 +24,7 @@ var COLLISION_DELAY = 50;
 /**
    @module level/mainLevel
  */
-var thisModule = {
+module.exports = {
     /////////////////////////////////
     // Public class methods/fields //
     /////////////////////////////////
@@ -148,4 +148,3 @@ var thisModule = {
         };
     }
 };
-module.exports = thisModule;

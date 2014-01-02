@@ -6,7 +6,7 @@ var MathExtensions = require('../util/mathExtensions');
 
     @class Direction
  */
-var thisModule = {
+module.exports = {
     LEFT: 37,
     UP: 38,
     RIGHT: 39,
@@ -15,21 +15,20 @@ var thisModule = {
     MIN: 37,
 
     toString: function(dir) {
-        return ['left', 'up', 'right', 'down'][dir - thisModule.MIN];
+        return ['left', 'up', 'right', 'down'][dir - module.exports.MIN];
     },
 
     opposite: function(dir) {
-        return [thisModule.RIGHT, thisModule.DOWN, thisModule.LEFT, thisModule.UP]
+        return [module.exports.RIGHT, module.exports.DOWN, module.exports.LEFT,
+            module.exports.UP]
         [dir -
-            thisModule.MIN];
+            module.exports.MIN];
     },
 
     random: function() {
-        return thisModule.MIN + MathExtensions.randomInt(4);
+        return module.exports.MIN + MathExtensions.randomInt(4);
     }
 };
-
-module.exports = thisModule;
 
 },{"../util/mathExtensions":20}],2:[function(require,module,exports){
 var $ = require('../lib/jquery');
@@ -48,7 +47,7 @@ var $ = require('../lib/jquery');
 /**
     @module events/inputHandler
  */
-var thisModule = {
+module.exports = {
     /////////////////////////////////
     // Public class methods/fields //
     /////////////////////////////////
@@ -129,8 +128,6 @@ var thisModule = {
     }
 };
 
-module.exports = thisModule;
-
 },{"../lib/jquery":8}],3:[function(require,module,exports){
 var _ = require('underscore');
 
@@ -162,7 +159,7 @@ var requestAnimFrame = (function(callback) {
 /**
   @module foundation/animation
 */
-var thisModule = {
+module.exports = {
     /////////////////////////////////
     // Public class methods/fields //
     /////////////////////////////////
@@ -245,10 +242,9 @@ var thisModule = {
                 durationElapsed < duration;
         };
 
-        return new thisModule.Animation(drawable, frameFunction, callback);
+        return new module.exports.Animation(drawable, frameFunction, callback);
     }
 };
-module.exports = thisModule;
 
 },{"underscore":23}],4:[function(require,module,exports){
 var _ = require('underscore'),
@@ -263,7 +259,7 @@ var _ = require('underscore'),
 /**
    @module foundation/canvasDrawer
  */
-var thisModule = {
+module.exports = {
     /////////////////////////////////
     // Public class methods/fields //
     /////////////////////////////////
@@ -602,7 +598,6 @@ var thisModule = {
         };
     }
 };
-module.exports = thisModule;
 
 },{"../util/mathExtensions":20,"underscore":23}],5:[function(require,module,exports){
 var CanvasDrawer = require('./canvasDrawer'),
@@ -623,7 +618,7 @@ var CanvasDrawer = require('./canvasDrawer'),
        @module foundation/shape
      */
 
-var thisModule = {
+module.exports = {
     /////////////////////////////////
     // Public class methods/fields //
     /////////////////////////////////
@@ -970,7 +965,7 @@ var thisModule = {
         var lineWidth = drawingSettings.lineWidth || 0;
 
         // Extend Shape constructor
-        thisModule.Shape.call(_this, -radius, -radius,
+        module.exports.Shape.call(_this, -radius, -radius,
             radius * 2, radius * 2, drawer,
             drawingSettings);
 
@@ -1070,7 +1065,7 @@ var thisModule = {
             h2 = height / 2;
 
         // Extend Polygon constructor
-        thisModule.Polygon.call(this, {
+        module.exports.Polygon.call(this, {
             x: x + w2,
             y: y + h2
         }, [{
@@ -1119,7 +1114,7 @@ var thisModule = {
             y: 0
         };
 
-        var bbox = thisModule.generateBbox(points);
+        var bbox = module.exports.generateBbox(points);
         bbox.x += center.x;
         bbox.y += center.y;
 
@@ -1131,7 +1126,7 @@ var thisModule = {
             height = bbox.height;
 
         // Extend Shape constructor
-        thisModule.Shape.call(this, x, y, width, height, drawer,
+        module.exports.Shape.call(this, x, y, width, height, drawer,
             drawingSettings);
 
         this.transformation.tx = center.x;
@@ -1241,12 +1236,10 @@ var thisModule = {
             var transformedPoints = this.points.map(function(p) {
                 return _this.transformation.applyToPoint(p);
             });
-            this.boundingBox = thisModule.generateBbox(transformedPoints);
+            this.boundingBox = module.exports.generateBbox(transformedPoints);
         };
     }
 };
-
-module.exports = thisModule;
 
 },{"../util/boundingBox":16,"../util/mathExtensions":20,"./canvasDrawer":4}],6:[function(require,module,exports){
 var CanvasDrawer = require('../foundation/canvasDrawer'),
@@ -1264,7 +1257,7 @@ var CanvasDrawer = require('../foundation/canvasDrawer'),
 /**
    @module level/levelBase
  */
-var thisModule = {
+module.exports = {
     /////////////////////////////////
     // Public class methods/fields //
     /////////////////////////////////
@@ -1354,8 +1347,6 @@ var thisModule = {
     }
 };
 
-module.exports = thisModule;
-
 },{"../events/inputHandler":2,"../foundation/canvasDrawer":4,"../util/boundingBox":16,"../util/factory":17,"../util/physics":22}],7:[function(require,module,exports){
 var LevelBase = require('./levelBase'),
     Shape = require('../foundation/shape'),
@@ -1383,7 +1374,7 @@ var COLLISION_DELAY = 50;
 /**
    @module level/mainLevel
  */
-var thisModule = {
+module.exports = {
     /////////////////////////////////
     // Public class methods/fields //
     /////////////////////////////////
@@ -1507,7 +1498,6 @@ var thisModule = {
         };
     }
 };
-module.exports = thisModule;
 
 },{"../enum/direction":1,"../foundation/animation":3,"../foundation/shape":5,"../sprite/enemy":11,"../sprite/maze":12,"../sprite/player":13,"../sprite/prize":14,"./levelBase":6}],8:[function(require,module,exports){
 /*! jQuery v2.0.3 | (c) 2005, 2013 jQuery Foundation, Inc. | jquery.org/license
@@ -5373,7 +5363,7 @@ var Sprite = require('./sprite'),
 /**
     @module sprite/abstractPlayer
  */
-var thisModule = {
+module.exports = {
     /////////////////////////////////
     // Public class methods/fields //
     /////////////////////////////////
@@ -5578,8 +5568,6 @@ var thisModule = {
 
 };
 
-module.exports = thisModule;
-
 },{"../enum/direction":1,"../foundation/animation":3,"../foundation/shape":5,"./sprite":15}],11:[function(require,module,exports){
 var AbstractPlayer = require('./abstractPlayer'),
     Shape = require('../foundation/shape'),
@@ -5605,7 +5593,7 @@ MOVE_DELAY = 1000,
 /**
     @module sprite/enemy
  */
-var thisModule = {
+module.exports = {
     /////////////////////////////////
     // Public class methods/fields //
     /////////////////////////////////
@@ -5708,8 +5696,6 @@ var thisModule = {
     }
 };
 
-module.exports = thisModule;
-
 },{"../foundation/animation":3,"../foundation/shape":5,"./abstractPlayer":10}],12:[function(require,module,exports){
 var Sprite = require('./sprite'),
     Shape = require('../foundation/shape'),
@@ -5739,7 +5725,7 @@ TILE_SIDE = 50,
 /**
     @module sprite/maze
  */
-var thisModule = {
+module.exports = {
     /////////////////////////////////
     // Public class methods/fields //
     /////////////////////////////////
@@ -6317,8 +6303,6 @@ var thisModule = {
     }
 };
 
-module.exports = thisModule;
-
 },{"../enum/direction":1,"../foundation/shape":5,"../util/graph":18,"../util/hash":19,"../util/mathExtensions":20,"./sprite":15}],13:[function(require,module,exports){
 var AbstractPlayer = require('./abstractPlayer'),
     Shape = require('../foundation/shape'),
@@ -6347,7 +6331,7 @@ HEAD_STYLE = 'yellow',
 /**
     @module sprite/player
  */
-var thisModule = {
+module.exports = {
     /////////////////////////////////
     // Public class methods/fields //
     /////////////////////////////////
@@ -6455,8 +6439,6 @@ var thisModule = {
     }
 };
 
-module.exports = thisModule;
-
 },{"../foundation/animation":3,"../foundation/shape":5,"./abstractPlayer":10,"./enemy":11,"./prize":14}],14:[function(require,module,exports){
 var Sprite = require('./sprite'),
     Shape = require('../foundation/shape');
@@ -6557,7 +6539,7 @@ var _ = require('underscore'),
 /**
    @module sprite/sprite
  */
-var thisModule = {
+module.exports = {
     /////////////////////////////////
     // Public class methods/fields //
     /////////////////////////////////
@@ -6821,7 +6803,6 @@ var thisModule = {
         };
     }
 };
-module.exports = thisModule;
 
 },{"../util/boundingBox":16,"../util/mathExtensions":20,"underscore":23}],16:[function(require,module,exports){
 /**
@@ -6835,7 +6816,7 @@ module.exports = thisModule;
 /**
    @module util/boundingBox
  */
-var thisModule = {
+module.exports = {
     /////////////////////////////////
     // Public class methods/fields //
     /////////////////////////////////
@@ -7010,11 +6991,10 @@ var thisModule = {
             if (intWidth < 0 || intHeight < 0) {
                 return null;
             }
-            return new thisModule.BoundingBox(x1, y1, intWidth, intWidth);
+            return new module.exports.BoundingBox(x1, y1, intWidth, intWidth);
         };
     }
 };
-module.exports = thisModule;
 
 },{}],17:[function(require,module,exports){
 var $ = require('../lib/jquery');
@@ -7028,7 +7008,7 @@ var $ = require('../lib/jquery');
 /**
    @module util/factory
  */
-var thisModule = {
+module.exports = {
     /** Construct a canvas. Should be called during/after .
 
         @param   {(Object)} options A dictionary of attributes for a new
@@ -7067,7 +7047,6 @@ var thisModule = {
             'height', height).appendTo('body');
     }
 };
-module.exports = thisModule;
 
 },{"../lib/jquery":8}],18:[function(require,module,exports){
 var _ = require('underscore'),
@@ -7087,7 +7066,7 @@ var _ = require('underscore'),
 /**
    @module util/graph
  */
-var thisModule = {
+module.exports = {
     /////////////////////////////////
     // Public class methods/fields //
     /////////////////////////////////
@@ -7461,7 +7440,7 @@ var thisModule = {
             @return {Graph} Graph of minimum spanning tree
          */
         this.kruskal = function() {
-            var minSpanningTree = new thisModule.Graph(),
+            var minSpanningTree = new module.exports.Graph(),
                 clonedNodesTable = new Hash.Hashtable();
 
             nodes.forEach(function(node) {
@@ -7488,8 +7467,6 @@ var thisModule = {
     }
 };
 
-module.exports = thisModule;
-
 },{"./hash":19,"./minHeap":21,"underscore":23}],19:[function(require,module,exports){
 var _ = require('underscore');
 
@@ -7508,7 +7485,7 @@ var _ = require('underscore');
 var currentHash = 0,
     INIT_CAPACITY = 16,
     LOAD_FACTOR = 0.5;
-var thisModule = {
+module.exports = {
     /////////////////////////////////
     // Public class methods/fields //
     /////////////////////////////////
@@ -7648,7 +7625,7 @@ var thisModule = {
         function insert(object, hashTarget) {
             var originalTarget = hashTarget || null;
             hashTarget = hashTarget || object;
-            var index = thisModule.hashcode(hashTarget) % capacity,
+            var index = module.exports.hashcode(hashTarget) % capacity,
                 location = bucket[index];
             var locKey;
             if (location) {
@@ -7753,7 +7730,7 @@ var thisModule = {
                 object)) {
                 return false;
             }
-            var index = thisModule.hashcode(hashTarget) % capacity,
+            var index = module.exports.hashcode(hashTarget) % capacity,
                 location = bucket[index];
             var locKey;
             if (location) {
@@ -7815,7 +7792,7 @@ var thisModule = {
             }
             var contained = _this.contains(object, originalTarget);
             if (contained) {
-                var index = thisModule.hashcode(hashTarget) % capacity,
+                var index = module.exports.hashcode(hashTarget) % capacity,
                     location = bucket[index];
                 var locKey;
                 if (location) {
@@ -7852,7 +7829,7 @@ var thisModule = {
         this.get = function(object, hashTarget) {
             var originalTarget = hashTarget || null;
             hashTarget = hashTarget || object;
-            var index = thisModule.hashcode(hashTarget) % capacity,
+            var index = module.exports.hashcode(hashTarget) % capacity,
                 location = bucket[index];
             var locKey;
             if (location) {
@@ -7942,7 +7919,7 @@ var thisModule = {
         // Private instance methods/fields //
         /////////////////////////////////////
 
-        var hashset = new thisModule.Hashset();
+        var hashset = new module.exports.Hashset();
 
         ////////////////////////////////////
         // Public instance methods/fields //
@@ -8029,7 +8006,6 @@ var thisModule = {
         });
     }
 };
-module.exports = thisModule;
 
 },{"underscore":23}],20:[function(require,module,exports){
 var _ = require('underscore'),
@@ -8047,7 +8023,7 @@ var _ = require('underscore'),
 /**
    @module util/mathExtensions
  */
-var thisModule = {
+module.exports = {
     /////////////////////////////////
     // Public class methods/fields //
     /////////////////////////////////
@@ -8064,7 +8040,7 @@ var thisModule = {
        @return  {integer} A random integer within the specified range.
      */
     randomInt: function(minimum, maximum) {
-        return Math.floor(thisModule.randomFloat.apply(this, arguments));
+        return Math.floor(module.exports.randomFloat.apply(this, arguments));
     },
 
     /**
@@ -8111,7 +8087,7 @@ var thisModule = {
             range.push(i);
         }
         while (range.length > 0) {
-            var randomIdx = thisModule.randomInt(range.length),
+            var randomIdx = module.exports.randomInt(range.length),
                 done = f(range[randomIdx]);
             if (done === true) {
                 return;
@@ -8148,7 +8124,7 @@ var thisModule = {
         @return {Matrix}    Rotation matrix
      */
     rotationMatrix: function(angle) {
-        return new thisModule.Matrix([
+        return new module.exports.Matrix([
             Math.cos(angle), -Math.sin(angle), 0,
             Math.sin(angle), Math.cos(angle), 0,
             0, 0, 1
@@ -8168,7 +8144,7 @@ var thisModule = {
         numRows = rows.length,
             numColumns = rows[0].length;
 
-        return new thisModule.Matrix(_.flatten(rows), numRows, numColumns);
+        return new module.exports.Matrix(_.flatten(rows), numRows, numColumns);
     },
 
     /**
@@ -8211,7 +8187,7 @@ var thisModule = {
                     column);
                 newEntries.push(sum);
             });
-            return new thisModule.Matrix(newEntries, _this.numRows,
+            return new module.exports.Matrix(newEntries, _this.numRows,
                 _this.numColumns);
         }
 
@@ -8364,11 +8340,11 @@ var thisModule = {
                 vector1 = _this.getRow(i);
                 for (var j = 0; j < matrix.numColumns; j += 1) {
                     vector2 = matrix.getColumn(j);
-                    dotProduct = thisModule.dotProduct(vector1, vector2);
+                    dotProduct = module.exports.dotProduct(vector1, vector2);
                     newEntries.push(dotProduct);
                 }
             }
-            return new thisModule.Matrix(newEntries, this.numRows,
+            return new module.exports.Matrix(newEntries, this.numRows,
                 matrix.numColumns);
         };
 
@@ -8384,7 +8360,7 @@ var thisModule = {
             this.forEachEntry(function(entry, i, j) {
                 newEntries.push(entry * k);
             });
-            return new thisModule.Matrix(newEntries, this.numRows,
+            return new module.exports.Matrix(newEntries, this.numRows,
                 this.numRows);
         };
 
@@ -8421,7 +8397,7 @@ var thisModule = {
                         id[row] = tmp;
                     }
                 }
-                return thisModule.buildMatrix(id);
+                return module.exports.buildMatrix(id);
             }
 
             // Main function
@@ -8457,8 +8433,8 @@ var thisModule = {
                 }
             }
             return {
-                l: thisModule.buildMatrix(l),
-                u: thisModule.buildMatrix(u),
+                l: module.exports.buildMatrix(l),
+                u: module.exports.buildMatrix(u),
                 p: p
             };
         };
@@ -8503,7 +8479,7 @@ var thisModule = {
                     i = this.get(2, 2),
                     det = a * (e * i - f * h) - b * (i * d - f * g) +
                         c * (d * h - e * g),
-                    inv = new thisModule.Matrix([
+                    inv = new module.exports.Matrix([
                         (e * i - f * h), -(b * i - c * h), (b * f -
                             c * e),
                         -(d * i - f * g), (a * i - c * g), -(a * f - c * d),
@@ -8534,7 +8510,7 @@ var thisModule = {
         ////////////////////////////
 
         var
-        matrix = new thisModule.Matrix([
+        matrix = new module.exports.Matrix([
             1, 0, 0,
             0, 1, 0,
             0, 0, 1
@@ -8675,7 +8651,7 @@ var thisModule = {
          */
         this.rotate = function(rotateAngle) {
             angle = (angle + rotateAngle) % (Math.PI * 2);
-            var rotationMatrix = thisModule.rotationMatrix(rotateAngle);
+            var rotationMatrix = module.exports.rotationMatrix(rotateAngle);
             matrix = matrix.multiply(rotationMatrix);
         };
 
@@ -8688,7 +8664,7 @@ var thisModule = {
          */
         this.applyToPoint = function(point) {
             var
-            coords = new thisModule.Matrix([point.x, point.y, 1], 3, 1),
+            coords = new module.exports.Matrix([point.x, point.y, 1], 3, 1),
                 newCoords = matrix.multiply(coords),
                 x = newCoords.get(0, 0),
                 y = newCoords.get(1, 0);
@@ -8708,7 +8684,7 @@ var thisModule = {
          */
         this.adjustPoint = function(point) {
             var
-            coords = new thisModule.Matrix([point.x, point.y, 1], 3, 1),
+            coords = new module.exports.Matrix([point.x, point.y, 1], 3, 1),
                 newCoords = matrix.inverse().multiply(coords),
                 x = newCoords.get(0, 0),
                 y = newCoords.get(1, 0);
@@ -8719,7 +8695,6 @@ var thisModule = {
         };
     }
 };
-module.exports = thisModule;
 
 },{"./boundingBox":16,"underscore":23}],21:[function(require,module,exports){
 //////////////////////////////////
@@ -8727,9 +8702,9 @@ module.exports = thisModule;
 //////////////////////////////////
 var DEFAULT_SIZE = 16;
 /**
-   @module thisModulePath
+   @module util/minHeap
  */
-var thisModule = {
+module.exports = {
     /////////////////////////////////
     // Public class methods/fields //
     /////////////////////////////////
@@ -8947,8 +8922,6 @@ var thisModule = {
     }
 };
 
-module.exports = thisModule;
-
 },{}],22:[function(require,module,exports){
 //////////////////////////////////
 // Private class methods/fields //
@@ -8956,61 +8929,59 @@ module.exports = thisModule;
 /**
    @module util/physics
  */
-var thisModule = {};
-
-/**
-    Physics engine
-
-    @constructor
-    @class Engine
-    @param  {Array} [objects=[]] An array of objects to control
- */
-thisModule.Engine = function(objects) {
-    var _this = this;
-
-    ///////////////////////////
-    // Public methods/fields //
-    ///////////////////////////
-
-    this.objects = objects || [];
-
+module.exports = {
     /**
-        Check shapes for collisions with point
+        Physics engine
 
-        @method collisionQuery
-        @param  {Point} point Point to test for
-        @return {Array} Array of objects with bounding boxes that contain
-        the given point
+        @constructor
+        @class Engine
+        @param  {Array} [objects=[]] An array of objects to control
      */
-    this.collisionQuery = function(point) {
-        return this.objects.filter(function(obj) {
-            return obj.boundingBox.containsPoint(point);
-        });
-    };
+    Engine: function(objects) {
+        var _this = this;
 
-    /**
-        Notify the Engine instance that a change in positions occurred
+        ///////////////////////////
+        // Public methods/fields //
+        ///////////////////////////
 
-        @method updatePositions
-        @return {void}
-     */
-    this.updatePositions = function() {
-        this.objects.forEach(function(obj) {
-            if (obj.checkCollision !== undefined) {
-                var candidates = _this.objects.filter(function(
-                    candidate) {
-                    return candidate !== obj &&
-                        candidate.boundingBox.intersects(obj.boundingBox);
-                });
-                if (candidates.length > 0) {
-                    obj.checkCollision(candidates);
+        this.objects = objects || [];
+
+        /**
+            Check shapes for collisions with point
+
+            @method collisionQuery
+            @param  {Point} point Point to test for
+            @return {Array} Array of objects with bounding boxes that contain
+            the given point
+         */
+        this.collisionQuery = function(point) {
+            return this.objects.filter(function(obj) {
+                return obj.boundingBox.containsPoint(point);
+            });
+        };
+
+        /**
+            Notify the Engine instance that a change in positions occurred
+
+            @method updatePositions
+            @return {void}
+         */
+        this.updatePositions = function() {
+            this.objects.forEach(function(obj) {
+                if (obj.checkCollision !== undefined) {
+                    var candidates = _this.objects.filter(function(
+                        candidate) {
+                        return candidate !== obj &&
+                            candidate.boundingBox.intersects(obj.boundingBox);
+                    });
+                    if (candidates.length > 0) {
+                        obj.checkCollision(candidates);
+                    }
                 }
-            }
-        });
-    };
+            });
+        };
+    }
 };
-
-module.exports = thisModule;
 
 },{}],23:[function(require,module,exports){
 //     Underscore.js 1.5.2

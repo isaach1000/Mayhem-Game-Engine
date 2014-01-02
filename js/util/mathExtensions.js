@@ -13,7 +13,7 @@ var _ = require('underscore'),
 /**
    @module util/mathExtensions
  */
-var thisModule = {
+module.exports = {
     /////////////////////////////////
     // Public class methods/fields //
     /////////////////////////////////
@@ -30,7 +30,7 @@ var thisModule = {
        @return  {integer} A random integer within the specified range.
      */
     randomInt: function(minimum, maximum) {
-        return Math.floor(thisModule.randomFloat.apply(this, arguments));
+        return Math.floor(module.exports.randomFloat.apply(this, arguments));
     },
 
     /**
@@ -77,7 +77,7 @@ var thisModule = {
             range.push(i);
         }
         while (range.length > 0) {
-            var randomIdx = thisModule.randomInt(range.length),
+            var randomIdx = module.exports.randomInt(range.length),
                 done = f(range[randomIdx]);
             if (done === true) {
                 return;
@@ -114,7 +114,7 @@ var thisModule = {
         @return {Matrix}    Rotation matrix
      */
     rotationMatrix: function(angle) {
-        return new thisModule.Matrix([
+        return new module.exports.Matrix([
             Math.cos(angle), -Math.sin(angle), 0,
             Math.sin(angle), Math.cos(angle), 0,
             0, 0, 1
@@ -134,7 +134,7 @@ var thisModule = {
         numRows = rows.length,
             numColumns = rows[0].length;
 
-        return new thisModule.Matrix(_.flatten(rows), numRows, numColumns);
+        return new module.exports.Matrix(_.flatten(rows), numRows, numColumns);
     },
 
     /**
@@ -177,7 +177,7 @@ var thisModule = {
                     column);
                 newEntries.push(sum);
             });
-            return new thisModule.Matrix(newEntries, _this.numRows,
+            return new module.exports.Matrix(newEntries, _this.numRows,
                 _this.numColumns);
         }
 
@@ -330,11 +330,11 @@ var thisModule = {
                 vector1 = _this.getRow(i);
                 for (var j = 0; j < matrix.numColumns; j += 1) {
                     vector2 = matrix.getColumn(j);
-                    dotProduct = thisModule.dotProduct(vector1, vector2);
+                    dotProduct = module.exports.dotProduct(vector1, vector2);
                     newEntries.push(dotProduct);
                 }
             }
-            return new thisModule.Matrix(newEntries, this.numRows,
+            return new module.exports.Matrix(newEntries, this.numRows,
                 matrix.numColumns);
         };
 
@@ -350,7 +350,7 @@ var thisModule = {
             this.forEachEntry(function(entry, i, j) {
                 newEntries.push(entry * k);
             });
-            return new thisModule.Matrix(newEntries, this.numRows,
+            return new module.exports.Matrix(newEntries, this.numRows,
                 this.numRows);
         };
 
@@ -387,7 +387,7 @@ var thisModule = {
                         id[row] = tmp;
                     }
                 }
-                return thisModule.buildMatrix(id);
+                return module.exports.buildMatrix(id);
             }
 
             // Main function
@@ -423,8 +423,8 @@ var thisModule = {
                 }
             }
             return {
-                l: thisModule.buildMatrix(l),
-                u: thisModule.buildMatrix(u),
+                l: module.exports.buildMatrix(l),
+                u: module.exports.buildMatrix(u),
                 p: p
             };
         };
@@ -469,7 +469,7 @@ var thisModule = {
                     i = this.get(2, 2),
                     det = a * (e * i - f * h) - b * (i * d - f * g) +
                         c * (d * h - e * g),
-                    inv = new thisModule.Matrix([
+                    inv = new module.exports.Matrix([
                         (e * i - f * h), -(b * i - c * h), (b * f -
                             c * e),
                         -(d * i - f * g), (a * i - c * g), -(a * f - c * d),
@@ -500,7 +500,7 @@ var thisModule = {
         ////////////////////////////
 
         var
-        matrix = new thisModule.Matrix([
+        matrix = new module.exports.Matrix([
             1, 0, 0,
             0, 1, 0,
             0, 0, 1
@@ -641,7 +641,7 @@ var thisModule = {
          */
         this.rotate = function(rotateAngle) {
             angle = (angle + rotateAngle) % (Math.PI * 2);
-            var rotationMatrix = thisModule.rotationMatrix(rotateAngle);
+            var rotationMatrix = module.exports.rotationMatrix(rotateAngle);
             matrix = matrix.multiply(rotationMatrix);
         };
 
@@ -654,7 +654,7 @@ var thisModule = {
          */
         this.applyToPoint = function(point) {
             var
-            coords = new thisModule.Matrix([point.x, point.y, 1], 3, 1),
+            coords = new module.exports.Matrix([point.x, point.y, 1], 3, 1),
                 newCoords = matrix.multiply(coords),
                 x = newCoords.get(0, 0),
                 y = newCoords.get(1, 0);
@@ -674,7 +674,7 @@ var thisModule = {
          */
         this.adjustPoint = function(point) {
             var
-            coords = new thisModule.Matrix([point.x, point.y, 1], 3, 1),
+            coords = new module.exports.Matrix([point.x, point.y, 1], 3, 1),
                 newCoords = matrix.inverse().multiply(coords),
                 x = newCoords.get(0, 0),
                 y = newCoords.get(1, 0);
@@ -685,4 +685,3 @@ var thisModule = {
         };
     }
 };
-module.exports = thisModule;

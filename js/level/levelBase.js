@@ -13,7 +13,7 @@ var CanvasDrawer = require('../foundation/canvasDrawer'),
 /**
    @module level/levelBase
  */
-var thisModule = {
+module.exports = {
     /////////////////////////////////
     // Public class methods/fields //
     /////////////////////////////////
@@ -102,5 +102,3 @@ var thisModule = {
         this.inputHandler = new InputHandler.InputHandler('body');
     }
 };
-
-module.exports = thisModule;

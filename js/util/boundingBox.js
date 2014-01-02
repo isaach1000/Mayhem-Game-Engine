@@ -9,7 +9,7 @@
 /**
    @module util/boundingBox
  */
-var thisModule = {
+module.exports = {
     /////////////////////////////////
     // Public class methods/fields //
     /////////////////////////////////
@@ -184,8 +184,7 @@ var thisModule = {
             if (intWidth < 0 || intHeight < 0) {
                 return null;
             }
-            return new thisModule.BoundingBox(x1, y1, intWidth, intWidth);
+            return new module.exports.BoundingBox(x1, y1, intWidth, intWidth);
         };
     }
 };
-module.exports = thisModule;

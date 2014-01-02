@@ -10,7 +10,7 @@ var _ = require('underscore'),
 /**
    @module foundation/canvasDrawer
  */
-var thisModule = {
+module.exports = {
     /////////////////////////////////
     // Public class methods/fields //
     /////////////////////////////////
@@ -349,4 +349,3 @@ var thisModule = {
         };
     }
 };
-module.exports = thisModule;

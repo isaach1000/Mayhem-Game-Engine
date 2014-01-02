@@ -16,7 +16,7 @@ var CanvasDrawer = require('./canvasDrawer'),
        @module foundation/shape
      */
 
-var thisModule = {
+module.exports = {
     /////////////////////////////////
     // Public class methods/fields //
     /////////////////////////////////
@@ -363,7 +363,7 @@ var thisModule = {
         var lineWidth = drawingSettings.lineWidth || 0;
 
         // Extend Shape constructor
-        thisModule.Shape.call(_this, -radius, -radius,
+        module.exports.Shape.call(_this, -radius, -radius,
             radius * 2, radius * 2, drawer,
             drawingSettings);
 
@@ -463,7 +463,7 @@ var thisModule = {
             h2 = height / 2;
 
         // Extend Polygon constructor
-        thisModule.Polygon.call(this, {
+        module.exports.Polygon.call(this, {
             x: x + w2,
             y: y + h2
         }, [{
@@ -512,7 +512,7 @@ var thisModule = {
             y: 0
         };
 
-        var bbox = thisModule.generateBbox(points);
+        var bbox = module.exports.generateBbox(points);
         bbox.x += center.x;
         bbox.y += center.y;
 
@@ -524,7 +524,7 @@ var thisModule = {
             height = bbox.height;
 
         // Extend Shape constructor
-        thisModule.Shape.call(this, x, y, width, height, drawer,
+        module.exports.Shape.call(this, x, y, width, height, drawer,
             drawingSettings);
 
         this.transformation.tx = center.x;
@@ -634,9 +634,7 @@ var thisModule = {
             var transformedPoints = this.points.map(function(p) {
                 return _this.transformation.applyToPoint(p);
             });
-            this.boundingBox = thisModule.generateBbox(transformedPoints);
+            this.boundingBox = module.exports.generateBbox(transformedPoints);
         };
     }
 };
-
-module.exports = thisModule;

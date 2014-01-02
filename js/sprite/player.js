@@ -25,7 +25,7 @@ HEAD_STYLE = 'yellow',
 /**
     @module sprite/player
  */
-var thisModule = {
+module.exports = {
     /////////////////////////////////
     // Public class methods/fields //
     /////////////////////////////////
@@ -132,5 +132,3 @@ var thisModule = {
         init();
     }
 };
-
-module.exports = thisModule;

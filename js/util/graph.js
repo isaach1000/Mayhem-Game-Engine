@@ -15,7 +15,7 @@ var _ = require('underscore'),
 /**
    @module util/graph
  */
-var thisModule = {
+module.exports = {
     /////////////////////////////////
     // Public class methods/fields //
     /////////////////////////////////
@@ -389,7 +389,7 @@ var thisModule = {
             @return {Graph} Graph of minimum spanning tree
          */
         this.kruskal = function() {
-            var minSpanningTree = new thisModule.Graph(),
+            var minSpanningTree = new module.exports.Graph(),
                 clonedNodesTable = new Hash.Hashtable();
 
             nodes.forEach(function(node) {
@@ -415,5 +415,3 @@ var thisModule = {
         };
     }
 };
-
-module.exports = thisModule;

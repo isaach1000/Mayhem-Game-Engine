@@ -5,7 +5,7 @@ var MathExtensions = require('../util/mathExtensions');
 
     @class Direction
  */
-var thisModule = {
+module.exports = {
     LEFT: 37,
     UP: 38,
     RIGHT: 39,
@@ -14,18 +14,17 @@ var thisModule = {
     MIN: 37,
 
     toString: function(dir) {
-        return ['left', 'up', 'right', 'down'][dir - thisModule.MIN];
+        return ['left', 'up', 'right', 'down'][dir - module.exports.MIN];
     },
 
     opposite: function(dir) {
-        return [thisModule.RIGHT, thisModule.DOWN, thisModule.LEFT, thisModule.UP]
+        return [module.exports.RIGHT, module.exports.DOWN, module.exports.LEFT,
+            module.exports.UP]
         [dir -
-            thisModule.MIN];
+            module.exports.MIN];
     },
 
     random: function() {
-        return thisModule.MIN + MathExtensions.randomInt(4);
+        return module.exports.MIN + MathExtensions.randomInt(4);
     }
 };
-
-module.exports = thisModule;
