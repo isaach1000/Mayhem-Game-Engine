@@ -4,6 +4,7 @@ var LevelBase = require('./levelBase'),
     Maze = require('../sprite/maze'),
     Player = require('../sprite/player'),
     Enemy = require('../sprite/enemy'),
+    Prize = require('../sprite/prize'),
     Direction = require('../enum/direction');
 
 /**
@@ -130,12 +131,15 @@ var thisModule = {
                         player.isFrozen = true;
                         enemy.isFrozen = true;
                         die(player);
-                    });
+                    }),
+                prize = new Prize.Prize(9, 15, maze,
+                    this.createContext('prize'));
 
             maze.draw();
             enemy.draw();
             player.draw();
-            this.physicsEngine.objects = [enemy, player];
+            prize.draw();
+            this.physicsEngine.objects = [enemy, player, prize];
             hitTest();
 
             enemy.addMoves([Direction.UP, Direction.DOWN, Direction.DOWN]);

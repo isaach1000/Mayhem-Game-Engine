@@ -11,7 +11,8 @@ module.exports = function(grunt) {
             },
             main: {
                 files: ['js/**/*.js', '!js/lib/**'],
-                tasks: ['jsbeautifier:main', 'jshint:main'],
+                tasks: ['jsbeautifier:main', 'jshint:main',
+                    'browserify:main'],
                 options: {
                     livereload: true
                 }

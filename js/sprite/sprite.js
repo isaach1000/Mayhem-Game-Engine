@@ -27,7 +27,7 @@ var thisModule = {
         @constructor
         @param {Array} shapes Array of shapes for sprite
         @param {CanvasDrawer} drawer Drawer to draw shapes
-        @param {Object} drawingSettings Hash of drawing settings
+        @param {Object} [drawingSettings={}] Hash of drawing settings
      */
     Sprite: function(shapes, drawer, drawingSettings) {
         var _this = this;

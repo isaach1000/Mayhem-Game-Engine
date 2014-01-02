@@ -31,7 +31,7 @@ var thisModule = {
 
 module.exports = thisModule;
 
-},{"../util/mathExtensions":19}],2:[function(require,module,exports){
+},{"../util/mathExtensions":20}],2:[function(require,module,exports){
 var $ = require('../lib/jquery');
 
 /**
@@ -250,7 +250,7 @@ var thisModule = {
 };
 module.exports = thisModule;
 
-},{"underscore":22}],4:[function(require,module,exports){
+},{"underscore":23}],4:[function(require,module,exports){
 var _ = require('underscore'),
     MathExtensions = require('../util/mathExtensions');
 
@@ -604,7 +604,7 @@ var thisModule = {
 };
 module.exports = thisModule;
 
-},{"../util/mathExtensions":19,"underscore":22}],5:[function(require,module,exports){
+},{"../util/mathExtensions":20,"underscore":23}],5:[function(require,module,exports){
 var CanvasDrawer = require('./canvasDrawer'),
     BoundingBox = require('../util/boundingBox'),
     MathExtensions = require('../util/mathExtensions');
@@ -1248,7 +1248,7 @@ var thisModule = {
 
 module.exports = thisModule;
 
-},{"../util/boundingBox":15,"../util/mathExtensions":19,"./canvasDrawer":4}],6:[function(require,module,exports){
+},{"../util/boundingBox":16,"../util/mathExtensions":20,"./canvasDrawer":4}],6:[function(require,module,exports){
 var CanvasDrawer = require('../foundation/canvasDrawer'),
     Factory = require('../util/factory'),
     BoundingBox = require('../util/boundingBox'),
@@ -1356,13 +1356,14 @@ var thisModule = {
 
 module.exports = thisModule;
 
-},{"../events/inputHandler":2,"../foundation/canvasDrawer":4,"../util/boundingBox":15,"../util/factory":16,"../util/physics":21}],7:[function(require,module,exports){
+},{"../events/inputHandler":2,"../foundation/canvasDrawer":4,"../util/boundingBox":16,"../util/factory":17,"../util/physics":22}],7:[function(require,module,exports){
 var LevelBase = require('./levelBase'),
     Shape = require('../foundation/shape'),
     Animation = require('../foundation/animation'),
     Maze = require('../sprite/maze'),
     Player = require('../sprite/player'),
     Enemy = require('../sprite/enemy'),
+    Prize = require('../sprite/prize'),
     Direction = require('../enum/direction');
 
 /**
@@ -1489,12 +1490,15 @@ var thisModule = {
                         player.isFrozen = true;
                         enemy.isFrozen = true;
                         die(player);
-                    });
+                    }),
+                prize = new Prize.Prize(9, 15, maze,
+                    this.createContext('prize'));
 
             maze.draw();
             enemy.draw();
             player.draw();
-            this.physicsEngine.objects = [enemy, player];
+            prize.draw();
+            this.physicsEngine.objects = [enemy, player, prize];
             hitTest();
 
             enemy.addMoves([Direction.UP, Direction.DOWN, Direction.DOWN]);
@@ -1504,7 +1508,7 @@ var thisModule = {
 };
 module.exports = thisModule;
 
-},{"../enum/direction":1,"../foundation/animation":3,"../foundation/shape":5,"../sprite/enemy":11,"../sprite/maze":12,"../sprite/player":13,"./levelBase":6}],8:[function(require,module,exports){
+},{"../enum/direction":1,"../foundation/animation":3,"../foundation/shape":5,"../sprite/enemy":11,"../sprite/maze":12,"../sprite/player":13,"../sprite/prize":14,"./levelBase":6}],8:[function(require,module,exports){
 /*! jQuery v2.0.3 | (c) 2005, 2013 jQuery Foundation, Inc. | jquery.org/license
 //@ sourceMappingURL=jquery-2.0.3.min.map
 */
@@ -5575,7 +5579,7 @@ var thisModule = {
 
 module.exports = thisModule;
 
-},{"../enum/direction":1,"../foundation/animation":3,"../foundation/shape":5,"./sprite":14}],11:[function(require,module,exports){
+},{"../enum/direction":1,"../foundation/animation":3,"../foundation/shape":5,"./sprite":15}],11:[function(require,module,exports){
 var AbstractPlayer = require('./abstractPlayer'),
     Shape = require('../foundation/shape'),
     Animation = require('../foundation/animation');
@@ -6314,9 +6318,11 @@ var thisModule = {
 
 module.exports = thisModule;
 
-},{"../enum/direction":1,"../foundation/shape":5,"../util/graph":17,"../util/hash":18,"../util/mathExtensions":19,"./sprite":14}],13:[function(require,module,exports){
+},{"../enum/direction":1,"../foundation/shape":5,"../util/graph":18,"../util/hash":19,"../util/mathExtensions":20,"./sprite":15}],13:[function(require,module,exports){
 var AbstractPlayer = require('./abstractPlayer'),
     Shape = require('../foundation/shape'),
+    Prize = require('./prize'),
+    Enemy = require('./enemy'),
     Animation = require('../foundation/animation');
 
 /**
@@ -6430,10 +6436,10 @@ var thisModule = {
         this.checkCollision = function(candidates) {
             var
             prizes = candidates.filter(function(candidate) {
-                return false;
+                return candidate instanceof Prize.Prize;
             }),
                 enemies = candidates.filter(function(candidate) {
-                    return candidate.isFrozen !== undefined;
+                    return candidate instanceof Enemy.Enemy;
                 });
 
             if (prizes.length > 0) {
@@ -6450,7 +6456,72 @@ var thisModule = {
 
 module.exports = thisModule;
 
-},{"../foundation/animation":3,"../foundation/shape":5,"./abstractPlayer":10}],14:[function(require,module,exports){
+},{"../foundation/animation":3,"../foundation/shape":5,"./abstractPlayer":10,"./enemy":11,"./prize":14}],14:[function(require,module,exports){
+var Sprite = require('./sprite'),
+    Shape = require('../foundation/shape');
+
+/**
+    A pickup item that end the game
+
+    @class Prize
+ */
+
+//////////////////////////////////
+// Private class methods/fields //
+//////////////////////////////////
+
+var
+FILL_STYLE = '#00FF76',
+    PRIZE_SIDE = 15;
+
+/**
+    @module sprite/prize
+ */
+module.exports = {
+    /////////////////////////////////
+    // Public class methods/fields //
+    /////////////////////////////////
+
+    /**
+         @class Prize
+         @constructor
+     */
+
+    Prize: function(row, column, maze, drawer) {
+        var _this = this;
+
+        /////////////////////////////////////
+        // Private instance methods/fields //
+        /////////////////////////////////////
+
+        var
+        rect = new Shape.Rectangle(-PRIZE_SIDE / 2, -PRIZE_SIDE / 2,
+            PRIZE_SIDE, PRIZE_SIDE, drawer, {
+                fillStyle: FILL_STYLE
+            }),
+            location = maze.get(row, column),
+            shapes = [rect];
+
+
+        function init() {
+            rect.rotate(Math.PI / 4);
+            Sprite.Sprite.call(_this, shapes, drawer);
+            _this.x = location.x + location.width / 2;
+            _this.y = location.y + location.height / 2;
+        }
+
+        ////////////////////////////////////
+        // Public instance methods/fields //
+        ////////////////////////////////////
+
+
+        // Call init to perform setup
+        init();
+    }
+
+};
+
+},{"../foundation/shape":5,"./sprite":15}],15:[function(require,module,exports){
 var _ = require('underscore'),
     BoundingBox = require('../util/boundingBox'),
     MathExtensions = require('../util/mathExtensions');
@@ -6480,7 +6551,7 @@ var thisModule = {
         @constructor
         @param {Array} shapes Array of shapes for sprite
         @param {CanvasDrawer} drawer Drawer to draw shapes
-        @param {Object} drawingSettings Hash of drawing settings
+        @param {Object} [drawingSettings={}] Hash of drawing settings
      */
     Sprite: function(shapes, drawer, drawingSettings) {
         var _this = this;
@@ -6736,7 +6807,7 @@ var thisModule = {
 };
 module.exports = thisModule;
 
-},{"../util/boundingBox":15,"../util/mathExtensions":19,"underscore":22}],15:[function(require,module,exports){
+},{"../util/boundingBox":16,"../util/mathExtensions":20,"underscore":23}],16:[function(require,module,exports){
 /**
    A class to represent the bounds of shapes in the canvas. Simplifies
    calculations certain involving complex shapes. Specifically effective for
@@ -6929,7 +7000,7 @@ var thisModule = {
 };
 module.exports = thisModule;
 
-},{}],16:[function(require,module,exports){
+},{}],17:[function(require,module,exports){
 var $ = require('../lib/jquery');
 
 /**
@@ -6982,7 +7053,7 @@ var thisModule = {
 };
 module.exports = thisModule;
 
-},{"../lib/jquery":8}],17:[function(require,module,exports){
+},{"../lib/jquery":8}],18:[function(require,module,exports){
 var _ = require('underscore'),
     Hash = require('./hash'),
     MinHeap = require('./minHeap');
@@ -7403,7 +7474,7 @@ var thisModule = {
 
 module.exports = thisModule;
 
-},{"./hash":18,"./minHeap":20,"underscore":22}],18:[function(require,module,exports){
+},{"./hash":19,"./minHeap":21,"underscore":23}],19:[function(require,module,exports){
 var _ = require('underscore');
 
 /**
@@ -7944,7 +8015,7 @@ var thisModule = {
 };
 module.exports = thisModule;
 
-},{"underscore":22}],19:[function(require,module,exports){
+},{"underscore":23}],20:[function(require,module,exports){
 var _ = require('underscore'),
     BoundingBox = require('./boundingBox');
 
@@ -8634,7 +8705,7 @@ var thisModule = {
 };
 module.exports = thisModule;
 
-},{"./boundingBox":15,"underscore":22}],20:[function(require,module,exports){
+},{"./boundingBox":16,"underscore":23}],21:[function(require,module,exports){
 //////////////////////////////////
 // Private class methods/fields //
 //////////////////////////////////
@@ -8862,7 +8933,7 @@ var thisModule = {
 
 module.exports = thisModule;
 
-},{}],21:[function(require,module,exports){
+},{}],22:[function(require,module,exports){
 //////////////////////////////////
 // Private class methods/fields //
 //////////////////////////////////
@@ -8925,7 +8996,7 @@ thisModule.Engine = function(objects) {
 
 module.exports = thisModule;
 
-},{}],22:[function(require,module,exports){
+},{}],23:[function(require,module,exports){
 //     Underscore.js 1.5.2
 //     http://underscorejs.org
 //     (c) 2009-2013 Jeremy Ashkenas, DocumentCloud and Investigative Reporters & Editors

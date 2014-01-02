@@ -1,5 +1,7 @@
 var AbstractPlayer = require('./abstractPlayer'),
     Shape = require('../foundation/shape'),
+    Prize = require('./prize'),
+    Enemy = require('./enemy'),
     Animation = require('../foundation/animation');
 
 /**
@@ -113,10 +115,10 @@ var thisModule = {
         this.checkCollision = function(candidates) {
             var
             prizes = candidates.filter(function(candidate) {
-                return false;
+                return candidate instanceof Prize.Prize;
             }),
                 enemies = candidates.filter(function(candidate) {
-                    return candidate.isFrozen !== undefined;
+                    return candidate instanceof Enemy.Enemy;
                 });
 
             if (prizes.length > 0) {
