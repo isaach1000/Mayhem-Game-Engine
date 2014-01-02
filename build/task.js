@@ -3744,9 +3744,10 @@ define('util/graph',[
 
                 @method dijkstra
                 @param  {GraphNode} source Source node
+                @param  {GraphNode} destination Destination node
                 @return {void}
              */
-            this.dijkstra = function(source) {
+            this.dijkstra = function(source, destination) {
                 nodes.forEach(function(node) {
                     node.weight = Infinity;
                     node.visited = false;
@@ -3757,8 +3758,10 @@ define('util/graph',[
                 // Distance of source to itself is 0
                 source.weight = 0;
 
+                // MinHeap for graph nodes
                 var queue = new MinHeap.MinHeap(function(graphNode1,
                     graphNode2) {
+                    // Comparator function that handles Infinity too
                     if (isFinite(graphNode1.weight) && isFinite(
                         graphNode2)) {
                         return graphNode1.weight - graphNode2.weight;
@@ -3789,6 +3792,9 @@ define('util/graph',[
                 while (queue.length !== 0) {
                     var u = queue.poll();
                     u.visited = true;
+                    if (u === destination) {
+                        return;
+                    }
                     u.neighbors.forEach(relaxEdge);
                 }
             };
