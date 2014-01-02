@@ -23,41 +23,37 @@ cat > $folderpath/$filename.js << MODULE
 
     @class $class
  */
-define([], function() {
-    'use strict';
 
-    //////////////////////////////////
-    // Private class methods/fields //
-    //////////////////////////////////
+//////////////////////////////////
+// Private class methods/fields //
+//////////////////////////////////
+
+/**
+    @module $folder/$filename
+ */
+module.exports = {
+    /////////////////////////////////
+    // Public class methods/fields //
+    /////////////////////////////////
 
     /**
-        @module $folder/$filename
+         @class $class
+         @constructor
      */
-    var module = {
-        /////////////////////////////////
-        // Public class methods/fields //
-        /////////////////////////////////
 
-        /**
-             @class $class
-             @constructor
-         */
+    $class: function() {
+        var _this = this;
 
-        $class: function() {
-            var _this = this;
+        /////////////////////////////////////
+        // Private instance methods/fields //
+        /////////////////////////////////////
 
-            /////////////////////////////////////
-            // Private instance methods/fields //
-            /////////////////////////////////////
+        ////////////////////////////////////
+        // Public instance methods/fields //
+        ////////////////////////////////////
 
-            ////////////////////////////////////
-            // Public instance methods/fields //
-            ////////////////////////////////////
+    }
 
-        }
+};
 
-    };
-
-    return module;
-});
 MODULE
