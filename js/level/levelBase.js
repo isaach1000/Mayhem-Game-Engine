@@ -1,104 +1,106 @@
-define(['foundation/canvasDrawer', 'util/factory', 'util/boundingBox',
-    'util/physics', 'events/inputHandler'
-], function(CanvasDrawer, Factory, BoundingBox, Physics, InputHandler) {
-    'use strict';
+var CanvasDrawer = require('../foundation/canvasDrawer'),
+    Factory = require('../util/factory'),
+    BoundingBox = require('../util/boundingBox'),
+    Physics = require('../util/physics'),
+    InputHandler = require('../events/inputHandler');
 
-    //////////////////////////////////
-    // Private class methods/fields //
-    //////////////////////////////////
+
+
+//////////////////////////////////
+// Private class methods/fields //
+//////////////////////////////////
+
+/**
+   @module level/levelBase
+ */
+var thisModule = {
+    /////////////////////////////////
+    // Public class methods/fields //
+    /////////////////////////////////
 
     /**
-       @module level/levelBase
+       LevelBase
+       @constructor
      */
-    var module = {
-        /////////////////////////////////
-        // Public class methods/fields //
-        /////////////////////////////////
+    LevelBase: function() {
+        var _this = this;
+
+        ////////////////////////////////////
+        // Public instance methods/fields //
+        ////////////////////////////////////
 
         /**
-           LevelBase
-           @constructor
+            Create a canvas with the dimensions this.WIDTH by this.HEIGHT
+
+            @method createCanvas
+            @param  {string} [id] String to use as HTML id
+            @return {JQueryObject} A new jQuery object of the new canvas
          */
-        LevelBase: function() {
-            var _this = this;
+        this.createCanvas = function(id) {
+            return Factory.createCanvas({
+                id: id,
+                width: this.WIDTH + this.MARGIN + 'px',
+                height: this.HEIGHT + this.MARGIN + 'px'
+            });
+        };
 
-            ////////////////////////////////////
-            // Public instance methods/fields //
-            ////////////////////////////////////
+        /**
+            Create a canvas with the createCanvas method and return a new
+            CanvasDrawer for that canvas
 
-            /**
-                Create a canvas with the dimensions this.WIDTH by this.HEIGHT
+            @method createContext
+            @param  {string} [id] String to use as HTML id
+            @return {CanvasDrawer} CanvasDrawer for new canvas
+         */
+        this.createContext = function(id) {
+            var
+            $canvas = this.createCanvas(id),
+                w = this.WIDTH,
+                h = this.HEIGHT,
+                ctx = $canvas[0].getContext('2d');
+            return new CanvasDrawer.CanvasDrawer(ctx, w, h);
+        };
 
-                @method createCanvas
-                @param  {string} [id] String to use as HTML id
-                @return {JQueryObject} A new jQuery object of the new canvas
-             */
-            this.createCanvas = function(id) {
-                return Factory.createCanvas({
-                    id: id,
-                    width: this.WIDTH + this.MARGIN + 'px',
-                    height: this.HEIGHT + this.MARGIN + 'px'
-                });
-            };
+        /**
+            Width of canvas
 
-            /**
-                Create a canvas with the createCanvas method and return a new
-                CanvasDrawer for that canvas
+            @property WIDTH
+            @type {number}
+         */
+        this.WIDTH = 1000;
 
-                @method createContext
-                @param  {string} [id] String to use as HTML id
-                @return {CanvasDrawer} CanvasDrawer for new canvas
-             */
-            this.createContext = function(id) {
-                var
-                $canvas = this.createCanvas(id),
-                    w = this.WIDTH,
-                    h = this.HEIGHT,
-                    ctx = $canvas[0].getContext('2d');
-                return new CanvasDrawer.CanvasDrawer(ctx, w, h);
-            };
+        /**
+            Height of canvas
 
-            /**
-                Width of canvas
+            @property HEIGHT
+            @type {number}
+         */
+        this.HEIGHT = 600;
 
-                @property WIDTH
-                @type {number}
-             */
-            this.WIDTH = 1000;
+        /**
+            Margin add to width and height when creating canvas
 
-            /**
-                Height of canvas
+            @property MARGIN
+            @type {Number}
+         */
+        this.MARGIN = 5;
 
-                @property HEIGHT
-                @type {number}
-             */
-            this.HEIGHT = 600;
+        /**
+            Physics engine
 
-            /**
-                Margin add to width and height when creating canvas
+            @property physicsEngine
+            @type {Engine}
+         */
+        this.physicsEngine = new Physics.Engine();
 
-                @property MARGIN
-                @type {Number}
-             */
-            this.MARGIN = 5;
+        /**
+            Input handler
 
-            /**
-                Physics engine
+            @property inputHandler
+            @type {InputHandler}
+         */
+        this.inputHandler = new InputHandler.InputHandler('body');
+    }
+};
 
-                @property physicsEngine
-                @type {Engine}
-             */
-            this.physicsEngine = new Physics.Engine();
-
-            /**
-                Input handler
-
-                @property inputHandler
-                @type {InputHandler}
-             */
-            this.inputHandler = new InputHandler.InputHandler('body');
-        }
-    };
-
-    return module;
-});
+module.exports = thisModule;
