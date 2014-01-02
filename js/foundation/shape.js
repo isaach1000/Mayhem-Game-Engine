@@ -293,7 +293,6 @@ define(['foundation/canvasDrawer', 'util/boundingBox', 'util/mathExtensions'],
                         this.width - lineWidth, -this.height - lineWidth, (this
                             .width + lineWidth) * 2, (this.height + lineWidth) *
                         2).restore();
-                    this.drawBoundingBox();
                 };
 
                 /**

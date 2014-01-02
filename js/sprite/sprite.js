@@ -209,7 +209,6 @@ define([
                     shape.draw();
                 });
                 drawer.restore();
-                this.drawBoundingBox();
             };
 
             /**

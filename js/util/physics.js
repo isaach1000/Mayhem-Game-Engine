@@ -16,10 +16,14 @@ define([], function() {
         @param  {Array} [objects=[]] An array of objects to control
      */
     module.Engine = function(objects) {
-        this.objects = objects || [];
-    };
+        var _this = this;
 
-    module.Engine.prototype = {
+        ///////////////////////////
+        // Public methods/fields //
+        ///////////////////////////
+
+        this.objects = objects || [];
+
         /**
             Check shapes for collisions with point
 
@@ -28,11 +32,32 @@ define([], function() {
             @return {Array} Array of objects with bounding boxes that contain
             the given point
          */
-        collisionQuery: function(point) {
+        this.collisionQuery = function(point) {
             return this.objects.filter(function(obj) {
                 return obj.boundingBox.containsPoint(point);
             });
-        }
+        };
+
+        /**
+            Notify the Engine instance that a change in positions occurred
+
+            @method updatePositions
+            @return {void}
+         */
+        this.updatePositions = function() {
+            this.objects.forEach(function(obj) {
+                if (obj.checkCollision !== undefined) {
+                    var candidates = _this.objects.filter(function(
+                        candidate) {
+                        return candidate !== obj &&
+                            candidate.boundingBox.intersects(obj.boundingBox);
+                    });
+                    if (candidates.length > 0) {
+                        obj.checkCollision(candidates);
+                    }
+                }
+            });
+        };
     };
 
     return module;

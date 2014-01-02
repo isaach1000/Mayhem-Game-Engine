@@ -209,6 +209,9 @@ define([
                         _this.x = newCenter.x;
                         _this.y = newCenter.y;
                         location = newLocation;
+
+                        // Notify the physics engine that a change occurred
+                        physicsEngine.updatePositions();
                     });
 
                 this.isAnimating = true;

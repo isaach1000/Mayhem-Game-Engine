@@ -17,7 +17,7 @@ define([
 
     var
     MOVE_DELAY = 1000,
-        FILL_STYLE = '#7CF2EC',
+        FILL_STYLE = '#FF0000',
         RADIUS = 20;
 
     /**

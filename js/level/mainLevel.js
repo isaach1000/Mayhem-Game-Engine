@@ -60,14 +60,56 @@ define([
                 _this.inputHandler.bind('mousemove', function() {
                     _this.physicsEngine.collisionQuery(mousePoint)
                         .forEach(function(shape) {
-                            console.debug(shape);
+                            console.debug('box');
                             if (shape.collisionTest(mousePoint)) {
-                                shape.drawingSettings.fillStyle =
-                                    'yellow';
-                                shape.update();
+                                console.debug('shape');
                             }
                         });
                 }, COLLISION_DELAY);
+            }
+
+            /**
+                Function to perform on player winning.
+
+                @method win
+                @private
+                @param  {Player} player Player
+                @return {void}
+             */
+            function win(player) {
+                var
+                rate = 1 / 1000,
+                    winAnim = new Animation.Animation(player, function(time,
+                        timeDiff) {
+                        player.transformation.sx += timeDiff * rate;
+                        player.transformation.sy += timeDiff * rate;
+                        return time > 5000;
+                    });
+                winAnim.start();
+            }
+
+            /**
+                Function to perform on player's death.
+
+                @method die
+                @private
+                @param  {Player} player Player
+                @return {void}
+             */
+            function die(player) {
+                var
+                rate = 1 / 1000,
+                    shrinkTime = 5000,
+                    dieAnim = new Animation.Animation(player, function(time,
+                        timeDiff) {
+                        player.transformation.angle += time * rate;
+                        player.transformation.sx = (shrinkTime - time) /
+                            shrinkTime;
+                        player.transformation.sy = (shrinkTime - time) /
+                            shrinkTime;
+                        return time > 5000;
+                    });
+                dieAnim.start();
             }
 
             ////////////////////////////////////
@@ -80,7 +122,16 @@ define([
                     enemy = new Enemy.Enemy(8, 8, maze, this.physicsEngine,
                         this.createContext('enemy')),
                     player = new Player.Player(1, 1, maze, this.inputHandler,
-                        this.physicsEngine, this.createContext('player'));
+                        this.physicsEngine, this.createContext('player'),
+                        function() {
+                            player.isFrozen = true;
+                            enemy.isFrozen = true;
+                            win(player);
+                        }, function() {
+                            player.isFrozen = true;
+                            enemy.isFrozen = true;
+                            die(player);
+                        });
 
                 maze.draw();
                 enemy.draw();

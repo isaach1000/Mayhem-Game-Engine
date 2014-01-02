@@ -129,7 +129,7 @@ define([], function() {
                 Check if this BoundingBox contains another BoundingBox
 
                 @method containsBoundingBox
-                @param {BoundingBox} bbox - The other BoundingBox
+                @param {BoundingBox} bbox The other BoundingBox
                 @return {boolean} True if contains the other BoundingBox, false
                 otherwise.
              */
@@ -138,9 +138,31 @@ define([], function() {
                     .y >= y && bbox.y + bbox.height <= y + h);
             };
 
+            /**
+                Check if this BoundingBox contains a point
+
+                @method containsPoint
+                @param {BoundingBox} bbox The point
+                @return {boolean} True if contains the point, false otherwise
+             */
             this.containsPoint = function(point) {
                 return point.x >= x && point.x <= x + w && point.y >= y &&
                     point.y <= y + h;
+            };
+
+            /**
+                Check if this BoundingBox instance intersects another
+                BoundingBox instance. Based on
+                <a href="http://stackoverflow.com/a/13390495/1930331">>this</a>
+                StackOverflow answer.
+                @method intersects
+                @param  {[type]} bbox [description]
+                @return {[type]} [description]
+             */
+            this.intersects = function(bbox) {
+                return !(this.x + this.width < bbox.x || bbox.x + bbox.width <
+                    this.x || this.y + this.height < bbox.y || bbox.y +
+                    bbox.height < this.y);
             };
 
             /**
@@ -148,16 +170,16 @@ define([], function() {
                 and another BoundingBox
 
                 @method intersection
-                @param {BoundingBox} otherBbox - Another BoundingBox instance.
+                @param {BoundingBox} bbox Another BoundingBox instance.
                 @return {BoundingBox}
              */
-            this.intersection = function(otherBbox) {
-                var x1 = Math.max(this.x, otherBbox.x),
-                    y1 = Math.max(this.y, otherBbox.y),
-                    x2 = Math.min(this.x + this.width, otherBbox.x +
-                        otherBbox.width),
-                    y2 = Math.min(this.y + this.height, otherBbox.y +
-                        otherBbox.height),
+            this.intersection = function(bbox) {
+                var x1 = Math.max(this.x, bbox.x),
+                    y1 = Math.max(this.y, bbox.y),
+                    x2 = Math.min(this.x + this.width, bbox.x +
+                        bbox.width),
+                    y2 = Math.min(this.y + this.height, bbox.y +
+                        bbox.height),
                     intWidth = x2 - x1,
                     intHeight = y2 - y1;
                 if (intWidth < 0 || intHeight < 0) {

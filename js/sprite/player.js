@@ -38,10 +38,12 @@ define([
              @param {InputHandler} InputHandler instance
              @param {Engine} physicsEngine Engine instance
              @param {CanvasDrawer} CanvasDrawer instance
+             @param {Function} onWin Function to perform on winning
+             @param {Function} onDeath Function to perform on death
          */
 
         Player: function(row, column, maze, inputHandler, physicsEngine,
-            drawer) {
+            drawer, onWin, onDeath) {
             var _this = this;
 
             /////////////////////////////////////
@@ -93,6 +95,37 @@ define([
                     _this.move(ev.keyCode);
                 });
             }
+
+            ///////////////////////////
+            // Public methods/fields //
+            ///////////////////////////
+
+            /**
+                Check whether a given array of candidate Sprites contains a
+                Sprite that collides with this one. This method is called by
+                the physics engine. If a collision occurs with an enemy, the
+                player dies.
+
+                @method checkCollision
+                @param  {Array} candidates An arrau of Sprites that have
+                bounding boxes that intersect with this Sprite's bounding box.
+                @return {void}
+             */
+            this.checkCollision = function(candidates) {
+                var
+                prizes = candidates.filter(function(candidate) {
+                    return false;
+                }),
+                    enemies = candidates.filter(function(candidate) {
+                        return candidate.isFrozen !== undefined;
+                    });
+
+                if (prizes.length > 0) {
+                    onWin();
+                } else if (enemies.length > 0) {
+                    onDeath();
+                }
+            };
 
             // Call init to perform setup
             init();
