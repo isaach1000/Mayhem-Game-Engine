@@ -26,18 +26,25 @@ define([
         /**
             @class Sprite
             @constructor
-            @param  {Array} shapes Array of shapes for sprite
-            @param  {CanvasDrawer} drawer Drawer to draw shapes
+            @param {Array} shapes Array of shapes for sprite
+            @param {CanvasDrawer} drawer Drawer to draw shapes
+            @param {Object} drawingSettings Hash of drawing settings
          */
-        Sprite: function(shapes, drawer) {
+        Sprite: function(shapes, drawer, drawingSettings) {
+            var _this = this;
+
             /////////////////////////////////////
             // Private instance methods/fields //
             /////////////////////////////////////
 
-            var _this = this,
+            var
+            x,
+                y,
                 boundingBox,
                 transformation = new MathExtensions.Transformation();
+
             shapes = shapes || [];
+            drawingSettings = drawingSettings || {};
 
             ////////////////////////////////////
             // Public instance methods/fields //
@@ -45,10 +52,10 @@ define([
 
             Object.defineProperties(this, {
                 /**
-                   Shapes of Sprite instance
+                    Shapes of Sprite instance
 
-                   @property shapes
-                   @type {Array}
+                    @property shapes
+                    @type {Array}
                  */
                 shapes: {
                     get: function() {
@@ -58,11 +65,52 @@ define([
                         shapes = newShapes;
                     }
                 },
-                /**
-                   BoundingBox of Sprite instance
 
-                   @property boundingBox
-                   @type {BoundingBox}
+                /**
+                    x coordinate of Sprite instance
+
+                    @property x
+                    @type {integer}
+                 */
+                x: {
+                    get: function() {
+                        return x;
+                    },
+                    set: function(newX) {
+                        if (x !== newX) {
+                            x = Math.round(newX);
+                            _this.transformation.tx = x;
+                            _this.boundingBox.x = x -
+                                _this.boundingBox.width / 2;
+                        }
+                    }
+                },
+
+                /**
+                    y coordinate of Sprite instance
+
+                    @property y
+                    @type {integer}
+                 */
+                y: {
+                    get: function() {
+                        return y;
+                    },
+                    set: function(newY) {
+                        if (y !== newY) {
+                            y = Math.round(newY);
+                            _this.transformation.ty = y;
+                            _this.boundingBox.y = y -
+                                _this.boundingBox.height / 2;
+                        }
+                    }
+                },
+
+                /**
+                    BoundingBox of Sprite instance
+
+                    @property boundingBox
+                    @type {BoundingBox}
                  */
                 boundingBox: {
                     get: function() {
@@ -73,6 +121,22 @@ define([
                     },
                     set: function(newBbox) {
                         boundingBox = newBbox;
+                    }
+                },
+
+                /**
+                    Drawing settings of Sprite instance
+
+                    @property drawingSettings
+                    @type {Object}
+                 */
+                drawingSettings: {
+                    get: function() {
+                        return drawingSettings;
+                    },
+                    set: function(newSettings) {
+                        drawingSettings = newSettings;
+                        _this.transformation.angle = drawingSettings.angle;
                     }
                 },
 
@@ -145,6 +209,7 @@ define([
                     shape.draw();
                 });
                 drawer.restore();
+                this.drawBoundingBox();
             };
 
             /**
@@ -156,9 +221,12 @@ define([
             this.drawBoundingBox = function() {
                 var x = _this.boundingBox.x,
                     y = _this.boundingBox.y,
-                    w = _this.boundingBox.w,
-                    h = _this.boundingBox.h,
+                    w = _this.boundingBox.width,
+                    h = _this.boundingBox.height,
                     lineWidth = _this.drawingSettings.lineWidth || 0;
+                drawer.contextSettings = {
+                    strokeStyle: 'red'
+                };
                 drawer.beginPath();
                 drawer.strokeRect(x + lineWidth, y + lineWidth, w - 2 *
                     lineWidth, h - 2 * lineWidth);
@@ -173,20 +241,23 @@ define([
             this.updateBoundingBox = function() {
                 var minX, minY, maxX, maxY;
                 this.forEachShape(function(shape) {
-                    var shapeBox = shape.boundingBox;
-                    if (minX === undefined || minX > shapeBox.x) {
-                        minX = shapeBox.x;
+                    var
+                    sBoxX = shape.boundingBox.x,
+                        sBoxY = shape.boundingBox.y;
+
+                    if (minX === undefined || minX > sBoxX) {
+                        minX = sBoxX;
                     }
-                    if (minY === undefined || minY > shapeBox.y) {
-                        minY = shapeBox.y;
+                    if (minY === undefined || minY > sBoxY) {
+                        minY = sBoxY;
                     }
-                    if (maxX === undefined || maxX < shapeBox.x +
-                        shapeBox.width) {
-                        maxX = shapeBox.x + shapeBox.width;
+                    if (maxX === undefined || maxX < sBoxX +
+                        shape.boundingBox.width) {
+                        maxX = sBoxX + shape.boundingBox.width;
                     }
-                    if (maxY === undefined || maxY < shapeBox.y +
-                        shapeBox.height) {
-                        maxY = shapeBox.y + shapeBox.height;
+                    if (maxY === undefined || maxY < sBoxY +
+                        shape.boundingBox.height) {
+                        maxY = sBoxY + shape.boundingBox.height;
                     }
                 });
                 this.boundingBox = new BoundingBox.BoundingBox(minX, minY,

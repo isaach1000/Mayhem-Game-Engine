@@ -18,8 +18,7 @@ define([
     var
     MOVE_DELAY = 1000,
         FILL_STYLE = '#7CF2EC',
-        RADIUS = 20,
-        MARGIN = 1;
+        RADIUS = 20;
 
     /**
         @module sprite/enemy

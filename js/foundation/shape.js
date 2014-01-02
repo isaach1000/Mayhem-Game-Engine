@@ -88,10 +88,10 @@ define(['foundation/canvasDrawer', 'util/boundingBox', 'util/mathExtensions'],
 
                @class Shape
                @constructor
-               @param {float} x                     x coordinate of top-left
-               @param {float} y                     y coordinate of top-left
-               @param {float} width                 Width of shape
-               @param {float} height                Height of shape
+               @param {number} x                     x coordinate of top-left
+               @param {number} y                     y coordinate of top-left
+               @param {number} width                 Width of shape
+               @param {number} height                Height of shape
                @param {CanvasDrawer} drawer         CanvasDrawer to draw image
                to canvas
                @param {Object} drawingSettings      Settings for the CanvasDrawer
@@ -119,10 +119,10 @@ define(['foundation/canvasDrawer', 'util/boundingBox', 'util/mathExtensions'],
 
                 Object.defineProperties(this, {
                     /**
-                       x coordinate of Shape instance
+                        x coordinate of Shape instance
 
-                       @property x
-                       @type {integer}
+                        @property x
+                        @type {integer}
                      */
                     x: {
                         get: function() {
@@ -138,10 +138,10 @@ define(['foundation/canvasDrawer', 'util/boundingBox', 'util/mathExtensions'],
                     },
 
                     /**
-                       y coordinate of Shape instance
+                        y coordinate of Shape instance
 
-                       @property y
-                       @type {integer}
+                        @property y
+                        @type {integer}
                      */
                     y: {
                         get: function() {
@@ -157,10 +157,10 @@ define(['foundation/canvasDrawer', 'util/boundingBox', 'util/mathExtensions'],
                     },
 
                     /**
-                       Width of Shape instance
+                        Width of Shape instance
 
-                       @property width
-                       @type {integer}
+                        @property width
+                        @type {integer}
                      */
                     width: {
                         get: function() {
@@ -176,10 +176,10 @@ define(['foundation/canvasDrawer', 'util/boundingBox', 'util/mathExtensions'],
                     },
 
                     /**
-                       Height of Shape instance
+                        Height of Shape instance
 
-                       @property height
-                       @type {integer}
+                        @property height
+                        @type {integer}
                      */
                     height: {
                         get: function() {
@@ -198,7 +198,7 @@ define(['foundation/canvasDrawer', 'util/boundingBox', 'util/mathExtensions'],
                         Angle of rotation of shape
 
                         @property angle
-                        @type number
+                        @type {number}
                      */
                     angle: {
                         get: function() {
@@ -226,10 +226,10 @@ define(['foundation/canvasDrawer', 'util/boundingBox', 'util/mathExtensions'],
                     },
 
                     /**
-                       Drawing settings of Shape instance
+                        Drawing settings of Shape instance
 
-                       @property drawingSettings
-                       @type {Object}
+                        @property drawingSettings
+                        @type {Object}
                      */
                     drawingSettings: {
                         get: function() {
@@ -277,9 +277,8 @@ define(['foundation/canvasDrawer', 'util/boundingBox', 'util/mathExtensions'],
                  */
                 this.draw = function() {
                     drawer.save().transform(this.transformation);
-                    this.drawShape(drawer);
+                    this._drawShape(drawer);
                     drawer.restore();
-                    //this.drawBoundingBox(drawer);
                 };
 
                 /**
@@ -294,6 +293,7 @@ define(['foundation/canvasDrawer', 'util/boundingBox', 'util/mathExtensions'],
                         this.width - lineWidth, -this.height - lineWidth, (this
                             .width + lineWidth) * 2, (this.height + lineWidth) *
                         2).restore();
+                    this.drawBoundingBox();
                 };
 
                 /**
@@ -302,7 +302,7 @@ define(['foundation/canvasDrawer', 'util/boundingBox', 'util/mathExtensions'],
                     @method drawBoundingBox
                     @return {void}
                  */
-                this.drawBoundingBox = function(drawer) {
+                this.drawBoundingBox = function() {
                     var
                     x = _this.boundingBox.x,
                         y = _this.boundingBox.y,
@@ -310,6 +310,9 @@ define(['foundation/canvasDrawer', 'util/boundingBox', 'util/mathExtensions'],
                         h = _this.boundingBox.height,
                         lineWidth = _this.drawingSettings.lineWidth || 1;
 
+                    drawer.contextSettings = {
+                        strokeStyle: 'yellow'
+                    };
                     drawer.strokeRect(x, y, w - lineWidth, h - lineWidth);
                 };
                 /**
@@ -340,9 +343,11 @@ define(['foundation/canvasDrawer', 'util/boundingBox', 'util/mathExtensions'],
             /**
                @class Circle
                @constructor
-               @param   {float} x x coordinate of center of circle
-               @param   {float} y y coordinate of center of circle
-               @param   {float} radius Radius of the circle
+               @param   {number} x x coordinate of <strong>center</strong> of
+               circle
+               @param   {number} y y coordinate of <strong>center</strong> of
+               circle
+               @param   {number} radius Radius of the circle
                @param   {CanvasDrawer} drawer CanvasDrawer to draw circle
                @param   {Object} drawingSettings Dictionary of drawing options
              */
@@ -357,9 +362,10 @@ define(['foundation/canvasDrawer', 'util/boundingBox', 'util/mathExtensions'],
                 var lineWidth = drawingSettings.lineWidth || 0;
 
                 // Extend Shape constructor
-                module.Shape.call(_this, x - radius, y - radius,
+                module.Shape.call(_this, -radius, -radius,
                     radius * 2, radius * 2, drawer,
                     drawingSettings);
+
                 this.transformation.tx = x;
                 this.transformation.ty = y;
 
@@ -372,7 +378,7 @@ define(['foundation/canvasDrawer', 'util/boundingBox', 'util/mathExtensions'],
                         Radius of circle
 
                         @property radius
-                        @type {float)
+                        @type {number)
                     */
                     radius: {
                         get: function() {
@@ -389,9 +395,11 @@ define(['foundation/canvasDrawer', 'util/boundingBox', 'util/mathExtensions'],
                 /**
                     Draw circle onto canvas.
 
+                    @method _drawShape
+                    @protected
                     @return {void}
                 */
-                this.drawShape = function(canvasDrawer) {
+                this._drawShape = function(canvasDrawer) {
                     canvasDrawer.beginPath();
                     canvasDrawer.contextSettings = _this.drawingSettings;
                     var lineWidth = this.drawingSettings.lineWidth || 1;
@@ -414,6 +422,13 @@ define(['foundation/canvasDrawer', 'util/boundingBox', 'util/mathExtensions'],
                     return dx * dx + dy * dy <= this.radius * this.radius;
                 };
 
+                /**
+                    Update boundingBox
+
+                    @method _updateBoundingBox
+                    @protected
+                    @return {void}
+                 */
                 this._updateBoundingBox = function() {
                     this.boundingBox = new BoundingBox.BoundingBox(this.x,
                         this.y, this.radius * 2, this.radius * 2);
@@ -430,20 +445,22 @@ define(['foundation/canvasDrawer', 'util/boundingBox', 'util/mathExtensions'],
             /**
                 @class Rectangle
                 @constructor
-                @param   {float} x The x coordinate of the rectangle's top-left
-                @param   {float} y The y coordinate of the rectangle's top-left
-                @param   {float} width The width of the rectangle
-                @param   {float} height The height of the rectangle
+                @param   {number} x The x coordinate of the rectangle's top-left
+                @param   {number} y The y coordinate of the rectangle's top-left
+                @param   {number} width The width of the rectangle
+                @param   {number} height The height of the rectangle
                 @param   {CanvasDrawer} drawer A CanvasDrawer to draw the
                 rectangle onto the canvas
                 @param   {Object} drawingSettings A dictionary of drawing options
              */
             Rectangle: function(x, y, width, height, drawer, drawingSettings) {
                 ////////////////////////////////////
-                // Public instance methods/fields //
+                // Private instance methods/fields //
                 ////////////////////////////////////
+
                 var w2 = width / 2,
                     h2 = height / 2;
+
                 // Extend Polygon constructor
                 module.Polygon.call(this, {
                     x: x + w2,
@@ -551,11 +568,13 @@ define(['foundation/canvasDrawer', 'util/boundingBox', 'util/mathExtensions'],
                 });
 
                 /**
-                   Draw the rectangle onto the canvas using the CanvasDrawer.
+                    Draw the rectangle onto the canvas using the CanvasDrawer.
 
-                   @return {void}
+                    @method _drawShape
+                    @protected
+                    @return {void}
                  */
-                this.drawShape = function(canvasDrawer) {
+                this._drawShape = function(canvasDrawer) {
                     canvasDrawer.beginPath().contextSettings = this.drawingSettings;
                     var pts = this.points,
                         numPoints = pts.length,

@@ -76,42 +76,6 @@ define([
 
             Object.defineProperties(this, {
                 /**
-                    x coordinate of AbstractPlayer
-
-                    @property x
-                    @type {number}
-                 */
-                x: {
-                    get: function() {
-                        return center.x;
-                    },
-                    set: function(newX) {
-                        if (center.x !== newX) {
-                            center.x = newX;
-                            _this.transformation.tx = center.x;
-                        }
-                    }
-                },
-
-                /**
-                    y coordinate of AbstractPlayer
-
-                    @property y
-                    @type {number}
-                 */
-                y: {
-                    get: function() {
-                        return center.y;
-                    },
-                    set: function(newY) {
-                        if (center.y !== newY) {
-                            center.y = newY;
-                            _this.transformation.ty = center.y;
-                        }
-                    }
-                },
-
-                /**
                     Whether or not the AbstractPlayer instance currently being
                     animated
 

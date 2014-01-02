@@ -47,19 +47,20 @@ define([
             var mousePoint;
 
             function hitTest() {
+                var pos = $('canvas').first().position();
                 // Update mousePoint on every mousemove
                 _this.inputHandler.bind('mousemove', function(ev) {
                     mousePoint = {
-                        x: ev.pageX,
-                        y: ev.pageY
+                        x: ev.pageX - pos.left,
+                        y: ev.pageY - pos.top
                     };
                 });
 
                 // Search QuadTree on mousemove with COLLISION_DELAY ms delay
                 _this.inputHandler.bind('mousemove', function() {
-                    _this.physicsEngine.collisionQuery(
-                        mousePoint).forEach(
-                        function(shape) {
+                    _this.physicsEngine.collisionQuery(mousePoint)
+                        .forEach(function(shape) {
+                            console.debug(shape);
                             if (shape.collisionTest(mousePoint)) {
                                 shape.drawingSettings.fillStyle =
                                     'yellow';
@@ -84,7 +85,7 @@ define([
                 maze.draw();
                 enemy.draw();
                 player.draw();
-                this.physicsEngine.objects = [];
+                this.physicsEngine.objects = [enemy, player];
                 hitTest();
 
                 enemy.addMoves([Direction.UP, Direction.DOWN, Direction.DOWN]);
