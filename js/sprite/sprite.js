@@ -174,7 +174,7 @@ var thisModule = {
         /**
             Clear the Sprite instance and redraw it
 
-            @method clear
+            @method update
             @return {void}
          */
         this.update = function() {

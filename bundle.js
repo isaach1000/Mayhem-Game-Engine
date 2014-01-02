@@ -1485,6 +1485,7 @@ var thisModule = {
                     function() {
                         player.isFrozen = true;
                         enemy.isFrozen = true;
+                        prize.hide(); // TODO: fix
                         win(player);
                     }, function() {
                         player.isFrozen = true;
@@ -6502,7 +6503,13 @@ module.exports = {
             location = maze.get(row, column),
             shapes = [rect];
 
+        /**
+            Initialization function
 
+            @method init
+            @private
+            @return {void}
+         */
         function init() {
             rect.rotate(Math.PI / 4);
             Sprite.Sprite.call(_this, shapes, drawer);
@@ -6514,6 +6521,15 @@ module.exports = {
         // Public instance methods/fields //
         ////////////////////////////////////
 
+        /**
+            Hide the Prize instance
+
+            @method hide
+            @return {void}
+         */
+        this.hide = function() {
+            this.clear();
+        };
 
         // Call init to perform setup
         init();
@@ -6698,7 +6714,7 @@ var thisModule = {
         /**
             Clear the Sprite instance and redraw it
 
-            @method clear
+            @method update
             @return {void}
          */
         this.update = function() {

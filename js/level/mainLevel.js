@@ -126,6 +126,7 @@ var thisModule = {
                     function() {
                         player.isFrozen = true;
                         enemy.isFrozen = true;
+                        prize.hide(); // TODO: fix
                         win(player);
                     }, function() {
                         player.isFrozen = true;
