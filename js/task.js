@@ -20,8 +20,7 @@ addEventListener('message', function(mainEvent) {
         var g = new Graph.Graph();
         console.debug(g);
 
-        var source = g.addNode(0);
-        g.addNode(1);
+        var source = g.addNode(1);
         g.addNode(2);
         g.addNode(3);
         g.addNode(4);
@@ -45,14 +44,20 @@ addEventListener('message', function(mainEvent) {
         g.addEdge(g.getNode(9), g.getNode(10));
         g.addEdge(g.getNode(10), dest);
 
-        //g.dijsktra(source);
+        g.dijkstra(source, dest);
 
+        var currentNode = dest,
+            path = [];
 
-        var neighs = source.neighbors;
-        neighs.forEach(function(
-            neighbor) {
-            console.debug(neighbor.data);
-        });
+        while (currentNode.previous !== undefined) {
+            currentNode = currentNode.previous;
+            path.push(currentNode.data);
+        }
+
+        var pathLen = path.length;
+        for (var i = 0; i < pathLen; i++) {
+            console.debug(path[i]);
+        }
 
 
         /*var
