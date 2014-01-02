@@ -1,7 +1,7 @@
-define(['foundation/shape'], function(Shape) {
-    'use strict';
+var Shape = require('../foundation/shape');
 
-    describe('Shape', function() {
-        // TODO
-    });
+
+
+describe('Shape', function() {
+    // TODO
 });

@@ -1,3 +1,7 @@
+var $ = require('../lib/jquery'),
+    _ = require('underscore'),
+    jasmine = require('../jasmine-html');
+
 require.config({
     baseUrl: 'js',
     paths: {
@@ -19,30 +23,28 @@ require.config({
         }
     }
 });
-require(['jquery', 'underscore', 'jasmine-html'], function($, _, jasmine) {
-    'use strict';
-    var jasmineEnv = jasmine.getEnv();
-    jasmineEnv.updateInterval = 1000;
-    var htmlReporter = new jasmine.HtmlReporter();
-    jasmineEnv.addReporter(htmlReporter);
-    jasmineEnv.specFilter = function(spec) {
-        return htmlReporter.specFilter(spec);
-    };
-    //////////////////////////////////
-    // Specify the modules to test. //
-    //////////////////////////////////
-    var specs = ['hash', 'graph', 'shape', 'minHeap',
-        'mathExtensions'];
-    specs = _.map(specs, function(moduleName) {
-        return 'js/spec/' + moduleName + '.spec.js';
-    });
-    $(document).ready(function() {
-        require(specs, function(spec) {
-            jasmineEnv.execute();
-        });
-    });
 
-    function execJasmine() {
-        jasmineEnv.execute();
-    }
+var jasmineEnv = jasmine.getEnv();
+jasmineEnv.updateInterval = 1000;
+var htmlReporter = new jasmine.HtmlReporter();
+jasmineEnv.addReporter(htmlReporter);
+jasmineEnv.specFilter = function(spec) {
+    return htmlReporter.specFilter(spec);
+};
+//////////////////////////////////
+// Specify the thisModules to test. //
+//////////////////////////////////
+var specs = ['hash', 'graph', 'shape', 'minHeap',
+    'mathExtensions'];
+specs = _.map(specs, function(thisModuleName) {
+    return 'js/spec/' + thisModuleName + '.spec.js';
 });
+$(document).ready(function() {
+    require(specs, function(spec) {
+        jasmineEnv.execute();
+    });
+});
+
+function execJasmine() {
+    jasmineEnv.execute();
+}

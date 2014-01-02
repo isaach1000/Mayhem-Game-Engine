@@ -50,21 +50,17 @@ module.exports = function(grunt) {
                 }
             }
         },
-        requirejs: {
-            compile: {
-                options: {
-                    baseUrl: 'js',
-                    name: 'main',
-                    out: 'build/optimized.js',
-                    paths: {
-                        jquery: 'lib/jquery',
-                        underscore: 'lib/underscore'
-                    },
-                    shim: {
-                        underscore: {
-                            exports: '_'
-                        }
-                    }
+        browserify: {
+            main: {
+                files: {
+                    'bundle.js': ['js/main.js']
+                }
+            }
+        },
+        uglify: {
+            main: {
+                files: {
+                    'build/bundle.js': ['bundle.js']
                 }
             }
         },
@@ -81,10 +77,10 @@ module.exports = function(grunt) {
     grunt.loadNpmTasks('grunt-contrib-watch');
     grunt.loadNpmTasks('grunt-contrib-jshint');
     grunt.loadNpmTasks('grunt-contrib-yuidoc');
-    grunt.loadNpmTasks('grunt-contrib-requirejs');
     grunt.loadNpmTasks('grunt-contrib-cssmin');
+    grunt.loadNpmTasks('grunt-browserify');
     grunt.loadNpmTasks('grunt-jsbeautifier');
     grunt.registerTask('default', ['jsbeautifier:*', 'jshint:*', 'yuidoc:*',
-        'cssmin:*']);
-    grunt.registerTask('build', ['default', 'requirejs:compile']);
+        'cssmin:*', 'browserify:main']);
+    grunt.registerTask('build', ['default', 'uglify:main']);
 };

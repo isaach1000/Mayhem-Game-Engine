@@ -1,21 +1,7 @@
-require.config({
-    baseUrl: 'js',
-    paths: {
-        jquery: 'lib/jquery',
-        underscore: 'lib/underscore'
-    },
-    shim: {
-        underscore: {
-            exports: '_'
-        }
-    }
-});
+var $ = require('./lib/jquery'),
+    MainLevel = require('./level/mainLevel');
 
-require(['jquery', 'level/mainLevel'], function($, MainLevel) {
-    'use strict';
-
-    $(function() {
-        var mainLevel = new MainLevel.MainLevel();
-        mainLevel.start();
-    });
+$(function() {
+    var mainLevel = new MainLevel.MainLevel();
+    mainLevel.start();
 });
