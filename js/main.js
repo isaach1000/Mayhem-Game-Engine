@@ -2,6 +2,9 @@ var $ = require('./lib/jquery'),
     MainLevel = require('./level/mainLevel');
 
 $(function() {
-    var mainLevel = new MainLevel.MainLevel();
+    var
+    worker = new Worker('./task.js'),
+        mainLevel = new MainLevel.MainLevel(worker);
+
     mainLevel.start();
 });

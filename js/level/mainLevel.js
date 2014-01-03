@@ -1,4 +1,5 @@
-var LevelBase = require('./levelBase'),
+var
+LevelBase = require('./levelBase'),
     Shape = require('../foundation/shape'),
     Animation = require('../foundation/animation'),
     Maze = require('../sprite/maze'),
@@ -32,9 +33,14 @@ module.exports = {
     /**
         @class MainLevel
         @constructor
+        @param {Worker} [worker=undefined] A web worker to improve efficient
+        code execution
     */
-    MainLevel: function() {
+    MainLevel: function(worker) {
         var _this = this;
+
+        // TODO: remove
+        worker.postMessage();
 
         // Extend LevelBase constructor
         LevelBase.LevelBase.call(this);
@@ -68,6 +74,7 @@ module.exports = {
         }
 
         function writeBanner(text, textColor) {
+            // If #banner exists, remove
             $('#banner').detach();
 
             var

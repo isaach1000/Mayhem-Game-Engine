@@ -11,8 +11,12 @@ module.exports = function(grunt) {
             },
             main: {
                 files: ['js/**/*.js', '!js/lib/**'],
-                tasks: ['jsbeautifier:main', 'jshint:main',
-                    'browserify:main'],
+                tasks: [
+                    'jsbeautifier:main',
+                    'jshint:main',
+                    'browserify:*',
+                    'concat:*'
+                ],
                 options: {
                     livereload: true
                 }
@@ -24,7 +28,8 @@ module.exports = function(grunt) {
         },
         jsbeautifier: {
             main: {
-                src: ['js/**/*.js', 'Gruntfile.js', 'package.json'],
+                src: ['js/**/*.js', 'Gruntfile.js', 'package.json',
+                    '!js/intro.js', '!js/outro.js'],
                 options: {
                     js: {
                         indentSize: 4,
@@ -35,7 +40,8 @@ module.exports = function(grunt) {
             }
         },
         jshint: {
-            main: ['Gruntfile.js', 'js/**/*.js', '!js/lib/**']
+            main: ['Gruntfile.js', 'js/**/*.js', '!js/lib/**',
+                '!js/intro.js', '!js/outro.js']
         },
         yuidoc: {
             main: {
@@ -51,17 +57,37 @@ module.exports = function(grunt) {
                 }
             }
         },
+        concat: {
+            main: {
+                src: [
+                  'js/intro.js',
+                  'tmp/bundle.js',
+                  'js/outro.js'
+                ],
+                dest: 'bundle.js'
+            },
+            worker: {
+                src: [
+                  'js/intro.js',
+                  'tmp/task.js',
+                  'js/outro.js'
+                ],
+                dest: 'task.js'
+            }
+        },
         browserify: {
             main: {
                 files: {
-                    'bundle.js': ['js/main.js']
+                    'tmp/bundle.js': ['js/main.js'],
+                    'tmp/task.js': ['js/task.js']
                 }
             }
         },
         uglify: {
             main: {
                 files: {
-                    'build/bundle.js': ['bundle.js']
+                    'build/bundle.js': ['bundle.js'],
+                    'build/task.js': ['task.js']
                 }
             }
         },
@@ -81,7 +107,13 @@ module.exports = function(grunt) {
     grunt.loadNpmTasks('grunt-contrib-cssmin');
     grunt.loadNpmTasks('grunt-browserify');
     grunt.loadNpmTasks('grunt-jsbeautifier');
-    grunt.registerTask('default', ['jsbeautifier:*', 'jshint:*', 'yuidoc:*',
-        'cssmin:*', 'browserify:main']);
+    grunt.registerTask('default', [
+        'jsbeautifier:*',
+        'jshint:*',
+        'yuidoc:*',
+        'cssmin:*',
+        'browserify:*',
+        'concat:*'
+    ]);
     grunt.registerTask('build', ['default', 'uglify:main']);
 };
