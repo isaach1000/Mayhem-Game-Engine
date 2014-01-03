@@ -138,7 +138,7 @@ module.exports = {
             @param {GraphNode} tail Tail node of edge
             @param {GraphNode} head Head node of edge
             @param {number} [weight=0] Weight of edge
-            @param {Object} [data=undefined] Data object for node
+            @param {Object} [data=undefined] Data object for edge
          */
         function GraphEdge(tail, head, weight, data) {
             /**

@@ -60,12 +60,27 @@ module.exports = {
             _this.inputHandler.bind('mousemove', function() {
                 _this.physicsEngine.collisionQuery(mousePoint)
                     .forEach(function(shape) {
-                        console.debug('box');
                         if (shape.collisionTest(mousePoint)) {
                             console.debug('shape');
                         }
                     });
             }, COLLISION_DELAY);
+        }
+
+        function writeBanner(text, textColor) {
+            $('#banner').detach();
+
+            var
+            canvasDrawer = _this.createContext('banner'),
+                x = _this.WIDTH / 2,
+                y = _this.HEIGHT / 2;
+
+            canvasDrawer.contextSettings = {
+                font: '40pt Arial',
+                textAlign: 'center',
+                fillStyle: textColor
+            };
+            canvasDrawer.fillText(text, x, y);
         }
 
         /**
@@ -84,6 +99,8 @@ module.exports = {
                     player.transformation.sx += timeDiff * rate;
                     player.transformation.sy += timeDiff * rate;
                     return time > 5000;
+                }, function() {
+                    writeBanner('Winner!', '#00FF7B');
                 });
             winAnim.start();
         }
@@ -108,6 +125,8 @@ module.exports = {
                     player.transformation.sy = (shrinkTime - time) /
                         shrinkTime;
                     return time > 5000;
+                }, function() {
+                    writeBanner('Game Over', 'red');
                 });
             dieAnim.start();
         }

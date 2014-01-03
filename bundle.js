@@ -250,8 +250,6 @@ module.exports = {
 var _ = require('underscore'),
     MathExtensions = require('../util/mathExtensions');
 
-
-
 //////////////////////////////////
 // Private class methods/fields //
 //////////////////////////////////
@@ -314,7 +312,7 @@ module.exports = {
 
             /**
                Properties of the context. Valid settings include:
-               lineWidth, fillStyle, and strokeStyle.
+               lineWidth, fillStyle, strokeStyle, font.
 
                @property contextSettings
                @type {Object}
@@ -324,8 +322,12 @@ module.exports = {
                     return ctxSettings;
                 },
                 set: function(settings) {
-                    var VALID_SETTINGS = ['lineWidth', 'fillStyle',
-                        'strokeStyle'
+                    var VALID_SETTINGS = [
+                        'lineWidth',
+                        'fillStyle',
+                        'strokeStyle',
+                        'font',
+                        'textAlign'
                     ],
                         success = true,
                         property;
@@ -567,6 +569,22 @@ module.exports = {
          */
         this.strokeRect = function(x, y, w, h) {
             ctx.strokeRect(x, y, w, h);
+            return this;
+        };
+
+
+        /**
+            Wrapper for <code>context.fillText</code>
+
+            @method fillText
+            @param  {string} text Text to draw
+            @param  {float} x x coordinate
+            @param  {float} y y coordinate
+            @param  {float} [maxWidth] Maximum width to draw
+            @chainable
+         */
+        this.fillText = function(text, x, y, maxWidth) {
+            ctx.fillText.apply(ctx, arguments);
             return this;
         };
 
@@ -1410,12 +1428,27 @@ module.exports = {
             _this.inputHandler.bind('mousemove', function() {
                 _this.physicsEngine.collisionQuery(mousePoint)
                     .forEach(function(shape) {
-                        console.debug('box');
                         if (shape.collisionTest(mousePoint)) {
                             console.debug('shape');
                         }
                     });
             }, COLLISION_DELAY);
+        }
+
+        function writeBanner(text, textColor) {
+            $('#banner').detach();
+
+            var
+            canvasDrawer = _this.createContext('banner'),
+                x = _this.WIDTH / 2,
+                y = _this.HEIGHT / 2;
+
+            canvasDrawer.contextSettings = {
+                font: '40pt Arial',
+                textAlign: 'center',
+                fillStyle: textColor
+            };
+            canvasDrawer.fillText(text, x, y);
         }
 
         /**
@@ -1434,6 +1467,8 @@ module.exports = {
                     player.transformation.sx += timeDiff * rate;
                     player.transformation.sy += timeDiff * rate;
                     return time > 5000;
+                }, function() {
+                    writeBanner('Winner!', '#00FF7B');
                 });
             winAnim.start();
         }
@@ -1458,6 +1493,8 @@ module.exports = {
                     player.transformation.sy = (shrinkTime - time) /
                         shrinkTime;
                     return time > 5000;
+                }, function() {
+                    writeBanner('Game Over', 'red');
                 });
             dieAnim.start();
         }
@@ -7189,7 +7226,7 @@ module.exports = {
             @param {GraphNode} tail Tail node of edge
             @param {GraphNode} head Head node of edge
             @param {number} [weight=0] Weight of edge
-            @param {Object} [data=undefined] Data object for node
+            @param {Object} [data=undefined] Data object for edge
          */
         function GraphEdge(tail, head, weight, data) {
             /**

@@ -1,8 +1,6 @@
 var _ = require('underscore'),
     MathExtensions = require('../util/mathExtensions');
 
-
-
 //////////////////////////////////
 // Private class methods/fields //
 //////////////////////////////////
@@ -65,7 +63,7 @@ module.exports = {
 
             /**
                Properties of the context. Valid settings include:
-               lineWidth, fillStyle, and strokeStyle.
+               lineWidth, fillStyle, strokeStyle, font.
 
                @property contextSettings
                @type {Object}
@@ -75,8 +73,12 @@ module.exports = {
                     return ctxSettings;
                 },
                 set: function(settings) {
-                    var VALID_SETTINGS = ['lineWidth', 'fillStyle',
-                        'strokeStyle'
+                    var VALID_SETTINGS = [
+                        'lineWidth',
+                        'fillStyle',
+                        'strokeStyle',
+                        'font',
+                        'textAlign'
                     ],
                         success = true,
                         property;
@@ -318,6 +320,22 @@ module.exports = {
          */
         this.strokeRect = function(x, y, w, h) {
             ctx.strokeRect(x, y, w, h);
+            return this;
+        };
+
+
+        /**
+            Wrapper for <code>context.fillText</code>
+
+            @method fillText
+            @param  {string} text Text to draw
+            @param  {float} x x coordinate
+            @param  {float} y y coordinate
+            @param  {float} [maxWidth] Maximum width to draw
+            @chainable
+         */
+        this.fillText = function(text, x, y, maxWidth) {
+            ctx.fillText.apply(ctx, arguments);
             return this;
         };
 
