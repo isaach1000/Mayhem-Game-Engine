@@ -12,67 +12,83 @@ require.config({
 });
 
 addEventListener('message', function(mainEvent) {
-    require(['util/graph'], function(Graph) {
+    require(['util/graph', 'enum/direction'], function(Graph, Direction) {
         'use strict';
 
+        // Build a graph object from a JSON object passed from the worker
+        function constructGraph(dictionary) {
+            var
+            graph = new module.Graph(),
+                key;
+            // Add the nodes to the graph
+            for (key in dictionary) {
+                if (dictionary.hasOwnProperty(key)) {
+                    key = parseInt(key);
+                    graph.addNode(key);
+                }
+            }
+            // Add the edges
+            for (key in dictionary) {
+                if (dictionary.hasOwnProperty(key)) {
+                    key = parseInt(key);
 
+                    var
+                    node = graph.getNode(key),
+                        neighborArr = dictionary[key],
+                        neighborArrLen = neighborArr.length,
+                        edge,
+                        neighborKey,
+                        neighbor,
+                        direction;
 
-        var g = new Graph.Graph();
-        console.debug(g);
+                    for (var index = 0; index < neighborArrLen; index++) {
+                        neighborKey = neighborArr[i],
+                        neighbor = graph.getNode(neighborKey),
+                        direction = index + Direction.MIN;
 
-        var source = g.addNode(1);
-        g.addNode(2);
-        g.addNode(3);
-        g.addNode(4);
-        var dest = g.addNode(5);
-        g.addNode(6);
-        g.addNode(7);
-        g.addNode(8);
-        g.addNode(9);
-        g.addNode(10);
-
-
-        g.addEdge(source, g.getNode(2));
-        g.addEdge(g.getNode(2), g.getNode(3));
-        g.addEdge(g.getNode(3), g.getNode(4));
-        g.addEdge(g.getNode(4), dest);
-        g.addEdge(source, g.getNode(6));
-        g.addEdge(g.getNode(6), g.getNode(7));
-        g.addEdge(g.getNode(7), g.getNode(8));
-        g.addEdge(g.getNode(8), dest);
-        g.addEdge(source, g.getNode(9));
-        g.addEdge(g.getNode(9), g.getNode(10));
-        g.addEdge(g.getNode(10), dest);
-
-        g.dijkstra(source, dest);
-
-        var currentNode = dest,
-            path = [];
-
-        while (currentNode.previous !== undefined) {
-            currentNode = currentNode.previous;
-            path.push(currentNode.data);
+                        edge = graph.addEdge(node, neighbor);
+                        edge.data = direction;
+                    }
+                }
+            }
+            return graph;
         }
 
-        var pathLen = path.length;
-        for (var i = 0; i < pathLen; i++) {
-            console.debug(path[i]);
+        function getPath(graph, source, dest) {
+            var currentNode,
+                path = [];
+
+            graph.dijkstra(source, dest);
+
+            currentNode = dest;
+            while (currentNode.previous !== undefined) {
+                currentNode = currentNode.previous;
+                path.push(currentNode.data);
+            }
+
+            var pathLen = path.length;
+            return path.reverse():
         }
 
 
-        /*var
+        var
         obj = {
             0: [1, 2, 3],
             1: [0, 3],
             2: [0, 2],
             3: [1, 2]
         },
-            graph = Graph.construct(obj);
+            graph = Graph.construct(obj),
 
-        nodes = graph.getNode(0).neighbors;
+            tail = graph.getNode(0),
+            neighs = tail.neighbors,
+            edge;
 
-        nodes.forEach(function(neighbor) {
-            console.debug(neighbor.data);
-        });*/
+        neighs.forEach(function(head) {
+            edge = graph.getEdge(tail, head);
+            console.debug(head.data);
+        });
+
+
     });
 });

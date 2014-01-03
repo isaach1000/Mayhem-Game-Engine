@@ -21,40 +21,6 @@ define([
         // Public class methods/fields //
         /////////////////////////////////
 
-        construct: function(dictionary) {
-            var
-            graph = new module.Graph(),
-                key;
-
-            // Add the nodes to the graph
-            for (key in dictionary) {
-                if (dictionary.hasOwnProperty(key)) {
-                    key = parseInt(key);
-                    graph.addNode(key);
-                }
-            }
-            // Add the edges
-            for (key in dictionary) {
-                if (dictionary.hasOwnProperty(key)) {
-                    key = parseInt(key);
-
-                    var
-                    node = graph.getNode(key),
-                        neighborArr = dictionary[key],
-                        neighborArrLen = neighborArr.length;
-
-                    for (var i = 0; i < neighborArrLen; i++) {
-                        var
-                        neighborKey = neighborArr[i],
-                            neighbor = graph.getNode(neighborKey);
-
-                        graph.addEdge(node, neighbor);
-                    }
-                }
-            }
-            return graph;
-        },
-
         /**
            @class Graph
            @constructor
