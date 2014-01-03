@@ -35,78 +35,93 @@ var
 Graph = require('./util/graph'),
     Direction = require('./enum/direction');
 
-addEventListener('message', function(mainEvent) {
-    // Build a graph object from a JSON object passed from the worker
-    function constructGraph(dictionary) {
-        var
-        graph = new Graph.Graph(),
-            key;
-        // Add the nodes to the graph
-        for (key in dictionary) {
-            if (dictionary.hasOwnProperty(key)) {
-                key = parseInt(key);
-                graph.addNode(key);
-            }
+/**
+    Build a graph object from a JSON object passed from the worker
+
+    @method constructGraph
+    @param  {Object} dictionary JSON object representing graph
+    @return {Graph} Graph representing JSON object
+ */
+function constructGraph(dictionary) {
+    var
+    graph = new Graph.Graph(),
+        key;
+    // Add the nodes to the graph
+    for (key in dictionary) {
+        if (dictionary.hasOwnProperty(key)) {
+            key = parseInt(key);
+            graph.addNode(key);
         }
-        // Add the edges
-        for (key in dictionary) {
-            if (dictionary.hasOwnProperty(key)) {
-                key = parseInt(key);
+    }
+    // Add the edges
+    for (key in dictionary) {
+        if (dictionary.hasOwnProperty(key)) {
+            key = parseInt(key);
 
-                var
-                node = graph.getNode(key),
-                    neighborArr = dictionary[key],
-                    neighborArrLen = neighborArr.length,
-                    edge,
-                    neighborKey,
-                    neighbor,
-                    direction;
+            var
+            node = graph.getNode(key),
+                neighborArr = dictionary[key],
+                neighborArrLen = neighborArr.length,
+                edge,
+                neighborKey,
+                neighbor,
+                direction;
 
-                for (var index = 0; index < neighborArrLen; index++) {
-                    neighborKey = neighborArr[index];
+            for (var index = 0; index < neighborArrLen; index++) {
+                neighborKey = neighborArr[index];
+                if (neighborKey !== undefined) {
                     neighbor = graph.getNode(neighborKey);
                     direction = index + Direction.MIN;
-
                     edge = graph.addEdge(node, neighbor);
                     edge.data = direction;
                 }
             }
         }
-        return graph;
     }
+    return graph;
+}
 
-    function getPath(graph, source, dest) {
-        var
-        currentNode,
-            path = [];
+/**
+    Get path from source node to destinaton node
 
-        graph.dijkstra(source, dest);
-
-        currentNode = dest;
-        while (currentNode.previous !== undefined) {
-            currentNode = currentNode.previous;
-            path.push(currentNode.data);
-        }
-
-        var pathLen = path.length;
-        return path.reverse();
-    }
-
+    @method getPath
+    @param  {Graph} graph Graph
+    @param  {GraphNode} source Source node to start from
+    @param  {GraphNode} dest Destination node to stop at
+    @return {Array} Array of Direction enums representing the path
+ */
+function getPath(graph, source, dest) {
     var
-    obj = {
-        0: [1, 2, 3],
-        1: [0, 3],
-        2: [0, 2],
-        3: [1, 2]
-    },
-        graph = constructGraph(obj),
-        tail = graph.getNode(0),
-        neighbors = tail.neighbors;
+    currentNode,
+        path = [];
 
-    neighbors.forEach(function(head) {
-        var edge = graph.getEdge(tail, head);
-        console.debug(head.data + ' ' + Direction.toString(edge.data));
-    });
+    graph.dijkstra(source, dest);
+
+    currentNode = dest;
+    while (currentNode.previous !== undefined) {
+        var dir = graph.getEdge(currentNode.previous, currentNode).data;
+        path.push(dir);
+        currentNode = currentNode.previous;
+    }
+
+    return path.reverse();
+}
+
+addEventListener('message', function(ev) {
+    var data = ev.data;
+
+    if (data.graph !== undefined &&
+        data.source !== undefined &&
+        data.destination !== undefined) {
+
+        var
+        graph = constructGraph(data.graph),
+            sourceNode = graph.getNode(data.source),
+            destinationNode = graph.getNode(data.destination),
+            path = getPath(graph, sourceNode, destinationNode);
+
+        self.postMessage(path);
+    }
 });
 
 },{"./enum/direction":1,"./util/graph":4}],3:[function(require,module,exports){

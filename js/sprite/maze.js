@@ -1,4 +1,5 @@
-var Sprite = require('./sprite'),
+var
+Sprite = require('./sprite'),
     Shape = require('../foundation/shape'),
     Hash = require('../util/hash'),
     Graph = require('../util/graph'),
@@ -181,7 +182,7 @@ module.exports = {
              */
             this.forEachWall = function(f) {
                 for (var i = 0; i < 4; i++) {
-                    var dir = Direction.MIN + 1;
+                    var dir = Direction.MIN + i;
                     f(_thisLocation.walls[dir], dir);
                 }
             };
@@ -202,9 +203,9 @@ module.exports = {
                 Get an impenetrable location adjacent to this location
 
                 @method getImpenetrable
-                @for Maze
                 @return {MazeLocation} Impenetrable location if exists,
                 null otherwise
+                @for Maze
              */
             this.getImpenetrable = function() {
                 for (var i = 0; i < 4; i++) {
@@ -585,6 +586,36 @@ module.exports = {
             });
 
             return graph;
+        };
+
+        /**
+            Get a JSON object representing the maze
+
+            @method toJSON
+            @return {Object} JSON object representing maze
+         */
+        this.toJSON = function() {
+            var jsonObj = {};
+
+            this.forEachLocation(function(location) {
+                var adjArr = [];
+                location.forEachWall(function(wall, dir) {
+                    if (wall.isPenetrable) {
+                        var neighborCode = Hash.hashcode(location.get(
+                            dir));
+                        adjArr[dir - Direction.MIN] = neighborCode;
+                    } else {
+                        adjArr[dir - Direction.MIN] = null;
+                    }
+                });
+                var locationCode = Hash.hashcode(location);
+                if (adjArr.length !== 4) {
+                    throw new Error('invalid length of adjacency array');
+                }
+                jsonObj[locationCode] = adjArr;
+            });
+
+            return jsonObj;
         };
 
         /**

@@ -1,4 +1,5 @@
-var Sprite = require('./sprite'),
+var
+Sprite = require('./sprite'),
     Shape = require('../foundation/shape'),
     Animation = require('../foundation/animation'),
     Direction = require('../enum/direction');
@@ -74,6 +75,21 @@ module.exports = {
         ////////////////////////////////////
 
         Object.defineProperties(this, {
+            /**
+                Location of AbstractPlayer instance in Maze
+
+                @property location
+                @type {MazeLocation}
+             */
+            location: {
+                get: function() {
+                    return location;
+                },
+                set: function(newLocation) {
+                    location = newLocation;
+                }
+            },
+
             /**
                 Whether or not the AbstractPlayer instance currently being
                 animated

@@ -39,9 +39,6 @@ module.exports = {
     MainLevel: function(worker) {
         var _this = this;
 
-        // TODO: remove
-        worker.postMessage();
-
         // Extend LevelBase constructor
         LevelBase.LevelBase.call(this);
 
@@ -144,23 +141,25 @@ module.exports = {
 
         this.start = function() {
             var
-            maze = new Maze.Maze(20, 10, this.createContext('maze')),
-                enemy = new Enemy.Enemy(8, 8, maze, this.physicsEngine,
-                    this.createContext('enemy')),
+            mazeCtx = this.createContext('maze'),
+                prizeCtx = this.createContext('prize'),
+                enemyCtx = this.createContext('enemy'),
+                playerCtx = this.createContext('player'),
+                maze = new Maze.Maze(20, 10, mazeCtx),
                 player = new Player.Player(1, 1, maze, this.inputHandler,
-                    this.physicsEngine, this.createContext('player'),
-                    function() {
+                    this.physicsEngine, playerCtx, function() {
                         player.isFrozen = true;
                         enemy.isFrozen = true;
-                        prize.hide(); // TODO: fix
+                        prize.hide();
                         win(player);
                     }, function() {
                         player.isFrozen = true;
                         enemy.isFrozen = true;
                         die(player);
                     }),
-                prize = new Prize.Prize(9, 15, maze,
-                    this.createContext('prize'));
+                enemy = new Enemy.Enemy(8, 8, maze, player, this.physicsEngine,
+                    enemyCtx, worker),
+                prize = new Prize.Prize(9, 15, maze, prizeCtx);
 
             maze.draw();
             enemy.draw();
@@ -168,8 +167,6 @@ module.exports = {
             prize.draw();
             this.physicsEngine.objects = [enemy, player, prize];
             hitTest();
-
-            enemy.addMoves([Direction.UP, Direction.DOWN, Direction.DOWN]);
             enemy.start();
         };
     }

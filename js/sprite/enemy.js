@@ -1,6 +1,8 @@
-var AbstractPlayer = require('./abstractPlayer'),
+var
+AbstractPlayer = require('./abstractPlayer'),
     Shape = require('../foundation/shape'),
-    Animation = require('../foundation/animation');
+    Animation = require('../foundation/animation'),
+    Hash = require('../util/hash');
 
 /**
     This class handles the AI and drawing of an enemy.
@@ -15,7 +17,7 @@ var AbstractPlayer = require('./abstractPlayer'),
 //////////////////////////////////
 
 var
-MOVE_DELAY = 1000,
+MOVE_DELAY = 300,
     FILL_STYLE = '#FF0000',
     RADIUS = 20;
 
@@ -33,12 +35,13 @@ module.exports = {
          @param {integer} row Row in maze
          @param {integer} column Column in maze
          @param {Maze} maze Maze instance
+         @param {Player} player Player instance
          @param {Engine} Engine instance
          @param {CanvasDrawer} CanvasDrawer instance
-         @param {string} Fill style of enemy
+         @param {Worker} [worker=undefined] Worker to calculate route to player
+         efficiently
      */
-    Enemy: function(row, column, maze, physicsEngine, drawer,
-        fillStyle) {
+    Enemy: function(row, column, maze, player, physicsEngine, drawer, worker) {
         var _this = this;
 
         /////////////////////////////////////
@@ -53,11 +56,13 @@ module.exports = {
             },
             head = new Shape.Circle(center.x, center.y,
                 RADIUS, drawer, {
-                    fillStyle: fillStyle || FILL_STYLE,
+                    fillStyle: FILL_STYLE,
                     strokeStyle: 'black'
                 }),
             shapes = [head],
-            movesQueue = [];
+            movesQueue = [],
+            mazeJson = maze.toJSON(),
+            lastPlayerLocation = player.location;
 
         /**
             Initialization method
@@ -86,6 +91,27 @@ module.exports = {
             if (!this.isAnimating && movesQueue.length > 0) {
                 this.move(movesQueue.pop());
             }
+            if (movesQueue.length === 0 ||
+                player.location !== lastPlayerLocation) {
+                lastPlayerLocation = player.location;
+                this.calculateRoute();
+            }
+        };
+
+        this.calculateRoute = function() {
+            if (worker === undefined) {
+                return; // TODO: calculate route without Worker
+            }
+            worker.addEventListener('message', function(ev) {
+                var moves = ev.data;
+                _this.clearMoves();
+                _this.addMoves(moves);
+            });
+            worker.postMessage({
+                graph: mazeJson,
+                source: Hash.hashcode(this.location),
+                destination: Hash.hashcode(player.location)
+            });
         };
 
         /**

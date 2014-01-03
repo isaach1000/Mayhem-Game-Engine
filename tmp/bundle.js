@@ -1407,9 +1407,6 @@ module.exports = {
     MainLevel: function(worker) {
         var _this = this;
 
-        // TODO: remove
-        worker.postMessage();
-
         // Extend LevelBase constructor
         LevelBase.LevelBase.call(this);
 
@@ -1512,23 +1509,25 @@ module.exports = {
 
         this.start = function() {
             var
-            maze = new Maze.Maze(20, 10, this.createContext('maze')),
-                enemy = new Enemy.Enemy(8, 8, maze, this.physicsEngine,
-                    this.createContext('enemy')),
+            mazeCtx = this.createContext('maze'),
+                prizeCtx = this.createContext('prize'),
+                enemyCtx = this.createContext('enemy'),
+                playerCtx = this.createContext('player'),
+                maze = new Maze.Maze(20, 10, mazeCtx),
                 player = new Player.Player(1, 1, maze, this.inputHandler,
-                    this.physicsEngine, this.createContext('player'),
-                    function() {
+                    this.physicsEngine, playerCtx, function() {
                         player.isFrozen = true;
                         enemy.isFrozen = true;
-                        prize.hide(); // TODO: fix
+                        prize.hide();
                         win(player);
                     }, function() {
                         player.isFrozen = true;
                         enemy.isFrozen = true;
                         die(player);
                     }),
-                prize = new Prize.Prize(9, 15, maze,
-                    this.createContext('prize'));
+                enemy = new Enemy.Enemy(8, 8, maze, player, this.physicsEngine,
+                    enemyCtx, worker),
+                prize = new Prize.Prize(9, 15, maze, prizeCtx);
 
             maze.draw();
             enemy.draw();
@@ -1536,8 +1535,6 @@ module.exports = {
             prize.draw();
             this.physicsEngine.objects = [enemy, player, prize];
             hitTest();
-
-            enemy.addMoves([Direction.UP, Direction.DOWN, Direction.DOWN]);
             enemy.start();
         };
     }
@@ -5390,7 +5387,8 @@ $(function() {
 });
 
 },{"./level/mainLevel":7,"./lib/jquery":8}],10:[function(require,module,exports){
-var Sprite = require('./sprite'),
+var
+Sprite = require('./sprite'),
     Shape = require('../foundation/shape'),
     Animation = require('../foundation/animation'),
     Direction = require('../enum/direction');
@@ -5466,6 +5464,21 @@ module.exports = {
         ////////////////////////////////////
 
         Object.defineProperties(this, {
+            /**
+                Location of AbstractPlayer instance in Maze
+
+                @property location
+                @type {MazeLocation}
+             */
+            location: {
+                get: function() {
+                    return location;
+                },
+                set: function(newLocation) {
+                    location = newLocation;
+                }
+            },
+
             /**
                 Whether or not the AbstractPlayer instance currently being
                 animated
@@ -5616,9 +5629,11 @@ module.exports = {
 };
 
 },{"../enum/direction":1,"../foundation/animation":3,"../foundation/shape":5,"./sprite":15}],11:[function(require,module,exports){
-var AbstractPlayer = require('./abstractPlayer'),
+var
+AbstractPlayer = require('./abstractPlayer'),
     Shape = require('../foundation/shape'),
-    Animation = require('../foundation/animation');
+    Animation = require('../foundation/animation'),
+    Hash = require('../util/hash');
 
 /**
     This class handles the AI and drawing of an enemy.
@@ -5633,7 +5648,7 @@ var AbstractPlayer = require('./abstractPlayer'),
 //////////////////////////////////
 
 var
-MOVE_DELAY = 1000,
+MOVE_DELAY = 300,
     FILL_STYLE = '#FF0000',
     RADIUS = 20;
 
@@ -5651,12 +5666,13 @@ module.exports = {
          @param {integer} row Row in maze
          @param {integer} column Column in maze
          @param {Maze} maze Maze instance
+         @param {Player} player Player instance
          @param {Engine} Engine instance
          @param {CanvasDrawer} CanvasDrawer instance
-         @param {string} Fill style of enemy
+         @param {Worker} [worker=undefined] Worker to calculate route to player
+         efficiently
      */
-    Enemy: function(row, column, maze, physicsEngine, drawer,
-        fillStyle) {
+    Enemy: function(row, column, maze, player, physicsEngine, drawer, worker) {
         var _this = this;
 
         /////////////////////////////////////
@@ -5671,11 +5687,13 @@ module.exports = {
             },
             head = new Shape.Circle(center.x, center.y,
                 RADIUS, drawer, {
-                    fillStyle: fillStyle || FILL_STYLE,
+                    fillStyle: FILL_STYLE,
                     strokeStyle: 'black'
                 }),
             shapes = [head],
-            movesQueue = [];
+            movesQueue = [],
+            mazeJson = maze.toJSON(),
+            lastPlayerLocation = player.location;
 
         /**
             Initialization method
@@ -5704,6 +5722,27 @@ module.exports = {
             if (!this.isAnimating && movesQueue.length > 0) {
                 this.move(movesQueue.pop());
             }
+            if (movesQueue.length === 0 ||
+                player.location !== lastPlayerLocation) {
+                lastPlayerLocation = player.location;
+                this.calculateRoute();
+            }
+        };
+
+        this.calculateRoute = function() {
+            if (worker === undefined) {
+                return; // TODO: calculate route without Worker
+            }
+            worker.addEventListener('message', function(ev) {
+                var moves = ev.data;
+                _this.clearMoves();
+                _this.addMoves(moves);
+            });
+            worker.postMessage({
+                graph: mazeJson,
+                source: Hash.hashcode(this.location),
+                destination: Hash.hashcode(player.location)
+            });
         };
 
         /**
@@ -5743,8 +5782,9 @@ module.exports = {
     }
 };
 
-},{"../foundation/animation":3,"../foundation/shape":5,"./abstractPlayer":10}],12:[function(require,module,exports){
-var Sprite = require('./sprite'),
+},{"../foundation/animation":3,"../foundation/shape":5,"../util/hash":19,"./abstractPlayer":10}],12:[function(require,module,exports){
+var
+Sprite = require('./sprite'),
     Shape = require('../foundation/shape'),
     Hash = require('../util/hash'),
     Graph = require('../util/graph'),
@@ -5927,7 +5967,7 @@ module.exports = {
              */
             this.forEachWall = function(f) {
                 for (var i = 0; i < 4; i++) {
-                    var dir = Direction.MIN + 1;
+                    var dir = Direction.MIN + i;
                     f(_thisLocation.walls[dir], dir);
                 }
             };
@@ -5948,9 +5988,9 @@ module.exports = {
                 Get an impenetrable location adjacent to this location
 
                 @method getImpenetrable
-                @for Maze
                 @return {MazeLocation} Impenetrable location if exists,
                 null otherwise
+                @for Maze
              */
             this.getImpenetrable = function() {
                 for (var i = 0; i < 4; i++) {
@@ -6331,6 +6371,36 @@ module.exports = {
             });
 
             return graph;
+        };
+
+        /**
+            Get a JSON object representing the maze
+
+            @method toJSON
+            @return {Object} JSON object representing maze
+         */
+        this.toJSON = function() {
+            var jsonObj = {};
+
+            this.forEachLocation(function(location) {
+                var adjArr = [];
+                location.forEachWall(function(wall, dir) {
+                    if (wall.isPenetrable) {
+                        var neighborCode = Hash.hashcode(location.get(
+                            dir));
+                        adjArr[dir - Direction.MIN] = neighborCode;
+                    } else {
+                        adjArr[dir - Direction.MIN] = null;
+                    }
+                });
+                var locationCode = Hash.hashcode(location);
+                if (adjArr.length !== 4) {
+                    throw new Error('invalid length of adjacency array');
+                }
+                jsonObj[locationCode] = adjArr;
+            });
+
+            return jsonObj;
         };
 
         /**
