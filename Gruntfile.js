@@ -60,26 +60,35 @@ module.exports = function(grunt) {
         concat: {
             main: {
                 src: [
-                  'js/intro.js',
-                  'tmp/bundle.js',
-                  'js/outro.js'
+                    'js/intro.js',
+                    'tmp/bundle.js',
+                    'js/outro.js'
                 ],
                 dest: 'bundle.js'
             },
             worker: {
                 src: [
-                  'js/intro.js',
-                  'tmp/worker.js',
-                  'js/outro.js'
+                    'js/intro.js',
+                    'tmp/worker.js',
+                    'js/outro.js'
                 ],
                 dest: 'worker.js'
+            },
+            specs: {
+                src: [
+                    'js/intro.js',
+                    'tmp/specs.js',
+                    'js/outro.js'
+                ],
+                dest: 'specs.js'
             }
         },
         browserify: {
             main: {
                 files: {
                     'tmp/bundle.js': ['js/main.js'],
-                    'tmp/worker.js': ['js/task.js']
+                    'tmp/worker.js': ['js/task.js'],
+                    'tmp/specs.js': ['js/spec/specRunner.js']
                 }
             }
         },

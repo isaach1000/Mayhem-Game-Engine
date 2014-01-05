@@ -27,9 +27,10 @@ Directory structure:
 * scripts/ --- Useful scripts (e.g. generate new module, commit new files)
 * Gruntfile.js --- Grunt tasks
 * README.md --- You are here
-* bundle.js --- Built JS file for main.js and its dependencies (not minified)
+* bundle.js --- Built JS file for js/main.js and its dependencies (not minified)
 * index.html --- Game page
 * package.json --- NodeJS data
-* specs.html --- Testing with Jasmine
+* specs.html --- Testing page (Jasmine)
+* specs.js --- Built JS file for js/spec/specRunner.js and its dependencies
 * style.css --- Stylesheet for index.html
-* worker.js --- Built JS file for task.js and its depend
+* worker.js --- Built JS file for js/task.js and its dependencies
