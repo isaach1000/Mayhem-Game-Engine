@@ -4,18 +4,32 @@
 This project demostrates the use of HTML5 Canvas in game development.
 
 ## Libraries
-RequireJS, jQuery, UnderscoreJS, Jasmine
+jQuery, UnderscoreJS, Browserify, Jasmine
 
 ## Structure
-Folders:
+Directory structure:
 
+* build/ --- Minified, concatenated files
+* docs/ --- Documentation
 * js/ --- All Javascripts:
-	* character/ --- Characters
+	* enum/ --- Enums
+	* events/ --- Event handlers
 	* foundation/ --- Basic shapes and drawing
 	* level/ --- Levels
 	* lib/ --- Libraries
+	* spec/ --- Tests
 	* sprite/ --- Multi-shape structures
 	* util/ --- Data structures and math
-* docs/ --- Documentation
-* scripts/ --- Useful scripts (e.g. generate docs)
-
+	* intro.js --- Intro for built files
+	* main.js --- Main entry point
+	* task.js --- Web Worker entry point
+	* outro.js --- Outro for built files
+* scripts/ --- Useful scripts (e.g. generate new module, commit new files)
+* Gruntfile.js --- Grunt tasks
+* README.md --- You are here
+* bundle.js --- Built JS file for main.js and its dependencies (not minified)
+* index.html --- Game page
+* package.json --- NodeJS data
+* specs.html --- Testing with Jasmine
+* style.css --- Stylesheet for index.html
+* worker.js --- Built JS file for task.js and its depend

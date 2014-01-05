@@ -69,17 +69,17 @@ module.exports = function(grunt) {
             worker: {
                 src: [
                   'js/intro.js',
-                  'tmp/task.js',
+                  'tmp/worker.js',
                   'js/outro.js'
                 ],
-                dest: 'task.js'
+                dest: 'worker.js'
             }
         },
         browserify: {
             main: {
                 files: {
                     'tmp/bundle.js': ['js/main.js'],
-                    'tmp/task.js': ['js/task.js']
+                    'tmp/worker.js': ['js/task.js']
                 }
             }
         },
@@ -87,7 +87,7 @@ module.exports = function(grunt) {
             main: {
                 files: {
                     'build/bundle.js': ['bundle.js'],
-                    'build/task.js': ['task.js']
+                    'build/worker.js': ['worker.js']
                 }
             }
         },

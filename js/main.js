@@ -3,7 +3,7 @@ var $ = require('./lib/jquery'),
 
 $(function() {
     var
-    worker = new Worker('./task.js'),
+    worker = new Worker('./worker.js'),
         mainLevel = new MainLevel.MainLevel(worker);
 
     mainLevel.start();
