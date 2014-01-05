@@ -1,17 +1,22 @@
 {
-    "name": "Mayhem Game Engine",
+    "name": "Mayhem-Game-Engine",
     "version": "0.0.0",
     "description": "Canvas game engine",
-    "homepage": "github.com/isaach1000/Mayhem-Game-Engine",
+    "homepage": "https://github.com/isaach1000/Mayhem-Game-Engine",
     "scripts": {
         "test": "echo \"Error: no test specified\" && exit 1"
     },
     "repository": {
         "type": "git",
-        "url": "git@gitbub.com:isaach1000/canvas.git"
+        "url": "https://github.com/isaach1000/Mayhem-Game-Engine.git"
     },
     "main": "./js/main.js",
     "author": "Isaac Hier",
+    "contributors": [
+        {
+            "name": "Joseph Aharon"
+        }
+    ],
     "license": "MIT",
     "devDependencies": {
         "grunt-contrib-watch": "~0.5.3",
