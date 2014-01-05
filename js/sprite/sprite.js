@@ -263,10 +263,11 @@ module.exports = {
         };
 
         /**
-           Test whether or not a point is within a Sprite
+            Test whether or not a point is within a Sprite
 
-           @param {Point} point Point to test
-           @return {boolean} If the point is in the Sprite
+            @method collisionTest
+            @param {Point} point Point to test
+            @return {boolean} If the point is in the Sprite
          */
         this.collisionTest = function(point) {
             var numShapes = this.shapes.length,

@@ -12,6 +12,8 @@ var $ = require('../lib/jquery');
 module.exports = {
     /** Construct a canvas. Should be called during/after .
 
+        @method createCanvas
+        @static
         @param   {(Object)} options A dictionary of attributes for a new
         HTML canvas.
         @param   {(Object)} cssRules A dictionary of CSS rules for a new

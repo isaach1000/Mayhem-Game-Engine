@@ -44,15 +44,27 @@ module.exports = function(grunt) {
                 '!js/intro.js', '!js/outro.js']
         },
         yuidoc: {
+            lint: {
+                name: '<%= pkg.name %>',
+                description: '<%= pkg.description %>',
+                version: '<%= pkg.version %>',
+                url: '<%= pkg.homepage %>',
+                options: {
+                    lint: true,
+                    paths: ['js'],
+                    exclude: 'js/lib,.DS_Store,.git',
+                    outdir: 'docs'
+                }
+            },
             main: {
                 name: '<%= pkg.name %>',
                 description: '<%= pkg.description %>',
                 version: '<%= pkg.version %>',
                 url: '<%= pkg.homepage %>',
                 options: {
+                    linkNatives: true,
                     paths: ['js'],
-                    ignorepaths: ['js/lib/*'],
-                    // TODO: lint: true,
+                    exclude: 'js/lib,.DS_Store,.git',
                     outdir: 'docs'
                 }
             }
@@ -119,7 +131,7 @@ module.exports = function(grunt) {
     grunt.registerTask('default', [
         'jsbeautifier:*',
         'jshint:*',
-        'yuidoc:*',
+        'yuidoc:main', // TODO: fix yuidoc:lint
         'cssmin:*',
         'browserify:*',
         'concat:*'

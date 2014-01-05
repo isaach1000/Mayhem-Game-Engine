@@ -1263,13 +1263,12 @@ module.exports = {
 };
 
 },{"../util/boundingBox":16,"../util/mathExtensions":20,"./canvasDrawer":4}],6:[function(require,module,exports){
-var CanvasDrawer = require('../foundation/canvasDrawer'),
+var
+CanvasDrawer = require('../foundation/canvasDrawer'),
     Factory = require('../util/factory'),
     BoundingBox = require('../util/boundingBox'),
     Physics = require('../util/physics'),
     InputHandler = require('../events/inputHandler');
-
-
 
 //////////////////////////////////
 // Private class methods/fields //
@@ -1284,7 +1283,7 @@ module.exports = {
     /////////////////////////////////
 
     /**
-       LevelBase
+       @class LevelBase
        @constructor
      */
     LevelBase: function() {
@@ -5696,7 +5695,8 @@ module.exports = {
             shapes = [head],
             movesQueue = [],
             mazeJson = maze.toJSON(),
-            lastPlayerLocation = player.location;
+            lastPlayerLocation = player.location,
+            messageId = 0;
 
         /**
             Initialization method
@@ -5724,6 +5724,8 @@ module.exports = {
         this.act = function() {
             if (!this.isAnimating && movesQueue.length > 0) {
                 this.move(movesQueue.pop());
+                // Change messageId after move to invalidate old messages
+                messageId++;
             }
             if (movesQueue.length === 0 ||
                 player.location !== lastPlayerLocation) {
@@ -5736,15 +5738,26 @@ module.exports = {
             if (worker === undefined) {
                 return; // TODO: calculate route without Worker
             }
+
             worker.addEventListener('message', function(ev) {
-                var moves = ev.data;
+                var data = ev.data,
+                    moves = data.moves,
+                    responseId = data.responseId;
+
+                // Make sure the enemy has not moved since the request
+                if (responseId !== messageId) {
+                    return;
+                }
+
                 _this.clearMoves();
                 _this.addMoves(moves);
             });
+
             worker.postMessage({
                 graph: mazeJson,
                 source: Hash.hashcode(this.location),
-                destination: Hash.hashcode(player.location)
+                destination: Hash.hashcode(player.location),
+                messageId: messageId
             });
         };
 
@@ -6905,10 +6918,11 @@ module.exports = {
         };
 
         /**
-           Test whether or not a point is within a Sprite
+            Test whether or not a point is within a Sprite
 
-           @param {Point} point Point to test
-           @return {boolean} If the point is in the Sprite
+            @method collisionTest
+            @param {Point} point Point to test
+            @return {boolean} If the point is in the Sprite
          */
         this.collisionTest = function(point) {
             var numShapes = this.shapes.length,
@@ -7131,6 +7145,8 @@ var $ = require('../lib/jquery');
 module.exports = {
     /** Construct a canvas. Should be called during/after .
 
+        @method createCanvas
+        @static
         @param   {(Object)} options A dictionary of attributes for a new
         HTML canvas.
         @param   {(Object)} cssRules A dictionary of CSS rules for a new
@@ -7611,12 +7627,14 @@ module.exports = {
     /////////////////////////////////
 
     /**
-       Return a hashcode for this object. Does not conform to the Java
-       standard that two objects that are structurally identical should
-       yield the same hashcode.
+        Return a hashcode for this object. Does not conform to the Java
+        standard that two objects that are structurally identical should
+        yield the same hashcode.
 
-       @param   {Object} object Object to get hashcode for
-       @return  {integer} Hashcode for object
+        @method hashcode
+        @static
+        @param   {Object} object Object to get hashcode for
+        @return  {integer} Hashcode for object
      */
     hashcode: function(object) {
         if (object._hashId === undefined) {

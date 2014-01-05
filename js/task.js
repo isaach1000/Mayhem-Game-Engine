@@ -80,13 +80,15 @@ addEventListener('message', function(ev) {
     if (data.graph !== undefined &&
         data.source !== undefined &&
         data.destination !== undefined) {
-
         var
         graph = constructGraph(data.graph),
             sourceNode = graph.getNode(data.source),
             destinationNode = graph.getNode(data.destination),
             path = getPath(graph, sourceNode, destinationNode);
 
-        self.postMessage(path);
+        self.postMessage({
+            moves: path,
+            responseId: data.messageId
+        });
     }
 });

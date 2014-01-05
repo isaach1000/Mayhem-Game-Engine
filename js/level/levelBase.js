@@ -1,10 +1,9 @@
-var CanvasDrawer = require('../foundation/canvasDrawer'),
+var
+CanvasDrawer = require('../foundation/canvasDrawer'),
     Factory = require('../util/factory'),
     BoundingBox = require('../util/boundingBox'),
     Physics = require('../util/physics'),
     InputHandler = require('../events/inputHandler');
-
-
 
 //////////////////////////////////
 // Private class methods/fields //
@@ -19,7 +18,7 @@ module.exports = {
     /////////////////////////////////
 
     /**
-       LevelBase
+       @class LevelBase
        @constructor
      */
     LevelBase: function() {

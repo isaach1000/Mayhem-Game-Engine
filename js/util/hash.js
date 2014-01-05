@@ -21,12 +21,14 @@ module.exports = {
     /////////////////////////////////
 
     /**
-       Return a hashcode for this object. Does not conform to the Java
-       standard that two objects that are structurally identical should
-       yield the same hashcode.
+        Return a hashcode for this object. Does not conform to the Java
+        standard that two objects that are structurally identical should
+        yield the same hashcode.
 
-       @param   {Object} object Object to get hashcode for
-       @return  {integer} Hashcode for object
+        @method hashcode
+        @static
+        @param   {Object} object Object to get hashcode for
+        @return  {integer} Hashcode for object
      */
     hashcode: function(object) {
         if (object._hashId === undefined) {

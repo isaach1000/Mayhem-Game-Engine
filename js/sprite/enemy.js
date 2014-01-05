@@ -62,7 +62,8 @@ module.exports = {
             shapes = [head],
             movesQueue = [],
             mazeJson = maze.toJSON(),
-            lastPlayerLocation = player.location;
+            lastPlayerLocation = player.location,
+            messageId = 0;
 
         /**
             Initialization method
@@ -90,6 +91,8 @@ module.exports = {
         this.act = function() {
             if (!this.isAnimating && movesQueue.length > 0) {
                 this.move(movesQueue.pop());
+                // Change messageId after move to invalidate old messages
+                messageId++;
             }
             if (movesQueue.length === 0 ||
                 player.location !== lastPlayerLocation) {
@@ -102,15 +105,26 @@ module.exports = {
             if (worker === undefined) {
                 return; // TODO: calculate route without Worker
             }
+
             worker.addEventListener('message', function(ev) {
-                var moves = ev.data;
+                var data = ev.data,
+                    moves = data.moves,
+                    responseId = data.responseId;
+
+                // Make sure the enemy has not moved since the request
+                if (responseId !== messageId) {
+                    return;
+                }
+
                 _this.clearMoves();
                 _this.addMoves(moves);
             });
+
             worker.postMessage({
                 graph: mazeJson,
                 source: Hash.hashcode(this.location),
-                destination: Hash.hashcode(player.location)
+                destination: Hash.hashcode(player.location),
+                messageId: messageId
             });
         };
 
