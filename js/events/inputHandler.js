@@ -38,14 +38,14 @@ module.exports = {
         function addHandler(eventName, handler) {
             if (eventHandlers[eventName] === undefined) {
                 eventHandlers[eventName] = [];
-                $domElement.on(eventName, function(event) {
+                $domElement.on(eventName, function(ev) {
                     eventHandlers[eventName].forEach(function(
                         handler) {
                         var currentDate = new Date();
                         if (currentDate - handler._lastTime >=
                             handler._delay) {
                             handler._lastTime = currentDate;
-                            handler(event);
+                            handler(ev);
                         }
                     });
                 });

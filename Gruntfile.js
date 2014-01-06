@@ -1,6 +1,9 @@
 module.exports = function(grunt) {
     grunt.initConfig({
         pkg: grunt.file.readJSON('package.json'),
+        clean: {
+            tmp: ['tmp/']
+        },
         watch: {
             css: {
                 files: ['style.css'],
@@ -12,7 +15,7 @@ module.exports = function(grunt) {
             main: {
                 files: ['js/**/*.js', '!js/lib/**'],
                 tasks: [
-                    'jsbeautifier:main',
+                    'jsbeautifier:js',
                     'jshint:main',
                     'browserify:*',
                     'concat:*'
@@ -23,11 +26,11 @@ module.exports = function(grunt) {
             },
             docs: {
                 files: ['js/**/*.js', '!js/lib/**'],
-                tasks: ['jsbeautifier:main', 'jshint:main', 'yuidoc:main']
+                tasks: ['jsbeautifier:js', 'jshint:main', 'yuidoc:main']
             }
         },
         jsbeautifier: {
-            main: {
+            js: {
                 src: ['js/**/*.js', 'Gruntfile.js', 'package.json',
                     '!js/intro.js', '!js/outro.js'],
                 options: {
@@ -35,6 +38,30 @@ module.exports = function(grunt) {
                         indentSize: 4,
                         wrapLineLength: 80,
                         keepArrayIndentation: true
+                    }
+                }
+            },
+            css: {
+                src: ['style.css'],
+                options: {
+                    css: {
+                        indentChar: ' ',
+                        indentSize: 4
+                    }
+                }
+            },
+            html: {
+                src: ['index.html'],
+                options: {
+                    html: {
+                        braceStyle: 'collapse',
+                        indentChar: ' ',
+                        indentScripts: 'keep',
+                        indentSize: 4,
+                        maxPreserveNewlines: 10,
+                        preserveNewlines: true,
+                        unformatted: ['a', 'sub', 'sup', 'b', 'i', 'u'],
+                        wrapLineLength: 0
                     }
                 }
             }
@@ -52,8 +79,7 @@ module.exports = function(grunt) {
                 options: {
                     lint: true,
                     paths: ['js'],
-                    exclude: 'js/lib,.DS_Store,.git',
-                    outdir: 'docs'
+                    exclude: 'js/lib,.DS_Store,.git'
                 }
             },
             main: {
@@ -93,6 +119,13 @@ module.exports = function(grunt) {
                     'js/outro.js'
                 ],
                 dest: 'specs.js'
+            },
+            markdown: {
+                src: [
+                    'canvas.md',
+                    'workers.md'
+                ],
+                dest: 'tmp/project.md'
             }
         },
         browserify: {
@@ -118,8 +151,28 @@ module.exports = function(grunt) {
                     'build/style.min.css': 'style.css'
                 }
             }
+        },
+        markdown: {
+            all: {
+                files: {
+                    'index.html': ['tmp/project.md']
+                },
+                options: {
+                    template: 'game.jst',
+                    markdownOptions: {
+                        gfm: true,
+                        highlight: 'manual',
+                        codeLines: {
+                            before: '<span>',
+                            after: '</span>'
+                        }
+                    }
+                }
+            }
         }
     });
+
+    grunt.loadNpmTasks('grunt-contrib-clean');
     grunt.loadNpmTasks('grunt-contrib-concat');
     grunt.loadNpmTasks('grunt-contrib-uglify');
     grunt.loadNpmTasks('grunt-contrib-watch');
@@ -128,13 +181,19 @@ module.exports = function(grunt) {
     grunt.loadNpmTasks('grunt-contrib-cssmin');
     grunt.loadNpmTasks('grunt-browserify');
     grunt.loadNpmTasks('grunt-jsbeautifier');
+    grunt.loadNpmTasks('grunt-markdown');
+
     grunt.registerTask('default', [
-        'jsbeautifier:*',
+        'clean:*',
+        'jsbeautifier:js',
+        'jsbeautifier:css',
         'jshint:*',
         'yuidoc:*',
         'cssmin:*',
         'browserify:*',
-        'concat:*'
+        'concat:*',
+        'markdown:*',
+        'jsbeautifier:html'
     ]);
     grunt.registerTask('build', ['default', 'uglify:main']);
 };

@@ -2,7 +2,8 @@ var AbstractPlayer = require('./abstractPlayer'),
     Shape = require('../foundation/shape'),
     Prize = require('./prize'),
     Enemy = require('./enemy'),
-    Animation = require('../foundation/animation');
+    Animation = require('../foundation/animation'),
+    Direction = require('../enum/direction');
 
 /**
     The Player class handles the actions and drawing of the main player.
@@ -93,6 +94,10 @@ module.exports = {
             mouthAnim.start();
 
             inputHandler.bind('keydown', function(ev) {
+                if (Direction.contains(ev.keyCode)) {
+                    // Prevent arrow keys from moving page
+                    ev.preventDefault();
+                }
                 _this.move(ev.keyCode);
             });
         }

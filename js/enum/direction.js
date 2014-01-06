@@ -17,11 +17,17 @@ module.exports = {
         return ['left', 'up', 'right', 'down'][dir - module.exports.MIN];
     },
 
-    opposite: function(dir) {
+    all: function() {
         return [module.exports.RIGHT, module.exports.DOWN, module.exports.LEFT,
-            module.exports.UP]
-        [dir -
-            module.exports.MIN];
+            module.exports.UP];
+    },
+
+    opposite: function(dir) {
+        return module.exports.all()[dir - module.exports.MIN];
+    },
+
+    contains: function(dir) {
+        return module.exports.all().indexOf(dir) !== -1;
     },
 
     random: function() {

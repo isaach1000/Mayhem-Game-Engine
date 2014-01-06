@@ -21,11 +21,17 @@ module.exports = {
         return ['left', 'up', 'right', 'down'][dir - module.exports.MIN];
     },
 
-    opposite: function(dir) {
+    all: function() {
         return [module.exports.RIGHT, module.exports.DOWN, module.exports.LEFT,
-            module.exports.UP]
-        [dir -
-            module.exports.MIN];
+            module.exports.UP];
+    },
+
+    opposite: function(dir) {
+        return module.exports.all()[dir - module.exports.MIN];
+    },
+
+    contains: function(dir) {
+        return module.exports.all().indexOf(dir) !== -1;
     },
 
     random: function() {
@@ -74,14 +80,14 @@ module.exports = {
         function addHandler(eventName, handler) {
             if (eventHandlers[eventName] === undefined) {
                 eventHandlers[eventName] = [];
-                $domElement.on(eventName, function(event) {
+                $domElement.on(eventName, function(ev) {
                     eventHandlers[eventName].forEach(function(
                         handler) {
                         var currentDate = new Date();
                         if (currentDate - handler._lastTime >=
                             handler._delay) {
                             handler._lastTime = currentDate;
-                            handler(event);
+                            handler(ev);
                         }
                     });
                 });
@@ -6441,7 +6447,8 @@ var AbstractPlayer = require('./abstractPlayer'),
     Shape = require('../foundation/shape'),
     Prize = require('./prize'),
     Enemy = require('./enemy'),
-    Animation = require('../foundation/animation');
+    Animation = require('../foundation/animation'),
+    Direction = require('../enum/direction');
 
 /**
     The Player class handles the actions and drawing of the main player.
@@ -6532,6 +6539,10 @@ module.exports = {
             mouthAnim.start();
 
             inputHandler.bind('keydown', function(ev) {
+                if (Direction.contains(ev.keyCode)) {
+                    // Prevent arrow keys from moving page
+                    ev.preventDefault();
+                }
                 _this.move(ev.keyCode);
             });
         }
@@ -6572,7 +6583,7 @@ module.exports = {
     }
 };
 
-},{"../foundation/animation":3,"../foundation/shape":5,"./abstractPlayer":10,"./enemy":11,"./prize":14}],14:[function(require,module,exports){
+},{"../enum/direction":1,"../foundation/animation":3,"../foundation/shape":5,"./abstractPlayer":10,"./enemy":11,"./prize":14}],14:[function(require,module,exports){
 var Sprite = require('./sprite'),
     Shape = require('../foundation/shape');
 
