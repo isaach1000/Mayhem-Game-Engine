@@ -255,7 +255,7 @@ module.exports = {
     }
 };
 
-},{"underscore":23}],4:[function(require,module,exports){
+},{"underscore":24}],4:[function(require,module,exports){
 var _ = require('underscore'),
     MathExtensions = require('../util/mathExtensions');
 
@@ -626,7 +626,7 @@ module.exports = {
     }
 };
 
-},{"../util/mathExtensions":20,"underscore":23}],5:[function(require,module,exports){
+},{"../util/mathExtensions":20,"underscore":24}],5:[function(require,module,exports){
 var CanvasDrawer = require('./canvasDrawer'),
     BoundingBox = require('../util/boundingBox'),
     MathExtensions = require('../util/mathExtensions');
@@ -1345,7 +1345,7 @@ module.exports = {
             @property HEIGHT
             @type {number}
          */
-        this.HEIGHT = 600;
+        this.HEIGHT = 500;
 
         /**
             Margin add to width and height when creating canvas
@@ -1473,16 +1473,33 @@ module.exports = {
          */
         function win(player) {
             var
-            rate = 1 / 1000,
+            rate = 1 / 500,
+                posDiff = 2,
+                vel = 2,
                 winAnim = new Animation.Animation(player, function(time,
                     timeDiff) {
                     player.transformation.sx += timeDiff * rate;
                     player.transformation.sy += timeDiff * rate;
                     return time > 5000;
                 }, function() {
-                    writeBanner('Winner!', '#00FF7B');
+                    writeBanner('Winner!', 'green');
+                }),
+                toCenterAnim = new Animation.Animation(player, function(time,
+                    timeDiff) {
+                    var
+                    dx = _this.WIDTH / 2 - player.transformation.tx,
+                        dy = _this.HEIGHT / 2 - player.transformation.ty,
+                        dist = Math.sqrt(dx * dx + dy * dy);
+
+                    player.transformation.tx += vel * dx / dist;
+                    player.transformation.ty += vel * dy / dist;
+                    return Math.abs(dx) < posDiff &&
+                        Math.abs(dy) < posDiff;
+                }, function() {
+                    winAnim.start();
                 });
-            winAnim.start();
+
+            toCenterAnim.start();
         }
 
         /**
@@ -5386,12 +5403,24 @@ module.exports = {
 var $ = require('./lib/jquery'),
     MainLevel = require('./level/mainLevel');
 
-$(function() {
-    var
-    worker = new Worker('./worker.js'),
-        mainLevel = new MainLevel.MainLevel(worker);
+function restartGame() {
+    var worker, mainLevel;
 
+    $('#game-container')[0].innerHTML = '';
+
+    if ($('#controls input').prop('checked')) {
+        worker = new Worker('./worker.js');
+        $('#controls p').text('Worker');
+    } else {
+        $('#controls p').text('No worker');
+    }
+    mainLevel = new MainLevel.MainLevel(worker);
     mainLevel.start();
+}
+
+$(function() {
+    $('button').on('click', restartGame);
+    restartGame();
 });
 
 },{"./level/mainLevel":7,"./lib/jquery":8}],10:[function(require,module,exports){
@@ -5641,7 +5670,8 @@ var
 AbstractPlayer = require('./abstractPlayer'),
     Shape = require('../foundation/shape'),
     Animation = require('../foundation/animation'),
-    Hash = require('../util/hash');
+    Hash = require('../util/hash'),
+    WorkerTasks = require('../worker/workerTasks');
 
 /**
     This class handles the AI and drawing of an enemy.
@@ -5741,30 +5771,41 @@ module.exports = {
         };
 
         this.calculateRoute = function() {
+            var startTime = new Date();
             if (worker === undefined) {
-                return; // TODO: calculate route without Worker
+                var
+                graph = WorkerTasks.constructGraph(mazeJson),
+                    source = Hash.hashcode(this.location),
+                    destination = Hash.hashcode(player.location),
+                    sourceNode = graph.getNode(source),
+                    destinationNode = graph.getNode(destination),
+                    path = WorkerTasks.getPath(graph, sourceNode,
+                        destinationNode);
+
+                this.clearMoves();
+                this.addMoves(path);
+                console.debug('time:', new Date() - startTime);
+            } else {
+                worker.onmessage = function(ev) {
+                    var data = ev.data,
+                        moves = data.moves,
+                        responseId = data.responseId;
+                    // Make sure the enemy has not moved since the request
+                    if (responseId !== messageId) {
+                        return;
+                    }
+                    _this.clearMoves();
+                    _this.addMoves(moves);
+                    console.debug('time:', new Date() - startTime);
+                };
+
+                worker.postMessage({
+                    graph: mazeJson,
+                    source: Hash.hashcode(this.location),
+                    destination: Hash.hashcode(player.location),
+                    messageId: messageId
+                });
             }
-
-            worker.addEventListener('message', function(ev) {
-                var data = ev.data,
-                    moves = data.moves,
-                    responseId = data.responseId;
-
-                // Make sure the enemy has not moved since the request
-                if (responseId !== messageId) {
-                    return;
-                }
-
-                _this.clearMoves();
-                _this.addMoves(moves);
-            });
-
-            worker.postMessage({
-                graph: mazeJson,
-                source: Hash.hashcode(this.location),
-                destination: Hash.hashcode(player.location),
-                messageId: messageId
-            });
         };
 
         /**
@@ -5804,7 +5845,7 @@ module.exports = {
     }
 };
 
-},{"../foundation/animation":3,"../foundation/shape":5,"../util/hash":19,"./abstractPlayer":10}],12:[function(require,module,exports){
+},{"../foundation/animation":3,"../foundation/shape":5,"../util/hash":19,"../worker/workerTasks":23,"./abstractPlayer":10}],12:[function(require,module,exports){
 var
 Sprite = require('./sprite'),
     Shape = require('../foundation/shape'),
@@ -6563,6 +6604,10 @@ module.exports = {
             @return {void}
          */
         this.checkCollision = function(candidates) {
+            if (this.isFrozen) {
+                return;
+            }
+
             var
             prizes = candidates.filter(function(candidate) {
                 return candidate instanceof Prize.Prize;
@@ -6949,7 +6994,7 @@ module.exports = {
     }
 };
 
-},{"../util/boundingBox":16,"../util/mathExtensions":20,"underscore":23}],16:[function(require,module,exports){
+},{"../util/boundingBox":16,"../util/mathExtensions":20,"underscore":24}],16:[function(require,module,exports){
 /**
    A class to represent the bounds of shapes in the canvas. Simplifies
    calculations certain involving complex shapes. Specifically effective for
@@ -7168,7 +7213,7 @@ module.exports = {
         options = options || {};
         cssRules = cssRules || {};
         var width = '1000px',
-            height = '600px';
+            height = '500px';
         if (options.width) {
             width = options.width;
             delete options.width;
@@ -7191,7 +7236,7 @@ module.exports = {
         // Must use attr method for width and height and not options
         // or jQuery will default to using CSS for width and height
         return $('<canvas>', options).attr('width', width).attr(
-            'height', height).appendTo('body');
+            'height', height).appendTo('#game-container');
     }
 };
 
@@ -7614,7 +7659,7 @@ module.exports = {
     }
 };
 
-},{"./hash":19,"./minHeap":21,"underscore":23}],19:[function(require,module,exports){
+},{"./hash":19,"./minHeap":21,"underscore":24}],19:[function(require,module,exports){
 var _ = require('underscore');
 
 /**
@@ -8156,7 +8201,7 @@ module.exports = {
     }
 };
 
-},{"underscore":23}],20:[function(require,module,exports){
+},{"underscore":24}],20:[function(require,module,exports){
 var _ = require('underscore'),
     BoundingBox = require('./boundingBox');
 
@@ -8845,7 +8890,7 @@ module.exports = {
     }
 };
 
-},{"./boundingBox":16,"underscore":23}],21:[function(require,module,exports){
+},{"./boundingBox":16,"underscore":24}],21:[function(require,module,exports){
 //////////////////////////////////
 // Private class methods/fields //
 //////////////////////////////////
@@ -9133,6 +9178,90 @@ module.exports = {
 };
 
 },{}],23:[function(require,module,exports){
+var
+Graph = require('../util/graph'),
+    Direction = require('../enum/direction');
+
+/**
+    Functions to call from worker
+
+    @module worker/workerTasks
+ */
+module.exports = {
+    /**
+        Build a graph object from a JSON object passed from the worker
+
+        @method constructGraph
+        @param  {Object} dictionary JSON object representing graph
+        @return {Graph} Graph representing JSON object
+     */
+    constructGraph: function(dictionary) {
+        var
+        graph = new Graph.Graph(),
+            key;
+        // Add the nodes to the graph
+        for (key in dictionary) {
+            if (dictionary.hasOwnProperty(key)) {
+                key = parseInt(key);
+                graph.addNode(key);
+            }
+        }
+        // Add the edges
+        for (key in dictionary) {
+            if (dictionary.hasOwnProperty(key)) {
+                key = parseInt(key);
+
+                var
+                node = graph.getNode(key),
+                    neighborArr = dictionary[key],
+                    neighborArrLen = neighborArr.length,
+                    edge,
+                    neighborKey,
+                    neighbor,
+                    direction;
+
+                for (var index = 0; index < neighborArrLen; index++) {
+                    neighborKey = neighborArr[index];
+                    if (neighborKey !== undefined) {
+                        neighbor = graph.getNode(neighborKey);
+                        direction = index + Direction.MIN;
+                        edge = graph.addEdge(node, neighbor);
+                        edge.data = direction;
+                    }
+                }
+            }
+        }
+        return graph;
+    },
+
+    /**
+        Get path from source node to destinaton node
+
+        @method getPath
+        @param  {Graph} graph Graph
+        @param  {GraphNode} source Source node to start from
+        @param  {GraphNode} dest Destination node to stop at
+        @return {Array} Array of Direction enums representing the path
+     */
+    getPath: function(graph, source, dest) {
+        var
+        currentNode,
+            path = [];
+
+        graph.dijkstra(source, dest);
+
+        currentNode = dest;
+        while (currentNode.previous !== undefined) {
+            var dir = graph.getEdge(currentNode.previous, currentNode).data;
+            path.push(dir);
+            currentNode = currentNode.previous;
+        }
+
+        return path.reverse();
+    }
+};
+
+},{"../enum/direction":1,"../util/graph":18}],24:[function(require,module,exports){
 //     Underscore.js 1.5.2
 //     http://underscorejs.org
 //     (c) 2009-2013 Jeremy Ashkenas, DocumentCloud and Investigative Reporters & Editors

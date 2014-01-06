@@ -97,16 +97,33 @@ module.exports = {
          */
         function win(player) {
             var
-            rate = 1 / 1000,
+            rate = 1 / 500,
+                posDiff = 2,
+                vel = 2,
                 winAnim = new Animation.Animation(player, function(time,
                     timeDiff) {
                     player.transformation.sx += timeDiff * rate;
                     player.transformation.sy += timeDiff * rate;
                     return time > 5000;
                 }, function() {
-                    writeBanner('Winner!', '#00FF7B');
+                    writeBanner('Winner!', 'green');
+                }),
+                toCenterAnim = new Animation.Animation(player, function(time,
+                    timeDiff) {
+                    var
+                    dx = _this.WIDTH / 2 - player.transformation.tx,
+                        dy = _this.HEIGHT / 2 - player.transformation.ty,
+                        dist = Math.sqrt(dx * dx + dy * dy);
+
+                    player.transformation.tx += vel * dx / dist;
+                    player.transformation.ty += vel * dy / dist;
+                    return Math.abs(dx) < posDiff &&
+                        Math.abs(dy) < posDiff;
+                }, function() {
+                    winAnim.start();
                 });
-            winAnim.start();
+
+            toCenterAnim.start();
         }
 
         /**

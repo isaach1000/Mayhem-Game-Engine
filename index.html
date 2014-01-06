@@ -11,6 +11,13 @@
 </head>
 
 <body>
+    <div id="game-container"></div>
+    <div id="controls">
+        <input type="checkbox" />Worker
+        <br />
+        <button>Reset</button>
+        <p></p>
+    </div>
     <div id="content">
         <h1 id="canvas">Canvas</h1>
         <h3 id="isaac-hier">Isaac Hier</h3>
@@ -45,8 +52,8 @@
         <p>The above version of the Pacman game is slow because there are two concurrent processes. One is using the canvas to constantly redraw the visuals which is the primary focus of the above project. The second process is the computation of the game
             logic. The game implements Dijkstra’s search algorithm to determine the shortest path from the monster to the player. This algorithm has a long runtime, and although the monster’s path came out somewhat buggy, he usually makes his way to the
             player.</p>
-        <p>The above demo is somewhat slow because the game is trying to run these two sophisticated processeses simultaneously. Below is the same exact game, but it uses Web Workers to separate the two tasks. As you can see, the result is a smoother game
-            that remains responsive to the user.</p>
+        <p>The above demo has rendering errors because the game is trying to run these two sophisticated processeses simultaneously. If you check the worker checkbox and press &quot;Reset&quot;, the resulting game is the same exact game, but it uses Web
+            Workers to separate the two tasks. As you can see, the result is a smoother game that remains responsive to the user&#39;s input.</p>
         <h2 id="alternative-solutions-to-the-problem-">Alternative Solutions to the problem:</h2>
         <p>Web Workers is the only way to implement multithreading in web pages. One similar alternative might be to use event driven programming, or a paradigm in which the flow of the program is determined by events. In such cases, the application is divided
             into two main loops: event detection and event processing. Web applications would be able to incorporate event driven programming by using a framework such as node.js.</p>

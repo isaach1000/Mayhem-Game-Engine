@@ -40,81 +40,7 @@ module.exports = {
 };
 
 },{"../util/mathExtensions":6}],2:[function(require,module,exports){
-var
-Graph = require('./util/graph'),
-    Direction = require('./enum/direction');
-
-/**
-    Build a graph object from a JSON object passed from the worker
-
-    @method constructGraph
-    @param  {Object} dictionary JSON object representing graph
-    @return {Graph} Graph representing JSON object
- */
-function constructGraph(dictionary) {
-    var
-    graph = new Graph.Graph(),
-        key;
-    // Add the nodes to the graph
-    for (key in dictionary) {
-        if (dictionary.hasOwnProperty(key)) {
-            key = parseInt(key);
-            graph.addNode(key);
-        }
-    }
-    // Add the edges
-    for (key in dictionary) {
-        if (dictionary.hasOwnProperty(key)) {
-            key = parseInt(key);
-
-            var
-            node = graph.getNode(key),
-                neighborArr = dictionary[key],
-                neighborArrLen = neighborArr.length,
-                edge,
-                neighborKey,
-                neighbor,
-                direction;
-
-            for (var index = 0; index < neighborArrLen; index++) {
-                neighborKey = neighborArr[index];
-                if (neighborKey !== undefined) {
-                    neighbor = graph.getNode(neighborKey);
-                    direction = index + Direction.MIN;
-                    edge = graph.addEdge(node, neighbor);
-                    edge.data = direction;
-                }
-            }
-        }
-    }
-    return graph;
-}
-
-/**
-    Get path from source node to destinaton node
-
-    @method getPath
-    @param  {Graph} graph Graph
-    @param  {GraphNode} source Source node to start from
-    @param  {GraphNode} dest Destination node to stop at
-    @return {Array} Array of Direction enums representing the path
- */
-function getPath(graph, source, dest) {
-    var
-    currentNode,
-        path = [];
-
-    graph.dijkstra(source, dest);
-
-    currentNode = dest;
-    while (currentNode.previous !== undefined) {
-        var dir = graph.getEdge(currentNode.previous, currentNode).data;
-        path.push(dir);
-        currentNode = currentNode.previous;
-    }
-
-    return path.reverse();
-}
+var WorkerTasks = require('./worker/workerTasks.js');
 
 addEventListener('message', function(ev) {
     var data = ev.data;
@@ -123,10 +49,10 @@ addEventListener('message', function(ev) {
         data.source !== undefined &&
         data.destination !== undefined) {
         var
-        graph = constructGraph(data.graph),
+        graph = WorkerTasks.constructGraph(data.graph),
             sourceNode = graph.getNode(data.source),
             destinationNode = graph.getNode(data.destination),
-            path = getPath(graph, sourceNode, destinationNode);
+            path = WorkerTasks.getPath(graph, sourceNode, destinationNode);
 
         self.postMessage({
             moves: path,
@@ -135,7 +61,7 @@ addEventListener('message', function(ev) {
     }
 });
 
-},{"./enum/direction":1,"./util/graph":4}],3:[function(require,module,exports){
+},{"./worker/workerTasks.js":8}],3:[function(require,module,exports){
 /**
    A class to represent the bounds of shapes in the canvas. Simplifies
    calculations certain involving complex shapes. Specifically effective for
@@ -746,7 +672,7 @@ module.exports = {
     }
 };
 
-},{"./hash":5,"./minHeap":7,"underscore":8}],5:[function(require,module,exports){
+},{"./hash":5,"./minHeap":7,"underscore":9}],5:[function(require,module,exports){
 var _ = require('underscore');
 
 /**
@@ -1288,7 +1214,7 @@ module.exports = {
     }
 };
 
-},{"underscore":8}],6:[function(require,module,exports){
+},{"underscore":9}],6:[function(require,module,exports){
 var _ = require('underscore'),
     BoundingBox = require('./boundingBox');
 
@@ -1977,7 +1903,7 @@ module.exports = {
     }
 };
 
-},{"./boundingBox":3,"underscore":8}],7:[function(require,module,exports){
+},{"./boundingBox":3,"underscore":9}],7:[function(require,module,exports){
 //////////////////////////////////
 // Private class methods/fields //
 //////////////////////////////////
@@ -2204,6 +2130,90 @@ module.exports = {
 };
 
 },{}],8:[function(require,module,exports){
+var
+Graph = require('../util/graph'),
+    Direction = require('../enum/direction');
+
+/**
+    Functions to call from worker
+
+    @module worker/workerTasks
+ */
+module.exports = {
+    /**
+        Build a graph object from a JSON object passed from the worker
+
+        @method constructGraph
+        @param  {Object} dictionary JSON object representing graph
+        @return {Graph} Graph representing JSON object
+     */
+    constructGraph: function(dictionary) {
+        var
+        graph = new Graph.Graph(),
+            key;
+        // Add the nodes to the graph
+        for (key in dictionary) {
+            if (dictionary.hasOwnProperty(key)) {
+                key = parseInt(key);
+                graph.addNode(key);
+            }
+        }
+        // Add the edges
+        for (key in dictionary) {
+            if (dictionary.hasOwnProperty(key)) {
+                key = parseInt(key);
+
+                var
+                node = graph.getNode(key),
+                    neighborArr = dictionary[key],
+                    neighborArrLen = neighborArr.length,
+                    edge,
+                    neighborKey,
+                    neighbor,
+                    direction;
+
+                for (var index = 0; index < neighborArrLen; index++) {
+                    neighborKey = neighborArr[index];
+                    if (neighborKey !== undefined) {
+                        neighbor = graph.getNode(neighborKey);
+                        direction = index + Direction.MIN;
+                        edge = graph.addEdge(node, neighbor);
+                        edge.data = direction;
+                    }
+                }
+            }
+        }
+        return graph;
+    },
+
+    /**
+        Get path from source node to destinaton node
+
+        @method getPath
+        @param  {Graph} graph Graph
+        @param  {GraphNode} source Source node to start from
+        @param  {GraphNode} dest Destination node to stop at
+        @return {Array} Array of Direction enums representing the path
+     */
+    getPath: function(graph, source, dest) {
+        var
+        currentNode,
+            path = [];
+
+        graph.dijkstra(source, dest);
+
+        currentNode = dest;
+        while (currentNode.previous !== undefined) {
+            var dir = graph.getEdge(currentNode.previous, currentNode).data;
+            path.push(dir);
+            currentNode = currentNode.previous;
+        }
+
+        return path.reverse();
+    }
+};
+
+},{"../enum/direction":1,"../util/graph":4}],9:[function(require,module,exports){
 //     Underscore.js 1.5.2
 //     http://underscorejs.org
 //     (c) 2009-2013 Jeremy Ashkenas, DocumentCloud and Investigative Reporters & Editors

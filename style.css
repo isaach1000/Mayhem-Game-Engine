@@ -3,6 +3,16 @@ body {
     margin: 0;
     font-family: Helvetica, arial, freesans, clean, sans-serif;
 }
+#controls {
+    position: absolute;
+    background-color: #FFFFFF;
+    border-radius: 0.4em;
+    width: 100px;
+    height: 100px;
+    top: 100px;
+    left: 1100px;
+    padding: 10px;
+}
 #content {
     position: absolute;
     top: 700px;

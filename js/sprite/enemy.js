@@ -2,7 +2,8 @@ var
 AbstractPlayer = require('./abstractPlayer'),
     Shape = require('../foundation/shape'),
     Animation = require('../foundation/animation'),
-    Hash = require('../util/hash');
+    Hash = require('../util/hash'),
+    WorkerTasks = require('../worker/workerTasks');
 
 /**
     This class handles the AI and drawing of an enemy.
@@ -102,30 +103,41 @@ module.exports = {
         };
 
         this.calculateRoute = function() {
+            var startTime = new Date();
             if (worker === undefined) {
-                return; // TODO: calculate route without Worker
+                var
+                graph = WorkerTasks.constructGraph(mazeJson),
+                    source = Hash.hashcode(this.location),
+                    destination = Hash.hashcode(player.location),
+                    sourceNode = graph.getNode(source),
+                    destinationNode = graph.getNode(destination),
+                    path = WorkerTasks.getPath(graph, sourceNode,
+                        destinationNode);
+
+                this.clearMoves();
+                this.addMoves(path);
+                console.debug('time:', new Date() - startTime);
+            } else {
+                worker.onmessage = function(ev) {
+                    var data = ev.data,
+                        moves = data.moves,
+                        responseId = data.responseId;
+                    // Make sure the enemy has not moved since the request
+                    if (responseId !== messageId) {
+                        return;
+                    }
+                    _this.clearMoves();
+                    _this.addMoves(moves);
+                    console.debug('time:', new Date() - startTime);
+                };
+
+                worker.postMessage({
+                    graph: mazeJson,
+                    source: Hash.hashcode(this.location),
+                    destination: Hash.hashcode(player.location),
+                    messageId: messageId
+                });
             }
-
-            worker.addEventListener('message', function(ev) {
-                var data = ev.data,
-                    moves = data.moves,
-                    responseId = data.responseId;
-
-                // Make sure the enemy has not moved since the request
-                if (responseId !== messageId) {
-                    return;
-                }
-
-                _this.clearMoves();
-                _this.addMoves(moves);
-            });
-
-            worker.postMessage({
-                graph: mazeJson,
-                source: Hash.hashcode(this.location),
-                destination: Hash.hashcode(player.location),
-                messageId: messageId
-            });
         };
 
         /**

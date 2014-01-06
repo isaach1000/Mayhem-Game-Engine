@@ -95,6 +95,23 @@ module.exports = function(grunt) {
                 }
             }
         },
+        copy: {
+            build: {
+                files: {
+                    'build/index.html': 'index.html'
+                },
+                options: {
+                    process: function(content, srcpath) {
+                        content = content.replace(
+                            /\s*<script.*src="\/\/localhost\:35729\/livereload\.js\">[\n\s]*<\/script>\s*/g,
+                            '\n');
+                        content = content.replace('style.css',
+                            'style.min.css');
+                        return content;
+                    }
+                }
+            }
+        },
         concat: {
             main: {
                 src: [
@@ -174,6 +191,7 @@ module.exports = function(grunt) {
 
     grunt.loadNpmTasks('grunt-contrib-clean');
     grunt.loadNpmTasks('grunt-contrib-concat');
+    grunt.loadNpmTasks('grunt-contrib-copy');
     grunt.loadNpmTasks('grunt-contrib-uglify');
     grunt.loadNpmTasks('grunt-contrib-watch');
     grunt.loadNpmTasks('grunt-contrib-jshint');
@@ -195,5 +213,5 @@ module.exports = function(grunt) {
         'markdown:*',
         'jsbeautifier:html'
     ]);
-    grunt.registerTask('build', ['default', 'uglify:main']);
+    grunt.registerTask('build', ['default', 'uglify:main', 'copy:build']);
 };

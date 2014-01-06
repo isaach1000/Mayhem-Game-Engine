@@ -74,7 +74,7 @@ module.exports = {
             @property HEIGHT
             @type {number}
          */
-        this.HEIGHT = 600;
+        this.HEIGHT = 500;
 
         /**
             Margin add to width and height when creating canvas

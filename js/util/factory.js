@@ -24,7 +24,7 @@ module.exports = {
         options = options || {};
         cssRules = cssRules || {};
         var width = '1000px',
-            height = '600px';
+            height = '500px';
         if (options.width) {
             width = options.width;
             delete options.width;
@@ -47,6 +47,6 @@ module.exports = {
         // Must use attr method for width and height and not options
         // or jQuery will default to using CSS for width and height
         return $('<canvas>', options).attr('width', width).attr(
-            'height', height).appendTo('body');
+            'height', height).appendTo('#game-container');
     }
 };

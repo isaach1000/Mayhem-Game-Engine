@@ -118,6 +118,10 @@ module.exports = {
             @return {void}
          */
         this.checkCollision = function(candidates) {
+            if (this.isFrozen) {
+                return;
+            }
+
             var
             prizes = candidates.filter(function(candidate) {
                 return candidate instanceof Prize.Prize;

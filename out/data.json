@@ -239,9 +239,11 @@
             "fors": {},
             "namespaces": {}
         },
-        "js/task.js": {
-            "name": "js/task.js",
-            "modules": {},
+        "js/worker/workerTasks.js": {
+            "name": "js/worker/workerTasks.js",
+            "modules": {
+                "worker/workerTasks": 1
+            },
             "classes": {},
             "fors": {},
             "namespaces": {}
@@ -346,7 +348,7 @@
             "namespaces": {},
             "tag": "module",
             "file": "js/sprite/enemy.js",
-            "line": 32
+            "line": 33
         },
         "sprite/maze": {
             "name": "sprite/maze",
@@ -492,6 +494,17 @@
             "tag": "module",
             "file": "js/util/physics.js",
             "line": 8
+        },
+        "worker/workerTasks": {
+            "name": "worker/workerTasks",
+            "submodules": {},
+            "classes": {},
+            "fors": {},
+            "namespaces": {},
+            "tag": "module",
+            "file": "js/worker/workerTasks.js",
+            "line": 5,
+            "description": "Functions to call from worker"
         }
     },
     "classes": {
@@ -868,7 +881,7 @@
             "module": "sprite/enemy",
             "namespace": "",
             "file": "js/sprite/enemy.js",
-            "line": 32,
+            "line": 33,
             "description": "This class handles the AI and drawing of an enemy.",
             "extends": "Sprite",
             "is_constructor": 1,
@@ -2436,7 +2449,7 @@
         },
         {
             "file": "js/level/mainLevel.js",
-            "line": 112,
+            "line": 129,
             "description": "Function to perform on player's death.",
             "itemtype": "method",
             "name": "die",
@@ -2536,7 +2549,7 @@
         },
         {
             "file": "js/sprite/enemy.js",
-            "line": 68,
+            "line": 69,
             "description": "Initialization method",
             "itemtype": "method",
             "name": "init",
@@ -2551,7 +2564,7 @@
         },
         {
             "file": "js/sprite/enemy.js",
-            "line": 85,
+            "line": 86,
             "description": "Perform an action if possible",
             "itemtype": "method",
             "name": "act",
@@ -2564,7 +2577,7 @@
         },
         {
             "file": "js/sprite/enemy.js",
-            "line": 131,
+            "line": 143,
             "description": "Add moves to the moves queue",
             "itemtype": "method",
             "name": "addMoves",
@@ -2580,7 +2593,7 @@
         },
         {
             "file": "js/sprite/enemy.js",
-            "line": 141,
+            "line": 153,
             "description": "Clear moves from the moves queue",
             "itemtype": "method",
             "name": "clearMoves",
@@ -4853,8 +4866,8 @@
             "module": "util/physics"
         },
         {
-            "file": "js/task.js",
-            "line": 5,
+            "file": "js/worker/workerTasks.js",
+            "line": 11,
             "description": "Build a graph object from a JSON object passed from the worker",
             "itemtype": "method",
             "name": "constructGraph",
@@ -4870,11 +4883,11 @@
                 "type": "Graph"
             },
             "class": "",
-            "module": "util/physics"
+            "module": "worker/workerTasks"
         },
         {
-            "file": "js/task.js",
-            "line": 51,
+            "file": "js/worker/workerTasks.js",
+            "line": 57,
             "description": "Get path from source node to destinaton node",
             "itemtype": "method",
             "name": "getPath",
@@ -4900,7 +4913,7 @@
                 "type": "Array"
             },
             "class": "",
-            "module": "util/physics"
+            "module": "worker/workerTasks"
         }
     ],
     "warnings": []

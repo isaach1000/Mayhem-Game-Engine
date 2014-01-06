@@ -15,7 +15,7 @@ By using Web Workers, a user can click or select user interface elements while t
 ## Our demo:
 The above version of the Pacman game is slow because there are two concurrent processes. One is using the canvas to constantly redraw the visuals which is the primary focus of the above project. The second process is the computation of the game logic. The game implements Dijkstra’s search algorithm to determine the shortest path from the monster to the player. This algorithm has a long runtime, and although the monster’s path came out somewhat buggy, he usually makes his way to the player.
 
-The above demo is somewhat slow because the game is trying to run these two sophisticated processeses simultaneously. Below is the same exact game, but it uses Web Workers to separate the two tasks. As you can see, the result is a smoother game that remains responsive to the user.
+The above demo has rendering errors because the game is trying to run these two sophisticated processeses simultaneously. If you check the worker checkbox and press "Reset", the resulting game is the same exact game, but it uses Web Workers to separate the two tasks. As you can see, the result is a smoother game that remains responsive to the user's input.
 
 ## Alternative Solutions to the problem:
 Web Workers is the only way to implement multithreading in web pages.
