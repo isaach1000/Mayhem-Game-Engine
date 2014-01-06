@@ -131,7 +131,7 @@ module.exports = function(grunt) {
     grunt.registerTask('default', [
         'jsbeautifier:*',
         'jshint:*',
-        'yuidoc:main', // TODO: fix yuidoc:lint
+        'yuidoc:*',
         'cssmin:*',
         'browserify:*',
         'concat:*'
