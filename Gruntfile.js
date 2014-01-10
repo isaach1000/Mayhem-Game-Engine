@@ -27,6 +27,13 @@ module.exports = function(grunt) {
             docs: {
                 files: ['js/**/*.js', '!js/lib/**'],
                 tasks: ['jsbeautifier:js', 'jshint:main', 'yuidoc:main']
+            },
+            markdown: {
+                files: ['*.md'],
+                tasks: ['markdown-build'],
+                options: {
+                    livereload: true
+                }
             }
         },
         jsbeautifier: {
@@ -221,7 +228,7 @@ module.exports = function(grunt) {
         'markdown:*',
         'jsbeautifier:html'
     ]);
-    grunt.registerTask('md', [
+    grunt.registerTask('markdown-build', [
         'concat:markdown',
         'markdown:all'
     ]);

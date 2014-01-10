@@ -26,19 +26,18 @@ github.com style (c) Vasily Polovnyov <vast@whiteants.net>
 */
 
 .hljs {
-  display: block; padding: 0.5em;
-  color: #333;
-  background: #f8f8f8
+    display: block;
+    padding: 0.5em;
+    color: #333;
+    background: #f8f8f8
 }
-
 .comment,
 .template_comment,
 .diff .header,
 .javadoc {
-  color: #998;
-  font-style: italic
+    color: #998;
+    font-style: italic
 }
-
 .keyword,
 .css .rule .keyword,
 .winutils,
@@ -47,100 +46,85 @@ github.com style (c) Vasily Polovnyov <vast@whiteants.net>
 .subst,
 .request,
 .status {
-  color: #333;
-  font-weight: bold
+    color: #333;
+    font-weight: bold
 }
-
 .number,
 .hexcolor,
 .ruby .constant {
-  color: #099;
+    color: #099;
 }
-
 .string,
 .tag .value,
 .phpdoc,
 .tex .formula {
-  color: #d14
+    color: #d14
 }
-
 .title,
 .id,
 .coffeescript .params,
 .scss .preprocessor {
-  color: #900;
-  font-weight: bold
+    color: #900;
+    font-weight: bold
 }
-
 .javascript .title,
 .lisp .title,
 .clojure .title,
 .subst {
-  font-weight: normal
+    font-weight: normal
 }
-
 .class .title,
 .haskell .type,
 .vhdl .literal,
 .tex .command {
-  color: #458;
-  font-weight: bold
+    color: #458;
+    font-weight: bold
 }
-
 .tag,
 .tag .title,
 .rules .property,
 .django .tag .keyword {
-  color: #000080;
-  font-weight: normal
+    color: #000080;
+    font-weight: normal
 }
-
 .attribute,
 .variable,
 .lisp .body {
-  color: #008080
+    color: #008080
 }
-
 .regexp {
-  color: #009926
+    color: #009926
 }
-
 .symbol,
 .ruby .symbol .string,
 .lisp .keyword,
 .tex .special,
 .prompt {
-  color: #990073
+    color: #990073
 }
-
 .built_in,
 .lisp .title,
 .clojure .built_in {
-  color: #0086b3
+    color: #0086b3
 }
-
 .preprocessor,
 .pragma,
 .pi,
 .doctype,
 .shebang,
 .cdata {
-  color: #999;
-  font-weight: bold
+    color: #999;
+    font-weight: bold
 }
-
 .deletion {
-  background: #fdd
+    background: #fdd
 }
-
 .addition {
-  background: #dfd
+    background: #dfd
 }
-
 .diff .change {
-  background: #0086b3
+    background: #0086b3
 }
-
 .chunk {
-  color: #aaa
+    color: #aaa
 }
