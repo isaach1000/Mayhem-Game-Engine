@@ -60,7 +60,8 @@ module.exports = function(grunt) {
                         indentSize: 4,
                         maxPreserveNewlines: 10,
                         preserveNewlines: true,
-                        unformatted: ['a', 'sub', 'sup', 'b', 'i', 'u'],
+                        unformatted: ['a', 'sub', 'sup', 'b', 'i', 'u',
+                            'pre'],
                         wrapLineLength: 0
                     }
                 }
@@ -143,6 +144,13 @@ module.exports = function(grunt) {
                     'workers.md'
                 ],
                 dest: 'tmp/project.md'
+            },
+            css: {
+                src: [
+                    'styles/main.css',
+                    'styles/github.css'
+                ],
+                dest: 'style.css'
             }
         },
         browserify: {
@@ -178,11 +186,7 @@ module.exports = function(grunt) {
                     template: 'game.jst',
                     markdownOptions: {
                         gfm: true,
-                        highlight: 'manual',
-                        codeLines: {
-                            before: '<span>',
-                            after: '</span>'
-                        }
+                        highlight: 'manual'
                     }
                 }
             }
@@ -207,11 +211,23 @@ module.exports = function(grunt) {
         'jsbeautifier:css',
         'jshint:*',
         'yuidoc:*',
+        'concat:css',
         'cssmin:*',
         'browserify:*',
-        'concat:*',
+        'concat:main',
+        'concat:worker',
+        'concat:specs',
+        'concat:markdown',
         'markdown:*',
         'jsbeautifier:html'
     ]);
-    grunt.registerTask('build', ['default', 'uglify:main', 'copy:build']);
+    grunt.registerTask('md', [
+        'concat:markdown',
+        'markdown:all'
+    ]);
+    grunt.registerTask('build', [
+        'default',
+        'uglify:main',
+        'copy:build'
+    ]);
 };

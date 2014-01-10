@@ -16,22 +16,30 @@ three-dimensional drawings as well. Although Flash is still widely used on the
 web, many mobile browsers have dropped support for Flash, making it a dying
 platform.
 
-## The Canvas API
-The canvas API is simplistic. The API methods allow one to draw lines,
-basic shapes, and custom paths. However, there are many needed methods that
-are not included in the canvas API. For example, there is no method to draw a
-dotted line in the current canvas API. One must implement this method own his/
-her own in order to draw dotted lines. Also, the current implementation does not
-help with hit testing at all. There is no built-in method to find whether or not
-the mouse or a polygon has collided with another polygon. The canvas programmer
-must use mathematics to calculate these collisions, while keeping performance
-high. A popular solution for hit-testing is to use bounding boxes. The bounding
-boxes are used to check for collisions before performing expensive calculations
-to determine polygon collisions (using ray-casting, etc.). Finally, various
-transformations can be applied to the drawing context, such as translating,
-scaling, and rotating. In practice, it proves easier to use transformation
-matrices to represent the various transformations. This allows the programmer
-to handle various different transformations when considering collisions, etc.
+## The Canvas Context
+In order to draw to the canvas element, one must retrieve the context from that
+canvas element. If we were to have a canvas on our page with the id "myCanvas",
+we could retrieve the canvas context (using jQuery) like so:
+```javascript
+var ctx = $('#myCanvas')[0].getContext('2d'); // Get 2d context
+```
+
+## Creating 2D Worlds With Canvas
+Canvas, like other rendering API's, provides drawing methods, but leaves
+the developer with the task of abstracting these low-level methods. For example,
+the drawing of a line in canvas looks like this
+```javascript
+ctx.moveTo(3, 2); // change position to xy coordinate (3, 2)
+ctx.lineTo(10, 5); // draw line from position to xy coordinate (10, 5)
+ctx.stroke(); // stroke the line
+```
+
+But what if we want to draw a polygon? Canvas has no method that takes an array
+of points and draws a polygon. The solution looks something like this:
+
+```javascript
+
+```
 
 ## Performance considerations
 The canvas API is fast, but JavaScript's single-threaded environment makes

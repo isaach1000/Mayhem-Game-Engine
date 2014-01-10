@@ -28,12 +28,14 @@
         <p>As the web standard has progressed, it became apparent that modern browsers could implement this technology without the use of plugins. With the release of HTML5 came the new canvas DOM element. The canvas element can render two-dimensional drawings,
             and eventually, will be relied upon to handle three-dimensional drawings as well. Although Flash is still widely used on the web, many mobile browsers have dropped support for Flash, making it a dying platform.
         </p>
-        <h2 id="the-canvas-api">The Canvas API</h2>
-        <p>The canvas API is simplistic. The API methods allow one to draw lines, basic shapes, and custom paths. However, there are many needed methods that are not included in the canvas API. For example, there is no method to draw a dotted line in the
-            current canvas API. One must implement this method own his/ her own in order to draw dotted lines. Also, the current implementation does not help with hit testing at all. There is no built-in method to find whether or not the mouse or a polygon
-            has collided with another polygon. The canvas programmer must use mathematics to calculate these collisions, while keeping performance high. A popular solution for hit-testing is to use bounding boxes. The bounding boxes are used to check
-            for collisions before performing expensive calculations to determine polygon collisions (using ray-casting, etc.). Finally, various transformations can be applied to the drawing context, such as translating, scaling, and rotating. In practice,
-            it proves easier to use transformation matrices to represent the various transformations. This allows the programmer to handle various different transformations when considering collisions, etc.</p>
+        <h2 id="the-canvas-context">The Canvas Context</h2>
+        <p>In order to draw to the canvas element, one must retrieve the context from that canvas element. If we were to have a canvas on our page with the id &quot;myCanvas&quot;, we could retrieve the canvas context (using jQuery) like so:</p>
+        <pre><code class="lang-javascript"><span class="keyword">var</span> ctx = $(<span class="string">'#myCanvas'</span>)[<span class="number">0</span>].getContext(<span class="string">'2d'</span>); <span class="comment">// Get 2d context</span></code></pre>
+        <h2 id="creating-2d-worlds-with-canvas">Creating 2D Worlds With Canvas</h2>
+        <p>Canvas, like other rendering API&#39;s, provides drawing methods, but leaves the developer with the task of abstracting these low-level methods. For example, the drawing of a line in canvas looks like this</p>
+        <pre><code class="lang-javascript">ctx.moveTo(<span class="number">3</span>, <span class="number">2</span>); <span class="comment">// change position to xy coordinate (3, 2)</span>
+ctx.lineTo(<span class="number">10</span>, <span class="number">5</span>); <span class="comment">// draw line from position to xy coordinate (10, 5)</span>
+ctx.stroke(); <span class="comment">// stroke the line</span></code></pre>
         <h2 id="performance-considerations">Performance considerations</h2>
         <p>The canvas API is fast, but JavaScript&#39;s single-threaded environment makes handling performance imperative. Calculations and rendering can freeze the user- interface and crash the site. Therefore, careful consideration is necessary when designing
             complex games with many mathematical calculations. As Joseph Aharon explains below, we used Web Workers to prevent performance issues.</p>
