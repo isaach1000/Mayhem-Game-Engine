@@ -3,6 +3,17 @@
 ## Introduction
 This project demostrates the use of HTML5 Canvas in game development.
 
+## Installation
+Clone the git repository. The build directory contains an index.html file with
+all of the necessary components.
+
+## Contribution
+Clone the git repository. Do `npm install` to get the dependencies. The
+grunt-cli is necessary to perform the build on the project. The script/commit.sh
+script performs a build, adds the changes to the git repo, commits the changes,
+and pushes to the branch. See the grunt watch tasks for convenient rebuilding
+on each save.
+
 ## Libraries
 jQuery, UnderscoreJS, Browserify, Jasmine
 
