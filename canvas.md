@@ -143,9 +143,9 @@ choice is called ray-casting. The idea is to draw an imaginary line from a point
 outside of the polygon to the point that we are testing. Then, check the number
 of times this imaginary line intersects with a side of the polygon. If the
 number is odd, the point is within the polygon, otherwise, it is outside of the
-polygon. These calculations are so computationally inefficient, it would slow
-down the game engine significant to perform these calculations for every
-suspected collision. Therefore, each shape also has a bounding box, represented
+polygon. These calculations are so computationally inefficient, performing these
+calculations for every suspected collision. would slow down the game engine
+significantly Therefore, each shape also has a bounding box, represented
 by the BoundingBox class in util/boundingBox. Using bounding boxes, we can skip
 the difficult calculations if a point does not lie in the bounding box of the
 polygon. The bounding box is always bigger than the shape it contains.
@@ -170,7 +170,7 @@ equation below illustrates the use of a transformation matrix:
 | 1  |   | 0 <sub> </sub> 0<sub> </sub> 1<sub> </sub> | | 1 |
 </pre>
 
-The matrix <em>s<sub>x</sub></em> and <em>s<sub>y</sub></em> determine the
+<em>s<sub>x</sub></em> and <em>s<sub>y</sub></em> determine the
 scaling of the original shape, so it is originally set to 1, which is 100%.
 <em>sh<sub>x</sub></em> and <em>sh<sub>y</sub></em> refer to the shear of the
 original shape and are also used in rotations. <em>sh</em> is initially 0.

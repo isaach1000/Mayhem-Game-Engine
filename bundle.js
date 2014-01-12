@@ -1198,12 +1198,12 @@ module.exports = {
         });
 
         /**
-                Draw the rectangle onto the canvas using the CanvasDrawer.
+            Draw the rectangle onto the canvas using the CanvasDrawer.
 
-                @method _drawShape
-                @protected
-                @return {void}
-             */
+            @method _drawShape
+            @protected
+            @return {void}
+         */
         this._drawShape = function(canvasDrawer) {
             canvasDrawer.beginPath().contextSettings = this.drawingSettings;
             var pts = this.points,
@@ -1232,15 +1232,15 @@ module.exports = {
         };
 
         /**
-                Hit testing based on
-                <a href="http://stackoverflow.com/a/2922778/1930331">this
-                </a> StackOverflow answer.
+            Hit testing based on
+            <a href="http://stackoverflow.com/a/2922778/1930331">this
+            </a> StackOverflow answer.
 
-                @method _hitTest
-                @protected
-                @param {Point} point A point
-                @return {boolean} If the point is in the polygon
-             */
+            @method _hitTest
+            @protected
+            @param {Point} point A point
+            @return {boolean} If the point is in the polygon
+         */
         this._hitTest = function(point) {
             var p = this.transformation.adjustPoint(point),
                 nvert = this.points.length,
@@ -1259,6 +1259,9 @@ module.exports = {
             return c;
         };
 
+        /**
+            Update the bounding box
+        */
         this._updateBoundingBox = function() {
             var transformedPoints = this.points.map(function(p) {
                 return _this.transformation.applyToPoint(p);
