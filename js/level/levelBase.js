@@ -1,5 +1,5 @@
 var
-CanvasDrawer = require('../foundation/canvasDrawer'),
+    CanvasDrawer = require('../foundation/canvasDrawer'),
     Factory = require('../util/factory'),
     BoundingBox = require('../util/boundingBox'),
     Physics = require('../util/physics'),
@@ -53,7 +53,7 @@ module.exports = {
          */
         this.createContext = function(id) {
             var
-            $canvas = this.createCanvas(id),
+                $canvas = this.createCanvas(id),
                 w = this.WIDTH,
                 h = this.HEIGHT,
                 ctx = $canvas[0].getContext('2d');

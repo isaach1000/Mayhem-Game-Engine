@@ -7,7 +7,7 @@ addEventListener('message', function(ev) {
         data.source !== undefined &&
         data.destination !== undefined) {
         var
-        graph = WorkerTasks.constructGraph(data.graph),
+            graph = WorkerTasks.constructGraph(data.graph),
             sourceNode = graph.getNode(data.source),
             destinationNode = graph.getNode(data.destination),
             path = WorkerTasks.getPath(graph, sourceNode, destinationNode);

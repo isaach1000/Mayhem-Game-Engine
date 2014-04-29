@@ -142,12 +142,12 @@ getJasmineRequireObj().base = function(j$) {
     j$.createSpy = function(name, originalFn) {
 
         var spyStrategy = new j$.SpyStrategy({
-            name: name,
-            fn: originalFn,
-            getSpy: function() {
-                return spy;
-            }
-        }),
+                name: name,
+                fn: originalFn,
+                getSpy: function() {
+                    return spy;
+                }
+            }),
             callTracker = new j$.CallTracker(),
             spy = function() {
                 callTracker.track({
@@ -509,7 +509,7 @@ getJasmineRequireObj().Env = function(j$) {
 
         // TODO: fix this naming, and here's where the value comes in
         this.catchExceptions = function(value) {
-            catchExceptions = !! value;
+            catchExceptions = !!value;
             return catchExceptions;
         };
 
@@ -1251,7 +1251,8 @@ getJasmineRequireObj().Expectation = function() {
                 if (!result.message) {
                     args.unshift(this.isNot);
                     args.unshift(name);
-                    message = this.util.buildFailureMessage.apply(null, args);
+                    message = this.util.buildFailureMessage.apply(null,
+                        args);
                 } else {
                     message = result.message;
                 }
@@ -2077,7 +2078,7 @@ getJasmineRequireObj().toBeFalsy = function() {
         return {
             compare: function(actual) {
                 return {
-                    pass: !! !actual
+                    pass: !!!actual
                 };
             }
         };
@@ -2161,7 +2162,7 @@ getJasmineRequireObj().toBeTruthy = function() {
         return {
             compare: function(actual) {
                 return {
-                    pass: !! actual
+                    pass: !!actual
                 };
             }
         };
@@ -2325,8 +2326,8 @@ getJasmineRequireObj().toThrow = function(j$) {
         return {
             compare: function(actual, expected) {
                 var result = {
-                    pass: false
-                },
+                        pass: false
+                    },
                     threw = false,
                     thrown;
 
@@ -2462,7 +2463,8 @@ getJasmineRequireObj().toThrowError = function(j$) {
                         return fail(
                             "Expected function to throw an exception with message " +
                             j$.pp(message) +
-                            ", but it threw an exception with message " + j$.pp(
+                            ", but it threw an exception with message " +
+                            j$.pp(
                                 thrown.message) + ".");
                     }
                 }
@@ -2476,7 +2478,8 @@ getJasmineRequireObj().toThrowError = function(j$) {
                         return fail(
                             "Expected function to throw an exception with a message matching " +
                             j$.pp(regexp) +
-                            ", but it threw an exception with message " + j$.pp(
+                            ", but it threw an exception with message " +
+                            j$.pp(
                                 thrown.message) + ".");
                     }
                 }

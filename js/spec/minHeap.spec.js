@@ -24,10 +24,10 @@ describe('MinHeap', function() {
             return data1.complex.number - data2.complex.number;
         });
         var obj1 = {
-            complex: {
-                number: 3
-            }
-        },
+                complex: {
+                    number: 3
+                }
+            },
             obj2 = {
                 complex: {
                     number: 1

@@ -37,7 +37,7 @@ module.exports = {
         /////////////////////////////////////
 
         var
-        x,
+            x,
             y,
             boundingBox,
             transformation = new MathExtensions.Transformation();
@@ -240,7 +240,7 @@ module.exports = {
             var minX, minY, maxX, maxY;
             this.forEachShape(function(shape) {
                 var
-                sBoxX = shape.boundingBox.x,
+                    sBoxX = shape.boundingBox.x,
                     sBoxY = shape.boundingBox.y;
 
                 if (minX === undefined || minX > sBoxX) {

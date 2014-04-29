@@ -1,5 +1,5 @@
 var
-AbstractPlayer = require('./abstractPlayer'),
+    AbstractPlayer = require('./abstractPlayer'),
     Shape = require('../foundation/shape'),
     Animation = require('../foundation/animation'),
     Hash = require('../util/hash'),
@@ -18,7 +18,7 @@ AbstractPlayer = require('./abstractPlayer'),
 //////////////////////////////////
 
 var
-MOVE_DELAY = 300,
+    MOVE_DELAY = 300,
     FILL_STYLE = '#FF0000',
     RADIUS = 20;
 
@@ -50,7 +50,7 @@ module.exports = {
         /////////////////////////////////////
 
         var
-        location = maze.get(row, column),
+            location = maze.get(row, column),
             center = {
                 x: 0,
                 y: 0
@@ -106,7 +106,7 @@ module.exports = {
             var startTime = new Date();
             if (worker === undefined) {
                 var
-                graph = WorkerTasks.constructGraph(mazeJson),
+                    graph = WorkerTasks.constructGraph(mazeJson),
                     source = Hash.hashcode(this.location),
                     destination = Hash.hashcode(player.location),
                     sourceNode = graph.getNode(source),

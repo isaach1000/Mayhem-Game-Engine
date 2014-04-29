@@ -2,13 +2,13 @@ var MathExtensions = require('../util/mathExtensions');
 
 describe('Matrix', function() {
     var
-    matrix1 = new MathExtensions.Matrix([11, 9, 24, 2, 1, 5, 2, 6,
+        matrix1 = new MathExtensions.Matrix([11, 9, 24, 2, 1, 5, 2, 6,
         3, 17, 18, 1, 2, 5, 7, 1], 4, 4),
         matrix2 = new MathExtensions.Matrix([11, 6, 32, 1, 2, 4, 5,
             2, 1], 3, 3);
     it('lu decomposition', function() {
         var
-        luDec = matrix1.luDecomposition(),
+            luDec = matrix1.luDecomposition(),
             l = luDec.l,
             u = luDec.u;
 

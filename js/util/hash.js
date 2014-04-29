@@ -117,7 +117,7 @@ module.exports = {
         function rehash() {
             // Create new bucket that is double the size
             var
-            oldBucket = bucket,
+                oldBucket = bucket,
                 oldIndices = indicesTaken,
                 hashTarget;
 

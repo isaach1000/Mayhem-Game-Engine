@@ -1,5 +1,5 @@
 var
-Sprite = require('./sprite'),
+    Sprite = require('./sprite'),
     Shape = require('../foundation/shape'),
     Animation = require('../foundation/animation'),
     Direction = require('../enum/direction');
@@ -44,7 +44,7 @@ module.exports = {
         /////////////////////////////////////
 
         var
-        location = maze.get(row, column),
+            location = maze.get(row, column),
             center = {
                 x: 0,
                 y: 0
@@ -204,10 +204,10 @@ module.exports = {
             dy = newLocation.y - location.y;
 
             var
-            newCenter = {
-                x: this.x + dx,
-                y: this.y + dy
-            },
+                newCenter = {
+                    x: this.x + dx,
+                    y: this.y + dy
+                },
                 dirX = dx > 0 ? 1 : -1,
                 dirY = dy > 0 ? 1 : -1,
                 idealTime = 100,

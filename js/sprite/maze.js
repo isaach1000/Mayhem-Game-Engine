@@ -1,5 +1,5 @@
 var
-Sprite = require('./sprite'),
+    Sprite = require('./sprite'),
     Shape = require('../foundation/shape'),
     Hash = require('../util/hash'),
     Graph = require('../util/graph'),
@@ -19,7 +19,7 @@ Sprite = require('./sprite'),
 //////////////////////////////////
 
 var
-TILE_SIDE = 50,
+    TILE_SIDE = 50,
     WALL_STYLE = '#FFFFFF',
     EMPTY_STYLE = '#000000',
     WALL_THICKNESS = 4;
@@ -45,7 +45,7 @@ module.exports = {
         /////////////////////////////////////
 
         var
-        locations = [],
+            locations = [],
             shapes = [];
 
         /**
@@ -233,10 +233,10 @@ module.exports = {
          */
         function MazeWall(x, y, isVertical) {
             var
-            w = isVertical ? WALL_THICKNESS : TILE_SIDE +
+                w = isVertical ? WALL_THICKNESS : TILE_SIDE +
                 WALL_THICKNESS,
                 h = isVertical ? TILE_SIDE + WALL_THICKNESS :
-                    WALL_THICKNESS,
+                WALL_THICKNESS,
                 isPenetrable = false;
 
             /**
@@ -359,7 +359,7 @@ module.exports = {
 
                 if (randomLocation !== null) {
                     var
-                    wall = location.walls[randomDir],
+                        wall = location.walls[randomDir],
                         oppWall = randomLocation.walls[Direction
                             .opposite(randomDir)];
 
@@ -544,7 +544,7 @@ module.exports = {
          */
         this.toGraph = function() {
             var
-            graph = new Graph.Graph(),
+                graph = new Graph.Graph(),
                 nodes = [],
                 currentRowIndex,
                 currentRow;
@@ -564,7 +564,7 @@ module.exports = {
 
             _this.forEachLocation(function(location, i, j) {
                 var
-                u = nodes[i][j],
+                    u = nodes[i][j],
                     v;
 
                 if (location.up !== null) {

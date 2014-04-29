@@ -12,7 +12,7 @@ var Sprite = require('./sprite'),
 //////////////////////////////////
 
 var
-FILL_STYLE = '#00FF76',
+    FILL_STYLE = '#00FF76',
     PRIZE_SIDE = 15;
 
 /**
@@ -36,10 +36,10 @@ module.exports = {
         /////////////////////////////////////
 
         var
-        rect = new Shape.Rectangle(-PRIZE_SIDE / 2, -PRIZE_SIDE / 2,
-            PRIZE_SIDE, PRIZE_SIDE, drawer, {
-                fillStyle: FILL_STYLE
-            }),
+            rect = new Shape.Rectangle(-PRIZE_SIDE / 2, -PRIZE_SIDE / 2,
+                PRIZE_SIDE, PRIZE_SIDE, drawer, {
+                    fillStyle: FILL_STYLE
+                }),
             location = maze.get(row, column),
             shapes = [rect];
 

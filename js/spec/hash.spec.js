@@ -1,7 +1,8 @@
 var Hash = require('../util/hash');
 
 describe('Hash', function() {
-    var obj1 = {}, obj2 = {};
+    var obj1 = {},
+        obj2 = {};
     it('unique hashcodes', function() {
         expect(Hash.hashcode(obj1)).not.toBe(Hash.hashcode(obj2));
     });
@@ -15,9 +16,10 @@ describe('Hash', function() {
 describe('Hashset', function() {
     var set = new Hash.Hashset();
     var item = {
-        key1: 'val1',
-        key2: 2
-    }, itemClone = {
+            key1: 'val1',
+            key2: 2
+        },
+        itemClone = {
             key1: 'val1',
             key2: 2
         };
@@ -63,10 +65,12 @@ describe('Hashset', function() {
 describe('Hashtable', function() {
     var table = new Hash.Hashtable();
     var key = {
-        prop: 'property'
-    }, value = {
+            prop: 'property'
+        },
+        value = {
             prop: 'val'
-        }, keyClone = {
+        },
+        keyClone = {
             prop: 'property'
         };
     it('put', function() {

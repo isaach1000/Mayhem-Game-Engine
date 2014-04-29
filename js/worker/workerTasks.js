@@ -1,5 +1,5 @@
 var
-Graph = require('../util/graph'),
+    Graph = require('../util/graph'),
     Direction = require('../enum/direction');
 
 /**
@@ -17,7 +17,7 @@ module.exports = {
      */
     constructGraph: function(dictionary) {
         var
-        graph = new Graph.Graph(),
+            graph = new Graph.Graph(),
             key;
         // Add the nodes to the graph
         for (key in dictionary) {
@@ -32,7 +32,7 @@ module.exports = {
                 key = parseInt(key);
 
                 var
-                node = graph.getNode(key),
+                    node = graph.getNode(key),
                     neighborArr = dictionary[key],
                     neighborArrLen = neighborArr.length,
                     edge,
@@ -65,7 +65,7 @@ module.exports = {
      */
     getPath: function(graph, source, dest) {
         var
-        currentNode,
+            currentNode,
             path = [];
 
         graph.dijkstra(source, dest);

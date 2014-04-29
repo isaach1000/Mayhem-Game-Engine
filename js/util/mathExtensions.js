@@ -131,7 +131,7 @@ module.exports = {
      */
     buildMatrix: function(rows) {
         var
-        numRows = rows.length,
+            numRows = rows.length,
             numColumns = rows[0].length;
 
         return new module.exports.Matrix(_.flatten(rows), numRows, numColumns);
@@ -367,7 +367,7 @@ module.exports = {
             // Inner helper function
             function pivotize() {
                 var
-                n = _this.numRows,
+                    n = _this.numRows,
                     id = [],
                     maxIter = function(i) {
                         return _this.get(i, j);
@@ -458,7 +458,7 @@ module.exports = {
         this.inverse = function() {
             if (this.numRows === 3) {
                 var
-                a = this.get(0, 0),
+                    a = this.get(0, 0),
                     b = this.get(0, 1),
                     c = this.get(0, 2),
                     d = this.get(1, 0),
@@ -468,7 +468,7 @@ module.exports = {
                     h = this.get(2, 1),
                     i = this.get(2, 2),
                     det = a * (e * i - f * h) - b * (i * d - f * g) +
-                        c * (d * h - e * g),
+                    c * (d * h - e * g),
                     inv = new module.exports.Matrix([
                         (e * i - f * h), -(b * i - c * h), (b * f -
                             c * e),
@@ -500,7 +500,7 @@ module.exports = {
         ////////////////////////////
 
         var
-        matrix = new module.exports.Matrix([
+            matrix = new module.exports.Matrix([
             1, 0, 0,
             0, 1, 0,
             0, 0, 1
@@ -654,7 +654,7 @@ module.exports = {
          */
         this.applyToPoint = function(point) {
             var
-            coords = new module.exports.Matrix([point.x, point.y, 1], 3, 1),
+                coords = new module.exports.Matrix([point.x, point.y, 1], 3, 1),
                 newCoords = matrix.multiply(coords),
                 x = newCoords.get(0, 0),
                 y = newCoords.get(1, 0);
@@ -674,7 +674,7 @@ module.exports = {
          */
         this.adjustPoint = function(point) {
             var
-            coords = new module.exports.Matrix([point.x, point.y, 1], 3, 1),
+                coords = new module.exports.Matrix([point.x, point.y, 1], 3, 1),
                 newCoords = matrix.inverse().multiply(coords),
                 x = newCoords.get(0, 0),
                 y = newCoords.get(1, 0);

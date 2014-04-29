@@ -32,7 +32,7 @@ module.exports = {
         /////////////////////////////////////
 
         var
-        eventHandlers = {},
+            eventHandlers = {},
             $domElement = $(domSelector);
 
         function addHandler(eventName, handler) {

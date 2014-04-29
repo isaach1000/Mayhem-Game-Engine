@@ -18,7 +18,7 @@ var AbstractPlayer = require('./abstractPlayer'),
 //////////////////////////////////
 
 var
-HEAD_STYLE = 'yellow',
+    HEAD_STYLE = 'yellow',
     EYE_STYLE = 'black',
     MOUTH_STYLE = 'black',
     MOUTH_MAX = 2;
@@ -53,10 +53,10 @@ module.exports = {
         /////////////////////////////////////
 
         var
-        center = {
-            x: 0,
-            y: 0
-        },
+            center = {
+                x: 0,
+                y: 0
+            },
             head = new Shape.Circle(center.x, center.y, 18,
                 drawer, {
                     fillStyle: HEAD_STYLE
@@ -84,7 +84,7 @@ module.exports = {
                 physicsEngine, drawer, shapes);
 
             var
-            cycleDuration = 600,
+                cycleDuration = 600,
                 mouthAnim = new Animation.Animation(_this, function(
                     time) {
                     mouth.transformation.sy = MOUTH_MAX * Math.sin(
@@ -123,9 +123,9 @@ module.exports = {
             }
 
             var
-            prizes = candidates.filter(function(candidate) {
-                return candidate instanceof Prize.Prize;
-            }),
+                prizes = candidates.filter(function(candidate) {
+                    return candidate instanceof Prize.Prize;
+                }),
                 enemies = candidates.filter(function(candidate) {
                     return candidate instanceof Enemy.Enemy;
                 });

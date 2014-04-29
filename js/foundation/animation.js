@@ -22,7 +22,7 @@ var requestAnimFrame = (function(callback) {
         window.mozRequestAnimationFrame || window.oRequestAnimationFrame ||
         window.msRequestAnimationFrame || function(callback) {
             window.setTimeout(callback, 1000 / 60);
-    };
+        };
 })();
 
 /**
@@ -58,7 +58,7 @@ module.exports = {
         function animate() {
             drawable.clear();
             var
-            callTime = new Date(),
+                callTime = new Date(),
                 shouldTerminate = frameFunction(callTime - startTime,
                     callTime - lastCallTime);
             lastCallTime = new Date();

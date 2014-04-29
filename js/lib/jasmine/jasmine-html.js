@@ -143,7 +143,7 @@ jasmineRequire.HtmlReporter = function(j$) {
                         createDom("div", {
                             className: "messages"
                         })
-                );
+                    );
                 var messages = failure.childNodes[1];
 
                 for (var i = 0; i < result.failedExpectations.length; i++) {

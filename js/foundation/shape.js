@@ -112,7 +112,7 @@ module.exports = {
 
         // Bbox with rounded numbers
         var
-        bbox = new BoundingBox.BoundingBox(x, y, width, height),
+            bbox = new BoundingBox.BoundingBox(x, y, width, height),
             transformation = new MathExtensions.Transformation();
 
         ////////////////////////////////////
@@ -305,7 +305,7 @@ module.exports = {
              */
         this.drawBoundingBox = function() {
             var
-            x = _this.boundingBox.x,
+                x = _this.boundingBox.x,
                 y = _this.boundingBox.y,
                 w = _this.boundingBox.width,
                 h = _this.boundingBox.height,
@@ -518,7 +518,7 @@ module.exports = {
 
         // Variables necessary for Shape constructor
         var
-        x = bbox.x,
+            x = bbox.x,
             y = bbox.y,
             width = bbox.width,
             height = bbox.height;

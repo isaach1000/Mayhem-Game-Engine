@@ -1,5 +1,5 @@
 var
-LevelBase = require('./levelBase'),
+    LevelBase = require('./levelBase'),
     Shape = require('../foundation/shape'),
     Animation = require('../foundation/animation'),
     Maze = require('../sprite/maze'),
@@ -75,7 +75,7 @@ module.exports = {
             $('#banner').detach();
 
             var
-            canvasDrawer = _this.createContext('banner'),
+                canvasDrawer = _this.createContext('banner'),
                 x = _this.WIDTH / 2,
                 y = _this.HEIGHT / 2;
 
@@ -97,7 +97,7 @@ module.exports = {
          */
         function win(player) {
             var
-            rate = 1 / 500,
+                rate = 1 / 500,
                 posDiff = 2,
                 vel = 2,
                 winAnim = new Animation.Animation(player, function(time,
@@ -111,7 +111,7 @@ module.exports = {
                 toCenterAnim = new Animation.Animation(player, function(time,
                     timeDiff) {
                     var
-                    dx = _this.WIDTH / 2 - player.transformation.tx,
+                        dx = _this.WIDTH / 2 - player.transformation.tx,
                         dy = _this.HEIGHT / 2 - player.transformation.ty,
                         dist = Math.sqrt(dx * dx + dy * dy);
 
@@ -136,7 +136,7 @@ module.exports = {
          */
         function die(player) {
             var
-            rate = 1 / 1000,
+                rate = 1 / 1000,
                 shrinkTime = 5000,
                 dieAnim = new Animation.Animation(player, function(time,
                     timeDiff) {
@@ -158,7 +158,7 @@ module.exports = {
 
         this.start = function() {
             var
-            mazeCtx = this.createContext('maze'),
+                mazeCtx = this.createContext('maze'),
                 prizeCtx = this.createContext('prize'),
                 enemyCtx = this.createContext('enemy'),
                 playerCtx = this.createContext('player'),
