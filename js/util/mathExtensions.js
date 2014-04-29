@@ -364,7 +364,7 @@ module.exports = {
             keys l, u, and p respectively
          */
         this.luDecomposition = function() {
-            // Inner helper functio
+            // Inner helper function
             function pivotize() {
                 var
                 n = _this.numRows,
