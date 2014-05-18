@@ -74,7 +74,7 @@ module.exports = {
         /////////////////////////////////////
 
         var
-        eventHandlers = {},
+            eventHandlers = {},
             $domElement = $(domSelector);
 
         function addHandler(eventName, handler) {
@@ -162,7 +162,7 @@ var requestAnimFrame = (function(callback) {
         window.mozRequestAnimationFrame || window.oRequestAnimationFrame ||
         window.msRequestAnimationFrame || function(callback) {
             window.setTimeout(callback, 1000 / 60);
-    };
+        };
 })();
 
 /**
@@ -198,7 +198,7 @@ module.exports = {
         function animate() {
             drawable.clear();
             var
-            callTime = new Date(),
+                callTime = new Date(),
                 shouldTerminate = frameFunction(callTime - startTime,
                     callTime - lastCallTime);
             lastCallTime = new Date();
@@ -741,7 +741,7 @@ module.exports = {
 
         // Bbox with rounded numbers
         var
-        bbox = new BoundingBox.BoundingBox(x, y, width, height),
+            bbox = new BoundingBox.BoundingBox(x, y, width, height),
             transformation = new MathExtensions.Transformation();
 
         ////////////////////////////////////
@@ -934,7 +934,7 @@ module.exports = {
              */
         this.drawBoundingBox = function() {
             var
-            x = _this.boundingBox.x,
+                x = _this.boundingBox.x,
                 y = _this.boundingBox.y,
                 w = _this.boundingBox.width,
                 h = _this.boundingBox.height,
@@ -1147,7 +1147,7 @@ module.exports = {
 
         // Variables necessary for Shape constructor
         var
-        x = bbox.x,
+            x = bbox.x,
             y = bbox.y,
             width = bbox.width,
             height = bbox.height;
@@ -1232,14 +1232,13 @@ module.exports = {
         };
 
         /**
-            Hit testing based on
-            <a href="http://stackoverflow.com/a/2922778/1930331">this
-            </a> StackOverflow answer.
-
-            @method _hitTest
-            @protected
-            @param {Point} point A point
-            @return {boolean} If the point is in the polygon
+         * Hit testing based on <a href="http://stackoverflow.com/a/2922778/1930331">this</a> StackOverflow answer.
+         * method _hittest
+         *
+         * @method _hitTest
+         * @protected
+         * @param  {Point} point A point
+         * @return {boolean}       If the point is in the polygon
          */
         this._hitTest = function(point) {
             var p = this.transformation.adjustPoint(point),
@@ -1260,8 +1259,12 @@ module.exports = {
         };
 
         /**
-            Update the bounding box
-        */
+         * Update the bounding box
+         *
+         * @method
+         * @protected
+         * @return {void}
+         */
         this._updateBoundingBox = function() {
             var transformedPoints = this.points.map(function(p) {
                 return _this.transformation.applyToPoint(p);
@@ -1273,7 +1276,7 @@ module.exports = {
 
 },{"../util/boundingBox":16,"../util/mathExtensions":20,"./canvasDrawer":4}],6:[function(require,module,exports){
 var
-CanvasDrawer = require('../foundation/canvasDrawer'),
+    CanvasDrawer = require('../foundation/canvasDrawer'),
     Factory = require('../util/factory'),
     BoundingBox = require('../util/boundingBox'),
     Physics = require('../util/physics'),
@@ -1327,7 +1330,7 @@ module.exports = {
          */
         this.createContext = function(id) {
             var
-            $canvas = this.createCanvas(id),
+                $canvas = this.createCanvas(id),
                 w = this.WIDTH,
                 h = this.HEIGHT,
                 ctx = $canvas[0].getContext('2d');
@@ -1378,7 +1381,7 @@ module.exports = {
 
 },{"../events/inputHandler":2,"../foundation/canvasDrawer":4,"../util/boundingBox":16,"../util/factory":17,"../util/physics":22}],7:[function(require,module,exports){
 var
-LevelBase = require('./levelBase'),
+    LevelBase = require('./levelBase'),
     Shape = require('../foundation/shape'),
     Animation = require('../foundation/animation'),
     Maze = require('../sprite/maze'),
@@ -1454,7 +1457,7 @@ module.exports = {
             $('#banner').detach();
 
             var
-            canvasDrawer = _this.createContext('banner'),
+                canvasDrawer = _this.createContext('banner'),
                 x = _this.WIDTH / 2,
                 y = _this.HEIGHT / 2;
 
@@ -1476,7 +1479,7 @@ module.exports = {
          */
         function win(player) {
             var
-            rate = 1 / 500,
+                rate = 1 / 500,
                 posDiff = 2,
                 vel = 2,
                 winAnim = new Animation.Animation(player, function(time,
@@ -1490,7 +1493,7 @@ module.exports = {
                 toCenterAnim = new Animation.Animation(player, function(time,
                     timeDiff) {
                     var
-                    dx = _this.WIDTH / 2 - player.transformation.tx,
+                        dx = _this.WIDTH / 2 - player.transformation.tx,
                         dy = _this.HEIGHT / 2 - player.transformation.ty,
                         dist = Math.sqrt(dx * dx + dy * dy);
 
@@ -1515,7 +1518,7 @@ module.exports = {
          */
         function die(player) {
             var
-            rate = 1 / 1000,
+                rate = 1 / 1000,
                 shrinkTime = 5000,
                 dieAnim = new Animation.Animation(player, function(time,
                     timeDiff) {
@@ -1537,7 +1540,7 @@ module.exports = {
 
         this.start = function() {
             var
-            mazeCtx = this.createContext('maze'),
+                mazeCtx = this.createContext('maze'),
                 prizeCtx = this.createContext('prize'),
                 enemyCtx = this.createContext('enemy'),
                 playerCtx = this.createContext('player'),
@@ -1579,7 +1582,8 @@ module.exports = {
         s = o.documentElement,
         a = e.jQuery,
         u = e.$,
-        l = {}, c = [],
+        l = {},
+        c = [],
         p = "2.0.3",
         f = c.concat,
         h = c.push,
@@ -1590,7 +1594,8 @@ module.exports = {
         v = p.trim,
         x = function(e, n) {
             return new x.fn.init(e, n, t)
-        }, b = /[+-]?(?:\d*\.|)\d+(?:[eE][+-]?\d+|)/.source,
+        },
+        b = /[+-]?(?:\d*\.|)\d+(?:[eE][+-]?\d+|)/.source,
         w = /\S+/g,
         T = /^(?:\s*(<[\w\W]+>)[^>]*|#([\w-]*))$/,
         C = /^<(\w+)\s*\/?>(?:<\/\1>|)$/,
@@ -1598,7 +1603,8 @@ module.exports = {
         N = /-([\da-z])/gi,
         E = function(e, t) {
             return t.toUpperCase()
-        }, S = function() {
+        },
+        S = function() {
             o.removeEventListener("DOMContentLoaded", S, !1), e.removeEventListener(
                 "load", S, !1), x.ready()
         };
@@ -1622,12 +1628,14 @@ module.exports = {
                     return this
                 }
                 return i = o.getElementById(r[2]), i && i.parentNode && (
-                    this.length = 1, this[0] = i), this.context = o, this.selector =
+                        this.length = 1, this[0] = i), this.context = o,
+                    this.selector =
                     e, this
             }
             return e.nodeType ? (this.context = this[0] = e, this.length =
                 1, this) : x.isFunction(e) ? n.ready(e) : (e.selector !==
-                undefined && (this.selector = e.selector, this.context = e.context),
+                undefined && (this.selector = e.selector, this.context =
+                    e.context),
                 x.makeArray(e, this))
         },
         selector: "",
@@ -1675,7 +1683,8 @@ module.exports = {
         sort: [].sort,
         splice: [].splice
     }, x.fn.init.prototype = x.fn, x.extend = x.fn.extend = function() {
-        var e, t, n, r, i, o, s = arguments[0] || {}, a = 1,
+        var e, t, n, r, i, o, s = arguments[0] || {},
+            a = 1,
             u = arguments.length,
             l = !1;
         for ("boolean" == typeof s && (l = s, s = arguments[1] || {}, a = 2),
@@ -1788,7 +1797,8 @@ module.exports = {
                     if (r = t.call(e[i], i, e[i]), r === !1) break
             } else
                 for (i in e)
-                    if (r = t.call(e[i], i, e[i]), r === !1) break; return e
+                    if (r = t.call(e[i], i, e[i]), r === !1) break; return
+            e
         },
         trim: function(e) {
             return null == e ? "" : v.call(e)
@@ -1815,7 +1825,7 @@ module.exports = {
             var r, i = [],
                 o = 0,
                 s = e.length;
-            for (n = !! n; s > o; o++) r = !! t(e[o], o), n !== r && i.push(
+            for (n = !!n; s > o; o++) r = !!t(e[o], o), n !== r && i.push(
                 e[o]);
             return i
         },
@@ -1837,7 +1847,8 @@ module.exports = {
             var n, r, i;
             return "string" == typeof t && (n = e[t], t = e, e = n), x.isFunction(
                 e) ? (r = d.call(arguments, 2), i = function() {
-                return e.apply(t || this, r.concat(d.call(arguments)))
+                return e.apply(t || this, r.concat(d.call(
+                    arguments)))
             }, i.guid = e.guid = e.guid || x.guid++, i) : undefined
         },
         access: function(e, t, n, r, i, o, s) {
@@ -1866,7 +1877,8 @@ module.exports = {
         }
     }), x.ready.promise = function(t) {
         return n || (n = x.Deferred(), "complete" === o.readyState ?
-            setTimeout(x.ready) : (o.addEventListener("DOMContentLoaded", S, !
+            setTimeout(x.ready) : (o.addEventListener(
+                "DOMContentLoaded", S, !
                 1), e.addEventListener("load", S, !1))), n.promise(t)
     }, x.each(
         "Boolean Number String Function Array Date RegExp Object Error".split(
@@ -1883,8 +1895,9 @@ module.exports = {
     }
     t = x(o),
     function(e, undefined) {
-        var t, n, r, i, o, s, a, u, l, c, p, f, h, d, g, m, y, v = "sizzle" + -
-                new Date,
+        var t, n, r, i, o, s, a, u, l, c, p, f, h, d, g, m, y, v = "sizzle" +
+            -
+            new Date,
             b = e.document,
             w = 0,
             T = 0,
@@ -1894,7 +1907,8 @@ module.exports = {
             E = !1,
             S = function(e, t) {
                 return e === t ? (E = !0, 0) : 0
-            }, j = typeof undefined,
+            },
+            j = typeof undefined,
             D = 1 << 31,
             A = {}.hasOwnProperty,
             L = [],
@@ -1908,17 +1922,18 @@ module.exports = {
                 for (; n > t; t++)
                     if (this[t] === e) return t;
                 return -1
-            }, R =
-                "checked|selected|async|autofocus|autoplay|controls|defer|disabled|hidden|ismap|loop|multiple|open|readonly|required|scoped",
+            },
+            R =
+            "checked|selected|async|autofocus|autoplay|controls|defer|disabled|hidden|ismap|loop|multiple|open|readonly|required|scoped",
             M = "[\\x20\\t\\r\\n\\f]",
             W = "(?:\\\\.|[\\w-]|[^\\x00-\\xa0])+",
             $ = W.replace("w", "w#"),
             B = "\\[" + M + "*(" + W + ")" + M + "*(?:([*^$|!~]?=)" + M +
-                "*(?:(['\"])((?:\\\\.|[^\\\\])*?)\\3|(" + $ + ")|)|)" + M +
-                "*\\]",
+            "*(?:(['\"])((?:\\\\.|[^\\\\])*?)\\3|(" + $ + ")|)|)" + M +
+            "*\\]",
             I = ":(" + W +
-                ")(?:\\(((['\"])((?:\\\\.|[^\\\\])*?)\\3|((?:\\\\.|[^\\\\()[\\]]|" +
-                B.replace(3, 8) + ")*)|.*)\\)|)",
+            ")(?:\\(((['\"])((?:\\\\.|[^\\\\])*?)\\3|((?:\\\\.|[^\\\\()[\\]]|" +
+            B.replace(3, 8) + ")*)|.*)\\)|)",
             z = RegExp("^" + M + "+|((?:^|[^\\\\])(?:\\\\.)*)" + M + "+$",
                 "g"),
             _ = RegExp("^" + M + "*," + M + "*"),
@@ -1941,7 +1956,8 @@ module.exports = {
                 needsContext: RegExp("^" + M +
                     "*[>+~]|:(even|odd|eq|gt|lt|nth|first|last)(?:\\(" + M +
                     "*((?:-\\d)?\\d*)" + M + "*\\)|)(?=[^-]|$)", "i")
-            }, Q = /^[^{]+\{\s*\[native \w/,
+            },
+            Q = /^[^{]+\{\s*\[native \w/,
             K = /^(?:#([\w-]+)|(\w+)|\.([\w-]+))$/,
             Z = /^(?:input|select|textarea|button)$/i,
             et = /^h\d$/i,
@@ -1983,13 +1999,13 @@ module.exports = {
                             if (s.id === a) return r.push(s), r
                         } else if (t.ownerDocument && (s = t.ownerDocument.getElementById(
                             a)) && y(t, s) && s.id === a) return r.push(s),
-                        r
+                            r
                     } else {
                         if (o[2]) return O.apply(r, t.getElementsByTagName(
                             e)), r;
                         if ((a = o[3]) && n.getElementsByClassName && t.getElementsByClassName)
                             return O.apply(r, t.getElementsByClassName(a)),
-                        r
+                                r
                     }
                 if (n.qsa && (!d || !d.test(e))) {
                     if (m = g = v, x = t, w = 9 === u && e, 1 === u &&
@@ -2015,7 +2031,7 @@ module.exports = {
 
             function t(n, r) {
                 return e.push(n += " ") > i.cacheLength && delete t[e.shift()],
-                t[n] = r
+                    t[n] = r
             }
             return t
         }
@@ -2062,7 +2078,8 @@ module.exports = {
         function ft(e) {
             return function(t) {
                 var n = t.nodeName.toLowerCase();
-                return ("input" === n || "button" === n) && t.type === e
+                return ("input" === n || "button" === n) && t.type ===
+                    e
             }
         }
 
@@ -2071,7 +2088,8 @@ module.exports = {
                 return t = +t, at(function(n, r) {
                     var i, o = e([], n.length, t),
                         s = o.length;
-                    while (s--) n[i = o[s]] && (n[i] = !(r[i] = n[i]))
+                    while (s--) n[i = o[s]] && (n[i] = !(r[
+                        i] = n[i]))
                 })
             })
         }
@@ -2094,10 +2112,11 @@ module.exports = {
                 }), n.getElementsByClassName = ut(function(e) {
                     return e.innerHTML =
                         "<div class='a'></div><div class='a i'></div>",
-                    e.firstChild.className = "i", 2 === e.getElementsByClassName(
-                        "i").length
+                        e.firstChild.className = "i", 2 === e.getElementsByClassName(
+                            "i").length
                 }), n.getById = ut(function(e) {
-                    return f.appendChild(e).id = v, !t.getElementsByName || !
+                    return f.appendChild(e).id = v, !t.getElementsByName ||
+                        !
                         t.getElementsByName(v).length
                 }), n.getById ? (i.find.ID = function(e, t) {
                     if (typeof t.getElementById !== j && h) {
@@ -2112,8 +2131,9 @@ module.exports = {
                 }) : (delete i.find.ID, i.filter.ID = function(e) {
                     var t = e.replace(nt, rt);
                     return function(e) {
-                        var n = typeof e.getAttributeNode !== j && e.getAttributeNode(
-                            "id");
+                        var n = typeof e.getAttributeNode !== j &&
+                            e.getAttributeNode(
+                                "id");
                         return n && n.value === t
                     }
                 }), i.find.TAG = n.getElementsByTagName ? function(e, t) {
@@ -2128,30 +2148,37 @@ module.exports = {
                         return r
                     }
                     return o
-                }, i.find.CLASS = n.getElementsByClassName && function(e, t) {
-                    return typeof t.getElementsByClassName !== j && h ? t.getElementsByClassName(
-                        e) : undefined
+                }, i.find.CLASS = n.getElementsByClassName && function(
+                    e, t) {
+                    return typeof t.getElementsByClassName !== j && h ?
+                        t.getElementsByClassName(
+                            e) : undefined
                 }, g = [], d = [], (n.qsa = Q.test(t.querySelectorAll)) &&
                 (ut(function(e) {
                     e.innerHTML =
                         "<select><option selected=''></option></select>",
                     e.querySelectorAll("[selected]").length ||
-                        d.push("\\[" + M + "*(?:value|" + R + ")"),
+                        d.push("\\[" + M + "*(?:value|" + R +
+                            ")"),
                     e.querySelectorAll(":checked").length || d.push(
                         ":checked")
                 }), ut(function(e) {
                     var n = t.createElement("input");
                     n.setAttribute("type", "hidden"), e.appendChild(
                         n).setAttribute("t", ""), e.querySelectorAll(
-                        "[t^='']").length && d.push("[*^$]=" + M +
+                        "[t^='']").length && d.push("[*^$]=" +
+                        M +
                         "*(?:''|\"\")"), e.querySelectorAll(
                         ":enabled").length || d.push(":enabled",
-                        ":disabled"), e.querySelectorAll("*,:x"), d
+                        ":disabled"), e.querySelectorAll("*,:x"),
+                    d
                         .push(",.*:")
                 })), (n.matchesSelector = Q.test(m = f.webkitMatchesSelector ||
-                    f.mozMatchesSelector || f.oMatchesSelector || f.msMatchesSelector
+                    f.mozMatchesSelector || f.oMatchesSelector || f
+                    .msMatchesSelector
                 )) && ut(function(e) {
-                    n.disconnectedMatch = m.call(e, "div"), m.call(e,
+                    n.disconnectedMatch = m.call(e, "div"), m.call(
+                        e,
                         "[s!='']:x"), g.push("!=", I)
                 }), d = d.length && RegExp(d.join("|")), g = g.length &&
                 RegExp(g.join("|")), y = Q.test(f.contains) || f.compareDocumentPosition ?
@@ -2159,7 +2186,8 @@ module.exports = {
                     var n = 9 === e.nodeType ? e.documentElement : e,
                         r = t && t.parentNode;
                     return e === r || !(!r || 1 !== r.nodeType || !(n.contains ?
-                        n.contains(r) : e.compareDocumentPosition && 16 &
+                        n.contains(r) : e.compareDocumentPosition &&
+                        16 &
                         e.compareDocumentPosition(r)))
                 } : function(e, t) {
                     if (t)
@@ -2171,8 +2199,10 @@ module.exports = {
                     var i = r.compareDocumentPosition && e.compareDocumentPosition &&
                         e.compareDocumentPosition(r);
                     return i ? 1 & i || !n.sortDetached && r.compareDocumentPosition(
-                        e) === i ? e === t || y(b, e) ? -1 : r === t || y(b,
-                        r) ? 1 : l ? P.call(l, e) - P.call(l, r) : 0 : 4 &
+                            e) === i ? e === t || y(b, e) ? -1 : r ===
+                        t || y(b,
+                            r) ? 1 : l ? P.call(l, e) - P.call(l, r) :
+                        0 : 4 &
                         i ? -1 : 1 : e.compareDocumentPosition ? -1 : 1
                 } : function(e, n) {
                     var r, i = 0,
@@ -2181,8 +2211,10 @@ module.exports = {
                         a = [e],
                         u = [n];
                     if (e === n) return E = !0, 0;
-                    if (!o || !s) return e === t ? -1 : n === t ? 1 : o ? -
-                        1 : s ? 1 : l ? P.call(l, e) - P.call(l, n) : 0;
+                    if (!o || !s) return e === t ? -1 : n === t ? 1 : o ?
+                        -
+                        1 : s ? 1 : l ? P.call(l, e) - P.call(l, n) :
+                        0;
                     if (o === s) return ct(e, n);
                     r = e;
                     while (r = r.parentNode) a.unshift(r);
@@ -2209,7 +2241,7 @@ module.exports = {
             (e.ownerDocument || e) !== p && c(e);
             var r = i.attrHandle[t.toLowerCase()],
                 o = r && A.call(i.attrHandle, t.toLowerCase()) ? r(e, t, !h) :
-                    undefined;
+                undefined;
             return o === undefined ? n.attributes || !h ? e.getAttribute(t) :
                 (o = e.getAttributeNode(t)) && o.specified ? o.value : null :
                 o
@@ -2262,22 +2294,28 @@ module.exports = {
             preFilter: {
                 ATTR: function(e) {
                     return e[1] = e[1].replace(nt, rt), e[3] = (e[4] || e[5] ||
-                        "").replace(nt, rt), "~=" === e[2] && (e[3] = " " +
+                        "").replace(nt, rt), "~=" === e[2] && (e[3] =
+                        " " +
                         e[3] + " "), e.slice(0, 4)
                 },
                 CHILD: function(e) {
                     return e[1] = e[1].toLowerCase(), "nth" === e[1].slice(
-                        0, 3) ? (e[3] || ot.error(e[0]), e[4] = +(e[4] ? e[
-                        5] + (e[6] || 1) : 2 * ("even" === e[3] ||
-                        "odd" === e[3])), e[5] = +(e[7] + e[8] || "odd" ===
+                        0, 3) ? (e[3] || ot.error(e[0]), e[4] = +(e[4] ?
+                        e[
+                            5] + (e[6] || 1) : 2 * ("even" === e[3] ||
+                            "odd" === e[3])), e[5] = +(e[7] + e[8] ||
+                        "odd" ===
                         e[3])) : e[3] && ot.error(e[0]), e
                 },
                 PSEUDO: function(e) {
                     var t, n = !e[5] && e[2];
                     return J.CHILD.test(e[0]) ? null : (e[3] && e[4] !==
-                        undefined ? e[2] = e[4] : n && V.test(n) && (t = gt(
-                            n, !0)) && (t = n.indexOf(")", n.length - t) -
-                            n.length) && (e[0] = e[0].slice(0, t), e[2] = n
+                        undefined ? e[2] = e[4] : n && V.test(n) && (t =
+                            gt(
+                                n, !0)) && (t = n.indexOf(")", n.length -
+                                t) -
+                            n.length) && (e[0] = e[0].slice(0, t), e[2] =
+                            n
                             .slice(0, t)), e.slice(0, 3))
                 }
             },
@@ -2287,7 +2325,8 @@ module.exports = {
                     return "*" === e ? function() {
                         return !0
                     } : function(e) {
-                        return e.nodeName && e.nodeName.toLowerCase() === t
+                        return e.nodeName && e.nodeName.toLowerCase() ===
+                            t
                     }
                 },
                 CLASS: function(e) {
@@ -2295,19 +2334,26 @@ module.exports = {
                     return t || (t = RegExp("(^|" + M + ")" + e + "(" + M +
                         "|$)")) && C(e, function(e) {
                         return t.test("string" == typeof e.className &&
-                            e.className || typeof e.getAttribute !== j &&
+                            e.className || typeof e.getAttribute !==
+                            j &&
                             e.getAttribute("class") || "")
                     })
                 },
                 ATTR: function(e, t, n) {
                     return function(r) {
                         var i = ot.attr(r, e);
-                        return null == i ? "!=" === t : t ? (i += "", "=" ===
-                            t ? i === n : "!=" === t ? i !== n : "^=" === t ?
-                            n && 0 === i.indexOf(n) : "*=" === t ? n && i.indexOf(
-                                n) > -1 : "$=" === t ? n && i.slice(-n.length) ===
-                            n : "~=" === t ? (" " + i + " ").indexOf(n) > -
-                            1 : "|=" === t ? i === n || i.slice(0, n.length +
+                        return null == i ? "!=" === t : t ? (i += "",
+                            "=" ===
+                            t ? i === n : "!=" === t ? i !== n :
+                            "^=" === t ?
+                            n && 0 === i.indexOf(n) : "*=" === t ?
+                            n && i.indexOf(
+                                n) > -1 : "$=" === t ? n && i.slice(-
+                                n.length) ===
+                            n : "~=" === t ? (" " + i + " ").indexOf(
+                                n) > -
+                            1 : "|=" === t ? i === n || i.slice(0,
+                                n.length +
                                 1) === n + "-" : !1) : !0
                     }
                 },
@@ -2318,8 +2364,9 @@ module.exports = {
                     return 1 === r && 0 === i ? function(e) {
                         return !!e.parentNode
                     } : function(t, n, u) {
-                        var l, c, p, f, h, d, g = o !== s ? "nextSibling" :
-                                "previousSibling",
+                        var l, c, p, f, h, d, g = o !== s ?
+                            "nextSibling" :
+                            "previousSibling",
                             m = t.parentNode,
                             y = a && t.nodeName.toLowerCase(),
                             x = !u && !a;
@@ -2329,7 +2376,8 @@ module.exports = {
                                     p = t;
                                     while (p = p[g])
                                         if (a ? p.nodeName.toLowerCase() ===
-                                            y : 1 === p.nodeType) return !1;
+                                            y : 1 === p.nodeType) return !
+                                            1;
                                     d = g = "only" === e && !d &&
                                         "nextSibling"
                                 }
@@ -2337,23 +2385,32 @@ module.exports = {
                             }
                             if (d = [s ? m.firstChild : m.lastChild], s &&
                                 x) {
-                                c = m[v] || (m[v] = {}), l = c[e] || [], h =
-                                    l[0] === w && l[1], f = l[0] === w && l[
+                                c = m[v] || (m[v] = {}), l = c[e] || [],
+                                h =
+                                    l[0] === w && l[1], f = l[0] === w &&
+                                    l[
                                         2], p = h && m.childNodes[h];
-                                while (p = ++h && p && p[g] || (f = h = 0) ||
+                                while (p = ++h && p && p[g] || (f = h =
+                                        0) ||
                                     d.pop())
-                                    if (1 === p.nodeType && ++f && p === t) {
+                                    if (1 === p.nodeType && ++f && p ===
+                                        t) {
                                         c[e] = [w, h, f];
                                         break
                                     }
-                            } else if (x && (l = (t[v] || (t[v] = {}))[e]) &&
+                            } else if (x && (l = (t[v] || (t[v] = {}))[
+                                    e]) &&
                                 l[0] === w) f = l[1];
                             else
-                                while (p = ++h && p && p[g] || (f = h = 0) ||
+                                while (p = ++h && p && p[g] || (f = h =
+                                        0) ||
                                     d.pop())
-                                    if ((a ? p.nodeName.toLowerCase() === y :
-                                        1 === p.nodeType) && ++f && (x &&
-                                        ((p[v] || (p[v] = {}))[e] = [w,
+                                    if ((a ? p.nodeName.toLowerCase() ===
+                                            y :
+                                            1 === p.nodeType) && ++f &&
+                                        (x &&
+                                            ((p[v] || (p[v] = {}))[e] = [
+                                                w,
                                             f]), p === t)) break; return f -=
                                 i, f === r || 0 === f % r && f / r >= 0
                         }
@@ -2361,14 +2418,16 @@ module.exports = {
                 },
                 PSEUDO: function(e, t) {
                     var n, r = i.pseudos[e] || i.setFilters[e.toLowerCase()] ||
-                            ot.error("unsupported pseudo: " + e);
+                        ot.error("unsupported pseudo: " + e);
                     return r[v] ? r(t) : r.length > 1 ? (n = [e, e, "", t],
-                        i.setFilters.hasOwnProperty(e.toLowerCase()) ? at(
+                        i.setFilters.hasOwnProperty(e.toLowerCase()) ?
+                        at(
                             function(e, n) {
                                 var i, o = r(e, t),
                                     s = o.length;
-                                while (s--) i = P.call(e, o[s]), e[i] = !(n[
-                                    i] = o[s])
+                                while (s--) i = P.call(e, o[s]), e[i] = !
+                                    (n[
+                                        i] = o[s])
                             }) : function(e) {
                             return r(e, 0, n)
                         }) : r
@@ -2382,7 +2441,8 @@ module.exports = {
                     return r[v] ? at(function(e, t, n, i) {
                         var o, s = r(e, null, i, []),
                             a = e.length;
-                        while (a--)(o = s[a]) && (e[a] = !(t[a] = o))
+                        while (a--)(o = s[a]) && (e[a] = !(t[a] =
+                            o))
                     }) : function(e, i, o) {
                         return t[0] = e, r(t, null, o, n), !n.pop()
                     }
@@ -2394,24 +2454,28 @@ module.exports = {
                 }),
                 contains: at(function(e) {
                     return function(t) {
-                        return (t.textContent || t.innerText || o(t)).indexOf(
-                            e) > -1
+                        return (t.textContent || t.innerText || o(t))
+                            .indexOf(
+                                e) > -1
                     }
                 }),
                 lang: at(function(e) {
                     return G.test(e || "") || ot.error(
-                        "unsupported lang: " + e), e = e.replace(nt, rt)
+                            "unsupported lang: " + e), e = e.replace(nt,
+                            rt)
                         .toLowerCase(),
-                    function(t) {
-                        var n;
-                        do
-                            if (n = h ? t.lang : t.getAttribute(
-                                "xml:lang") || t.getAttribute(
-                                "lang")) return n = n.toLowerCase(), n ===
-                                e || 0 === n.indexOf(e + "-"); while ((
-                            t = t.parentNode) && 1 === t.nodeType);
-                        return !1
-                    }
+                        function(t) {
+                            var n;
+                            do
+                                if (n = h ? t.lang : t.getAttribute(
+                                    "xml:lang") || t.getAttribute(
+                                    "lang")) return n = n.toLowerCase(),
+                                    n ===
+                                    e || 0 === n.indexOf(e + "-");
+                            while ((
+                                t = t.parentNode) && 1 === t.nodeType);
+                            return !1
+                        }
                 }),
                 target: function(t) {
                     var n = e.location && e.location.hash;
@@ -2421,7 +2485,8 @@ module.exports = {
                     return e === f
                 },
                 focus: function(e) {
-                    return e === p.activeElement && (!p.hasFocus || p.hasFocus()) && !!
+                    return e === p.activeElement && (!p.hasFocus || p.hasFocus()) &&
+                        !!
                         (e.type || e.href || ~e.tabIndex)
                 },
                 enabled: function(e) {
@@ -2432,11 +2497,13 @@ module.exports = {
                 },
                 checked: function(e) {
                     var t = e.nodeName.toLowerCase();
-                    return "input" === t && !! e.checked || "option" === t && !!
+                    return "input" === t && !!e.checked || "option" === t &&
+                        !!
                         e.selected
                 },
                 selected: function(e) {
-                    return e.parentNode && e.parentNode.selectedIndex, e.selected === !
+                    return e.parentNode && e.parentNode.selectedIndex, e.selected ===
+                        !
                         0
                 },
                 empty: function(e) {
@@ -2552,14 +2619,17 @@ module.exports = {
                 var u, l, c, p = w + " " + s;
                 if (a) {
                     while (t = t[i])
-                        if ((1 === t.nodeType || o) && e(t, n, a)) return !
+                        if ((1 === t.nodeType || o) && e(t, n, a))
+                            return !
                             0
                 } else
                     while (t = t[i])
                         if (1 === t.nodeType || o)
-                            if (c = t[v] || (t[v] = {}), (l = c[i]) && l[0] ===
+                            if (c = t[v] || (t[v] = {}), (l = c[i]) &&
+                                l[0] ===
                                 p) {
-                                if ((u = l[1]) === !0 || u === r) return u === !
+                                if ((u = l[1]) === !0 || u === r) return
+                                u === !
                                     0
                             } else if (l = c[i] = [p], l[1] = e(t, n, a) ||
                     r, l[1] === !0) return !0
@@ -2587,33 +2657,34 @@ module.exports = {
 
         function bt(e, t, n, r, i, o) {
             return r && !r[v] && (r = bt(r)), i && !i[v] && (i = bt(i, o)),
-            at(function(o, s, a, u) {
-                var l, c, p, f = [],
-                    h = [],
-                    d = s.length,
-                    g = o || Ct(t || "*", a.nodeType ? [a] : a, []),
-                    m = !e || !o && t ? g : xt(g, f, e, a, u),
-                    y = n ? i || (o ? e : d || r) ? [] : s : m;
-                if (n && n(m, y, a, u), r) {
-                    l = xt(y, h), r(l, [], a, u), c = l.length;
-                    while (c--)(p = l[c]) && (y[h[c]] = !(m[h[c]] =
-                        p))
-                }
-                if (o) {
-                    if (i || e) {
-                        if (i) {
-                            l = [], c = y.length;
-                            while (c--)(p = y[c]) && l.push(m[c] =
-                                p);
-                            i(null, y = [], l, u)
-                        }
-                        c = y.length;
-                        while (c--)(p = y[c]) && (l = i ? P.call(o,
-                            p) : f[c]) > -1 && (o[l] = !(s[l] = p))
+                at(function(o, s, a, u) {
+                    var l, c, p, f = [],
+                        h = [],
+                        d = s.length,
+                        g = o || Ct(t || "*", a.nodeType ? [a] : a, []),
+                        m = !e || !o && t ? g : xt(g, f, e, a, u),
+                        y = n ? i || (o ? e : d || r) ? [] : s : m;
+                    if (n && n(m, y, a, u), r) {
+                        l = xt(y, h), r(l, [], a, u), c = l.length;
+                        while (c--)(p = l[c]) && (y[h[c]] = !(m[h[c]] =
+                            p))
                     }
-                } else y = xt(y === s ? y.splice(d, y.length) : y),
-                i ? i(null, s, y, u) : O.apply(s, y)
-            })
+                    if (o) {
+                        if (i || e) {
+                            if (i) {
+                                l = [], c = y.length;
+                                while (c--)(p = y[c]) && l.push(m[c] =
+                                    p);
+                                i(null, y = [], l, u)
+                            }
+                            c = y.length;
+                            while (c--)(p = y[c]) && (l = i ? P.call(o,
+                                p) : f[c]) > -1 && (o[l] = !(s[l] =
+                                p))
+                        }
+                    } else y = xt(y === s ? y.splice(d, y.length) : y),
+                        i ? i(null, s, y, u) : O.apply(s, y)
+                })
         }
 
         function wt(e) {
@@ -2643,8 +2714,10 @@ module.exports = {
                             if (i.relative[e[r].type]) break;
                         return bt(l > 1 && vt(f), l > 1 && mt(e.slice(0, l -
                                 1).concat({
-                                value: " " === e[l - 2].type ? "*" : ""
-                            })).replace(z, "$1"), n, r > l && wt(e.slice(l,
+                                value: " " === e[l - 2].type ?
+                                    "*" : ""
+                            })).replace(z, "$1"), n, r > l && wt(e.slice(
+                                l,
                                 r)), o > r && wt(e = e.slice(r)), o > r &&
                             mt(e))
                     }
@@ -2787,7 +2860,8 @@ module.exports = {
                     }
                 r = !1, a && (u ? u.length && l(u.shift()) : t ? a = [] : c
                     .disable())
-            }, c = {
+            },
+            c = {
                 add: function() {
                     if (a) {
                         var n = a.length;
@@ -2806,7 +2880,8 @@ module.exports = {
                     return a && x.each(arguments, function(e, t) {
                         var n;
                         while ((n = x.inArray(t, a, n)) > -1) a.splice(
-                            n, 1), r && (o >= n && o--, s >= n && s--)
+                            n, 1), r && (o >= n && o--, s >= n &&
+                            s--)
                     }), this
                 },
                 has: function(e) {
@@ -2859,18 +2934,26 @@ module.exports = {
                         return x.Deferred(function(n) {
                             x.each(t, function(t, o) {
                                 var s = o[0],
-                                    a = x.isFunction(e[t]) && e[
+                                    a = x.isFunction(e[t]) &&
+                                    e[
                                         t];
                                 i[o[1]](function() {
                                     var e = a && a.apply(
-                                        this, arguments);
-                                    e && x.isFunction(e.promise) ?
-                                        e.promise().done(n.resolve)
-                                        .fail(n.reject).progress(
-                                            n.notify) : n[s +
-                                            "With"](this ===
+                                        this,
+                                        arguments);
+                                    e && x.isFunction(e
+                                        .promise) ?
+                                        e.promise().done(
+                                            n.resolve)
+                                        .fail(n.reject)
+                                        .progress(
+                                            n.notify) :
+                                        n[s +
+                                            "With"](
+                                            this ===
                                             r ? n.promise() :
-                                            this, a ? [e] :
+                                            this, a ? [
+                                                e] :
                                             arguments)
                                 })
                             }), e = null
@@ -2879,7 +2962,8 @@ module.exports = {
                     promise: function(e) {
                         return null != e ? x.extend(e, r) : r
                     }
-                }, i = {};
+                },
+                i = {};
             return r.pipe = r.then, x.each(t, function(e, o) {
                 var s = o[2],
                     a = o[3];
@@ -2900,16 +2984,19 @@ module.exports = {
                 o = 1 === i ? e : x.Deferred(),
                 s = function(e, t, n) {
                     return function(r) {
-                        t[e] = this, n[e] = arguments.length > 1 ? d.call(
-                            arguments) : r, n === a ? o.notifyWith(t, n) : --
+                        t[e] = this, n[e] = arguments.length > 1 ?
+                            d.call(
+                                arguments) : r, n === a ? o.notifyWith(
+                                t, n) : --
                         i || o.resolveWith(t, n)
                     }
-                }, a, u, l;
+                },
+                a, u, l;
             if (r > 1)
                 for (a = Array(r), u = Array(r), l = Array(r); r > t; t++)
                     n[t] && x.isFunction(n[t].promise) ? n[t].promise()
-                        .done(s(t, l, n)).fail(o.reject).progress(s(t,
-                            u, a)) : --i;
+                    .done(s(t, l, n)).fail(o.reject).progress(s(t,
+                        u, a)) : --i;
             return i || o.resolveWith(l, n), o.promise()
         }
     }), x.support = function(t) {
@@ -2920,36 +3007,44 @@ module.exports = {
             a = s.appendChild(o.createElement("option"));
         return n.type ? (n.type = "checkbox", t.checkOn = "" !== n.value, t
             .optSelected = a.selected, t.reliableMarginRight = !0, t.boxSizingReliable = !
-            0, t.pixelPosition = !1, n.checked = !0, t.noCloneChecked = n.cloneNode(!
-                0).checked, s.disabled = !0, t.optDisabled = !a.disabled, n =
-            o.createElement("input"), n.value = "t", n.type = "radio", t.radioValue =
+            0, t.pixelPosition = !1, n.checked = !0, t.noCloneChecked =
+            n.cloneNode(!
+                0).checked, s.disabled = !0, t.optDisabled = !a.disabled,
+            n =
+            o.createElement("input"), n.value = "t", n.type = "radio",
+            t.radioValue =
             "t" === n.value, n.setAttribute("checked", "t"), n.setAttribute(
                 "name", "t"), r.appendChild(n), t.checkClone = r.cloneNode(!
                 0).cloneNode(!0).lastChild.checked, t.focusinBubbles =
-            "onfocusin" in e, i.style.backgroundClip = "content-box", i.cloneNode(!
+            "onfocusin" in e, i.style.backgroundClip = "content-box", i
+            .cloneNode(!
                 0).style.backgroundClip = "", t.clearCloneStyle =
             "content-box" === i.style.backgroundClip, x(function() {
                 var n, r, s =
-                        "padding:0;margin:0;border:0;display:block;-webkit-box-sizing:content-box;-moz-box-sizing:content-box;box-sizing:content-box",
+                    "padding:0;margin:0;border:0;display:block;-webkit-box-sizing:content-box;-moz-box-sizing:content-box;box-sizing:content-box",
                     a = o.getElementsByTagName("body")[0];
                 a && (n = o.createElement("div"), n.style.cssText =
                     "border:0;width:0;height:0;position:absolute;top:0;left:-9999px;margin-top:1px",
-                    a.appendChild(n).appendChild(i), i.innerHTML = "",
+                    a.appendChild(n).appendChild(i), i.innerHTML =
+                    "",
                     i.style.cssText =
                     "-webkit-box-sizing:border-box;-moz-box-sizing:border-box;box-sizing:border-box;padding:1px;border:1px;display:block;width:4px;margin-top:1%;position:absolute;top:1%",
                     x.swap(a, null != a.style.zoom ? {
                         zoom: 1
                     } : {}, function() {
                         t.boxSizing = 4 === i.offsetWidth
-                    }), e.getComputedStyle && (t.pixelPosition = "1%" !==
+                    }), e.getComputedStyle && (t.pixelPosition =
+                        "1%" !==
                         (e.getComputedStyle(i, null) || {}).top, t.boxSizingReliable =
                         "4px" === (e.getComputedStyle(i, null) || {
                             width: "4px"
                         }).width, r = i.appendChild(o.createElement(
                             "div")), r.style.cssText = i.style.cssText =
-                        s, r.style.marginRight = r.style.width = "0", i
+                        s, r.style.marginRight = r.style.width =
+                        "0", i
                         .style.width = "1px", t.reliableMarginRight = !
-                        parseFloat((e.getComputedStyle(r, null) || {}).marginRight)
+                        parseFloat((e.getComputedStyle(r, null) || {})
+                            .marginRight)
                     ), a.removeChild(n))
             }), t) : t
     }({});
@@ -2968,7 +3063,8 @@ module.exports = {
     }, F.prototype = {
         key: function(e) {
             if (!F.accepts(e)) return 0;
-            var t = {}, n = e[this.expando];
+            var t = {},
+                n = e[this.expando];
             if (!n) {
                 n = F.uid++;
                 try {
@@ -3044,8 +3140,8 @@ module.exports = {
                 if (this.length && (s = L.get(i), 1 === i.nodeType && !
                     q.get(i, "hasDataAttrs"))) {
                     for (n = i.attributes; n.length > o; o++) r = n[o].name,
-                    0 === r.indexOf("data-") && (r = x.camelCase(r.slice(
-                        5)), P(i, r, s[r]));
+                        0 === r.indexOf("data-") && (r = x.camelCase(r.slice(
+                            5)), P(i, r, s[r]));
                     q.set(i, "hasDataAttrs", !0)
                 }
                 return s
@@ -3055,14 +3151,18 @@ module.exports = {
             }) : x.access(this, function(t) {
                 var n, r = x.camelCase(e);
                 if (i && t === undefined) {
-                    if (n = L.get(i, e), n !== undefined) return n;
-                    if (n = L.get(i, r), n !== undefined) return n;
+                    if (n = L.get(i, e), n !== undefined) return
+                    n;
+                    if (n = L.get(i, r), n !== undefined) return
+                    n;
                     if (n = P(i, r, undefined), n !== undefined)
                         return n
                 } else this.each(function() {
                     var n = L.get(this, r);
-                    L.set(this, r, t), -1 !== e.indexOf("-") &&
-                        n !== undefined && L.set(this, e, t)
+                    L.set(this, r, t), -1 !== e.indexOf(
+                        "-") &&
+                        n !== undefined && L.set(this,
+                            e, t)
                 })
             }, null, t, arguments.length > 1, null, !0)
         },
@@ -3091,7 +3191,8 @@ module.exports = {
         queue: function(e, t, n) {
             var r;
             return e ? (t = (t || "fx") + "queue", r = q.get(e, t), n &&
-                (!r || x.isArray(n) ? r = q.access(e, t, x.makeArray(n)) :
+                (!r || x.isArray(n) ? r = q.access(e, t, x.makeArray(
+                        n)) :
                     r.push(n)), r || []) : undefined
         },
         dequeue: function(e, t) {
@@ -3133,12 +3234,12 @@ module.exports = {
         },
         delay: function(e, t) {
             return e = x.fx ? x.fx.speeds[e] || e : e, t = t || "fx",
-            this.queue(t, function(t, n) {
-                var r = setTimeout(t, e);
-                n.stop = function() {
-                    clearTimeout(r)
-                }
-            })
+                this.queue(t, function(t, n) {
+                    var r = setTimeout(t, e);
+                    n.stop = function() {
+                        clearTimeout(r)
+                    }
+                })
         },
         clearQueue: function(e) {
             return this.queue(e || "fx", [])
@@ -3233,8 +3334,10 @@ module.exports = {
                         t) : o.addClass(t)
                 } else(n === r || "boolean" === n) && (this.className &&
                     q.set(this, "__className__", this.className),
-                    this.className = this.className || e === !1 ?
-                    "" : q.get(this, "__className__") || "")
+                    this.className = this.className || e ===
+                    !1 ?
+                    "" : q.get(this, "__className__") || ""
+                )
             })
         },
         hasClass: function(e) {
@@ -3251,20 +3354,27 @@ module.exports = {
                 if (arguments.length) return r = x.isFunction(e), this.each(
                     function(n) {
                         var i;
-                        1 === this.nodeType && (i = r ? e.call(this, n,
-                                x(this).val()) : e, null == i ? i = "" :
+                        1 === this.nodeType && (i = r ? e.call(
+                                this, n,
+                                x(this).val()) : e, null == i ?
+                            i = "" :
                             "number" == typeof i ? i += "" : x.isArray(
                                 i) && (i = x.map(i, function(e) {
-                                return null == e ? "" : e + ""
-                            })), t = x.valHooks[this.type] || x.valHooks[
+                                return null == e ? "" :
+                                    e + ""
+                            })), t = x.valHooks[this.type] || x
+                            .valHooks[
                                 this.nodeName.toLowerCase()], t &&
-                            "set" in t && t.set(this, i, "value") !==
+                            "set" in t && t.set(this, i,
+                                "value") !==
                             undefined || (this.value = i))
                     });
                 if (i) return t = x.valHooks[i.type] || x.valHooks[i.nodeName
-                    .toLowerCase()], t && "get" in t && (n = t.get(i,
+                    .toLowerCase()], t && "get" in t && (n = t.get(
+                    i,
                     "value")) !== undefined ? n : (n = i.value,
-                    "string" == typeof n ? n.replace($, "") : null == n ?
+                    "string" == typeof n ? n.replace($, "") :
+                    null == n ?
                     "" : n)
             }
         }
@@ -3308,13 +3418,20 @@ module.exports = {
         attr: function(e, t, n) {
             var i, o, s = e.nodeType;
             if (e && 3 !== s && 8 !== s && 2 !== s) return typeof e.getAttribute ===
-                r ? x.prop(e, t, n) : (1 === s && x.isXMLDoc(e) || (t =
-                        t.toLowerCase(), i = x.attrHooks[t] || (x.expr.match
-                            .bool.test(t) ? M : R)), n === undefined ?
-                    i && "get" in i && null !== (o = i.get(e, t)) ? o :
-                    (o = x.find.attr(e, t), null == o ? undefined : o) :
-                    null !== n ? i && "set" in i && (o = i.set(e, n, t)) !==
-                    undefined ? o : (e.setAttribute(t, n + ""), n) : (x
+                r ? x.prop(e, t, n) : (1 === s && x.isXMLDoc(e) ||
+                    (t =
+                        t.toLowerCase(), i = x.attrHooks[t] || (x.expr
+                            .match
+                            .bool.test(t) ? M : R)), n ===
+                    undefined ?
+                    i && "get" in i && null !== (o = i.get(e, t)) ?
+                    o :
+                    (o = x.find.attr(e, t), null == o ? undefined :
+                        o) :
+                    null !== n ? i && "set" in i && (o = i.set(e, n,
+                        t)) !==
+                    undefined ? o : (e.setAttribute(t, n + ""), n) :
+                    (x
                         .removeAttr(e, t), undefined))
         },
         removeAttr: function(e, t) {
@@ -3342,10 +3459,13 @@ module.exports = {
         },
         prop: function(e, t, n) {
             var r, i, o, s = e.nodeType;
-            if (e && 3 !== s && 8 !== s && 2 !== s) return o = 1 !== s || !
+            if (e && 3 !== s && 8 !== s && 2 !== s) return o = 1 !== s ||
+                !
                 x.isXMLDoc(e), o && (t = x.propFix[t] || t, i = x.propHooks[
-                    t]), n !== undefined ? i && "set" in i && (r = i.set(
-                    e, n, t)) !== undefined ? r : e[t] = n : i && "get" in
+                    t]), n !== undefined ? i && "set" in i && (r =
+                    i.set(
+                        e, n, t)) !== undefined ? r : e[t] = n : i &&
+                "get" in
                 i && null !== (r = i.get(e, t)) ? r : e[t]
         },
         propHooks: {
@@ -3365,14 +3485,14 @@ module.exports = {
         x.expr.attrHandle[t] = function(e, t, r) {
             var i = x.expr.attrHandle[t],
                 o = r ? undefined : (x.expr.attrHandle[t] = undefined) !=
-                    n(e, t, r) ? t.toLowerCase() : null;
+                n(e, t, r) ? t.toLowerCase() : null;
             return x.expr.attrHandle[t] = i, o
         }
     }), x.support.optSelected || (x.propHooks.selected = {
         get: function(e) {
             var t = e.parentNode;
             return t && t.parentNode && t.parentNode.selectedIndex,
-            null
+                null
         }
     }), x.each(["tabIndex", "readOnly", "maxLength", "cellSpacing",
         "cellPadding", "rowSpan", "colSpan", "useMap", "frameBorder",
@@ -3428,21 +3548,25 @@ module.exports = {
                         handler: n,
                         guid: n.guid,
                         selector: o,
-                        needsContext: o && x.expr.match.needsContext.test(
-                            o),
+                        needsContext: o && x.expr.match.needsContext
+                            .test(
+                                o),
                         namespace: g.join(".")
                     }, s), (h = l[d]) || (h = l[d] = [], h.delegateCount =
-                        0, f.setup && f.setup.call(e, i, g, a) !== !1 || e.addEventListener &&
+                        0, f.setup && f.setup.call(e, i, g, a) !== !1 ||
+                        e.addEventListener &&
                         e.addEventListener(d, a, !1)), f.add && (f.add.call(
-                        e, p), p.handler.guid || (p.handler.guid = n.guid)),
-                    o ? h.splice(h.delegateCount++, 0, p) : h.push(p), x.event
+                        e, p), p.handler.guid || (p.handler.guid =
+                        n.guid)),
+                    o ? h.splice(h.delegateCount++, 0, p) : h.push(p),
+                    x.event
                     .global[d] = !0);
                 e = null
             }
         },
         remove: function(e, t, n, r, i) {
             var o, s, a, u, l, c, p, f, h, d, g, m = q.hasData(e) && q.get(
-                    e);
+                e);
             if (m && (u = m.events)) {
                 t = (t || "").match(w) || [""], l = t.length;
                 while (l--)
@@ -3456,7 +3580,7 @@ module.exports = {
                             n.guid !== c.guid || a && !a.test(c.namespace) ||
                             r && r !== c.selector && ("**" !== r || !c.selector) ||
                             (f.splice(o, 1), c.selector && f.delegateCount--,
-                            p.remove && p.remove.call(e, c));
+                                p.remove && p.remove.call(e, c));
                         s && !f.length && (p.teardown && p.teardown.call(e,
                             d, m.handle) !== !1 || x.removeEvent(e, h,
                             m.handle), delete u[h])
@@ -3470,7 +3594,8 @@ module.exports = {
             var s, a, u, l, c, p, f, h = [r || o],
                 d = y.call(t, "type") ? t.type : t,
                 g = y.call(t, "namespace") ? t.namespace.split(".") : [];
-            if (a = u = r = r || o, 3 !== r.nodeType && 8 !== r.nodeType && !
+            if (a = u = r = r || o, 3 !== r.nodeType && 8 !== r.nodeType &&
+                !
                 _.test(d + x.event.triggered) && (d.indexOf(".") >= 0 && (g =
                         d.split("."), d = g.shift(), g.sort()), c = 0 > d.indexOf(
                         ":") && "on" + d, t = t[x.expando] ? t : new x.Event(
@@ -3479,7 +3604,8 @@ module.exports = {
                     RegExp("(^|\\.)" + g.join("\\.(?:.*\\.|)") + "(\\.|$)") :
                     null, t.result = undefined, t.target || (t.target = r),
                     n = null == n ? [t] : x.makeArray(n, [t]), f = x.event.special[
-                        d] || {}, i || !f.trigger || f.trigger.apply(r, n) !== !
+                        d] || {}, i || !f.trigger || f.trigger.apply(r, n) !==
+                    !
                     1)) {
                 if (!i && !f.noBubble && !x.isWindow(r)) {
                     for (l = f.delegateType || d, _.test(l + d) || (a = a.parentNode); a; a =
@@ -3491,8 +3617,8 @@ module.exports = {
                 while ((a = h[s++]) && !t.isPropagationStopped()) t.type =
                     s > 1 ? l : f.bindType || d, p = (q.get(a, "events") || {})[
                         t.type] && q.get(a, "handle"), p && p.apply(a, n),
-                p = c && a[c], p && x.acceptData(a) && p.apply && p.apply(
-                    a, n) === !1 && t.preventDefault();
+                    p = c && a[c], p && x.acceptData(a) && p.apply && p.apply(
+                        a, n) === !1 && t.preventDefault();
                 return t.type = d, i || t.isDefaultPrevented() || f._default &&
                     f._default.apply(h.pop(), n) !== !1 || !x.acceptData(r) ||
                     c && x.isFunction(r[d]) && !x.isWindow(r) && (u = r[c],
@@ -3513,7 +3639,7 @@ module.exports = {
                     e.currentTarget = i.elem, n = 0;
                     while ((o = i.handlers[n++]) && !e.isImmediatePropagationStopped())
                         (!e.namespace_re || e.namespace_re.test(o.namespace)) &&
-                            (e.handleObj = o, e.data = o.data, r = ((x.event
+                        (e.handleObj = o, e.data = o.data, r = ((x.event
                                     .special[o.origType] || {}).handle || o
                                 .handler).apply(i.elem, a), r !== undefined &&
                             (e.result = r) === !1 && (e.preventDefault(), e
@@ -3559,13 +3685,15 @@ module.exports = {
             filter: function(e, t) {
                 var n, r, i, s = t.button;
                 return null == e.pageX && null != t.clientX && (n = e.target
-                    .ownerDocument || o, r = n.documentElement, i = n.body,
-                    e.pageX = t.clientX + (r && r.scrollLeft || i && i.scrollLeft ||
-                        0) - (r && r.clientLeft || i && i.clientLeft || 0),
-                    e.pageY = t.clientY + (r && r.scrollTop || i && i.scrollTop ||
-                        0) - (r && r.clientTop || i && i.clientTop || 0)),
-                e.which || s === undefined || (e.which = 1 & s ? 1 : 2 &
-                    s ? 3 : 4 & s ? 2 : 0), e
+                        .ownerDocument || o, r = n.documentElement, i = n.body,
+                        e.pageX = t.clientX + (r && r.scrollLeft || i && i.scrollLeft ||
+                            0) - (r && r.clientLeft || i && i.clientLeft ||
+                            0),
+                        e.pageY = t.clientY + (r && r.scrollTop || i && i.scrollTop ||
+                            0) - (r && r.clientTop || i && i.clientTop || 0)
+                    ),
+                    e.which || s === undefined || (e.which = 1 & s ? 1 : 2 &
+                        s ? 3 : 4 & s ? 2 : 0), e
             }
         },
         fix: function(e) {
@@ -3578,7 +3706,8 @@ module.exports = {
                 .props) : this.props, e = new x.Event(s), t = r.length;
             while (t--) n = r[t], e[n] = s[n];
             return e.target || (e.target = o), 3 === e.target.nodeType && (
-                e.target = e.target.parentNode), a.filter ? a.filter(e, s) :
+                    e.target = e.target.parentNode), a.filter ? a.filter(e,
+                    s) :
                 e
         },
         special: {
@@ -3630,8 +3759,10 @@ module.exports = {
         return this instanceof x.Event ? (e && e.type ? (this.originalEvent =
                 e, this.type = e.type, this.isDefaultPrevented = e.defaultPrevented ||
                 e.getPreventDefault && e.getPreventDefault() ? U : Y) :
-            this.type = e, t && x.extend(this, t), this.timeStamp = e && e.timeStamp ||
-            x.now(), this[x.expando] = !0, undefined) : new x.Event(e, t)
+            this.type = e, t && x.extend(this, t), this.timeStamp = e &&
+            e.timeStamp ||
+            x.now(), this[x.expando] = !0, undefined) : new x.Event(e,
+            t)
     }, x.Event.prototype = {
         isDefaultPrevented: Y,
         isPropagationStopped: Y,
@@ -3659,7 +3790,8 @@ module.exports = {
                     i = e.relatedTarget,
                     o = e.handleObj;
                 return (!i || i !== r && !x.contains(r, i)) && (e.type =
-                    o.origType, n = o.handler.apply(this, arguments), e
+                    o.origType, n = o.handler.apply(this, arguments),
+                    e
                     .type = t), n
             }
         }
@@ -3689,7 +3821,8 @@ module.exports = {
             }
             if (null == n && null == r ? (r = t, n = t = undefined) :
                 null == r && ("string" == typeof t ? (r = n, n =
-                    undefined) : (r = n, n = t, t = undefined)), r === !
+                    undefined) : (r = n, n = t, t = undefined)), r ===
+                !
                 1) r = Y;
             else if (!r) return this;
             return 1 === i && (o = r, r = function(e) {
@@ -3705,9 +3838,11 @@ module.exports = {
         off: function(e, t, n) {
             var r, i;
             if (e && e.preventDefault && e.handleObj) return r = e.handleObj,
-            x(e.delegateTarget).off(r.namespace ? r.origType + "." +
-                r.namespace : r.origType, r.selector, r.handler),
-            this;
+                x(e.delegateTarget).off(r.namespace ? r.origType +
+                    "." +
+                    r.namespace : r.origType, r.selector, r.handler
+                ),
+                this;
             if ("object" == typeof e) {
                 for (i in e) this.off(i, t, e[i]);
                 return this
@@ -3744,7 +3879,8 @@ module.exports = {
             if ("string" != typeof e) return this.pushStack(x(e).filter(
                 function() {
                     for (t = 0; i > t; t++)
-                        if (x.contains(r[t], this)) return !0
+                        if (x.contains(r[t], this)) return !
+                            0
                 }));
             for (t = 0; i > t; t++) x.find(e, r[t], n);
             return n = this.pushStack(i > 1 ? x.unique(n) : n), n.selector =
@@ -3774,7 +3910,7 @@ module.exports = {
                 i = this.length,
                 o = [],
                 s = Q.test(e) || "string" != typeof e ? x(e, t || this.context) :
-                    0;
+                0;
             for (; i > r; r++)
                 for (n = this[r]; n && n !== t; n = n.parentNode)
                     if (11 > n.nodeType && (s ? s.index(n) > -1 : 1 ===
@@ -3791,7 +3927,7 @@ module.exports = {
         },
         add: function(e, t) {
             var n = "string" == typeof e ? x(e, t) : x.makeArray(e && e
-                .nodeType ? [e] : e),
+                    .nodeType ? [e] : e),
                 r = x.merge(this.get(), n);
             return this.pushStack(x.unique(r))
         },
@@ -3915,7 +4051,8 @@ module.exports = {
         ct.thead, ct.th = ct.td, x.fn.extend({
             text: function(e) {
                 return x.access(this, function(e) {
-                    return e === undefined ? x.text(this) : this.empty()
+                    return e === undefined ? x.text(this) :
+                        this.empty()
                         .append((this[0] && this[0].ownerDocument ||
                             o).createTextNode(e))
                 }, null, e, arguments.length)
@@ -3967,23 +4104,28 @@ module.exports = {
             },
             clone: function(e, t) {
                 return e = null == e ? !1 : e, t = null == t ? e : t,
-                this.map(function() {
-                    return x.clone(this, e, t)
-                })
+                    this.map(function() {
+                        return x.clone(this, e, t)
+                    })
             },
             html: function(e) {
                 return x.access(this, function(e) {
-                    var t = this[0] || {}, n = 0,
+                    var t = this[0] || {},
+                        n = 0,
                         r = this.length;
-                    if (e === undefined && 1 === t.nodeType) return t
-                        .innerHTML;
-                    if ("string" == typeof e && !it.test(e) && !ct[
-                        (nt.exec(e) || ["", ""])[1].toLowerCase()
-                        ]) {
+                    if (e === undefined && 1 === t.nodeType)
+                        return t
+                            .innerHTML;
+                    if ("string" == typeof e && !it.test(e) &&
+                        !ct[
+                            (nt.exec(e) || ["", ""])[1].toLowerCase()
+                            ]) {
                         e = e.replace(tt, "<$1></$2>");
                         try {
-                            for (; r > n; n++) t = this[n] || {}, 1 ===
-                                t.nodeType && (x.cleanData(mt(t, !1)),
+                            for (; r > n; n++) t = this[n] || {},
+                                1 ===
+                                t.nodeType && (x.cleanData(mt(t, !
+                                        1)),
                                     t.innerHTML = e);
                             t = 0
                         } catch (i) {}
@@ -3993,8 +4135,8 @@ module.exports = {
             },
             replaceWith: function() {
                 var e = x.map(this, function(e) {
-                    return [e.nextSibling, e.parentNode]
-                }),
+                        return [e.nextSibling, e.parentNode]
+                    }),
                     t = 0;
                 return this.domManip(arguments, function(n) {
                     var r = e[t++],
@@ -4017,7 +4159,8 @@ module.exports = {
                 if (g || !(1 >= c || "string" != typeof d || x.support.checkClone) &&
                     st.test(d)) return this.each(function(r) {
                     var i = p.eq(r);
-                    g && (e[0] = d.call(this, r, i.html())), i.domManip(
+                    g && (e[0] = d.call(this, r, i.html())),
+                    i.domManip(
                         e, t, n)
                 });
                 if (c && (r = x.buildFragment(e, this[0].ownerDocument, !
@@ -4030,7 +4173,8 @@ module.exports = {
                     if (s)
                         for (u = o[o.length - 1].ownerDocument, x.map(o,
                             ht), l = 0; s > l; l++) a = o[l], at.test(a
-                            .type || "") && !q.access(a, "globalEval") &&
+                                .type || "") && !q.access(a,
+                                "globalEval") &&
                             x.contains(u, a) && (a.src ? x._evalUrl(a.src) :
                                 x.globalEval(a.textContent.replace(lt,
                                     "")))
@@ -4050,7 +4194,7 @@ module.exports = {
                     o = i.length - 1,
                     s = 0;
                 for (; o >= s; s++) n = s === o ? this : this.clone(!0),
-                x(i[s])[t](n), h.apply(r, n.get());
+                    x(i[s])[t](n), h.apply(r, n.get());
                 return this.pushStack(r)
             }
         }), x.extend({
@@ -4129,8 +4273,9 @@ module.exports = {
 
     function pt(e, t) {
         return x.nodeName(e, "table") && x.nodeName(1 === t.nodeType ? t :
-            t.firstChild, "tr") ? e.getElementsByTagName("tbody")[0] || e.appendChild(
-            e.ownerDocument.createElement("tbody")) : e
+                t.firstChild, "tr") ? e.getElementsByTagName("tbody")[0] ||
+            e.appendChild(
+                e.ownerDocument.createElement("tbody")) : e
     }
 
     function ft(e) {
@@ -4180,8 +4325,10 @@ module.exports = {
             var t;
             return x.isFunction(e) ? this.each(function(t) {
                 x(this).wrapAll(e.call(this, t))
-            }) : (this[0] && (t = x(e, this[0].ownerDocument).eq(0).clone(!
-                    0), this[0].parentNode && t.insertBefore(this[0]),
+            }) : (this[0] && (t = x(e, this[0].ownerDocument).eq(0)
+                .clone(!
+                    0), this[0].parentNode && t.insertBefore(
+                    this[0]),
                 t.map(function() {
                     var e = this;
                     while (e.firstElementChild) e = e.firstElementChild;
@@ -4217,14 +4364,17 @@ module.exports = {
         kt = RegExp("^([+-])=(" + b + ")", "i"),
         Nt = {
             BODY: "block"
-        }, Et = {
+        },
+        Et = {
             position: "absolute",
             visibility: "hidden",
             display: "block"
-        }, St = {
+        },
+        St = {
             letterSpacing: 0,
             fontWeight: 400
-        }, jt = ["Top", "Right", "Bottom", "Left"],
+        },
+        jt = ["Top", "Right", "Bottom", "Left"],
         Dt = ["Webkit", "O", "Moz", "ms"];
 
     function At(e, t) {
@@ -4252,25 +4402,32 @@ module.exports = {
             a = e.length;
         for (; a > s; s++) r = e[s], r.style && (o[s] = q.get(r,
                 "olddisplay"), n = r.style.display, t ? (o[s] || "none" !==
-                n || (r.style.display = ""), "" === r.style.display && Lt(r) &&
-                (o[s] = q.access(r, "olddisplay", Rt(r.nodeName)))) : o[s] ||
-            (i = Lt(r), (n && "none" !== n || !i) && q.set(r, "olddisplay",
+                n || (r.style.display = ""), "" === r.style.display &&
+                Lt(r) &&
+                (o[s] = q.access(r, "olddisplay", Rt(r.nodeName)))) : o[
+                s] ||
+            (i = Lt(r), (n && "none" !== n || !i) && q.set(r,
+                "olddisplay",
                 i ? n : x.css(r, "display"))));
         for (s = 0; a > s; s++) r = e[s], r.style && (t && "none" !== r.style
-            .display && "" !== r.style.display || (r.style.display = t ? o[
-                s] || "" : "none"));
+            .display && "" !== r.style.display || (r.style.display = t ?
+                o[
+                    s] || "" : "none"));
         return e
     }
     x.fn.extend({
         css: function(e, t) {
             return x.access(this, function(e, t, n) {
-                var r, i, o = {}, s = 0;
+                var r, i, o = {},
+                    s = 0;
                 if (x.isArray(t)) {
-                    for (r = qt(e), i = t.length; i > s; s++) o[t[s]] =
+                    for (r = qt(e), i = t.length; i > s; s++) o[
+                            t[s]] =
                         x.css(e, t[s], !1, r);
                     return o
                 }
-                return n !== undefined ? x.style(e, t, n) : x.css(e,
+                return n !== undefined ? x.style(e, t, n) : x.css(
+                    e,
                     t)
             }, e, t, arguments.length > 1)
         },
@@ -4317,7 +4474,7 @@ module.exports = {
                 var i, o, s, a = x.camelCase(t),
                     u = e.style;
                 return t = x.cssProps[a] || (x.cssProps[a] = At(u, a)),
-                s = x.cssHooks[t] || x.cssHooks[a], n === undefined ?
+                    s = x.cssHooks[t] || x.cssHooks[a], n === undefined ?
                     s && "get" in s && (i = s.get(e, !1, r)) !==
                     undefined ? i : u[t] : (o = typeof n, "string" ===
                         o && (i = kt.exec(n)) && (n = (i[1] + 1) * i[2] +
@@ -4334,9 +4491,9 @@ module.exports = {
         css: function(e, t, n, r) {
             var i, o, s, a = x.camelCase(t);
             return t = x.cssProps[a] || (x.cssProps[a] = At(e.style, a)),
-            s = x.cssHooks[t] || x.cssHooks[a], s && "get" in s &&
+                s = x.cssHooks[t] || x.cssHooks[a], s && "get" in s &&
                 (i = s.get(e, !0, n)), i === undefined && (i = vt(e, t,
-                r)), "normal" === i && t in St && (i = St[t]), "" ===
+                    r)), "normal" === i && t in St && (i = St[t]), "" ===
                 n || n ? (o = parseFloat(i), n === !0 || x.isNumeric(o) ?
                     o || 0 : i) : i
         }
@@ -4345,8 +4502,10 @@ module.exports = {
             a = s ? s.getPropertyValue(t) || s[t] : undefined,
             u = e.style;
         return s && ("" !== a || x.contains(e.ownerDocument, e) || (a = x.style(
-            e, t)), Ct.test(a) && wt.test(t) && (r = u.width, i = u.minWidth,
-            o = u.maxWidth, u.minWidth = u.maxWidth = u.width = a, a =
+            e, t)), Ct.test(a) && wt.test(t) && (r = u.width, i = u
+            .minWidth,
+            o = u.maxWidth, u.minWidth = u.maxWidth = u.width = a,
+            a =
             s.width, u.width = r, u.minWidth = i, u.maxWidth = o)), a
     };
 
@@ -4360,10 +4519,13 @@ module.exports = {
             0,
             s = 0;
         for (; 4 > o; o += 2) "margin" === n && (s += x.css(e, n + jt[o], !
-            0, i)), r ? ("content" === n && (s -= x.css(e, "padding" + jt[o], !
-            0, i)), "margin" !== n && (s -= x.css(e, "border" + jt[o] +
+            0, i)), r ? ("content" === n && (s -= x.css(e, "padding" +
+            jt[o], !
+            0, i)), "margin" !== n && (s -= x.css(e, "border" + jt[
+                o] +
             "Width", !0, i))) : (s += x.css(e, "padding" + jt[o], !0, i),
-            "padding" !== n && (s += x.css(e, "border" + jt[o] + "Width", !
+            "padding" !== n && (s += x.css(e, "border" + jt[o] +
+                "Width", !
                 0, i)));
         return s
     }
@@ -4387,10 +4549,12 @@ module.exports = {
         var t = o,
             n = Nt[e];
         return n || (n = Mt(e, t), "none" !== n && n || (xt = (xt || x(
-                "<iframe frameborder='0' width='0' height='0'/>").css(
+                "<iframe frameborder='0' width='0' height='0'/>"
+            ).css(
                 "cssText", "display:block !important")).appendTo(t.documentElement),
             t = (xt[0].contentWindow || xt[0].contentDocument).document,
-            t.write("<!doctype html><html><body>"), t.close(), n = Mt(e,
+            t.write("<!doctype html><html><body>"), t.close(), n =
+            Mt(e,
                 t), xt.detach()), Nt[e] = n), n
     }
 
@@ -4410,7 +4574,8 @@ module.exports = {
             set: function(e, n, r) {
                 var i = r && qt(e);
                 return Ot(e, n, r ? Ft(e, t, r, x.support.boxSizing &&
-                    "border-box" === x.css(e, "boxSizing", !1, i),
+                    "border-box" === x.css(e, "boxSizing", !1,
+                        i),
                     i) : 0)
             }
         }
@@ -4442,7 +4607,8 @@ module.exports = {
         x.cssHooks[e + t] = {
             expand: function(n) {
                 var r = 0,
-                    i = {}, o = "string" == typeof n ? n.split(" ") : [
+                    i = {},
+                    o = "string" == typeof n ? n.split(" ") : [
                         n];
                 for (; 4 > r; r++) i[e + jt[r] + t] = o[r] || o[r - 2] ||
                     o[0];
@@ -4465,12 +4631,15 @@ module.exports = {
                 return e ? x.makeArray(e) : this
             }).filter(function() {
                 var e = this.type;
-                return this.name && !x(this).is(":disabled") && zt.test(
-                    this.nodeName) && !It.test(e) && (this.checked || !
-                    ot.test(e))
+                return this.name && !x(this).is(":disabled") &&
+                    zt.test(
+                        this.nodeName) && !It.test(e) && (this.checked ||
+                        !
+                        ot.test(e))
             }).map(function(e, t) {
                 var n = x(this).val();
-                return null == n ? null : x.isArray(n) ? x.map(n,
+                return null == n ? null : x.isArray(n) ? x.map(
+                    n,
                     function(e) {
                         return {
                             name: t.name,
@@ -4543,7 +4712,9 @@ module.exports = {
         en = /^\/\//,
         tn = /^([\w.+-]+:)(?:\/\/([^\/?#:]*)(?::(\d+)|)|)/,
         nn = x.fn.load,
-        rn = {}, on = {}, sn = "*/".concat("*");
+        rn = {},
+        on = {},
+        sn = "*/".concat("*");
     try {
         Ut = i.href
     } catch (an) {
@@ -4557,20 +4728,24 @@ module.exports = {
             var r, i = 0,
                 o = t.toLowerCase().match(w) || [];
             if (x.isFunction(n))
-                while (r = o[i++]) "+" === r[0] ? (r = r.slice(1) || "*", (
-                    e[r] = e[r] || []).unshift(n)) : (e[r] = e[r] || []).push(
+                while (r = o[i++]) "+" === r[0] ? (r = r.slice(1) ||
+                    "*", (
+                        e[r] = e[r] || []).unshift(n)) : (e[r] = e[
+                    r] || []).push(
                     n)
         }
     }
 
     function ln(e, t, n, r) {
-        var i = {}, o = e === on;
+        var i = {},
+            o = e === on;
 
         function s(a) {
             var u;
             return i[a] = !0, x.each(e[a] || [], function(e, a) {
                 var l = a(t, n, r);
-                return "string" != typeof l || o || i[l] ? o ? !(u = l) :
+                return "string" != typeof l || o || i[l] ? o ? !(u =
+                        l) :
                     undefined : (t.dataTypes.unshift(l), s(l), !1)
             }), u
         }
@@ -4588,18 +4763,20 @@ module.exports = {
         var r, i, o, s = this,
             a = e.indexOf(" ");
         return a >= 0 && (r = e.slice(a), e = e.slice(0, a)), x.isFunction(
-            t) ? (n = t, t = undefined) : t && "object" == typeof t && (i =
-            "POST"), s.length > 0 && x.ajax({
-            url: e,
-            type: i,
-            dataType: "html",
-            data: t
-        }).done(function(e) {
-            o = arguments, s.html(r ? x("<div>").append(x.parseHTML(e))
-                .find(r) : e)
-        }).complete(n && function(e, t) {
-            s.each(n, o || [e.responseText, t, e])
-        }), this
+                t) ? (n = t, t = undefined) : t && "object" == typeof t &&
+            (i =
+                "POST"), s.length > 0 && x.ajax({
+                url: e,
+                type: i,
+                dataType: "html",
+                data: t
+            }).done(function(e) {
+                o = arguments, s.html(r ? x("<div>").append(x.parseHTML(
+                        e))
+                    .find(r) : e)
+            }).complete(n && function(e, t) {
+                s.each(n, o || [e.responseText, t, e])
+            }), this
     }, x.each(["ajaxStart", "ajaxStop", "ajaxComplete", "ajaxError",
         "ajaxSuccess", "ajaxSend"], function(e, t) {
         x.fn[t] = function(e) {
@@ -4658,7 +4835,10 @@ module.exports = {
                 f = c.context && (p.nodeType || p.jquery) ? x(p) : x.event,
                 h = x.Deferred(),
                 d = x.Callbacks("once memory"),
-                g = c.statusCode || {}, m = {}, y = {}, v = 0,
+                g = c.statusCode || {},
+                m = {},
+                y = {},
+                v = 0,
                 b = "canceled",
                 T = {
                     readyState: 0,
@@ -4680,7 +4860,7 @@ module.exports = {
                     setRequestHeader: function(e, t) {
                         var n = e.toLowerCase();
                         return v || (e = y[n] = y[n] || e, m[e] = t),
-                        this
+                            this
                     },
                     overrideMimeType: function(e) {
                         return v || (c.mimeType = e), this
@@ -4778,13 +4958,13 @@ module.exports = {
     }), x.each(["get", "post"], function(e, t) {
         x[t] = function(e, n, r, i) {
             return x.isFunction(n) && (i = i || r, r = n, n = undefined),
-            x.ajax({
-                url: e,
-                type: t,
-                dataType: i,
-                data: n,
-                success: r
-            })
+                x.ajax({
+                    url: e,
+                    type: t,
+                    dataType: i,
+                    data: n,
+                    success: r
+                })
         }
     });
 
@@ -4814,7 +4994,8 @@ module.exports = {
     }
 
     function fn(e, t, n, r) {
-        var i, o, s, a, u, l = {}, c = e.dataTypes.slice();
+        var i, o, s, a, u, l = {},
+            c = e.dataTypes.slice();
         if (c[1])
             for (s in e.converters) l[s.toLowerCase()] = e.converters[s];
         o = c.shift();
@@ -4839,7 +5020,8 @@ module.exports = {
                 } catch (p) {
                     return {
                         state: "parsererror",
-                        error: s ? p : "No conversion from " + u + " to " +
+                        error: s ? p : "No conversion from " + u +
+                            " to " +
                             o
                     }
                 }
@@ -4894,20 +5076,23 @@ module.exports = {
         }
     }), x.ajaxPrefilter("json jsonp", function(t, n, r) {
         var i, o, s, a = t.jsonp !== !1 && (dn.test(t.url) ? "url" :
-                "string" == typeof t.data && !(t.contentType || "").indexOf(
-                    "application/x-www-form-urlencoded") && dn.test(t.data) &&
-                "data");
+            "string" == typeof t.data && !(t.contentType || "").indexOf(
+                "application/x-www-form-urlencoded") && dn.test(t.data) &&
+            "data");
         return a || "jsonp" === t.dataTypes[0] ? (i = t.jsonpCallback =
             x.isFunction(t.jsonpCallback) ? t.jsonpCallback() : t.jsonpCallback,
-            a ? t[a] = t[a].replace(dn, "$1" + i) : t.jsonp !== !1 && (
-                t.url += (Vt.test(t.url) ? "&" : "?") + t.jsonp + "=" +
+            a ? t[a] = t[a].replace(dn, "$1" + i) : t.jsonp !== !1 &&
+            (
+                t.url += (Vt.test(t.url) ? "&" : "?") + t.jsonp +
+                "=" +
                 i), t.converters["script json"] = function() {
                 return s || x.error(i + " was not called"), s[0]
             }, t.dataTypes[0] = "json", o = e[i], e[i] = function() {
                 s = arguments
             }, r.always(function() {
                 e[i] = o, t[i] && (t.jsonpCallback = n.jsonpCallback,
-                    hn.push(i)), s && x.isFunction(o) && o(s[0]), s =
+                    hn.push(i)), s && x.isFunction(o) && o(s[0]),
+                s =
                     o = undefined
             }), "script") : undefined
     }), x.ajaxSettings.xhr = function() {
@@ -4919,39 +5104,46 @@ module.exports = {
         mn = {
             0: 200,
             1223: 204
-        }, yn = 0,
+        },
+        yn = 0,
         vn = {};
     e.ActiveXObject && x(e).on("unload", function() {
         for (var e in vn) vn[e]();
         vn = undefined
-    }), x.support.cors = !! gn && "withCredentials" in gn, x.support.ajax =
-        gn = !! gn, x.ajaxTransport(function(e) {
+    }), x.support.cors = !!gn && "withCredentials" in gn, x.support.ajax =
+        gn = !!gn, x.ajaxTransport(function(e) {
             var t;
             return x.support.cors || gn && !e.crossDomain ? {
                 send: function(n, r) {
                     var i, o, s = e.xhr();
-                    if (s.open(e.type, e.url, e.async, e.username, e.password),
+                    if (s.open(e.type, e.url, e.async, e.username,
+                            e.password),
                         e.xhrFields)
                         for (i in e.xhrFields) s[i] = e.xhrFields[i];
                     e.mimeType && s.overrideMimeType && s.overrideMimeType(
                         e.mimeType), e.crossDomain || n[
-                        "X-Requested-With"] || (n["X-Requested-With"] =
+                        "X-Requested-With"] || (n[
+                            "X-Requested-With"] =
                         "XMLHttpRequest");
                     for (i in n) s.setRequestHeader(i, n[i]);
                     t = function(e) {
                         return function() {
-                            t && (delete vn[o], t = s.onload = s.onerror =
+                            t && (delete vn[o], t = s.onload =
+                                s.onerror =
                                 null, "abort" === e ? s.abort() :
-                                "error" === e ? r(s.status || 404, s.statusText) :
+                                "error" === e ? r(s.status ||
+                                    404, s.statusText) :
                                 r(mn[s.status] || s.status, s.statusText,
                                     "string" == typeof s.responseText ? {
                                         text: s.responseText
                                     } : undefined, s.getAllResponseHeaders()
                                 ))
                         }
-                    }, s.onload = t(), s.onerror = t("error"), t = vn[o =
-                        yn++] = t("abort"), s.send(e.hasContent && e.data ||
-                        null)
+                    }, s.onload = t(), s.onerror = t("error"), t =
+                        vn[o =
+                            yn++] = t("abort"), s.send(e.hasContent &&
+                            e.data ||
+                            null)
                 },
                 abort: function() {
                     t && t()
@@ -5016,7 +5208,8 @@ module.exports = {
                 for (; u > s; s++) l.tweens[s].run(o);
                 return a.notifyWith(e, [l, o, n]), 1 > o && u ? n : (a.resolveWith(
                     e, [l]), !1)
-            }, l = a.promise({
+            },
+            l = a.promise({
                 elem: e,
                 props: x.extend({}, t),
                 opts: x.extend(!0, {
@@ -5045,11 +5238,11 @@ module.exports = {
         for (Dn(c, l.opts.specialEasing); s > o; o++)
             if (r = kn[o].call(l, e, c, l.opts)) return r;
         return x.map(c, Sn, l), x.isFunction(l.opts.start) && l.opts.start.call(
-            e, l), x.fx.timer(x.extend(u, {
-            elem: e,
-            anim: l,
-            queue: l.opts.queue
-        })), l.progress(l.opts.progress).done(l.opts.done, l.opts.complete)
+                e, l), x.fx.timer(x.extend(u, {
+                elem: e,
+                anim: l,
+                queue: l.opts.queue
+            })), l.progress(l.opts.progress).done(l.opts.done, l.opts.complete)
             .fail(l.opts.fail).always(l.opts.always)
     }
 
@@ -5078,7 +5271,8 @@ module.exports = {
 
     function An(e, t, n) {
         var r, i, o, s, a, u, l = this,
-            c = {}, p = e.style,
+            c = {},
+            p = e.style,
             f = e.nodeType && Lt(e),
             h = q.get(e, "fxshow");
         n.queue || (a = x._queueHooks(e, "fx"), null == a.unqueued && (a.unqueued =
@@ -5116,7 +5310,8 @@ module.exports = {
                 for (t in c) x.style(e, t, c[t])
             });
             for (r in c) s = Sn(f ? h[r] : 0, r, l), r in h || (h[r] = s.start,
-                f && (s.end = s.start, s.start = "width" === r || "height" ===
+                f && (s.end = s.start, s.start = "width" === r ||
+                    "height" ===
                     r ? 1 : 0))
         }
     }
@@ -5139,11 +5334,12 @@ module.exports = {
         run: function(e) {
             var t, n = Ln.propHooks[this.prop];
             return this.pos = t = this.options.duration ? x.easing[this.easing]
-            (e, this.options.duration * e, 0, 1, this.options.duration) : e,
-            this.now = (this.end - this.start) * t + this.start, this.options
+                (e, this.options.duration * e, 0, 1, this.options.duration) :
+                e,
+                this.now = (this.end - this.start) * t + this.start, this.options
                 .step && this.options.step.call(this.elem, this.now, this),
-            n && n.set ? n.set(this) : Ln.propHooks._default.set(this),
-            this
+                n && n.set ? n.set(this) : Ln.propHooks._default.set(this),
+                this
         }
     }, Ln.prototype.init.prototype = Ln.prototype, Ln.propHooks = {
         _default: {
@@ -5192,21 +5388,21 @@ module.exports = {
                 delete e.stop, t(n)
             };
             return "string" != typeof e && (n = t, t = e, e = undefined),
-            t && e !== !1 && this.queue(e || "fx", []), this.each(
-                function() {
-                    var t = !0,
-                        i = null != e && e + "queueHooks",
-                        o = x.timers,
-                        s = q.get(this);
-                    if (i) s[i] && s[i].stop && r(s[i]);
-                    else
-                        for (i in s) s[i] && s[i].stop && Cn.test(i) &&
-                            r(s[i]);
-                    for (i = o.length; i--;) o[i].elem !== this ||
-                        null != e && o[i].queue !== e || (o[i].anim
-                            .stop(n), t = !1, o.splice(i, 1));
-                    (t || !n) && x.dequeue(this, e)
-                })
+                t && e !== !1 && this.queue(e || "fx", []), this.each(
+                    function() {
+                        var t = !0,
+                            i = null != e && e + "queueHooks",
+                            o = x.timers,
+                            s = q.get(this);
+                        if (i) s[i] && s[i].stop && r(s[i]);
+                        else
+                            for (i in s) s[i] && s[i].stop && Cn.test(i) &&
+                                r(s[i]);
+                        for (i = o.length; i--;) o[i].elem !== this ||
+                            null != e && o[i].queue !== e || (o[i].anim
+                                .stop(n), t = !1, o.splice(i, 1));
+                        (t || !n) && x.dequeue(this, e)
+                    })
         },
         finish: function(e) {
             return e !== !1 && (e = e || "fx"), this.each(function() {
@@ -5215,11 +5411,15 @@ module.exports = {
                     i = n[e + "queueHooks"],
                     o = x.timers,
                     s = r ? r.length : 0;
-                for (n.finish = !0, x.queue(this, e, []), i && i.stop &&
-                    i.stop.call(this, !0), t = o.length; t--;) o[t]
-                    .elem === this && o[t].queue === e && (o[t].anim
+                for (n.finish = !0, x.queue(this, e, []), i &&
+                    i.stop &&
+                    i.stop.call(this, !0), t = o.length; t--;) o[
+                        t]
+                    .elem === this && o[t].queue === e && (o[t]
+                        .anim
                         .stop(!0), o.splice(t, 1));
-                for (t = 0; s > t; t++) r[t] && r[t].finish && r[t]
+                for (t = 0; s > t; t++) r[t] && r[t].finish &&
+                    r[t]
                     .finish.call(this);
                 delete n.finish
             })
@@ -5229,7 +5429,8 @@ module.exports = {
     function qn(e, t) {
         var n, r = {
                 height: e
-            }, i = 0;
+            },
+            i = 0;
         for (t = t ? 1 : 0; 4 > i; i += 2 - t) n = jt[i], r["margin" + n] =
             r["padding" + n] = e;
         return t && (r.opacity = r.width = e), r
@@ -5263,7 +5464,7 @@ module.exports = {
                 .queue = "fx"), r.old = r.complete, r.complete = function() {
                 x.isFunction(r.old) && r.old.call(this), r.queue && x.dequeue(
                     this, r.queue)
-        }, r
+            }, r
     }, x.easing = {
         linear: function(e) {
             return e
@@ -5301,7 +5502,8 @@ module.exports = {
             o = {
                 top: 0,
                 left: 0
-            }, s = i && i.ownerDocument;
+            },
+            s = i && i.ownerDocument;
         if (s) return t = s.documentElement, x.contains(t, i) ? (typeof i.getBoundingClientRect !==
             r && (o = i.getBoundingClientRect()), n = Hn(s), {
                 top: o.top + n.pageYOffset - t.clientTop,
@@ -5331,12 +5533,15 @@ module.exports = {
                     };
                 return "fixed" === x.css(n, "position") ? t = n.getBoundingClientRect() :
                     (e = this.offsetParent(), t = this.offset(), x.nodeName(
-                    e[0], "html") || (r = e.offset()), r.top += x.css(
-                    e[0], "borderTopWidth", !0), r.left += x.css(e[
-                    0], "borderLeftWidth", !0)), {
-                    top: t.top - r.top - x.css(n, "marginTop", !0),
-                    left: t.left - r.left - x.css(n, "marginLeft", !0)
-                }
+                            e[0], "html") || (r = e.offset()), r.top +=
+                        x.css(
+                            e[0], "borderTopWidth", !0), r.left += x.css(
+                            e[
+                                0], "borderLeftWidth", !0)), {
+                        top: t.top - r.top - x.css(n, "marginTop", !0),
+                        left: t.left - r.left - x.css(n, "marginLeft", !
+                            0)
+                    }
             }
         },
         offsetParent: function() {
@@ -5355,9 +5560,10 @@ module.exports = {
         x.fn[t] = function(i) {
             return x.access(this, function(t, i, o) {
                 var s = Hn(t);
-                return o === undefined ? s ? s[n] : t[i] : (s ? s.scrollTo(
-                    r ? e.pageXOffset : o, r ? o : e.pageYOffset
-                ) : t[i] = o, undefined)
+                return o === undefined ? s ? s[n] : t[i] : (s ?
+                    s.scrollTo(
+                        r ? e.pageXOffset : o, r ? o : e.pageYOffset
+                    ) : t[i] = o, undefined)
             }, t, i, arguments.length, null)
         }
     });
@@ -5376,18 +5582,23 @@ module.exports = {
         }, function(n, r) {
             x.fn[r] = function(r, i) {
                 var o = arguments.length && (n || "boolean" !=
-                    typeof r),
+                        typeof r),
                     s = n || (r === !0 || i === !0 ? "margin" :
                         "border");
                 return x.access(this, function(t, n, r) {
                     var i;
                     return x.isWindow(t) ? t.document.documentElement[
-                        "client" + e] : 9 === t.nodeType ? (i =
-                        t.documentElement, Math.max(t.body[
-                                "scroll" + e], i["scroll" + e],
-                            t.body["offset" + e], i["offset" +
-                                e], i["client" + e])) : r ===
-                        undefined ? x.css(t, n, s) : x.style(t,
+                            "client" + e] : 9 === t.nodeType ?
+                        (i =
+                            t.documentElement, Math.max(t.body[
+                                    "scroll" + e], i[
+                                    "scroll" + e],
+                                t.body["offset" + e], i[
+                                    "offset" +
+                                    e], i["client" + e])) :
+                        r ===
+                        undefined ? x.css(t, n, s) : x.style(
+                            t,
                             n, r, s)
                 }, t, o ? r : undefined, o, null)
             }
@@ -5428,7 +5639,7 @@ $(function() {
 
 },{"./level/mainLevel":7,"./lib/jquery":8}],10:[function(require,module,exports){
 var
-Sprite = require('./sprite'),
+    Sprite = require('./sprite'),
     Shape = require('../foundation/shape'),
     Animation = require('../foundation/animation'),
     Direction = require('../enum/direction');
@@ -5473,7 +5684,7 @@ module.exports = {
         /////////////////////////////////////
 
         var
-        location = maze.get(row, column),
+            location = maze.get(row, column),
             center = {
                 x: 0,
                 y: 0
@@ -5633,10 +5844,10 @@ module.exports = {
             dy = newLocation.y - location.y;
 
             var
-            newCenter = {
-                x: this.x + dx,
-                y: this.y + dy
-            },
+                newCenter = {
+                    x: this.x + dx,
+                    y: this.y + dy
+                },
                 dirX = dx > 0 ? 1 : -1,
                 dirY = dy > 0 ? 1 : -1,
                 idealTime = 100,
@@ -5670,7 +5881,7 @@ module.exports = {
 
 },{"../enum/direction":1,"../foundation/animation":3,"../foundation/shape":5,"./sprite":15}],11:[function(require,module,exports){
 var
-AbstractPlayer = require('./abstractPlayer'),
+    AbstractPlayer = require('./abstractPlayer'),
     Shape = require('../foundation/shape'),
     Animation = require('../foundation/animation'),
     Hash = require('../util/hash'),
@@ -5689,7 +5900,7 @@ AbstractPlayer = require('./abstractPlayer'),
 //////////////////////////////////
 
 var
-MOVE_DELAY = 300,
+    MOVE_DELAY = 300,
     FILL_STYLE = '#FF0000',
     RADIUS = 20;
 
@@ -5721,7 +5932,7 @@ module.exports = {
         /////////////////////////////////////
 
         var
-        location = maze.get(row, column),
+            location = maze.get(row, column),
             center = {
                 x: 0,
                 y: 0
@@ -5777,7 +5988,7 @@ module.exports = {
             var startTime = new Date();
             if (worker === undefined) {
                 var
-                graph = WorkerTasks.constructGraph(mazeJson),
+                    graph = WorkerTasks.constructGraph(mazeJson),
                     source = Hash.hashcode(this.location),
                     destination = Hash.hashcode(player.location),
                     sourceNode = graph.getNode(source),
@@ -5850,7 +6061,7 @@ module.exports = {
 
 },{"../foundation/animation":3,"../foundation/shape":5,"../util/hash":19,"../worker/workerTasks":23,"./abstractPlayer":10}],12:[function(require,module,exports){
 var
-Sprite = require('./sprite'),
+    Sprite = require('./sprite'),
     Shape = require('../foundation/shape'),
     Hash = require('../util/hash'),
     Graph = require('../util/graph'),
@@ -5870,7 +6081,7 @@ Sprite = require('./sprite'),
 //////////////////////////////////
 
 var
-TILE_SIDE = 50,
+    TILE_SIDE = 50,
     WALL_STYLE = '#FFFFFF',
     EMPTY_STYLE = '#000000',
     WALL_THICKNESS = 4;
@@ -5896,7 +6107,7 @@ module.exports = {
         /////////////////////////////////////
 
         var
-        locations = [],
+            locations = [],
             shapes = [];
 
         /**
@@ -6084,10 +6295,10 @@ module.exports = {
          */
         function MazeWall(x, y, isVertical) {
             var
-            w = isVertical ? WALL_THICKNESS : TILE_SIDE +
+                w = isVertical ? WALL_THICKNESS : TILE_SIDE +
                 WALL_THICKNESS,
                 h = isVertical ? TILE_SIDE + WALL_THICKNESS :
-                    WALL_THICKNESS,
+                WALL_THICKNESS,
                 isPenetrable = false;
 
             /**
@@ -6210,7 +6421,7 @@ module.exports = {
 
                 if (randomLocation !== null) {
                     var
-                    wall = location.walls[randomDir],
+                        wall = location.walls[randomDir],
                         oppWall = randomLocation.walls[Direction
                             .opposite(randomDir)];
 
@@ -6395,7 +6606,7 @@ module.exports = {
          */
         this.toGraph = function() {
             var
-            graph = new Graph.Graph(),
+                graph = new Graph.Graph(),
                 nodes = [],
                 currentRowIndex,
                 currentRow;
@@ -6415,7 +6626,7 @@ module.exports = {
 
             _this.forEachLocation(function(location, i, j) {
                 var
-                u = nodes[i][j],
+                    u = nodes[i][j],
                     v;
 
                 if (location.up !== null) {
@@ -6507,7 +6718,7 @@ var AbstractPlayer = require('./abstractPlayer'),
 //////////////////////////////////
 
 var
-HEAD_STYLE = 'yellow',
+    HEAD_STYLE = 'yellow',
     EYE_STYLE = 'black',
     MOUTH_STYLE = 'black',
     MOUTH_MAX = 2;
@@ -6542,10 +6753,10 @@ module.exports = {
         /////////////////////////////////////
 
         var
-        center = {
-            x: 0,
-            y: 0
-        },
+            center = {
+                x: 0,
+                y: 0
+            },
             head = new Shape.Circle(center.x, center.y, 18,
                 drawer, {
                     fillStyle: HEAD_STYLE
@@ -6573,7 +6784,7 @@ module.exports = {
                 physicsEngine, drawer, shapes);
 
             var
-            cycleDuration = 600,
+                cycleDuration = 600,
                 mouthAnim = new Animation.Animation(_this, function(
                     time) {
                     mouth.transformation.sy = MOUTH_MAX * Math.sin(
@@ -6612,9 +6823,9 @@ module.exports = {
             }
 
             var
-            prizes = candidates.filter(function(candidate) {
-                return candidate instanceof Prize.Prize;
-            }),
+                prizes = candidates.filter(function(candidate) {
+                    return candidate instanceof Prize.Prize;
+                }),
                 enemies = candidates.filter(function(candidate) {
                     return candidate instanceof Enemy.Enemy;
                 });
@@ -6646,7 +6857,7 @@ var Sprite = require('./sprite'),
 //////////////////////////////////
 
 var
-FILL_STYLE = '#00FF76',
+    FILL_STYLE = '#00FF76',
     PRIZE_SIDE = 15;
 
 /**
@@ -6670,10 +6881,10 @@ module.exports = {
         /////////////////////////////////////
 
         var
-        rect = new Shape.Rectangle(-PRIZE_SIDE / 2, -PRIZE_SIDE / 2,
-            PRIZE_SIDE, PRIZE_SIDE, drawer, {
-                fillStyle: FILL_STYLE
-            }),
+            rect = new Shape.Rectangle(-PRIZE_SIDE / 2, -PRIZE_SIDE / 2,
+                PRIZE_SIDE, PRIZE_SIDE, drawer, {
+                    fillStyle: FILL_STYLE
+                }),
             location = maze.get(row, column),
             shapes = [rect];
 
@@ -6751,7 +6962,7 @@ module.exports = {
         /////////////////////////////////////
 
         var
-        x,
+            x,
             y,
             boundingBox,
             transformation = new MathExtensions.Transformation();
@@ -6954,7 +7165,7 @@ module.exports = {
             var minX, minY, maxX, maxY;
             this.forEachShape(function(shape) {
                 var
-                sBoxX = shape.boundingBox.x,
+                    sBoxX = shape.boundingBox.x,
                     sBoxY = shape.boundingBox.y;
 
                 if (minX === undefined || minX > sBoxX) {
@@ -7782,7 +7993,7 @@ module.exports = {
         function rehash() {
             // Create new bucket that is double the size
             var
-            oldBucket = bucket,
+                oldBucket = bucket,
                 oldIndices = indicesTaken,
                 hashTarget;
 
@@ -8338,7 +8549,7 @@ module.exports = {
      */
     buildMatrix: function(rows) {
         var
-        numRows = rows.length,
+            numRows = rows.length,
             numColumns = rows[0].length;
 
         return new module.exports.Matrix(_.flatten(rows), numRows, numColumns);
@@ -8571,10 +8782,10 @@ module.exports = {
             keys l, u, and p respectively
          */
         this.luDecomposition = function() {
-            // Inner helper functio
+            // Inner helper function
             function pivotize() {
                 var
-                n = _this.numRows,
+                    n = _this.numRows,
                     id = [],
                     maxIter = function(i) {
                         return _this.get(i, j);
@@ -8665,7 +8876,7 @@ module.exports = {
         this.inverse = function() {
             if (this.numRows === 3) {
                 var
-                a = this.get(0, 0),
+                    a = this.get(0, 0),
                     b = this.get(0, 1),
                     c = this.get(0, 2),
                     d = this.get(1, 0),
@@ -8675,7 +8886,7 @@ module.exports = {
                     h = this.get(2, 1),
                     i = this.get(2, 2),
                     det = a * (e * i - f * h) - b * (i * d - f * g) +
-                        c * (d * h - e * g),
+                    c * (d * h - e * g),
                     inv = new module.exports.Matrix([
                         (e * i - f * h), -(b * i - c * h), (b * f -
                             c * e),
@@ -8707,7 +8918,7 @@ module.exports = {
         ////////////////////////////
 
         var
-        matrix = new module.exports.Matrix([
+            matrix = new module.exports.Matrix([
             1, 0, 0,
             0, 1, 0,
             0, 0, 1
@@ -8861,7 +9072,7 @@ module.exports = {
          */
         this.applyToPoint = function(point) {
             var
-            coords = new module.exports.Matrix([point.x, point.y, 1], 3, 1),
+                coords = new module.exports.Matrix([point.x, point.y, 1], 3, 1),
                 newCoords = matrix.multiply(coords),
                 x = newCoords.get(0, 0),
                 y = newCoords.get(1, 0);
@@ -8881,7 +9092,7 @@ module.exports = {
          */
         this.adjustPoint = function(point) {
             var
-            coords = new module.exports.Matrix([point.x, point.y, 1], 3, 1),
+                coords = new module.exports.Matrix([point.x, point.y, 1], 3, 1),
                 newCoords = matrix.inverse().multiply(coords),
                 x = newCoords.get(0, 0),
                 y = newCoords.get(1, 0);
@@ -9182,7 +9393,7 @@ module.exports = {
 
 },{}],23:[function(require,module,exports){
 var
-Graph = require('../util/graph'),
+    Graph = require('../util/graph'),
     Direction = require('../enum/direction');
 
 /**
@@ -9200,7 +9411,7 @@ module.exports = {
      */
     constructGraph: function(dictionary) {
         var
-        graph = new Graph.Graph(),
+            graph = new Graph.Graph(),
             key;
         // Add the nodes to the graph
         for (key in dictionary) {
@@ -9215,7 +9426,7 @@ module.exports = {
                 key = parseInt(key);
 
                 var
-                node = graph.getNode(key),
+                    node = graph.getNode(key),
                     neighborArr = dictionary[key],
                     neighborArrLen = neighborArr.length,
                     edge,
@@ -9248,7 +9459,7 @@ module.exports = {
      */
     getPath: function(graph, source, dest) {
         var
-        currentNode,
+            currentNode,
             path = [];
 
         graph.dijkstra(source, dest);

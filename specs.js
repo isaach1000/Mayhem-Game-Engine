@@ -75,7 +75,8 @@ describe('Graph', function() {
 var Hash = require('../util/hash');
 
 describe('Hash', function() {
-    var obj1 = {}, obj2 = {};
+    var obj1 = {},
+        obj2 = {};
     it('unique hashcodes', function() {
         expect(Hash.hashcode(obj1)).not.toBe(Hash.hashcode(obj2));
     });
@@ -89,9 +90,10 @@ describe('Hash', function() {
 describe('Hashset', function() {
     var set = new Hash.Hashset();
     var item = {
-        key1: 'val1',
-        key2: 2
-    }, itemClone = {
+            key1: 'val1',
+            key2: 2
+        },
+        itemClone = {
             key1: 'val1',
             key2: 2
         };
@@ -137,10 +139,12 @@ describe('Hashset', function() {
 describe('Hashtable', function() {
     var table = new Hash.Hashtable();
     var key = {
-        prop: 'property'
-    }, value = {
+            prop: 'property'
+        },
+        value = {
             prop: 'val'
-        }, keyClone = {
+        },
+        keyClone = {
             prop: 'property'
         };
     it('put', function() {
@@ -188,13 +192,13 @@ var MathExtensions = require('../util/mathExtensions');
 
 describe('Matrix', function() {
     var
-    matrix1 = new MathExtensions.Matrix([11, 9, 24, 2, 1, 5, 2, 6,
+        matrix1 = new MathExtensions.Matrix([11, 9, 24, 2, 1, 5, 2, 6,
         3, 17, 18, 1, 2, 5, 7, 1], 4, 4),
         matrix2 = new MathExtensions.Matrix([11, 6, 32, 1, 2, 4, 5,
             2, 1], 3, 3);
     it('lu decomposition', function() {
         var
-        luDec = matrix1.luDecomposition(),
+            luDec = matrix1.luDecomposition(),
             l = luDec.l,
             u = luDec.u;
 
@@ -266,10 +270,10 @@ describe('MinHeap', function() {
             return data1.complex.number - data2.complex.number;
         });
         var obj1 = {
-            complex: {
-                number: 3
-            }
-        },
+                complex: {
+                    number: 3
+                }
+            },
             obj2 = {
                 complex: {
                     number: 1
@@ -304,7 +308,7 @@ describe('MinHeap', function() {
 
 },{"../util/minHeap":10}],5:[function(require,module,exports){
 var
-hashSpec = require('./hash.spec'),
+    hashSpec = require('./hash.spec'),
     graphSpec = require('./graph.spec'),
     minHeapSpec = require('./minHeap.spec'),
     mathExtensionsSpec = require('./mathExtensions.spec');
@@ -1040,7 +1044,7 @@ module.exports = {
         function rehash() {
             // Create new bucket that is double the size
             var
-            oldBucket = bucket,
+                oldBucket = bucket,
                 oldIndices = indicesTaken,
                 hashTarget;
 
@@ -1596,7 +1600,7 @@ module.exports = {
      */
     buildMatrix: function(rows) {
         var
-        numRows = rows.length,
+            numRows = rows.length,
             numColumns = rows[0].length;
 
         return new module.exports.Matrix(_.flatten(rows), numRows, numColumns);
@@ -1829,10 +1833,10 @@ module.exports = {
             keys l, u, and p respectively
          */
         this.luDecomposition = function() {
-            // Inner helper functio
+            // Inner helper function
             function pivotize() {
                 var
-                n = _this.numRows,
+                    n = _this.numRows,
                     id = [],
                     maxIter = function(i) {
                         return _this.get(i, j);
@@ -1923,7 +1927,7 @@ module.exports = {
         this.inverse = function() {
             if (this.numRows === 3) {
                 var
-                a = this.get(0, 0),
+                    a = this.get(0, 0),
                     b = this.get(0, 1),
                     c = this.get(0, 2),
                     d = this.get(1, 0),
@@ -1933,7 +1937,7 @@ module.exports = {
                     h = this.get(2, 1),
                     i = this.get(2, 2),
                     det = a * (e * i - f * h) - b * (i * d - f * g) +
-                        c * (d * h - e * g),
+                    c * (d * h - e * g),
                     inv = new module.exports.Matrix([
                         (e * i - f * h), -(b * i - c * h), (b * f -
                             c * e),
@@ -1965,7 +1969,7 @@ module.exports = {
         ////////////////////////////
 
         var
-        matrix = new module.exports.Matrix([
+            matrix = new module.exports.Matrix([
             1, 0, 0,
             0, 1, 0,
             0, 0, 1
@@ -2119,7 +2123,7 @@ module.exports = {
          */
         this.applyToPoint = function(point) {
             var
-            coords = new module.exports.Matrix([point.x, point.y, 1], 3, 1),
+                coords = new module.exports.Matrix([point.x, point.y, 1], 3, 1),
                 newCoords = matrix.multiply(coords),
                 x = newCoords.get(0, 0),
                 y = newCoords.get(1, 0);
@@ -2139,7 +2143,7 @@ module.exports = {
          */
         this.adjustPoint = function(point) {
             var
-            coords = new module.exports.Matrix([point.x, point.y, 1], 3, 1),
+                coords = new module.exports.Matrix([point.x, point.y, 1], 3, 1),
                 newCoords = matrix.inverse().multiply(coords),
                 x = newCoords.get(0, 0),
                 y = newCoords.get(1, 0);

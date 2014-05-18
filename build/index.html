@@ -18,49 +18,158 @@
     </div>
     <div id="content">
         <h1 id="canvas">Canvas</h1>
-        <h3 id="isaac-hier">Isaac Hier</h3>
+        <h4 id="isaac-hier">Isaac Hier</h4>
         <h2 id="the-problem">The Problem</h2>
         <p>Before HTML5, there was no way to render custom drawings to the screen. Flash gained popularity because it provided an interface for rendering drawings and animations.
         </p>
         <h2 id="the-solution">The Solution</h2>
-        <p>As the web standard has progressed, it became apparent that modern browsers could implement this technology without the use of plugins. With the release of HTML5 came the new canvas DOM element. The canvas element can render two-dimensional drawings,
-            and eventually, will be relied upon to handle three-dimensional drawings as well. Although Flash is still widely used on the web, many mobile browsers have dropped support for Flash, making it a dying platform.
+        <p>As the web standard has progressed, it became apparent that modern browsers could implement this technology without the use of plugins. With the release of HTML5 came the new canvas DOM element. The canvas element can render two-dimensional drawings, and eventually, will be relied upon to handle three-dimensional drawings as well. Although Flash is still widely used on the web, many mobile browsers have dropped support for Flash, making it a dying platform.
         </p>
-        <h2 id="the-canvas-api">The Canvas API</h2>
-        <p>The canvas API is simplistic. The API methods allow one to draw lines, basic shapes, and custom paths. However, there are many needed methods that are not included in the canvas API. For example, there is no method to draw a dotted line in the
-            current canvas API. One must implement this method own his/ her own in order to draw dotted lines. Also, the current implementation does not help with hit testing at all. There is no built-in method to find whether or not the mouse or a polygon
-            has collided with another polygon. The canvas programmer must use mathematics to calculate these collisions, while keeping performance high. A popular solution for hit-testing is to use bounding boxes. The bounding boxes are used to check
-            for collisions before performing expensive calculations to determine polygon collisions (using ray-casting, etc.). Finally, various transformations can be applied to the drawing context, such as translating, scaling, and rotating. In practice,
-            it proves easier to use transformation matrices to represent the various transformations. This allows the programmer to handle various different transformations when considering collisions, etc.</p>
+        <h2 id="the-canvas-context">The Canvas Context</h2>
+        <p>In order to draw to the canvas element, one must retrieve the context from that canvas element. If we were to have a canvas on our page with the id &quot;myCanvas&quot;, we could retrieve the canvas context (using jQuery) like so:</p>
+        <pre><code class="lang-javascript"><span class="keyword">var</span> ctx = $(<span class="string">'#myCanvas'</span>)[<span class="number">0</span>].getContext(<span class="string">'2d'</span>); <span class="comment">// Get 2d context</span></code></pre>
+        <h2 id="creating-2d-worlds-with-canvas">Creating 2D Worlds With Canvas</h2>
+        <p>Canvas, like other rendering API&#39;s, provides drawing methods, but leaves the developer with the task of abstracting these low-level methods. For example, the drawing of a line in canvas looks like this</p>
+        <pre><code class="lang-javascript">ctx.moveTo(<span class="number">3</span>, <span class="number">2</span>); <span class="comment">// change position to xy coordinate (3, 2)</span>
+ctx.lineTo(<span class="number">10</span>, <span class="number">5</span>); <span class="comment">// draw line from position to xy coordinate (10, 5)</span>
+ctx.stroke(); <span class="comment">// stroke the line</span></code></pre>
+        <p>But what if we want to draw a polygon? Canvas has no method that takes an array of points and draws a polygon. The solution looks something like this:</p>
+        <pre><code class="lang-javascript">ctx.beginPath();
+ctx.moveTo(points[<span class="number">0</span>].x, points[<span class="number">0</span>].y);
+
+<span class="keyword">for</span> (<span class="keyword">var</span> i = <span class="number">1</span>; i &lt; points.length; i++) {
+    <span class="keyword">var</span> pt = points[(i + <span class="number">1</span>) % numPoints];
+    ctx.lineTo(pt.x, pt.y);
+}
+
+ctx.fill();
+ctx.stroke();</code></pre>
+        <p>Also, you can see that the methods do not takes objects, only primitives. This is not such an issue for points, but becomes an issue with shapes and matrices. The transform method has six required parameters!</p>
+        <p>In order to give the canvas context a more object-oriented interface, I started this project with the foundation/canvasDrawer module. This module contains a class that effectively wraps a canvas context within a more appealing interface.</p>
+        <h3 id="the-canvasdrawer-class">The CanvasDrawer Class</h3>
+        <p>The CanvasDrawer class mostly contains simple wrapper methods. However, there are a few very significant differences.</p>
+        <p>First, in order to set options for stroke color, fill color, line width, font, and others, one must set the appropriate fields of the context, like so:</p>
+        <pre><code class="lang-javascript">ctx.fillStyle = <span class="string">'orange'</span>;
+ctx.strokeStyle = <span class="string">'blue'</span>;
+ctx.lineWidth = <span class="number">4</span>;</code></pre>
+        <p>This becomes verbose and does not follow the way JavaScript usually handles these types of modifications. Inspired by jQuery, I created a single field called contextSettings, which can modify multiple settings in one shot.</p>
+        <pre><code class="lang-javascript">ctx.contextSettings = {
+    fillStyle: <span class="string">'orange'</span>,
+    strokeStyle: <span class="string">'blue'</span>,
+    lineWidth: <span class="number">4</span>
+};</code></pre>
+        <p>Although the number of lines of code grew, the above code represents an optimization for the following reason: we can now set the options for multiple canvases with one settings object, as opposed to calling the respective methods of each instance. (This is a valid solution because the CanvasDrawer makes a deep copy of the settings object, so it would not affect all of the object if one changed one of their settings.)</p>
+        <p>Later, jQuery inspired me again and I added method chaining to the canvas context. This was surprisingly helpful. Code that once looked like this:</p>
+        <pre><code class="lang-javascript">drawer.save();
+drawer.transform(<span class="keyword">this</span>.transformation);
+drawer.clearRect(x, y, w, h);
+drawer.restore();</code></pre>
+        <p>Now looks like this:</p>
+        <pre><code class="lang-javascript">drawer.save()
+    .transform(<span class="keyword">this</span>.transformation)
+    .clearRect(x, y, w, h)
+    .restore();</code></pre>
+        <p>The CanvasDrawer class takes a procedural canvas context and puts it in a JavaScript-styled interface. This forms the foundation of a long and arduous journey to make useful classes to represent shapes, animations, transformations, sprites, and finally, levels.</p>
+        <h2 id="object-oriented-game-development">Object-Oriented Game Development</h2>
+        <p>The next step is to separate every other aspect of the game into classes. These classes are stored in multiple files and folders, but are built into a single file using Grunt before deployment. The names of the many of the directories reflect the different categories of objects that we dealt with: enum, events, foundation, level, sprite, util (lib, spec, and worker are intentionally not included). In terms of the abstraction hierarchy, the foundation folder contains the most fundamental modules for our game engine: canvasDrawer, shape, and animation.
+        </p>
+        <h3 id="shapes">Shapes</h3>
+        <p>From this point on, no object will call a canvas context method directly, all interactions are controlled through the CanvasDrawer instances. The shape module contains all of the basic shape classes. The first class in the module is Shape. This is an abstract class that defines behaviors common for all basic shapes, such as drawing and clearing methods and x, y, angle, drawingSettings, etc. fields. The abstract class is also responsible for collision detection, which each subclass overrides.</p>
+        <p>Circle is a simple class. The drawing of a circle is as simple as calling the arc method of the canvas context. Collision detection is also simple, just check if the distance from the center to the point is less than the radius. On the other hand, polygons are very difficult to deal with. The drawing of a polygon involves iterating through its points and calling canvas methods at each iteration. The collision detection algorithm for polygons is computationally expensive and confusing. The method of choice is called ray-casting. The idea is to draw an imaginary line from a point outside of the polygon to the point that we are testing. Then, check the number of times this imaginary line intersects with a side of the polygon. If the number is odd, the point is within the polygon, otherwise, it is outside of the polygon. These calculations are so computationally inefficient, performing these calculations for every suspected collision. would slow down the game engine significantly Therefore, each shape also has a bounding box, represented by the BoundingBox class in util/boundingBox. Using bounding boxes, we can skip the difficult calculations if a point does not lie in the bounding box of the polygon. The bounding box is always bigger than the shape it contains.</p>
+        <p>Finally, it is worth mentioning that the shapes will round floats when they are set for x or y coordinates. This may require changing in the future to accurately reflect the physics of the game, but there are benefits in rounding floats to integers when drawing. The canvas element uses pixel as its measure, so decimals mean that a number is between two pixels. Since a pixel is a discrete entity, splitting it isn&#39;t really possible. In fact, the browser may make the drawing worse by compensating for the floating point value using antialiasing.
+        </p>
+        <h3 id="transformations">Transformations</h3>
+        <p>Although canvas has methods for rotating, translating, and scaling the context, it is simpler to represent these changes as a transformation matrix. The equation below illustrates the use of a transformation matrix:</p>
+        <pre>
+| x' |   | s<sub>x</sub> sh<sub>x</sub> t<sub>x</sub> | | x |
+| y' | = | sh<sub>y</sub> s<sub>y</sub> t<sub>y</sub> | | y |
+| 1  |   | 0 <sub> </sub> 0<sub> </sub> 1<sub> </sub> | | 1 |
+</pre>
+
+        <p>
+            <em>s<sub>x</sub>
+            </em>and
+            <em>s<sub>y</sub>
+            </em>determine the scaling of the original shape, so it is originally set to 1, which is 100%.
+            <em>sh<sub>x</sub>
+            </em>and
+            <em>sh<sub>y</sub>
+            </em>refer to the shear of the original shape and are also used in rotations.
+            <em>sh</em>is initially 0.
+            <em>t</em>determines the translation of the original shape. Originally, the translation is 0. The values of the matrix determine the position, scaling, rotation, and more. The util/mathExtension module contains the Transformation class. By applying this matrix to each point, we can transform a shape from its original space to a local space. Note that these transformations must be considered when doing collision tests.</p>
+        <p>Rotation is done using a rotation matrix. A rotation matrix looks like this:</p>
+        <p><pre>
+| cos&theta;  -sin&theta;  0 |
+| sin&theta;   cos&theta;  0 |
+| 0      0     1 |
+</pre>
+            where &theta; is the counterclockwise angle of rotation. Multiplying the current transformation with a rotation matrix produces a rotation of the original transformation.</p>
+        <h3 id="animations">Animations</h3>
+        <p>An animation can be modeled as a function that clears the frame, updates the shape, and redraws the shape until a condition is met. By definition, an animation must be asynchronous. If it were synchronous, we could not have animations running concurrently, nor anything else for that matter. As is typical with JavaScript, asynchronous methods are handled with callbacks. When the animation completes, it calls another function. To minimize the amount of confusing callbacks, all animations are defined as instances of the Animation class in the foundation/animation module. An animation instance is constructed with a shape, an update function, and a callback function. The update function is given the following parameters: the total time the animation has been running and the time since the last call of this function. The reason the animation needs time as opposed to frame number is that the frame rate is not necessarily constant. Smooth animations need to be at a constant rate. In order to terminate the animation, the update function must return true (truthy values are not considered as true to terminate the animation). The callback function is optional, but crucial for multiple animations. To run the animation, the
+            <code>start</code>
+            method must be called on the Animation instance. Because the callback must be defined with the construction of the Animation instance, successive animations must be listed in reverse order.</p>
+        <h4 id="example-">Example:</h4>
+        <pre><code class="lang-javascript"><span class="comment">// The shape we will animate</span>
+<span class="keyword">var</span> circle = <span class="keyword">new</span> Circle(<span class="number">100</span>, <span class="number">100</span>, <span class="number">30</span>, drawer, {});
+<span class="comment">// Last animation is constructed first, without a callback.</span>
+<span class="keyword">var</span> anim2 = <span class="keyword">new</span> Animation(circle, <span class="keyword">function</span>(time, timeDiff) {
+    <span class="keyword">var</span> totalDistance = <span class="number">100</span>; <span class="comment">// Move down 100px</span>
+    <span class="keyword">var</span> totalTime = <span class="number">500</span>; <span class="comment">// 500 milliseconds</span>
+    <span class="comment">// Translate the circle using the transformation matrix.</span>
+    <span class="comment">// Calculate distance based on rate * time.</span>
+    circle.transformation.ty = timeDiff / totalTime * totalDistance;
+    <span class="keyword">return</span> time &gt;= totalTime; <span class="comment">// Returns true once 500 milliseconds has passed</span>
+});
+<span class="keyword">var</span> anim1 = <span class="keyword">new</span> Animation(circle, <span class="keyword">function</span>(time, timeDiff) {
+    <span class="keyword">var</span> totalDistance = <span class="number">100</span>; <span class="comment">// Move right 100px</span>
+    <span class="keyword">var</span> totalTime = <span class="number">500</span>; <span class="comment">// 500 milliseconds</span>
+    <span class="comment">// Translate the circle using the transformation matrix.</span>
+    <span class="comment">// Calculate distance based on rate * time.</span>
+    circle.transformation.tx = timeDiff / totalTime * totalDistance;
+    <span class="keyword">return</span> time &gt;= totalTime; <span class="comment">// Returns true once 500 milliseconds has passed</span>
+}, anim2.start);
+<span class="comment">// Start first animation, which will trigger second animation.</span>
+anim1.start();</code></pre>
+        <h2 id="the-next-level-sprites-and-levels">The Next Level: Sprites and Levels</h2>
+        <h3 id="sprites">Sprites</h3>
+        <p>Now that we have a useful way to draw basic shapes, the next logical step is to create groupings of these shapes. These groupings are referred to as sprites. The sprite/sprite module contains an abstract class called Sprite. Instances of this class are made up of multiple shapes. Most of the methods are similar to the methods of Shape. For example, they both have a
+            <code>draw</code>method and they both have a
+            <code>collisionTest</code>method. This structure let&#39;s us consider sprites as big shapes. The methods are meant to be very similar, except that a Sprite instance performs the method on all the Shape instances that it contains. Sprites have to keep their bounding boxes consistent. Even if the orientation of the sprite does not change (meaning the transformation matrix is not affected), the bounding box must update every time one of its shapes move. Sprites also have transformations. Its shapes are defined around the origin, which represents the center of the sprite. The transformations of the shapes are used to define the shapes around the center of the sprite. Then the sprite has an overall transformation. This transformation is used to transform all of the shapes in the sprite in unison.</p>
+        <p>Another major distinction should be made between shapes and sprites. While shapes are only simple representations of canvas drawings, sprites can represent characters, maps, or any other game object, containing methods that handle game logic.
+        </p>
+        <h3 id="sprites-in-the-game">Sprites in the Game</h3>
+        <p>The sprites in this game are the player, the enemy, the prize and the maze are all sprites. The player and enemy both inherit from the AbstractPlayer class. The main differences between the player and the enemy are their shapes. The move method of both is inherited from the superclass. While player uses keyboard input to supply moves to the move method, the enemy relies on an asynchronous pathfinding algorithm to supply it with moves.</p>
+        <h3 id="levels">Levels</h3>
+        <p>Levels are at the top of the abstraction hierarchy developed in this project. Levels are responsible for instantiating sprites, handling events, and bringing all the game logic together in a coherent fashion. Levels extend the level/levelBase abstract class. This class contains methods to create canvases and/or CanvasDrawers and initializes the physics engine and input handler. Each sprite should be given its own canvas. The performance difference is not that significant if there is a difference at all. When a shape updates its position, it clears a significant area from the canvas, which may contain another shape that was not supposed to be erased.</p>
+        <h4 id="physics-engine">Physics Engine</h4>
+        <p>The physics engine is extremely simple as of now. It has a public array of objects that are objects it manages. These objects are to call the
+            <code>updatePositions</code>method whenever they move. The
+            <code>updatePositions</code>method will call the
+            <code>checkCollision</code>method of each object if it has one, with a parameter of all of the other objects that it may collide with. The other method of the physics engine is the
+            <code>collisionQuery</code>method. This method returns all of the objectssthat intersect a given point. This is a useful feature to check if the mouse intersects a shape.</p>
+        <h4 id="input-handler">Input Handler</h4>
+        <p>The events/inputHandler module contains the inputHandler class. This class is used to manage event handling functions. Functions are bound and unbound as appropriate to update the functions that should be called on a given event.</p>
+        <h3 id="miscellaneous-modules-classes">Miscellaneous Modules/Classes</h3>
+        <p>There are various data structures in the util directory. The util/factory module contains a class that is used to create DOM elements. The spec directory contains tests for certain classes and the specRunner script, which is used to launch the tests in the specs.html file.</p>
         <h2 id="performance-considerations">Performance considerations</h2>
-        <p>The canvas API is fast, but JavaScript&#39;s single-threaded environment makes handling performance imperative. Calculations and rendering can freeze the user- interface and crash the site. Therefore, careful consideration is necessary when designing
-            complex games with many mathematical calculations. As Joseph Aharon explains below, we used Web Workers to prevent performance issues.</p>
+        <p>The canvas API is fast, but JavaScript&#39;s single-threaded environment makes optimizing performance imperative. Calculations and rendering can freeze the user interface and crash the site. Therefore, careful consideration is necessary when designing complex games with many mathematical calculations. As Joseph Aharon explains below, we used Web Workers to prevent performance issues.</p>
+        <hr>
         <h1 id="web-workers">Web Workers</h1>
         <h3 id="joseph-aharon">Joseph Aharon</h3>
         <h2 id="the-problem-javascript-is-limited-to-executing-its-code-within-a-single-thread-">The problem: JavaScript is limited to executing its code within a single thread.</h2>
         <p>Computer processors are built to run through and execute code one line at a time. This means that computers cannot begin new tasks before finishing their current jobs.</p>
-        <p>If that’s the case, how is it that a computer can still operate quickly while running through large loads of work? The answer is multithreading. Today’s computers are built with multiple core processors that allow them to run more than one process
-            at a given time. In other words, computers can execute multiple blocks of code simultaneously. This sort of multitasking is what enables computers to run multiple applications, each of which compute complicated tasks, at once.</p>
-        <p>JavaScript, however, is not intrinsically able to take advantage of multi-threading. Web applications, which run on JavaScript, are therefore limited to running within a single thread. This makes the processing power of web applications weaker
-            than optimal, and such applications that run long processes can freeze the user’s window. We all know how annoying that can be.</p>
+        <p>If that’s the case, how is it that a computer can still operate quickly while running through large loads of work? The answer is multithreading. Today’s computers are built with multiple core processors that allow them to run more than one process at a given time. In other words, computers can execute multiple blocks of code simultaneously. This sort of multitasking is what enables computers to run multiple applications, each of which compute complicated tasks, at once.</p>
+        <p>JavaScript, however, is not intrinsically able to take advantage of multi-threading. Web applications, which run on JavaScript, are therefore limited to running within a single thread. This makes the processing power of web applications weaker than optimal, and such applications that run long processes can freeze the user’s window. We all know how annoying that can be.</p>
         <h2 id="the-solution-web-workers-are-javascripts-that-run-in-the-background-independently-of-other-scripts-without-affecting-the-performance-of-a-page-">The solution: Web Workers are JavaScripts that run in the background, independently of other scripts, without affecting the performance of a page.</h2>
-        <p>By using Web Workers, a user can click or select user interface elements while the web worker runs in the background. This allows a web browser to separate the tasks of, say, drawing an image from computing the logic behind how that image should
-            be rendered. The result is a window that won’t become unresponsive and an overall smoother user experience.</p>
+        <p>By using Web Workers, a user can click or select user interface elements while the web worker runs in the background. This allows a web browser to separate the tasks of, say, drawing an image from computing the logic behind how that image should be rendered. The result is a window that won’t become unresponsive and an overall smoother user experience.</p>
         <h2 id="our-demo-">Our demo:</h2>
-        <p>The above version of the Pacman game is slow because there are two concurrent processes. One is using the canvas to constantly redraw the visuals which is the primary focus of the above project. The second process is the computation of the game
-            logic. The game implements Dijkstra’s search algorithm to determine the shortest path from the monster to the player. This algorithm has a long runtime, and although the monster’s path came out somewhat buggy, he usually makes his way to the
-            player.</p>
-        <p>The above demo has rendering errors because the game is trying to run these two sophisticated processeses simultaneously. If you check the worker checkbox and press &quot;Reset&quot;, the resulting game is the same exact game, but it uses Web
-            Workers to separate the two tasks. As you can see, the result is a smoother game that remains responsive to the user&#39;s input.</p>
+        <p>The above version of the Pacman game is slow because there are two concurrent processes. One is using the canvas to constantly redraw the visuals which is the primary focus of the above project. The second process is the computation of the game logic. The game implements Dijkstra’s search algorithm to determine the shortest path from the monster to the player. This algorithm has a long runtime, and although the monster’s path came out somewhat buggy, he usually makes his way to the player.</p>
+        <p>The above demo has rendering errors because the game is trying to run these two sophisticated processeses simultaneously. If you check the worker checkbox and press &quot;Reset&quot;, the resulting game is the same exact game, but it uses Web Workers to separate the two tasks. As you can see, the result is a smoother game that remains responsive to the user&#39;s input.</p>
         <h2 id="alternative-solutions-to-the-problem-">Alternative Solutions to the problem:</h2>
-        <p>Web Workers is the only way to implement multithreading in web pages. One similar alternative might be to use event driven programming, or a paradigm in which the flow of the program is determined by events. In such cases, the application is divided
-            into two main loops: event detection and event processing. Web applications would be able to incorporate event driven programming by using a framework such as node.js.</p>
+        <p>Web Workers is the only way to implement multithreading in web pages. One similar alternative might be to use event driven programming, or a paradigm in which the flow of the program is determined by events. In such cases, the application is divided into two main loops: event detection and event processing. Web applications would be able to incorporate event driven programming by using a framework such as node.js.</p>
         <h2 id="tradeoffs-encountered-during-implementation-">Tradeoffs encountered during implementation:</h2>
-        <p>One barrier to implementing Web Workers is that the programmer must have an understanding of multithreading and be able to separate different processes. At the same time, the programmer needs to be able to bring those separate processes back together
-            to communicate with each other in order to make one smoothly running application.</p>
-        <p>A tradeoff with workers is that it is not so simple to pass off complex data types to the worker or from the worker back to the main thread. This means that our program could not send JSON objects back and forth between the worker. To deal with
-            this issue, when sending off data to the worker, our application calls a method that encodes the JSON data into an array data type of primitives. After the worker receives the array, the worker then calls another method that reconstructs the
-            JSON object from the array data. In our case, the data being passed is a graph of the two dimensional layout of the game.</p>
+        <p>One barrier to implementing Web Workers is that the programmer must have an understanding of multithreading and be able to separate different processes. At the same time, the programmer needs to be able to bring those separate processes back together to communicate with each other in order to make one smoothly running application.</p>
+        <p>A tradeoff with workers is that it is not so simple to pass off complex data types to the worker or from the worker back to the main thread. This means that our program could not send JSON objects back and forth between the worker. To deal with this issue, when sending off data to the worker, our application calls a method that encodes the JSON data into an array data type of primitives. After the worker receives the array, the worker then calls another method that reconstructs the JSON object from the array data. In our case, the data being passed is a graph of the two dimensional layout of the game.</p>
         <p>Further reading:
             <a href="http://en.wikipedia.org/wiki/Web_worker">Web worker - Wikipedia</a>
             <a href="http://www.w3schools.com/html/html5_webworkers.asp">HTML5 Web Workers - W3Schools</a>

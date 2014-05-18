@@ -1,0 +1,4935 @@
+{
+    "project": {
+        "name": "Mayhem-Game-Engine",
+        "description": "Canvas game engine",
+        "version": "0.0.0",
+        "url": "https://github.com/isaach1000/Mayhem-Game-Engine"
+    },
+    "files": {
+        "js/enum/direction.js": {
+            "name": "js/enum/direction.js",
+            "modules": {},
+            "classes": {
+                "Direction": 1
+            },
+            "fors": {},
+            "namespaces": {}
+        },
+        "js/events/inputHandler.js": {
+            "name": "js/events/inputHandler.js",
+            "modules": {
+                "events/inputHandler": 1
+            },
+            "classes": {
+                "InputHandler": 1
+            },
+            "fors": {},
+            "namespaces": {}
+        },
+        "js/foundation/animation.js": {
+            "name": "js/foundation/animation.js",
+            "modules": {
+                "foundation/animation": 1
+            },
+            "classes": {
+                "Animation": 1
+            },
+            "fors": {},
+            "namespaces": {}
+        },
+        "js/foundation/canvasDrawer.js": {
+            "name": "js/foundation/canvasDrawer.js",
+            "modules": {
+                "foundation/canvasDrawer": 1
+            },
+            "classes": {
+                "CanvasDrawer": 1
+            },
+            "fors": {},
+            "namespaces": {}
+        },
+        "js/foundation/shape.js": {
+            "name": "js/foundation/shape.js",
+            "modules": {
+                "foundation/shape": 1
+            },
+            "classes": {
+                "Shape": 1,
+                "Circle": 1,
+                "Rectangle": 1,
+                "Polygon": 1
+            },
+            "fors": {},
+            "namespaces": {}
+        },
+        "js/level/levelBase.js": {
+            "name": "js/level/levelBase.js",
+            "modules": {
+                "level/levelBase": 1
+            },
+            "classes": {
+                "LevelBase": 1
+            },
+            "fors": {},
+            "namespaces": {}
+        },
+        "js/level/mainLevel.js": {
+            "name": "js/level/mainLevel.js",
+            "modules": {
+                "level/mainLevel": 1
+            },
+            "classes": {
+                "MainLevel": 1
+            },
+            "fors": {},
+            "namespaces": {}
+        },
+        "js/sprite/abstractPlayer.js": {
+            "name": "js/sprite/abstractPlayer.js",
+            "modules": {
+                "sprite/abstractPlayer": 1
+            },
+            "classes": {
+                "AbstractPlayer": 1
+            },
+            "fors": {},
+            "namespaces": {}
+        },
+        "js/sprite/enemy.js": {
+            "name": "js/sprite/enemy.js",
+            "modules": {
+                "sprite/enemy": 1
+            },
+            "classes": {
+                "Enemy": 1
+            },
+            "fors": {},
+            "namespaces": {}
+        },
+        "js/sprite/maze.js": {
+            "name": "js/sprite/maze.js",
+            "modules": {
+                "sprite/maze": 1
+            },
+            "classes": {
+                "Maze": 1,
+                "MazeLocation": 1,
+                "MazeWall": 1
+            },
+            "fors": {
+                "Maze": 1
+            },
+            "namespaces": {}
+        },
+        "js/sprite/player.js": {
+            "name": "js/sprite/player.js",
+            "modules": {
+                "sprite/player": 1
+            },
+            "classes": {
+                "Player": 1
+            },
+            "fors": {},
+            "namespaces": {}
+        },
+        "js/sprite/prize.js": {
+            "name": "js/sprite/prize.js",
+            "modules": {
+                "sprite/prize": 1
+            },
+            "classes": {
+                "Prize": 1
+            },
+            "fors": {},
+            "namespaces": {}
+        },
+        "js/sprite/sprite.js": {
+            "name": "js/sprite/sprite.js",
+            "modules": {
+                "sprite/sprite": 1
+            },
+            "classes": {
+                "Sprite": 1
+            },
+            "fors": {},
+            "namespaces": {}
+        },
+        "js/util/boundingBox.js": {
+            "name": "js/util/boundingBox.js",
+            "modules": {
+                "util/boundingBox": 1
+            },
+            "classes": {
+                "BoundingBox": 1
+            },
+            "fors": {},
+            "namespaces": {}
+        },
+        "js/util/factory.js": {
+            "name": "js/util/factory.js",
+            "modules": {
+                "util/factory": 1
+            },
+            "classes": {
+                "Factory": 1
+            },
+            "fors": {},
+            "namespaces": {}
+        },
+        "js/util/graph.js": {
+            "name": "js/util/graph.js",
+            "modules": {
+                "util/graph": 1
+            },
+            "classes": {
+                "Graph": 1,
+                "GraphNode": 1,
+                "GraphEdge": 1
+            },
+            "fors": {
+                "Graph": 1
+            },
+            "namespaces": {}
+        },
+        "js/util/hash.js": {
+            "name": "js/util/hash.js",
+            "modules": {
+                "util/hash": 1
+            },
+            "classes": {
+                "Hash": 1,
+                "Hashset": 1,
+                "Hashtable": 1
+            },
+            "fors": {},
+            "namespaces": {}
+        },
+        "js/util/mathExtensions.js": {
+            "name": "js/util/mathExtensions.js",
+            "modules": {
+                "util/mathExtensions": 1
+            },
+            "classes": {
+                "MathExtensions": 1,
+                "Matrix": 1,
+                "Transformation": 1
+            },
+            "fors": {},
+            "namespaces": {}
+        },
+        "js/util/minHeap.js": {
+            "name": "js/util/minHeap.js",
+            "modules": {
+                "util/minHeap": 1
+            },
+            "classes": {
+                "MinHeap": 1
+            },
+            "fors": {},
+            "namespaces": {}
+        },
+        "js/util/physics.js": {
+            "name": "js/util/physics.js",
+            "modules": {
+                "util/physics": 1
+            },
+            "classes": {
+                "Engine": 1
+            },
+            "fors": {},
+            "namespaces": {}
+        },
+        "js/worker/workerTasks.js": {
+            "name": "js/worker/workerTasks.js",
+            "modules": {
+                "worker/workerTasks": 1
+            },
+            "classes": {},
+            "fors": {},
+            "namespaces": {}
+        }
+    },
+    "modules": {
+        "events/inputHandler": {
+            "name": "events/inputHandler",
+            "submodules": {},
+            "classes": {
+                "Direction": 1,
+                "InputHandler": 1
+            },
+            "fors": {},
+            "namespaces": {},
+            "tag": "module",
+            "file": "js/events/inputHandler.js",
+            "line": 22
+        },
+        "foundation/animation": {
+            "name": "foundation/animation",
+            "submodules": {},
+            "classes": {
+                "Animation": 1
+            },
+            "fors": {},
+            "namespaces": {},
+            "tag": "module",
+            "file": "js/foundation/animation.js",
+            "line": 35
+        },
+        "foundation/canvasDrawer": {
+            "name": "foundation/canvasDrawer",
+            "submodules": {},
+            "classes": {
+                "CanvasDrawer": 1
+            },
+            "fors": {},
+            "namespaces": {},
+            "tag": "module",
+            "file": "js/foundation/canvasDrawer.js",
+            "line": 16
+        },
+        "foundation/shape": {
+            "name": "foundation/shape",
+            "submodules": {},
+            "classes": {
+                "Shape": 1,
+                "Circle": 1,
+                "Rectangle": 1,
+                "Polygon": 1
+            },
+            "fors": {},
+            "namespaces": {},
+            "tag": "module",
+            "file": "js/foundation/shape.js",
+            "line": 491
+        },
+        "level/levelBase": {
+            "name": "level/levelBase",
+            "submodules": {},
+            "classes": {
+                "LevelBase": 1
+            },
+            "fors": {},
+            "namespaces": {},
+            "tag": "module",
+            "file": "js/level/levelBase.js",
+            "line": 20
+        },
+        "level/mainLevel": {
+            "name": "level/mainLevel",
+            "submodules": {},
+            "classes": {
+                "MainLevel": 1
+            },
+            "fors": {},
+            "namespaces": {},
+            "tag": "module",
+            "file": "js/level/mainLevel.js",
+            "line": 33
+        },
+        "sprite/abstractPlayer": {
+            "name": "sprite/abstractPlayer",
+            "submodules": {},
+            "classes": {
+                "AbstractPlayer": 1
+            },
+            "fors": {},
+            "namespaces": {},
+            "tag": "module",
+            "file": "js/sprite/abstractPlayer.js",
+            "line": 27
+        },
+        "sprite/enemy": {
+            "name": "sprite/enemy",
+            "submodules": {},
+            "classes": {
+                "Enemy": 1
+            },
+            "fors": {},
+            "namespaces": {},
+            "tag": "module",
+            "file": "js/sprite/enemy.js",
+            "line": 33
+        },
+        "sprite/maze": {
+            "name": "sprite/maze",
+            "submodules": {},
+            "classes": {
+                "Maze": 1,
+                "MazeLocation": 1,
+                "MazeWall": 1
+            },
+            "fors": {
+                "Maze": 1
+            },
+            "namespaces": {},
+            "tag": "module",
+            "file": "js/sprite/maze.js",
+            "line": 224
+        },
+        "sprite/player": {
+            "name": "sprite/player",
+            "submodules": {},
+            "classes": {
+                "Player": 1
+            },
+            "fors": {},
+            "namespaces": {},
+            "tag": "module",
+            "file": "js/sprite/player.js",
+            "line": 34
+        },
+        "sprite/prize": {
+            "name": "sprite/prize",
+            "submodules": {},
+            "classes": {
+                "Prize": 1
+            },
+            "fors": {},
+            "namespaces": {},
+            "tag": "module",
+            "file": "js/sprite/prize.js",
+            "line": 26
+        },
+        "sprite/sprite": {
+            "name": "sprite/sprite",
+            "submodules": {},
+            "classes": {
+                "Sprite": 1
+            },
+            "fors": {},
+            "namespaces": {},
+            "tag": "module",
+            "file": "js/sprite/sprite.js",
+            "line": 25
+        },
+        "util/boundingBox": {
+            "name": "util/boundingBox",
+            "submodules": {},
+            "classes": {
+                "BoundingBox": 1
+            },
+            "fors": {},
+            "namespaces": {},
+            "tag": "module",
+            "file": "js/util/boundingBox.js",
+            "line": 16
+        },
+        "util/factory": {
+            "name": "util/factory",
+            "submodules": {},
+            "classes": {
+                "Factory": 1
+            },
+            "fors": {},
+            "namespaces": {},
+            "tag": "module",
+            "file": "js/util/factory.js",
+            "line": 3
+        },
+        "util/graph": {
+            "name": "util/graph",
+            "submodules": {},
+            "classes": {
+                "Graph": 1,
+                "GraphNode": 1,
+                "GraphEdge": 1
+            },
+            "fors": {
+                "Graph": 1
+            },
+            "namespaces": {},
+            "tag": "module",
+            "file": "js/util/graph.js",
+            "line": 134
+        },
+        "util/hash": {
+            "name": "util/hash",
+            "submodules": {},
+            "classes": {
+                "Hash": 1,
+                "Hashset": 1,
+                "Hashtable": 1
+            },
+            "fors": {},
+            "namespaces": {},
+            "tag": "module",
+            "file": "js/util/hash.js",
+            "line": 443,
+            "description": "Hash class used to generate hashcodes for JavaScript objects. The hashcode\nis stored as a property of the object, but it is set to non-enumerable and\ncannot be changed, thereby guaranteeing the consistency of hashcodes."
+        },
+        "util/mathExtensions": {
+            "name": "util/mathExtensions",
+            "submodules": {},
+            "classes": {
+                "MathExtensions": 1,
+                "Matrix": 1,
+                "Transformation": 1
+            },
+            "fors": {},
+            "namespaces": {},
+            "tag": "module",
+            "file": "js/util/mathExtensions.js",
+            "line": 489
+        },
+        "util/minHeap": {
+            "name": "util/minHeap",
+            "submodules": {},
+            "classes": {
+                "MinHeap": 1
+            },
+            "fors": {},
+            "namespaces": {},
+            "tag": "module",
+            "file": "js/util/minHeap.js",
+            "line": 12
+        },
+        "util/physics": {
+            "name": "util/physics",
+            "submodules": {},
+            "classes": {
+                "Engine": 1
+            },
+            "fors": {},
+            "namespaces": {},
+            "tag": "module",
+            "file": "js/util/physics.js",
+            "line": 8
+        },
+        "worker/workerTasks": {
+            "name": "worker/workerTasks",
+            "submodules": {},
+            "classes": {},
+            "fors": {},
+            "namespaces": {},
+            "tag": "module",
+            "file": "js/worker/workerTasks.js",
+            "line": 5,
+            "description": "Functions to call from worker"
+        }
+    },
+    "classes": {
+        "Direction": {
+            "name": "Direction",
+            "shortname": "Direction",
+            "classitems": [],
+            "plugins": [],
+            "extensions": [],
+            "plugin_for": [],
+            "extension_for": [],
+            "module": "events/inputHandler",
+            "file": "js/enum/direction.js",
+            "line": 3,
+            "description": "Enum for key arrow input"
+        },
+        "InputHandler": {
+            "name": "InputHandler",
+            "shortname": "InputHandler",
+            "classitems": [],
+            "plugins": [],
+            "extensions": [],
+            "plugin_for": [],
+            "extension_for": [],
+            "module": "events/inputHandler",
+            "file": "js/events/inputHandler.js",
+            "line": 22,
+            "description": "Handle inputHandler from keyboard and mouse",
+            "is_constructor": 1,
+            "params": [
+                {
+                    "name": "domSelector",
+                    "description": "Selector for target element",
+                    "type": "String"
+                }
+            ]
+        },
+        "Animation": {
+            "name": "Animation",
+            "shortname": "Animation",
+            "classitems": [],
+            "plugins": [],
+            "extensions": [],
+            "plugin_for": [],
+            "extension_for": [],
+            "module": "foundation/animation",
+            "namespace": "",
+            "file": "js/foundation/animation.js",
+            "line": 35,
+            "description": "Defines the behavior of animations.",
+            "is_constructor": 1,
+            "params": [
+                {
+                    "name": "drawable",
+                    "description": "The drawable to animate.",
+                    "type": "Drawable"
+                },
+                {
+                    "name": "frameFunction",
+                    "description": "A function that updates the\nanimation. Return true to terminate the animation. It may take the\nduration in milliseconds from the beginning of the animation as a\nparameter. For example,\n<code><pre>\nfunction(time, timeDiff) {\n    shape.x = Math.floor(time / 100);\n    return time > 1000;\n}\n</pre></code>",
+                    "type": "Function"
+                },
+                {
+                    "name": "callback",
+                    "description": "A function to perform at the completion\nof the animation.",
+                    "type": "Function"
+                }
+            ]
+        },
+        "CanvasDrawer": {
+            "name": "CanvasDrawer",
+            "shortname": "CanvasDrawer",
+            "classitems": [],
+            "plugins": [],
+            "extensions": [],
+            "plugin_for": [],
+            "extension_for": [],
+            "module": "foundation/canvasDrawer",
+            "namespace": "",
+            "file": "js/foundation/canvasDrawer.js",
+            "line": 16,
+            "description": "CanvasDrawer for drawing to a canvas. Wrapper class for HTML5\nCanvasRenderingContext2D.",
+            "is_constructor": 1,
+            "params": [
+                {
+                    "name": "ctx",
+                    "description": "Context of canvas",
+                    "type": "Context"
+                },
+                {
+                    "name": "width",
+                    "description": "Width of canvas",
+                    "type": "Float"
+                },
+                {
+                    "name": "height",
+                    "description": "Height of canvas",
+                    "type": "Float"
+                }
+            ]
+        },
+        "Shape": {
+            "name": "Shape",
+            "shortname": "Shape",
+            "classitems": [],
+            "plugins": [],
+            "extensions": [],
+            "plugin_for": [],
+            "extension_for": [],
+            "module": "foundation/shape",
+            "namespace": "",
+            "file": "js/foundation/shape.js",
+            "line": 88,
+            "description": "Shape abstract class",
+            "is_constructor": 1,
+            "params": [
+                {
+                    "name": "x",
+                    "description": "x coordinate of top-left",
+                    "type": "Number"
+                },
+                {
+                    "name": "y",
+                    "description": "y coordinate of top-left",
+                    "type": "Number"
+                },
+                {
+                    "name": "width",
+                    "description": "Width of shape",
+                    "type": "Number"
+                },
+                {
+                    "name": "height",
+                    "description": "Height of shape",
+                    "type": "Number"
+                },
+                {
+                    "name": "drawer",
+                    "description": "CanvasDrawer to draw image\nto canvas",
+                    "type": "CanvasDrawer"
+                },
+                {
+                    "name": "drawingSettings",
+                    "description": "Settings for the CanvasDrawer",
+                    "type": "Object"
+                }
+            ]
+        },
+        "Circle": {
+            "name": "Circle",
+            "shortname": "Circle",
+            "classitems": [],
+            "plugins": [],
+            "extensions": [],
+            "plugin_for": [],
+            "extension_for": [],
+            "module": "foundation/shape",
+            "namespace": "",
+            "file": "js/foundation/shape.js",
+            "line": 344,
+            "description": "Circle shape",
+            "extends": "Shape",
+            "is_constructor": 1,
+            "params": [
+                {
+                    "name": "x",
+                    "description": "x coordinate of <strong>center</strong> of\ncircle",
+                    "type": "Number"
+                },
+                {
+                    "name": "y",
+                    "description": "y coordinate of <strong>center</strong> of\ncircle",
+                    "type": "Number"
+                },
+                {
+                    "name": "radius",
+                    "description": "Radius of the circle",
+                    "type": "Number"
+                },
+                {
+                    "name": "drawer",
+                    "description": "CanvasDrawer to draw circle",
+                    "type": "CanvasDrawer"
+                },
+                {
+                    "name": "drawingSettings",
+                    "description": "Dictionary of drawing options",
+                    "type": "Object"
+                }
+            ]
+        },
+        "Rectangle": {
+            "name": "Rectangle",
+            "shortname": "Rectangle",
+            "classitems": [],
+            "plugins": [],
+            "extensions": [],
+            "plugin_for": [],
+            "extension_for": [],
+            "module": "foundation/shape",
+            "namespace": "",
+            "file": "js/foundation/shape.js",
+            "line": 446,
+            "description": "Rectangle",
+            "extends": "Polygon",
+            "is_constructor": 1,
+            "params": [
+                {
+                    "name": "x",
+                    "description": "The x coordinate of the rectangle's top-left",
+                    "type": "Number"
+                },
+                {
+                    "name": "y",
+                    "description": "The y coordinate of the rectangle's top-left",
+                    "type": "Number"
+                },
+                {
+                    "name": "width",
+                    "description": "The width of the rectangle",
+                    "type": "Number"
+                },
+                {
+                    "name": "height",
+                    "description": "The height of the rectangle",
+                    "type": "Number"
+                },
+                {
+                    "name": "drawer",
+                    "description": "A CanvasDrawer to draw the\nrectangle onto the canvas",
+                    "type": "CanvasDrawer"
+                },
+                {
+                    "name": "drawingSettings",
+                    "description": "A dictionary of drawing options",
+                    "type": "Object"
+                }
+            ]
+        },
+        "Polygon": {
+            "name": "Polygon",
+            "shortname": "Polygon",
+            "classitems": [],
+            "plugins": [],
+            "extensions": [],
+            "plugin_for": [],
+            "extension_for": [],
+            "module": "foundation/shape",
+            "namespace": "",
+            "file": "js/foundation/shape.js",
+            "line": 491,
+            "description": "Polygon",
+            "extends": "Shape",
+            "is_constructor": 1,
+            "params": [
+                {
+                    "name": "center",
+                    "description": "The center of the polygon",
+                    "type": "Point",
+                    "optional": true,
+                    "optdefault": "0,0"
+                },
+                {
+                    "name": "points",
+                    "description": "An array of points that describe the\npolygon. Should be relative to the center so rotation can be\nperformed more easily.",
+                    "type": "Array"
+                },
+                {
+                    "name": "drawer",
+                    "description": "A CanvasDrawer to draw the\npolygon onto the canvas",
+                    "type": "CanvasDrawer"
+                },
+                {
+                    "name": "drawingSettings",
+                    "description": "A dictionary of drawing\noptions",
+                    "type": "Object"
+                }
+            ]
+        },
+        "LevelBase": {
+            "name": "LevelBase",
+            "shortname": "LevelBase",
+            "classitems": [],
+            "plugins": [],
+            "extensions": [],
+            "plugin_for": [],
+            "extension_for": [],
+            "module": "level/levelBase",
+            "namespace": "",
+            "file": "js/level/levelBase.js",
+            "line": 20,
+            "is_constructor": 1
+        },
+        "MainLevel": {
+            "name": "MainLevel",
+            "shortname": "MainLevel",
+            "classitems": [],
+            "plugins": [],
+            "extensions": [],
+            "plugin_for": [],
+            "extension_for": [],
+            "module": "level/mainLevel",
+            "namespace": "",
+            "file": "js/level/mainLevel.js",
+            "line": 33,
+            "description": "MainLevel contains all of the logic necessary for the main level of the\ngame.",
+            "extends": "LevelBase",
+            "is_constructor": 1,
+            "params": [
+                {
+                    "name": "worker",
+                    "description": "A web worker to improve efficient\ncode execution",
+                    "type": "Worker",
+                    "optional": true,
+                    "optdefault": "undefined"
+                }
+            ]
+        },
+        "AbstractPlayer": {
+            "name": "AbstractPlayer",
+            "shortname": "AbstractPlayer",
+            "classitems": [],
+            "plugins": [],
+            "extensions": [],
+            "plugin_for": [],
+            "extension_for": [],
+            "module": "sprite/abstractPlayer",
+            "namespace": "",
+            "file": "js/sprite/abstractPlayer.js",
+            "line": 27,
+            "description": "Abstract class for {{#crossLink Player}}{{/crossLink}} and\n{{#crossLink Enemy}}{{/crossLink}} classes.",
+            "is_constructor": 1,
+            "params": [
+                {
+                    "name": "row",
+                    "description": "Row in maze",
+                    "type": "Integer"
+                },
+                {
+                    "name": "column",
+                    "description": "Column in maze",
+                    "type": "Integer"
+                },
+                {
+                    "name": "maze",
+                    "description": "Maze instance",
+                    "type": "Maze"
+                },
+                {
+                    "name": "physicsEngine",
+                    "description": "Engine instance",
+                    "type": "Engine"
+                },
+                {
+                    "name": "CanvasDrawer",
+                    "description": "instance",
+                    "type": "CanvasDrawer"
+                },
+                {
+                    "name": "shapes",
+                    "description": "An array of shapes",
+                    "type": "Array"
+                }
+            ]
+        },
+        "Enemy": {
+            "name": "Enemy",
+            "shortname": "Enemy",
+            "classitems": [],
+            "plugins": [],
+            "extensions": [],
+            "plugin_for": [],
+            "extension_for": [],
+            "module": "sprite/enemy",
+            "namespace": "",
+            "file": "js/sprite/enemy.js",
+            "line": 33,
+            "description": "This class handles the AI and drawing of an enemy.",
+            "extends": "Sprite",
+            "is_constructor": 1,
+            "params": [
+                {
+                    "name": "row",
+                    "description": "Row in maze",
+                    "type": "Integer"
+                },
+                {
+                    "name": "column",
+                    "description": "Column in maze",
+                    "type": "Integer"
+                },
+                {
+                    "name": "maze",
+                    "description": "Maze instance",
+                    "type": "Maze"
+                },
+                {
+                    "name": "player",
+                    "description": "Player instance",
+                    "type": "Player"
+                },
+                {
+                    "name": "Engine",
+                    "description": "instance",
+                    "type": "Engine"
+                },
+                {
+                    "name": "CanvasDrawer",
+                    "description": "instance",
+                    "type": "CanvasDrawer"
+                },
+                {
+                    "name": "worker",
+                    "description": "Worker to calculate route to player\nefficiently",
+                    "type": "Worker",
+                    "optional": true,
+                    "optdefault": "undefined"
+                }
+            ]
+        },
+        "Maze": {
+            "name": "Maze",
+            "shortname": "Maze",
+            "classitems": [],
+            "plugins": [],
+            "extensions": [],
+            "plugin_for": [],
+            "extension_for": [],
+            "module": "sprite/maze",
+            "namespace": "",
+            "file": "js/sprite/maze.js",
+            "line": 35,
+            "description": "Maze class generates a maze from a graph.",
+            "extends": "Sprite",
+            "is_constructor": 1
+        },
+        "MazeLocation": {
+            "name": "MazeLocation",
+            "shortname": "MazeLocation",
+            "classitems": [],
+            "plugins": [],
+            "extensions": [],
+            "plugin_for": [],
+            "extension_for": [],
+            "module": "sprite/maze",
+            "namespace": "",
+            "file": "js/sprite/maze.js",
+            "line": 51,
+            "description": "MazeLocation represents locations within a maze",
+            "is_constructor": 1,
+            "params": [
+                {
+                    "name": "i",
+                    "description": "Row index of location",
+                    "type": "Integer"
+                },
+                {
+                    "name": "j",
+                    "description": "Column index of location",
+                    "type": "Integer"
+                }
+            ]
+        },
+        "MazeWall": {
+            "name": "MazeWall",
+            "shortname": "MazeWall",
+            "classitems": [],
+            "plugins": [],
+            "extensions": [],
+            "plugin_for": [],
+            "extension_for": [],
+            "module": "sprite/maze",
+            "namespace": "",
+            "file": "js/sprite/maze.js",
+            "line": 224,
+            "description": "Class to represent walls of MazeLocation",
+            "is_constructor": 1,
+            "params": [
+                {
+                    "name": "x",
+                    "description": "x coordinate of wall",
+                    "type": "Number"
+                },
+                {
+                    "name": "y",
+                    "description": "y coordinate of wall",
+                    "type": "Number"
+                },
+                {
+                    "name": "isVertical",
+                    "description": "Whether or not wall is vertical",
+                    "type": "Boolean"
+                }
+            ]
+        },
+        "Player": {
+            "name": "Player",
+            "shortname": "Player",
+            "classitems": [],
+            "plugins": [],
+            "extensions": [],
+            "plugin_for": [],
+            "extension_for": [],
+            "module": "sprite/player",
+            "namespace": "",
+            "file": "js/sprite/player.js",
+            "line": 34,
+            "description": "The Player class handles the actions and drawing of the main player.",
+            "extends": "Sprite",
+            "is_constructor": 1,
+            "params": [
+                {
+                    "name": "row",
+                    "description": "Row in maze",
+                    "type": "Integer"
+                },
+                {
+                    "name": "column",
+                    "description": "Column in maze",
+                    "type": "Integer"
+                },
+                {
+                    "name": "maze",
+                    "description": "Maze instance",
+                    "type": "Maze"
+                },
+                {
+                    "name": "InputHandler",
+                    "description": "instance",
+                    "type": "InputHandler"
+                },
+                {
+                    "name": "physicsEngine",
+                    "description": "Engine instance",
+                    "type": "Engine"
+                },
+                {
+                    "name": "CanvasDrawer",
+                    "description": "instance",
+                    "type": "CanvasDrawer"
+                },
+                {
+                    "name": "onWin",
+                    "description": "Function to perform on winning",
+                    "type": "Function"
+                },
+                {
+                    "name": "onDeath",
+                    "description": "Function to perform on death",
+                    "type": "Function"
+                }
+            ]
+        },
+        "Prize": {
+            "name": "Prize",
+            "shortname": "Prize",
+            "classitems": [],
+            "plugins": [],
+            "extensions": [],
+            "plugin_for": [],
+            "extension_for": [],
+            "module": "sprite/prize",
+            "namespace": "",
+            "file": "js/sprite/prize.js",
+            "line": 26,
+            "description": "A pickup item that end the game",
+            "is_constructor": 1
+        },
+        "Sprite": {
+            "name": "Sprite",
+            "shortname": "Sprite",
+            "classitems": [],
+            "plugins": [],
+            "extensions": [],
+            "plugin_for": [],
+            "extension_for": [],
+            "module": "sprite/sprite",
+            "namespace": "",
+            "file": "js/sprite/sprite.js",
+            "line": 25,
+            "description": "Abstract class used to implement basic functions of sprites. Sprites inherit\nfrom this class and override the necessary drawing methods, etc.",
+            "is_constructor": 1,
+            "params": [
+                {
+                    "name": "shapes",
+                    "description": "Array of shapes for sprite",
+                    "type": "Array"
+                },
+                {
+                    "name": "drawer",
+                    "description": "Drawer to draw shapes",
+                    "type": "CanvasDrawer"
+                },
+                {
+                    "name": "drawingSettings",
+                    "description": "Hash of drawing settings",
+                    "type": "Object",
+                    "optional": true,
+                    "optdefault": "{}"
+                }
+            ]
+        },
+        "BoundingBox": {
+            "name": "BoundingBox",
+            "shortname": "BoundingBox",
+            "classitems": [],
+            "plugins": [],
+            "extensions": [],
+            "plugin_for": [],
+            "extension_for": [],
+            "module": "util/boundingBox",
+            "namespace": "",
+            "file": "js/util/boundingBox.js",
+            "line": 16,
+            "description": "Create a BoundingBox.",
+            "is_constructor": 1,
+            "params": [
+                {
+                    "name": "arg0",
+                    "description": "The x coordinate of left side, or left-top point.",
+                    "type": "(float|Point)"
+                },
+                {
+                    "name": "arg1",
+                    "description": "The y coordinate of front side, or right-bottom point.",
+                    "type": "(float|Point)"
+                },
+                {
+                    "name": "arg2",
+                    "description": "Width of the box.",
+                    "type": "Float"
+                },
+                {
+                    "name": "arg3",
+                    "description": "Height of the box.",
+                    "type": "Float"
+                }
+            ]
+        },
+        "Factory": {
+            "name": "Factory",
+            "shortname": "Factory",
+            "classitems": [],
+            "plugins": [],
+            "extensions": [],
+            "plugin_for": [],
+            "extension_for": [],
+            "module": "util/factory",
+            "namespace": "",
+            "file": "js/util/factory.js",
+            "line": 3,
+            "description": "Factory class to produce HTML elements."
+        },
+        "Graph": {
+            "name": "Graph",
+            "shortname": "Graph",
+            "classitems": [],
+            "plugins": [],
+            "extensions": [],
+            "plugin_for": [],
+            "extension_for": [],
+            "module": "util/graph",
+            "namespace": "",
+            "file": "js/util/graph.js",
+            "line": 23,
+            "description": "Graph abstract data structure to represent maze structure.",
+            "is_constructor": 1
+        },
+        "GraphNode": {
+            "name": "GraphNode",
+            "shortname": "GraphNode",
+            "classitems": [],
+            "plugins": [],
+            "extensions": [],
+            "plugin_for": [],
+            "extension_for": [],
+            "module": "util/graph",
+            "namespace": "",
+            "file": "js/util/graph.js",
+            "line": 62,
+            "description": "Inner GraphNode class",
+            "is_constructor": 1,
+            "params": [
+                {
+                    "name": "data",
+                    "description": "[description]",
+                    "type": "[type]"
+                }
+            ]
+        },
+        "GraphEdge": {
+            "name": "GraphEdge",
+            "shortname": "GraphEdge",
+            "classitems": [],
+            "plugins": [],
+            "extensions": [],
+            "plugin_for": [],
+            "extension_for": [],
+            "module": "util/graph",
+            "namespace": "",
+            "file": "js/util/graph.js",
+            "line": 134,
+            "is_constructor": 1,
+            "params": [
+                {
+                    "name": "tail",
+                    "description": "Tail node of edge",
+                    "type": "GraphNode"
+                },
+                {
+                    "name": "head",
+                    "description": "Head node of edge",
+                    "type": "GraphNode"
+                },
+                {
+                    "name": "weight",
+                    "description": "Weight of edge",
+                    "type": "Number",
+                    "optional": true,
+                    "optdefault": "0"
+                },
+                {
+                    "name": "data",
+                    "description": "Data object for edge",
+                    "type": "Object",
+                    "optional": true,
+                    "optdefault": "undefined"
+                }
+            ]
+        },
+        "Hash": {
+            "name": "Hash",
+            "shortname": "Hash",
+            "classitems": [],
+            "plugins": [],
+            "extensions": [],
+            "plugin_for": [],
+            "extension_for": [],
+            "module": "util/hash",
+            "namespace": "",
+            "file": "js/util/hash.js",
+            "line": 3,
+            "description": "Hash class used to generate hashcodes for JavaScript objects. The hashcode\nis stored as a property of the object, but it is set to non-enumerable and\ncannot be changed, thereby guaranteeing the consistency of hashcodes."
+        },
+        "Hashset": {
+            "name": "Hashset",
+            "shortname": "Hashset",
+            "classitems": [],
+            "plugins": [],
+            "extensions": [],
+            "plugin_for": [],
+            "extension_for": [],
+            "module": "util/hash",
+            "namespace": "",
+            "file": "js/util/hash.js",
+            "line": 54,
+            "description": "Hashset data structure used to store unique objects without\nduplicates. The hashset will add identical items of the same type,\nas long as they are not the exact same object (or the hashcode\nproperty is identical). For more info, see the {{#crossLink Hash}}\n{{/crossLink}}.",
+            "is_constructor": 1
+        },
+        "Hashtable": {
+            "name": "Hashtable",
+            "shortname": "Hashtable",
+            "classitems": [],
+            "plugins": [],
+            "extensions": [],
+            "plugin_for": [],
+            "extension_for": [],
+            "module": "util/hash",
+            "namespace": "",
+            "file": "js/util/hash.js",
+            "line": 443,
+            "description": "Hashtable implementation to map objects to other objects.",
+            "is_constructor": 1
+        },
+        "MathExtensions": {
+            "name": "MathExtensions",
+            "shortname": "MathExtensions",
+            "classitems": [],
+            "plugins": [],
+            "extensions": [],
+            "plugin_for": [],
+            "extension_for": [],
+            "module": "util/mathExtensions",
+            "namespace": "",
+            "file": "js/util/mathExtensions.js",
+            "line": 4,
+            "description": "Math extensions"
+        },
+        "Matrix": {
+            "name": "Matrix",
+            "shortname": "Matrix",
+            "classitems": [],
+            "plugins": [],
+            "extensions": [],
+            "plugin_for": [],
+            "extension_for": [],
+            "module": "util/mathExtensions",
+            "namespace": "",
+            "file": "js/util/mathExtensions.js",
+            "line": 140,
+            "description": "A matrix to represent transformations, etc.",
+            "is_constructor": 1,
+            "params": [
+                {
+                    "name": "entriesArray",
+                    "description": "An array with all of the values in the\nmatrix",
+                    "type": "Array"
+                },
+                {
+                    "name": "numRows",
+                    "description": "Number of rows in the matrix",
+                    "type": "Number"
+                },
+                {
+                    "name": "numRows",
+                    "description": "Number of column in the matrix",
+                    "type": "Number"
+                }
+            ]
+        },
+        "Transformation": {
+            "name": "Transformation",
+            "shortname": "Transformation",
+            "classitems": [],
+            "plugins": [],
+            "extensions": [],
+            "plugin_for": [],
+            "extension_for": [],
+            "module": "util/mathExtensions",
+            "namespace": "",
+            "file": "js/util/mathExtensions.js",
+            "line": 489,
+            "description": "Transformation matrix class",
+            "is_constructor": 1
+        },
+        "MinHeap": {
+            "name": "MinHeap",
+            "shortname": "MinHeap",
+            "classitems": [],
+            "plugins": [],
+            "extensions": [],
+            "plugin_for": [],
+            "extension_for": [],
+            "module": "util/minHeap",
+            "namespace": "",
+            "file": "js/util/minHeap.js",
+            "line": 12,
+            "is_constructor": 1,
+            "params": [
+                {
+                    "name": "arg1",
+                    "description": "Comparator function (if one argument) or size (if two arguments)",
+                    "type": "Function|number",
+                    "optional": true,
+                    "optdefault": "numeric_comparator|16"
+                },
+                {
+                    "name": "arg2",
+                    "description": "Comparator function",
+                    "type": "Function",
+                    "optional": true,
+                    "optdefault": "numeric_comparator"
+                }
+            ]
+        },
+        "Engine": {
+            "name": "Engine",
+            "shortname": "Engine",
+            "classitems": [],
+            "plugins": [],
+            "extensions": [],
+            "plugin_for": [],
+            "extension_for": [],
+            "module": "util/physics",
+            "namespace": "",
+            "file": "js/util/physics.js",
+            "line": 8,
+            "description": "Physics engine",
+            "is_constructor": 1,
+            "params": [
+                {
+                    "name": "objects",
+                    "description": "An array of objects to control",
+                    "type": "Array",
+                    "optional": true,
+                    "optdefault": "["
+                }
+            ]
+        }
+    },
+    "classitems": [
+        {
+            "file": "js/events/inputHandler.js",
+            "line": 69,
+            "description": "Bind a handler to an event",
+            "itemtype": "method",
+            "name": "bind",
+            "params": [
+                {
+                    "name": "eventName",
+                    "description": "Name of the event",
+                    "type": "String"
+                },
+                {
+                    "name": "handler",
+                    "description": "Handler to unbind",
+                    "type": "Function"
+                },
+                {
+                    "name": "delay",
+                    "description": "Minimum delay between calls to handler",
+                    "type": "Number",
+                    "optional": true,
+                    "optdefault": "0"
+                }
+            ],
+            "return": {
+                "description": "",
+                "type": "Void"
+            },
+            "class": "InputHandler",
+            "module": "events/inputHandler"
+        },
+        {
+            "file": "js/events/inputHandler.js",
+            "line": 84,
+            "description": "Unbind a handler from an event",
+            "itemtype": "method",
+            "name": "unbind",
+            "params": [
+                {
+                    "name": "eventName",
+                    "description": "Name of the event",
+                    "type": "String"
+                },
+                {
+                    "name": "handler",
+                    "description": "Handler to unbind",
+                    "type": "Function"
+                }
+            ],
+            "return": {
+                "description": "",
+                "type": "Void"
+            },
+            "class": "InputHandler",
+            "module": "events/inputHandler"
+        },
+        {
+            "file": "js/foundation/animation.js",
+            "line": 12,
+            "description": "Based on <a href=\"http://www.html5canvastutorials.com\">\nhtml5canvastutorials</a>",
+            "itemtype": "method",
+            "name": "requestAnimFrame",
+            "access": "private",
+            "tagname": "",
+            "params": [
+                {
+                    "name": "callback",
+                    "description": "A function to perform after one frame",
+                    "type": "Function"
+                }
+            ],
+            "return": {
+                "description": "",
+                "type": "Void"
+            },
+            "class": "Animation",
+            "module": "events/inputHandler"
+        },
+        {
+            "file": "js/foundation/animation.js",
+            "line": 76,
+            "description": "Start the animation.",
+            "itemtype": "method",
+            "name": "start",
+            "return": {
+                "description": "",
+                "type": "Void"
+            },
+            "class": "Animation",
+            "module": "foundation/animation"
+        },
+        {
+            "file": "js/foundation/animation.js",
+            "line": 87,
+            "description": "Create an easing.",
+            "itemtype": "method",
+            "name": "easing",
+            "static": 1,
+            "params": [
+                {
+                    "name": "drawable",
+                    "description": "The drawable to animate.",
+                    "type": "Polygon|Rectangle|Circle"
+                },
+                {
+                    "name": "endX",
+                    "description": "The x to go to.",
+                    "type": "Float"
+                },
+                {
+                    "name": "endY",
+                    "description": "The y to go to.",
+                    "type": "Float"
+                },
+                {
+                    "name": "duration",
+                    "description": "The number of milliseconds for the animation.",
+                    "type": "Int"
+                },
+                {
+                    "name": "callback",
+                    "description": "A function to perform at the completion of the animation.",
+                    "type": "Function"
+                }
+            ],
+            "return": {
+                "description": "An animation representing the easing",
+                "type": "Animation"
+            },
+            "class": "Animation",
+            "module": "foundation/animation"
+        },
+        {
+            "file": "js/foundation/canvasDrawer.js",
+            "line": 40,
+            "description": "Width of the canvas",
+            "type": "{float}",
+            "itemtype": "property",
+            "name": "width",
+            "class": "CanvasDrawer",
+            "module": "foundation/canvasDrawer"
+        },
+        {
+            "file": "js/foundation/canvasDrawer.js",
+            "line": 52,
+            "description": "Height of the canvas",
+            "itemtype": "property",
+            "name": "height",
+            "type": "{float}",
+            "class": "CanvasDrawer",
+            "module": "foundation/canvasDrawer"
+        },
+        {
+            "file": "js/foundation/canvasDrawer.js",
+            "line": 64,
+            "description": "Properties of the context. Valid settings include:\nlineWidth, fillStyle, strokeStyle, font.",
+            "itemtype": "property",
+            "name": "contextSettings",
+            "type": "{Object}",
+            "class": "CanvasDrawer",
+            "module": "foundation/canvasDrawer"
+        },
+        {
+            "file": "js/foundation/canvasDrawer.js",
+            "line": 101,
+            "description": "Draw a line between two points",
+            "itemtype": "method",
+            "name": "drawLine",
+            "params": [
+                {
+                    "name": "point1",
+                    "description": "x coordinate of the first point\nor the first point",
+                    "type": "(float|Point)"
+                },
+                {
+                    "name": "point2",
+                    "description": "y coordinate of the first point\nor the second point",
+                    "type": "(float|Point)"
+                },
+                {
+                    "name": "moveFirst",
+                    "description": "If true, uses moveTo method",
+                    "type": "Boolean",
+                    "optional": true,
+                    "optdefault": "false"
+                }
+            ],
+            "chainable": 1,
+            "class": "CanvasDrawer",
+            "module": "foundation/canvasDrawer"
+        },
+        {
+            "file": "js/foundation/canvasDrawer.js",
+            "line": 120,
+            "description": "Wrapper for <code>context.stroke</code>",
+            "itemtype": "method",
+            "name": "stroke",
+            "chainable": 1,
+            "class": "CanvasDrawer",
+            "module": "foundation/canvasDrawer"
+        },
+        {
+            "file": "js/foundation/canvasDrawer.js",
+            "line": 131,
+            "description": "Wrapper for <code>context.fill</code>",
+            "itemtype": "method",
+            "name": "fill",
+            "chainable": 1,
+            "class": "CanvasDrawer",
+            "module": "foundation/canvasDrawer"
+        },
+        {
+            "file": "js/foundation/canvasDrawer.js",
+            "line": 142,
+            "description": "Wrapper for <code>context.beginPath</code>",
+            "itemtype": "method",
+            "name": "beginPath",
+            "chainable": 1,
+            "class": "CanvasDrawer",
+            "module": "foundation/canvasDrawer"
+        },
+        {
+            "file": "js/foundation/canvasDrawer.js",
+            "line": 153,
+            "description": "Wrapper for <code>context.closePath</code>",
+            "itemtype": "method",
+            "name": "closePath",
+            "chainable": 1,
+            "class": "CanvasDrawer",
+            "module": "foundation/canvasDrawer"
+        },
+        {
+            "file": "js/foundation/canvasDrawer.js",
+            "line": 164,
+            "description": "Wrapper for <code>context.rect</code>",
+            "itemtype": "method",
+            "name": "rect",
+            "params": [
+                {
+                    "name": "x",
+                    "description": "x coordinate",
+                    "type": "Float"
+                },
+                {
+                    "name": "y",
+                    "description": "y coordinate",
+                    "type": "Float"
+                },
+                {
+                    "name": "w",
+                    "description": "Width of rectangle",
+                    "type": "Float"
+                },
+                {
+                    "name": "h",
+                    "description": "Height of rectangle",
+                    "type": "Float"
+                }
+            ],
+            "chainable": 1,
+            "class": "CanvasDrawer",
+            "module": "foundation/canvasDrawer"
+        },
+        {
+            "file": "js/foundation/canvasDrawer.js",
+            "line": 179,
+            "description": "Wrapper for <code>context.arc</code>",
+            "itemtype": "method",
+            "name": "arc",
+            "params": [
+                {
+                    "name": "x",
+                    "description": "x coordinate",
+                    "type": "Float"
+                },
+                {
+                    "name": "y",
+                    "description": "y coordinate",
+                    "type": "Float"
+                },
+                {
+                    "name": "radius",
+                    "description": "Radius of arc",
+                    "type": "Float"
+                },
+                {
+                    "name": "startAngle",
+                    "description": "Start angle of arc",
+                    "type": "Float"
+                },
+                {
+                    "name": "endAngle",
+                    "description": "End angle of arc",
+                    "type": "Float"
+                },
+                {
+                    "name": "ccw",
+                    "description": "Move counterclockwise",
+                    "type": "Boolean"
+                }
+            ],
+            "chainable": 1,
+            "class": "CanvasDrawer",
+            "module": "foundation/canvasDrawer"
+        },
+        {
+            "file": "js/foundation/canvasDrawer.js",
+            "line": 196,
+            "description": "Wrapper for <code>context.clearRect</code>",
+            "itemtype": "method",
+            "name": "clearRect",
+            "params": [
+                {
+                    "name": "x",
+                    "description": "Minimum x of area.",
+                    "type": "Float"
+                },
+                {
+                    "name": "y",
+                    "description": "Minimum y of area.",
+                    "type": "Float"
+                },
+                {
+                    "name": "width",
+                    "description": "Width of area.",
+                    "type": "Float"
+                },
+                {
+                    "name": "height",
+                    "description": "Height of area.",
+                    "type": "Float"
+                }
+            ],
+            "chainable": 1,
+            "class": "CanvasDrawer",
+            "module": "foundation/canvasDrawer"
+        },
+        {
+            "file": "js/foundation/canvasDrawer.js",
+            "line": 211,
+            "description": "Clear entire canvas",
+            "itemtype": "method",
+            "name": "clearCanvas",
+            "chainable": 1,
+            "class": "CanvasDrawer",
+            "module": "foundation/canvasDrawer"
+        },
+        {
+            "file": "js/foundation/canvasDrawer.js",
+            "line": 222,
+            "description": "Wrapper for <code>context.save</code>",
+            "itemtype": "method",
+            "name": "save",
+            "chainable": 1,
+            "class": "CanvasDrawer",
+            "module": "foundation/canvasDrawer"
+        },
+        {
+            "file": "js/foundation/canvasDrawer.js",
+            "line": 233,
+            "description": "Wrapper for <code>context.restore</code>",
+            "itemtype": "method",
+            "name": "restore",
+            "chainable": 1,
+            "class": "CanvasDrawer",
+            "module": "foundation/canvasDrawer"
+        },
+        {
+            "file": "js/foundation/canvasDrawer.js",
+            "line": 244,
+            "description": "Wrapper for <code>context.restore</code>",
+            "itemtype": "method",
+            "name": "transform",
+            "params": [
+                {
+                    "name": "a",
+                    "description": "Either a transformation or\n<em>a</em> of transformation matrix",
+                    "type": "Transformation|number",
+                    "optional": true
+                },
+                {
+                    "name": "b",
+                    "description": "<em>b</em> of transformation matrix",
+                    "type": "Number"
+                },
+                {
+                    "name": "c",
+                    "description": "<em>c</em> of transformation matrix",
+                    "type": "Number"
+                },
+                {
+                    "name": "d",
+                    "description": "<em>d</em> of transformation matrix",
+                    "type": "Number"
+                },
+                {
+                    "name": "e",
+                    "description": "<em>e</em> of transformation matrix",
+                    "type": "Number"
+                },
+                {
+                    "name": "f",
+                    "description": "<em>f</em> of transformation matrix",
+                    "type": "Number"
+                }
+            ],
+            "chainable": 1,
+            "class": "CanvasDrawer",
+            "module": "foundation/canvasDrawer"
+        },
+        {
+            "file": "js/foundation/canvasDrawer.js",
+            "line": 271,
+            "description": "Wrapper for <code>context.translate</code>",
+            "itemtype": "method",
+            "name": "translate",
+            "params": [
+                {
+                    "name": "x",
+                    "description": "x coordinate of destination",
+                    "type": "Float"
+                },
+                {
+                    "name": "y",
+                    "description": "y coordinate of destination",
+                    "type": "Float"
+                }
+            ],
+            "chainable": 1,
+            "class": "CanvasDrawer",
+            "module": "foundation/canvasDrawer"
+        },
+        {
+            "file": "js/foundation/canvasDrawer.js",
+            "line": 284,
+            "description": "Wrapper for <code>context.rotate</code>",
+            "itemtype": "method",
+            "name": "rotate",
+            "params": [
+                {
+                    "name": "angle",
+                    "description": "Angle of rotation",
+                    "type": "Float"
+                }
+            ],
+            "return": {
+                "description": "",
+                "type": "Void"
+            },
+            "class": "CanvasDrawer",
+            "module": "foundation/canvasDrawer"
+        },
+        {
+            "file": "js/foundation/canvasDrawer.js",
+            "line": 296,
+            "description": "Wrapper for <code>context.fillRect</code>",
+            "itemtype": "method",
+            "name": "fillRect",
+            "params": [
+                {
+                    "name": "x",
+                    "description": "x coordinate of top-left of rectangle",
+                    "type": "Float"
+                },
+                {
+                    "name": "y",
+                    "description": "y coordinate of top-left of rectangle",
+                    "type": "Float"
+                },
+                {
+                    "name": "w",
+                    "description": "Width of rectangle",
+                    "type": "Float"
+                },
+                {
+                    "name": "h",
+                    "description": "Height of rectangle",
+                    "type": "Float"
+                }
+            ],
+            "chainable": 1,
+            "class": "CanvasDrawer",
+            "module": "foundation/canvasDrawer"
+        },
+        {
+            "file": "js/foundation/canvasDrawer.js",
+            "line": 311,
+            "description": "Wrapper for <code>context.strokeRect</code>",
+            "itemtype": "method",
+            "name": "strokeRect",
+            "params": [
+                {
+                    "name": "x",
+                    "description": "x coordinate of top-left of rectangle",
+                    "type": "Float"
+                },
+                {
+                    "name": "y",
+                    "description": "y coordinate of top-left of rectangle",
+                    "type": "Float"
+                },
+                {
+                    "name": "w",
+                    "description": "Width of rectangle",
+                    "type": "Float"
+                },
+                {
+                    "name": "h",
+                    "description": "Height of rectangle",
+                    "type": "Float"
+                }
+            ],
+            "chainable": 1,
+            "class": "CanvasDrawer",
+            "module": "foundation/canvasDrawer"
+        },
+        {
+            "file": "js/foundation/canvasDrawer.js",
+            "line": 327,
+            "description": "Wrapper for <code>context.fillText</code>",
+            "itemtype": "method",
+            "name": "fillText",
+            "params": [
+                {
+                    "name": "text",
+                    "description": "Text to draw",
+                    "type": "String"
+                },
+                {
+                    "name": "x",
+                    "description": "x coordinate",
+                    "type": "Float"
+                },
+                {
+                    "name": "y",
+                    "description": "y coordinate",
+                    "type": "Float"
+                },
+                {
+                    "name": "maxWidth",
+                    "description": "Maximum width to draw",
+                    "type": "Float",
+                    "optional": true
+                }
+            ],
+            "chainable": 1,
+            "class": "CanvasDrawer",
+            "module": "foundation/canvasDrawer"
+        },
+        {
+            "file": "js/foundation/canvasDrawer.js",
+            "line": 342,
+            "description": "Wrapper for <code>context.getImageData</code>",
+            "itemtype": "method",
+            "name": "getImageData",
+            "params": [
+                {
+                    "name": "x",
+                    "description": "x coordinate of top-left of image",
+                    "type": "Float"
+                },
+                {
+                    "name": "y",
+                    "description": "y coordinate of top-left of image",
+                    "type": "Float"
+                },
+                {
+                    "name": "width",
+                    "description": "Width of image",
+                    "type": "Float"
+                },
+                {
+                    "name": "height",
+                    "description": "Height of image",
+                    "type": "Float"
+                }
+            ],
+            "return": {
+                "description": "Image data",
+                "type": "Array"
+            },
+            "class": "CanvasDrawer",
+            "module": "foundation/canvasDrawer"
+        },
+        {
+            "file": "js/foundation/canvasDrawer.js",
+            "line": 355,
+            "description": "Wrapper for <code>context.putImageData</code>",
+            "itemtype": "method",
+            "name": "putImageData",
+            "params": [
+                {
+                    "name": "imageData",
+                    "description": "Image data",
+                    "type": "Array"
+                },
+                {
+                    "name": "x",
+                    "description": "x coordinate of top-left of image",
+                    "type": "Float"
+                },
+                {
+                    "name": "y",
+                    "description": "y coordinate of top-left of image",
+                    "type": "Float"
+                }
+            ],
+            "chainable": 1,
+            "class": "CanvasDrawer",
+            "module": "foundation/canvasDrawer"
+        },
+        {
+            "file": "js/foundation/shape.js",
+            "line": 24,
+            "description": "Generate a BoundingBox for a polygon",
+            "itemtype": "method",
+            "name": "generateBbox",
+            "static": 1,
+            "params": [
+                {
+                    "name": "points",
+                    "description": "An array of points describing the polygon",
+                    "type": "Array"
+                }
+            ],
+            "return": {
+                "description": "A BoundingBox containing all of the points",
+                "type": "BoundingBox"
+            },
+            "class": "Shape",
+            "module": "foundation/shape"
+        },
+        {
+            "file": "js/foundation/shape.js",
+            "line": 58,
+            "description": "Find center of a polygon",
+            "itemtype": "method",
+            "name": "findPolygonCenter",
+            "static": 1,
+            "params": [
+                {
+                    "name": "points",
+                    "description": "An array of the points of the polygon",
+                    "type": "Array"
+                }
+            ],
+            "return": {
+                "description": "Center of polygon",
+                "type": "Point"
+            },
+            "class": "Shape",
+            "module": "foundation/shape"
+        },
+        {
+            "file": "js/foundation/shape.js",
+            "line": 123,
+            "description": "x coordinate of Shape instance",
+            "itemtype": "property",
+            "name": "x",
+            "type": "{integer}",
+            "class": "Shape",
+            "module": "foundation/shape"
+        },
+        {
+            "file": "js/foundation/shape.js",
+            "line": 142,
+            "description": "y coordinate of Shape instance",
+            "itemtype": "property",
+            "name": "y",
+            "type": "{integer}",
+            "class": "Shape",
+            "module": "foundation/shape"
+        },
+        {
+            "file": "js/foundation/shape.js",
+            "line": 161,
+            "description": "Width of Shape instance",
+            "itemtype": "property",
+            "name": "width",
+            "type": "{integer}",
+            "class": "Shape",
+            "module": "foundation/shape"
+        },
+        {
+            "file": "js/foundation/shape.js",
+            "line": 180,
+            "description": "Height of Shape instance",
+            "itemtype": "property",
+            "name": "height",
+            "type": "{integer}",
+            "class": "Shape",
+            "module": "foundation/shape"
+        },
+        {
+            "file": "js/foundation/shape.js",
+            "line": 199,
+            "description": "Angle of rotation of shape",
+            "itemtype": "property",
+            "name": "angle",
+            "type": "{number}",
+            "class": "Shape",
+            "module": "foundation/shape"
+        },
+        {
+            "file": "js/foundation/shape.js",
+            "line": 215,
+            "description": "BoundingBox of Shape instance",
+            "itemtype": "property",
+            "name": "boundingBox",
+            "type": "{BoundingBox}",
+            "class": "Shape",
+            "module": "foundation/shape"
+        },
+        {
+            "file": "js/foundation/shape.js",
+            "line": 230,
+            "description": "Drawing settings of Shape instance",
+            "itemtype": "property",
+            "name": "drawingSettings",
+            "type": "{Object}",
+            "class": "Shape",
+            "module": "foundation/shape"
+        },
+        {
+            "file": "js/foundation/shape.js",
+            "line": 246,
+            "description": "Transformation matrix",
+            "itemtype": "property",
+            "name": "transformation",
+            "type": "{Transformation}",
+            "class": "Shape",
+            "module": "foundation/shape"
+        },
+        {
+            "file": "js/foundation/shape.js",
+            "line": 263,
+            "description": "Clear and draw Shape onto canvas",
+            "itemtype": "method",
+            "name": "update",
+            "return": {
+                "description": "",
+                "type": "Void"
+            },
+            "class": "Shape",
+            "module": "foundation/shape"
+        },
+        {
+            "file": "js/foundation/shape.js",
+            "line": 274,
+            "description": "Draw Shape instance onto the canvas",
+            "itemtype": "method",
+            "name": "draw",
+            "return": {
+                "description": "",
+                "type": "Void"
+            },
+            "class": "Shape",
+            "module": "foundation/shape"
+        },
+        {
+            "file": "js/foundation/shape.js",
+            "line": 286,
+            "description": "Clear the Shape instance",
+            "itemtype": "method",
+            "name": "clear",
+            "return": {
+                "description": "",
+                "type": "Void"
+            },
+            "class": "Shape",
+            "module": "foundation/shape"
+        },
+        {
+            "file": "js/foundation/shape.js",
+            "line": 300,
+            "description": "Draw BoundingBox of Shape instance",
+            "itemtype": "method",
+            "name": "drawBoundingBox",
+            "return": {
+                "description": "",
+                "type": "Void"
+            },
+            "class": "Shape",
+            "module": "foundation/shape"
+        },
+        {
+            "file": "js/foundation/shape.js",
+            "line": 319,
+            "description": "Check if a point is within the Shape instance",
+            "itemtype": "method",
+            "name": "collisionTest",
+            "params": [
+                {
+                    "name": "point",
+                    "description": "A 2D point",
+                    "type": "Point"
+                }
+            ],
+            "return": {
+                "description": "Whether or not the point is within the Shape",
+                "type": "Boolean"
+            },
+            "class": "Shape",
+            "module": "foundation/shape"
+        },
+        {
+            "file": "js/foundation/shape.js",
+            "line": 378,
+            "description": "Radius of circle",
+            "itemtype": "property",
+            "name": "radius",
+            "type": "{number)",
+            "class": "Circle",
+            "module": "foundation/shape"
+        },
+        {
+            "file": "js/foundation/shape.js",
+            "line": 396,
+            "description": "Draw circle onto canvas.",
+            "itemtype": "method",
+            "name": "_drawShape",
+            "access": "protected",
+            "tagname": "",
+            "return": {
+                "description": "",
+                "type": "Void"
+            },
+            "class": "Circle",
+            "module": "foundation/shape"
+        },
+        {
+            "file": "js/foundation/shape.js",
+            "line": 412,
+            "description": "_hitTest to call from collisionTest",
+            "itemtype": "method",
+            "name": "_hitTest",
+            "access": "protected",
+            "tagname": "",
+            "params": [
+                {
+                    "name": "point",
+                    "description": "[description]",
+                    "type": "Point"
+                }
+            ],
+            "return": {
+                "description": "[description]",
+                "type": "Boolean"
+            },
+            "class": "Circle",
+            "module": "foundation/shape"
+        },
+        {
+            "file": "js/foundation/shape.js",
+            "line": 426,
+            "description": "Update boundingBox",
+            "itemtype": "method",
+            "name": "_updateBoundingBox",
+            "access": "protected",
+            "tagname": "",
+            "return": {
+                "description": "",
+                "type": "Void"
+            },
+            "class": "Circle",
+            "module": "foundation/shape"
+        },
+        {
+            "file": "js/foundation/shape.js",
+            "line": 533,
+            "description": "Iterate through each point in the polygon.",
+            "itemtype": "method",
+            "name": "forEachPoint",
+            "access": "private",
+            "tagname": "",
+            "params": [
+                {
+                    "name": "f",
+                    "description": "Function to be called on each point",
+                    "type": "Function"
+                }
+            ],
+            "return": {
+                "description": "",
+                "type": "Void"
+            },
+            "class": "Polygon",
+            "module": "foundation/shape"
+        },
+        {
+            "file": "js/foundation/shape.js",
+            "line": 554,
+            "description": "Points of Polygon instance",
+            "itemtype": "property",
+            "name": "points",
+            "type": "{Array}",
+            "class": "Polygon",
+            "module": "foundation/shape"
+        },
+        {
+            "file": "js/foundation/shape.js",
+            "line": 571,
+            "description": "Draw the rectangle onto the canvas using the CanvasDrawer.",
+            "itemtype": "method",
+            "name": "_drawShape",
+            "access": "protected",
+            "tagname": "",
+            "return": {
+                "description": "",
+                "type": "Void"
+            },
+            "class": "Polygon",
+            "module": "foundation/shape"
+        },
+        {
+            "file": "js/foundation/shape.js",
+            "line": 605,
+            "description": "Hit testing based on <a href=\"http://stackoverflow.com/a/2922778/1930331\">this</a> StackOverflow answer.\nmethod _hittest",
+            "itemtype": "method",
+            "name": "_hitTest",
+            "access": "protected",
+            "tagname": "",
+            "params": [
+                {
+                    "name": "point",
+                    "description": "A point",
+                    "type": "Point"
+                }
+            ],
+            "return": {
+                "description": "If the point is in the polygon",
+                "type": "Boolean"
+            },
+            "class": "Polygon",
+            "module": "foundation/shape"
+        },
+        {
+            "file": "js/foundation/shape.js",
+            "line": 632,
+            "description": "Update the bounding box",
+            "itemtype": "method",
+            "name": "",
+            "access": "protected",
+            "tagname": "",
+            "return": {
+                "description": "",
+                "type": "Void"
+            },
+            "class": "Polygon",
+            "module": "foundation/shape"
+        },
+        {
+            "file": "js/level/levelBase.js",
+            "line": 31,
+            "description": "Create a canvas with the dimensions this.WIDTH by this.HEIGHT",
+            "itemtype": "method",
+            "name": "createCanvas",
+            "params": [
+                {
+                    "name": "id",
+                    "description": "String to use as HTML id",
+                    "type": "String",
+                    "optional": true
+                }
+            ],
+            "return": {
+                "description": "A new jQuery object of the new canvas",
+                "type": "JQueryObject"
+            },
+            "class": "LevelBase",
+            "module": "level/levelBase"
+        },
+        {
+            "file": "js/level/levelBase.js",
+            "line": 46,
+            "description": "Create a canvas with the createCanvas method and return a new\nCanvasDrawer for that canvas",
+            "itemtype": "method",
+            "name": "createContext",
+            "params": [
+                {
+                    "name": "id",
+                    "description": "String to use as HTML id",
+                    "type": "String",
+                    "optional": true
+                }
+            ],
+            "return": {
+                "description": "CanvasDrawer for new canvas",
+                "type": "CanvasDrawer"
+            },
+            "class": "LevelBase",
+            "module": "level/levelBase"
+        },
+        {
+            "file": "js/level/levelBase.js",
+            "line": 63,
+            "description": "Width of canvas",
+            "itemtype": "property",
+            "name": "WIDTH",
+            "type": "{number}",
+            "class": "LevelBase",
+            "module": "level/levelBase"
+        },
+        {
+            "file": "js/level/levelBase.js",
+            "line": 71,
+            "description": "Height of canvas",
+            "itemtype": "property",
+            "name": "HEIGHT",
+            "type": "{number}",
+            "class": "LevelBase",
+            "module": "level/levelBase"
+        },
+        {
+            "file": "js/level/levelBase.js",
+            "line": 79,
+            "description": "Margin add to width and height when creating canvas",
+            "itemtype": "property",
+            "name": "MARGIN",
+            "type": "{Number}",
+            "class": "LevelBase",
+            "module": "level/levelBase"
+        },
+        {
+            "file": "js/level/levelBase.js",
+            "line": 87,
+            "description": "Physics engine",
+            "itemtype": "property",
+            "name": "physicsEngine",
+            "type": "{Engine}",
+            "class": "LevelBase",
+            "module": "level/levelBase"
+        },
+        {
+            "file": "js/level/levelBase.js",
+            "line": 95,
+            "description": "Input handler",
+            "itemtype": "property",
+            "name": "inputHandler",
+            "type": "{InputHandler}",
+            "class": "LevelBase",
+            "module": "level/levelBase"
+        },
+        {
+            "file": "js/level/mainLevel.js",
+            "line": 90,
+            "description": "Function to perform on player winning.",
+            "itemtype": "method",
+            "name": "win",
+            "access": "private",
+            "tagname": "",
+            "params": [
+                {
+                    "name": "player",
+                    "description": "Player",
+                    "type": "Player"
+                }
+            ],
+            "return": {
+                "description": "",
+                "type": "Void"
+            },
+            "class": "MainLevel",
+            "module": "level/mainLevel"
+        },
+        {
+            "file": "js/level/mainLevel.js",
+            "line": 129,
+            "description": "Function to perform on player's death.",
+            "itemtype": "method",
+            "name": "die",
+            "access": "private",
+            "tagname": "",
+            "params": [
+                {
+                    "name": "player",
+                    "description": "Player",
+                    "type": "Player"
+                }
+            ],
+            "return": {
+                "description": "",
+                "type": "Void"
+            },
+            "class": "MainLevel",
+            "module": "level/mainLevel"
+        },
+        {
+            "file": "js/sprite/abstractPlayer.js",
+            "line": 56,
+            "description": "Initialization method",
+            "itemtype": "method",
+            "name": "init",
+            "access": "private",
+            "tagname": "",
+            "return": {
+                "description": "",
+                "type": "Void"
+            },
+            "class": "AbstractPlayer",
+            "module": "sprite/abstractPlayer"
+        },
+        {
+            "file": "js/sprite/abstractPlayer.js",
+            "line": 78,
+            "description": "Location of AbstractPlayer instance in Maze",
+            "itemtype": "property",
+            "name": "location",
+            "type": "{MazeLocation}",
+            "class": "AbstractPlayer",
+            "module": "sprite/abstractPlayer"
+        },
+        {
+            "file": "js/sprite/abstractPlayer.js",
+            "line": 93,
+            "description": "Whether or not the AbstractPlayer instance currently being\nanimated",
+            "itemtype": "property",
+            "name": "isAnimating",
+            "type": "{boolean}",
+            "class": "AbstractPlayer",
+            "module": "sprite/abstractPlayer"
+        },
+        {
+            "file": "js/sprite/abstractPlayer.js",
+            "line": 109,
+            "description": "Whether or not the AbstractPlayer instance currently frozen",
+            "itemtype": "property",
+            "name": "isFrozen",
+            "type": "{boolean}",
+            "class": "AbstractPlayer",
+            "module": "sprite/abstractPlayer"
+        },
+        {
+            "file": "js/sprite/abstractPlayer.js",
+            "line": 125,
+            "description": "Get whether or not the AbstractPlayer instance can move based\non the isAnimating and isFrozen properties",
+            "itemtype": "method",
+            "name": "canMove",
+            "return": {
+                "description": "Whether or not the AbstractPlayer can move",
+                "type": "Boolean"
+            },
+            "class": "AbstractPlayer",
+            "module": "sprite/abstractPlayer"
+        },
+        {
+            "file": "js/sprite/abstractPlayer.js",
+            "line": 136,
+            "description": "Move AbstractPlayer instance",
+            "itemtype": "method",
+            "name": "move",
+            "params": [
+                {
+                    "name": "direction",
+                    "description": "Direction to move",
+                    "type": "Direction"
+                }
+            ],
+            "return": {
+                "description": "",
+                "type": "Void"
+            },
+            "class": "AbstractPlayer",
+            "module": "sprite/abstractPlayer"
+        },
+        {
+            "file": "js/sprite/enemy.js",
+            "line": 69,
+            "description": "Initialization method",
+            "itemtype": "method",
+            "name": "init",
+            "access": "private",
+            "tagname": "",
+            "return": {
+                "description": "",
+                "type": "Void"
+            },
+            "class": "Enemy",
+            "module": "sprite/enemy"
+        },
+        {
+            "file": "js/sprite/enemy.js",
+            "line": 86,
+            "description": "Perform an action if possible",
+            "itemtype": "method",
+            "name": "act",
+            "return": {
+                "description": "",
+                "type": "Void"
+            },
+            "class": "Enemy",
+            "module": "sprite/enemy"
+        },
+        {
+            "file": "js/sprite/enemy.js",
+            "line": 143,
+            "description": "Add moves to the moves queue",
+            "itemtype": "method",
+            "name": "addMoves",
+            "params": [
+                {
+                    "name": "moves",
+                    "description": "An array of directions to move in",
+                    "type": "Array"
+                }
+            ],
+            "class": "Enemy",
+            "module": "sprite/enemy"
+        },
+        {
+            "file": "js/sprite/enemy.js",
+            "line": 153,
+            "description": "Clear moves from the moves queue",
+            "itemtype": "method",
+            "name": "clearMoves",
+            "return": {
+                "description": "",
+                "type": "Void"
+            },
+            "class": "Enemy",
+            "module": "sprite/enemy"
+        },
+        {
+            "file": "js/sprite/maze.js",
+            "line": 63,
+            "description": "Row index of MazeLocation in Maze",
+            "itemtype": "property",
+            "name": "row",
+            "type": "{integer}",
+            "class": "Maze",
+            "module": "sprite/maze"
+        },
+        {
+            "file": "js/sprite/maze.js",
+            "line": 71,
+            "description": "Column index of MazeLocation in Maze",
+            "itemtype": "property",
+            "name": "column",
+            "type": "{integer}",
+            "class": "Maze",
+            "module": "sprite/maze"
+        },
+        {
+            "file": "js/sprite/maze.js",
+            "line": 79,
+            "description": "x coordination of tile",
+            "itemtype": "property",
+            "name": "x",
+            "type": "{number}",
+            "class": "Maze",
+            "module": "sprite/maze"
+        },
+        {
+            "file": "js/sprite/maze.js",
+            "line": 87,
+            "description": "y coordination of tile",
+            "itemtype": "property",
+            "name": "y",
+            "type": "{number}",
+            "class": "Maze",
+            "module": "sprite/maze"
+        },
+        {
+            "file": "js/sprite/maze.js",
+            "line": 95,
+            "description": "Width of tile",
+            "itemtype": "property",
+            "name": "width",
+            "type": "{number}",
+            "class": "Maze",
+            "module": "sprite/maze"
+        },
+        {
+            "file": "js/sprite/maze.js",
+            "line": 103,
+            "description": "Width of tile",
+            "itemtype": "property",
+            "name": "height",
+            "type": "{number}",
+            "class": "Maze",
+            "module": "sprite/maze"
+        },
+        {
+            "file": "js/sprite/maze.js",
+            "line": 111,
+            "description": "Tile rectangle to represent MazeLocation",
+            "itemtype": "property",
+            "name": "tile",
+            "type": "{Rectangle}",
+            "class": "Maze",
+            "module": "sprite/maze"
+        },
+        {
+            "file": "js/sprite/maze.js",
+            "line": 122,
+            "description": "Location to the left of this one",
+            "itemtype": "property",
+            "name": "left",
+            "type": "{MazeLocation}",
+            "class": "Maze",
+            "module": "sprite/maze"
+        },
+        {
+            "file": "js/sprite/maze.js",
+            "line": 130,
+            "description": "Location to the right of this one",
+            "itemtype": "property",
+            "name": "right",
+            "type": "{MazeLocation}",
+            "class": "Maze",
+            "module": "sprite/maze"
+        },
+        {
+            "file": "js/sprite/maze.js",
+            "line": 138,
+            "description": "Location above this one",
+            "itemtype": "property",
+            "name": "up",
+            "type": "{MazeLocation}",
+            "class": "Maze",
+            "module": "sprite/maze"
+        },
+        {
+            "file": "js/sprite/maze.js",
+            "line": 146,
+            "description": "Location below this one",
+            "itemtype": "property",
+            "name": "down",
+            "type": "{MazeLocation}",
+            "class": "Maze",
+            "module": "sprite/maze"
+        },
+        {
+            "file": "js/sprite/maze.js",
+            "line": 154,
+            "description": "A hash of walls with Direction enums as keys",
+            "itemtype": "property",
+            "name": "walls",
+            "type": "{Object}",
+            "class": "Maze",
+            "module": "sprite/maze"
+        },
+        {
+            "file": "js/sprite/maze.js",
+            "line": 174,
+            "description": "Iterate through each wall of this location",
+            "itemtype": "method",
+            "name": "forEachWall",
+            "params": [
+                {
+                    "name": "f",
+                    "description": "Function to apply to each wall. It is\ngiven the wall and the direction of the wall as parameters.\nThe function can exit iteration by returning true.",
+                    "type": "Function"
+                }
+            ],
+            "return": {
+                "description": "",
+                "type": "Void"
+            },
+            "class": "Maze",
+            "module": "sprite/maze"
+        },
+        {
+            "file": "js/sprite/maze.js",
+            "line": 190,
+            "description": "Get the locaton in a given direction from this locaton",
+            "itemtype": "method",
+            "name": "get",
+            "params": [
+                {
+                    "name": "direction",
+                    "description": "Direction enum",
+                    "type": "Direction"
+                }
+            ],
+            "return": {
+                "description": "Adjacent location",
+                "type": "MazeLocation"
+            },
+            "class": "Maze",
+            "module": "sprite/maze"
+        },
+        {
+            "file": "js/sprite/maze.js",
+            "line": 202,
+            "description": "Get an impenetrable location adjacent to this location",
+            "itemtype": "method",
+            "name": "getImpenetrable",
+            "return": {
+                "description": "Impenetrable location if exists,\nnull otherwise",
+                "type": "MazeLocation"
+            },
+            "class": "Maze",
+            "module": "sprite/maze"
+        },
+        {
+            "file": "js/sprite/maze.js",
+            "line": 242,
+            "description": "Rectangle to display on canvas",
+            "itemtype": "property",
+            "name": "rect",
+            "type": "{Shape}",
+            "class": "Maze",
+            "module": "sprite/maze"
+        },
+        {
+            "file": "js/sprite/maze.js",
+            "line": 256,
+            "description": "Whether or not the wall is penetrable",
+            "itemtype": "property",
+            "name": "isPenetrable",
+            "type": "{boolean}",
+            "class": "Maze",
+            "module": "sprite/maze"
+        },
+        {
+            "file": "js/sprite/maze.js",
+            "line": 285,
+            "description": "Initialize maze",
+            "itemtype": "method",
+            "name": "init",
+            "access": "private",
+            "tagname": "",
+            "return": {
+                "description": "",
+                "type": "Void"
+            },
+            "class": "Maze",
+            "module": "sprite/maze"
+        },
+        {
+            "file": "js/sprite/maze.js",
+            "line": 315,
+            "description": "Connect MazeLocations to their neighbors",
+            "itemtype": "method",
+            "name": "connectLocations",
+            "access": "private",
+            "tagname": "",
+            "return": {
+                "description": "",
+                "type": "Void"
+            },
+            "class": "Maze",
+            "module": "sprite/maze"
+        },
+        {
+            "file": "js/sprite/maze.js",
+            "line": 339,
+            "description": "Generate the maze",
+            "itemtype": "method",
+            "name": "generateMaze",
+            "access": "private",
+            "tagname": "",
+            "return": {
+                "description": "",
+                "type": "Void"
+            },
+            "class": "Maze",
+            "module": "sprite/maze"
+        },
+        {
+            "file": "js/sprite/maze.js",
+            "line": 380,
+            "description": "Random neighbor of location that is not in visited set",
+            "itemtype": "method",
+            "name": "randomNeighbor",
+            "access": "private",
+            "tagname": "",
+            "params": [
+                {
+                    "name": "location",
+                    "description": "Starting location",
+                    "type": "MazeLocation"
+                },
+                {
+                    "name": "visited",
+                    "description": "Visited location set",
+                    "type": "Hashset"
+                }
+            ],
+            "return": {
+                "description": "Adjacent location",
+                "type": "MazeLocation"
+            },
+            "class": "Maze",
+            "module": "sprite/maze"
+        },
+        {
+            "file": "js/sprite/maze.js",
+            "line": 412,
+            "description": "Eliminate walls from the maze that make traversing the entrie\nmaze impossible",
+            "itemtype": "method",
+            "name": "eliminateBarriers",
+            "access": "private",
+            "tagname": "",
+            "return": {
+                "description": "",
+                "type": "Void"
+            },
+            "class": "Maze",
+            "module": "sprite/maze"
+        },
+        {
+            "file": "js/sprite/maze.js",
+            "line": 462,
+            "description": "Count the number of reachable locations from an origin location",
+            "itemtype": "method",
+            "name": "numReachableLocations",
+            "access": "private",
+            "tagname": "",
+            "params": [
+                {
+                    "name": "origin",
+                    "description": "Origin location",
+                    "type": "MazeLocation"
+                }
+            ],
+            "return": {
+                "description": "Number of reachable locations (including self)",
+                "type": "Number"
+            },
+            "class": "Maze",
+            "module": "sprite/maze"
+        },
+        {
+            "file": "js/sprite/maze.js",
+            "line": 504,
+            "description": "Iterate through each location in the maze",
+            "itemtype": "method",
+            "name": "forEachLocation",
+            "params": [
+                {
+                    "name": "f",
+                    "description": "Function to apply to each location.\nFunction can exit iteration by returning true.",
+                    "type": "Function"
+                }
+            ],
+            "return": {
+                "description": "",
+                "type": "Void"
+            },
+            "class": "Maze",
+            "module": "sprite/maze"
+        },
+        {
+            "file": "js/sprite/maze.js",
+            "line": 523,
+            "description": "Iterate randomly through each location in the maze",
+            "itemtype": "method",
+            "name": "forEachLocationRandom",
+            "params": [
+                {
+                    "name": "f",
+                    "description": "Function to apply to each location.\nFunction can exit iteration by returning true.",
+                    "type": "Function"
+                }
+            ],
+            "return": {
+                "description": "",
+                "type": "Void"
+            },
+            "class": "Maze",
+            "module": "sprite/maze"
+        },
+        {
+            "file": "js/sprite/maze.js",
+            "line": 539,
+            "description": "Generate a graph representing the maze",
+            "itemtype": "method",
+            "name": "toGraph",
+            "return": {
+                "description": "The graph",
+                "type": "Graph"
+            },
+            "class": "Maze",
+            "module": "sprite/maze"
+        },
+        {
+            "file": "js/sprite/maze.js",
+            "line": 591,
+            "description": "Get a JSON object representing the maze",
+            "itemtype": "method",
+            "name": "toJSON",
+            "return": {
+                "description": "JSON object representing maze",
+                "type": "Object"
+            },
+            "class": "Maze",
+            "module": "sprite/maze"
+        },
+        {
+            "file": "js/sprite/maze.js",
+            "line": 621,
+            "description": "Get MazeLocation with given row and column indices",
+            "itemtype": "method",
+            "name": "get",
+            "params": [
+                {
+                    "name": "row",
+                    "description": "Row index",
+                    "type": "Integer"
+                },
+                {
+                    "name": "column",
+                    "description": "Column index",
+                    "type": "Integer"
+                }
+            ],
+            "return": {
+                "description": "MazeLocation at specified indices",
+                "type": "MazeLocation"
+            },
+            "class": "Maze",
+            "module": "sprite/maze"
+        },
+        {
+            "file": "js/sprite/player.js",
+            "line": 74,
+            "description": "Initialization method",
+            "itemtype": "method",
+            "name": "init",
+            "access": "private",
+            "tagname": "",
+            "return": {
+                "description": "",
+                "type": "Void"
+            },
+            "class": "Player",
+            "module": "sprite/player"
+        },
+        {
+            "file": "js/sprite/player.js",
+            "line": 109,
+            "description": "Check whether a given array of candidate Sprites contains a\nSprite that collides with this one. This method is called by\nthe physics engine. If a collision occurs with an enemy, the\nplayer dies.",
+            "itemtype": "method",
+            "name": "checkCollision",
+            "params": [
+                {
+                    "name": "candidates",
+                    "description": "An arrau of Sprites that have\nbounding boxes that intersect with this Sprite's bounding box.",
+                    "type": "Array"
+                }
+            ],
+            "return": {
+                "description": "",
+                "type": "Void"
+            },
+            "class": "Player",
+            "module": "sprite/player"
+        },
+        {
+            "file": "js/sprite/prize.js",
+            "line": 46,
+            "description": "Initialization function",
+            "itemtype": "method",
+            "name": "init",
+            "access": "private",
+            "tagname": "",
+            "return": {
+                "description": "",
+                "type": "Void"
+            },
+            "class": "Prize",
+            "module": "sprite/prize"
+        },
+        {
+            "file": "js/sprite/prize.js",
+            "line": 64,
+            "description": "Hide the Prize instance",
+            "itemtype": "method",
+            "name": "hide",
+            "return": {
+                "description": "",
+                "type": "Void"
+            },
+            "class": "Prize",
+            "module": "sprite/prize"
+        },
+        {
+            "file": "js/sprite/sprite.js",
+            "line": 53,
+            "description": "Shapes of Sprite instance",
+            "itemtype": "property",
+            "name": "shapes",
+            "type": "{Array}",
+            "class": "Sprite",
+            "module": "sprite/sprite"
+        },
+        {
+            "file": "js/sprite/sprite.js",
+            "line": 68,
+            "description": "x coordinate of Sprite instance",
+            "itemtype": "property",
+            "name": "x",
+            "type": "{integer}",
+            "class": "Sprite",
+            "module": "sprite/sprite"
+        },
+        {
+            "file": "js/sprite/sprite.js",
+            "line": 88,
+            "description": "y coordinate of Sprite instance",
+            "itemtype": "property",
+            "name": "y",
+            "type": "{integer}",
+            "class": "Sprite",
+            "module": "sprite/sprite"
+        },
+        {
+            "file": "js/sprite/sprite.js",
+            "line": 108,
+            "description": "BoundingBox of Sprite instance",
+            "itemtype": "property",
+            "name": "boundingBox",
+            "type": "{BoundingBox}",
+            "class": "Sprite",
+            "module": "sprite/sprite"
+        },
+        {
+            "file": "js/sprite/sprite.js",
+            "line": 126,
+            "description": "Drawing settings of Sprite instance",
+            "itemtype": "property",
+            "name": "drawingSettings",
+            "type": "{Object}",
+            "class": "Sprite",
+            "module": "sprite/sprite"
+        },
+        {
+            "file": "js/sprite/sprite.js",
+            "line": 142,
+            "description": "Transformation matrix",
+            "itemtype": "property",
+            "name": "transformation",
+            "type": "{Transformation}",
+            "class": "Sprite",
+            "module": "sprite/sprite"
+        },
+        {
+            "file": "js/sprite/sprite.js",
+            "line": 158,
+            "description": "Iterator function",
+            "itemtype": "method",
+            "name": "forEachShape",
+            "params": [
+                {
+                    "name": "f",
+                    "description": "A function _this takes a Shape instance as a\nparameter",
+                    "type": "Function"
+                }
+            ],
+            "return": {
+                "description": "",
+                "type": "Void"
+            },
+            "class": "Sprite",
+            "module": "sprite/sprite"
+        },
+        {
+            "file": "js/sprite/sprite.js",
+            "line": 174,
+            "description": "Clear the Sprite instance and redraw it",
+            "itemtype": "method",
+            "name": "update",
+            "return": {
+                "description": "",
+                "type": "Void"
+            },
+            "class": "Sprite",
+            "module": "sprite/sprite"
+        },
+        {
+            "file": "js/sprite/sprite.js",
+            "line": 185,
+            "description": "Clear Sprite instance",
+            "itemtype": "method",
+            "name": "clear",
+            "return": {
+                "description": "",
+                "type": "Void"
+            },
+            "class": "Sprite",
+            "module": "sprite/sprite"
+        },
+        {
+            "file": "js/sprite/sprite.js",
+            "line": 199,
+            "description": "Draw Sprite instance",
+            "itemtype": "method",
+            "name": "draw",
+            "return": {
+                "description": "",
+                "type": "Void"
+            },
+            "class": "Sprite",
+            "module": "sprite/sprite"
+        },
+        {
+            "file": "js/sprite/sprite.js",
+            "line": 213,
+            "description": "Draw BoundingBox of Sprite instance",
+            "itemtype": "method",
+            "name": "drawBoundingBox",
+            "return": {
+                "description": "",
+                "type": "Void"
+            },
+            "class": "Sprite",
+            "module": "sprite/sprite"
+        },
+        {
+            "file": "js/sprite/sprite.js",
+            "line": 233,
+            "description": "Update BoundingBox of Sprite instance",
+            "itemtype": "method",
+            "name": "updateBoundingBox",
+            "return": {
+                "description": "",
+                "type": "Void"
+            },
+            "class": "Sprite",
+            "module": "sprite/sprite"
+        },
+        {
+            "file": "js/sprite/sprite.js",
+            "line": 265,
+            "description": "Test whether or not a point is within a Sprite",
+            "itemtype": "method",
+            "name": "collisionTest",
+            "params": [
+                {
+                    "name": "point",
+                    "description": "Point to test",
+                    "type": "Point"
+                }
+            ],
+            "return": {
+                "description": "If the point is in the Sprite",
+                "type": "Boolean"
+            },
+            "class": "Sprite",
+            "module": "sprite/sprite"
+        },
+        {
+            "file": "js/util/boundingBox.js",
+            "line": 57,
+            "description": "x coordinate of top-left of BoundingBox instance",
+            "itemtype": "property",
+            "name": "x",
+            "type": "{float}",
+            "class": "BoundingBox",
+            "module": "util/boundingBox"
+        },
+        {
+            "file": "js/util/boundingBox.js",
+            "line": 72,
+            "description": "y coordinate of top-left of BoundingBox instance",
+            "itemtype": "property",
+            "name": "y",
+            "type": "{float}",
+            "class": "BoundingBox",
+            "module": "util/boundingBox"
+        },
+        {
+            "file": "js/util/boundingBox.js",
+            "line": 87,
+            "description": "Width of BoundingBox instance",
+            "itemtype": "property",
+            "name": "width",
+            "type": "{float}",
+            "class": "BoundingBox",
+            "module": "util/boundingBox"
+        },
+        {
+            "file": "js/util/boundingBox.js",
+            "line": 99,
+            "description": "Height of BoundingBox instance",
+            "itemtype": "property",
+            "name": "height",
+            "type": "{float}",
+            "class": "BoundingBox",
+            "module": "util/boundingBox"
+        },
+        {
+            "file": "js/util/boundingBox.js",
+            "line": 111,
+            "description": "Center of BoundingBox instance",
+            "itemtype": "property",
+            "name": "center",
+            "type": "{Object}",
+            "class": "BoundingBox",
+            "module": "util/boundingBox"
+        },
+        {
+            "file": "js/util/boundingBox.js",
+            "line": 127,
+            "description": "Check if this BoundingBox contains another BoundingBox",
+            "itemtype": "method",
+            "name": "containsBoundingBox",
+            "params": [
+                {
+                    "name": "bbox",
+                    "description": "The other BoundingBox",
+                    "type": "BoundingBox"
+                }
+            ],
+            "return": {
+                "description": "True if contains the other BoundingBox, false\notherwise.",
+                "type": "Boolean"
+            },
+            "class": "BoundingBox",
+            "module": "util/boundingBox"
+        },
+        {
+            "file": "js/util/boundingBox.js",
+            "line": 140,
+            "description": "Check if this BoundingBox contains a point",
+            "itemtype": "method",
+            "name": "containsPoint",
+            "params": [
+                {
+                    "name": "bbox",
+                    "description": "The point",
+                    "type": "BoundingBox"
+                }
+            ],
+            "return": {
+                "description": "True if contains the point, false otherwise",
+                "type": "Boolean"
+            },
+            "class": "BoundingBox",
+            "module": "util/boundingBox"
+        },
+        {
+            "file": "js/util/boundingBox.js",
+            "line": 152,
+            "description": "Check if this BoundingBox instance intersects another\nBoundingBox instance. Based on\n<a href=\"http://stackoverflow.com/a/13390495/1930331\">>this</a>\nStackOverflow answer.",
+            "itemtype": "method",
+            "name": "intersects",
+            "params": [
+                {
+                    "name": "bbox",
+                    "description": "[description]",
+                    "type": "[type]"
+                }
+            ],
+            "return": {
+                "description": "[description]",
+                "type": "[type]"
+            },
+            "class": "BoundingBox",
+            "module": "util/boundingBox"
+        },
+        {
+            "file": "js/util/boundingBox.js",
+            "line": 167,
+            "description": "Get the intersection of this BoundingBox\nand another BoundingBox",
+            "itemtype": "method",
+            "name": "intersection",
+            "params": [
+                {
+                    "name": "bbox",
+                    "description": "Another BoundingBox instance.",
+                    "type": "BoundingBox"
+                }
+            ],
+            "return": {
+                "description": "",
+                "type": "BoundingBox"
+            },
+            "class": "BoundingBox",
+            "module": "util/boundingBox"
+        },
+        {
+            "file": "js/util/factory.js",
+            "line": 13,
+            "itemtype": "method",
+            "name": "createCanvas",
+            "static": 1,
+            "params": [
+                {
+                    "name": "options",
+                    "description": "A dictionary of attributes for a new\n        HTML canvas.",
+                    "type": "(Object)"
+                },
+                {
+                    "name": "cssRules",
+                    "description": "A dictionary of CSS rules for a new\n        HTML canvas.",
+                    "type": "(Object)"
+                }
+            ],
+            "return": {
+                "description": "The canvas jQuery object.",
+                "type": "JQueryObject"
+            },
+            "class": "Factory",
+            "module": "util/factory"
+        },
+        {
+            "file": "js/util/graph.js",
+            "line": 77,
+            "description": "Edges of node",
+            "itemtype": "property",
+            "name": "edges",
+            "type": "{Hashset}",
+            "class": "Graph",
+            "module": "util/graph"
+        },
+        {
+            "file": "js/util/graph.js",
+            "line": 89,
+            "description": "Neighbors of node",
+            "itemtype": "property",
+            "name": "neighbors",
+            "type": "{Hashset}",
+            "class": "Graph",
+            "module": "util/graph"
+        },
+        {
+            "file": "js/util/graph.js",
+            "line": 106,
+            "description": "Find all the nodes that are reachable from this node",
+            "itemtype": "method",
+            "name": "reachableNodes",
+            "return": {
+                "description": "Set of reachable nodes",
+                "type": "Hashset"
+            },
+            "class": "Graph",
+            "module": "util/graph"
+        },
+        {
+            "file": "js/util/graph.js",
+            "line": 144,
+            "description": "Tail node of edge",
+            "itemtype": "property",
+            "name": "tail",
+            "type": "{GraphNode}",
+            "class": "Graph",
+            "module": "util/graph"
+        },
+        {
+            "file": "js/util/graph.js",
+            "line": 152,
+            "description": "Head node of edge",
+            "itemtype": "property",
+            "name": "head",
+            "type": "{GraphNode}",
+            "class": "Graph",
+            "module": "util/graph"
+        },
+        {
+            "file": "js/util/graph.js",
+            "line": 160,
+            "description": "Weight of edge",
+            "itemtype": "property",
+            "name": "weight",
+            "type": "{number}",
+            "class": "Graph",
+            "module": "util/graph"
+        },
+        {
+            "file": "js/util/graph.js",
+            "line": 172,
+            "description": "Add a node to the graph",
+            "itemtype": "method",
+            "name": "addNode",
+            "params": [
+                {
+                    "name": "data",
+                    "description": "Data to be stored in the node",
+                    "type": "Object"
+                }
+            ],
+            "return": {
+                "description": "A node with the data",
+                "type": "GraphNode"
+            },
+            "class": "Graph",
+            "module": "util/graph"
+        },
+        {
+            "file": "js/util/graph.js",
+            "line": 185,
+            "description": "Get a node with the given data",
+            "itemtype": "method",
+            "name": "getNode",
+            "params": [
+                {
+                    "name": "data",
+                    "description": "The data in the desired node",
+                    "type": "Object"
+                }
+            ],
+            "return": {
+                "description": "The desired node",
+                "type": "GraphNode"
+            },
+            "class": "Graph",
+            "module": "util/graph"
+        },
+        {
+            "file": "js/util/graph.js",
+            "line": 203,
+            "description": "Add an edge to the graph",
+            "itemtype": "method",
+            "name": "addEdge",
+            "params": [
+                {
+                    "name": "tail",
+                    "description": "The origin node of the edge",
+                    "type": "GraphNode"
+                },
+                {
+                    "name": "head",
+                    "description": "The destination node of the edge",
+                    "type": "GraphNode"
+                }
+            ],
+            "return": {
+                "description": "A directed edge connecting the nodes",
+                "type": "GraphEdge"
+            },
+            "class": "Graph",
+            "module": "util/graph"
+        },
+        {
+            "file": "js/util/graph.js",
+            "line": 218,
+            "description": "Get edge with given tail and head.",
+            "itemtype": "method",
+            "name": "getEdge",
+            "params": [
+                {
+                    "name": "tail",
+                    "description": "Tail node",
+                    "type": "GraphNode"
+                },
+                {
+                    "name": "head",
+                    "description": "Head node",
+                    "type": "GraphNode"
+                }
+            ],
+            "return": {
+                "description": "If edge exists, the edge, otherwise,\nundefined.",
+                "type": "GraphEdge"
+            },
+            "class": "Graph",
+            "module": "util/graph"
+        },
+        {
+            "file": "js/util/graph.js",
+            "line": 234,
+            "description": "Remove an edge from the graph",
+            "itemtype": "method",
+            "name": "removeEdge",
+            "params": [
+                {
+                    "name": "tail",
+                    "description": "The origin node of the edge",
+                    "type": "GraphNode"
+                },
+                {
+                    "name": "head",
+                    "description": "The destination node of the edge",
+                    "type": "GraphNode"
+                }
+            ],
+            "return": {
+                "description": "",
+                "type": "Void"
+            },
+            "class": "Graph",
+            "module": "util/graph"
+        },
+        {
+            "file": "js/util/graph.js",
+            "line": 255,
+            "description": "Perform a depth first search of the graph",
+            "itemtype": "method",
+            "name": "depthFirstSearch",
+            "params": [
+                {
+                    "name": "f",
+                    "description": "The operation to perform on the visited\nnodes",
+                    "type": "Function"
+                }
+            ],
+            "return": {
+                "description": "",
+                "type": "Void"
+            },
+            "class": "Graph",
+            "module": "util/graph"
+        },
+        {
+            "file": "js/util/graph.js",
+            "line": 293,
+            "description": "Perform a breadth first search on the graph",
+            "itemtype": "method",
+            "name": "breadthFirstSearch",
+            "params": [
+                {
+                    "name": "f",
+                    "description": "The operation to perform on the visited\nnodes",
+                    "type": "Function"
+                }
+            ],
+            "return": {
+                "description": "",
+                "type": "Void"
+            },
+            "class": "Graph",
+            "module": "util/graph"
+        },
+        {
+            "file": "js/util/graph.js",
+            "line": 331,
+            "description": "Dijkstra's algorithm",
+            "itemtype": "method",
+            "name": "dijkstra",
+            "params": [
+                {
+                    "name": "source",
+                    "description": "Source node",
+                    "type": "GraphNode"
+                }
+            ],
+            "return": {
+                "description": "",
+                "type": "Void"
+            },
+            "class": "Graph",
+            "module": "util/graph"
+        },
+        {
+            "file": "js/util/graph.js",
+            "line": 385,
+            "description": "Kruskal's algorithm",
+            "itemtype": "method",
+            "name": "kruskal",
+            "return": {
+                "description": "Graph of minimum spanning tree",
+                "type": "Graph"
+            },
+            "class": "Graph",
+            "module": "util/graph"
+        },
+        {
+            "file": "js/util/hash.js",
+            "line": 23,
+            "description": "Return a hashcode for this object. Does not conform to the Java\nstandard that two objects that are structurally identical should\nyield the same hashcode.",
+            "itemtype": "method",
+            "name": "hashcode",
+            "static": 1,
+            "params": [
+                {
+                    "name": "object",
+                    "description": "Object to get hashcode for",
+                    "type": "Object"
+                }
+            ],
+            "return": {
+                "description": "Hashcode for object",
+                "type": "Integer"
+            },
+            "class": "Hash",
+            "module": "util/hash"
+        },
+        {
+            "file": "js/util/hash.js",
+            "line": 70,
+            "description": "Resolve a collision in the hashset.",
+            "itemtype": "method",
+            "name": "resolveCollision",
+            "access": "private",
+            "tagname": "",
+            "params": [
+                {
+                    "name": "object",
+                    "description": "",
+                    "type": "Object"
+                },
+                {
+                    "name": "index",
+                    "description": "Index where collision occurred",
+                    "type": "Integer"
+                }
+            ],
+            "return": {
+                "description": "Whether or not the item was added to the set",
+                "type": "Boolean"
+            },
+            "class": "Hashset",
+            "module": "util/hash"
+        },
+        {
+            "file": "js/util/hash.js",
+            "line": 93,
+            "description": "Add the index of a location that is currently occupied in the\narray",
+            "itemtype": "method",
+            "name": "addIndex",
+            "access": "private",
+            "tagname": "",
+            "params": [
+                {
+                    "name": "idx",
+                    "description": "Index of occupied location",
+                    "type": "Integer"
+                }
+            ],
+            "class": "Hashset",
+            "module": "util/hash"
+        },
+        {
+            "file": "js/util/hash.js",
+            "line": 109,
+            "description": "Helper method to rehash the array when the objects inserted\nexceeds half of the total capacity",
+            "itemtype": "method",
+            "name": "rehash",
+            "access": "private",
+            "tagname": "",
+            "return": {
+                "description": "",
+                "type": "Void"
+            },
+            "class": "Hashset",
+            "module": "util/hash"
+        },
+        {
+            "file": "js/util/hash.js",
+            "line": 146,
+            "description": "Insert an object into the internal array.",
+            "itemtype": "method",
+            "name": "insert",
+            "access": "private",
+            "tagname": "",
+            "params": [
+                {
+                    "name": "object",
+                    "description": "An object to insert into the array",
+                    "type": "Object"
+                },
+                {
+                    "name": "hashTarget",
+                    "description": "An object used to generate\na hashcode",
+                    "type": "Object",
+                    "optional": true,
+                    "optdefault": "`object`"
+                }
+            ],
+            "return": {
+                "description": "Whether or not the object was inserted into the\narray",
+                "type": "Boolean"
+            },
+            "class": "Hashset",
+            "module": "util/hash"
+        },
+        {
+            "file": "js/util/hash.js",
+            "line": 182,
+            "description": "The size of the Hashset",
+            "itemtype": "property",
+            "name": "length",
+            "type": "{integer}",
+            "class": "Hashset",
+            "module": "util/hash"
+        },
+        {
+            "file": "js/util/hash.js",
+            "line": 194,
+            "description": "Add an object",
+            "itemtype": "method",
+            "name": "add",
+            "params": [
+                {
+                    "name": "object",
+                    "description": "Object to add",
+                    "type": "Object"
+                },
+                {
+                    "name": "hashTarget",
+                    "description": "Object to hash",
+                    "type": "Object",
+                    "optional": true
+                }
+            ],
+            "return": {
+                "description": "Whether or not the insertion was successful",
+                "type": "Boolean"
+            },
+            "class": "Hashset",
+            "module": "util/hash"
+        },
+        {
+            "file": "js/util/hash.js",
+            "line": 220,
+            "description": "Get the union of this set with another set",
+            "itemtype": "method",
+            "name": "union",
+            "params": [
+                {
+                    "name": "otherSet",
+                    "description": "Other set",
+                    "type": "Hashset"
+                }
+            ],
+            "return": {
+                "description": "Union of both set",
+                "type": "Hashset"
+            },
+            "class": "Hashset",
+            "module": "util/hash"
+        },
+        {
+            "file": "js/util/hash.js",
+            "line": 238,
+            "description": "Clear the Hashset instance of all elements",
+            "itemtype": "method",
+            "name": "clear",
+            "return": {
+                "description": "",
+                "type": "Void"
+            },
+            "class": "Hashset",
+            "module": "util/hash"
+        },
+        {
+            "file": "js/util/hash.js",
+            "line": 251,
+            "description": "Check if an object is an element of this set",
+            "itemtype": "method",
+            "name": "contains",
+            "params": [
+                {
+                    "name": "object",
+                    "description": "An object that may be an element",
+                    "type": "Object"
+                }
+            ],
+            "return": {
+                "description": "Whether or not the object is an element",
+                "type": "Boolean"
+            },
+            "class": "Hashset",
+            "module": "util/hash"
+        },
+        {
+            "file": "js/util/hash.js",
+            "line": 288,
+            "description": "Check if this Hashset instance is the same as another",
+            "itemtype": "method",
+            "name": "equals",
+            "params": [
+                {
+                    "name": "otherSet",
+                    "description": "Other set to compare with",
+                    "type": "Hashset"
+                }
+            ],
+            "return": {
+                "description": "True if equal, false otherwise",
+                "type": "Boolean"
+            },
+            "class": "Hashset",
+            "module": "util/hash"
+        },
+        {
+            "file": "js/util/hash.js",
+            "line": 310,
+            "description": "Remove an object",
+            "itemtype": "method",
+            "name": "remove",
+            "params": [
+                {
+                    "name": "object",
+                    "description": "An object",
+                    "type": "Object"
+                }
+            ],
+            "return": {
+                "description": "True if removed object from set, false if\nobject could not be removed from set",
+                "type": "Boolean"
+            },
+            "class": "Hashset",
+            "module": "util/hash"
+        },
+        {
+            "file": "js/util/hash.js",
+            "line": 353,
+            "description": "Get the object from the set",
+            "itemtype": "method",
+            "name": "get",
+            "params": [
+                {
+                    "name": "object",
+                    "description": "Object to get",
+                    "type": "Object"
+                },
+                {
+                    "name": "hashTarget",
+                    "description": "Object to hash",
+                    "type": "Object"
+                }
+            ],
+            "return": {
+                "description": "Object from set if it exists, null otherwise.",
+                "type": "Object"
+            },
+            "class": "Hashset",
+            "module": "util/hash"
+        },
+        {
+            "file": "js/util/hash.js",
+            "line": 388,
+            "description": "Apply function to each object in Hashset instance",
+            "itemtype": "method",
+            "name": "forEach",
+            "params": [
+                {
+                    "name": "f",
+                    "description": "Function that takes an element of the\nHashset as a parameter. Function can terminate forEach method by\nreturning true.",
+                    "type": "Function"
+                }
+            ],
+            "return": {
+                "description": "",
+                "type": "Void"
+            },
+            "class": "Hashset",
+            "module": "util/hash"
+        },
+        {
+            "file": "js/util/hash.js",
+            "line": 422,
+            "description": "Get the elements in the Hashset instance in an array",
+            "itemtype": "method",
+            "name": "toArray",
+            "return": {
+                "description": "Array of elements",
+                "type": "Array"
+            },
+            "class": "Hashset",
+            "module": "util/hash"
+        },
+        {
+            "file": "js/util/hash.js",
+            "line": 460,
+            "description": "Put new entry in Hashtable",
+            "itemtype": "method",
+            "name": "put",
+            "params": [
+                {
+                    "name": "key",
+                    "description": "Entry key",
+                    "type": "Object"
+                },
+                {
+                    "name": "value",
+                    "description": "Entry value",
+                    "type": "Object"
+                }
+            ],
+            "return": {
+                "description": "True if successfully added new entry, false\notherwise",
+                "type": "Boolean"
+            },
+            "class": "Hashtable",
+            "module": "util/hash"
+        },
+        {
+            "file": "js/util/hash.js",
+            "line": 477,
+            "description": "Get value of entry with given key.",
+            "itemtype": "method",
+            "name": "get",
+            "params": [
+                {
+                    "name": "key",
+                    "description": "Key for entry",
+                    "type": "Object"
+                }
+            ],
+            "return": {
+                "description": "Value of entry",
+                "type": "Object"
+            },
+            "class": "Hashtable",
+            "module": "util/hash"
+        },
+        {
+            "file": "js/util/hash.js",
+            "line": 488,
+            "description": "Check whether or not Hashtable contains a given key",
+            "itemtype": "method",
+            "name": "containsKey",
+            "params": [
+                {
+                    "name": "key",
+                    "description": "The key to check for",
+                    "type": "Object"
+                }
+            ],
+            "return": {
+                "description": "Whether or not key is in Hashtable",
+                "type": "Boolean"
+            },
+            "class": "Hashtable",
+            "module": "util/hash"
+        },
+        {
+            "file": "js/util/hash.js",
+            "line": 499,
+            "description": "Remove an entry from Hashtable instance",
+            "itemtype": "method",
+            "name": "remove",
+            "params": [
+                {
+                    "name": "key",
+                    "description": "Key of entry to remove",
+                    "type": "Object"
+                }
+            ],
+            "return": {
+                "description": "Whether or not entry was successfully removed",
+                "type": "Boolean"
+            },
+            "class": "Hashtable",
+            "module": "util/hash"
+        },
+        {
+            "file": "js/util/hash.js",
+            "line": 509,
+            "description": "Clear all entries from Hashtable instance",
+            "itemtype": "method",
+            "name": "clear",
+            "return": {
+                "description": "",
+                "type": "Void"
+            },
+            "class": "Hashtable",
+            "module": "util/hash"
+        },
+        {
+            "file": "js/util/hash.js",
+            "line": 518,
+            "description": "Apply function to each entry in Hashtable instance",
+            "itemtype": "method",
+            "name": "forEach",
+            "params": [
+                {
+                    "name": "f",
+                    "description": "Function that takes entry as parameter.\nEntry has key and value properties.",
+                    "type": "Function"
+                }
+            ],
+            "return": {
+                "description": "",
+                "type": "Void"
+            },
+            "class": "Hashtable",
+            "module": "util/hash"
+        },
+        {
+            "file": "js/util/mathExtensions.js",
+            "line": 21,
+            "description": "Generate a random integer.",
+            "itemtype": "method",
+            "name": "randomInt",
+            "static": 1,
+            "params": [
+                {
+                    "name": "minimum",
+                    "description": "The minimum for the random integer\n(inclusive)",
+                    "type": "Integer",
+                    "optional": true,
+                    "optdefault": "0"
+                },
+                {
+                    "name": "maximum",
+                    "description": "The maximum for the random integer\n(not inclusive)",
+                    "type": "Integer"
+                }
+            ],
+            "return": {
+                "description": "A random integer within the specified range.",
+                "type": "Integer"
+            },
+            "class": "MathExtensions",
+            "module": "util/mathExtensions"
+        },
+        {
+            "file": "js/util/mathExtensions.js",
+            "line": 36,
+            "description": "Generate a random float.",
+            "itemtype": "method",
+            "name": "randomFloat",
+            "static": 1,
+            "params": [
+                {
+                    "name": "minimum",
+                    "description": "The minimum for the random float\n(inclusive)",
+                    "type": "Float",
+                    "optional": true,
+                    "optdefault": "0"
+                },
+                {
+                    "name": "maximum",
+                    "description": "The maximum for the random float\n(not inclusive)",
+                    "type": "Float"
+                }
+            ],
+            "return": {
+                "description": "A random float within the specified range.",
+                "type": "Float"
+            },
+            "class": "MathExtensions",
+            "module": "util/mathExtensions"
+        },
+        {
+            "file": "js/util/mathExtensions.js",
+            "line": 63,
+            "description": "Iterate randomly from 0 to a given maximum. Stores the range of\nnumbers internally inside an array, so do not use with large\nnumbers.",
+            "itemtype": "method",
+            "name": "randomIterator",
+            "params": [
+                {
+                    "name": "max",
+                    "description": "Maximum (not inclusive)",
+                    "type": "Number"
+                },
+                {
+                    "name": "f",
+                    "description": "Function to apply to index. Takes a number as a\nparameter. Function can exit iteration by returning true.",
+                    "type": "Function"
+                }
+            ],
+            "return": {
+                "description": "",
+                "type": "Void"
+            },
+            "class": "MathExtensions",
+            "module": "util/mathExtensions"
+        },
+        {
+            "file": "js/util/mathExtensions.js",
+            "line": 89,
+            "description": "Get the dot product of two vectors.",
+            "itemtype": "method",
+            "name": "dotProduct",
+            "static": 1,
+            "params": [
+                {
+                    "name": "vector1",
+                    "description": "A vector of numbers",
+                    "type": "Array"
+                },
+                {
+                    "name": "vector2",
+                    "description": "A vector of numbers (same length as vector1)",
+                    "type": "Array"
+                }
+            ],
+            "return": {
+                "description": "The dot product of the two vectors.",
+                "type": "Float"
+            },
+            "class": "MathExtensions",
+            "module": "util/mathExtensions"
+        },
+        {
+            "file": "js/util/mathExtensions.js",
+            "line": 109,
+            "description": "Rotation matrix",
+            "itemtype": "method",
+            "name": "rotationMatrix",
+            "params": [
+                {
+                    "name": "angle",
+                    "description": "Counterclockwise angle in radian",
+                    "type": "Number"
+                }
+            ],
+            "return": {
+                "description": "Rotation matrix",
+                "type": "Matrix"
+            },
+            "class": "MathExtensions",
+            "module": "util/mathExtensions"
+        },
+        {
+            "file": "js/util/mathExtensions.js",
+            "line": 124,
+            "description": "Build a matrix from a 2d array",
+            "itemtype": "method",
+            "name": "buildMatrix",
+            "static": 1,
+            "params": [
+                {
+                    "name": "rows",
+                    "description": "2d array",
+                    "type": "Array"
+                }
+            ],
+            "return": {
+                "description": "Matrix from 2d array",
+                "type": "Matrix"
+            },
+            "class": "MathExtensions",
+            "module": "util/mathExtensions"
+        },
+        {
+            "file": "js/util/mathExtensions.js",
+            "line": 159,
+            "description": "Add the elements of a matrix to this matrix",
+            "itemtype": "method",
+            "name": "addAll",
+            "access": "private",
+            "tagname": "",
+            "params": [
+                {
+                    "name": "matrix",
+                    "description": "Other matrix",
+                    "type": "Matrix"
+                },
+                {
+                    "name": "coefficient",
+                    "description": "Coefficient to multiply elements of\nother matrix before addition",
+                    "type": "Number"
+                }
+            ],
+            "return": {
+                "description": "Result of addition",
+                "type": "Matrix"
+            },
+            "class": "Matrix",
+            "module": "util/mathExtensions"
+        },
+        {
+            "file": "js/util/mathExtensions.js",
+            "line": 184,
+            "description": "Generate rows of the matrix",
+            "itemtype": "method",
+            "name": "generateRows",
+            "access": "private",
+            "tagname": "",
+            "return": {
+                "description": "",
+                "type": "Void"
+            },
+            "class": "Matrix",
+            "module": "util/mathExtensions"
+        },
+        {
+            "file": "js/util/mathExtensions.js",
+            "line": 210,
+            "description": "Apply a function to each element in the matrix (in order)",
+            "itemtype": "method",
+            "name": "forEachEntry",
+            "params": [
+                {
+                    "name": "f",
+                    "description": "Function that takes element as parameter",
+                    "type": "Function"
+                }
+            ],
+            "return": {
+                "description": "",
+                "type": "Void"
+            },
+            "class": "Matrix",
+            "module": "util/mathExtensions"
+        },
+        {
+            "file": "js/util/mathExtensions.js",
+            "line": 225,
+            "description": "Get an element from the matrix",
+            "itemtype": "method",
+            "name": "get",
+            "params": [
+                {
+                    "name": "row",
+                    "description": "Index of the row to select",
+                    "type": "Integer"
+                },
+                {
+                    "name": "column",
+                    "description": "Index of the column to select",
+                    "type": "Integer"
+                }
+            ],
+            "return": {
+                "description": "Number at row and column",
+                "type": "Number"
+            },
+            "class": "Matrix",
+            "module": "util/mathExtensions"
+        },
+        {
+            "file": "js/util/mathExtensions.js",
+            "line": 237,
+            "description": "Get an element from the matrix",
+            "itemtype": "method",
+            "name": "set",
+            "params": [
+                {
+                    "name": "row",
+                    "description": "Index of the row to select",
+                    "type": "Integer"
+                },
+                {
+                    "name": "column",
+                    "description": "Index of the column to select",
+                    "type": "Integer"
+                },
+                {
+                    "name": "value",
+                    "description": "Number at row and column",
+                    "type": "Number"
+                }
+            ],
+            "return": {
+                "description": "",
+                "type": "Void"
+            },
+            "class": "Matrix",
+            "module": "util/mathExtensions"
+        },
+        {
+            "file": "js/util/mathExtensions.js",
+            "line": 250,
+            "description": "Get a row from the matrix",
+            "itemtype": "method",
+            "name": "getRow",
+            "params": [
+                {
+                    "name": "rowIndex",
+                    "description": "Index of row",
+                    "type": "Integer"
+                }
+            ],
+            "return": {
+                "description": "Row as array",
+                "type": "Array"
+            },
+            "class": "Matrix",
+            "module": "util/mathExtensions"
+        },
+        {
+            "file": "js/util/mathExtensions.js",
+            "line": 262,
+            "description": "Get a column from the matrix",
+            "itemtype": "method",
+            "name": "getColumn",
+            "params": [
+                {
+                    "name": "columnIndex",
+                    "description": "Index of column",
+                    "type": "Integer"
+                }
+            ],
+            "return": {
+                "description": "Column as array",
+                "type": "Array"
+            },
+            "class": "Matrix",
+            "module": "util/mathExtensions"
+        },
+        {
+            "file": "js/util/mathExtensions.js",
+            "line": 277,
+            "description": "Get a 2d array representing the matrix",
+            "itemtype": "method",
+            "name": "toArray2D",
+            "return": {
+                "description": "2d array of matrix",
+                "type": "Array"
+            },
+            "class": "Matrix",
+            "module": "util/mathExtensions"
+        },
+        {
+            "file": "js/util/mathExtensions.js",
+            "line": 294,
+            "description": "Add this matrix with another matrix",
+            "itemtype": "method",
+            "name": "add",
+            "params": [
+                {
+                    "name": "matrix",
+                    "description": "Another matrix",
+                    "type": "Matrix"
+                }
+            ],
+            "return": {
+                "description": "The resulting matrix",
+                "type": "Matrix"
+            },
+            "class": "Matrix",
+            "module": "util/mathExtensions"
+        },
+        {
+            "file": "js/util/mathExtensions.js",
+            "line": 305,
+            "description": "Subtract another matrix from this matrix",
+            "itemtype": "method",
+            "name": "subtract",
+            "params": [
+                {
+                    "name": "matrix",
+                    "description": "Another matrix",
+                    "type": "Matrix"
+                }
+            ],
+            "return": {
+                "description": "The resulting matrix",
+                "type": "Matrix"
+            },
+            "class": "Matrix",
+            "module": "util/mathExtensions"
+        },
+        {
+            "file": "js/util/mathExtensions.js",
+            "line": 316,
+            "description": "Multiply this matrix with another matrix",
+            "itemtype": "method",
+            "name": "multiply",
+            "params": [
+                {
+                    "name": "matrix",
+                    "description": "Another matrix",
+                    "type": "Matrix"
+                }
+            ],
+            "return": {
+                "description": "The resulting matrix",
+                "type": "Matrix"
+            },
+            "class": "Matrix",
+            "module": "util/mathExtensions"
+        },
+        {
+            "file": "js/util/mathExtensions.js",
+            "line": 341,
+            "description": "Multiply the matrix by a coefficient",
+            "itemtype": "method",
+            "name": "multiplyCoefficient",
+            "params": [
+                {
+                    "name": "k",
+                    "description": "Coefficient",
+                    "type": "Number"
+                }
+            ],
+            "return": {
+                "description": "New matrix multiplied by coefficient",
+                "type": "Matrix"
+            },
+            "class": "Matrix",
+            "module": "util/mathExtensions"
+        },
+        {
+            "file": "js/util/mathExtensions.js",
+            "line": 357,
+            "description": "LU Decomposition (only for square matrices). Based on\n<a href=\"http://rosettacode.org/wiki/LU_decomposition#Python\">\nthis</a> article.",
+            "itemtype": "method",
+            "name": "luDecomposition",
+            "return": {
+                "description": "Lower, upper, and pivot matrices in hash with\nkeys l, u, and p respectively",
+                "type": "Object"
+            },
+            "class": "Matrix",
+            "module": "util/mathExtensions"
+        },
+        {
+            "file": "js/util/mathExtensions.js",
+            "line": 432,
+            "description": "Get the determinant of the matrix (must be a square matrix)",
+            "itemtype": "method",
+            "name": "determinant",
+            "return": {
+                "description": "The determinant",
+                "type": "Number"
+            },
+            "class": "Matrix",
+            "module": "util/mathExtensions"
+        },
+        {
+            "file": "js/util/mathExtensions.js",
+            "line": 452,
+            "description": "Get the inverse of the matrix (must be a square matrix)",
+            "itemtype": "method",
+            "name": "inverse",
+            "return": {
+                "description": "The inverse matrix",
+                "type": "Matrix"
+            },
+            "class": "Matrix",
+            "module": "util/mathExtensions"
+        },
+        {
+            "file": "js/util/mathExtensions.js",
+            "line": 515,
+            "description": "Translation in x",
+            "itemtype": "property",
+            "name": "tx",
+            "type": "{number}",
+            "class": "Transformation",
+            "module": "util/mathExtensions"
+        },
+        {
+            "file": "js/util/mathExtensions.js",
+            "line": 530,
+            "description": "Translation in y",
+            "itemtype": "property",
+            "name": "ty",
+            "type": "{number}",
+            "class": "Transformation",
+            "module": "util/mathExtensions"
+        },
+        {
+            "file": "js/util/mathExtensions.js",
+            "line": 545,
+            "description": "Scale in x",
+            "itemtype": "property",
+            "name": "sx",
+            "type": "{number}",
+            "class": "Transformation",
+            "module": "util/mathExtensions"
+        },
+        {
+            "file": "js/util/mathExtensions.js",
+            "line": 560,
+            "description": "Scale in y",
+            "itemtype": "property",
+            "name": "sy",
+            "type": "{number}",
+            "class": "Transformation",
+            "module": "util/mathExtensions"
+        },
+        {
+            "file": "js/util/mathExtensions.js",
+            "line": 575,
+            "description": "Shear in x",
+            "itemtype": "property",
+            "name": "x",
+            "type": "{number}",
+            "class": "Transformation",
+            "module": "util/mathExtensions"
+        },
+        {
+            "file": "js/util/mathExtensions.js",
+            "line": 590,
+            "description": "Shear in y",
+            "itemtype": "property",
+            "name": "y",
+            "type": "{number}",
+            "class": "Transformation",
+            "module": "util/mathExtensions"
+        },
+        {
+            "file": "js/util/mathExtensions.js",
+            "line": 605,
+            "description": "Angle of rotation (counterclockwise in radian)",
+            "itemtype": "property",
+            "name": "angle",
+            "type": "{number}",
+            "class": "Transformation",
+            "module": "util/mathExtensions"
+        },
+        {
+            "file": "js/util/mathExtensions.js",
+            "line": 622,
+            "description": "Translate matrix from its current position",
+            "itemtype": "method",
+            "name": "translate",
+            "params": [
+                {
+                    "name": "dx",
+                    "description": "x offset",
+                    "type": "Number"
+                },
+                {
+                    "name": "dy",
+                    "description": "y offset",
+                    "type": "Number"
+                }
+            ],
+            "return": {
+                "description": "",
+                "type": "Void"
+            },
+            "class": "Transformation",
+            "module": "util/mathExtensions"
+        },
+        {
+            "file": "js/util/mathExtensions.js",
+            "line": 635,
+            "description": "Rotate matrix",
+            "itemtype": "method",
+            "name": "rotate",
+            "params": [
+                {
+                    "name": "rotateAngle",
+                    "description": "Counterclockwise angle in radian",
+                    "type": "Number"
+                }
+            ],
+            "return": {
+                "description": "",
+                "type": "Void"
+            },
+            "class": "Transformation",
+            "module": "util/mathExtensions"
+        },
+        {
+            "file": "js/util/mathExtensions.js",
+            "line": 648,
+            "description": "Apply this transformation to a point",
+            "itemtype": "method",
+            "name": "applyToPoint",
+            "params": [
+                {
+                    "name": "point",
+                    "description": "Point to apply transformation to",
+                    "type": "Point"
+                }
+            ],
+            "return": {
+                "description": "New point with transformation applied",
+                "type": "Point"
+            },
+            "class": "Transformation",
+            "module": "util/mathExtensions"
+        },
+        {
+            "file": "js/util/mathExtensions.js",
+            "line": 667,
+            "description": "Apply the inverse of the transformation to a point to do\ncollision detection",
+            "itemtype": "method",
+            "name": "adjustPoint",
+            "params": [
+                {
+                    "name": "point",
+                    "description": "Point to apply transformation to",
+                    "type": "Point"
+                }
+            ],
+            "return": {
+                "description": "A new point with the transformation",
+                "type": "Point"
+            },
+            "class": "Transformation",
+            "module": "util/mathExtensions"
+        },
+        {
+            "file": "js/util/minHeap.js",
+            "line": 41,
+            "description": "Get index in array of left child",
+            "itemtype": "method",
+            "name": "getLeftChildIndex",
+            "access": "private",
+            "tagname": "",
+            "params": [
+                {
+                    "name": "nodeIndex",
+                    "description": "Index of parent",
+                    "type": "Number"
+                }
+            ],
+            "return": {
+                "description": "Index of left child in array",
+                "type": "Number"
+            },
+            "class": "MinHeap",
+            "module": "util/minHeap"
+        },
+        {
+            "file": "js/util/minHeap.js",
+            "line": 53,
+            "description": "Get index in array of right child",
+            "itemtype": "method",
+            "name": "getRightChildIndex",
+            "access": "private",
+            "tagname": "",
+            "params": [
+                {
+                    "name": "nodeIndex",
+                    "description": "Index of parent",
+                    "type": "Number"
+                }
+            ],
+            "return": {
+                "description": "Index of right child in array",
+                "type": "Number"
+            },
+            "class": "MinHeap",
+            "module": "util/minHeap"
+        },
+        {
+            "file": "js/util/minHeap.js",
+            "line": 65,
+            "description": "Get index of parent",
+            "itemtype": "method",
+            "name": "getParentIndex",
+            "access": "private",
+            "tagname": "",
+            "params": [
+                {
+                    "name": "nodeIndex",
+                    "description": "Index of child",
+                    "type": "Number"
+                }
+            ],
+            "return": {
+                "description": "Index of parent",
+                "type": "Number"
+            },
+            "class": "MinHeap",
+            "module": "util/minHeap"
+        },
+        {
+            "file": "js/util/minHeap.js",
+            "line": 77,
+            "description": "Heapify",
+            "itemtype": "method",
+            "name": "bubbleUp",
+            "access": "private",
+            "tagname": "",
+            "params": [
+                {
+                    "name": "nodeIndex",
+                    "description": "Index to bubbleUp",
+                    "type": "Number"
+                }
+            ],
+            "return": {
+                "description": "",
+                "type": "Void"
+            },
+            "class": "MinHeap",
+            "module": "util/minHeap"
+        },
+        {
+            "file": "js/util/minHeap.js",
+            "line": 102,
+            "description": "Remove minimum element from heap",
+            "itemtype": "method",
+            "name": "removeMin",
+            "access": "private",
+            "tagname": "",
+            "return": {
+                "description": "Data of minimum node",
+                "type": "Object"
+            },
+            "class": "MinHeap",
+            "module": "util/minHeap"
+        },
+        {
+            "file": "js/util/minHeap.js",
+            "line": 120,
+            "description": "Heapify",
+            "itemtype": "method",
+            "name": "bubbleDown",
+            "access": "private",
+            "tagname": "",
+            "params": [
+                {
+                    "name": "nodeIndex",
+                    "description": "Index of node to modify",
+                    "type": "Number"
+                }
+            ],
+            "return": {
+                "description": "",
+                "type": "Void"
+            },
+            "class": "MinHeap",
+            "module": "util/minHeap"
+        },
+        {
+            "file": "js/util/minHeap.js",
+            "line": 161,
+            "description": "Add object to MinHeap",
+            "itemtype": "method",
+            "name": "add",
+            "params": [
+                {
+                    "name": "object",
+                    "description": "Object to add",
+                    "type": "Object"
+                }
+            ],
+            "return": {
+                "description": "",
+                "type": "Void"
+            },
+            "class": "MinHeap",
+            "module": "util/minHeap"
+        },
+        {
+            "file": "js/util/minHeap.js",
+            "line": 175,
+            "description": "Return the minimum element and extract it",
+            "itemtype": "method",
+            "name": "poll",
+            "return": {
+                "description": "The minimum element",
+                "type": "Object"
+            },
+            "class": "MinHeap",
+            "module": "util/minHeap"
+        },
+        {
+            "file": "js/util/minHeap.js",
+            "line": 187,
+            "description": "Return the minimum element without extracting it",
+            "itemtype": "method",
+            "name": "peek",
+            "return": {
+                "description": "The minimum element",
+                "type": "Object"
+            },
+            "class": "MinHeap",
+            "module": "util/minHeap"
+        },
+        {
+            "file": "js/util/minHeap.js",
+            "line": 197,
+            "description": "Clear the MinHeap of all elements",
+            "itemtype": "method",
+            "name": "clear",
+            "return": {
+                "description": "",
+                "type": "Void"
+            },
+            "class": "MinHeap",
+            "module": "util/minHeap"
+        },
+        {
+            "file": "js/util/minHeap.js",
+            "line": 211,
+            "description": "Number of elements in the MinHeap",
+            "itemtype": "property",
+            "name": "length",
+            "type": "{number}",
+            "class": "MinHeap",
+            "module": "util/minHeap"
+        },
+        {
+            "file": "js/util/physics.js",
+            "line": 24,
+            "description": "Check shapes for collisions with point",
+            "itemtype": "method",
+            "name": "collisionQuery",
+            "params": [
+                {
+                    "name": "point",
+                    "description": "Point to test for",
+                    "type": "Point"
+                }
+            ],
+            "return": {
+                "description": "Array of objects with bounding boxes that contain\nthe given point",
+                "type": "Array"
+            },
+            "class": "Engine",
+            "module": "util/physics"
+        },
+        {
+            "file": "js/util/physics.js",
+            "line": 38,
+            "description": "Notify the Engine instance that a change in positions occurred",
+            "itemtype": "method",
+            "name": "updatePositions",
+            "return": {
+                "description": "",
+                "type": "Void"
+            },
+            "class": "Engine",
+            "module": "util/physics"
+        },
+        {
+            "file": "js/worker/workerTasks.js",
+            "line": 11,
+            "description": "Build a graph object from a JSON object passed from the worker",
+            "itemtype": "method",
+            "name": "constructGraph",
+            "params": [
+                {
+                    "name": "dictionary",
+                    "description": "JSON object representing graph",
+                    "type": "Object"
+                }
+            ],
+            "return": {
+                "description": "Graph representing JSON object",
+                "type": "Graph"
+            },
+            "class": "",
+            "module": "worker/workerTasks"
+        },
+        {
+            "file": "js/worker/workerTasks.js",
+            "line": 57,
+            "description": "Get path from source node to destinaton node",
+            "itemtype": "method",
+            "name": "getPath",
+            "params": [
+                {
+                    "name": "graph",
+                    "description": "Graph",
+                    "type": "Graph"
+                },
+                {
+                    "name": "source",
+                    "description": "Source node to start from",
+                    "type": "GraphNode"
+                },
+                {
+                    "name": "dest",
+                    "description": "Destination node to stop at",
+                    "type": "GraphNode"
+                }
+            ],
+            "return": {
+                "description": "Array of Direction enums representing the path",
+                "type": "Array"
+            },
+            "class": "",
+            "module": "worker/workerTasks"
+        }
+    ],
+    "warnings": []
+}

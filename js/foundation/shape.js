@@ -603,14 +603,13 @@ module.exports = {
         };
 
         /**
-            Hit testing based on
-            <a href="http://stackoverflow.com/a/2922778/1930331">this
-            </a> StackOverflow answer.
-
-            @method _hitTest
-            @protected
-            @param {Point} point A point
-            @return {boolean} If the point is in the polygon
+         * Hit testing based on <a href="http://stackoverflow.com/a/2922778/1930331">this</a> StackOverflow answer.
+         * method _hittest
+         *
+         * @method _hitTest
+         * @protected
+         * @param  {Point} point A point
+         * @return {boolean}       If the point is in the polygon
          */
         this._hitTest = function(point) {
             var p = this.transformation.adjustPoint(point),
@@ -631,8 +630,12 @@ module.exports = {
         };
 
         /**
-            Update the bounding box
-        */
+         * Update the bounding box
+         *
+         * @method
+         * @protected
+         * @return {void}
+         */
         this._updateBoundingBox = function() {
             var transformedPoints = this.points.map(function(p) {
                 return _this.transformation.applyToPoint(p);
