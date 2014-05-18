@@ -7,3 +7,6 @@ docs/
 tmp/
 build/
 
+bundle.js
+worker.js
+

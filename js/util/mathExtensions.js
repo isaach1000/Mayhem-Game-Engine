@@ -370,7 +370,7 @@ module.exports = {
                     n = _this.numRows,
                     id = [],
                     maxIter = function(i) {
-                        return _this.get(i, j);
+                        return Math.abs(_this.get(i, j));
                     };
 
                 for (var j = 0; j < n; j++) {
